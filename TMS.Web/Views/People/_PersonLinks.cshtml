@@ -1,0 +1,9 @@
+﻿@model string
+@using lr = Resources.Resources;
+@{
+    var Postion = TabStripTabPosition.Left;
+    if (TMS.CultureHelper.IsRighToLeft())
+    {
+        Postion = TabStripTabPosition.Right;
+    }
+}

@@ -1,0 +1,85 @@
+﻿@using lr = Resources.Resources;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+}
+
+<h2>@lr.AdminPageTitle</h2>
+
+<div id="dashboard-left" class="col-md-8">
+    <ul class="shortcuts">
+        <li class="events">
+            <a href="@Url.Content("~/Resource/Index")">
+                <span class="mdi mdi-web tms-tile-icon"></span>
+                <span class="shortcuts-label">@lr.ResourcesPageTitle</span>
+            </a>
+        </li>
+        <li>
+            <a href="@Url.Content("~/Resource/Lookup")">
+                <span class="fa fa-list-alt tms-tile-icon"></span>
+                <span class="shortcuts-label">@lr.LookupPageTitle</span>
+            </a>
+        </li>
+        
+        @if (User.IsInRole("CanViewOrganization"))
+        {
+            <li>
+                <a href="@Url.Content("~/Organization/Index")">
+                    <span class="mdi mdi-folder-star tms-tile-icon"></span>
+                    <span class="shortcuts-label">@lr.OrganizationTitle</span>
+                </a>
+            </li>}
+        @if (User.IsInRole("CanViewGroups"))
+        {
+            <li>
+                <a href="@Url.Content("~/Admin/Groups")">
+                    <span class="mdi mdi-security-network tms-tile-icon"></span>
+                    <span class="shortcuts-label">@lr.GroupsTitle</span>
+                </a>
+            </li>}
+        @if (User.IsInRole("CanViewUsers"))
+        {
+            <li>
+                <a href="@Url.Content("~/User/Index")">
+                    <span class="mdi mdi-account-multiple tms-tile-icon"></span>
+                    <span class="shortcuts-label">@lr.UsersTitle</span>
+                </a>
+            </li>}
+
+        <li>
+            <a href="@Url.Content("~/Home/Office365Enabled")">
+                <span class="mdi mdi-login-variant tms-tile-icon"></span>
+                <span class="shortcuts-label">@lr.Office365Title</span>
+            </a>
+        </li>
+        
+        
+
+        @if (User.IsInAnyRoles("CanViewFlags", "CanViewVenue", "CanViewRoles", "CanViewVendor", "CanViewCategory", "CanViewFocusAreas", "CanViewCourseMaterials", "CanViewDegreeCertificates", "CanViewCourseLogisticRequirements"))
+        {
+            <li class="tms-tile-2x">
+                <a href="@Url.Content("~/Admin/Prerequisite")">
+                    <span class="mdi mdi-flag-triangle tms-tile-icon"></span>
+                    <span class="mdi mdi-home-map-marker tms-tile-icon"></span>
+                    <span class="shortcuts-label">@lr.PreRequisitesTitle</span>
+                </a>
+            </li>
+        }
+    </ul>
+
+    <br />
+
+    <div id="chartplace" style="height:300px;"></div>
+
+    <div class="divider30"></div>
+</div><!--col-md-8-->
+
+<style>
+    .shortcuts li.tms-tile-2x a {
+        width: 120px;
+    }
+    .shortcuts li.tms-tile-2x .tms-tile-icon {
+        padding: 5px 0px 3px 7px;
+        display: inline-block;
+    }
+</style>

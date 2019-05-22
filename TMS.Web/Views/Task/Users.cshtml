@@ -1,0 +1,146 @@
+﻿@using lr = Resources.Resources;
+@model List<TMS.Library.Entities.CRM.CRM_UserEnrolment>
+
+
+
+
+<div class="ChildGrid">
+    <h3>@lr.UsersTitle</h3>
+    @*@using (Html.BeginForm("Attendance_Create", "Program", FormMethod.Post))
+        {*@
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @*if (Model.Count > 0)
+        {*@
+    <table class="table table-striped jsuser" id="tbl">
+        <thead>
+            <tr>
+
+                <th>
+                    Full Name
+
+                </th>
+                <th>
+                   Email
+                </th>
+              
+                <th>
+                    Current Prospects
+                </th>
+                <th>
+
+                  
+
+                    select
+                </th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @*@for (var i = 0; i < Model.Count; i++)*@
+            @foreach (var item in Model)
+            {
+                //var value = item.PersonID + "_" + item.UserID;
+                <tr>
+
+                    <td>
+                        @Html.Raw(item.FullName)
+                        @*@Html.TextBoxFor(m => m[i].FullName, new { @readonly = "readonly" })*@
+
+                    </td>
+                  
+
+                    <td>
+                        @Html.Raw(item.Email)
+                        @*@Html.DisplayFor(m => m[i].AssignedBy)*@
+
+                    </td>
+                    <td id="count">
+                        @Html.Raw(item.CurrentProspect)
+                        @*@Html.DisplayFor(m => m[i].AddedByAlias)*@
+
+                    </td>
+                    <td id="users">
+                        <input type="radio" name="all-users" id="rdUser_@item.UserID" value="@item.UserID" />
+
+                    </td>
+                    @*<td>
+                        @Html.HiddenFor(m => m[i].ID)
+
+                    </td>*@
+
+
+                </tr>
+            }
+            @*<tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                    <td>
+
+                        <input type="submit" id="btnsave" class="btn btn-primary" value="Save" />
+
+                    </td>
+                </tr>*@
+        </tbody>
+
+    </table>
+
+    @*  }
+        else {
+             <div>No Record Found</div>
+         }*@
+    @*}*@
+</div>
+
+<style>
+    th {
+        background-color: #f2f2f2;
+    }
+
+    input.btn.btn-primary {
+        float: right;
+        height: 20px;
+        width: 68px;
+    }
+
+    select#d_AttendanceType {
+        height: 18px;
+        max-width: 180px;
+    }
+    td#users {
+    padding-left: 20px;
+
+}
+    select.col-md-2.col-lg-2.form-control {
+        height: 20px;
+        width: 83%;
+    }
+    td#count {
+    padding-left: 49px;
+}
+    input[type="text"] {
+        border: 0px;
+        background-color: transparent;
+    }
+
+    input[type=checkbox] {
+        display: inline-table;
+    }
+</style>
+
+
+@*<script>
+        jQuery("#btn").click(function () {
+            jQuery.ajax({
+                url: '/Program/ManageAttendance',
+                success: function (data) {
+                    jQuery("#tbl").html(data);
+                }
+            })
+        })
+    </script>*@
+
+

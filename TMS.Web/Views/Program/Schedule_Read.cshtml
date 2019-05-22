@@ -1,0 +1,148 @@
+﻿
+@{
+    ViewBag.Title = "Schedule_Read";
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+}
+
+
+
+
+<style>
+    div#calender {
+        width: 1082px;
+    }
+
+    .fc-content {
+        color: #000;
+    }
+
+    td.fc-day.fc-widget-content.fc-sun.fc-today.fc-state-highlight {
+        background-color: #80BFC8;
+    }
+
+  .right-inner-addon {
+    display: none;
+}
+  .fc button .fc-icon {
+    position: relative;
+    top: -.05em;
+    margin: 0 .2em;
+    /* vertical-align: middle; */
+}
+</style>
+<h2>Schedule</h2>
+
+
+
+@*<a class="k-button mdi mdi-magnify search-icon"><span class="tms-grid-icon mdi mdi-magnify search-icon" onclick="ScheduleTemplate(0)"></span></a>*@
+<div id="calender"></div><div class="row">
+    <div class="col-lg-8 col-md-8">
+
+
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog" style="margin-top: 70px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        @*<h4 class="modal-title"><span id="eventTitle"></span></h4>*@
+                    </div>
+                    <div class="modal-body">
+                        <p id="pDetails"></p>
+                    </div>
+                 
+            </div>
+        </div>
+            </div>
+    </div>
+</div>
+
+<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+
+    <script>
+        jQuery(document).ready(function () {
+            var events = [];
+
+            jQuery.ajax({
+                type: "GET",
+                url: "/Program/Schedule_Read",
+                success: function (data) {
+                    jQuery.each(data, function (i, v) {
+                        events.push({
+                            title:v.EndTime, //v.SessionName,
+                            ScheduleDate: v.ScheduleDate,
+                            description: v.CourseName,
+                            FullName: v.FullName,
+                            SessionName:v.SessionName,
+                            VenueName: v.VenueName,
+                            ClassTitle: v.ClassTitle,
+                            start: moment(v.StartTime ),
+                            StartDate: v.StartDate,
+                            end: moment(v.EndTime),
+                            end: v.EndTime != null ?(v.EndTime) : null,
+                            color: v.ThemeColor,
+                            allDay: v.IsFullDay
+                           
+                        });
+                    })
+                    debugger
+                    GenerateCalender(events);
+                },
+                error: function (error) {
+                    alert('failed');
+                }
+            })
+
+            function GenerateCalender(events) {
+                jQuery('#calender').fullCalendar('destroy');
+                jQuery('#calender').fullCalendar({
+                    contentHeight: 400,
+                    defaultDate: new Date(),
+                    timeFormat: 'h(:mm)a',
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,basicWeek,basicDay'
+                    },
+                    ////eventLimit: true,
+                    eventColor: '#378006',
+                    events: events,
+                    eventClick: function (calEvent, jsEvent, view) {
+
+                       jQuery('#myModal #eventTitle').text(moment(calEvent.title));
+                       var $description = jQuery('<div/>');
+                       //$description.append(jQuery('<p/>').html('<b>Start:</b>' + calEvent.StartDate));
+                       // if (calEvent.end != null) {
+                       //     $description.append(jQuery('<p/>').html('<b>End:</b>' + calEvent.EndDate));
+                       //  }
+                        var dateget = calEvent.ScheduleDate.substr(6)
+                        var currentTime = new Date(parseInt(dateget));
+                        var month = currentTime.getMonth() + 1;
+                        var day = currentTime.getDate();
+                        var year = currentTime.getFullYear();
+                        var date = day + "/" + month + "/" + year;
+                        $description.append(jQuery('<p/>').html('<b>Session Name : </b>' + calEvent.SessionName));
+                        $description.append(jQuery('<p/>').html('<b>Schedule Date : </b>' + date));
+                        $description.append(jQuery('<p/>').html('<b>Venue Name : </b>' + calEvent.VenueName));
+                        $description.append(jQuery('<p/>').html('<b>Trainer Name : </b>' + calEvent.FullName));
+                        $description.append(jQuery('<p/>').html('<b>Class Title : </b>' + calEvent.ClassTitle));
+                        $description.append(jQuery('<p/>').html('<b>Course Name : </b>' + calEvent.description));
+                        jQuery('#myModal #pDetails').empty().html($description);
+                        jQuery('#myModal').modal();
+                    }
+                })
+            }
+        })
+    </script>
+
+
+}
+@*.format("DD-MMM-YYYY HH:mm a")*@
+
+
+
+

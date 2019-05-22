@@ -1,0 +1,71 @@
+﻿@model long
+@using lr = Resources.Resources;
+
+<script>
+    function ClassNestedGrid_onEdit(e) {
+        //if current model is not new then remove the Name editor
+        var title = jQuery(e.container).parent().find(".k-window-title");
+        var update = jQuery(e.container).parent().find(".k-grid-update");
+        var cancel = jQuery(e.container).parent().find(".k-grid-cancel");
+        jQuery(cancel).html('<span class="k-icon k-i-cancel"></span>' + lr.CencelRecordGeneralButton);
+        if (e.model.isNew()) {
+
+            jQuery(title).text(lr.AddRecordGeneralTitle);
+            jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.SaveRecordGeneralButton);
+
+        }
+        else {
+            jQuery(title).text(lr.EditRecordGeneralTitle);
+            jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.UpdateRecordGeneralButton);
+        }
+        //
+    }
+    function CreateVenueAdditionalData() {
+        return {
+             ClassID: '@Model'
+        }
+    }
+
+    //Class
+
+</script>
+@(Html.Kendo().Grid<TMS.Library.Entities.Common.Configuration.CourseLogisticRequirements>()
+            .Name("ClassGrid" + Model)
+    .Columns(columns =>
+    {
+        columns.Bound(e => e.PrimaryRequirementName).ClientTemplate("#=PrimaryRequirementName#");
+        columns.Bound(e => e.AddedByAlias).ClientTemplate("#=AddedByAlias#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy);
+    }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_ClassLogisticTemplate").DisplayDeleteConfirmation(false))
+          .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>))
+     .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+     .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
+     .Scrollable()
+     .Events(e => e.Edit("ClassNestedGrid_onEdit").Save("General_onSave"))
+     //.HtmlAttributes(new { style = "height:450px !important;" })
+     .DataSource(dataSource => dataSource.Ajax().Model(model => { model.Id(m => m.ID); })
+     .PageSize(5)
+     .Read(read => read.Action("SessionLogistics_Read", "Program", new { ClassId = Model }))
+     .Create(read => read.Action("SessionLogistics_Create", "Program").Data("CreateVenueAdditionalData"))
+     .Destroy(read => read.Action("SessionLogistics_Destroy", "Program").Data("CreateVenueAdditionalData"))
+     .Update(read => read.Action("SessionLogistics_Update", "Program").Data("CreateVenueAdditionalData"))
+     .Events(e => e.Error("GeneralErrorHandler(\"ClassGrid\")").RequestEnd("GridRequestEndUpdate")))
+     .NoRecords(lr.GridNoRecordFoundMessage)
+)
+@helper RenderAddTemplate()
+{
+    <div class="toolbar">
+        @if (User.IsInRole("CanAddEditClass"))
+        {
+            <a class="k-button tms-grid-add" title="" data-placement="left" data-toggle="tooltip" data-original-title="Tooltip on left">
+                <span class="tms-grid-icon mdi mdi-plus "></span>
+            </a>
+            <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+        }
+        @if (User.IsInRole("CanDeleteClass"))
+        {
+            <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+        }
+    </div>
+
+}
+

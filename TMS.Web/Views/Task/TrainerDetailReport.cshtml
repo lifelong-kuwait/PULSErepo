@@ -1,0 +1,98 @@
+﻿@using Telerik.Reporting;
+@using Telerik.ReportViewer.Mvc;
+@using ReportingClassLibrary;
+@using lr = Resources.Resources;
+@model TMS.Library.TMS.Persons.Person
+
+@{
+    ViewBag.Title = lr.PersonPageTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var phonenubner = lr.PersonPhoneNumber;
+    var personEmail = lr.PersonContactEmail;
+    var gender = lr.Gender;
+}
+
+@section scripts{
+    <script src="~/ReportViewer/js/telerikReportViewer-11.2.17.1025.min.js"></script>
+    <script src="~/ReportViewer/js/telerikReportViewer-11.2.17.1025.js"></script>
+}
+@section ReportingStyles
+{
+    <link href="~/Content/kendo/telerikReportViewer.css" rel="stylesheet" />
+    <style>
+        #myReportViewer {
+            position: relative;
+            width: 100%;
+            height: 800px;
+            overflow: hidden;
+            font-family: Verdana, Arial;
+        }
+    </style>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+}
+
+@section ReportingScripts
+{
+    @(Html.TelerikReporting().DeferredScripts())
+}
+
+
+@*<div class="form-horizontal">
+    <div class="row col-md-6">
+        <div class="form-group">
+            @Html.Label("Class", new { @class = "col-md-1 col-lg-1 control-label" })
+            <div class="col-md-10 col-lg-offset-1 col-lg-10 col-sm-10">
+                @(Html.Kendo().DropDownListFor(m => m.ID)
+                    .HtmlAttributes(new { style = "width:100%" })
+                    .Name("Class")
+                    .DataTextField("Text")
+                    .OptionLabel("Select Class...")
+                    .DataValueField("Value").DataSource(dataSource =>
+                    {
+                        dataSource.Read(read => read.Action("GetAllClasses", "DDL"));
+
+                    }))
+            </div>
+        </div>
+    </div>
+    <div class="row col-md-6">
+        <div class="form-group">
+            @Html.Label("Trainee", new { @class = "col-md-1 col-lg-1 control-label" })
+            <div class="col-md-10 col-lg-offset-1 col-lg-10 col-sm-10">
+                @(Html.Kendo().DropDownListFor(m => m.ID)
+                    .HtmlAttributes(new { style = "width:100%" })
+                    .Name("Trainee")
+                    .DataTextField("Text")
+                    .OptionLabel("Select Trainee...")
+                    .DataValueField("Value").DataSource(dataSource =>
+                    {
+                        dataSource.Read(read => read.Action("PersonAll", "DDL"));
+
+                    }))
+            </div>
+        </div>
+    </div>*@
+
+
+@{
+//var typeReportSource = new Telerik.Reporting.TypeReportSource();
+//typeReportSource.TypeName = typeof(ThirdTraineeDetailReport).AssemblyQualifiedName;
+//if (!string.IsNullOrEmpty(Convert.ToString(Model.ID))) {
+//    typeReportSource.Parameters.Add(new Telerik.Reporting.Parameter() { Name ="PersonRegCode", Value = "PersonRegCode" });
+//}
+// rptInvoice.ReportSource = typeReportSource
+}
+
+@(Html.TelerikReporting().ReportViewer()
+        .Id("myReportViewer")
+        .ServiceUrl("/api/reports/")
+        .ReportSource(new TypeReportSource() { TypeName = typeof(TrainerDetailReport).AssemblyQualifiedName })
+        //.ReportSource(typeReportSource)
+        .ViewMode(ViewModes.INTERACTIVE)
+        .ScaleMode(ScaleModes.SPECIFIC)
+        .Scale(1.0)
+        .EnableAccessibility(true)
+        .PrintMode(PrintMode.AutoSelect)
+        .ParametersAreaVisible(true)
+        .PersistSession(false)
+        .Deferred());

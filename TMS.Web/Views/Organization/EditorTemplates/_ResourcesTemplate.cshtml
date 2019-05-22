@@ -1,0 +1,40 @@
+﻿@model TMS.Library.Admin.TMSResource
+@using lr = Resources.Resources
+
+<div class="k-edit-form-container">
+    <div class="Alertbox alert alert-danger" style="display:none">
+        <ul class="errors"></ul>
+    </div>
+    </div>
+
+    <div class="editor-field">
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.Kendo().TextBoxFor(model => model.Name).HtmlAttributes(new { @style = "width:100%" })
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+     
+
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.P_Value)
+    </div>
+    <div class="editor-field">
+        @Html.Kendo().TextBoxFor(model => model.P_Value).HtmlAttributes(new { @style = "width:100%" })
+        @Html.ValidationMessageFor(model => model.P_Value)
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.S_Value)
+    </div>
+    <div class="editor-field">
+        @Html.Kendo().TextBoxFor(model => model.S_Value).HtmlAttributes(new { @style = "width:100%" })
+        @Html.ValidationMessageFor(model => model.S_Value)
+    </div>
+</div>
+
+
+

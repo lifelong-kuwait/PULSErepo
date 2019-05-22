@@ -1,0 +1,229 @@
+﻿@model TMS.Library.TMS.Persons.Person
+@using Kendo.Mvc.UI;
+@using System.Data;
+
+
+@{
+    var _Gender = new[] {new
+    {
+        Id=0,Description="Not Specified"
+    },new{
+        Id=1,Description="Male"
+    },new{
+        Id=2,Description="Female"
+    }
+    };
+
+    var _Marital = new[] {new
+    {
+        Id=0,Description="Not Specified"
+    },new{
+        Id=1,Description="Married"
+    },new{
+        Id=2,Description="Single"
+    }
+    };
+
+    var _CallType = new[] {new
+    {
+        Id=1,Description="Outgoing Call"
+    },new{
+        Id=2,Description="Incoming Call"
+    },new{
+        Id=3,Description="Scheduled Call"
+    },new{
+        Id=4,Description="Forwarded Call"
+        }
+    };
+
+    var _VisitType = new[] {new
+    {
+        Id=1,Description="Walkin Visit"
+    },new{
+        Id=2,Description="Event Visit"
+    },new{
+        Id=3,Description="Schedule Visit"
+    }
+    };
+}
+<!DOCTYPE html>
+
+@{var PSID = ViewBag.PrspID;}
+@using (Html.BeginForm("RecordDetails", "Prospect", FormMethod.Post))
+{
+
+    @( Html.Kendo().TabStrip()
+        .Name("TabStrip").Animation(animation =>
+                  animation.Open(effect =>
+                      effect.Fade(FadeDirection.In)))
+    .Items(items =>
+    {
+        items.Add().Text("Record Detail").Selected(true).Content(@<text>
+            @(Html.Kendo().Grid<TMS.Library.TMS.Persons.Person>()
+                            .Name("grid_")
+                            .Columns(column =>
+                            {
+                                column.Bound(p => p.P_FirstName).ClientTemplate("#=P_FirstName# #=P_LastName#").Title("Full Name");
+                                column.Bound(p => p.S_FirstName).ClientTemplate("#=S_FirstName# #=S_LastName#").Title("Name in other Language");
+                                column.ForeignKey(p => p.Gender, _Gender, "Id", "Description");
+                                column.Bound(p => p.Designation).Title("Job Title");
+                                column.ForeignKey(p => p.MaritalStatus, _Marital, "Id", "Description").Title("Marital Status");
+                                column.Bound(p => p.DateOfBirth).Format("{0: MM/dd/yyyy}").Title("DOB");
+                                column.Bound(p => p.OrganizationID).Title("Company");
+                                column.Bound(P => P.NationalIdentity).Title("Nationality");
+
+                                //columns.Bound(c => c.Status).ClientTemplate("#=TaskStatus(fieldNameValue)#").Width(100);
+                            })
+                                .DataSource(d => d
+                                    .Ajax()
+                                    .PageSize(10)
+                                            .Model(model =>
+                                            {
+                                                model.Id(m => m.ID);
+                                            })
+                                        .Read(read => read.Action("Person_Record_GetAll", "Prospect", new { PSID = @PSID }))
+                                )
+                                .Pageable()
+                                .Sortable()
+            )
+        </text>);
+        items.Add().Text("Call History").Content(@<text>
+
+           <h4>No Data Found!.</h4>
+        </text>);
+        items.Add().Text("Visit History").Content(@<text>
+            <h4>No Data Found!.</h4>
+        </text>);
+        items.Add().Text("Enrollment History").Content(@<text><h4>No Data Found!.</h4></text>);
+    })
+    )
+                                    }
+
+
+
+<script>
+
+    function OnSave1() {
+        debugger;
+        var ids = '';
+        jQuery('.sales_box input[type="checkbox"]').each(function () {
+            if (jQuery(this).is(":checked")) {
+                ids += jQuery(this).attr('value') + ",";
+            }
+        });
+        jQuery('#Courses').val(ids);
+        ids = '';
+        jQuery('.tms_box input[type="checkbox"]').each(function () {
+            if (jQuery(this).is(":checked")) {
+                ids += jQuery(this).attr('value') + ",";
+            }
+        });
+        jQuery('#Classes').val(ids);
+
+        ids = '';
+        jQuery('.jsCategories input[type="checkbox"]').each(function () {
+            if (jQuery(this).is(":checked")) {
+                ids += jQuery(this).attr('value') + ",";
+            }
+        });
+        jQuery('#CourseCategories').val(ids);
+
+        ids = '';
+        jQuery('.jsHowHearedAboutUs input[type="checkbox"]').each(function () {
+            if (jQuery(this).is(":checked")) {
+                ids += jQuery(this).attr('value') + ",";
+            }
+        });
+        jQuery('#HowYouHearedAboutUs').val(ids);
+
+       //$.ajax({
+       //     method: "post",
+       //     url: "/Prospect/RecordDetails",
+       //     dataType: "JSON",
+       //     contentType: "application/json; charset=utf-8",
+       //     data: JSON.stringify({ ID: ID })
+       // });
+    }
+
+    jQuery(document).ready(function () {
+        var hdn = jQuery("#hdnClientType").val();
+        if (hdn > 0) {
+            if (hdn == 1) {
+                jQuery("#rdClientType_0").attr('checked', true);
+                jQuery("#rdClientType_0").attr('disabled', true);
+
+            }
+            if (hdn == 2) {
+                jQuery("#rdClientType_0").attr('disabled', true);
+                jQuery("#rdClientType_1").attr('disabled', true);
+                jQuery("#rdClientType_1").attr('checked', true);
+            }
+            if (hdn == 3) {
+                jQuery("#rdClientType_0").attr('disabled', true);
+                jQuery("#rdClientType_1").attr('disabled', true);
+                jQuery("#rdClientType_2").attr('disabled', true);
+                jQuery("#rdClientType_2").attr('checked', true);
+
+            }
+            if (hdn == 4) {
+                jQuery("#rdClientType_0").attr('disabled', true);
+                jQuery("#rdClientType_1").attr('disabled', true);
+                jQuery("#rdClientType_2").attr('disabled', true);
+                jQuery("#rdClientType_3").attr('disabled', true);
+                jQuery("#rdClientType_3").attr('checked', true);
+            }
+        }
+
+        jQuery('.jsphone input[type="radio"]').click(function () {
+            Radio(this);
+        });
+    });
+
+    function Radio(element) {
+        jQuery('.jsphone input[type="radio"]').each(function () {
+            jQuery(this).prop('checked', false);
+        });
+        var id = jQuery(element).attr('id');
+        jQuery('#' + id).prop('checked', true);
+    }
+</script>
+<style>
+    .k-grid {
+        width: 100% !important;
+        float: none !important;
+    }
+
+    .editor-field {
+        width: 75% !important;
+    }
+
+    .editor-label {
+        width: 23% !important;
+    }
+
+    .k-editor {
+        height: 100px !important;
+    }
+
+    .editor-field-optional {
+        width: 75% !important;
+    }
+
+    .editor-area-optional {
+        width: 76.3% !important;
+    }
+
+    .textarea-label {
+        width: 23%;
+        height: 122px;
+    }
+
+    .textarea-label1 {
+        width: 23.2%;
+        height: 142px;
+    }
+
+    .inline-checkboxes {
+        width: 32% !important;
+    }
+</style>

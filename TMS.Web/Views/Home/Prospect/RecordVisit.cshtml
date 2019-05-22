@@ -1,0 +1,71 @@
+﻿
+@model long
+
+@using lr = Resources.Resources;
+
+<script>
+    function CreateVenueAdditionalData() {
+        return {
+            oid: '@Model'
+        }
+    }
+</script>
+<div class="ChildGrid">
+    @(Html.Kendo().Grid<TMS.Library.Entities.CRM.CRM_VisitHistory>()
+            .Name("RecordVisit" + Model)
+      .Columns(columns =>
+      {
+          columns.Bound(e => e.VisitType).Title("Visit Type").Width(130);
+          columns.Bound(e => e.VisitDateTimes).Title("Visit DateTime").Width(200);
+          columns.Bound(e => e.Notes).Title("Note").Width(180);
+          columns.Bound(e => e.PerformedBy).Title("Performed By").Width(130);
+          //columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(190).Title(lr.GridAddedBy);
+
+          columns.Bound(e => e.AddedByAlias).Width(190).Title(lr.GridAddedBy).ClientTemplate(@"<div class='gridupdated'>
+            <span class='Addedby' >#:AddedByAlias#</span>
+            <span class='date' >#=kendo.toString(CreatedOn,'" + DateFormatScript + @"')#</span>
+            <span class='time' >#=kendo.toString(CreatedOn,'" + TimeFormatScript + @"')#</span>
+        </div>");
+
+          //  columns.Bound(e => e.UpdatedByAlias).Width(230).Title(lr.ModifiedBy).ClientTemplate(@"<div class='gridupdated'>
+          //    <span class='Addedby' >#:UpdatedByAlias#</span>
+          //    <span class='date' >#=kendo.toString(UpdatedOn,'" + DateFormatScript + @"')#</span>
+          //    <span class='time' >#=kendo.toString(UpdatedOn,'" + TimeFormatScript + @"')#</span>
+          //</div>");
+          columns.Bound(e => e.UpdatedByAlias).Width(170).Title(lr.ModifiedBy).
+   ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"<span class='Addedby'>#=UpdatedByAlias# </span>
+    <span class='date' >#=kendo.toString(UpdatedOn,'" + DateFormatScript + @"')#</span>
+<span class='time' >#=kendo.toString(UpdatedOn,'" + TimeFormatScript + @"')#</span>
+" + @"#} else {#<div>Not Modified</div> </div>#}#");
+      }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("RecordVisitTemplate").DisplayDeleteConfirmation(false))
+                    .ToolBar(toolbar => toolbar.Template(@<text> @RenderAddTemplate()</text>))
+        .Sortable().Selectable(selectable => selectable
+        .Mode(GridSelectionMode.Multiple))
+        .Pageable(pager => pager.Refresh(true)).Scrollable().Filterable().Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
+        .HtmlAttributes(new { style = "height:350px;" }).DataSource(dataSource => dataSource.Ajax().Model(model => { model.Id(m => m.ID); }).PageSize(8)
+        .Read(read => read.Action("ManageRecordVisit_Read", "Prospect", new { PersonID = Model }))
+        .Create(read => read.Action("ManageRecordVisit_Create", "Prospect").Data("CreateVenueAdditionalData"))
+        .Update(read => read.Action("ManageRecordVisit_Update", "Prospect"))
+        .Destroy(read => read.Action("ManageRecordVisit_Destroy", "Prospect"))
+        .Events(e => e.Error("GeneralErrorHandler(\"RecordVisit" + Model + "\")").RequestEnd("GridRequestEndUpdate"))
+                        ).NoRecords(lr.GridNoRecordFoundMessage)
+    )
+
+    @helper RenderAddTemplate()
+    {
+    <div class="toolbar">
+        @if (User.IsInAnyRoles("CanAddEditRecordVisit"))
+        {
+            <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+            <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+        }
+        @if (User.IsInAnyRoles("CanDeleteRecordVisit"))
+        {
+            <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+        }
+
+    </div>
+
+}
+</div>
+

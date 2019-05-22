@@ -1,0 +1,60 @@
+﻿@model string
+@using lr = Resources.Resources;
+
+<div class="ChildGrid">
+    @(Html.Kendo().Grid<TMS.Library.Addresses>()
+    .Name("PersonContactAddressGrid" + Model)
+      .Columns(columns =>
+     {
+         columns.Bound(e => e.AddressLine1);
+         columns.Bound(e => e.CountryID).MinScreenWidth(550);
+         columns.Bound(e => e.CityID).MinScreenWidth(550);
+         columns.Bound(e => e.ZipCode).MinScreenWidth(550);
+         columns.Bound(e => e.StateID).MinScreenWidth(550);
+         columns.Command(cmd =>
+         { cmd.Edit(); cmd.Destroy(); }).Title("Edit/Delete")
+                      .Width(100);
+     }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_AddressTemplate").DisplayDeleteConfirmation(false))
+                    .ToolBar(toolbar => toolbar.Template(@<text>
+        <div class="toolbar">
+            <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+            <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+            <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+        </div>
+                    </text>))
+                              .Sortable().Selectable(selectable => selectable
+                                                                    .Mode(GridSelectionMode.Multiple))
+                   .Pageable(pager => pager
+               .Refresh(true))
+             .Scrollable().Filterable()
+             .Events(e => e.Edit("GeneralPersonGrid_onEdit").Save("PersonChildGrid_onSave"))
+            .HtmlAttributes(new { style = "height:350px;" })
+               .DataSource(dataSource => dataSource
+                      .Ajax()
+                           .Model(model =>
+                           {
+                               model.Id(m => m.ID);
+                           })
+
+                 .PageSize(5)
+                                                        .Read(read => read.Action("ContactAddress_Read", "PersonContact", new { PersonID = Model }))
+                                                            .Create(read => read.Action("ContactAddress_Create", "PersonContact", new { pid = Model }))
+                                                                             .Update(read => read.Action("ContactAddress_Update", "PersonContact"))
+                                                                                              .Destroy(read => read.Action("ContactAddress_Destroy", "PersonContact", new { pid = Model }))
+                                                     .Events(e => e.Error("GeneralErrorHandlerPerson(\"PersonContactAddressGrid" + Model + "\")").RequestEnd("PersonEducationRequestEnd"))
+            ).NoRecords(lr.GridNoRecordFoundMessage)
+    )
+</div>
+
+<script type="text/x-kendo-template" id="PersonEducationErrorTemplate">
+    # if (messages.length) { #
+    <li class="ErrorDetailhead">
+        <span>#=field#</span>
+        <ul class="DetailsError">
+            # for (var i = 0; i < messages.length; ++i) { #
+            <li>#= messages[i] #</li>
+            # } #
+        </ul>
+    </li>
+    # } #
+</script>

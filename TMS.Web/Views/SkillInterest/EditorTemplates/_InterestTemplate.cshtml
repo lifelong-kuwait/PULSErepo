@@ -1,0 +1,15 @@
+﻿@model TMS.Library.TMS.Skills.PersonInterest
+@using lr = Resources.Resources
+
+<div class=" Alertbox alert alert-danger" style="display:none">
+    <ul class="errors"></ul>
+</div>
+<div class="form-horizontal form-person-popup">
+    <div class="form-group">
+        @Html.LabelFor(model => model.Title, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.Title).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+    </div>
+</div>

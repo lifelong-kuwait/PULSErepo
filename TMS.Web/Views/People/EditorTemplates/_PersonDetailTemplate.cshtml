@@ -1,0 +1,287 @@
+﻿@model TMS.Library.TMS.Persons.Person
+@using lr = Resources.Resources
+@{
+
+    var PrimaryLanguageName = TMS.TMSHelper.PrimaryLangName();
+    var PrimaryLanguageFlag = TMS.TMSHelper.PrimaryLangFlag();
+    var SecondaryLanguageName = TMS.TMSHelper.SecondaryLangName();
+    var SecondaryLanguageFlag = TMS.TMSHelper.SecondaryLangFlag();
+}
+
+<div class=" Alertbox alert alert-danger" style="display:none">
+    <ul class="errors"></ul>
+</div>
+<div class="form-horizontal form-person-popup">
+    <div id="personeditdiv">
+        <div class="form-group">
+            @Html.LabelFor(model => model.PersonRegCode, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @Html.Kendo().TextBoxFor(model => model.PersonRegCode).HtmlAttributes(new { @class = "form-control ", @disabled = "disabled", @style = " width: 100%;" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SalutationID, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(c => c.SalutationID).DataTextField("Text").DataValueField("Value")
+                    //.OptionLabel(lr.SalutationOptionalLabel)
+                            .OptionLabel(new { Text = lr.SalutationOptionalLabel, Value = 0 })
+            .HtmlAttributes(new { @class = "form-control ", style = "width:100%", })
+                                .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.Salutation>(typeof(TMS.Library.Salutation))).Events(e => e.Change("SalutationChange")))
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Gender, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(c => c.Gender).DataTextField("Text").DataValueField("Value")
+                    //.OptionLabel(lr.GenderOptionallabel)
+                               .OptionLabel(new { Text = lr.GenderOptionallabel, Value = 0 })
+            .HtmlAttributes(new { @class = "form-control ", style = "width:100%" })
+                                   .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.Gender>(typeof(TMS.Library.Gender))))
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.P_FirstName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().TextBoxFor(model => model.P_FirstName).HtmlAttributes(new { @class = "form-control pfirstname txtrequired", @placeholder = lr.PersonP_FirstName, @dir = @PLDIR, @style = " width: 100%;" })
+            @Html.ValidationMessageFor(model => model.P_FirstName)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.P_MiddleName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().TextBoxFor(model => model.P_MiddleName).HtmlAttributes(new { @class = "form-control pmidddlename", @placeholder = lr.PersonP_MiddleName, @dir = @PLDIR, @style = " width: 100%;" })
+            @Html.ValidationMessageFor(model => model.P_MiddleName)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.P_LastName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().TextBoxFor(model => model.P_LastName).HtmlAttributes(new { @class = "form-control plast_name txtrequired", @placeholder = lr.PersonP_LastName, @dir = @PLDIR, @style = " width: 100%;" })
+            @Html.ValidationMessageFor(model => model.P_LastName)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.S_FirstName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().TextBoxFor(model => model.S_FirstName).HtmlAttributes(new { @class = "form-control ", @placeholder = lr.PersonS_FirstName, @dir = @PLDIR, @style = " width: 100%;" })
+            @Html.ValidationMessageFor(model => model.S_FirstName)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.S_MiddleName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().TextBoxFor(model => model.S_MiddleName).HtmlAttributes(new { @class = "form-control ", @placeholder = lr.PersonS_MiddleName, @dir = @PLDIR, @style = " width: 100%;" })
+            @Html.ValidationMessageFor(model => model.S_MiddleName)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.S_LastName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().TextBoxFor(model => model.S_LastName).HtmlAttributes(new { @class = "form-control", @placeholder = lr.PersonS_LastName, @dir = @PLDIR, @style = " width: 100%;" })
+            @Html.ValidationMessageFor(model => model.S_LastName)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.NickName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().TextBoxFor(model => model.NickName).HtmlAttributes(new { @class = "form-control nickname", @placeholder = lr.PersonNickName, @dir = @PLDIR, @style = " width: 100%;" })
+            @Html.ValidationMessageFor(model => model.NickName)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Alias, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().TextBoxFor(model => model.Alias).HtmlAttributes(new { @class = "form-control alias", @placeholder = lr.PersonAlias, @dir = @PLDIR, @style = " width: 100%;" })
+            @Html.ValidationMessageFor(model => model.Alias)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.P_DisplayName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().TextBoxFor(model => model.P_DisplayName).HtmlAttributes(new { @class = "form-control pdisplayname txtrequired", @placeholder = lr.PersonP_DisplayName, @dir = @PLDIR, @style = " width: 100%;" })
+            @Html.ValidationMessageFor(model => model.P_DisplayName)
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PictureID, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @*@(Html.Kendo().Upload().Name("PictureID").Multiple(false).Async(a => a.Save("SavePicture", "Attachment").Remove("RemoveAttachment", "Attachment").
+                AutoUpload(true)).Events(e => e.Success("PersonPictureOnSuccess").Remove(@<text>function(e) {e.data = { file: PicturelastUploadedFile }; } </text>)
+                                                               ))*@
+            @*@(Html.Kendo().Upload().Name("fileupload").Multiple(false).Async(a => a.Save("SavePictureAndLogo", "Attachment").Remove("RemovePictureAndLogo", "Attachment").
+                AutoUpload(true)).Events(e => e.Success("PersonPictureOnSuccess").Remove("PersonPictureOnRemove").Upload("profile_UploadAttachmentData").Select("LoginUserProfilePictureSelect")
+                                                   ))*@
+            <input id="files" name="fileupload" type="file" />
+            <script>
+                    jQuery(document).ready(function () {
+                        jQuery("#files").kendoUpload({
+                            multiple: false,
+                            async: {
+                                saveUrl: '@Url.Content("~/Attachment/SavePictureAndLogo")',
+                                removeUrl: '@Url.Content("~/Attachment/RemovePictureAndLogo")',
+                                autoUpload: true
+                            },
+                            remove: PersonPictureOnRemove,
+                            success: PersonPictureOnSuccess,
+                            upload: profile_UploadAttachmentData,
+                            select: LoginUserProfilePictureSelect,
+                            select: function (e) {
+                                var fileInfo = e.files[0];
+                                var wrapper = this.wrapper;
+
+                                setTimeout(function () {
+                                    addPreview(fileInfo, wrapper);
+                                });
+                            }
+                        });
+                    });
+
+                    function addPreview(file, wrapper) {
+                        var raw = file.rawFile;
+                        var reader = new FileReader();
+                        debugger;
+                        if (raw) {
+                            reader.onloadend = function () {
+                                debugger;
+                                var preview = jQuery("<img class='image-preview'>").attr("src", this.result);
+
+                                wrapper.find(".k-file[data-uid='" + file.uid + "'] .k-file-extension-wrapper")
+                                  .replaceWith(preview);
+                            };
+
+                            reader.readAsDataURL(raw);
+                        }
+                    }
+            </script>
+            <style>
+                .image-preview {
+                    position: relative;
+                    vertical-align: top;
+                    height: 45px;
+                }
+            </style>
+
+        </div>
+    </div>
+
+
+    @*<div class="form-group">
+        @Html.LabelFor(model => model.PictureID, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+          
+            @(Html.Kendo().Upload().Name("fileupload").Multiple(false).Async(a => a.Save("SavePictureAndLogo", "Attachment").Remove("RemovePictureAndLogo", "Attachment").
+                                                         AutoUpload(true)).Events(e => e.Success("PersonPictureOnSuccess").Remove("PersonPictureOnRemove").Upload("profile_UploadAttachmentData").Select("person_AttachmentSelect")
+                                                                                            ))
+        </div>
+    </div>*@
+    @*<div class="form-group">
+        @Html.LabelFor(model => model.Designation, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().TextBoxFor(model => model.Designation).HtmlAttributes(new { @class = "form-control", @style = " width: 100%;" })
+            @Html.ValidationMessageFor(model => model.Designation)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.OrganizationID, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(model => model.OrganizationID)
+                    .HtmlAttributes(new { style = "width:100%" })
+                    .DataTextField("Text")
+                    .DataValueField("Value")
+                    .OptionLabel(new { Text = lr.OrganizationSelectLabelOptional, Value = 0 })
+                    .DataSource(source =>
+                    {
+                        source.Read(read =>
+                        {
+                            read.Action("Orgnization", "DDL");
+                        });
+                    })
+            )
+        </div>
+    </div>*@
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().TextBoxFor(model => model.Email).HtmlAttributes(new { @class = "form-control", @placeholder = lr.PersonContactEmail, @style = " width: 100%;" })
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CountryCode, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(m => m.CountryCode)
+                    /// .ValuePrimitive(true)
+                           .HtmlAttributes(new { style = "width:100%" })
+            .DataTextField("Text")
+                    .DataValueField("Value")
+            .OptionLabel(new { Text = lr.PersonPhoneCountryCodeOptionalLabel, Value = 0 })
+                  .DataSource(dataSource =>
+                  {
+                      dataSource.Read(read => read.Action("CountryCode", "DDL"));
+
+                  })
+            )
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ContactNumber, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.ContactNumber).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Extension, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.Extension).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Flags, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().MultiSelectFor(x => x.Flags)
+                        .DataTextField("P_FlagName")
+                .DataValueField("ID")
+                 .Filter("contains")
+                 .AutoBind(true)
+                 .MaxSelectedItems(6)
+          .DataSource(source =>
+          {
+              source.Read(read =>
+              {
+                  read.Action("Flags", "DDL");
+              })
+              .ServerFiltering(true);
+          }))
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+    jQuery(document).ready(function () {
+        jQuery('.pfirstname , .pmiddlename , .plast_name, .nickname').bind('keypress blur', function () {
+            jQuery('.pdisplayname').val(jQuery('.pfirstname').val() + ' ' +
+                                  jQuery('.pmidddlename').val() + ' ' +
+                                       jQuery('.plast_name').val() + ' ' +
+                                       jQuery('.nickname').val()
+                                    ).change();
+        });
+    });
+</script>

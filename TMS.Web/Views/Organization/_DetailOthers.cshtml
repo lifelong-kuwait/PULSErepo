@@ -1,0 +1,22 @@
+﻿@model string
+@using lr = Resources.Resources;
+<script>
+    function onDetailExpand(e) {
+        jQuery('html, body').animate({
+            scrollTop: jQuery(e.item).parent().offset().top+e.item.offsetTop
+        }, 1000);
+    }
+</script>
+@(Html.Kendo().PanelBar()
+        .Name("PersonOthers" + Model)
+    .ExpandMode(PanelBarExpandMode.Multiple)
+    .Items(i =>
+    {
+        if (User.IsInRole("CanViewOrganizationAttachments"))
+        i.Add().Text(lr.AttachmentTabTitle).LoadContentFrom("OpenAttachments", "Attachment", new { OpenId = Model, Opentype = 2 });
+        if (User.IsInRole("CanViewOrganizationNotes"))
+        i.Add().Text(lr.NotesTabTitle).LoadContentFrom("OpenNotes", "Common", new { OpenId = Model, Opentype = 2 });
+    }).Events(e => e.Expand("onDetailExpand")))
+
+
+

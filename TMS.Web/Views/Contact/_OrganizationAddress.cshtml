@@ -1,0 +1,43 @@
+﻿@model string
+@using lr = Resources.Resources;
+
+<div class="ChildGrid">
+    @(Html.Kendo().Grid<TMS.Library.Addresses>()
+    .Name("OrganizationContactAddressGrid" + Model)
+      .Columns(columns =>
+     {
+         columns.Bound(e => e.AddressLine1);
+         columns.Bound(e => e.Country).MinScreenWidth(550);
+         columns.Bound(e => e.State).MinScreenWidth(550);
+         columns.Bound(e => e.ZipCode).MinScreenWidth(550);
+        
+     }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_AddressTemplate").DisplayDeleteConfirmation(false))
+                    .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate() </text>))
+                                   .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+                                   .Pageable(pager => pager.Refresh(true)).Scrollable().Filterable()
+                                                                                   .Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
+                                   .HtmlAttributes(new { style = "height:350px;" })
+                                   .DataSource(dataSource => dataSource.Ajax().Model(model => { model.Id(m => m.ID); })
+                                   .PageSize(5)
+                                   .Read(read => read.Action("ContactAddress_Read", "Contact", new { type = 2, oid = Model }))
+                                   .Create(read => read.Action("ContactAddress_Create", "Contact", new { type = 2, oid = Model }))
+                                   .Update(read => read.Action("ContactAddress_Update", "Contact"))
+                                   .Destroy(read => read.Action("ContactAddress_Destroy", "Contact", new { type = 2, oid = Model }))
+                                                                                                           .Events(e => e.Error("GeneralErrorHandler(\"OrganizationContactAddressGrid" + Model + "\")").RequestEnd("GridRequestEndUpdate"))
+                                   ).NoRecords(lr.GridNoRecordFoundMessage)
+    )
+</div>
+@helper RenderAddTemplate()
+{
+    <div class="toolbar">
+        @if (User.IsInRole("CanAddEditOrganizationAddresses"))
+        {
+            <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+            <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+        }
+        @if (User.IsInRole("CanDeleteOrganizationAddresses"))
+        {
+            <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+        }
+    </div>
+}

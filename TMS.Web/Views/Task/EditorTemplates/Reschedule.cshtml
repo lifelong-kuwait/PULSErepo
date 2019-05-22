@@ -1,0 +1,78 @@
+﻿@model TMS.Library.Task.Sls_Task
+@*@using Kendo.Mvc.UI*@
+@using lr = Resources.Resources
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+@using (Html.BeginForm("EditStatusRescheduled", "Task", FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken()
+    <div class="Alertbox alert alert-danger" style="display:none">
+        <ul class="errors"></ul>
+    </div>
+    <div class="form-horizontal form-person-popup">
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.DueDate, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.Kendo().DatePickerFor(x => x.DueDate).Start(CalendarView.Month).Depth(CalendarView.Month).Format(KendoDateFormat).Value("").HtmlAttributes(new { style = "width: 100%;padding-bottom: 10px;", @class = "txtrequired" }).Min(DateTime.Now.AddDays(0)).Events(e => e.Change("onDOBChange")))
+                @Html.ValidationMessageFor(model => model.DueDate)
+            </div>
+        </div>*@
+
+    
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DueDate, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.Kendo().DatePickerFor(x => x.DueDate).Start(CalendarView.Month).Depth(CalendarView.Month).Format(KendoDateFormat).Value("").HtmlAttributes(new { style = "width: 100%;padding-bottom: 10px;", @class = "txtrequired" }).Min(DateTime.Now.AddDays(0)).Events(e => e.Change("onDOBChange")))
+                @Html.ValidationMessageFor(model => model.DueDate)
+            </div>
+        </div>
+
+    </div>
+    <div>
+        @Html.HiddenFor(model=>model.ID)
+    </div>
+    <div>
+        @Html.Kendo().Button().Name("Edit").Content("Update").HtmlAttributes(new { @class= "k-button col-lg-offset col-lg-4" })
+    </div>
+
+}
+<script>
+    //jQuery(".txtrequired").click(function () {
+    jQuery(document).ready(function () {
+        jQuery('.k-button').prop('disabled', true);
+        jQuery(".txtrequired").click(function () {
+            jQuery('.k-button').prop('disabled', false);
+        });
+        
+});
+</script>
+
+    <script>
+        function onDOBChange(e) {
+            var dt = e.sender;
+            var value = dt.value();
+
+            if (value === null) {
+                value = kendo.parseDate(dt.element.val(), dt.options.parseFormats);
+            }
+
+            if (value < dt.min()) {
+                dt.value(dt.min());
+            } else if (value > dt.max()) {
+                dt.value(dt.max());
+            }
+        }
+    </script>
+
+<style>
+    .col-lg-offset{
+        margin-left:60%;
+    }
+</style>

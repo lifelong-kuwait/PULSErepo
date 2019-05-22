@@ -1,0 +1,45 @@
+﻿@model TMS.Library.Common.Address.PersonAvailability
+@using lr = Resources.Resources
+
+<script>
+    function startChange() {
+        var endPicker = jQuery("#ToDate").data("kendoDatePicker"),
+            startDate = this.value();
+
+        if (startDate) {
+            startDate = new Date(startDate);
+            startDate.setDate(startDate.getDate() + 1);
+            endPicker.min(startDate);
+        }
+    }
+
+    function endChange() {
+        var startPicker = jQuery("#FromDate").data("kendoDatePicker"),
+            endDate = this.value();
+
+        if (endDate) {
+            endDate = new Date(endDate);
+            endDate.setDate(endDate.getDate() - 1);
+            startPicker.max(endDate);
+        }
+    }
+</script>
+<div class=" Alertbox alert alert-danger" style="display:none">
+    <ul class="errors"></ul>
+</div>
+<div class="form-horizontal form-person-popup">
+    <div class="form-group">
+        @Html.LabelFor(model => model.FromDate, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().DatePickerFor(c => c.FromDate).Culture(CurrentCulture).HtmlAttributes(new { @style = "width:100%" }).Events(e => e.Change("startChange")).Format(KendoDateFormat).Value("")
+            @Html.ValidationMessageFor(model => model.FromDate)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ToDate, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().DatePickerFor(c => c.ToDate).Culture(CurrentCulture).Events(e => e.Change("endChange")).HtmlAttributes(new { @style = "width:100%" }).Format(KendoDateFormat).Min(DateTime.Now).Value("")
+            @Html.ValidationMessageFor(model => model.ToDate)
+        </div>
+    </div>
+</div>

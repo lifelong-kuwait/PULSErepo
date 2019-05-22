@@ -1,0 +1,56 @@
+﻿@model string
+@using lr = Resources.Resources;
+
+<script type="text/javascript">
+    var personids;
+    function filterPersontoadded() {
+
+        return {
+            PersonIds: personids, cid: '@Model'
+            }
+    }
+</script>
+<div class="ChildGrid">
+    @(Html.Kendo().Grid<TMS.Library.TMS.Skills.PersonSkill>()
+            .Name("PersonSkillGrid" + Model)
+      .Columns(columns =>
+     {
+
+         columns.Bound(e => e.Title);
+         columns.Command(cmd =>
+         { cmd.Edit(); cmd.Destroy(); }).Title("Edit/Delete").Width(100);
+     }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_SkillTemplate").DisplayDeleteConfirmation(false).AdditionalViewData(new { PersonID = Model }))
+                    .ToolBar(toolbar => toolbar.Template(@<text>
+        <div class="toolbar">
+            @if (User.IsInRole("CanAddEditPersonSkillsAreasofFocus"))
+            { <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+            <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>}
+
+            @if (User.IsInRole("CanDeletePersonSkillsAreasofFocus"))
+            {<a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a> }
+
+        </div>
+                    </text>))
+                              .Sortable().Selectable(selectable => selectable
+                                                                    .Mode(GridSelectionMode.Multiple))
+                  .Pageable(pager => pager
+               .Refresh(true))
+             .Scrollable().Filterable()
+                                             .Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
+            .HtmlAttributes(new { style = "height:350px;" })
+               .DataSource(dataSource => dataSource
+                      .Ajax()
+                           .Model(model =>
+                           {
+                               model.Id(m => m.ID);
+                           })
+
+            .PageSize(8)
+                                .Read(read => read.Action("PersonSkill_Read", "SkillInterest", new { PersonID = Model }))
+                .Create(read => read.Action("PersonSkill_Create", "SkillInterest").Data("filterPersontoadded"))
+                        .Update(read => read.Action("PersonSkill_Update", "SkillInterest"))
+                .Destroy(read => read.Action("PersonSkill_Destroy", "SkillInterest"))
+                                .Events(e => e.Error("GeneralErrorHandler(\"PersonSkillGrid" + Model + "\")"))
+        ).NoRecords(lr.GridNoRecordFoundMessage)
+    )
+</div>

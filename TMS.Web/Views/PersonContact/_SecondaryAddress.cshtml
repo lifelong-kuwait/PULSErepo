@@ -1,0 +1,53 @@
+﻿@model string
+@using lr = Resources.Resources;
+
+<div class="ChildGrid">
+    @(Html.Kendo().Grid<TMS.Library.Addresses>()
+            .Name("PersonSecondaryAddresssGrid" + Model)
+      .Columns(columns =>
+     {
+         columns.Bound(e => e.AddressLine1).Width(120);
+         columns.Bound(e => e.CountryID).Width(50);
+         columns.Bound(e => e.CityID).Width(120);
+         columns.Bound(e => e.ZipCode).Width(100);
+         columns.Bound(e => e.StateID).Width(120);
+         columns.Command(cmd =>
+         { cmd.Edit(); cmd.Destroy(); }).Title("Edit/Delete")
+                      .Width(50);
+     }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_AddressTemplate"))
+                    .ToolBar(toolbar => toolbar.Create().Text(lr.AddPrimaryAddressButtonText))
+     .Sortable()
+          .Pageable(pager => pager
+       .Refresh(true))
+     .Scrollable().Filterable()
+     .Events(e => e.Edit("GeneralPersonGrid_onEdit").Save("PersonChildGrid_onSave"))
+    .HtmlAttributes(new { style = "height:350px;" })
+       .DataSource(dataSource => dataSource
+              .Ajax()
+                   .Model(model =>
+                   {
+                       model.Id(m => m.ID);
+                   })
+
+         .PageSize(5)
+                .Read(read => read.Action("ContactSecondaryAddress_Read", "PersonContact", new { PersonID = Model }))
+                  .Create(read => read.Action("ContactSecondaryAddress_Create", "PersonContact", new { pid = Model }))
+                          .Update(read => read.Action("ContactSecondaryAddress_Update", "PersonContact"))
+                .Destroy(read => read.Action("ContactSecondaryAddress_Destroy", "PersonContact", new { pid = Model }))
+                                                     .Events(e => e.Error("GeneralErrorHandlerPerson(\"PersonSecondaryAddresssGrid" + Model + "\")").RequestEnd("PersonEducationRequestEnd"))
+    ).NoRecords(lr.GridNoRecordFoundMessage)
+    )
+</div>
+
+<script type="text/x-kendo-template" id="PersonEducationErrorTemplate">
+    # if (messages.length) { #
+    <li class="ErrorDetailhead">
+        <span>#=field#</span>
+        <ul class="DetailsError">
+            # for (var i = 0; i < messages.length; ++i) { #
+            <li>#= messages[i] #</li>
+            # } #
+        </ul>
+    </li>
+    # } #
+</script>

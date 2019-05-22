@@ -1,0 +1,96 @@
+﻿@using MvcSiteMapProvider.Web.Html
+<ul class="breadcrumbs">
+    <li><a><i class="iconfa-home"></i></a></li>
+    <li>@Html.MvcSiteMap().SiteMapPath()</li>
+    <li class="xsUser dropdown" style="border-right:none; margin-right:0px;">@Html.Partial("Static/_xsMobileUserMenu")</li>
+    <li class="right dropdown">
+        <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="mdi mdi-water" style="font-size:27px;"></i></a>
+        <ul class="dropdown-menu pull-right skin-color">
+            @*<li><a href="default">Default</a></li>*@
+            <li><a val="default">Blue</a></li>
+            <li><a val="green">Green</a></li>
+            <li><a val="red">Red</a></li>
+            <li><a val="violet">Violet </a></li>
+            <li><a val="yellow">Yellow </a></li>
+            <li><a val="pink">Pink </a></li>
+            
+        </ul>
+    </li>
+    <li class="Lang dropdown" style="border-right:none; margin-right:0px;">  @Html.Action("headerLanguage", "Layout")</li>
+</ul>
+
+<div class="pageheader">
+    <div class="row tms-row">
+        <div class="gridsearch">
+            <div class="col-md-offset-1 col-md-10">
+                <div class="input-group">
+                    <div class="right-inner-addon">
+                        @*<i class="mdi mdi-magnify " id="btnSearch"></i>*@
+                        <span class="input-group-addon cursorPointer tms-gridsearch" id="btnSearch"><i class="mdi mdi-magnify search-icon"></i></span>
+                        <input type="search" class="form-control tms-serach" id="searchBox" placeholder="To search type and hit enter...">
+                        @*<span class="input-group-addon cursorPointer tms-gridsearch" id="btnSearch"><i class="mdi mdi-magnify search-icon"></i></span>*@
+                    </div>
+                   
+            </div>
+    </div>
+     </div>
+
+
+        @*<div class=" col-md-offset-1 col-md-10">
+            <div class="right-inner-addon">
+                <i class="mdi mdi-magnify "></i>
+                <input type="search" class="form-control tms-serach" name="keyword" placeholder="To search type and hit enter..." />
+            </div>
+        </div>*@
+    </div>
+    @*<form action="results.html" method="post" >
+            <input type="text" class="searchinput" name="keyword" placeholder="To search type and hit enter..." />
+
+        </form>*@
+    @*<div class="pageicon"><span class="iconfa-laptop"></span></div>
+        <div class="pagetitle">
+            <h5>All Features Summary</h5>
+            <h1>Dashboard</h1>
+        </div>*@
+</div><!--pageheader-->
+
+<script>
+    jQuery('.skin-color a').click(function (e) {
+        var s = jQuery(e.target).attr("val");
+        if (jQuery('#skinstyle').length > 0) {
+            if (s != 'default') {
+                jQuery('#skinstyle').attr('href', '@Url.Content("~/content/shamcey/css/")'+'style.' + s + '.css');
+                updateusertheme(s);
+                //jQuery.cookie('skin-color', s, { path: '/' });
+            } else {
+                jQuery('#skinstyle').remove();
+                updateusertheme(null);
+                // jQuery.cookie("skin-color", '', { path: '/' });
+                updateusertheme(null);
+            }
+        } else {
+            if (s != 'default') {
+                jQuery('head').append('<link id="skinstyle" rel="stylesheet" href="../content/shamcey/css/style.' + s + '.css" type="text/css" />');
+                // jQuery.cookie("skin-color", s, { path: '/' });
+                updateusertheme(s);
+            }
+        }
+        return false;
+    });
+    //// load selected skin color from cookie
+    //if (jQuery.cookie('skin-color')) {
+    //    var c = jQuery.cookie('skin-color');
+    //    if (c) {
+    //        jQuery('head').append('<link id="skinstyle" rel="stylesheet" href="../content/shamcey/css/style.' + c + '.css" type="text/css" />');
+    //        jQuery.cookie("skin-color", c, { path: '/' });
+    //    }
+    //}
+    function updateusertheme(style) {
+        jQuery.ajax({
+            url: '@Url.Content("~/Home/Theme")',
+            data: { theme: style },
+            success: function (result) {
+            }
+        });
+    }
+</script>

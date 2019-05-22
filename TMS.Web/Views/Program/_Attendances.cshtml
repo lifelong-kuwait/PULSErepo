@@ -1,0 +1,129 @@
+﻿@using lr = Resources.Resources;
+@model List<TMS.Library.Entities.TMS.Program.Attendance>
+
+
+
+
+<div class="ChildGrid">
+@using (Html.BeginForm("Attendance_Create", "Program", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    if (Model.Count > 0)
+    {
+        <table class="table table-striped" id="tbl">
+            <thead>
+                <tr>
+                  
+                    <th>
+                        @lr.TraineeRegistrationNo
+
+                    </th>
+                    <th>
+                        @lr.TraineeName
+                    </th>
+                    <th>
+                        @lr.AttendanceType
+                    </th>
+                    <th>
+                       
+                        <p><b> Mark All Present </b> @Html.RadioButton("Present", "Mark All Present")
+
+                            @Html.RadioButton("Present", "Absent All", new { @checked = true, @id = "Markpresent" })
+                            @*<span class="glyphicon glyphicon-refresh"></span>*@
+                        </p>
+                      
+                    </th>
+                  
+                </tr>
+            </thead>
+    
+        <tbody>
+            @for (var i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                   
+                    <td>
+                        @Html.TextBoxFor(m => m[i].ClassTraineesID, new { @readonly = "readonly" })
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => m[i].TraineeName)
+
+                    </td>
+                    <td>
+                        @(Html.Kendo().DropDownListFor(m => m[i].AttendanceType).DataTextField("Text").DataValueField("Value")
+
+  .HtmlAttributes(new { @class = "form-control", style = "width:200px" })
+  .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.AttendanceType>(typeof(TMS.Library.AttendanceType))))
+
+         </td>
+                    <td>
+                        @Html.HiddenFor(m => m[i].ID)
+
+                    </td>
+                  
+                   
+                </tr>
+            }
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+
+                <td>
+@*@if (User.IsInRole("CanAddEditAttendance"))
+{*@
+                    <input type="submit" id="btnsave" class="btn btn-primary" value="Save" />
+@*}*@
+                </td>
+            </tr>
+        </tbody>
+     
+        </table>
+
+    }
+    else {
+        <div>There is no Trainee in Session</div>
+    }
+}
+</div>
+
+<style>
+    th{
+        background-color:#f2f2f2;
+    }
+   input.btn.btn-primary {
+    float: right;
+    height: 20px;
+    width: 68px;
+}
+    select#d_AttendanceType {
+    height: 18px;
+    max-width: 180px;
+  
+}
+    select.col-md-2.col-lg-2.form-control {
+    height: 20px;
+    width: 83%;
+}
+    input[type="text"] {
+    border: 0px;
+    background-color: transparent;
+}
+    input#Markpresent {
+    display: none;
+}
+</style>
+
+
+    @*<script>
+        jQuery("#btn").click(function () {
+            jQuery.ajax({
+                url: '/Program/ManageAttendance',
+                success: function (data) {
+                    jQuery("#tbl").html(data);
+                }
+            })
+        })
+    </script>*@

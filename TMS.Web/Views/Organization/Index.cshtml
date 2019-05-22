@@ -1,0 +1,643 @@
+﻿@using lr = Resources.Resources;
+@{
+    ViewBag.Title = lr.OrganizationTitle;
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+}
+<h2>@lr.OrganizationTitle</h2>
+@Html.AntiForgeryToken()
+@(Html.Kendo().Grid<TMS.Library.TMS.Organization.OrganizationModel>()
+        .Name("OrganizationGrid")
+    .Columns(columns =>
+    {
+        columns.Bound(e => e.FullName).ClientTemplate(@"<div  class='person-box'>
+                <div class='person'>
+<img src='../#:replaceString(data.Logo)#' class='paddig' alt=''>" +
+
+     @"<h2>#:FullName#</h2><p></p><h3> #if(P_DisplayName !=null){# (#:P_DisplayName#) #}#   #if(Purpose !=null){# (#:Purpose#) #}#</h3> " +
+    @"# if (PersonEmail !=null) { #" +
+    @"<p></p><h4>#:PersonEmail#</h4> #}" +
+    @" if(ContactNumber !=null){#<p></p><h5> #if(CountryCode !=null){##:CountryCode# #}# #:ContactNumber# #if(Extension !=null){# (#:Extension#) #}#</h5> #}#
+</div>"
+                   );
+        columns.Bound(e => e.CreatedBy).Width(190).MinScreenWidth(550).Title(lr.GridAddedBy).ClientTemplate(@"<div class='gridaddedby'>
+#if(AddedByAlias!=null){#<span class='Addedby' >#:AddedByAlias#</span>#}#
+<span class='date' >#=kendo.toString(CreatedDate,'" + DateFormatScript + @"')#</span>
+<span class='time' >#=kendo.toString(CreatedDate,'" + TimeFormatScript + @"')#</span>
+</div>");
+        columns.Bound(e => e.UpdatedByAlias).Width(170).Title(lr.ModifiedBy).
+ ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"<span class='Addedby'>#=UpdatedByAlias# </span>
+    <span class='date' >#=kendo.toString(UpdatedDate,'" + DateFormatScript + @"')#</span>
+<span class='time' >#=kendo.toString(UpdatedDate,'" + TimeFormatScript + @"')#</span>
+" + @"#} else {#<div>Not Modified</div> </div>#}#");
+    
+    }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_OrganizationTemplate").DisplayDeleteConfirmation(false))
+      .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>))
+     .Groupable().Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+     .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
+                         .Scrollable().Filterable().Events(e => e.Edit("OrganizationIndexGrid_onEdit").Save("General_onSave"))
+     .HtmlAttributes(new { style = "height:700px !important;" })
+     .DataSource(dataSource => dataSource.Ajax().Model(model => { model.Id(m => m.ID);  })
+     .PageSize(15)
+     .Read(read => read.Action("Organization_Read", "Organization").Data("withSearch"))
+     .Create(read => read.Action("Organization_Create", "Organization").Data("OrganizationIndexGetLogo"))
+     .Destroy(read => read.Action("Organization_Destroy", "Organization"))
+     .Update(read => read.Action("Organization_Update", "Organization").Data("OrganizationGetLogo"))
+     .Events(e => e.Error("GeneralErrorHandler(\"OrganizationGrid\")")))
+     .NoRecords(lr.GridNoRecordFoundMessage)
+)
+
+@helper RenderAddTemplate()
+{
+    <div class="toolbar">
+        @if (User.IsInRole("CanAddOrganization"))
+        {
+            <a class="k-button tms-grid-add" title="" data-placement="left" data-toggle="tooltip" data-original-title="Tooltip on left">
+                <span class="tms-grid-icon mdi mdi-plus "></span>
+            </a>
+        }
+        @if (User.IsInRole("CanAddEditOrganization"))
+        {
+           
+            <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+        }
+        @if (User.IsInRole("CanDeleteOrganization"))
+        {
+            <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+        }
+        @if (User.IsInRole("CanViewOrganizationDetail"))
+        {
+            <a class="k-button tms-grid-detail"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>}
+
+      
+    </div>
+    @*@Html.Partial("Static/_gridSearchWidget", lr.PersonOrganization)*@
+}
+
+
+
+<script id="toolTipTemplate" type="text/x-kendo-template">
+
+   @if (User.IsInRole("CanAddEditOrganization"))
+   {
+        <span class="grid-tooltip-icon edit" dat-uid="#=uid#" title="Edit #=P_DisplayName#"><i class="mdi mdi-pencil"></i></span>
+    }
+   @if (User.IsInRole("CanDeleteOrganization"))
+   {
+        <span class="grid-tooltip-icon delete" dat-uid="#=uid#" title="Delete"><i class="mdi mdi-delete"></i></span>
+    }
+    @if (User.IsInRole("CanViewOrganizationDetail"))
+    {
+        <span class="grid-tooltip-icon persondetail" dat-uid="#=ID#" title="See the detail of #=P_DisplayName#"><i class="mdi mdi-open-in-new"></i></span>
+
+
+    }
+</script>
+
+
+<script>
+     jQuery(function () {
+       // debugger;
+        var template = kendo.template(jQuery("#toolTipTemplate").html());
+        //initialize tooltip to grid tbody with filter cells with given CSS class
+        var tooltip = jQuery("#OrganizationGrid tbody").kendoTooltip({
+            position: "center",
+            autoHide: false,
+            filter: "td:nth-child(1)",
+            showOn: "click",
+            show: function (e) {
+                //get current target row
+                this.popup.element.addClass("tmstooltip");
+                var currentRow = this.target().closest("tr");
+                var grid = jQuery("#OrganizationGrid").data("kendoGrid");
+                //get current row dataItem
+                var dataItem = grid.dataItem(currentRow);
+
+                //pass the dataItem to the template
+                var generatedTemplate = template(dataItem);
+                //set the generated template to the content of the tooltip
+                this.content.html(generatedTemplate);
+            },
+        }).data("kendoTooltip");
+     
+        jQuery(".edit").live("mousedown", function (event) {
+            //debugger;
+            jQuery("#OrganizationGrid").data("kendoGrid").editRow(jQuery("[data-uid='" + jQuery(this).attr("dat-uid") + "']"));
+        });
+     
+        jQuery(".delete").live("mousedown", function (event) {
+            //debugger;
+            grid = jQuery("#OrganizationGrid").data("kendoGrid");
+            var selectedRows = jQuery("#OrganizationGrid tr.k-state-selected");
+            var checkedLength = selectedRows.length;
+            var checkedLength = selectedRows.length;
+            if (checkedLength == 1) {
+                var grid = jQuery("#OrganizationGrid").data("kendoGrid");
+                var data = grid.dataItem(jQuery("[data-uid='" + jQuery(this).attr("dat-uid") + "']"));  //get the row data so it can be referred later
+
+                swal({
+                    title: '@lr.Areyousureyouwanttodeletethisrecord',
+                    text: '@lr.Youwillnotbeabletorecover',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "@lr.confirmDelete",
+                    cancelButtonText: "@lr.confirmNo",
+                    closeOnConfirm: false,
+                    closeOnCancel: true,
+                    customClass: "tmsconfirm"
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        grid.removeRow(selectedRows);
+                        swal({
+                           title: '@lr.confirmDeleted',
+                           text:  '@lr.confirmDeletedMessage',
+                           type: "success"
+                       },
+                    function(){
+                         window.location="@Url.Content("~/Organization/Index")";
+                        });
+                   }
+                });
+            } else if (checkedLength > 1) {
+                var grid = jQuery("#OrganizationGrid").data("kendoGrid");
+
+
+                swal({
+                    title: '@lr.Areyousureyouwanttodeletetheserecord',
+                    text: '@lr.Youwillnotbeabletorecover' + ' <strong style="font-weight:bold">' + checkedLength + ' ' + '@lr.confirmRecords' + '</strong> ?',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "@lr.confirmDelete",
+                    cancelButtonText: "@lr.confirmNo",
+                    closeOnConfirm: false,
+                    closeOnCancel: true,
+                    html: true,
+                    customClass: "tmsconfirm"
+                },
+              function (isConfirm) {
+                  if (isConfirm) {
+                      selectedRows.each(function () { grid.removeRow(jQuery(this)); });
+                      swal({
+                           title: '@lr.confirmDeleted',
+                           text:  '@lr.confirmDeletedMessage',
+                           type: "success"
+                       },
+                    function(){
+                        window.location="@Url.Content("~/Organization/Index")";
+                        });
+                   }
+              });
+            } else {
+
+            }
+        });
+
+
+
+        //destroy from header
+        jQuery(".tms-grid-destroyperson").live("mousedown", function (event) {
+            var selectedRows = jQuery("#OrganizationGrid tr.k-state-selected");
+            var checkedLength = selectedRows.length;
+            var checkedLength = selectedRows.length;
+            if (checkedLength == 1) {
+                var grid = jQuery("#OrganizationGrid").data("kendoGrid");
+
+                swal({
+                    title: '@lr.Areyousureyouwanttodeletethisrecord',
+                    text: '@lr.Youwillnotbeabletorecover',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "@lr.confirmDelete",
+                    cancelButtonText: "@lr.confirmNo",
+                    closeOnConfirm: false,
+                    closeOnCancel: true,
+                    customClass: "tmsconfirm"
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        grid.removeRow(selectedRows);
+                        swal({
+                           title: '@lr.confirmDeleted',
+                           text:  '@lr.confirmDeletedMessage',
+                           type: "success"
+                       },
+                    function(){
+                        window.location="@Url.Content("~/Organization/Index")";
+                        });
+                   }
+                });
+            } else if (checkedLength > 1) {
+                var grid = jQuery("#OrganizationGrid").data("kendoGrid");
+
+                swal({
+                    title: '@lr.Areyousureyouwanttodeletetheserecord',
+                    text: '@lr.Youwillnotbeabletorecover' + ' <strong style="font-weight:bold">' + checkedLength + ' ' + '@lr.confirmRecords' + '</strong> ?',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "@lr.confirmDelete",
+                    cancelButtonText: "@lr.confirmNo",
+                    closeOnConfirm: false,
+                    closeOnCancel: true,
+                    html: true,
+                    customClass: "tmsconfirm"
+                },
+           function (isConfirm) {
+               if (isConfirm) {
+                   selectedRows.each(function () { grid.removeRow(jQuery(this)); });
+                   swal({
+                           title: '@lr.confirmDeleted',
+                           text:  '@lr.confirmDeletedMessage',
+                           type: "success"
+                       },
+                    function(){
+                        window.location="@Url.Content("~/Organization/Index")";
+                    });
+                   }
+           });
+
+
+
+            } else {
+
+            }
+        });
+
+
+         jQuery(".persondetail").live("mousedown", function (event) {
+             //debugger;
+             var url = '@Url.Content("~/Organization/Detail?oid=")' + jQuery(this).attr("dat-uid");
+             window.open(url, '_blank');
+         });
+
+         jQuery(".tms-grid-detail").live("mousedown", function (event) {
+             //debugger;
+             var checkedLength = jQuery("#OrganizationGrid tr.k-state-selected").length;
+             if (checkedLength == 1) {
+                 grid = jQuery("#OrganizationGrid").data("kendoGrid");
+                 var data = grid.dataItem(jQuery("#OrganizationGrid tr.k-state-selected"));
+                 var url = '@Url.Content("~/Organization/Detail?oid=")' + data.ID;
+                 window.open(url, '_blank');
+             } else {
+
+             }
+
+         });
+
+
+    });
+</script>
+
+
+
+<script id="OrganizationTemplate" type="text/kendo">
+    <div class='person-box'>
+        <div class='person'>
+          
+           <img src='../#:replaceString(data.LogoPicture)#' class='paddig' alt=''>
+            <h3> #:data.P_DisplayName# </h3>
+            <p></p><h4>#:data.PersonEmail#</h4>
+           
+        </div>
+    </div>
+
+</script>
+<script type="text/javascript">
+    function UserTemplate(data) {
+        if (data != null) {
+            var userGroupsTemplate = kendo.template(jQuery("#OrganizationTemplate").html(), { useWithBlock: false });
+            return userGroupsTemplate(data);
+        }
+        return '';
+    }
+</script>
+<script type="text/javascript">
+    function replaceString(value) {
+        debugger
+        if (value == null || value == "") { return "@TMS.TMSHelper.DefaultPicture()"; } else {
+            return value.replace("~/", "");
+        }
+    }
+</script>
+<script>
+
+    jQuery(function () {
+
+        //jQuery(".tms-grid-add").live("mousedown", function (event) {
+        //    jQuery(this).parents('.k-grid').data("kendoGrid").addRow();
+        //});
+
+        ////general addtion button
+        //jQuery(".tms-grid-edit").live("mousedown", function (event) {
+        //    var selectedrow = jQuery("#" + jQuery(this).parents('.k-grid')[0].id + " tr.k-state-selected");
+        //    if (selectedrow.length == 1) { currentRowId = selectedrow.data().uid; jQuery(this).parents('.k-grid').data("kendoGrid").editRow(selectedrow); }
+        //});
+
+        jQuery(".tms-grid-detail").live("mousedown", function (event) {
+            var selectedRows = jQuery("#" + jQuery(this).parents('.k-grid')[0].id + " tr.k-state-selected");
+            if (selectedRows.length == 1) {
+                var grid = jQuery(this).parents('.k-grid').data("kendoGrid");
+                var data = grid.dataItem(grid.select());
+                var url = '@Url.Content("~/Organization/Detail?oid=")' + data.ID;
+                window.open(url, '_blank');
+            }
+        });
+    });
+    var tms = tms || {};
+    var currentRowId = null;
+    //@*jQuery(function () {
+
+        jQuery(".tms-grid-add").live("mousedown", function (event) {
+            jQuery(this).parents('.k-grid').data("kendoGrid").addRow();
+        });
+
+        //general addtion button
+        jQuery(".tms-grid-edit").live("mousedown", function (event) {
+            var selectedrow = jQuery("#" + jQuery(this).parents('.k-grid')[0].id + " tr.k-state-selected");
+            if (selectedrow.length == 1) { currentRowId = selectedrow.data().uid; jQuery(this).parents('.k-grid').data("kendoGrid").editRow(selectedrow); }
+        });
+
+        jQuery(".tms-grid-detail").live("mousedown", function (event) {
+            var selectedRows = jQuery("#" + jQuery(this).parents('.k-grid')[0].id + " tr.k-state-selected");
+            if (selectedRows.length == 1) {
+                var grid = jQuery(this).parents('.k-grid').data("kendoGrid");
+                var data = grid.dataItem(grid.select());
+                var url = '@Url.Content("~/Organization/Detail?oid=")' + data.ID;
+                window.open(url, '_blank');
+            }
+        });
+        jQuery(".tms-grid-destroy").live("mousedown", function (event) {
+            var selectedRows = jQuery("#" + jQuery(this).parents('.k-grid')[0].id + " tr.k-state-selected");
+
+            var checkedLength = selectedRows.length;
+            if (checkedLength == 1) {
+                var grid = jQuery(this).parents('.k-grid').data("kendoGrid");
+
+                swal({
+                    title: '@lr.Areyousureyouwanttodeletethisrecord',
+                    text: '@lr.Youwillnotbeabletorecover',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "@lr.confirmDelete",
+                    cancelButtonText: "@lr.confirmNo",
+                    closeOnConfirm: false,
+                    closeOnCancel: true,
+                    customClass: "tmsconfirm"
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        grid.removeRow(selectedRows);
+                        swal("@lr.confirmDeleted", "@lr.confirmDeletedMessage", "success");
+                    } else {
+                    }
+                });
+            } else if (checkedLength > 1) {
+                var grid = jQuery(this).parents('.k-grid').data("kendoGrid");
+                swal({
+                    title: '@lr.Areyousureyouwanttodeletetheserecord',
+                    text: '@lr.Youwillnotbeabletorecover' + ' <strong style="font-weight:bold">' + checkedLength + ' ' + '@lr.confirmRecords' + '</strong> ?',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "@lr.confirmDelete",
+                    cancelButtonText: "@lr.confirmNo",
+                    closeOnConfirm: false,
+                    closeOnCancel: true,
+                    html: true,
+                    customClass: "tmsconfirm"
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        selectedRows.each(function () { grid.removeRow(jQuery(this)); });
+                        swal("@lr.confirmDeleted", "@lr.confirmDeletedMessageMultiple", "success");
+                    } else {
+                    }
+                });
+            } else {
+
+            }
+        });
+    });*@
+
+    var OrganizationIndexLogo = null;
+    var OrganizationIndex_aid = 0; var OrganizationIndexattachmentname = null;
+    function OrganizationIndexLogoSuccess(e) {
+        OrganizationIndexLogo = e.response.parentFoldername;
+        OrganizationIndex_aid = e.response.aid;
+    }
+    function OrganizationIndexGetLogo() {
+        if (OrganizationIndexLogo == undefined) { OrganizationIndexLogo = null; }
+        if (OrganizationIndex_aid == undefined) { OrganizationIndex_aid = 0; }
+
+        return {
+            filename: OrganizationIndexLogo,
+            aid: OrganizationIndex_aid
+        }
+    }
+    function OrganizationIndexOnRemove(e) {
+        e.data = {
+            aid: OrganizationIndex_aid
+        }
+    }
+    function OrganizationIndexAttachmentSelect(e) {
+        var filename = e.files[0].name;
+        var dropvalue = checkfiletypeOrganizationlogo(e.files[0].extension.toLowerCase());
+        if (dropvalue == "-1") {
+            e.preventDefault();
+        } else {
+           // OrganizationIndexattachmentname = filename;
+        }
+    }
+    function checkfiletypeOrganizationlogo(filetype) {
+        switch (filetype) {
+            case ".jpg": case ".jpeg": case ".bmp": case ".png":
+                return "1";
+            default:
+                return "-1";
+                break;
+        }
+    }
+
+
+
+
+
+    //var OrganizationIndexLogo;
+    //var OrganizationIndex_aid = 0; var OrganizationIndexattachmentname = null;
+    //function OrganizationIndexLogoSuccess(e) {
+    //    OrganizationIndexLogo = e.response.parentFoldername;
+    //    OrganizationIndex_aid = e.response.aid;
+    //    if (currentRowId != null) {
+    //        var item = jQuery("#OrganizationGrid").data("kendoGrid").dataItem(jQuery("[data-uid='" + currentRowId + "']"));
+    //        currentRowId = null;
+    //        item.dirty = true;
+    //    }
+    //}
+    //var LoginUserProfileEdit_aid = 0; var CurrentUID = null;
+    //var LoginUser_parentFoldername = null; var CurrentLoginUserId;
+    //function LoginUserProfilePictureEditOnSuccess(e) {
+    //    LoginUser_parentFoldername = e.response.parentFoldername;
+    //    LoginUserProfileEdit_aid = e.response.aid;
+    //    if (currentRowId != null) {
+    //        var item = jQuery("#OrganizationGrid").data("kendoGrid").dataItem(jQuery("[data-uid='" + currentRowId + "']"));
+    //        currentRowId = null;
+    //        item.dirty = true;
+    //    }
+    //}
+    //function OrganizationIndexGetLogo() {
+    //    debugger;
+    //    if (OrganizationIndexLogo == undefined) { OrganizationIndexLogo = null; }
+    //    if (OrganizationIndex_aid == undefined) { OrganizationIndex_aid = 0; }
+    //    return {
+    //        filename: OrganizationIndexLogo,
+    //        aid: OrganizationIndex_aid
+    //    }
+    //}
+
+    //function OrganizationIndexOnRemove(e) {
+    //    e.data = {
+    //        aid: OrganizationIndex_aid
+    //    }
+    //}
+    //function OrganizationIndexAttachmentData(e) {
+
+    //}
+    //function OrganizationIndexAttachmentSelect(e) {
+    //    var filename = e.files[0].name;
+    //    var dropvalue = checkfiletypeOrganizationlogo(e.files[0].extension.toLowerCase());
+    //    if (dropvalue == "-1") {
+    //        e.preventDefault();
+    //    } else {
+    //        OrganizationIndexattachmentname = filename;
+    //    }
+    //}
+    //function checkfiletypeOrganizationlogo(filetype) {
+    //    switch (filetype) {
+    //        case ".jpg": case ".jpeg": case ".bmp": case ".png":
+    //            return "1";
+    //        default:
+    //            return "-1";
+    //            break;
+    //    }
+    //}
+
+
+
+    function OrganizationIndexGrid_onEdit(e) {
+        //if current model is not new then remove the Name editor
+
+        var title = jQuery(e.container).parent().find(".k-window-title");
+        var update = jQuery(e.container).parent().find(".k-grid-update");
+        var cancel = jQuery(e.container).parent().find(".k-grid-cancel");
+        //jQuery('<a class="k-button k-button-icontext k-grid-update custom" href="\\#"><span class="k-icon k-i-check"></span>Save & New</a>').insertBefore(".k-grid-update");
+        jQuery(cancel).html('<span class="k-icon k-i-cancel"></span>' + lr.CencelRecordGeneralButton);
+        if (e.model.isNew()) {
+            // add
+
+
+
+            jQuery("#fileupload").kendoUpload({
+                multiple: false,
+                async: {
+                    saveUrl: '@Url.Content("~/Attachment/SaveOrganizationLogo")',
+                    removeUrl: '@Url.Content("~/Attachment/RemoveOrganizationLogo")',
+                    @*saveUrl: '@Url.Content("~/Attachment/SavePictureAndLogo")',
+                    removeUrl: '@Url.Content("~/Attachment/RemovePictureAndLogo")',*@
+                    autoUpload: true
+                },
+
+             //   select: LoginUserProfilePictureSelect,
+
+                remove: OrganizationIndexOnRemove,
+                success: OrganizationIndexLogoSuccess,
+                select: OrganizationIndexAttachmentSelect,
+
+            });
+            jQuery(title).text(lr.AddRecordGeneralTitle);
+            jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.SaveRecordGeneralButton);
+        } else {
+            // edit
+            Organization_parentFoldername = null; OrganizationProfile_aid = 0;
+            CurrentOrganizationId = e.model.ID;
+            jQuery("#fileupload").kendoUpload({
+                // files:files,
+                multiple: false,
+                async: {
+                    saveUrl: '@Url.Content("~/Attachment/SaveOrganizationLogo")',
+                    removeUrl: '@Url.Content("~/Attachment/RemoveOrganizationLogo")',
+                    @*saveUrl: '@Url.Content("~/Attachment/SavePictureAndLogo")',
+                    removeUrl: '@Url.Content("~/Attachment/RemovePictureAndLogo")',*@
+                    autoUpload: true
+                },
+                remove: OrganizationPictureOnRemove,
+                success: OrganizationLogoOnSuccess,
+                select: OrganizationIndexAttachmentSelect
+
+              //  upload: Organization_UploadAttachmentData,
+                //select: function (e) {
+                //    var fileInfo = e.files[0];
+                //    var wrapper = this.wrapper;
+
+                //    setTimeout(function () {
+                //        addPreview(fileInfo, wrapper);
+                //    });
+                //}
+            });
+            jQuery(title).text(lr.EditRecordGeneralTitle);
+            jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.UpdateRecordGeneralButton);
+        }
+        //
+    }
+
+    var OrganizationLogo;
+    var OrganizationProfile_aid; var Organizationattachmentname = null;
+    var Organization_parentFoldername = null; var CurrentOrganizationId;
+    function OrganizationLogoOnSuccess(e) {
+        Organization_parentFoldername = e.response.parentFoldername;
+        OrganizationProfile_aid = e.response.aid;
+        if (currentRowId != null) {
+            var item = jQuery("#OrganizationGrid").data("kendoGrid").dataItem(jQuery("[data-uid='" + currentRowId + "']"));
+            //  var item = jQuery("#OrganizationGrid").data("kendoGrid").dataItem(jQuery("[data-uid='" + jQuery(".k-window-titlebar.k-header:visible +div").attr("data-uid") + "']"));
+            currentRowId = null;
+            item.dirty = true;
+        }
+    }
+
+    function OrganizationPictureOnRemove(e) {
+        e.data = {
+            parentFoldername: Organization_parentFoldername,
+           // oid: CurrentOrganizationId,
+           // Opentype: 2,
+            aid: OrganizationProfile_aid
+        }
+    }
+
+    function OrganizationGetLogo() {
+        if (Organization_parentFoldername == undefined) { Organization_parentFoldername = null; }
+        if (OrganizationProfile_aid == undefined) { OrganizationProfile_aid = 0; }
+
+        return {
+            filename: Organization_parentFoldername,
+            aid: OrganizationProfile_aid
+        }
+    }
+
+
+
+</script>
+
+<style>
+    .k-grid tr {
+        cursor: pointer;
+    }
+</style>
+
+
+@section Scripts
+{
+    <script src="@Url.Content("~/Views/Organization/Organization.js")"></script>
+}

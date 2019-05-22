@@ -1,0 +1,267 @@
+﻿@model string
+@{
+    var Opentype = (int)ViewData["OpenType"];
+}
+@using lr = Resources.Resources;
+@{
+    List<TMS.DDlList> data = TMS.Extensions.EnumToSelectList<TMS.Library.AttachmentsFileType>(typeof(TMS.Library.AttachmentsFileType)).ToList();
+}
+@Html.AntiForgeryToken()
+<script>
+    var attachmentname = null;var parentFoldername=null; var aid=null; var currentEditingRowFileType=null;
+    function CreateAttachmentAdditionalData(){
+        return {
+            parentFoldername: parentFoldername,aid:aid
+        }
+    }
+    
+    function UpdateAttachmentAdditionalData(){
+        return {
+            parentFoldername: parentFoldername,aid:aid
+        }
+    }
+
+    
+    function UploadAttachmentData(e) {
+        e.data = { oid:@Model,otype:@Opentype ,fileType:jQuery("#FileType").val()};
+    }
+    function Attachmentsuccess(e) {
+        parentFoldername = e.response.parentFoldername;
+        aid=e.response.aid;
+        jQuery("#file").val(parentFoldername).trigger("change");
+    }
+    function AttachmentRemove(e) {
+        if (attachmentname == e.files[0].name) {
+            jQuery("#FileName").val(null).trigger("change");
+            var FileType = jQuery("#FileType").data('kendoDropDownList'); FileType.value(0); FileType.trigger("change");
+        }
+        debugger;
+        e.data= {
+            parentFoldername: parentFoldername,
+            oid:@Model ,
+            Opentype: @Opentype,
+           // filename: e.files[0].name,
+            aid:aid
+        }
+    }
+    function AttachmentSelect(e) {
+        var filename = e.files[0].name;
+        var dropvalue;
+        if(currentEditingRowFileType==12){
+            dropvalue= checkfiletypfortheprofileandLogo(e.files[0].extension.toLowerCase());
+        }else{
+            dropvalue = changeFileTypeAccordingly(e.files[0].extension.toLowerCase());
+        }
+        var upload = jQuery("#file").data("kendoUpload");
+        if (dropvalue == "-1") {
+            e.preventDefault();
+        } else {
+            attachmentname = filename;
+            jQuery("#FileName").val(filename).trigger("change");
+            if(currentEditingRowFileType==12){
+
+            }else{
+                var FileType = jQuery("#FileType").data('kendoDropDownList'); FileType.value(dropvalue); FileType.trigger("change");
+                jQuery(".attachmentimage").html(fileiconaccordinglyfiletype(dropvalue));
+            }
+        }
+    }
+
+    function checkfiletypfortheprofileandLogo(filetype) {
+        switch (filetype) {
+            case ".jpg": case ".jpeg": case ".bmp": case ".png":
+                return "1";
+            default:
+                return "-1";
+                break;
+        }
+    }
+    function changeFileTypeAccordingly(filetype) {
+        switch (filetype) {
+            case ".doc": case ".rtf": case ".docx": case ".docm": case ".dotx": case ".dotm": case ".docb":
+                return "1";
+            case ".xls": case ".xlsx": case ".xlsm": case ".xlsb": case ".xltm": case ".xltx": case ".xlt": case ".csv":
+                return "2";
+            case ".ppt": case ".pot": case ".pps": case ".pptx": case ".pptm": case ".potx": case ".ppam": case ".sldx": case ".sldm":
+                return "3";
+            case ".pdf":
+                return "4";
+            case ".txt":
+                return "5";
+            case ".jpg": case ".jpeg": case ".jfif": case ".tiff": case ".bmp": case ".gif": case ".png":
+                return "6";
+            case ".psd": case ".ai": case ".swf":
+                return "7";
+            case ".mp3":
+                return "8";
+            case ".mp4": case ".mov": case ".wmv":
+                return "9";
+            case ".rar": case ".7z": case ".zip":
+                return "10";
+            case ".exe": case ".msi":
+                return "-1";
+            default:
+                return "11";
+                break;
+        }
+    }   
+    function AttachmentGrid_onEdit(e) {
+        //if current model is not new then remove the Name editor
+        var title = jQuery(e.container).parent().find(".k-window-title");
+        var update = jQuery(e.container).parent().find(".k-grid-update");
+        var cancel = jQuery(e.container).parent().find(".k-grid-cancel");
+        //jQuery('<a class="k-button k-button-icontext k-grid-update custom" href="\\#"><span class="k-icon k-i-check"></span>Save & New</a>').insertBefore(".k-grid-update");
+        jQuery(cancel).html('<span class="k-icon k-i-cancel"></span>' + lr.CencelRecordGeneralButton);
+        if (e.model.isNew()) {
+            // add
+            jQuery(title).text(lr.AddRecordGeneralTitle);
+            jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.SaveRecordGeneralButton);
+            //EndTimePeriod
+            jQuery("#ValidTill").data("kendoDatePicker").value(null);
+
+            jQuery("#fileupload").kendoUpload({
+                multiple: false,
+                async: {
+                    saveUrl: '@Url.Content("~/Attachment/TMSSaveAttachment")',
+                    removeUrl: '@Url.Content("~/Attachment/RemoveTMSAttachment")',
+                    autoUpload: true
+                },
+                remove: AttachmentRemove,
+                success: Attachmentsuccess,
+                select: AttachmentSelect,
+                upload: UploadAttachmentData
+            });
+            jQuery(".attachmentforEditingonly").hide();jQuery(".attachmentfornewonly").show();
+        } else {
+            //editing
+            //attachmentname=e.model.FileName;
+            // parentFoldername=e.model.FileParentRootFolder;
+            // aid=e.model.ID;
+            //var files = [
+            //   { name: e.model.FileName, size: e.model.FileSize, extension: e.model.FileExtenstion },
+            //];
+            if(e.model.FileType==12){
+                currentEditingRowFileType=12;
+                jQuery("#fileupload").kendoUpload({
+                    // files:files,
+                    multiple: false,
+                    async: {
+                        saveUrl: '@Url.Content("~/Attachment/SavePictureAndLogo")',
+                        removeUrl: '@Url.Content("~/Attachment/RemovePictureAndLogo")',
+                        autoUpload: true
+                    },
+                    remove: AttachmentRemove,
+                    success: Attachmentsuccess,
+                    select: AttachmentSelect,
+                    upload: UploadAttachmentData
+                });
+                jQuery(".attachmentforEditingonly").hide();jQuery(".attachmentfornewonly").show(); 
+                jQuery("#FileName").attr("readonly", true);
+            }else{
+                jQuery(".attachmentforEditingonly").show();jQuery(".attachmentfornewonly").hide();
+            }
+           // jQuery("#file").val(e.model.FileParentRootFolder).trigger("change").trigger("change");;
+            jQuery(".filelink").attr("href",e.model.FilePath); 
+            jQuery(".filelink").html(e.model.FileName);
+
+            jQuery(".attachmentimage").html(fileiconaccordinglyfiletype(e.model.FileType));
+            jQuery(title).text(lr.EditRecordGeneralTitle);
+            jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.UpdateRecordGeneralButton);
+        }
+    }
+
+
+    function AttachmentRequestEnd(e) {
+        if(e.sender.error.length>0){
+
+        }else{
+            if (e.response == "403") {
+                window.location = LoginUrl;
+            }
+            else
+            if (e.response.Errors == null) {
+                if (e.type == "update") { this.read(); } if (e.type == "create") { this.read(); }
+            }
+        }
+    }
+ 
+    function fileiconaccordinglyfiletype(filetype) {
+        switch (filetype) {
+            case "1":
+                return '<i class="mdi mdi-36px mdi-file-word"></i>';
+            case "2": 
+                return '<i class="mdi mdi-36px mdi-file-excel"></i>';
+            case "3":
+                return '<i class="mdi mdi-36px mdi-file-powerpoint"></i>';
+            case "4":
+                return '<i class="mdi mdi-36px mdi-file-pdf"></i>';
+            case "5":
+                return '<i class="mdi mdi-36px mdi-file"></i>';
+            case "6":
+                return '<i class="mdi mdi-36px mdi-file-image"></i>';
+            case ".psd":
+                return '<i class="mdi mdi-36px mdi-file-multiple"></i>';
+            case "8":
+                return '<i class="mdi mdi-36px mdi-file-music"></i>';
+            case "9":
+                return '<i class="mdi mdi-36px mdi-file-video"></i>';
+            case "10":
+                return '<i class="mdi mdi-36px mdi-zip-box"></i>';
+                return "10";
+            case "12":
+                return '<i class="mdi mdi-36px mdi-account-box"></i>';
+                return "10";
+            default:
+                return '<i class="mdi mdi-36px mdi-file-outline"></i>';
+                break;
+        }
+    }
+</script>
+
+<div class="ChildGrid">
+    @(Html.Kendo().Grid<TMS.Library.Common.Attachment.TMS_Attachments>()
+     .Name("TMS_AttachmentsGrid" + Model)
+              .Columns(columns =>
+     {
+         columns.Bound(e => e.FileName);
+         columns.Bound(e => e.FileName).ClientTemplate("<span> #=fileiconaccordinglyfiletype(FileType)#</span>");
+         columns.ForeignKey(c => c.FileType, data, "Value", "Text").MinScreenWidth(550);
+         columns.Bound(e => e.Description).Format(KendoDateFormat).MinScreenWidth(550);
+     }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_AttachmentsTemplate").DisplayDeleteConfirmation(false))
+                    .ToolBar(toolbar => toolbar.Template(@<text>
+        <div class="toolbar">
+            @if (Opentype == 1 && User.IsInRole("CanAddEditPersonAttachments"))
+            {
+                <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+                <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+            }
+            @if (Opentype == 1 && User.IsInRole("CanDeletePersonAttachments"))
+            {
+                <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+            }
+            @if (Opentype == 2 && User.IsInRole("CanAddEditOrganizationAttachments"))
+            {
+                <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+                <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+            }
+            @if (Opentype == 2 && User.IsInRole("CanDeleteOrganizationAttachments"))
+            {
+                <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+            }
+        </div>
+                    </text>))
+        .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+        .Pageable(pager => pager.Refresh(true)).Scrollable().Filterable()
+        .Events(e => e.Edit("AttachmentGrid_onEdit").Save("General_onSave"))
+        .HtmlAttributes(new { style = "height:350px;" })
+        .DataSource(dataSource => dataSource
+        .Ajax().Model(model => { model.Id(m => m.ID); model.Field("FileType", typeof(string)); })
+        .PageSize(5)
+        .Read(read => read.Action("Attachments_Read", "Attachment", new { OpenId = Model, Opentype = Opentype }))
+        .Create(read => read.Action("Attachment_Create", "Attachment").Data("CreateAttachmentAdditionalData"))
+        .Update(read => read.Action("Attachment_Update", "Attachment").Data("UpdateAttachmentAdditionalData"))
+        .Destroy(read => read.Action("Attachment_Destroy", "Attachment"))
+        .Events(e => e.Error("GeneralErrorHandler(\"TMS_AttachmentsGrid" + Model + "\")").RequestEnd("AttachmentRequestEnd"))
+        ).NoRecords(lr.GridNoRecordFoundMessage)
+    )
+</div>

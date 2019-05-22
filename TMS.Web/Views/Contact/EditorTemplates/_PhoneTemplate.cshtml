@@ -1,0 +1,55 @@
+﻿@model TMS.Library.Common.Address.PhoneNumbers
+@using lr = Resources.Resources
+
+<div class=" Alertbox alert alert-danger" style="display:none">
+    <ul class="errors"></ul>
+</div>
+<div class="form-horizontal form-person-popup">
+    <div class="form-group">
+        @Html.LabelFor(model => model.PhoneTypeID, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(c => c.PhoneTypeID).DataTextField("Text").DataValueField("Value").OptionLabel(lr.PersonPhoneTypeOptionalLabel).HtmlAttributes(new { @class = "form-control", style = "width:100%" })
+                                       .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.PhoneNumberType>(typeof(TMS.Library.PhoneNumberType))))
+            @Html.ValidationMessageFor(model => model.PhoneTypeID)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.CountryCode, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(m => m.CountryCode)
+                  .ValuePrimitive(true)
+                  .OptionLabel(lr.PersonPhoneCountryCodeOptionalLabel)
+                          .DataTextField("Text")
+                          .DataValueField("Value").HtmlAttributes(new { @class = "form-control ", style = "width:100%" })
+                  .DataSource(dataSource =>
+                  {
+                      dataSource.Read(read => read.Action("CountryCode", "DDL"));
+
+                  })
+            )
+            @Html.ValidationMessageFor(model => model.CountryCode)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ContactNumber, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.ContactNumber).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.ContactNumber)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Extension, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.Extension).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(m => m.Extension)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.IsPrimary, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().CheckBoxFor(model => model.IsPrimary)
+        </div>
+    </div>
+</div>

@@ -1,0 +1,136 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.Web", "TMS.Web\TMS.Web.csproj", "{404A6D3B-AA85-4E4C-AEEE-1E5026D5F135}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.Business", "TMS.Business\TMS.Business.csproj", "{E6A5767D-C2D8-4889-9657-E8C3898BCC83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.Library", "TMS.Library\TMS.Library.csproj", "{DF954994-9C97-447C-AFB1-9EA6F3027F80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.Common", "TMS.Common\TMS.Common.csproj", "{5BB71D9A-DF63-4863-87FE-4552BA27420F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.DataObjects", "TMS.DataObjects\TMS.DataObjects.csproj", "{A16CFE52-802D-4D4E-A7E3-9C271F21EACA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resource", "Resource\Resource.csproj", "{FCE306BE-E9FD-4303-8A0D-C937F1297335}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResourceBuilder", "ResourceBuilder\ResourceBuilder.csproj", "{CDF37018-1A3D-4A76-A09C-D3F558084431}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{4A5AC1AF-4BEF-44A4-8467-DA0B068906B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business Logic", "Business Logic", "{3E8AB520-B359-47BB-979E-6E8FB4D79A86}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business Objects", "Business Objects", "{23CFF0E2-EDF7-4A54-8831-32D50BAE6928}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data Logic", "Data Logic", "{532E9B1D-318B-4924-B67A-B1C91BF8B0D9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common Components", "Common Components", "{2597FA87-10E2-4BF5-B45D-67A536D95C5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportingClassLibrary", "ReportingClassLibrary\ReportingClassLibrary.csproj", "{9143A812-8F77-4F20-96E6-08E818A70C6B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A16CFE52-802D-4D4E-A7E3-9C271F21EACA} = {A16CFE52-802D-4D4E-A7E3-9C271F21EACA}
+		{E6A5767D-C2D8-4889-9657-E8C3898BCC83} = {E6A5767D-C2D8-4889-9657-E8C3898BCC83}
+		{DF954994-9C97-447C-AFB1-9EA6F3027F80} = {DF954994-9C97-447C-AFB1-9EA6F3027F80}
+		{5BB71D9A-DF63-4863-87FE-4552BA27420F} = {5BB71D9A-DF63-4863-87FE-4552BA27420F}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp.ReportLibrary", "ReportLibrary\CSharp.ReportLibrary.csproj", "{45DCEC9A-B73B-45F3-B199-DA974C511B6D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{404A6D3B-AA85-4E4C-AEEE-1E5026D5F135}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{404A6D3B-AA85-4E4C-AEEE-1E5026D5F135}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{404A6D3B-AA85-4E4C-AEEE-1E5026D5F135}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{404A6D3B-AA85-4E4C-AEEE-1E5026D5F135}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6A5767D-C2D8-4889-9657-E8C3898BCC83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6A5767D-C2D8-4889-9657-E8C3898BCC83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6A5767D-C2D8-4889-9657-E8C3898BCC83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6A5767D-C2D8-4889-9657-E8C3898BCC83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF954994-9C97-447C-AFB1-9EA6F3027F80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF954994-9C97-447C-AFB1-9EA6F3027F80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF954994-9C97-447C-AFB1-9EA6F3027F80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF954994-9C97-447C-AFB1-9EA6F3027F80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BB71D9A-DF63-4863-87FE-4552BA27420F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BB71D9A-DF63-4863-87FE-4552BA27420F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BB71D9A-DF63-4863-87FE-4552BA27420F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BB71D9A-DF63-4863-87FE-4552BA27420F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A16CFE52-802D-4D4E-A7E3-9C271F21EACA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A16CFE52-802D-4D4E-A7E3-9C271F21EACA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A16CFE52-802D-4D4E-A7E3-9C271F21EACA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A16CFE52-802D-4D4E-A7E3-9C271F21EACA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCE306BE-E9FD-4303-8A0D-C937F1297335}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCE306BE-E9FD-4303-8A0D-C937F1297335}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCE306BE-E9FD-4303-8A0D-C937F1297335}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCE306BE-E9FD-4303-8A0D-C937F1297335}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDF37018-1A3D-4A76-A09C-D3F558084431}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDF37018-1A3D-4A76-A09C-D3F558084431}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDF37018-1A3D-4A76-A09C-D3F558084431}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDF37018-1A3D-4A76-A09C-D3F558084431}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9143A812-8F77-4F20-96E6-08E818A70C6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9143A812-8F77-4F20-96E6-08E818A70C6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9143A812-8F77-4F20-96E6-08E818A70C6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9143A812-8F77-4F20-96E6-08E818A70C6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45DCEC9A-B73B-45F3-B199-DA974C511B6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45DCEC9A-B73B-45F3-B199-DA974C511B6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45DCEC9A-B73B-45F3-B199-DA974C511B6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45DCEC9A-B73B-45F3-B199-DA974C511B6D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E6A5767D-C2D8-4889-9657-E8C3898BCC83} = {3E8AB520-B359-47BB-979E-6E8FB4D79A86}
+		{DF954994-9C97-447C-AFB1-9EA6F3027F80} = {23CFF0E2-EDF7-4A54-8831-32D50BAE6928}
+		{5BB71D9A-DF63-4863-87FE-4552BA27420F} = {2597FA87-10E2-4BF5-B45D-67A536D95C5E}
+		{A16CFE52-802D-4D4E-A7E3-9C271F21EACA} = {532E9B1D-318B-4924-B67A-B1C91BF8B0D9}
+		{FCE306BE-E9FD-4303-8A0D-C937F1297335} = {4A5AC1AF-4BEF-44A4-8467-DA0B068906B8}
+		{CDF37018-1A3D-4A76-A09C-D3F558084431} = {4A5AC1AF-4BEF-44A4-8467-DA0B068906B8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {10E2AFBF-3FD6-4786-AD04-72E6BA9D9014}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 10
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://124.109.39.25:8080/tfs/defaultcollection
+		SccProjectUniqueName0 = TMS.Library\\TMS.Library.csproj
+		SccProjectTopLevelParentUniqueName0 = TMS.sln
+		SccProjectName0 = TMS.Library
+		SccLocalPath0 = TMS.Library
+		SccProjectUniqueName1 = TMS.DataObjects\\TMS.DataObjects.csproj
+		SccProjectTopLevelParentUniqueName1 = TMS.sln
+		SccProjectName1 = TMS.DataObjects
+		SccLocalPath1 = TMS.DataObjects
+		SccProjectUniqueName2 = TMS.Common\\TMS.Common.csproj
+		SccProjectTopLevelParentUniqueName2 = TMS.sln
+		SccProjectName2 = TMS.Common
+		SccLocalPath2 = TMS.Common
+		SccProjectUniqueName3 = TMS.Business\\TMS.Business.csproj
+		SccProjectTopLevelParentUniqueName3 = TMS.sln
+		SccProjectName3 = TMS.Business
+		SccLocalPath3 = TMS.Business
+		SccLocalPath4 = .
+		SccProjectUniqueName5 = ReportingClassLibrary\\ReportingClassLibrary.csproj
+		SccProjectName5 = ReportingClassLibrary
+		SccLocalPath5 = ReportingClassLibrary
+		SccProjectUniqueName6 = ReportLibrary\\CSharp.ReportLibrary.csproj
+		SccProjectName6 = ReportLibrary
+		SccLocalPath6 = ReportLibrary
+		SccProjectUniqueName7 = Resource\\Resource.csproj
+		SccProjectTopLevelParentUniqueName7 = TMS.sln
+		SccProjectName7 = Resource
+		SccLocalPath7 = Resource
+		SccProjectUniqueName8 = ResourceBuilder\\ResourceBuilder.csproj
+		SccProjectTopLevelParentUniqueName8 = TMS.sln
+		SccProjectName8 = ResourceBuilder
+		SccLocalPath8 = ResourceBuilder
+		SccProjectUniqueName9 = TMS.Web\\TMS.Web.csproj
+		SccProjectName9 = TMS.Web
+		SccLocalPath9 = TMS.Web
+	EndGlobalSection
+EndGlobal

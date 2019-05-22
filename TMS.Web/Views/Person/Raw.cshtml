@@ -1,0 +1,171 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+}
+@using lr = Resources.Resources;
+<h2>Index</h2>  <a href="@Url.Content("~/Person/Mobile")">Go to Mobile View</a>
+
+    @(Html.Kendo().Grid<TMS.Library.TMS.Persons.Person>()
+    .Name("RawPersonGrid")
+    .Columns(columns =>
+    {
+        columns.Bound(c => c.P_DisplayName).ClientTemplate(
+                    @"<div class='customer-photo'
+                        style='background-image: url(../#:ProfilePicture#);'></div>
+                    <div class='customer-name'>#: P_DisplayName #</div>").Width(120);
+        columns.Bound(e => e.P_DisplayName).Width(120);
+        columns.Bound(e => e.Nationality).Width(120);
+        columns.Bound(e => e.DateOfBirth).Width(120).Format(KendoDateFormat);
+        columns.Bound(e => e.PersonRegCode).Width(120);
+    }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_RawPersonTemplate"))
+            .ToolBar(toolbar => toolbar.Create().Text(lr.PersonAddRawPersonText))
+    .Sortable()
+        .Pageable(pager => pager
+       .Refresh(true).Input(true).Numeric(true).Info(true).PreviousNext(true).PageSizes(true))
+    .Scrollable()
+    .ClientDetailTemplateId("PersonGridChildtemplate")
+      .Filterable().Events(e => e.Edit("RawPersonGrid_onEdit").Save("RawPerson_onSave"))
+    .HtmlAttributes(new { style = "height:650px;" })
+    .DataSource(dataSource => dataSource
+            .Ajax().Model(model => model.Id(p => p.ID))
+        .PageSize(12)
+            .Read(read => read.Action("RawPerson_Read", "Person"))
+                         .Create(read => read.Action("RawPerson_Create", "Person").Data("PersonCreateAttachmentInfoData"))
+                               .Events(e => e.Error("RawPersonGrid_Error"))
+    ).NoRecords(lr.GridNoRecordFoundMessage)
+    )
+
+    <script id="PersonGridChildtemplate" type="text/kendo-tmpl">
+        @( Html.Kendo().TabStrip()
+    .Name("PersonGridChildtemplate#=ID#")
+            .SelectedIndex(0)
+            .Animation(animation => animation.Open(open => open.Fade(FadeDirection.In)))
+             .Items(i =>
+               {
+                   i.Add().Text(lr.PersonBasicInfoTab).LoadContentFrom("PersonBasicInfo", "Person", new { ID = "#=ID#" });
+                   i.Add().Text(lr.PersonEducationTabTitle).LoadContentFrom("PersonEducationInformation", "Person", new { ID = "#=ID#" });
+                   i.Add().Text(lr.PersonContactInformationTabTitle).LoadContentFrom("PersonContactInformation", "Person", new { ID = "#=ID#" });
+                   i.Add().Text(lr.PersonSkillandInterestsTabTitle).LoadContentFrom("PersonSkillandInterests", "Person", new { ID = "#=ID#" });
+                   i.Add().Text(lr.PersonPersonLevelTabTitle).LoadContentFrom("PersonLevel", "SkillInterest", new { ID = "#=ID#" });
+               }
+            ).ToClientTemplate())
+    </script>
+
+<script>
+    var tms = tms || {};
+    (function ($) {
+
+        tms.person = tms.person || {};
+
+        tms.person.salutation = {
+            Not_Specified: 0,
+            Salutation_Mr: 1,
+            Salutation_Mrs: 2,
+            Salutation_Ms: 3,
+            Salutation_Dr: 4
+        };
+
+        tms.person.gender = {
+            Not_Specified: 0,
+            Gender_Male: 1,
+            Gender_Female: 2
+        };
+        tms.person.maritialStatus = {
+            Not_Specified: 0,
+            MaritialStatus_Single: 1,
+            MaritialStatus_Married: 2
+        };
+
+    })(jQuery);
+
+    var PicturelastUploadedFile;
+    function PersonPictureOnSuccess(e) {
+        PicturelastUploadedFile = e.response.filename;
+    }
+    var AttachmentlastUploadedFileArr = [];
+    function PersononAttachmentOnSuccess(e) {
+        var person = { uid: e.files[0].uid, name: e.response.filename, id: e.response.id };
+        AttachmentlastUploadedFileArr.push(person);
+    }
+    function PersonCreateAttachmentInfoData() {
+
+        return {
+            picturename: PicturelastUploadedFile,
+            attachmentname: AttachmentlastUploadedFileArr
+        }
+    }
+
+    function PersonAttachmentsRemove(e) {
+        var findthiselem = jQuery.grep(AttachmentlastUploadedFileArr, function (v) {
+            return v.uid == e.files[0].uid;
+        });
+        var idvalue = findthiselem[0].id.toString()
+        AttachmentlastUploadedFileArr = jQuery.grep(AttachmentlastUploadedFileArr, function (v) {
+            return v.uid != e.files[0].uid;
+        });
+        e.data = {
+            file: idvalue
+        }
+    }
+
+    function SalutationChange(e) {
+        var dataItem = this.dataItem(e.item);
+        var salutation = parseInt(dataItem.Value);
+        var dropdownlist = jQuery("#Gender").data("kendoDropDownList");
+
+        switch (salutation) {
+            case tms.person.salutation.Salutation_Mr:
+                dropdownlist.value("1"); dropdownlist.trigger("change");
+                break;
+            case tms.person.salutation.Salutation_Mrs:
+                dropdownlist.value("2"); dropdownlist.trigger("change");
+                break;
+            case tms.person.salutation.Salutation_Ms:
+                dropdownlist.value("2"); dropdownlist.trigger("change");
+                break;
+            case tms.person.salutation.Salutation_Dr:
+                dropdownlist.value("0"); dropdownlist.trigger("change");
+                break;
+            default:
+                return true;
+        }
+    };
+</script>
+<script type="text/x-kendo-template" id="RawPersonGridErrorTemplate">
+    # if (messages.length) { #
+    <li class="ErrorDetailhead">
+        <span>#=field#</span>
+        <ul class="DetailsError">
+            # for (var i = 0; i < messages.length; ++i) { #
+            <li>#= messages[i] #</li>
+            # } #
+        </ul>
+    </li>
+    # } #
+</script>
+@section Scripts
+{
+    <script src="@Url.Content("~/Views/Person/Raw.js")"></script>
+}
+
+<style>
+    .customer-photo {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-size: 32px 35px;
+        background-position: center center;
+        vertical-align: middle;
+        line-height: 32px;
+        box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2);
+        margin-left: 5px;
+    }
+
+    .customer-name {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 32px;
+        padding-left: 3px;
+    }
+</style>

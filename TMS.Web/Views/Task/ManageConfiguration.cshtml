@@ -1,0 +1,53 @@
+﻿
+
+
+@using lr = Resources.Resources;
+<div class="ChildGrid">
+    @Html.AntiForgeryToken()
+    @(Html.Kendo().Grid<TMS.Library.Entities.CRM.CRMHowHeard>()
+            .Name("ManageConfiguration")
+      .Columns(columns =>
+      {
+          columns.Bound(e => e.Name).Title("How Heard About US");
+          columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy);
+          //columns.Bound(e => e.UpdatedByAlias).Width(230).Title(lr.ModifiedBy).ClientTemplate(@"<div class='gridupdated'>
+          //    <span class='Addedby' >#:UpdatedByAlias#</span>
+          //    <span class='date' >#=kendo.toString(ModifiedOn,'" + DateFormatScript + @"')#</span>
+          //    <span class='time' >#=kendo.toString(ModifiedOn,'" + TimeFormatScript + @"')#</span>
+          //</div>");
+          columns.Bound(e => e.UpdatedByAlias).Width(170).Title(lr.ModifiedBy).
+    ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"<span class='Addedby'>#=UpdatedByAlias# </span>
+    <span class='date' >#=kendo.toString(ModifiedOn,'" + DateFormatScript + @"')#</span>
+<span class='time' >#=kendo.toString(ModifiedOn,'" + TimeFormatScript + @"')#</span>
+" + @"#} else {#<div>Not Modified</div> </div>#}#");
+      }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("ConfigurationTemplate").DisplayDeleteConfirmation(false))
+                    .ToolBar(toolbar => toolbar.Template(@<text> @RenderAddTemplate()</text>))
+        .Sortable().Selectable(selectable => selectable
+        .Mode(GridSelectionMode.Multiple))
+        .Pageable(pager => pager.Refresh(true)).Scrollable().Filterable().Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
+        .HtmlAttributes(new { style = "height:350px;" }).DataSource(dataSource => dataSource.Ajax().Model(model => { model.Id(m => m.ID); }).PageSize(5)
+        .Read(read => read.Action("ManageConfiguration_Read", "Task"))
+        .Create(read => read.Action("ManageConfiguration_Create", "Task"))
+          .Update(read => read.Action("ConfigurationUpdate", "Task"))
+          .Destroy(read => read.Action("Configuration_Destroy", "Task"))
+        .Events(e => e.Error("GeneralErrorHandler(\"ManageConfiguration\")").RequestEnd("GridRequestEndUpdate"))).NoRecords(lr.GridNoRecordFoundMessage)
+    )
+
+    @helper RenderAddTemplate()
+    {
+    <div class="toolbar">
+        @if (User.IsInAnyRoles("CanAddEditManageConfiguration"))
+        {
+            <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+            <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+        }
+        @if (User.IsInAnyRoles("canDeleteManageConfiguration"))
+        {
+            <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+        }
+    </div>
+
+}
+</div>
+
+@*.Data("CreateTrainerAdditionalData")*@

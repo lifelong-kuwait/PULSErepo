@@ -1,0 +1,80 @@
+﻿
+@using lr = Resources.Resources;
+@model long
+<script>
+    function ClassNestedGrid_onEdit(e) {
+        //if current model is not new then remove the Name editor
+        var title = jQuery(e.container).parent().find(".k-window-title");
+        var update = jQuery(e.container).parent().find(".k-grid-update");
+        var cancel = jQuery(e.container).parent().find(".k-grid-cancel");
+        jQuery(cancel).html('<span class="k-icon k-i-cancel"></span>' + lr.CencelRecordGeneralButton);
+        if (e.model.isNew()) {
+
+            jQuery(title).text(lr.AddRecordGeneralTitle);
+            jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.SaveRecordGeneralButton);
+
+        }
+        else {
+            jQuery(title).text(lr.EditRecordGeneralTitle);
+            jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.UpdateRecordGeneralButton);
+        }
+        //
+    }
+
+    //Class
+    function ClassTemplate(data) {
+        if (data !== null) {
+            var ClassTemplate = kendo.template(jQuery("#ClassTemplate").html(), { useWithBlock: false });
+            return ClassTemplate(data);
+        }
+        return '';
+    }
+</script>
+<script type="text/javascript">
+
+    var personids;
+    function CreateTrainerAdditionalData() {
+        return {
+            oid: '@Model'
+        }
+    }
+</script>
+@(Html.Kendo().Grid<TMS.Library.Entities.Common.Configuration.FocusAreas>()
+            .Name("FocuseAreaGrid"+Model)
+    .Columns(columns =>
+    {
+        columns.Bound(e => e.PrimaryFocusAreaName).ClientTemplate("#=PrimaryFocusAreaName#");
+        columns.Bound(e => e.AddedByAlias).ClientTemplate("#=AddedByAlias#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy);
+    }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_CourseFocusAreaTemplate").DisplayDeleteConfirmation(false))
+          .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>))
+     .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+     .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
+     .Scrollable()
+     .Events(e => e.Edit("ClassNestedGrid_onEdit").Save("General_onSave"))
+     //.HtmlAttributes(new { style = "height:450px !important;" })
+     .DataSource(dataSource => dataSource.Ajax().ServerOperation(true).Model(model => { model.Id(m => m.ID); })
+     .PageSize(5)
+     .Read(read => read.Action("CourseFocusArea_Read", "Program", new { CourseId = Model }))
+     .Create(read => read.Action("CourseFocusArea_Create", "Program", new { CourseId   = Model }))
+     .Destroy(read => read.Action("CourseFocusArea_Destroy", "Program", new { CourseId = Model }))
+     .Update(read => read.Action("CourseFocusArea_Update", "Program", new { CourseId = Model }))
+     .Events(e => e.Error("GeneralErrorHandler(\"FocuseAreaGrid" + Model + "\")").RequestEnd("GridRequestEndUpdate")))
+     .NoRecords(lr.GridNoRecordFoundMessage)
+)
+@helper RenderAddTemplate()
+{
+    <div class="toolbar">
+        @if (User.IsInRole("CanAddEditClass"))
+        {
+            <a class="k-button tms-grid-add" title="" data-placement="left" data-toggle="tooltip" data-original-title="Tooltip on left">
+                <span class="tms-grid-icon mdi mdi-plus "></span>
+            </a>
+            <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+        }
+        @if (User.IsInRole("CanDeleteClass"))
+        {
+            <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+        }
+    </div>
+
+}

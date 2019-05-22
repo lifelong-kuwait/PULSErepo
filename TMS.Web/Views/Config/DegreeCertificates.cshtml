@@ -1,0 +1,80 @@
+﻿@using lr = Resources.Resources
+@{
+    ViewBag.Title = lr.DegreeCertificatesTitle;
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+}
+<h2>@lr.DegreeCertificatesTitle</h2>
+@(Html.Kendo().Grid<TMS.Library.Entities.Common.Configuration.DegreeCertificates>()
+                .Name("DegreeCertificatesGrid")
+                .Columns(columns =>
+                {
+                    columns.Bound(e => e.PrimaryName).ClientTemplate("#=DegreeCertificatesTemplate(data)#");
+                    columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy);
+                    columns.Bound(e => e.UpdatedByAlias).Width(170).Title(lr.ModifiedBy).
+ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"<span class='Addedby'>#=UpdatedByAlias# </span>
+    <span class='date' >#=kendo.toString(UpdatedDate,'" + DateFormatScript + @"')#</span>
+<span class='time' >#=kendo.toString(UpdatedDate,'" + TimeFormatScript + @"')#</span>
+" + @"#} else {#<div>Not Modified</div> </div>#}#");
+                })
+                 .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>)).Selectable(e => e.Mode(GridSelectionMode.Multiple))
+                 .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_DegreeCertificatesTemplate").DisplayDeleteConfirmation(false))
+                             .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+                           .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
+                           .Scrollable()
+                                  .Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
+                                 .HtmlAttributes(new { style = "height:700px !important;" })
+                              .DataSource(dataSource => dataSource.Ajax().PageSize(10).Model(model => { model.Id(p => p.ID); })
+                              .Read(read => read.Action("DegreeCertificates_Read", "Config").Data("withSearch"))
+                              .Create(update => update.Action("DegreeCertificates_Create", "Config"))
+                              .Update(update => update.Action("DegreeCertificates_Update", "Config"))
+                              .Destroy(update => update.Action("DegreeCertificates_Destroy", "Config"))
+                              .Events(events => events.Error("GeneralErrorHandler(\"DegreeCertificatesGrid\")").RequestEnd("GridRequestEndUpdate")))
+                              .NoRecords(lr.GridNoRecordFoundMessage)
+)
+@helper RenderAddTemplate()
+    {
+        <div class="toolbar">
+            @if (User.IsInRole("CanAddEditDegreeCertificates"))
+            {
+                <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+                <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>}
+
+            @if (User.IsInRole("CanDeleteDegreeCertificates"))
+            {
+                <a class="k-button tms-grid-destroy "><span class="tms-grid-icon mdi mdi-delete "></span></a>
+            }
+        </div>
+        @*@Html.Partial("Static/_gridSearchWidget", lr.CategoryTitle)*@
+
+}
+
+
+<script>
+    function DegreeCertificatesTemplate(d) {
+        if (d !== null) {
+            var DegreeCertificatesTemplate = kendo.template(jQuery("#DegreeCertificatesTemplate").html(), { useWithBlock: false });
+            return DegreeCertificatesTemplate(d);
+        }
+        return '';
+    }
+</script>
+
+<script id="DegreeCertificatesTemplate" type="text/kendo">
+    <div class=''>
+        <div class=''>
+            <p>
+                <span class="heading">
+                    <b>
+                        #:data.PrimaryName#
+                    </b>
+                </span>
+            </p>
+
+            <p>
+                <span>
+                    #if (data.PrimaryDescription!=null){ # #:data.PrimaryDescription#  #}# 
+                </span>
+            </p>
+        </div>
+    </div>
+</script>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Adding Telerik Windows Forms Report Viewer form log</title>
+    <style>
+        body {
+            background: #fff;
+            color: #505050;
+            font: 14px 'Segoe UI', tahoma, arial, helvetica, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+
+        #header {
+            background: #efefef;
+            padding: 0;
+        }
+
+        /* Start: Toggle details */
+        label { 
+            top:0; 
+            left:0; 
+            font-weight:700; 
+            margin-top: 10px;
+            user-select: none;
+            -ms-user-select: none;
+        }
+
+            label:hover{
+                color: cadetblue;
+                border-color: #505050;
+            }
+
+        input#show, input#hide {
+            display:none;
+        }
+
+        ul#details {
+            transition: opacity 1s ease-out;
+            opacity: 0; 
+            height: 0;
+            font-size: 0;
+            overflow: hidden;
+        }
+
+        input#show:checked ~ .show:before {
+            content: "";
+        }
+
+        input#show:checked ~ .hide:before {
+            content: "Hide details";
+            border: solid;
+            padding: 3px;
+        }
+
+        input#hide:checked ~ .hide:before {
+            content: "";
+        }
+
+        input#hide:checked ~ .show:before {
+            content: "Show details"; 
+            border: solid;
+            padding: 3px;
+        }
+
+        input#show:checked ~ ul#details {
+            opacity: 1;
+            font-size: 100%;
+            height: auto;
+            padding: 10px;
+        }
+
+        input#hide:checked ~ ul#details {
+            transition: opacity 1s ease-out;
+            opacity: 0; 
+            height: 0;
+            font-size: 0;
+            overflow: hidden;
+        }
+
+        /* End: toggle details */
+
+
+        h1 {
+            font-size: 48px;
+            font-weight: normal;
+            margin: 0;
+            padding: 0 30px;
+            line-height: 150px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #fff;
+            background: #969696;
+            padding: 0 30px;
+            line-height: 50px;
+        }
+
+        #main {
+            padding: 5px 30px;
+        }
+
+        .section {
+            width: 21.7%;
+            float: left;
+            margin: 0 0 0 40px;
+        }
+
+            .section h2 {
+                font-size: 13px;
+                text-transform: uppercase;
+                margin: 0;
+                border-bottom: 1px solid silver;
+                padding-bottom: 12px;
+                margin-bottom: 8px;
+            }
+
+            .section.first {
+                margin-left: 0;
+                width: 25%
+            }
+
+                .section.first h2 {
+                    font-size: 20px;
+                    text-transform: none;
+                    margin-bottom: 16px;
+                    border: none;
+                }
+
+                .section.first li {
+                    border-top: 1px solid silver;
+                    padding: 8px 0;
+                }
+
+            .section.last {
+                margin-right: 0;
+                width: 70%;
+            }
+            
+            .section.last h2 {
+                    font-size: 20px;
+                    text-transform: none;
+                    margin-bottom: 5px;
+                    border: none;
+                }
+
+            .section.last li {
+                padding: 4px 0;
+                border-bottom: solid;
+                border-bottom-width: 1px;
+                border-color: lightgray;
+            }
+            
+            .section.last ul{
+                padding-bottom:10px;   
+                margin-bottom: 10px; 
+            }
+            
+                
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            line-height: 20px;
+        }
+
+
+
+        a {
+            color: #267cb2;
+            text-decoration: none;
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+
+    </style>
+</head>
+<body>
+
+    <div id="header">
+        <p><span style="color: red;">ERROR!</span> An error occurred while adding a Form with Windows Forms Report Viewer</p>
+    </div>
+
+    <div id="main">
+        <div class="section first">
+            <h2>Telerik Windows Form Report Viewer enabled application consists of: </h2>
+            <ul>
+                <li>Reference to Telerik.ReportViewer.WinForms</li>
+                <li>Form with <a href="http://www.telerik.com/help/reporting/winforms-report-viewer.html">Windows Form Report Viewer</a></li>
+            </ul>
+        </div>
+
+        <div class="section last">
+            <h2>Summary</h2>
+            <ul style="padding-bottom: 10px; padding-left: 7px;">
+                <li style="color: #FF0000;">Error: Fail to add project reference System.Runtime.InteropServices.COMException (0x80004005): Adding 'ReportingClassLibrary' as a project-to-project reference would cause this project to reference itself.
+   at VSLangProj.References.AddProject(Project pProject)
+   at Telerik.Reporting.Vs.Common.ProjectManager.TryAddProjectReference(Project projectToReference)</li>
+<li style="color: #FF6600;">Warning: Could not add connection string to the configuration file. Please add the following connection string manually:</li>
+<li style="color: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;connectionStrings&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;add name="ReportingClassLibrary.Properties.Settings.Default123"<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;connectionString="Data Source=WIN-KPPK5C12UBS;Initial Catalog=TMS_GUST;Integrated Security=True;Pooling=False"<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;providerName="System.Data.SqlClient" /&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/connectionStrings&gt;</li>
+<li style="color: none;"></li>
+<li style="color: none;">Reference added: Telerik.ReportViewer.WinForms</li>
+<li style="color: none;">Reference added: Telerik.Reporting.XpsRendering</li>
+<li style="color: none;">Reference added: Telerik.Reporting.Services.HttpClient</li>
+<li style="color: none;">Added ReportViewerForm1.cs</li>
+<li style="color: none;">Added ReportViewerForm1.Designer.cs</li>
+<li style="color: none;">Added ReportViewerForm1.resx</li>
+
+            </ul>
+
+            <input type="radio" id="show" name="group" />   
+            <input type="radio" id="hide" name="group" checked />
+            <label for="hide" class="hide" unselectable="on"></label>
+            <label for="show" class="show" unselectable="on"></label> 
+
+            <ul id="details">
+                8/29/2018 11:20:19 AM
+<li style="color: none;">Check Framework Support</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 11.2.17.1025</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Core</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 11.2.17.1025</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Drawing</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 11.2.17.1025</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Windows.Forms</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 11.2.17.1025</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Xml.Linq</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 11.2.17.1025</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Data.DataSetExtensions</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 11.2.17.1025</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : Microsoft.CSharp</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 11.2.17.1025</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Data</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 11.2.17.1025</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : System.Xml</li>
+<li style="color: none;">Assembly Version: </li>
+<li style="color: none;">Product Version: 11.2.17.1025</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : Telerik.Reporting</li>
+<li style="color: none;">Assembly Version: 11.2.17.1025</li>
+<li style="color: none;">Product Version: 11.2.17.1025</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : Telerik.Reporting.Services.WebApi</li>
+<li style="color: none;">Assembly Version: 11.2.17.1025</li>
+<li style="color: none;">Product Version: 11.2.17.1025</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">Assembly name is null: False</li>
+<li style="color: none;">Assembly : Telerik.ReportViewer.Mvc</li>
+<li style="color: none;">Assembly Version: 11.2.17.1025</li>
+<li style="color: none;">Product Version: 11.2.17.1025</li>
+<li style="color: none;">Verify Telerik Reporting Version: True</li>
+<li style="color: none;">This is a solution folder Resources</li>
+<li style="color: none;">Nested in folder prj: ResourceBuilder</li>
+<li style="color: none;">Nested in folder prj: Resource</li>
+<li style="color: none;">This is a solution folder Business Logic</li>
+<li style="color: none;">Nested in folder prj: TMS.Business</li>
+<li style="color: none;">This is a solution folder Business Objects</li>
+<li style="color: none;">Nested in folder prj: TMS.Library</li>
+<li style="color: none;">This is a solution folder Data Logic</li>
+<li style="color: none;">Nested in folder prj: TMS.DataObjects</li>
+<li style="color: none;">This is a solution folder Common Components</li>
+<li style="color: none;">Nested in folder prj: TMS.Common</li>
+<li style="color: none;">Get project references.</li>
+<li style="color: none;">Probe for types project: TMS.Web</li>
+<li style="color: none;">Get project references.</li>
+<li style="color: none;">Get project references.</li>
+<li style="color: none;">Get project references.</li>
+<li style="color: none;">Can not get project Resources references.</li>
+<li style="color: none;">Probe for types project: Resources</li>
+<li style="color: none;">Get project references.</li>
+<li style="color: none;">Get project references.</li>
+<li style="color: none;">Can not get project Business Logic references.</li>
+<li style="color: none;">Probe for types project: Business Logic</li>
+<li style="color: none;">Get project references.</li>
+<li style="color: none;">Get project references.</li>
+<li style="color: none;">Can not get project Business Objects references.</li>
+<li style="color: none;">Probe for types project: Business Objects</li>
+<li style="color: none;">Get project references.</li>
+<li style="color: none;">Get project references.</li>
+<li style="color: none;">Can not get project Data Logic references.</li>
+<li style="color: none;">Probe for types project: Data Logic</li>
+<li style="color: none;">Get project references.</li>
+<li style="color: none;">Get project references.</li>
+<li style="color: none;">Can not get project Common Components references.</li>
+<li style="color: none;">Probe for types project: Common Components</li>
+<li style="color: none;">Get project references.</li>
+<li style="color: none;">Probe for types project: ReportingClassLibrary</li>
+<li style="color: none;">Initialize available report types.</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is not found</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is not found</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is not found</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is not found</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is not found</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is not found</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is not found</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is not found</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is not found</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is not found</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is not found</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is not found</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is found in ReportingClassLibrary project.</li>
+<li style="color: none;">Get project references.</li>
+<li style="color: #FF0000;">Error: Fail to add project reference System.Runtime.InteropServices.COMException (0x80004005): Adding 'ReportingClassLibrary' as a project-to-project reference would cause this project to reference itself.
+   at VSLangProj.References.AddProject(Project pProject)
+   at Telerik.Reporting.Vs.Common.ProjectManager.TryAddProjectReference(Project projectToReference)</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is not found</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is not found</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is not found</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is not found</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is not found</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is not found</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is not found</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is not found</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is not found</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is not found</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is not found</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is not found</li>
+<li style="color: none;">Class with name ThirdTraineeDetailReport is found in ReportingClassLibrary project.</li>
+<li style="color: none;">Connection Name ReportingClassLibrary.Properties.Settings.Default123</li>
+<li style="color: none;">Connection String Data Source=WIN-KPPK5C12UBS;Initial Catalog=TMS_GUST;Integrated Security=True;Pooling=False</li>
+<li style="color: none;">Connection Type Configuration</li>
+<li style="color: none;">Connection ProviderName System.Data.SqlClient</li>
+<li style="color: none;">System.ArgumentException: Value does not fall within the expected range.
+   at Microsoft.VisualStudio.Editors.SettingsDesigner.DesignTimeSettings.Add(DesignTimeSettingInstance Instance, Boolean MakeNameUnique)
+   at Microsoft.VisualStudio.Editors.SettingsGlobalObjects.SettingsFileGlobalObject.GlobalSettingsPropertyCollection.OnAddComplete(SettingsProperty prop)
+   at System.Configuration.SettingsPropertyCollection.Add(SettingsProperty property)
+   at Microsoft.VSDesigner.VSDesignerPackage.AppSettingsHelper.AddConnectionToAppSettings(IServiceProvider serviceProvider, Project project, DataConnection connection)
+   at Microsoft.VSDesigner.VSDesignerPackage.GlobalConnectionService.Microsoft.VSDesigner.VSDesignerPackage.IGlobalConnectionService.AddConnectionToAppSettings(IServiceProvider serviceProvider, Project project, DataConnection connection)
+   at Telerik.Reporting.Design.VisualStudio.Data.DataConnectionManager.AddConfigurationConnection(DataConnectionInfo dataConnectionInfo, Project targetProject)
+   at Telerik.ReportViewer.Design.Common.ConnectionStringManager.InsertConnectionsForReport(Type type, Project targetProject)</li>
+<li style="color: #FF6600;">Warning: Could not add connection string to the configuration file. Please add the following connection string manually:</li>
+<li style="color: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;connectionStrings&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;add name="ReportingClassLibrary.Properties.Settings.Default123"<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;connectionString="Data Source=WIN-KPPK5C12UBS;Initial Catalog=TMS_GUST;Integrated Security=True;Pooling=False"<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;providerName="System.Data.SqlClient" /&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/connectionStrings&gt;</li>
+<li style="color: none;"></li>
+<li style="color: none;">Add project references</li>
+<li style="color: none;">Reference already available: Telerik.Reporting, Version=11.2.17.1025, Culture=neutral, PublicKeyToken=a9d7983dfcc261be</li>
+<li style="color: none;">Reference added: Telerik.ReportViewer.WinForms</li>
+<li style="color: none;">Reference added: Telerik.Reporting.XpsRendering</li>
+<li style="color: none;">Add project references</li>
+<li style="color: none;">Reference added: Telerik.Reporting.Services.HttpClient</li>
+<li style="color: none;">Adding TelerikViewerForm.cs project item</li>
+<li style="color: none;">Template file name not checked: TelerikViewerForm.cs</li>
+<li style="color: none;">Added ReportViewerForm1.cs</li>
+<li style="color: none;">Adding TelerikViewerForm.Designer.cs.Type project item</li>
+<li style="color: none;">Added ReportViewerForm1.Designer.cs</li>
+<li style="color: none;">Adding TelerikViewerForm.Designer.cs.Trdx project item</li>
+<li style="color: none;">Adding TelerikViewerForm.Designer.cs.ServiceUrl project item</li>
+<li style="color: none;">Adding TelerikViewerForm.Designer.cs.ReportServer project item</li>
+<li style="color: none;">Adding TelerikViewerForm.resx project item</li>
+<li style="color: none;">Template file name not checked: TelerikViewerForm.resx</li>
+<li style="color: none;">Added ReportViewerForm1.resx</li>
+
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

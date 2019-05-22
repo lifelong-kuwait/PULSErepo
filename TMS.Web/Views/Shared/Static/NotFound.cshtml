@@ -1,0 +1,19 @@
+﻿@using lr = Resources.Resources;
+@{
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+    var url = (string)ViewData["model"];// as string;
+}
+<script>
+    jQuery(function () {
+        swal({
+            title: '@lr.ResourceOops',
+            text: '@lr.ResourceNotFound',
+            type: "error",
+            confirmButtonText: "@lr.ButtonOk",
+            closeOnConfirm: false
+        },
+       function (isConfirm) {
+           window.location='@url'
+       });
+    });
+</script>

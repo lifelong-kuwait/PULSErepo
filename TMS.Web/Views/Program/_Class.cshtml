@@ -1,0 +1,131 @@
+﻿@model long
+@using lr = Resources.Resources;
+
+<script>
+    function ClassNestedGrid_onEdit(e) {
+        //if current model is not new then remove the Name editor
+        var title = jQuery(e.container).parent().find(".k-window-title");
+        var update = jQuery(e.container).parent().find(".k-grid-update");
+        var cancel = jQuery(e.container).parent().find(".k-grid-cancel");
+        jQuery(cancel).html('<span class="k-icon k-i-cancel"></span>' + lr.CencelRecordGeneralButton);
+        if (e.model.isNew()) {
+            jQuery("#courseddl").hide();
+            jQuery(title).text(lr.AddRecordGeneralTitle);
+            jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.SaveRecordGeneralButton);
+            jQuery("#StartDate").data("kendoDatePicker").value(null);
+            jQuery("#EndDate").data("kendoDatePicker").value(null);
+            var ClassDurationType = jQuery("#CourseID").data('kendoDropDownList'); ClassDurationType.value('@Model'); ClassDurationType.trigger("change");
+        }
+        else {
+            jQuery(title).text(lr.EditRecordGeneralTitle);
+            jQuery("#courseddl").remove();
+            jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.UpdateRecordGeneralButton);
+        }
+        //
+    }
+
+    //Class
+    function ClassTemplate(data) {
+        if (data !== null) {
+            var ClassTemplate = kendo.template(jQuery("#ClassTemplate").html(), { useWithBlock: false });
+            return ClassTemplate(data);
+        }
+        return '';
+    }
+</script>
+@(Html.Kendo().Grid<TMS.Library.Entities.TMS.Program.Classes>()
+            .Name("ClassGrid")
+    .Columns(columns =>
+    {
+        columns.Bound(e => e.PrimaryClassTitle).ClientTemplate("#=ClassTemplate(data)#");
+        columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy);
+        columns.Bound(e => e.UpdatedByAlias).Width(170).Title(lr.ModifiedBy).
+ ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"<span class='Addedby'>#=UpdatedByAlias# </span>
+    <span class='date' >#=kendo.toString(UpdatedDate,'" + DateFormatScript + @"')#</span>
+<span class='time' >#=kendo.toString(UpdatedDate,'" + TimeFormatScript + @"')#</span>
+" + @"#} else {#<div>Not Modified</div> </div>#}#");
+    }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_ClassTemplate").DisplayDeleteConfirmation(false))
+          .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>))
+     .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+     .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
+     .Scrollable()
+     .Events(e => e.Edit("ClassNestedGrid_onEdit").Save("General_onSave"))
+     .HtmlAttributes(new { style = "height:450px !important;" })
+     .DataSource(dataSource => dataSource.Ajax().ServerOperation(true).Model(model => { model.Id(m => m.ID); })
+     .PageSize(5)
+     .Read(read => read.Action("Class_Read", "Program", new { CourseId=Model }))
+     .Create(read => read.Action("Class_Create", "Program"))
+     .Destroy(read => read.Action("Class_Destroy", "Program"))
+     .Update(read => read.Action("Class_Update", "Program"))
+     .Events(e => e.Error("GeneralErrorHandler(\"ClassGrid\")").RequestEnd("GridRequestEndUpdate")))
+     .NoRecords(lr.GridNoRecordFoundMessage)
+)
+@helper RenderAddTemplate()
+{
+    <div class="toolbar">
+        @if (User.IsInRole("CanAddEditClass"))
+        {
+            <a class="k-button tms-grid-add" title="" data-placement="left" data-toggle="tooltip" data-original-title="Tooltip on left">
+                <span class="tms-grid-icon mdi mdi-plus "></span>
+            </a>
+            <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+        }
+        @if (User.IsInRole("CanDeleteClass"))
+        {
+            <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+        }
+    </div>
+
+}
+<script>
+    var enumClassType =  @(Html.Raw(Json.Encode(TMS.Extensions.EnumToSelectList<TMS.Library.ClassType>(typeof(TMS.Library.ClassType)).ToList())));
+    var enumClassFeeCurrency =@Html.Action("CurrenciesData", "DDl");
+</script>
+
+<script id="ClassTemplate" type="text/kendo">
+    <div class=''>
+        <div class=''>
+            <p>
+                <span class="heading">
+                    <b>
+                        #:data.ClassName#
+                    </b>
+                </span>
+            </p>
+            <p>
+                <label>
+                    #:lr.ClassType#:
+                </label>
+                <span>
+                    #:enumvalue(data.ClassTypeID,enumClassType)#
+                </span>
+            </p>
+            <p>
+                <label>
+                    #:lr.ClassCourse#:
+                </label>
+                <span>
+                    #:data.CourseName#
+                </span>
+            </p>
+            <p>
+                <label>
+                    #:lr.ClassFee#:
+                </label>
+                <span>
+                    #:data.ClassFee#  (#:enumvalue(data.FeeCurrency,enumClassFeeCurrency)#)
+                </span>
+            </p>
+            <p>
+                <label>
+                    #:lr.ClassDates#:
+                </label>
+                <label>
+                    #=kendo.toString(data.StartDate, '@DateFormatScript')# - #=kendo.toString(data.EndDate, '@DateFormatScript')#
+                </label>
+
+            </p>
+        </div>
+    </div>
+</script>
+

@@ -1,0 +1,121 @@
+﻿@using System.Threading
+@using System.Web.Optimization
+@using Abp.Timing
+@{
+    SetAntiForgeryCookie();
+}
+@model TMS.Library.Users.LoginModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="@Url.Content("~/Content/Shamcey/css/style.default.css")" type="text/css" />
+    <link href="@Url.Content("~/css/custom.css")" rel="stylesheet" />
+    @Styles.Render("~/Bundles/vendor/css")
+    @Styles.Render("~/Bundles/css")
+    <link href="@Url.Content("~/Content/flags/famfamfam-flags.css")" rel="stylesheet" />
+
+    <link href="@Url.Content("~/css/Nav/Custommenu.css")" rel="stylesheet" />
+    <script type="text/javascript">
+        //This is used to get the application's root path from javascript. It's useful if you're running application in a virtual directory under IIS.
+        var abp = abp || {}; abp.appPath = '@ApplicationPath';
+    </script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="@Url.Content("~/Scripts/others/html5shiv.js")"></script>
+        <script src="@Url.Content("~/Scripts/others/respond.min.js")"></script>
+    <![endif]-->
+    @Scripts.Render("~/Bundles/vendor/js/top")
+    <link href="@Url.Content("~/Content/kendo/2016.1.18/kendo.common-bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2016.1.18/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2016.1.18/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2016.1.18/kendo.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2016.1.18/kendo.dataviz.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/kendo/2016.1.18/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2016.1.18/jszip.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2016.1.18/kendo.all.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2016.1.18/kendo.aspnetmvc.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+    <link href="@Url.Content("~/css/materialdesignicons.min.css")" media="all" rel="stylesheet" type="text/css" />
+    @if (CurrentCulture == "ar-KW")
+    {
+        <link href="@Url.Content("~/Content/Shamcey/css/lang-AR.css")" rel="stylesheet" type="text/css" id="rtl_ltr_b1" />
+        <link href="@Url.Content("~/css/langRTL.css")" rel="stylesheet" />
+    }
+    else
+    {
+
+        <link href="@Url.Content("~/css/langLTR.css")" rel="stylesheet" />
+    }
+    <style>
+        body{
+ background: none;
+        }
+           
+    </style>
+</head>
+<body class="@(CurrentCulture == "ar-KW" ? "lang-AR" : "lang-EN")">
+    <div id="mainwrapperId" class="mainwrapperId">
+        @Html.Partial("Static/_Header")
+        @*@Html.Partial("Static/_Leftpanel")*@
+        @*@Html.Partial("Static/_RightPanel")*@
+
+        <div class="mainpanel">
+            @Html.Partial("Static/_PageHeader")
+            <div class="maincontent">
+                <div class="maincontentinner">
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                            @RenderBody()
+                        </div>
+                    </div>
+
+                </div><!--maincontentinner-->
+            </div><!--maincontent-->
+
+        </div><!--rightpanel-->
+    </div>
+    @*<script src="@Url.Content("~/Content/Shamcey/js/jquery-1.10.2.min.js")"></script>*@
+    <script src="@Url.Content("~/Content/Shamcey/js/jquery-migrate-1.2.1.min.js")"></script>
+    <script src="@Url.Content("~/Content/Shamcey/js/jquery-ui-1.10.3.min.js")"></script>
+    <script src="@Url.Content("~/Content/Shamcey/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Content/Shamcey/js/modernizr.min.js")"></script>
+    @Scripts.Render("~/Bundles/vendor/js/bottom")
+    @Scripts.Render("~/Bundles/js")
+    <script src="@Url.Content("~/Content/Shamcey/js/custom.js")"></script>
+    <script src="@Url.Content("~/Content/Shamcey/js/jquery.cookies.js")"></script>
+
+    <script>
+            abp.localization.defaultSourceName = '@LocalizationSourceName';
+            //moment.locale('@Thread.CurrentThread.CurrentUICulture.Name'); //Localizing momentjs
+    </script>
+    <script src="~/AbpScripts/GetScripts?v=@(Clock.Now.Ticks)" type="text/javascript"></script>
+    <script type="text/javascript">
+
+            var source = abp.localization.getSource('TMS');
+            var s1 = source('Welcomenote');
+    </script>
+    @*<script>
+            jQuery('.dropdown-Logo').click(function () {
+                $(this).next('.dropdown').toggle();
+            })
+            jQuery(document).click(function (e) {
+                var target = e.target;
+                if (!$(target).is('.dropdown-Logo') && !$(target).parents().is('.dropdown-Logo')) {
+                    $('.dropdown').hide();
+                }
+            });
+
+        </script>*@
+    <script type="text/javascript" src="@Url.Content("~/Content/Shamcey/js/jquery.validate.min.js")"></script>
+
+</body>
+</html>

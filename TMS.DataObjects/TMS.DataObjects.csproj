@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A16CFE52-802D-4D4E-A7E3-9C271F21EACA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TMS.DataObjects</RootNamespace>
+    <AssemblyName>TMS.DataObjects</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper">
+      <HintPath>..\packages\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="DapperExtensions">
+      <HintPath>..\packages\DapperExtensions.1.6.3\lib\net45\DapperExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\Address\AddressDAL.cs" />
+    <Compile Include="Common\AttachmentDAL.cs" />
+    <Compile Include="Common\CommonDAL.cs" />
+    <Compile Include="Common\Configuration\Categories\ConfigurationDALCategories.cs" />
+    <Compile Include="Common\Configuration\ConfigurationDAL.cs" />
+    <Compile Include="Common\Configuration\CourseLogisticRequirements\ConfigurationDALCourseLogisticRequirements.cs" />
+    <Compile Include="Common\Configuration\CourseMaterials\ConfigurationDALCourseMaterials.cs" />
+    <Compile Include="Common\Configuration\DegreeCertificates\ConfigurationDALDegreeCertificates.cs" />
+    <Compile Include="Common\Configuration\Flags\ConfigurationDALFlags.cs" />
+    <Compile Include="Common\Configuration\FocusArea\ConfigurationDALFocusArea.cs" />
+    <Compile Include="Common\Configuration\Trainer\ConfigurationDALTrainer.cs" />
+    <Compile Include="Common\Configuration\Vendor\ConfigurationDALVendor.cs" />
+    <Compile Include="Common\Configuration\Venue\ConfigurationDALVenue.cs" />
+    <Compile Include="Common\DDL\DDLDAL.cs" />
+    <Compile Include="Common\EmailTemplates\EmailTemplatesDAL.cs" />
+    <Compile Include="Common\Groups\GroupsDAL.cs" />
+    <Compile Include="Common\Roles\RolesDAL.cs" />
+    <Compile Include="CRM\SalesAdministrationDAL.cs" />
+    <Compile Include="CustomGenerics\Admin\DbCustomAdminGenerics.cs" />
+    <Compile Include="CustomGenerics\Common\Address\AddressCustomGenerics.cs" />
+    <Compile Include="CustomGenerics\TMS\Person\CustomGenerics.cs" />
+    <Compile Include="Generics\CommonUtility.cs" />
+    <Compile Include="Generics\DBGenerics.cs" />
+    <Compile Include="Generics\DBHelper.cs" />
+    <Compile Include="Interfaces\Common\Address\IAddressDAL.cs" />
+    <Compile Include="Interfaces\Common\Configuration\IConfigurationDAL.cs" />
+    <Compile Include="Interfaces\Common\DDL\IDDLDAL.cs" />
+    <Compile Include="Interfaces\Common\EmailTemplates\IEmailTemplatesDAL.cs" />
+    <Compile Include="Interfaces\Common\Groups\IGroupsDAL.cs" />
+    <Compile Include="Interfaces\Common\IAttachmentDAL.cs" />
+    <Compile Include="Interfaces\Common\ICommonDAL.cs" />
+    <Compile Include="Interfaces\Common\Roles\IRolesDAL.cs" />
+    <Compile Include="Interfaces\CRM\ISalesAdministrationDAL.cs" />
+    <Compile Include="Interfaces\TMS\Admin\ILookupDAL.cs" />
+    <Compile Include="Interfaces\TMS\Admin\ITMSResourceDAL.cs" />
+    <Compile Include="Interfaces\TMS\Exams\IExamsDAL.cs" />
+    <Compile Include="Interfaces\TMS\Language\ILanguageDAL.cs" />
+    <Compile Include="Interfaces\TMS\Program\IAttendanceDAL.cs" />
+    <Compile Include="Interfaces\TMS\Program\IClassDAL.cs" />
+    <Compile Include="Interfaces\TMS\Program\ICourseDAL.cs" />
+    <Compile Include="Interfaces\TMS\Organization\IOrganizationDAL.cs" />
+    <Compile Include="Interfaces\TMS\Person\Contact\IPersonContactDAL.cs" />
+    <Compile Include="Interfaces\TMS\Person\Education\IPersonEducationDAL.cs" />
+    <Compile Include="Interfaces\TMS\Person\IPersonDAL.cs" />
+    <Compile Include="Interfaces\TMS\Person\SkillsInterestLevel\ISkillsInterestLevelDAL.cs" />
+    <Compile Include="Interfaces\TMS\Program\ISessionDAL.cs" />
+    <Compile Include="Interfaces\TMS\Prospect\IProspectDAL.cs" />
+    <Compile Include="Interfaces\TMS\Report\IReportDAL.cs" />
+    <Compile Include="Interfaces\TMS\Task\ITaskDAL.cs" />
+    <Compile Include="Interfaces\TMS\Trainer\ITrainerDAL.cs" />
+    <Compile Include="Interfaces\TMS\Users\IOffice365UsersDAL.cs" />
+    <Compile Include="Interfaces\TMS\Users\IUserDAL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TMS\Admin\LookupDAL.cs" />
+    <Compile Include="TMS\Admin\TMSResourceDAL.cs" />
+    <Compile Include="TMS\Exams\ExamsDAL.cs" />
+    <Compile Include="TMS\Language\LanguageDAL.cs" />
+    <Compile Include="TMS\Persons\SqlDatabase.cs" />
+    <Compile Include="TMS\Program\AttendanceDAL.cs" />
+    <Compile Include="TMS\Program\ClassDAL.cs" />
+    <Compile Include="TMS\Program\CourseDAL.cs" />
+    <Compile Include="TMS\Organization\OrganizationDAL.cs" />
+    <Compile Include="TMS\Persons\Contact\PersonContactDAL.cs" />
+    <Compile Include="TMS\Persons\Education\PersonEducationDAL.cs" />
+    <Compile Include="TMS\Persons\PersonDAL.cs" />
+    <Compile Include="TMS\Persons\SkillsInterestLevel\SkillsInterestLevelDAL.cs" />
+    <Compile Include="TMS\Program\SessionDAL.cs" />
+    <Compile Include="TMS\Prospect\ProspectDAL.cs" />
+    <Compile Include="TMS\Report\ReportDAL.cs" />
+    <Compile Include="TMS\Task\TaskDAL.cs" />
+    <Compile Include="TMS\Trainer\TrainerDAL.cs" />
+    <Compile Include="TMS\Users\Office365UsersDAL.cs" />
+    <Compile Include="TMS\Users\UserDAL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Resource\Resource.csproj">
+      <Project>{fce306be-e9fd-4303-8a0d-c937f1297335}</Project>
+      <Name>Resource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TMS.Library\TMS.Library.csproj">
+      <Project>{df954994-9c97-447c-afb1-9ea6f3027f80}</Project>
+      <Name>TMS.Library</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

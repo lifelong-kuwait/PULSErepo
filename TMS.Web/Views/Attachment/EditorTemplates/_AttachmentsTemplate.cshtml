@@ -1,0 +1,65 @@
+﻿@model TMS.Library.Common.Attachment.TMS_Attachments
+@using lr = Resources.Resources
+
+<div class=" Alertbox alert alert-danger" style="display:none">
+    <ul class="errors"></ul>
+</div>
+<div class="form-horizontal form-person-popup">
+    <div class="attachmentfornewonly">
+        <div class="form-group">
+            @Html.LabelFor(model => model.file, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                <input id="fileupload" name="fileupload" type="file" />
+                @(Html.HiddenFor(m => m.file))
+                @Html.ValidationMessageFor(model => model.file)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FileName, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.Kendo().TextBoxFor(c => c.FileName).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+                @Html.ValidationMessageFor(model => model.FileName)
+            </div>
+        </div>
+    </div>
+    <div class="attachmentforEditingonly" style="display:none;">
+        <div class=" form-group">
+            @Html.LabelFor(model => model.FileName, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                <a href="#" class="filelink" target='_blank'>@Model.FileName</a>
+            </div>
+        </div>
+    </div> 
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FileType, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            <div class="row" style="margin-bottom: 0px;">
+                <div class="col-md-5 col-lg-5 col-sm-7 col-xs-7" style="margin-bottom: 0px;">
+                    @(Html.Kendo().DropDownListFor(c => c.FileType).DataTextField("Text").DataValueField("Value").HtmlAttributes(new { @class = "form-control", style = "width:100%" }).Enable(false)
+                                                       .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.AttachmentsFileType>(typeof(TMS.Library.AttachmentsFileType))))
+                    @Html.ValidationMessageFor(model => model.FileType)
+                </div>
+                <div class="col-md-2 col-lg-2 col-sm-3" style="margin-bottom: 0px;">
+                    <span class="attachmentimage"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ValidTill, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DatePickerFor(x => x.ValidTill).Start(CalendarView.Month).Depth(CalendarView.Month).Format(KendoDateFormat).Value("").HtmlAttributes(new { style = "width: 100%;padding-bottom: 10px;" }).Min(DateTime.Now))
+            @Html.ValidationMessageFor(model => model.ValidTill)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.TextAreaFor(c => c.Description, new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+    </div>
+
+</div>

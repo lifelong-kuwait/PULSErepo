@@ -1,0 +1,774 @@
+﻿@import url('droidarabicnaskh.css');
+
+body.lang-AR {
+    background-position:right;
+}
+body.lang-AR
+body.lang-AR h1,
+body.lang-AR h2,
+body.lang-AR h3,
+body.lang-AR h4,
+body.lang-AR h5,
+body.lang-AR h6,
+body.lang-AR p,
+body.lang-AR a,
+body.lang-AR strong,
+body.lang-AR label,
+body.lang-AR input,
+body.lang-AR .btn,
+body.lang-AR small,
+body.lang-AR .button,
+body.lang-AR .table,
+body.lang-AR .table tr td,
+body.lang-AR .table tr th, 
+body.lang-AR .body.lang-AR span,
+body.lang-AR .alertinfo{
+    /*font-family: 'Droid Arabic Naskh', wf_segoe-ui_semilight !important;*/
+    
+    direction:rtl;
+}
+/*main*/
+body.lang-AR .col-xs-1, 
+body.lang-AR .col-xs-2, 
+body.lang-AR .col-xs-3, 
+body.lang-AR .col-xs-4, 
+body.lang-AR .col-xs-5, 
+body.lang-AR .col-xs-6, 
+body.lang-AR .col-xs-7, 
+body.lang-AR .col-xs-8, 
+body.lang-AR .col-xs-9, 
+body.lang-AR .col-xs-10, 
+body.lang-AR .col-xs-11,
+body.lang-AR .col-sm-1, 
+body.lang-AR .col-sm-2, 
+body.lang-AR .col-sm-3, 
+body.lang-AR .col-sm-4, 
+body.lang-AR .col-sm-5, 
+body.lang-AR .col-sm-6, 
+body.lang-AR .col-sm-7, 
+body.lang-AR .col-sm-8, 
+body.lang-AR .col-sm-9, 
+body.lang-AR .col-sm-10, 
+body.lang-AR .col-sm-11,
+body.lang-AR .col-md-1, 
+body.lang-AR .col-md-2, 
+body.lang-AR .col-md-3, 
+body.lang-AR .col-md-4, 
+body.lang-AR .col-md-5, 
+body.lang-AR .col-md-6, 
+body.lang-AR .col-md-7, 
+body.lang-AR .col-md-8, 
+body.lang-AR .col-md-9, 
+body.lang-AR .col-md-10, 
+body.lang-AR .col-md-11,
+body.lang-AR .col-lg-1, 
+body.lang-AR .col-lg-2, 
+body.lang-AR .col-lg-3, 
+body.lang-AR .col-lg-4, 
+body.lang-AR .col-lg-5, 
+body.lang-AR .col-lg-6, 
+body.lang-AR .col-lg-7, 
+body.lang-AR .col-lg-8, 
+body.lang-AR .col-lg-9, 
+body.lang-AR .col-lg-10, 
+body.lang-AR .col-lg-11
+{
+    float:right !important;
+    direction:rtl !important;
+    font-family: 'Droid Arabic Naskh', wf_segoe-ui_semilight !important;
+}
+body.lang-AR .btn, 
+body.lang-AR label,
+body.lang-AR .control-label, 
+body.lang-AR p{
+    font-size:10px;
+}
+body.lang-AR .col-md-offset-2,
+body.lang-AR .col-sm-offset-2{
+    margin-right:16.6667%;
+}
+body.lang-AR .col-lg-12,
+body.lang-AR .col-md-12,
+body.lang-AR .col-sm-12,
+body.lang-AR .col-xs-12{
+    direction:rtl !important;
+    font-family: 'Droid Arabic Naskh', wf_segoe-ui_semilight !important;
+}
+/* Header*/
+body.lang-AR .userloggedinfo ul li a,
+body.lang-AR .headmenu > li > a .headmenu-label{
+    font-family: 'Droid Arabic Naskh', wf_segoe-ui_semilight;
+    font-weight:bold;
+    font-size:10px;
+}
+body.lang-AR .userloggedinfo ul li a{
+    padding:2px 15px;
+    text-align:right;
+}
+body.lang-AR .userloggedinfo img{
+    height:89px;
+    position:relative;
+    top:5px;
+}
+body.lang-AR .userloggedinfo{
+    padding:9px 11px;
+}
+body.lang-AR .userloggedinfo .userinfo h5{
+    font-family: "Helvetica Neue",Helvetica,sans-serif !important;
+}
+body.lang-AR .leftmenu .nav-tabs.nav-stacked > li > a,
+body.lang-AR .leftmenu .nav-tabs.nav-stacked > li.nav-header{
+    text-align:right;
+}
+body.lang-AR .leftmenu .nav-tabs.nav-stacked > li > a{
+    position:relative;
+    padding-right:50px;
+}
+body.lang-AR .leftmenu .nav-tabs.nav-stacked > li > a span,
+body.lang-AR .leftmenu .nav-tabs.nav-stacked > li > a i{
+    position:absolute;
+    right:15px;
+    top:10px;
+    font-size:14px;
+}
+body.lang-AR .leftmenu .nav-tabs.nav-stacked > li,
+body.lang-AR .leftmenu .nav-tabs.nav-stacked > li > a{
+    font-family: 'Droid Arabic Naskh', wf_segoe-ui_semilight;
+    font-weight:bold;
+    font-size:10px;
+}
+body.lang-AR .leftmenu .nav-tabs.nav-stacked > li.dropdown > a{
+    background-position:15px 15px;
+    position:relative;
+}
+body.lang-AR .leftmenu .nav-tabs.nav-stacked .dropdown ul li a{
+    text-align:right;
+    padding-right:50px;
+    font-family: 'Droid Arabic Naskh', wf_segoe-ui_semilight;
+    font-size:10px;
+}
+body.lang-AR .searchbar{
+    right:auto;
+    left:15px;
+}
+body.lang-AR .footer .footer-left{
+    text-align:right !important;
+    float:right;
+}
+body.lang-AR .searchbar input{
+    background: #fff url("../images/icons/search.png") no-repeat scroll 10px 14px;
+    text-align:right;
+}
+body.lang-AR .pageicon,
+body.lang-AR .pagetitle{
+    float:right;
+}
+body.lang-AR .pagetitle{
+    margin-right:20px;
+    text-align:right;
+}
+body.lang-AR .pagetitle h1{
+    font-family: 'Droid Arabic Naskh', wf_segoe-ui_semilight;
+    font-weight:bold;
+    font-size:24px;
+}
+body.lang-AR .nav-header,
+body.lang-AR .breadcrumbs > li > a,
+body.lang-AR .breadcrumbs > li{
+    font-family: 'Droid Arabic Naskh', wf_segoe-ui_semilight;
+    font-size:11px !important;
+}
+body.lang-AR .newusers small,
+body.lang-AR .breadcrumbs > li.right > a{
+    font-family: "Helvetica Neue",Helvetica,sans-serif;
+}
+body.lang-AR .headmenu .dropdown-menu{
+    text-align:right;
+}
+body.lang-AR .newusers .userthumb{
+    float:right;
+    margin:3px 0 3px 10px;
+}
+body.lang-AR .newusers strong{
+    margin-top:3px;
+}
+body.lang-AR .dropdown-menu > li > a{
+    direction:rtl !important;
+}
+body.lang-AR .dropdown-menu > li > a span,
+body.lang-AR .dropdown-menu > li > a i{
+    position:relative;
+    left:5px;
+    /*top:3px;*/
+}
+body.lang-AR .dropdown-menu > li > a{
+    padding-top:8px;
+    padding-bottom:8px;
+}
+
+body.lang-AR .Language > li > a{
+    padding-top:3px;
+    padding-bottom:3px;
+}
+
+body.lang-AR .xsUserMenu > li > a{
+    padding-top:3px;
+    padding-bottom:3px;
+}
+body.lang-AR .alert,
+body.lang-AR button,
+body.lang-AR .dropdown-menu > li > a,
+body.lang-AR .dropdown-menu > li > a strong,
+body.lang-AR .dropdown-menu > li > a small{
+    font-family: 'Droid Arabic Naskh', wf_segoe-ui_semilight;
+    font-size:10px;
+}
+body.lang-AR .dropdown-menu > li > a strong{
+    font-weight:bold;
+}
+body.lang-AR .dropdown-menu > li > a .user-name{
+    font-family: "Helvetica Neue",Helvetica,sans-serif;
+    font-size:12px;
+}
+/*----------------------
+          Main Menu
+-----------------------*/
+body.lang-AR .chatmenu{
+    left:10px;
+    right:auto;
+}
+body.lang-AR .barmenu{
+    float:right;
+}
+body.lang-AR .header .logo,
+body.lang-AR .headerinner .headmenu > li{
+    float:right;
+}
+body.lang-AR .headerinner{
+    margin:0;
+}
+body.lang-AR .headerinner .headmenu > li.right{
+    float:left;
+}
+body.lang-AR .rightpanel{
+    margin-right:260px;
+    margin-left:0;
+}
+body.lang-AR .leftpanel{
+    float:right;
+    height:100%;
+
+}
+body.lang-AR .leftmenu{
+    z-index:100;
+}
+body.lang-AR .headmenu .dropdown-menu{
+    right:0;
+    left:auto;
+}
+body.lang-AR .headmenu .dropdown-menu::after{
+    right:20px;
+    left:auto;
+}
+/*   Breadcrumb   */
+body.lang-AR .breadcrumbs > li{
+    float:right !important;
+    direction:rtl !important;
+}
+
+
+body.lang-AR .breadcrumbs > li.Lang{
+    float:left !important;
+}
+body.lang-AR .breadcrumbs > li.right{
+    float:left !important;
+}
+body.lang-AR .breadcrumbs > li.xsUser{
+    float:left !important;
+}
+body.lang-AR .breadcrumbs > li.right > a{
+    /*font-size:11px;
+    display:block;
+    line-height:32px;
+    /*padding:0 15px 0px;*/
+    /*position:relative;
+    top:0px;
+    direction:rtl !important;*/
+}
+
+body.lang-AR .breadcrumbs > li.right .dropdown-menu a{
+    text-align:right;
+}
+body.lang-AR .breadcrumbs > li.Lang .dropdown-menu a{
+    text-align:right;
+}
+body.lang-AR .breadcrumbs > li.xsUser .dropdown-menu a{
+    text-align:right;
+}
+body.lang-AR .breadcrumbs > li > .dropdown-menu{
+    left:0 !important;
+    right:auto !important;
+}
+body.lang-AR .breadcrumbs > li:not(:first-child)::before{
+    color: #666;
+    content: " ";
+    padding: 0 5px;
+    position:relative;
+    top:1px;
+    font-family:FontAwesome;
+    font-size:14px;
+    direction:rtl !important;
+}
+body.lang-AR .breadcrumbs > li.right > a{
+    /*padding:2px 6px 0px;*/
+    font-size:14px;
+    position:relative;
+}
+body.lang-AR .dropdown-menu > li > span {
+    direction: rtl !important;
+       
+}
+body.lang-AR .breadcrumbs > li.xsUser .dropdown-menu span {
+    text-align: right !important;
+     display: block;
+}
+body.lang-AR .dropdown-menu > li > small {
+    direction: rtl !important;
+       
+}
+body.lang-AR .breadcrumbs > li.xsUser .dropdown-menu small {
+    text-align: right !important;
+     display: block;
+}
+/*-----------------------
+     Registration Form
+------------------------*/
+body.lang-AR .regcontent{
+    direction:rtl;
+}
+
+body.lang-AR .loginpanelinner{
+    direction:rtl;
+}
+body.lang-AR .inputwrapper .pull-right,
+body.lang-AR .inputwrapper .pull-right label{
+    float:left !important;
+    font-family: 'Droid Arabic Naskh', wf_segoe-ui_semilight;
+    font-size:10px;
+}
+/*--------------------------------
+              Responsive Tables
+----------------------------------*/
+body.lang-AR .table{
+    direction:rtl !important;
+}
+body.lang-AR .table thead > tr > th, 
+body.lang-AR .table tbody > tr > th, 
+body.lang-AR .table tfoot > tr > th, 
+body.lang-AR .table thead > tr > td, 
+body.lang-AR .table tbody > tr > td, 
+body.lang-AR .table tfoot > tr > td{
+    text-align:right;
+    font-family: 'Droid Arabic Naskh', wf_segoe-ui_semilight !important;
+    font-size:11px;
+}
+body.lang-AR .table .centeralign,
+body.lang-AR .table .centeralign{
+    text-align:center !important;
+}
+body.lang-AR .dataTables_info{
+    text-align:right;
+}
+body.lang-AR .dataTables_paginate {
+    left:5px;
+    right:auto;
+}
+/*-----------------------------------
+                Forms
+-------------------------------------*/
+body.lang-AR form .form-group label.control-label{
+    text-align:left !important;
+    direction:rtl !important;
+    display:block;
+    padding-right:5px;
+}
+body.lang-AR form .form-group,
+body.lang-AR .checkbox,
+body.lang-AR .radio{
+    direction:rtl !important;
+}
+body.lang-AR .form-group{
+    text-align:right !important;
+ } 
+body.lang-AR .input-group-addon{
+    /*border:1px solid #CCCCCC;*/
+}
+body.lang-AR .input-group-addon,
+body.lang-AR .input-group-btn .btn{
+    margin-right:-1px;
+}
+body.lang-AR .dropdown-menu{
+    left:auto;
+    right:0;
+}
+body.lang-AR  .widgettitle{
+    text-align:right;
+}
+body.lang-AR .fileupload-new .input-append .btn-file{
+    border:1px solid #ccc;
+    margin-right:-4px;
+    margin-left:0;
+}
+body.lang-AR .ui-spinner-button{
+    border-left:1px solid #CCCCCC;
+    border-right:0;
+}
+body.lang-AR .tabbedmenu li{
+    float:right;
+    text-align:right;
+}
+body.lang-AR .formwiz > h4{
+    text-align:right;
+}
+body.lang-AR .tabbedmenu li > a span.label,
+body.lang-AR .hormenu li > a span.label,
+body.lang-AR .wizard .hormenu li a span.h2{
+    text-align:right;
+}
+body.lang-AR .actionBar a{
+    float:left;
+}
+/*---------------------------------
+            UI Elements
+-----------------------------------*/
+body.lang-AR .pargroup .par p.pull-right{
+    float:left !important;
+}
+body.lang-AR .ui-tabs .ui-tabs-nav li{
+    float:right;
+}
+/*       Bootstrap          */
+body.lang-AR .navbar .navbar-header,
+body.lang-AR .navbar .navbar-nav,
+body.lang-AR .navbar .navbar-left,
+body.lang-AR .navbar .navbar-nav ul.nav li,
+body.lang-AR .navbar .navbar-right li,
+body.lang-AR .progress-bar{
+    float:right !important;
+}
+body.lang-AR .headtitle .btn-group,
+body.lang-AR .close,
+body.lang-AR .navbar .navbar-right{
+    float:left !important;
+}
+body.lang-AR .close,{
+    font-size:18px;
+}
+body.lang-AR .pager .previous > a, 
+body.lang-AR .pager .previous > span,
+body.lang-AR .pager .next > a, 
+body.lang-AR .pager .next > span{
+    direction:ltr !important;
+}
+body.lang-AR .modal-header,
+body.lang-AR .widgettitle,
+body.lang-AR .widgetbox{
+    direction:rtl !important;
+}
+body.lang-AR .footer{
+    padding-left:15px;
+    padding-right:15px;
+}
+body.lang-AR .modal-footer{
+    text-align:left;
+    direction:rtl;
+}
+body.lang-AR .widgetbox .btn-group .btn{
+    height:38px !important;
+}
+body.lang-AR .widgettitle{
+    padding:7px 15px;
+}
+body.lang-AR .headtitle .btn-group{
+    border-right:1px solid rgba(255, 255, 255, 0.32);
+}
+body.lang-AR .minimize{
+    margin-left:10px;
+    position: relative;
+    top: -4px;
+}
+body.lang-AR .headtitle .dropdown-menu{
+    right:auto;
+    left:0;
+}
+body.lang-AR .widgettitle{
+    font-size:12px;
+    font-weight:bold;
+}
+body.lang-AR .widgetcontent{
+    font-size:10px;
+}
+body.lang-AR .profile-left .taglist li a span{
+    opacity: 0.5;
+    position: absolute;
+    right: auto;
+    top: 12px;
+    left:10px;
+    font-size:14px;
+}
+body.lang-AR .headtitle .btn-group .btn .caret{
+    position :relative;
+    top:2px;
+    left:-5px;
+}
+/*-----------------------------
+        Other Pages
+    -----------------------*/
+body.lang-AR .table tr td,
+body.lang-AR .table tr th{
+    font-size:10px;
+}
+body.lang-AR .width70{
+    line-height:23px;
+}
+body.lang-AR .table tr th,
+body.lang-AR .subtitle2{
+    font-weight:bold;
+}
+body.lang-AR .sidebarlist li a span{
+    float:left;
+    margin-left:5px;
+}
+body.lang-AR .sidebarlist li{
+    position:relative;
+    padding-right:15px;
+}
+body.lang-AR .sidebarlist li i {
+    position: absolute;
+    right: 5px;
+    top: 12px;
+    display: inline-block;
+    transform: rotate(180deg);
+}
+body.lang-AR .topicpanel .author-thumb{
+    float:right;
+    margin-left:15px;
+}
+body.lang-AR .topicpanel .topic-content{
+    margin:right:90px;
+    margin-left:0;
+}
+body.lang-AR .comments li .comment{
+    margin-left:0;
+    margin-right:75px;
+}
+body.lang-AR .comments li .authorimg{
+    float:right;
+    margin:right:0;
+    margin-left:20px;
+}
+body.lang-AR .comments ul{
+    margin-left:0;
+    margin-right:75px;
+}
+body.lang-AR .replypanel .topic-content{
+    margin-left:0;
+    margin-right:75px;
+}
+body.lang-AR .replypanel .author-thumb{
+    float:right;
+}
+body.lang-AR .btn{
+    line-height:20px;
+    font-weight:bold;
+}
+body.lang-AR .gridblog li .inner{
+    text-align:right;
+}
+body.lang-AR .gridblog li .inner h3{
+    font-weight:bold;
+    font-size:14px;
+}
+body.lang-AR .gridblog li .blogmeta{
+    direction:rtl;
+}
+body.lang-AR .gridblog li .inner p{
+    directon:ltr !important;
+}
+body.lang-AR .gridblog li .inner .readmore{
+   directon:ltr !important;
+}
+body.lang-AR .gridblog li .inner .readmore span,
+body.lang-AR .gridblog li .inner .readmore i{
+    margin-right:5px;
+    display:inline-block;
+}
+/*    Timeline      */
+body.lang-AR .timelinelist{
+    margin-left:0;
+    margin-right:53px;
+    border-left:0;
+    border-right:2px solid #ccc;
+}
+body.lang-AR .timelinelist li .tl-icon{
+    float:right;
+    margin-right: -34px;
+}
+body.lang-AR .timelinelist li .tl-post{
+    margin-left:0;
+    margin-right:50px;
+}
+
+body.lang-AR .timelinelist li .tl-action a{
+    border-left:1px solid #ccc;
+    border-right:0;
+}
+body.lang-AR .timelinelist li .tl-thumb,
+body.lang-AR .timelinelist li h5{
+    float:right;
+}
+body.lang-AR .timelinelist li .tl-thumb{
+    margin-left:10px;
+    position:relative;
+    top:5px;
+}
+body.lang-AR .timelinelist li .tl-action a,
+body.lang-AR .peoplelist .thumb,
+body.lang-AR .alphabets li,
+body.lang-AR .peoplegroup li,
+body.lang-AR .timelinelist li .tl-comments ul li > .c-thumb,
+body.lang-AR .timelinelist li .linkdetails,
+body.lang-AR .timelinelist li .linkimg{
+    float:right;
+}
+body.lang-AR .timelinelist li .linkdetails {
+    margin:0;
+    margin-right: 2%;
+}
+body.lang-AR .timelinelist li h5 a{
+    display:inline-block;
+    margin:0 3px;
+}
+body.lang-AR .timelinelist li .tl-comments ul li .c-text{
+    margin-left:0;
+    margin-right:40px;
+}
+body.lang-AR .input-spinner{
+    margin-right:0 !important;
+}
+body.lang-AR .peoplegroup,
+body.lang-AR .alphabets {
+    display:block;
+}
+body.lang-AR .alphabets {
+    margin-top:42px;
+    border:1px solid #ccc;
+}
+body.lang-AR .alphabets li:last-child{
+    border:0;
+}
+body.lang-AR .peoplegroup li{
+    padding:0 10px !important;
+    border:0;
+    border-left:1px solid #CCCCCC;
+}
+body.lang-AR .peoplelist .peopleinfo{
+    margin-left: 0;
+    margin-right: 95px;
+    direction:rtl;
+}
+body.lang-AR .peoplelist .peopleinfo h4{
+    display:inline-block;
+}
+body.lang-AR .peoplelist .peopleinfo h4 span{
+    float:left;
+    margin-right:5px;
+}
+body.lang-AR .peoplelist .peopleinfo ul li span:first-child{
+    font-weight:bold;
+    margin-left:5px;
+}
+/*-----------------------------
+          Media queries
+-------------------------------*/
+
+@media screen and (max-width: 1024px) {
+    body.lang-AR .leftpanel{
+        margin-left:0;
+        margin-right:-260px;
+    }
+
+    /*//nav stoped almas*/
+    /*body.lang-AR .header .logo,
+    body.lang-AR .leftpanel{
+        margin-right:-260px;
+    }*/
+    body.lang-AR .rightpanel{
+        width:100%;
+        margin:0;
+    }
+}
+@media screen and (max-width: 768px){
+    body.lang-AR .userinfo ul{
+        min-width:136px;
+    }
+    body.lang-AR .userloggedinfo img{
+        height:65px;
+        width:65px;
+        top:15px;
+    }
+}
+@media screen and (max-width: 720px) {
+    body.lang-AR .pageicon{
+        float:none;
+        position:absolute;
+        right:20px;
+        bottom:20px;
+    }
+    body.lang-AR .pagetitle{
+        margin-right:80px;
+        display:block;
+        float:none;
+    }
+}
+@media screen and (max-width: 640px) {
+    body.lang-AR .userloggedinfo .userinfo{
+        margin-left:15px;
+    }
+}
+@media screen and (max-width: 603px) {
+    body.lang-AR .userloggedinfo .userinfo{
+        margin-left:72px !important; 
+    }
+}
+@media screen and (max-width: 480px){
+    body.lang-AR .userloggedinfo .userinfo{
+        left: -62px;
+        right: auto;
+        margin-left:0;
+     }
+    body.lang-AR .userloggedinfo .userinfo::after{
+        right:auto;
+        left:26px;
+    }
+    body.lang-AR .pagetitle h1 {
+        font-family: "Droid Arabic Naskh",serif;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    body.lang-AR .userloggedinfo img{
+        top:15px !important;
+    }
+}
+@media screen and (max-width: 360px){
+    body.lang-AR .userloggedinfo img{
+        top:3px !important;
+    }
+}
+
+
+.topbar .Outmenu{
+    float:right !important;
+}
+
+

@@ -1,0 +1,115 @@
+﻿@model TMS.Library.TMS.Persons.Education.WorkExperiences
+@using lr = Resources.Resources
+<div class=" Alertbox alert alert-danger" style="display:none">
+    <ul class="errors"></ul>
+</div>
+<div class="form-horizontal form-person-popup">
+    <div class="form-group">
+        @Html.LabelFor(model => model.CompanyName, new { @class = "col-md-3 col-lg-3 control-label" })
+        @*<div class="col-md-4 col-lg-4 col-sm-11">
+            @(Html.Kendo().DropDownListFor(model => model.OrganizationID)
+                    .HtmlAttributes(new { style = "width:100%" })
+                    .DataTextField("Text")
+                    .DataValueField("Value").Filter("contain")
+                    //.OptionLabel(new { Text = lr.OrganizationSelectLabelOptional, Value = 0 })
+                                    .OptionLabel(lr.OrganizationSelectLabelOptional).Events(x => x.Change("onChangeOrganization"))
+                    .DataSource(source =>
+                    {
+                        source.Read(read =>
+                        {
+                            read.Action("OrgnizationForWork", "DDL");
+                        });
+                    })
+            )
+            @Html.ValidationMessageFor(model => model.OrganizationID)
+        </div>*@
+            <div class="col-md-7 col-lg-7 col-sm-11">
+              @(Html.Kendo().TextBoxFor(c => c.CompanyName).HtmlAttributes(new { @class = "form-control ", style = "width:100%", }))
+              @Html.ValidationMessageFor(model => model.CompanyName) 
+            </div>
+    </div>
+  
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.P_Title, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.P_Title).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.P_Title)
+        </div>
+    </div>
+    @*<div class="form-group">
+        @Html.LabelFor(model => model.RelationType, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(c => c.RelationType).DataTextField("Text").DataValueField("Value").OptionLabel(new { Text = lr.PersonWorkExperinceRelationToOrganizationOptionalLabel, Value = 0 }).HtmlAttributes(new { @class = "form-control", style = "width:100%" })
+                                               .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.PersonWorkExperinceRelationToOrganization>(typeof(TMS.Library.PersonWorkExperinceRelationToOrganization))))
+            @Html.ValidationMessageFor(model => model.RelationType)
+        </div>
+    </div>*@
+    <div class="form-group" style="margin:0; padding:0px;">
+        @Html.LabelFor(model => model.JobStatus, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-3 col-lg-3 col-sm-11">
+            @(Html.Kendo().DropDownListFor(c => c.JobStatus).DataTextField("Text").DataValueField("Value").OptionLabel(lr.PersonEducationWorkExperiencesJobStatusOptionalLabel).HtmlAttributes(new { @class = "form-control", style = "width:100%" })
+                                       .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.PersonJobStatus>(typeof(TMS.Library.PersonJobStatus))))
+            @Html.ValidationMessageFor(model => model.JobStatus)
+        </div>
+        <div class="col-md-4 col-lg-4 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.Location).HtmlAttributes(new { @class = "form-control ", style = "width:88%", @placeHolder = lr.PersonEducationWorkExperiencesLocationRequired }))
+            @Html.ValidationMessageFor(model => model.Location)
+        </div>
+    </div>
+    <div class="form-group" style="margin:0; padding:0px;">
+        <label class="col-md-3 col-lg-3 control-label">@lr.PersonEducationWorkExperiencesTimePeriod</label>
+        @Html.LabelFor(model => model.StartTimePeriod, new { @class = "col-md-1 col-lg-1 control-label" })
+        <div class="col-md-4 col-lg-4 col-sm-11">
+            @(Html.Kendo().DatePickerFor(x => x.StartTimePeriod).Culture(CurrentCulture).Start(CalendarView.Year).Depth(CalendarView.Year).Format("MMMM yyyy").HtmlAttributes(new { style = "width: 100%" }).Max(DateTime.Now).Value(""))
+            @Html.ValidationMessageFor(x => x.StartTimePeriod)
+        </div>
+        <div class="col-md-3 col-lg-3 col-sm-11" style="padding-top:4px;">
+            @Html.Kendo().CheckBoxFor(x => x.IsCurrent).Label(lr.PersonEducationWorkExperiencesPresent).HtmlAttributes(new { @class = "IsCurrent" })
+        </div>
+    </div>
+    <div class="form-group" style="margin:0; padding:0px;">
+        <label class="col-md-3 col-lg-3 control-label"></label>
+        @Html.LabelFor(model => model.EndTimePeriod, new { @class = "col-md-1 col-lg-1 control-label" })
+        <div class="col-md-4 col-lg-4 col-sm-11">
+            @(Html.Kendo().DatePickerFor(x => x.EndTimePeriod).Start(CalendarView.Year).Depth(CalendarView.Year).Format("MMMM yyyy").Value("").HtmlAttributes(new { style = "width: 100%" }).Max(DateTime.Now))
+        </div>
+    </div>
+    @*<div class="form-group" style="margin:0; padding:0px;">
+        @Html.LabelFor(model => model.RefferenceName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(model => model.RefferenceName).HtmlAttributes(new { @class = "form-control", style = "width:100%" }))
+        </div>
+    </div>
+    <div class="form-group" style="margin:0; padding:0px;">
+        @Html.LabelFor(model => model.RefferenceEmail, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(model => model.RefferenceEmail).HtmlAttributes(new { @class = "form-control", style = "width:100%" }))
+        </div>
+    </div>
+    <div class="form-group" style="margin:0; padding:0px;">
+        @Html.LabelFor(model => model.RefferencePhone, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(model => model.RefferencePhone).HtmlAttributes(new { @class = "form-control", style = "width:100%" }))
+        </div>
+    </div>*@
+    <div class="form-group" style="margin:0; padding:0px;">
+        @Html.LabelFor(model => model.Description, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.TextAreaFor(model => model.Description, new { @class = "form-control", style = "width:100%" }))
+        </div>
+    </div>
+</div>
+
+<script>
+    jQuery(".IsCurrent").change(function () {
+        var isChecked = jQuery(this).is(':checked');
+        if (isChecked) {
+            var num = jQuery("#EndTimePeriod").data("kendoDatePicker"); num.enable(false);
+        } else {
+            var num = jQuery("#EndTimePeriod").data("kendoDatePicker"); num.enable(true);
+        }
+    });
+</script>

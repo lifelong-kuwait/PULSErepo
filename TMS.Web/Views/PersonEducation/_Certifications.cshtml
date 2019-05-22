@@ -1,0 +1,40 @@
+﻿@model string
+@using lr = Resources.Resources;
+@{
+    List<TMS.DDlList> data = TMS.Extensions.EnumToSelectList<TMS.Library.CourseDurationType>(typeof(TMS.Library.CourseDurationType)).ToList();
+}
+<div class="ChildGrid">
+    @(Html.Kendo().Grid<TMS.Library.TMS.Persons.Education.PersonCertifications>()
+            .Name("PersonCertificationsDegreeGrid" + Model)
+      .Columns(columns =>
+     {
+         columns.Bound(e => e.CertificationP_Name);
+         columns.Bound(e => e.AwardingBody).MinScreenWidth(550);
+         columns.ForeignKey(c => c.CertificationDurationType, data, "Value", "Text").MinScreenWidth(550);
+         columns.Bound(e => e.CertificationReferenceNo).Format(KendoDateFormat).MinScreenWidth(550);
+         columns.Bound(e => e.CompletionYear).MinScreenWidth(550);
+         columns.Command(cmd =>
+         { cmd.Edit(); cmd.Destroy(); }).Title("Edit/Delete")
+                      .Width(100);
+     }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_CertificationsTemplate").DisplayDeleteConfirmation(false))
+                    .ToolBar(toolbar => toolbar.Template(@<text>
+        <div class="toolbar">
+            @if (User.IsInRole("CanAddEditPersonCertification"))
+            {<a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+            <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>}
+            @if (User.IsInRole("CanDeletePersonCertification"))
+            { <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>}
+        </div>
+                    </text>))
+      .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+      .Pageable(pager => pager.Refresh(true)).Scrollable().Filterable()
+                                      .Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
+      .HtmlAttributes(new { style = "height:350px;" }).DataSource(dataSource => dataSource.Ajax().Model(model => {model.Id(m => m.ID); model.Field("CertificationDurationType", typeof(string));}).PageSize(5)
+        .Read(read => read.Action("PersonCertifications_Read", "PersonEducation", new { PersonID = Model }))
+        .Create(read => read.Action("PersonCertifications_Create", "PersonEducation", new { pid = Model }))
+        .Update(read => read.Action("PersonCertifications_Update", "PersonEducation"))
+        .Destroy(read => read.Action("PersonCertifications_Destroy", "PersonEducation"))
+                                        .Events(e => e.Error("GeneralErrorHandler(\"PersonCertificationsDegreeGrid" + Model + "\")").RequestEnd("GridRequestEndUpdate"))
+        ).NoRecords(lr.GridNoRecordFoundMessage)
+    )
+</div>

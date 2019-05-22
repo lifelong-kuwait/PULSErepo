@@ -1,0 +1,109 @@
+﻿.header .menu {
+    width: 40px;
+    text-align: center;
+    float: left;
+}
+
+.headermeu > span {
+    float: right;
+}
+
+@media(max-width:1024px) {
+    .o365cs-newAL-on.o365cs-nav-navMenu {
+        left: 0 !important;
+        right: auto !important;
+    }
+}
+
+.o365cs-newAL-on.o365cs-nav-navMenu::after {
+    position: absolute;
+    top: -12px;
+    left: 2px;
+    display: inline-block;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid white;
+    border-left: 12px solid transparent;
+    content: '';
+}
+
+.tilewrapper::after {
+    position: absolute;
+    top: -12px;
+    left: 2px;
+    display: inline-block;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid white;
+    border-left: 12px solid transparent;
+    content: '';
+}
+
+/*popup Error ul Template Design classes*/
+
+.Alertbox {
+    padding-left: 20px;
+}
+/*popup Error ul Template Design classes*/
+
+.tabstrip-popuup {
+    padding: 20px 0px 20px 0px;
+}
+
+.form-horizontal.form-person-popup {
+    margin-left: 2%;
+}
+
+.form-group-footer {
+    float: right;
+}
+
+.person img {
+    float: left;
+}
+
+.right-inner-addon i {
+    right: 0px;
+}
+
+.right-inner-addon input {
+    padding-right: 30px;
+}
+
+.gridaddedby {
+    margin-left: -10px;
+}
+
+.FlagsHeader {
+    padding-left: 0.288em !important;
+}
+
+.k-grid-toolbar .k-button:nth-child(1) {
+    margin-left: 0;
+}
+
+
+.grid-tooltip-icon {
+    border-right: 1px solid white;
+    float: left;
+}
+
+.k-tooltip-button {
+    float: right;
+}
+
+    .k-tooltip-button > a.k-i-close {
+        margin-right: 8px;
+        float: right;
+    }
+
+.k-edit-form-container .Addedby {
+    padding-right: 10px;
+}
+
+
+
+.grid-tooltip-icon:last-child {
+    margin-right: 15px;
+}
+.clearspace {
+    margin-bottom: 2px;
+}

@@ -1,0 +1,298 @@
+﻿@using lr = Resources.Resources;
+@using TMS.Library.Entities.TMS.Program;
+@{
+    var Model = (TMS.Library.Entities.TMS.Program.Sessions)ViewData["model"];
+   // ViewBag.Title = Model.CourseCode;
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+    List<TMS.Library.Entities.TMS.Program.Sessions> modellist = new List<TMS.Library.Entities.TMS.Program.Sessions>() { Model };
+}
+@Html.AntiForgeryToken()
+
+<script>
+
+    function SessionNestedTemplate(data) {
+        if (data !== null) {
+            var SessionNestedTemplate = kendo.template(jQuery("#SessionNestedTemplate").html(), { useWithBlock: false });
+            return SessionNestedTemplate(data);
+        }
+        return '';
+    }
+
+    function onChangeofSessionTRainer(e) {
+        if (e.sender.value() === "-1") {
+            jQuery("#SessionDetailGrid").data("kendoGrid").addRow();
+        }
+
+    }
+</script>
+
+<div id="inforecords"></div>
+@Html.AntiForgeryToken()
+@(Html.Kendo().Grid<TMS.Library.Entities.TMS.Program.Sessions>(modellist)
+            .Name("SessionDetailGrid")
+    .Columns(columns =>
+    {
+        columns.Bound(e => e.SessionName).ClientTemplate("#=SessionNestedTemplate(data)#").HeaderHtmlAttributes(new { @style = "display: none" });
+        columns.Bound(e => e.AddedByAlias).ClientTemplate("#=modifiedtemplate(data)#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy).HeaderHtmlAttributes(new { @style = "display: none" });
+    }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_SessionNestedTemplate").DisplayDeleteConfirmation(false))
+     .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>))
+     .Events(e => e.Edit("CourseGrid_onEdit").Save("General_onSave"))
+     .DataSource(dataSource => dataSource.Ajax().ServerOperation(true).Model(model => { model.Id(m => m.ID); })
+     .Read(read => read.Action("Sessions_Read", "Program"))
+     .Create(read => read.Action("Sessions_Create", "Program"))
+     .Destroy(read => read.Action("Sessions_Destroy", "Program"))
+     .Update(read => read.Action("Sessions_Update", "Program"))
+     .Events(e => e.Error("GeneralErrorHandler(\"SessionDetailGrid\")").RequestEnd("GridRequestEndUpdate")))
+     .NoRecords(lr.GridNoRecordFoundMessage)
+
+)
+@helper RenderAddTemplate()
+{
+    <div class="toolbar">
+        @if (User.IsInRole("CanAddEditSession"))
+        {
+            <a class="k-button  tms-grid-add-main" title="" data-placement="left" data-toggle="tooltip" data-original-title="Tooltip on left">
+                <span class="tms-grid-icon mdi mdi-plus "></span>
+            </a>
+            <a class="k-button tms-grid-edit-main"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+        }
+        @if (User.IsInRole("CanDeleteSession"))
+        {
+            <a class="k-button tms-grid-destroy-main"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+        }
+    </div>
+}
+
+@(Html.Kendo().PanelBar()
+        .Name("CourseDetailGridChildtemplate" + Model.ID)
+    .ExpandMode(PanelBarExpandMode.Multiple)
+    .Items(i =>
+    {
+
+        if (User.IsInRole("CanViewProgramTrainee"))
+        {
+            i.Add().Text(lr.Trainee).LoadContentFrom("ManageTrainee", "Program", new { ClassId = Model.ClassID });
+        }
+        //if (User.IsInRole("CanViewProgramTrainee"))
+        //{
+        //    i.Add().Text(lr.CourseMaterialsTitle).LoadContentFrom("ManageSessionMeterialMap", "Config", new { SessionID = Model.ID });
+        //    //, new { CourseId = Model.ID }
+        //}
+
+        if (User.IsInRole("CanViewAttendance"))
+        {
+            i.Add().Text(lr.AttendanceTitle).LoadContentFrom("ManageAttendance", "Program", new { id = Model.ID });
+            //if (User.IsInRole("CanViewClass"))
+            //{
+            // i.Add().Text(lr.AttendanceTitle).LoadContentFrom("TrainerDetailReport", "Program");
+            //}
+        }
+
+    }).Events(e => e.Expand("onExpand")))
+
+<script>
+    function filterrelateditems() {
+        return {
+            OpenId:@Model.ID , OpenType:-1
+        }
+    }
+</script>
+<script type="text/javascript">
+    jQuery(function () {
+
+        jQuery(".tms-grid-add-main").live("mousedown", function (event) {
+            jQuery("#CourseGrid").data("kendoGrid").addRow();
+        });
+
+        //destroy from header
+        jQuery(".tms-grid-destroy-main").live("mousedown", function (event) {
+            grid = jQuery("#SessionDetailGrid").data("kendoGrid");
+            var selectedrow = jQuery("#SessionDetailGrid tr:nth(1)");
+
+            swal({
+                title: '@lr.Areyousureyouwanttodeletethisrecord',
+                text: '@lr.Youwillnotbeabletorecover',
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "@lr.confirmDelete",
+                cancelButtonText: "@lr.confirmNo",
+                closeOnConfirm: false,
+                closeOnCancel: true,
+                customClass:"tmsconfirm"
+            },
+               function(isConfirm){
+                   if (isConfirm) {
+                       jQuery("#CourseDetailGrid").data("kendoGrid").removeRow(selectedrow);
+                       swal({
+                           title: '@lr.confirmDeleted',
+                           text:  '@lr.confirmDeletedMessage',
+                           type: "success"
+                       },
+                    function(){
+                        window.location="@Url.Content("~/Program/Sessions")";
+                    });
+                   }
+               });
+        });
+
+    //edit from header
+    jQuery(".tms-grid-edit-main").live("mousedown", function (event) {
+        jQuery("#SessionDetailGrid").data("kendoGrid").editRow(jQuery("#SessionDetailGrid tr:nth(1)"));
+    });
+    });
+
+    function onExpand(e) {
+        jQuery('html, body').animate({
+            scrollTop:  e.item.offsetTop
+        }, 1500);
+    }
+
+
+</script>
+@(Html.Kendo().Grid<TMS.Library.Entities.TMS.Program.Sessions>()
+ .Name("CourseGrid")
+ .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_SessionNestedTemplate"))
+ .Events(e => e.Edit("CourseGrid_onEdit").Save("General_onSave"))
+ .HtmlAttributes(new { style = "display:none" })
+ .DataSource(dataSource => dataSource
+ .Ajax().Model(model => { model.Id(m => m.ID); })
+ .Create(read => read.Action("Sessions_Create", "Program").Data("courseAddtionalData"))
+ .Events(e => e.Error("GeneralErrorHandler(\"CourseGrid\")").RequestEnd("requestendCourseGrid")))
+)
+<script type="text/x-kendo-template" id="showrecordinserted">
+    <div class="alert alert-success">
+        <button data-dismiss="alert" class="close" type="button">×</button>
+        @lr.CourseRecordAddedSuccessfully<strong><a target="_blank" href="@Url.Content("~/Program/SessionsDetail?id=")#=data.ID#"> #=data.PrimaryName#</a></strong>
+    </div>
+</script>
+<script>
+    function requestendCourseGrid(e) {
+        if (e.type == "create") {
+            if (e.response.Data[0].ID != 0) {
+                showaddedCourse();
+            }
+        }
+    }
+    function showaddedCourse() {
+        setTimeout(function () {
+            var showrecordinserted = kendo.template(jQuery("#showrecordinserted").html());
+            grid = jQuery("#CourseGrid").data("kendoGrid");
+            var selectedrow = jQuery("#SessionDetailGrid tr:nth(1)");
+            var data = grid.dataItem(selectedrow);
+            var recordaddedrow = showrecordinserted(data);
+            jQuery("#inforecords").append(recordaddedrow);
+        }, 50);
+    }
+</script>
+
+<script>
+    var enumCourseDurationType =  @(Html.Raw(Json.Encode(TMS.Extensions.EnumToSelectList<TMS.Library.CourseDurationType>(typeof(TMS.Library.CourseDurationType)).ToList())));
+    var enumClassFeeCurrency =@Html.Action("CurrenciesData", "DDl");
+    var enumCourseVendorsData =@Html.Action("CourseVendorsData", "DDl");
+
+    function modifiedtemplate(d) {
+        if (d !== null) {
+            var modifiedtemplate = kendo.template(jQuery("#modifiedtemplate").html(), { useWithBlock: false });
+            return modifiedtemplate(d);
+        }
+        return '';
+    }
+</script>
+
+<script id="modifiedtemplate" type="text/kendo">
+    <div class='gridlastmodified'>
+        <span class='lastmodifed'>@lr.LastModified</span>
+        <span class='datetime'>  #if (data.UpdatedDate!=null){ # #=kendo.toString(data.UpdatedDate,'@DefaultLongDateFormat')#  #}else{#  #=kendo.toString(data.CreatedDate,'@DefaultLongDateFormat')#  #}#</span>
+    </div>
+</script>
+
+
+<script id="SessionNestedTemplate" type="text/kendo">
+    <div class=''>
+        <div class=''>
+            <p>
+                <span class="heading">
+                    <b>
+                        #:data.SessionName#
+                    </b>
+                </span>
+            </p>
+            <p>
+                <label>
+                    @lr.PrimaryCourseName:
+                </label>
+                <span>
+                    #:data.CourseName#
+                </span>
+            </p>
+            <p>
+                <label>
+                    @lr.Trainer:
+                </label>
+                <span>
+                    #:data.TrainerName#  
+                </span>
+            </p>
+            <p>
+                <label>
+                    Scheduled Date:
+                </label>
+                <label>
+                    #=kendo.toString(data.ScheduleDate, '@DateFormatScript')#      #:data.StartTimeString#  #:data.EndTimeString#
+                </label>
+            </p>
+            @*<p>
+                <label>
+                 Start Time:
+                </label>
+                <span>
+                    #:data.StartTime#
+                </span>
+            </p>
+            <p>
+                <label>
+                    End Time:
+                </label>
+                <span>
+                    #:data.EndTime# 
+                </span>
+           </p>*@
+   @* <p>
+        <label>
+            Course Fee:
+        </label>
+        <span>
+            #:data.CourseFee#  (#:enumvalue(data.FeeCurrency,enumClassFeeCurrency)#)
+        </span>
+    </p>
+    <p>
+        <label>
+            @lr.CourseVendor:
+        </label>
+        <span>
+            #:enumvalue(data.FeeCurrency,enumCourseVendorsData)#
+        </span>
+    </p>*@
+        </div>
+    </div>
+</script>
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/ts/tms/Program/Program.js")"></script>
+}
+<style>
+    .person-box {
+        color: #0c4e6f;
+    }
+
+    #CourseDetailGrid > table tr:first-child td {
+        background: #e2f4fd;
+    }
+    `
+    #inforecords .alert-success {
+        padding: 5px 5px 5px 15px;
+        font-size: 13px;
+        margin-bottom: 3px;
+    }
+</style>

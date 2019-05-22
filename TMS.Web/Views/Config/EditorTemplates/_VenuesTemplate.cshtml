@@ -1,0 +1,252 @@
+﻿@model TMS.Library.Entities.Common.Configuration.Venues.Venues
+@using lr = Resources.Resources
+<script type="text/javascript">
+    function filterCountry() {
+        return {
+            CountryId: jQuery("#CountryID").data("kendoDropDownList").value()
+        };
+    }
+    jQuery(function () {
+        setTimeout(function () {
+            jQuery('.k-widget.k-tooltip-validation').hide();
+        }, 100);
+
+    });
+    function filterStates() {
+        return {
+            RegionId: jQuery("#StateID").data("kendoDropDownList").value()
+        };
+    }
+</script>
+<div class="Alertbox alert alert-danger" style="display:none">
+    <ul class="errors"></ul>
+</div>
+<input type="hidden" id="modelid" value="@Model.ID">
+<div class="form-horizontal form-person-popup">
+    <div class="form-group">
+        @Html.LabelFor(model => model.PrimaryName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.PrimaryName).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.PrimaryName)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.SecondaryName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.SecondaryName).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.SecondaryName)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-2 col-lg-2"></div>
+
+        <div class="col-md-7 col-lg-7 col-sm-11" style="margin-left:30px;">
+            @Html.Kendo().CheckBoxFor(model => model.IsCommon)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.VenueCodeID, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.VenueCodeID).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.VenueCodeID)
+        </div>
+    </div>
+    <div class="form-group" id="courseddl">
+        @Html.LabelFor(model => model.VenueStatusID, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(c => c.VenueStatusID).DataTextField("Text").DataValueField("Value")
+              //   .OptionLabel(new { Text = lr.ClassTypeOptionalLabel, Value = 0 })
+              .OptionLabel(lr.VenueStatusOptionalLabel)
+              .HtmlAttributes(new { @class = "form-control", style = "width:100%" })
+                                               .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.VenueStatusType>(typeof(TMS.Library.VenueStatusType))))
+            @Html.ValidationMessageFor(model => model.VenueStatusID)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Capacity, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.Capacity).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.Capacity)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Currency, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(m => m.Currency)
+            .HtmlAttributes(new { style = "width:100%" })
+            .DataTextField("Text")
+            .DataValueField("Value")
+                    .OptionLabel(lr.CurrencyOptionalLabel)
+            // .OptionLabel(new { Text = lr.CourseFeeCurrencyOptionalLabel, Value = 0 })
+                    .DataSource(dataSource => { dataSource.Read(read => read.Action("Currencies", "DDL")); }))
+            @Html.ValidationMessageFor(model => model.Currency)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Cost, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.Cost).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.Cost)
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.RateType, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(c => c.RateType).DataTextField("Text").DataValueField("Value").OptionLabel(lr.VenueRateTypeOptionalLabel).HtmlAttributes(new { @class = "form-control", style = "width:100%" })
+                                               .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.RateType>(typeof(TMS.Library.RateType))))
+            @Html.ValidationMessageFor(model => model.RateType)
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ContactPersonName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.ContactPersonName).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.ContactPersonName)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ContactPersonPhone, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.ContactPersonPhone).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.ContactPersonPhone)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ContactPersonEmail, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.ContactPersonEmail).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.ContactPersonEmail)
+        </div>
+    </div>
+
+
+
+ 
+    <div class="form-group">
+        @Html.LabelFor(model => model.AvailableFromString, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(m => m.AvailableFromString)
+            .HtmlAttributes(new { style = "width:100%" })
+            .DataTextField("Text")
+            .DataValueField("Value")
+            .OptionLabel(lr.SessionStartTimeOptionalLabel)
+            // .OptionLabel(new { Text = lr.CourseCategoryOptionalLabel, Value = 0 })
+            .BindTo(TMS.DropDownUtil.FillSessionTimeDropDown()))
+            @Html.ValidationMessageFor(model => model.AvailableFromString)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.AvailableToString, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(m => m.AvailableToString)
+            .HtmlAttributes(new { style = "width:100%" })
+            .DataTextField("Text")
+            .DataValueField("Value")
+            .OptionLabel(lr.SessionEndTimeOptionalLabel)
+            // .OptionLabel(new { Text = lr.CourseCategoryOptionalLabel, Value = 0 })
+            .BindTo(TMS.DropDownUtil.FillSessionTimeDropDown()))
+            @Html.ValidationMessageFor(model => model.AvailableToString)
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(model => model.AddressLine1, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.AddressLine1).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.AddressLine1)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.AddressLine2, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.AddressLine2).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ZipCode, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.ZipCode).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CountryID, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(m => m.CountryID)
+                  .ValuePrimitive(true)
+                  .OptionLabel(lr.AddressCountryOptionalLabel)
+                          .DataTextField("Text")
+                          .DataValueField("Value").HtmlAttributes(new { @class = "form-control ", style = "width:100%" })
+                  .DataSource(dataSource =>
+                  {
+                      dataSource.Read(read => read.Action("CoreCountries", "DDL"))
+                                .ServerFiltering(true);
+                  })
+            )
+            @Html.ValidationMessageFor(m => m.CountryID)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.StateID, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(m => m.StateID)
+                  .AutoBind(false)
+                  .ValuePrimitive(true)
+                                  .OptionLabel(lr.AddressStateRegionOptionalLabel)
+                          .DataTextField("Text")
+                                  .DataValueField("Value").HtmlAttributes(new { @class = "form-control ", style = "width:100%" })
+                  .DataSource(dataSource =>
+                  {
+                      dataSource.Read(read => read.Action("CoreRegion", "DDL").Data("filterCountry"))
+                                .ServerFiltering(true);
+                  })
+                          .CascadeFrom("CountryID")
+            )
+            @Html.ValidationMessageFor(m => m.StateID)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.CityID, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(m => m.CityID)
+                  .AutoBind(false)
+                  .ValuePrimitive(true)
+                                  .OptionLabel(lr.AddressCityOptionalLabel)
+                          .DataTextField("Text")
+                                  .DataValueField("Value").HtmlAttributes(new { @class = "form-control ", style = "width:100%" })
+                  .DataSource(dataSource =>
+                  {
+                      dataSource.Read(read => read.Action("CoreCities", "DDL").Data("filterStates"))
+                                .ServerFiltering(true);
+                  })
+                          .CascadeFrom("StateID")
+            )
+            @Html.ValidationMessageFor(m => m.CityID)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Setup, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.TextAreaFor(c => c.Setup, new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.Setup)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Notes, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.TextAreaFor(c => c.Notes, new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.Notes)
+        </div>
+    </div>
+
+</div>

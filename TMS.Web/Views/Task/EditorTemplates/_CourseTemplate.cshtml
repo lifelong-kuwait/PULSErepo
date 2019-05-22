@@ -1,0 +1,32 @@
+﻿
+
+@model TMS.Library.Entities.CRM.CRMCourses
+@using lr = Resources.Resources
+<div class="Alertbox alert alert-danger" style="display:none">
+    <ul class="errors"></ul>
+</div>
+<div class="form-horizontal form-person-popup">
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PrimaryCourseName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.PrimaryCourseName).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.PrimaryCourseName)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SecondaryCourseName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.SecondaryCourseName).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.SecondaryCourseName)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.TextAreaFor(c => c.Description, new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+    </div>
+</div>

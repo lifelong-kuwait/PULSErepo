@@ -1,0 +1,62 @@
+﻿@using Telerik.Reporting;
+@using Telerik.ReportViewer.Mvc;
+@using lr = Resources.Resources;
+@using TelerikReportLibrary;
+@using Kendo.Mvc;
+@{
+    ViewBag.Title = lr.PersonPageTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var phonenubner = lr.PersonPhoneNumber;
+    var personEmail = lr.PersonContactEmail;
+    var gender = lr.Gender;
+}
+@section scripts
+{
+    <script src="~/Content/kendo/telerikReportViewer-12.1.18.620.js"></script>
+}
+
+@section ReportingStyles
+{
+    <link href="~/Content/kendo/telerikReportViewer.css" rel="stylesheet" />
+    <style>
+        #myReportViewer {
+            position: relative;
+            width: 100%;
+            height: 800px;
+            overflow: hidden;
+            font-family: Verdana, Arial;
+        }
+    </style>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+}
+
+@section ReportingScripts
+{
+    @(Html.TelerikReporting().DeferredScripts())
+}
+
+<h2>Telerik Reporting in ASP.NET MVC Example</h2>
+
+
+@*<script>
+    //$("#trdxButton").on("click", function (e) {
+
+    $(document).ready(function () {
+
+        var reportViewer = $("#myReportViewer").data("telerik_ReportViewer");
+
+        reportViewer.reportSource({ report: "Report2.trdx" });
+    });
+
+</script>*@
+
+
+@(Html.TelerikReporting().ReportViewer()
+    .Id("myReportViewer")
+    .ServiceUrl("/api/reports/")
+    .TemplateUrl(Url.Content("~/Content/kendo/telerikReportViewerTemplate.html"))
+    .ReportSource(new TypeReportSource() { TypeName = typeof(Report1).AssemblyQualifiedName })
+    .ViewMode(ViewModes.INTERACTIVE)
+    .ScaleMode(ScaleModes.SPECIFIC).Scale(1.0).PersistSession(false).Deferred()
+)
+

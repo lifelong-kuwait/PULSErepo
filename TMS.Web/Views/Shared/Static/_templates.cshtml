@@ -1,0 +1,37 @@
+﻿<script src="@Url.Content("~/js/DashBoard/MainItems.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/Shamcey/js/jquery.validate.min.js")"></script>
+
+<div>
+    <script type="text/javascript">
+        var baseurl = '@Url.Content("~/")';
+        var LoginUrl = '@Url.Content("~/Home/Login")';
+    </script>
+    <script src="@Url.Content("~/Scripts/ts/main/main.js")"></script>
+    <script type="text/x-kendo-template" id="GridErrorTemplate">
+        # if (messages.length) { #
+        <li class="ErrorDetailhead">
+            <span>#=field#</span>
+            <ul class="DetailsError">
+                # for (var i = 0; i < messages.length; ++i) { #
+                <li>#= messages[i] #</li>
+                # } #
+            </ul>
+        </li>
+        # } #
+    </script>
+
+    <script id="addedbytemplate" type="text/kendo">
+        <div class='gridaddedby'>
+            <span class='Addedby'>#:data.AddedByAlias#</span>
+            <span class='date'>#=kendo.toString(data.CreatedDate,'@DateFormatScript')#</span>
+            <span class='time'>#=kendo.toString(data.CreatedDate,'@TimeFormatScript')#</span>
+        </div>
+    </script>
+</div>
+
+
+<style>
+    .k-grid tr {
+        cursor: pointer;
+    }
+</style>

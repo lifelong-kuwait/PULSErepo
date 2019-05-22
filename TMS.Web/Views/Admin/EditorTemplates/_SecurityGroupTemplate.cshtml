@@ -1,0 +1,29 @@
+﻿@model TMS.Library.Common.Groups.SecurityGroups
+
+<div class=" Alertbox alert alert-danger" style="display:none">
+    <ul class="errors"></ul>
+</div>
+<div class="form-horizontal form-person-popup">
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PrimaryGroupName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.PrimaryGroupName).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.PrimaryGroupName)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.SecondaryGroupName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.SecondaryGroupName).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.SecondaryGroupName)
+        </div>
+    </div>
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.IsDeleteAllowed, new { @class = "col-md-3 col-lg-3 control-label" })*@
+        <div class="col-md-2 col-lg-2"></div>
+        <div class="col-md-7 col-lg-7 col-sm-11" style="margin-left:30px;">
+            @Html.Kendo().CheckBoxFor(model => model.IsDeleteAllowed)
+        </div>
+    </div>
+</div>

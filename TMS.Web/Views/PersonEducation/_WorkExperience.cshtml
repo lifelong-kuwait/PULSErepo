@@ -1,0 +1,93 @@
+﻿@model string
+@using lr = Resources.Resources;
+@{
+    List<TMS.DDlList> data = TMS.Extensions.EnumToSelectList<TMS.Library.PersonJobStatus>(typeof(TMS.Library.PersonJobStatus)).ToList();
+}
+
+<script>
+    function PersonWorkGrid_onEdit(e) {
+        //if current model is not new then remove the Name editor
+
+        var title = jQuery(e.container).parent().find(".k-window-title");
+        var update = jQuery(e.container).parent().find(".k-grid-update");
+        var cancel = jQuery(e.container).parent().find(".k-grid-cancel");
+        //jQuery('<a class="k-button k-button-icontext k-grid-update custom" href="\\#"><span class="k-icon k-i-check"></span>Save & New</a>').insertBefore(".k-grid-update");
+        jQuery(cancel).html('<span class="k-icon k-i-cancel"></span>' + lr.CencelRecordGeneralButton);
+        if (e.model.isNew()) {
+            // add
+            jQuery(title).text(lr.AddRecordGeneralTitle);
+            jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.SaveRecordGeneralButton);
+            //EndTimePeriod 
+            jQuery("#StartTimePeriod").data("kendoDatePicker").value(null);
+            jQuery("#EndTimePeriod").data("kendoDatePicker").value(null);
+
+        } 
+            // edit
+            if (e.model.IsCurrent == 1) {
+                var num = jQuery("#EndTimePeriod").data("kendoDatePicker"); num.enable(false);
+            }
+            //jQuery(title).text(lr.EditRecordGeneralTitle);
+            //jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.UpdateRecordGeneralButton);
+        
+
+    }
+</script>
+<div class="ChildGrid">
+    @(Html.Kendo().Grid<TMS.Library.TMS.Persons.Education.WorkExperiences>()
+                            .Name("PersonWorkExperiencesGrid" + Model)
+      .Columns(columns =>
+     {
+         columns.Bound(e => e.CompanyName);
+         columns.Bound(e => e.P_Title).MinScreenWidth(550);
+         columns.ForeignKey(c => c.JobStatus, data, "Value", "Text").MinScreenWidth(550);
+         columns.Bound(e => e.Location).MinScreenWidth(550);
+         columns.Command(cmd =>
+         { cmd.Edit(); cmd.Destroy(); }).Title("Edit/Delete")
+                      .Width(100);
+     }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_WorkExperienceTemplate").DisplayDeleteConfirmation(false))
+                    .ToolBar(toolbar => toolbar.Template(@<text>
+        <div class="toolbar">
+          @if (User.IsInRole("CanAddEditWorkExperience")) {  <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+            <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>}
+            @if (User.IsInRole("CanDeleteWorkExperience")) { <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>}
+        </div>
+                    </text>))
+                              .Sortable().Selectable(selectable => selectable
+                                                                    .Mode(GridSelectionMode.Multiple))
+                  .Pageable(pager => pager
+               .Refresh(true))
+             .Scrollable().Filterable()
+                                                             .Events(e => e.Edit("PersonWorkGrid_onEdit").Save("General_onSave"))
+            .HtmlAttributes(new { style = "height:350px;" })
+                .DataSource(dataSource => dataSource
+                      .Ajax()
+                           .Model(model =>
+                           {
+                               model.Id(m => m.ID);
+                               model.Field("JobStatus", typeof(string));
+                           })
+
+                 .PageSize(5)
+                    .Read(read => read.Action("PersonWorkExperience_Read", "PersonEducation", new { PersonID = Model }))
+                      .Create(read => read.Action("PersonWorkExperience_Create", "PersonEducation", new { pid = Model }))
+                   .Update(read => read.Action("PersonWorkExperience_Update", "PersonEducation"))
+                    .Destroy(read => read.Action("PersonWorkExperience_Destroy", "PersonEducation"))
+                                                                 .Events(e => e.Error("GeneralErrorHandler(\"PersonWorkExperiencesGrid" + Model + "\")").RequestEnd("GridRequestEndUpdate"))
+            ).NoRecords(lr.GridNoRecordFoundMessage)
+    )
+</div>
+<script>
+
+    function onChangeOrganization(e) {
+        ddlItem = this.value();
+        if (ddlItem == "-1") {
+            jQuery("#compaynameOther").show();
+            jQuery("#CompanyName").removeAttr('disabled'); jQuery("#CompanyName").val("").change();
+        } else {
+            jQuery("#CompanyName").attr('disabled', 'disabled');
+            jQuery("#compaynameOther").hide(); jQuery("#CompanyName").val("change").change();
+        }
+    }
+
+
+</script>

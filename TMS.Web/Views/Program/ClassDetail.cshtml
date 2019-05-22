@@ -1,0 +1,316 @@
+﻿@using lr = Resources.Resources;
+@using TMS.Library.Entities.TMS.Program;
+@{
+    var Model = (TMS.Library.Entities.TMS.Program.Classes)ViewData["model"];
+    ViewBag.Title = Model.ClassName;
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+    List<Classes> modellist = new List<TMS.Library.Entities.TMS.Program.Classes>() { Model };
+}
+@Html.AntiForgeryToken()
+<script>
+    //Class
+    function ClassTemplate(data) {
+        if (data !== null) {
+            var ClassTemplate = kendo.template(jQuery("#ClassTemplate").html(), { useWithBlock: false });
+            return ClassTemplate(data);
+        }
+        return '';
+    }
+</script>
+<div id="inforecords"></div>
+@Html.AntiForgeryToken()
+@(Html.Kendo().Grid<TMS.Library.Entities.TMS.Program.Classes>(modellist)
+            .Name("ClassDetailGrid")
+    .Columns(columns =>
+    {
+        columns.Bound(e => e.PrimaryClassTitle).ClientTemplate("#=ClassTemplate(data)#").HeaderHtmlAttributes(new { @class = "hide" });
+        columns.Bound(e => e.AddedByAlias).ClientTemplate("#=modifiedtemplate(data)#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy).HeaderHtmlAttributes(new { @class = "hide" });
+    }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_ClassTemplate").DisplayDeleteConfirmation(false))
+     //.ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>))
+     .Events(e => e.Edit("ClassGrid_onEdit").Save("General_onSave"))
+     .DataSource(dataSource => dataSource.Ajax().ServerOperation(true).Model(model => { model.Id(m => m.ID); })
+     .Create(read => read.Action("Class_Create", "Program"))
+     .Destroy(read => read.Action("Class_Destroy", "Program"))
+     .Update(read => read.Action("Class_Update", "Program"))
+     .Events(e => e.Error("GeneralErrorHandler(\"ClassDetailGrid\")").RequestEnd("GridRequestEndUpdate")))
+     .NoRecords(lr.GridNoRecordFoundMessage)
+)
+@helper RenderAddTemplate()
+{
+    <div class="toolbar">
+        @if (User.IsInRole("CanAddEditClass"))
+        {
+            <a class="k-button  tms-grid-add-main" title="" data-placement="left" data-toggle="tooltip" data-original-title="Tooltip on left">
+                <span class="tms-grid-icon mdi mdi-plus "></span>
+            </a>
+            <a class="k-button tms-grid-edit-main"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+        }
+        @if (User.IsInRole("CanDeleteClass"))
+        {
+            <a class="k-button tms-grid-destroy-main"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+        }
+        @if (User.IsInRole("CanViewAttendanceReport"))
+        {
+            <a class="k-button tms-class-attendancereport-main"><span class="tms-grid-icon mdi mdi-chart-bar"></span></a>
+
+        }
+        @if (User.IsInRole("CanViewClassFeedBack"))
+        {
+
+            <a class="k-button tms-class-feedback-main"><span class="tms-grid-icon mdi mdi-comment-text-outline"></span></a>
+        }
+    </div>
+}
+
+@(Html.Kendo().PanelBar()
+        .Name("CourseDetailGridChildtemplate" + Model.ID)
+    .ExpandMode(PanelBarExpandMode.Multiple)
+    .Items(i =>
+    {
+        if (User.IsInRole("CanViewVenue"))
+        {
+            i.Add().Text(lr.VenueTabTitle).LoadContentFrom("ManageVenues", "Config", new { OpenId = Model.ID, Opentype = 2 });
+        }
+        if (User.IsInRole("CanViewProgramTrainer"))
+        {
+            i.Add().Text(lr.Trainer).LoadContentFrom("ManageTrainer", "Config", new { OpenId = Model.ID, Opentype = 2 });
+        }
+        if (User.IsInRole("CanViewProgramTrainee"))
+        {
+            i.Add().Text(lr.Trainee).LoadContentFrom("ManageTrainee", "Program", new { ClassId = Model.ID });
+        }
+        if (User.IsInRole("CanViewProgramTrainee"))
+        {
+            i.Add().Text(lr.CourseMaterialsTitle).LoadContentFrom("ManageClassMeterialMap", "Config", new { ClassId = Model.ID });
+        }
+        if (User.IsInRole("CanViewSession"))
+        {
+            i.Add().Text(lr.MenuSession).LoadContentFrom("SessionNested", "Program", new { ClassId = Model.ID });
+        }
+        i.Add().Text(lr.CourseLogisticRequirementsTitle).LoadContentFrom("ClassLogistics", "Program", new { ClassId = Model.ID });
+        //i.Add().Text(lr.MenuSession +" "+ lr.CourseLogisticRequirementsTitle).LoadContentFrom("SessionLogistics", "Program", new { ClassId = Model.ID });
+    }).Events(e => e.Expand("onExpand")))
+
+
+<script>
+    function filterrelateditems() {
+         return {
+             OpenId:@Model.CourseID , OpenType: 3
+    @*the open type 3 means we need to fetch crossponding Courses*@
+         }
+    }
+</script>
+
+<script type="text/javascript">
+    jQuery(function () {
+
+        jQuery(".tms-grid-add-main").live("mousedown", function (event) {
+            jQuery("#ClassGrid").data("kendoGrid").addRow();
+        });
+
+        //destroy from header
+        jQuery(".tms-grid-destroy-main").live("mousedown", function (event) {
+            grid = jQuery("#ClassDetailGrid").data("kendoGrid");
+            var selectedrow = jQuery("#ClassDetailGrid tr:nth(1)");
+
+            swal({
+                title: '@lr.Areyousureyouwanttodeletethisrecord',
+                text: '@lr.Youwillnotbeabletorecover',
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "@lr.confirmDelete",
+                cancelButtonText: "@lr.confirmNo",
+                closeOnConfirm: false,
+                closeOnCancel: true,
+                customClass:"tmsconfirm"
+            },
+               function(isConfirm){
+                   if (isConfirm) {
+                       jQuery("#ClassDetailGrid").data("kendoGrid").removeRow(selectedrow);
+                       swal({
+                           title: '@lr.confirmDeleted',
+                           text:  '@lr.confirmDeletedMessage',
+                           type: "success"
+                       },
+                    function(){
+                        window.location="@Url.Content("~/Program/Class")";
+                    });
+                   }
+               });
+        });
+
+    //edit from header
+    jQuery(".tms-grid-edit-main").live("mousedown", function (event) {
+        jQuery("#ClassDetailGrid").data("kendoGrid").editRow(jQuery("#ClassDetailGrid tr:nth(1)"));
+    });
+    });
+
+    function onExpand(e) {
+        jQuery('html, body').animate({
+            scrollTop:  e.item.offsetTop
+        }, 1500);
+    }
+</script>
+@(Html.Kendo().Grid<Classes>()
+ .Name("ClassGrid")
+ .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_ClassTemplate"))
+ .Events(e => e.Edit("ClassGrid_onEdit").Save("General_onSave"))
+ .HtmlAttributes(new { style = "display:none" })
+ .DataSource(dataSource => dataSource
+ .Ajax().Model(model => { model.Id(m => m.ID); })
+ .Create(read => read.Action("Class_Create", "Program"))
+ .Events(e => e.Error("GeneralErrorHandler(\"ClassGrid\")").RequestEnd("requestendClassgrid")))
+)
+<script type="text/x-kendo-template" id="showrecordinserted">
+    <div class="alert alert-success">
+        <button data-dismiss="alert" class="close" type="button">×</button>
+        @lr.ClassRecordAddedSuccessfully<strong><a target="_blank" href="@Url.Content("~/Program/ClassDetail?id=")#=data.ID#"> #=data.ClassName#</a></strong>
+    </div>
+</script>
+<script>
+    function requestendClassgrid(e) {
+        if (e.type == "create") {
+            if (e.response.Data[0].ID != 0) {
+                showaddedClass();
+            }
+        }
+    }
+    function showaddedClass() {
+        setTimeout(function () {
+            var showrecordinserted = kendo.template(jQuery("#showrecordinserted").html());
+            grid = jQuery("#ClassGrid").data("kendoGrid");
+            var selectedrow = jQuery("#ClassDetailGrid tr:nth(1)");
+            var data = grid.dataItem(selectedrow);
+            var recordaddedrow = showrecordinserted(data);
+            jQuery("#inforecords").append(recordaddedrow);
+        }, 50);
+    }
+</script>
+
+<script>
+    var enumClassDurationType =  @(Html.Raw(Json.Encode(TMS.Extensions.EnumToSelectList<TMS.Library.CourseDurationType>(typeof(TMS.Library.CourseDurationType)).ToList())));
+    var enumClassType =  @(Html.Raw(Json.Encode(TMS.Extensions.EnumToSelectList<TMS.Library.ClassType>(typeof(TMS.Library.ClassType)).ToList())));
+    var enumClassFeeCurrency =@Html.Action("CurrenciesData", "DDl");
+    var enumClassLanguage =@Html.Action("LangData", "DDl");
+
+    function modifiedtemplate(d) {
+        if (d !== null) {
+            var modifiedtemplate = kendo.template(jQuery("#modifiedtemplate").html(), { useWithBlock: false });
+            return modifiedtemplate(d);
+        }
+        return '';
+    }
+</script>
+
+<script id="modifiedtemplate" type="text/kendo">
+    <div class='gridlastmodified'>
+        <span class='lastmodifed'>@lr.LastModified</span>
+        <span class='datetime'>#=kendo.toString(data.UpdatedDate,'@DefaultLongDateFormat')#</span>
+    </div>
+</script>
+<script id="ClassTemplate" type="text/kendo">
+    <div class=''>
+        <div class=''>
+            <p>
+                <label>
+                   @lr.ClassTitle:
+                </label>
+                <span>
+                    #:data.PrimaryClassTitle#
+                </span>
+            </p>
+            <p>
+                <label>
+                  @lr.ClassName:
+                </label>
+                <span class="heading">
+                    
+                        #:data.ClassName#
+                    
+                </span>
+            </p>
+            <p>
+                <label>
+                    @lr.ClassType :
+                </label>
+                <span>
+                    #:enumvalue(data.ClassTypeID,enumClassType)#
+                </span>
+            </p>
+            <p>
+                <label>
+                    @lr.ClassDuration :
+                </label>
+                <span>
+                    #:data.ClassDuration#  (#:enumvalue(data.ClassDurationType,enumClassDurationType)#)
+                </span>
+            </p>
+            <p>
+                <label>
+                    @lr.ClassFee :
+                </label>
+                <span>
+                    #:data.ClassFee#  (#:enumvalue(data.FeeCurrency,enumClassFeeCurrency)#)
+                </span>
+            </p>
+            <p>
+                <label>
+                    @lr.ClassStartDate :
+                </label>
+                <span>
+                    #=kendo.toString(data.StartDate, '@DateFormatScript')#
+                </span>
+                <label>
+                    @lr.ClassEndDate :
+                </label>
+                <span>
+                    #=kendo.toString(data.EndDate, '@DateFormatScript')#
+                </span>
+            </p>
+            <p>
+                <label>
+                    @lr.ClassLanguage :
+                </label>
+                <span>
+                    #:enumvalue(data.LanguageID,enumClassLanguage)#
+                </span>
+            </p>
+            <p>
+                <label>
+                    @lr.ClassMinimumTrainee :
+                </label>
+                <span>
+                    #=data.MinimumTrainee#
+                </span>
+            </p>
+            <p>
+                <label>
+                    @lr.ClassCourse :
+                </label>
+                <span>
+                    <a href="@Url.Content("~/Program/CourseDetail/?id=")#:data.CourseID#">#:data.CourseName#</a>
+                </span>
+            </p>
+        </div>
+    </div>
+</script>
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/ts/tms/Program/Program.js")"></script>
+}
+<style>
+    .person-box {
+        color: #0c4e6f;
+    }
+
+    #ClassDetailGrid > table tr:first-child td {
+        background: #e2f4fd;
+    }
+
+    #inforecords .alert-success {
+        padding: 5px 5px 5px 15px;
+        font-size: 13px;
+        margin-bottom: 3px;
+    }
+</style>

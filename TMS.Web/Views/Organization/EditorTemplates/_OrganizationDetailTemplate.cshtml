@@ -1,0 +1,89 @@
+﻿@model TMS.Library.TMS.Organization.OrganizationModel
+@using lr = Resources.Resources
+<div class=" Alertbox alert alert-danger" style="display:none">
+    <ul class="errors"></ul>
+</div>
+<input type="hidden" id="modelid" value="@Model.ID">
+<div class="form-horizontal form-person-popup">
+    <div class="form-group">
+        @Html.LabelFor(model => model.P_Name, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.P_Name).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.P_Name)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ShortName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.ShortName).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.ShortName)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.FullName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.FullName).HtmlAttributes(new { @class = "form-control ", style = "width:100%", @disabled = "disabled" }))
+            @Html.ValidationMessageFor(model => model.FullName)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.S_Name, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.S_Name).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.S_Name)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Type, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(m => m.Type)
+            .HtmlAttributes(new { style = "width:100%" })
+            .DataTextField("Text")
+            .DataValueField("Value")
+                    // .OptionLabel(lr.OrganizationTypeOptionalLabel)
+           .OptionLabel(new { Text = lr.OrganizationTypeOptionalLabel, Value = 0 })
+            .DataSource(dataSource => { dataSource.Read(read => read.Action("OrganizationTypes", "DDL")); }))
+            @Html.ValidationMessageFor(model => model.Type)
+        </div>
+    </div>
+    <div class="form-group" style="margin:0; padding:0px;">
+        @Html.LabelFor(model => model.Logo, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @*@(Html.Kendo().Upload().Name("Logo").Multiple(false).Async(a => a.Save("SaveLogo", "Attachment").Remove("RemoveAttachment", "Attachment").
+                   AutoUpload(true)).Events(e => e.Success("OrganizationLogoOnSuccess").Remove(@<text>function(e) {e.data = { file: OrganizationLogo }; } </text>)
+            ))*@
+            @(Html.Kendo().Upload().Name("fileupload").Multiple(false).Async(a => a.Save("SavePictureAndLogo", "Attachment").Remove("RemovePictureAndLogo", "Attachment").
+                                                                                         AutoUpload(true)).Events(e => e.Success("OrganizationLogoOnSuccess").Remove("OrganizationPictureOnRemove").Upload("Organization_UploadAttachmentData").Select("Organization_AttachmentSelect")
+                                                                                            ))
+
+            @Html.ValidationMessageFor(model => model.Logo)
+        </div>
+
+        @*<div class="col-md-4 col-lg-4 col-sm-4">
+          <img src="https://www.google.com.pk/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjs0aOGkcfeAhXpkIsKHRyAC-MQjRx6BAgBEAU&url=https%3A%2F%2Fwww.pexels.com%2Fsearch%2Fflower%2F&psig=AOvVaw3gEpwHYafA8gUU1grzJ_uo&ust=1541846793456623" style="max-height:100px;max-width:100px;" />
+        </div>*@
+    </div>
+
+
+ 
+    <div class="form-group" style="margin:0; padding:0px;">
+        @Html.LabelFor(model => model.HandledBy, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(model => model.HandledBy)
+                    .HtmlAttributes(new { style = "width:100%" })
+                    .DataTextField("Text")
+                    .DataValueField("Value")
+                            .OptionLabel(new { Text = lr.HandledByOptionalLabel, Value = 0 })
+                    .DataSource(source =>
+                    {
+                        source.Read(read =>
+                        {
+                            read.Action("PersonAll", "DDL");
+                        });
+                    })
+            )
+        </div>
+    </div>
+
+
+</div>

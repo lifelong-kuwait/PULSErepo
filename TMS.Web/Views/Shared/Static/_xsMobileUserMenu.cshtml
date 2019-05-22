@@ -1,0 +1,17 @@
+﻿@{
+    string Username = "";
+    if (IsP) { Username = CurrentUser.P_FirstName; } else { Username = CurrentUser.S_FirstName; }
+    var LogoutUrl = "";
+    if (CurrentUser.IsAZureAD) { LogoutUrl = Url.Content("~/Home/SignOut"); } else { LogoutUrl = Url.Content("~/Home/LogOut"); }
+}
+<a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="mdi mdi-account mdi-24px"></i> </a>
+<ul class="dropdown-menu pull-right xsUserMenu">
+    <li><span>@Username</span> </li>
+    <li><small>@CurrentUser.Email</small></li>
+    <li class="divider"></li>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Account Settings</a></li>
+    @if (!CurrentUser.IsAZureAD){ <li><a href="#">Change Password</a></li>}
+    <li class="divider"></li>
+    <li><a href="@LogoutUrl">Sign Out</a></li>
+</ul>

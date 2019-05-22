@@ -1,0 +1,175 @@
+﻿@model TMS.Library.Task.Sls_Task
+@using lr = Resources.Resources
+@{
+
+    var PrimaryLanguageName = TMS.TMSHelper.PrimaryLangName();
+    var PrimaryLanguageFlag = TMS.TMSHelper.PrimaryLangFlag();
+    var SecondaryLanguageName = TMS.TMSHelper.SecondaryLangName();
+    var SecondaryLanguageFlag = TMS.TMSHelper.SecondaryLangFlag();
+}
+
+<script>
+        function onDOBChange(e) {
+            var dt = e.sender;
+            var value = dt.value();
+
+            if (value === null) {
+                value = kendo.parseDate(dt.element.val(), dt.options.parseFormats);
+            }
+
+            if (value < dt.min()) {
+                dt.value(dt.min());
+            } else if (value > dt.max()) {
+                dt.value(dt.max());
+            }
+        }
+    </script>
+   
+    <div class="Alertbox alert alert-danger" style="display:none">
+        <ul class="errors"></ul>
+    </div>
+    <div class="form-horizontal form-person-popup">
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DueDate, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @Html.Kendo().DatePickerFor(model => model.DueDate).HtmlAttributes(new { @class = "form-control pfirstname txtrequired", @placeholder = lr.PersonP_FirstName, @dir = @PLDIR, @style = " width: 100%;" })
+                @Html.ValidationMessageFor(model => model.DueDate)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TaskType, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11 btradio">
+                @{ 
+                    var i = 1;
+                    var chk = string.Empty;
+                    bool std;
+                    foreach(var value in TMS.Extensions.GetEnumCollection(typeof(TMS.Library.TaskType)))
+                    {
+                        if (i == 3)
+                        {
+                            std = true;
+                            chk = "checked";
+                        }
+                        <input type="radio" value="@value.Value" name="TaskType" @chk id="rdTaskType_@i" data-bind="checked:TaskType" /><label for="rdTaskType_@i">@value.Name</label>
+                        i++;
+                        @*@Html.Label("rdTaskType_"+i.ToString())*@
+                    }
+                }
+            </div>
+        </div>
+
+       <div class="form-group _leadID">
+            <div class="form-group">
+                @Html.LabelFor(model => model.LeadID, "Prospect", new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(m => m.LeadID)
+    .HtmlAttributes(new { style = "width:100%" })
+    .DataTextField("Text")
+    .DataValueField("Value").Filter(Kendo.Mvc.UI.FilterType.Contains)
+    .OptionLabel(lr.PersonRelationToOptionalLabel)
+            .DataSource(dataSource => { dataSource.Read(read => read.Action("PersonAll", "DDL")); }))
+            @Html.ValidationMessageFor(model => model.LeadID)
+        </div>
+    </div>
+
+
+
+            @*@Html.LabelFor(model => model.LeadID,"Prospect", new { @class = "col-md-3 col-lg-3 control-label" })*@
+            @*<div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.Kendo().DropDownListFor(m => m.LeadID)
+                        .Name("prst_lead")
+            .HtmlAttributes(new { style = "width:100%" })
+            .DataTextField("Text")
+            .DataValueField("Value")
+            .OptionLabel(lr.PersonRelationToOptionalLabel)
+            .DataSource(dataSource => { dataSource.Read(read => read.Action("PersonAll", "DDL")); }))
+                @Html.ValidationMessageFor(model => model.LeadID)
+            </div>
+       </div>*@
+          </div>
+        <div class="form-group _assignedTo">
+            @Html.LabelFor(model => model.AssignedTo,"Assigned To", new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.Kendo().DropDownListFor(m => m.AssignedTo)
+            .HtmlAttributes(new { style = "width:100%" })
+            .DataTextField("Text")
+            .DataValueField("Value")
+            .OptionLabel(lr.CRMUserOptionalLabel)
+            .DataSource(dataSource => { dataSource.Read(read => read.Action("CRM_Users", "DDL")); }))
+                @Html.ValidationMessageFor(model => model.AssignedTo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.TextAreaFor(c => c.Description, new { @class = "form-control ", style = "width:100%" }))
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+    </div>
+
+<script>
+    jQuery(document).ready(function () {
+        jQuery('.pfirstname , .pmiddlename , .plast_name, .nickname').bind('keypress blur', function () {
+            jQuery('.pdisplayname').val(jQuery('.pfirstname').val() + ' ' +
+                                  jQuery('.pmidddlename').val() + ' ' +
+                                       jQuery('.plast_name').val() + ' ' +
+                                       jQuery('.nickname').val()
+                                    ).change();
+        });
+
+        jQuery('._leadID').show();
+
+        jQuery('#rdTaskType_1').click(function () {
+            jQuery('._leadID').show();
+            jQuery('#prst_lead').data("kendoDropDownList").enable(true);
+        });
+        jQuery('#rdTaskType_2').click(function () {
+            jQuery('._leadID').show();
+            jQuery('#prst_lead').data("kendoDropDownList").enable(true);
+        });
+        jQuery('#rdTaskType_3').click(function () {
+            jQuery('._leadID').show();
+            jQuery('#prst_lead').data("kendoDropDownList").enable(true);
+        });
+    });
+
+    //$(document).ready(function () {
+        //$('._leadID').show();
+       // $(".k-grid-upadate")[0].innerHTML = "<span class='k-icon k-update'></span>Save  ";
+
+        //$('#rdTaskType_1').click(function () {
+        //    $('._leadID').show();
+        //    $('#prst_lead').data("kendoDropDownList").enable(true);
+        //})
+        //$('#rdTaskType_2').click(function () {
+        //    $('._leadID').show();
+        //    $('#prst_lead').data("kendoDropDownList").enable(true);
+        //})
+        //$('#rdTaskType_3').click(function () {
+        //    $('._leadID').hide();
+        //    $('#prst_lead').data("kendoDropDownList").enable(false);
+        //})
+   // })
+</script>
+
+
+<style>
+    .item-value {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 5px;
+        border-radius: 50%;
+        font-size: 17px;
+    }
+
+    .textspan {
+        vertical-align: middle;
+        font-size: 16px;
+    }
+</style>

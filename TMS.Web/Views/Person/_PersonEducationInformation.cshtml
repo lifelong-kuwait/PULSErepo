@@ -1,0 +1,24 @@
+﻿@using lr = Resources.Resources;
+@{
+   var  Postion = TabStripTabPosition.Left;
+   if (TMS.CultureHelper.IsRighToLeft())
+   {
+       Postion = TabStripTabPosition.Right;
+   }
+}
+@model string
+@( Html.Kendo().TabStrip()
+    .Name("PersonEducationTabStrip")
+                 .SelectedIndex(0).TabPosition(Postion)
+            .Animation(animation => animation.Open(open => open.Fade(FadeDirection.In)))
+             .Items(i =>
+               {
+                   i.Add().Text(lr.PersonDegreeTabTitle).LoadContentFrom("Degree", "PersonEducation", new { PersonID = Model });
+                   i.Add().Text(lr.PersonCertificationTabTitle).LoadContentFrom("Certification", "PersonEducation", new { PersonID = Model });
+                   i.Add().Text(lr.PersonTrainingDeliveredTabTitle).LoadContentFrom("TrainingDelivered", "PersonEducation", new { PersonID = Model });
+                   i.Add().Text(lr.PersonWorkExperienceTabTitle).LoadContentFrom("WorkExperience", "PersonEducation", new { PersonID = Model });
+                   i.Add().Text(lr.PersonAchievementTabTitle).LoadContentFrom("Achievement", "PersonEducation", new { PersonID = Model });
+                   i.Add().Text(lr.PersonSuggestedTrainingTabTitle).LoadContentFrom("SuggestedTraining", "PersonEducation", new { PersonID = Model });
+               }
+            )
+)

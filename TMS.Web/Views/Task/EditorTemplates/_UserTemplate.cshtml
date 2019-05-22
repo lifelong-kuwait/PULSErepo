@@ -1,0 +1,238 @@
+﻿@model TMS.Library.Task.Sls_Task
+@using lr = Resources.Resources
+@{
+
+    var PrimaryLanguageName = TMS.TMSHelper.PrimaryLangName();
+    var PrimaryLanguageFlag = TMS.TMSHelper.PrimaryLangFlag();
+    var SecondaryLanguageName = TMS.TMSHelper.SecondaryLangName();
+    var SecondaryLanguageFlag = TMS.TMSHelper.SecondaryLangFlag();
+}
+
+<div class="form-group">
+    @Html.LabelFor(model => model.ID, new { @class = "col-md-3 col-lg-3 control-label" })
+    <div class="col-md-7 col-lg-7 col-sm-11">
+        @Html.Kendo().TextBoxFor(model => model.ID).HtmlAttributes(new { @class = "form-control pfirstname txtrequired", @placeholder = lr.PersonP_FirstName, @dir = @PLDIR, @style = " width: 100%;" })
+        @Html.ValidationMessageFor(model => model.ID)
+    </div>
+</div>
+
+@*<script>
+        function onDOBChange(e) {
+            var dt = e.sender;
+            var value = dt.value();
+
+            if (value === null) {
+                value = kendo.parseDate(dt.element.val(), dt.options.parseFormats);
+            }
+
+            if (value < dt.min()) {
+                dt.value(dt.min());
+            } else if (value > dt.max()) {
+                dt.value(dt.max());
+            }
+        }
+    </script>
+    <script id="UserGroupsTemplate" type="text/kendo">
+        <span class="item-value" style="float:left">
+            #if(data.GroupId==1){# <i class="mdi mdi-security mdi-18px"></i>#}else{#
+            <i class="mdi mdi-server-security mdi-18px"></i>
+            #}#
+        </span>
+        <span class="textspan">#: data.GroupName #</span>
+    </script>
+
+    <script type="text/javascript">
+        function UserGroupsTemplate(data) {
+            if (data != null) {
+                var userGroupsTemplate = kendo.template(jQuery("#UserGroupsTemplate").html(), { useWithBlock: false });
+                return userGroupsTemplate(data);
+            }
+            return '';
+        }
+    </script>
+    <div class=" Alertbox alert alert-danger" style="display:none">
+        <ul class="errors"></ul>
+    </div>
+    <div class="form-horizontal form-person-popup">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Salutation, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.Kendo().DropDownListFor(c => c.Salutation).DataTextField("Text").DataValueField("Value")
+                                .OptionLabel(lr.SalutationOptionalLabel)
+                                //        .OptionLabel(new { Text = lr.SalutationOptionalLabel, Value = 0 })
+                                .HtmlAttributes(new { @class = "form-control txtrequired ", style = "width:100%", })
+                                            .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.Salutation>(typeof(TMS.Library.Salutation))).Events(e => e.Change("SalutationChange")))
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Gender, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.Kendo().DropDownListFor(c => c.Gender).DataTextField("Text").DataValueField("Value")
+                                .OptionLabel(lr.GenderOptionallabel)
+                                //           .OptionLabel(new { Text = lr.GenderOptionallabel, Value = 0 })
+                                .HtmlAttributes(new { @class = "form-control txtrequired", style = "width:100%" })
+                                               .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.Gender>(typeof(TMS.Library.Gender))))
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.P_FirstName, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @Html.Kendo().TextBoxFor(model => model.P_FirstName).HtmlAttributes(new { @class = "form-control pfirstname txtrequired", @placeholder = lr.PersonP_FirstName, @dir = @PLDIR, @style = " width: 100%;" })
+                @Html.ValidationMessageFor(model => model.P_FirstName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.P_MiddleName, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @Html.Kendo().TextBoxFor(model => model.P_MiddleName).HtmlAttributes(new { @class = "form-control pmidddlename", @placeholder = lr.PersonP_MiddleName, @dir = @PLDIR, @style = " width: 100%;" })
+                @Html.ValidationMessageFor(model => model.P_MiddleName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.P_LastName, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @Html.Kendo().TextBoxFor(model => model.P_LastName).HtmlAttributes(new { @class = "form-control plast_name txtrequired", @placeholder = lr.PersonP_LastName, @dir = @PLDIR, @style = " width: 100%;" })
+                @Html.ValidationMessageFor(model => model.P_LastName)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.NickName, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @Html.Kendo().TextBoxFor(model => model.NickName).HtmlAttributes(new { @class = "form-control nickname txtrequired", @placeholder = lr.PersonNickName, @dir = @PLDIR, @style = " width: 100%;" })
+                @Html.ValidationMessageFor(model => model.NickName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.P_DisplayName, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @Html.Kendo().TextBoxFor(model => model.P_DisplayName).HtmlAttributes(new { @class = "form-control pdisplayname txtrequired", @placeholder = lr.PersonP_DisplayName, @dir = @PLDIR, @style = " width: 100%;" })
+                @Html.ValidationMessageFor(model => model.P_DisplayName)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-4 col-lg-4 col-sm-11">
+                @Html.Kendo().TextBoxFor(model => model.Email).HtmlAttributes(new { @class = "form-control txtrequired", @placeholder = lr.PersonContactEmail, @style = " width: 100%;" })
+                @Html.ValidationMessageFor(model => model.Email)
+                @Html.Hidden("InitialEmail", Model.Email)
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-11  CreatePasswordEmail" style="padding-top:4px;">
+                @Html.Kendo().CheckBoxFor(x => x.IsSendCreatePasswordEmail).Label(lr.UserSendCreatePasswordEmail).HtmlAttributes(new { @class = "sendCreatePasswordEmail" })
+            </div>
+        </div>
+        <div class="myP">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, new { @class = "col-md-3 col-lg-3 control-label" })
+                <div class="col-md-7 col-lg-7 col-sm-11">
+                    @Html.Kendo().TextBoxFor(model => model.Password).HtmlAttributes(new { type = "password", @class = "form-control txtrequired", @placeholder = lr.UserPassword, @dir = @PLDIR, @style = " width: 100%;" })
+                    @Html.ValidationMessageFor(model => model.Password)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ConfirmPassword, new { @class = "col-md-3 col-lg-3 control-label" })
+                <div class="col-md-7 col-lg-7 col-sm-11">
+                    @Html.Kendo().TextBoxFor(model => model.ConfirmPassword).HtmlAttributes(new { type = "password", @class = "form-control txtrequired", @placeholder = lr.UserConfirmPassword, @dir = @PLDIR, @style = " width: 100%;" })
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateOfBirth, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.Kendo().DatePickerFor(x => x.DateOfBirth).Start(CalendarView.Month).Depth(CalendarView.Month).Format(KendoDateFormat).Value("").HtmlAttributes(new { style = "width: 100%;padding-bottom: 10px;", @class = "txtrequired" }).Max(DateTime.Now).Events(e => e.Change("onDOBChange")))
+                @Html.ValidationMessageFor(model => model.DateOfBirth)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsActive, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @Html.Kendo().CheckBoxFor(x => x.IsActive).Label(lr.GridIsActiveColumnTitle)
+            </div>
+        </div>
+
+        <div class="form-group" style="margin:0; padding:0px;">
+            @Html.LabelFor(model => model.ProfileImage, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                <input id="fileupload" name="fileupload" type="file" />
+                @Html.ValidationMessageFor(model => model.ProfileImage)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserGroups, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.Kendo().MultiSelectFor(x => x.UserGroups)
+                         .DataTextField("GroupName").DataValueField("GroupId").Filter("contains")
+                                         .TagTemplate("#=UserGroupsTemplate(data)#")
+                                          .ItemTemplate("#=UserGroupsTemplate(data)#")
+                                         .AutoBind(true).MaxSelectedItems(6)
+                         .DataSource(source =>
+                         {
+                             source.Read(read =>
+                          {
+                              read.Action("UserLoginGroups", "User");
+                          })
+                          .ServerFiltering(false);
+                         }))
+
+            </div>
+        </div>
+
+    </div>*@
+
+<script>
+    jQuery(document).ready(function () {
+        jQuery('.pfirstname , .pmiddlename , .plast_name, .nickname').bind('keypress blur', function () {
+            jQuery('.pdisplayname').val(jQuery('.pfirstname').val() + ' ' +
+                                  jQuery('.pmidddlename').val() + ' ' +
+                                       jQuery('.plast_name').val() + ' ' +
+                                       jQuery('.nickname').val()
+                                    ).change();
+        });
+
+        jQuery(".sendCreatePasswordEmail").change(function (e) {
+
+            var isChecked = jQuery(this).is(':checked');
+            if (isChecked) {
+                jQuery('.myP').addClass("hide");
+                jQuery('.myP').slideUp('slow');
+                jQuery("#ConfirmPassword").removeAttr("data-val-required");
+                jQuery("#Password").removeAttr("data-val-required");
+
+            } else {
+                jQuery('.myP').removeClass("hide");
+                jQuery('.myP').slideDown('slow');
+                jQuery("#ConfirmPassword").attr("data-val-required", lr.UserConfirmPasswordRequired);
+                jQuery("#Password").attr("data-val-required", lr.LoginPasswordRequired);
+            }
+        });
+    });
+</script>
+
+
+<style>
+    .item-value {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 5px;
+        border-radius: 50%;
+        font-size: 17px;
+    }
+
+    .textspan {
+        vertical-align: middle;
+        font-size: 16px;
+    }
+</style>

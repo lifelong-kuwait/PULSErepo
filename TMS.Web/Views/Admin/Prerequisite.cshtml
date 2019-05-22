@@ -1,0 +1,118 @@
+﻿@using lr = Resources.Resources;
+@{
+    ViewBag.Title = lr.PreRequisitesTitle;
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+}
+
+<h2>@lr.PreRequisitesTitle</h2>
+
+<div id="dashboard-left" class="col-md-8">
+    <ul class="shortcuts">
+        @if (User.IsInRole("CanViewFlags"))
+        {
+            <li>
+                <a href="@Url.Content("~/Config/Flags")">
+                    <span class="mdi mdi-flag-triangle tms-tile-icon"></span>
+                    <span class="shortcuts-label">@lr.FlagsPageTitle</span>
+                </a>
+            </li>}
+
+        @if (User.IsInRole("CanViewVenue"))
+        {
+            <li>
+                <a href="@Url.Content("~/Config/Venues")">
+                    <span class="mdi mdi-home-map-marker tms-tile-icon"></span>
+                    <span class="shortcuts-label">@lr.VenueTabTitle</span>
+                </a>
+            </li>
+        }
+        @if (User.IsInRole("CanViewRoles"))
+        {
+            <li>
+                <a href="@Url.Content("~/Admin/Roles")">
+                    <span class="mdi mdi-group tms-tile-icon"></span>
+                    <span class="shortcuts-label">@lr.RolesTitle</span>
+                </a>
+            </li>
+        }
+
+        @if (User.IsInRole("CanViewVendor"))
+        {
+            <li>
+                <a href="@Url.Content("~/Config/Vendors")">
+                    <span class="mdi mdi-human-handsup tms-tile-icon"></span>
+                    <span class="shortcuts-label">@lr.VendorTitle</span>
+                </a>
+            </li>
+        }
+        @if (User.IsInRole("CanViewCategory"))
+        {
+            <li>
+                <a href="@Url.Content("~/Config/Categories")">
+                    <span class="mdi mdi-format-list-bulleted-type tms-tile-icon"></span>
+                    <span class="shortcuts-label">@lr.CategoryTitle</span>
+                </a>
+            </li>
+        }
+
+        @if (User.IsInRole("CanViewFocusAreas"))
+        {
+            <li>
+                <a href="@Url.Content("~/Config/FocusAreas")">
+                    <span class="mdi mdi-image-filter-center-focus tms-tile-icon"></span>
+                    <span class="shortcuts-label">@lr.FocusAreaTitle</span>
+                </a>
+            </li>
+        }
+        @if (User.IsInRole("CanViewCourseMaterials"))
+        {
+            <li class="tms-tile-2x">
+                <a href="@Url.Content("~/Config/CourseMaterials")">
+                    <span class="mdi mdi-pencil tms-tile-icon"></span>
+                    <span class="mdi mdi-clipboard-text tms-tile-icon"></span>
+                    <span class="shortcuts-label">@lr.CourseMaterialsTitle</span>
+                </a>
+            </li>
+        }
+
+        @if (User.IsInRole("CanViewDegreeCertificates"))
+        {
+            <li class="tms-tile-2x">
+                <a href="@Url.Content("~/Config/DegreeCertificates")">
+                    <span class="mdi mdi-certificate tms-tile-icon"></span>
+                    <span class="mdi mdi-school tms-tile-icon"></span>
+                    
+                    <span class="shortcuts-label">@lr.DegreeCertificatesTitle</span>
+                </a>
+            </li>
+        }
+
+        @if (User.IsInRole("CanViewCourseLogisticRequirements"))
+        {
+            <li class="tms-tile-2x">
+                <a href="@Url.Content("~/Config/CourseLogisticRequirements")">
+                    <span class="mdi mdi-chair-school tms-tile-icon"></span>
+                    <span class="mdi mdi-bus tms-tile-icon"></span>
+                    <span class="shortcuts-label">@lr.CourseLogisticRequirementsTitle</span>
+                </a>
+            </li>
+        }
+    </ul>
+
+    <br />
+
+    <div id="chartplace" style="height:300px;"></div>
+
+    <div class="divider30"></div>
+</div><!--col-md-8-->
+
+<style>
+    .shortcuts li.tms-tile-2x a {
+        width: 120px;
+    }
+
+    .shortcuts li.tms-tile-2x .tms-tile-icon {
+        padding: 5px 0px 3px 7px;
+        display: inline-block;
+    }
+</style>

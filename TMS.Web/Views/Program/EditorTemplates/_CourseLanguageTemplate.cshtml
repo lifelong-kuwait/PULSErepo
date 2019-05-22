@@ -1,0 +1,59 @@
+﻿@model TMS.Library.Entities.Language.MapLanguage
+@using lr = Resources.Resources
+
+@*<script id="UserGroupsTemplate" type="text/kendo">
+    <span class="item-value" style="float:left">
+        #if(data.ID==1){# <i class="mdi mdi-security mdi-18px"></i>#}else{#
+        <i class="mdi mdi-server-security mdi-18px"></i>
+        #}#
+    </span>
+    <span class="textspan">#: data.PrimaryLanguageName #</span>
+</script>
+
+<script type="text/javascript">
+        function UserGroupsTemplate(data) {
+            if (data != null) {
+                var userGroupsTemplate = kendo.template(jQuery("#UserGroupsTemplate").html(), { useWithBlock: false });
+                return userGroupsTemplate(data);
+            }
+            return '';
+        }
+</script>*@
+
+<div class="Alertbox alert alert-danger" style="display:none">
+    <ul class="errors"></ul>
+</div>
+<input type="hidden" id="modelid" value="@Model.ID">
+<div class="form-horizontal form-person-popup">
+    
+    <div class="form-group">
+        @Html.Label(lr.ClassLanguage, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(model=>model.LanguageID)
+                .DataTextField("PrimaryLanguageName")
+                .DataValueField("ID")
+                .HtmlAttributes(new { style="width:100%"})
+                .OptionLabel(lr.ClassLanguageOptionalLabel)
+                .DataSource(source =>
+                {
+                    source.Read(read => read.Action("CourseLanguages", "DDL"));
+                })
+                )
+            @*@(Html.Kendo().DropDownListFor(x => x.ID)
+             .DataTextField("PrimaryLanguageName")
+             .DataValueField("ID")
+              .HtmlAttributes(new { style = "width:100%" })
+              .OptionLabel(lr.ClassLanguageOptionalLabel)
+             .DataSource(source =>
+             {
+                 source.Read(read =>
+                 {
+                     read.Action("CourseLanguages", "DDL");
+                 })
+             }))*@
+
+        </div>
+    </div>
+    
+</div>
+

@@ -1,0 +1,48 @@
+﻿@model string
+@using lr = Resources.Resources;
+
+<div class="ChildGrid">
+    @(Html.Kendo().Grid<TMS.Library.Common.Address.EmailAddresses>()
+    .Name("PersonEmailAddressGrid" + Model)
+      .Columns(columns =>
+     {
+
+         columns.Bound(e => e.Email);
+         columns.Bound(p => p.IsPrimary).ClientTemplate(
+    "<input type='checkbox' disabled='true' value='#= IsPrimary #' " +
+        "# if (IsPrimary) { #" +
+            "checked='checked'" +
+        "# } #" +
+    " />"
+).Title(lr.GridIsPrimary).Width(80).MinScreenWidth(550);
+        
+     }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_EmailAddressTemplate").DisplayDeleteConfirmation(false))
+                    .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate() </text>))
+      .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+      .Pageable(pager => pager.Refresh(true))
+                                                      .Scrollable().Filterable().Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
+      .HtmlAttributes(new { style = "height:350px;" }).DataSource(dataSource => dataSource.Ajax()  .Model(model =>{ model.Id(m => m.ID);   }).PageSize(8)
+      .Read(read => read.Action("EmailAddress_Read", "Contact", new { PersonID = Model }))
+      .Create(read => read.Action("EmailAddress_Create", "Contact", new { pid = Model }))
+      .Update(read => read.Action("EmailAddress_Update", "Contact", new { pid = Model }))
+      .Destroy(read => read.Action("EmailAddress_Destroy", "Contact", new { pid = Model }))
+                                                      .Events(e => e.Error("GeneralErrorHandler(\"PersonEmailAddressGrid" + Model + "\")").RequestEnd("GridRequestEndUpdate"))
+      ).NoRecords(lr.GridNoRecordFoundMessage)
+    )
+</div>
+
+@helper RenderAddTemplate()
+{<div class="toolbar">
+        @if (User.IsInRole("CanAddEditPersonEmail"))
+        {
+            <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+            <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+        }
+        @if (User.IsInRole("CanDeletePersonEmail"))
+        {
+            <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+        }
+    </div>
+
+}
+

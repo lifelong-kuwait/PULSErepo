@@ -1,0 +1,10 @@
+﻿@model string
+@using lr = Resources.Resources;
+<div class="gridsearch">
+    <div class="col-md-12 wrap">
+        <div class="input-group">
+            <input type="search" class="input-default searchinput" id="searchBox" placeholder="@string.Format("{0} {1}", lr.Search, Model)">
+            <span class="input-group-addon cursorPointer tms-gridsearch" id="btnSearch"><i class="mdi mdi-magnify search-icon"></i></span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,226 @@
+﻿@model TMS.Library.TMS.Persons.Person
+@using lr = Resources.Resources
+@{
+
+    var PrimaryLanguageName = TMS.TMSHelper.PrimaryLangName();
+    var PrimaryLanguageFlag = TMS.TMSHelper.PrimaryLangFlag();
+    var SecondaryLanguageName = TMS.TMSHelper.SecondaryLangName();
+    var SecondaryLanguageFlag = TMS.TMSHelper.SecondaryLangFlag();
+}
+
+<div class="Alertbox alert alert-danger" style="display:none">
+    <ul class="errors"></ul>
+</div>
+<div class="form-horizontal form-person-popup">
+    <div id="personeditdiv">
+        <div class="form-group">
+            @Html.LabelFor(model => model.PersonRegCode, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @Html.Kendo().TextBoxFor(model => model.PersonRegCode).HtmlAttributes(new { @class = "form-control ", @disabled = "disabled", @style = " width: 100%;" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SalutationID, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(c => c.SalutationID).DataTextField("Text").DataValueField("Value")
+                            //.OptionLabel(lr.SalutationOptionalLabel)
+                            .OptionLabel(new { Text = lr.SalutationOptionalLabel, Value = 0 })
+            .HtmlAttributes(new { @class = "form-control ", style = "width:100%", })
+                                .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.Salutation>(typeof(TMS.Library.Salutation))).Events(e => e.Change("SalutationChange")))
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Gender, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(c => c.Gender).DataTextField("Text").DataValueField("Value")
+            //.OptionLabel(lr.GenderOptionallabel)
+                               .OptionLabel(new { Text = lr.GenderOptionallabel, Value = 0 })
+            .HtmlAttributes(new { @class = "form-control ", style = "width:100%" })
+                                   .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.Gender>(typeof(TMS.Library.Gender))))
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.P_FirstName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().TextBoxFor(model => model.P_FirstName).HtmlAttributes(new { @class = "form-control pfirstname txtrequired", @placeholder = lr.PersonP_FirstName, @dir = @PLDIR, @style = " width: 100%;" })
+            @Html.ValidationMessageFor(model => model.P_FirstName)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.P_MiddleName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().TextBoxFor(model => model.P_MiddleName).HtmlAttributes(new { @class = "form-control pmidddlename", @placeholder = lr.PersonP_MiddleName, @dir = @PLDIR, @style = " width: 100%;" })
+            @Html.ValidationMessageFor(model => model.P_MiddleName)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.P_LastName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().TextBoxFor(model => model.P_LastName).HtmlAttributes(new { @class = "form-control plast_name txtrequired", @placeholder = lr.PersonP_LastName, @dir = @PLDIR, @style = " width: 100%;" })
+            @Html.ValidationMessageFor(model => model.P_LastName)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.NickName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().TextBoxFor(model => model.NickName).HtmlAttributes(new { @class = "form-control nickname", @placeholder = lr.PersonNickName, @dir = @PLDIR, @style = " width: 100%;" })
+            @Html.ValidationMessageFor(model => model.NickName)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Alias, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().TextBoxFor(model => model.Alias).HtmlAttributes(new { @class = "form-control alias", @placeholder = lr.PersonAlias, @dir = @PLDIR, @style = " width: 100%;" })
+            @Html.ValidationMessageFor(model => model.Alias)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.P_DisplayName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().TextBoxFor(model => model.P_DisplayName).HtmlAttributes(new { @class = "form-control pdisplayname txtrequired", @placeholder = lr.PersonP_DisplayName, @dir = @PLDIR, @style = " width: 100%;" })
+            @Html.ValidationMessageFor(model => model.P_DisplayName)
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().TextBoxFor(model => model.Email).HtmlAttributes(new { @class = "form-control", @placeholder = lr.PersonContactEmail, @style = " width: 100%;" })
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.clientstatus, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(c => c.clientstatus).DataTextField("Text").DataValueField("Value")
+                .OptionLabel(lr.ClientTypeOptionalLabel)
+                //.OptionLabel(new { Text = lr.GenderOptionallabel, Value = 0 })
+                .HtmlAttributes(new { @class = "form-control txtrequired ", style = "width:100%" })
+                .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.CRMClientType>(typeof(TMS.Library.CRMClientType))))
+
+        </div>
+    </div>
+
+
+    @*<div class="form-group">
+        @Html.LabelFor(model => model.AssignedTo, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(m => m.AssignedTo)
+                           /// .ValuePrimitive(true)
+                           .HtmlAttributes(new { style = "width:100%" })
+            .DataTextField("Text")
+                    .DataValueField("Value")
+            .OptionLabel(new { Text = lr.CRMUserOptionalLabel, Value = 0 })
+                  .DataSource(dataSource =>
+                  {
+                      dataSource.Read(read => read.Action("CRM_Users", "DDL"));
+
+                  })
+            )
+        </div>
+    </div>*@
+
+    <div class="form-group _assignedTo">
+        @Html.LabelFor(model => model.AssignedTo, "Assigned To", new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(m => m.AssignedTo)
+            .HtmlAttributes(new { style = "width:100%" })
+            .DataTextField("Text")
+            .DataValueField("Value")
+            .OptionLabel(lr.CRMUserOptionalLabel)
+            .DataSource(dataSource => { dataSource.Read(read => read.Action("CRM_Users", "DDL")); }))
+            @Html.ValidationMessageFor(model => model.AssignedTo)
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CountryCode, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(m => m.CountryCode)
+                           /// .ValuePrimitive(true)
+                           .HtmlAttributes(new { style = "width:100%" })
+            .DataTextField("Text")
+                    .DataValueField("Value")
+            .OptionLabel(new { Text = lr.PersonPhoneCountryCodeOptionalLabel, Value = 0 })
+                  .DataSource(dataSource =>
+                  {
+                      dataSource.Read(read => read.Action("CountryCode", "DDL"));
+
+                  })
+            )
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ContactNumber, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.ContactNumber).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Extension, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.Extension).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Flags, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().MultiSelectFor(x => x.Flags)
+                        .DataTextField("P_FlagName")
+                .DataValueField("ID")
+                 .Filter("contains")
+                 .AutoBind(true)
+                 .MaxSelectedItems(6)
+          .DataSource(source =>
+          {
+              source.Read(read =>
+              {
+                  read.Action("Flags", "DDL");
+              })
+              .ServerFiltering(false);
+          }))
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+    
+
+    jQuery(document).ready(function () {
+        jQuery('.pfirstname , .pmiddlename , .plast_name, .nickname').bind('keypress blur', function () {
+            jQuery('.pdisplayname').val(jQuery('.pfirstname').val() + ' ' +
+                                  jQuery('.pmidddlename').val() + ' ' +
+                                       jQuery('.plast_name').val() + ' ' +
+                                       jQuery('.nickname').val()
+                                    ).change();
+        });
+    });
+</script>
+<script>
+    jQuery('input').keypress(function( e ) {
+        if(e.which === 32) 
+            return false;
+    });
+    //jQuery('input.pfirstname').keypress(function( e ) {
+    //    if(e.which === 32) 
+    //        return false;
+    //})​​​​​;​
+</script>

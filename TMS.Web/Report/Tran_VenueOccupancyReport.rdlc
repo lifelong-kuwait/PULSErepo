@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <Body>
+    <ReportItems>
+      <Tablix Name="Tablix1">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>1.75in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.92709in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.67708in</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.25in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox3">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Course</Value>
+                              <Style>
+                                <Color>#ffffff</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox3</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>#244800</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox5">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Class</Value>
+                              <Style>
+                                <Color>#ffffff</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox5</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>#244800</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox9">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Occupied Date and Time</Value>
+                              <Style>
+                                <Color>#ffffff</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox9</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>#244800</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.25in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="CourseName">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!CourseName.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>CourseName</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="ClassTitle">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!ClassTitle.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>ClassTitle</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="AvailableTime">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!AvailableTime.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>AvailableTime</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <TablixHeader>
+                <Size>1in</Size>
+                <CellContents>
+                  <Textbox Name="Textbox13">
+                    <CanGrow>true</CanGrow>
+                    <KeepTogether>true</KeepTogether>
+                    <Paragraphs>
+                      <Paragraph>
+                        <TextRuns>
+                          <TextRun>
+                            <Value>Venue Name</Value>
+                            <Style>
+                              <FontStyle>Normal</FontStyle>
+                              <FontWeight>Normal</FontWeight>
+                              <TextDecoration>None</TextDecoration>
+                              <Color>#ffffff</Color>
+                            </Style>
+                          </TextRun>
+                        </TextRuns>
+                        <Style />
+                      </Paragraph>
+                    </Paragraphs>
+                    <rd:DefaultName>Textbox13</rd:DefaultName>
+                    <Style>
+                      <Border>
+                        <Color>LightGrey</Color>
+                        <Style>Solid</Style>
+                      </Border>
+                      <BackgroundColor>#244800</BackgroundColor>
+                      <PaddingLeft>2pt</PaddingLeft>
+                      <PaddingRight>2pt</PaddingRight>
+                      <PaddingTop>2pt</PaddingTop>
+                      <PaddingBottom>2pt</PaddingBottom>
+                    </Style>
+                  </Textbox>
+                </CellContents>
+              </TablixHeader>
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
+              <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
+            </TablixMember>
+            <TablixMember>
+              <Group Name="Group1">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!VenueID.Value</GroupExpression>
+                </GroupExpressions>
+              </Group>
+              <SortExpressions>
+                <SortExpression>
+                  <Value>=Fields!VenueID.Value</Value>
+                </SortExpression>
+              </SortExpressions>
+              <TablixHeader>
+                <Size>1in</Size>
+                <CellContents>
+                  <Textbox Name="VenueName">
+                    <CanGrow>true</CanGrow>
+                    <KeepTogether>true</KeepTogether>
+                    <Paragraphs>
+                      <Paragraph>
+                        <TextRuns>
+                          <TextRun>
+                            <Value>=Fields!VenueName.Value</Value>
+                            <Style />
+                          </TextRun>
+                        </TextRuns>
+                        <Style />
+                      </Paragraph>
+                    </Paragraphs>
+                    <rd:DefaultName>VenueName</rd:DefaultName>
+                    <Style>
+                      <Border>
+                        <Color>LightGrey</Color>
+                        <Style>Solid</Style>
+                      </Border>
+                      <PaddingLeft>2pt</PaddingLeft>
+                      <PaddingRight>2pt</PaddingRight>
+                      <PaddingTop>2pt</PaddingTop>
+                      <PaddingBottom>2pt</PaddingBottom>
+                    </Style>
+                  </Textbox>
+                </CellContents>
+              </TablixHeader>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Details" />
+                </TablixMember>
+              </TablixMembers>
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>OccupancyReport</DataSetName>
+        <Height>0.5in</Height>
+        <Width>6.35417in</Width>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Tablix>
+    </ReportItems>
+    <Height>0.59375in</Height>
+    <Style />
+  </Body>
+  <Width>6.35417in</Width>
+  <Page>
+    <PageHeader>
+      <Height>0.5925in</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox1">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Venue Occupancy Report</Value>
+                  <Style>
+                    <FontSize>14pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox1</rd:DefaultName>
+          <Top>0.14458in</Top>
+          <Left>1.7968in</Left>
+          <Height>0.25in</Height>
+          <Width>2.58333in</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Image Name="Image1">
+          <Source>Embedded</Source>
+          <Value>pace</Value>
+          <Sizing>FitProportional</Sizing>
+          <Height>0.5925in</Height>
+          <Width>1.19667in</Width>
+          <ZIndex>1</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </Image>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageHeader>
+    <LeftMargin>1in</LeftMargin>
+    <RightMargin>1in</RightMargin>
+    <TopMargin>1in</TopMargin>
+    <BottomMargin>1in</BottomMargin>
+    <Style />
+  </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="Tran_VenueOccupancyReport">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>9b8b199c-993e-4e06-94d9-7354eb08f15b</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="OccupancyReport">
+      <Query>
+        <DataSourceName>Tran_VenueOccupancyReport</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="VenueName">
+          <DataField>VenueName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="VenueDateTime">
+          <DataField>VenueDateTime</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="VenueID">
+          <DataField>VenueID</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="CourseID">
+          <DataField>CourseID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="CourseName">
+          <DataField>CourseName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ClassID">
+          <DataField>ClassID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ClassTitle">
+          <DataField>ClassTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="AvailableTime">
+          <DataField>AvailableTime</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="OccupiedTime">
+          <DataField>OccupiedTime</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>Tran_VenueOccupancyReport</rd:DataSetName>
+        <rd:SchemaPath>C:\GUST\SourceCode\Lifelong.EIS.TrainingWeb\Tran_VenueOccupancyReport.xsd</rd:SchemaPath>
+        <rd:TableName>Tran_Venue_GetVenueOccupancyReports</rd:TableName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>Tran_Venue_GetVenueOccupancyReportsTableAdapter</rd:TableAdapterName>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
+  <EmbeddedImages>
+    <EmbeddedImage Name="pace">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>5024788d-f032-44a9-bc2a-2fd2099313d2</rd:ReportID>
+</Report>

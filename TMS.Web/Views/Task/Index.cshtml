@@ -1,0 +1,710 @@
+﻿@using lr = Resources.Resources;
+@{
+    //  ViewBag.Title = lr.PersonPageTitle;
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+    var phonenubner = lr.PersonPhoneNumber;
+    var personEmail = lr.PersonContactEmail;
+    var gender = lr.Gender;
+
+}
+@Html.AntiForgeryToken()
+@{
+  //  ViewBag.Title = "Task";
+}
+
+@{
+    var somearray = new[] {new
+    {
+        Id=1,Description="Done"
+    },new{
+        Id=2,Description="Rescheduled"
+    },new{
+        Id=3,Description="Underway"
+    }};
+}
+<h2>Task</h2> 
+@(Html.Kendo().Grid<TMS.Library.Task.Sls_Task>().Name("Users")
+            .Columns(columns =>
+            {
+                columns.Bound(e => e.Description);
+                columns.Bound(c => c.UserName).Title("Assigned To").Width(140);
+                columns.Bound(e => e.DueDate).Format("{0: MM-dd-yyyy}").Title("Scheduled Date").Width(145);
+
+                columns.ForeignKey(c => c.Status, somearray, "Id", "Description").Width(100);
+                //   columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(150).Title(lr.GridAddedBy);
+                columns.Bound(e => e.AddedByAlias).Width(190).Title(lr.GridAddedBy).ClientTemplate(@"<div class='gridupdated'>
+            <span class='Addedby' >#:AddedByAlias#</span>
+            <span class='date' >#=kendo.toString(CreatedOn,'" + DateFormatScript + @"')#</span>
+            <span class='time' >#=kendo.toString(CreatedOn,'" + TimeFormatScript + @"')#</span>
+        </div>");
+                //        columns.Bound(e => e.UpdatedByAlias).Width(170).Title(lr.ModifiedBy).ClientTemplate(@"<div class='gridupdated'>
+                //    <span class='Addedby' >#:UpdatedByAlias#</span>
+                //    <span class='date' >#=kendo.toString(ModifiedOn,'" + DateFormatScript + @"')#</span>
+                //    <span class='time' >#=kendo.toString(ModifiedOn,'" + TimeFormatScript + @"')#</span>
+                //</div>");
+                columns.Bound(e => e.UpdatedByAlias).Width(170).Title(lr.ModifiedBy).
+     ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"<span class='Addedby'>#=UpdatedByAlias# </span>
+    <span class='date' >#=kendo.toString(ModifiedOn,'" + DateFormatScript + @"')#</span>
+<span class='time' >#=kendo.toString(ModifiedOn,'" + TimeFormatScript + @"')#</span>
+" + @"#} else {#<div>Not Modified</div> </div>#}#");
+
+            })
+            @*.ToolBar(toolbar => toolbar.Template(@<text>
+                    <div class="toolbar">
+                        @if (User.IsInRole("CanAddEditUsers"))
+                        {
+                            <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+                            <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+                        }
+                        @if (User.IsInRole("CanDeleteUsers"))
+                        {<a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+                        }
+                    </div>
+                </text>))*@
+        .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>))
+        .Groupable()
+        .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_TaskTemplate").DisplayDeleteConfirmation(false))
+        .Sortable().Scrollable().Filterable().Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+        .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
+        .HtmlAttributes(new { style = "height:700px !important;" })
+     //   .Events(e => e.Edit("UsersLoginGrid_onEdit").Save("UsersLoginGrid_onSave"))
+        .DataSource(dataSource => dataSource.Ajax().PageSize(15).Model(model => model.Id(p => p.ID))      
+        .Read(read => read.Action("Sls_Tasks_Read", "Task"))
+         .Create(create => create.Action("Task_Create", "Task"))
+        .Update(update => update.Action("Sls_Tasks_Update", "Task"))//.Data("GetLoginUserProfilePictureUpdate"))
+        .Destroy(update => update.Action("Sls_Tasks_Destroy", "Task"))
+        .Events(events => events.Error("UsersLoginGrid_Error(\"Users\")").RequestEnd("LoginUserRequestEnd"))
+        )
+)
+
+@{Html.Kendo().Window()
+    .Name("RescheduledModel")
+    .Content(@<text>@{Html.RenderPartial("~/Views/Task/EditorTemplates/Reschedule.cshtml");}</text>)
+    .Draggable(true).Title("Reschedule")
+    .Resizable()
+    .Scrollable(false)
+    .Height(120)
+    .Width(400)
+    .Visible(false)
+    .Modal(true)
+    .Actions(actions => actions.Maximize().Minimize().Close())
+    .Iframe(true)
+    .Render();
+  }
+
+@helper RenderAddTemplate()
+{
+    <div class="toolbar">
+
+      @if (User.IsInRole("CanAddEditTask"))
+      {
+        <a class="k-button tms-grid-add" title="" data-placement="left" data-toggle="tooltip" data-original-title="Tooltip on left"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+
+          <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+      }
+@if (User.IsInRole("CanDeleteTask"))
+{
+        <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+}
+@*@if (User.IsInRole("CanViewTaskDetail"))
+{
+    <a class="k-button tms-grid-Persondetail"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>
+}*@
+@*@if (User.IsInRole("CanAddEditUnderWay"))
+{
+    <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-cached "></span></a>
+}*@
+        @*<a class="k-button tms-grid-pdf-main"><span class="tms-grid-icon mdi mdi-file-pdf "></span></a>
+        <a class="k-button tms-grid-word-main"><span class="tms-grid-icon mdi mdi-file-word "></span></a>*@
+
+    
+    @*<a class="k-button tms-grid-detail"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>
+    <a class="k-button tms-grid-exitapp"><span class="tms-grid-icon mdi mdi-exit-to-app "></span></a>
+    <a class="k-button tms-grid-phone"><span class="tms-grid-icon mdi mdi-phone-settings "></span></a>*@
+    </div>
+}
+
+<script id="UserTemplate" type="text/kendo">
+    <div class='person-box'>
+        <div class='person'>
+            <img src='../#:replaceString(data.ProfileImage)#' class='paddig' alt=''>
+            <h3> #:data.P_DisplayName# </h3>
+            <p></p><h4>#:data.Email#</h4>
+        </div>
+    </div>
+
+</script>
+
+<script type="text/javascript">
+    function FlagsTemplate(data) {
+        debugger;
+        if (data != null) {
+            var FlagsTemplate = kendo.template(jQuery("#FlagsTemplateformat").html(), { useWithBlock: false });
+            return FlagsTemplate(data);
+        }
+        return '';
+    }
+    jQuery(function () {
+       
+        var template = kendo.template(jQuery("#toolTipTemplate").html());
+        //initialize tooltip to grid tbody with filter cells with given CSS class
+        var tooltip = jQuery("#Users tbody").kendoTooltip({
+            position: "center",
+            autoHide: false,
+            filter: "td:nth-child(1)",
+            showOn: "click",
+            show: function (e) {
+                //get current target row
+                this.popup.element.addClass("tmstooltip");
+                var currentRow = this.target().closest("tr");
+                var grid = jQuery("#Users").data("kendoGrid");
+                //get current row dataItem
+                var dataItem = grid.dataItem(currentRow);
+
+                //pass the dataItem to the template
+                var generatedTemplate = template(dataItem);
+                //set the generated template to the content of the tooltip
+                this.content.html(generatedTemplate);
+            },
+        }).data("kendoTooltip");
+        jQuery(".edit").live("mousedown", function (event) {
+            
+            jQuery("#Users").data("kendoGrid").editRow(jQuery("[data-uid='" + jQuery(this).attr("dat-uid") + "']"));
+        });
+
+
+        jQuery(".delete").live("mousedown", function (event) {
+           
+            grid = jQuery("#Users").data("kendoGrid");
+            var selectedRows = jQuery("#Users tr.k-state-selected");
+            var checkedLength = selectedRows.length;
+            var checkedLength = selectedRows.length;
+            if (checkedLength == 1) {
+                var grid = jQuery("#Users").data("kendoGrid");
+                var data = grid.dataItem(jQuery("[data-uid='" + jQuery(this).attr("dat-uid") + "']"));  //get the row data so it can be referred later
+
+                swal({
+                    title: '@lr.Areyousureyouwanttodeletethisrecord',
+                    text: '@lr.Youwillnotbeabletorecover',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "@lr.confirmDelete",
+                    cancelButtonText: "@lr.confirmNo",
+                    closeOnConfirm: false,
+                    closeOnCancel: true,
+                    customClass: "tmsconfirm"
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        grid.removeRow(selectedRows);
+                        swal("@lr.confirmDeleted", "@lr.confirmDeletedMessage", "success");
+                    } else {
+                    }
+                });
+            } else if (checkedLength > 1) {
+                var grid = jQuery("#Users").data("kendoGrid");
+
+
+                swal({
+                    title: '@lr.Areyousureyouwanttodeletetheserecord',
+                    text: '@lr.Youwillnotbeabletorecover' + ' <strong style="font-weight:bold">' + checkedLength + ' ' + '@lr.confirmRecords' + '</strong> ?',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "@lr.confirmDelete",
+                    cancelButtonText: "@lr.confirmNo",
+                    closeOnConfirm: false,
+                    closeOnCancel: true,
+                    html: true,
+                    customClass: "tmsconfirm"
+                },
+              function (isConfirm) {
+                  if (isConfirm) {
+                      selectedRows.each(function () { grid.removeRow(jQuery(this)); });
+                      swal("@lr.confirmDeleted", "@lr.confirmDeletedMessageMultiple", "success");
+                  } else {
+                  }
+              });
+            } else {
+
+            }
+        });
+        jQuery(".detail").live("mousedown", function (event) {
+            var url = '@Url.Content("~/Task/Detail?pid=")' + jQuery(this).attr("dat-pid");
+            window.open(url, '_blank');
+        });
+
+@*//adding row to grid
+        jQuery(".tms-grid-add").live("mousedown", function (event) {
+            jQuery(this).parents('.k-grid').data("kendoGrid").addRow();
+        });
+
+        //destroy from header
+        jQuery(".tms-grid-destroy").live("mousedown", function (event) {
+            var selectedRows = jQuery("#PersonGrid tr.k-state-selected");
+            var checkedLength = selectedRows.length;
+            var checkedLength = selectedRows.length;
+            if (checkedLength == 1) {
+                var grid = jQuery("#PersonGrid").data("kendoGrid");
+
+                swal({
+                    title: '@lr.Areyousureyouwanttodeletethisrecord',
+                    text: '@lr.Youwillnotbeabletorecover',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "@lr.confirmDelete",
+                    cancelButtonText: "@lr.confirmNo",
+                    closeOnConfirm: false,
+                    closeOnCancel: true,
+                    customClass: "tmsconfirm"
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        grid.removeRow(selectedRows);
+                        swal("@lr.confirmDeleted", "@lr.confirmDeletedMessage", "success");
+                    } else {
+                    }
+                });
+            } else if (checkedLength > 1) {
+                var grid = jQuery("#PersonGrid").data("kendoGrid");
+
+                swal({
+                    title: '@lr.Areyousureyouwanttodeletetheserecord',
+                    text: '@lr.Youwillnotbeabletorecover' + ' <strong style="font-weight:bold">' + checkedLength + ' ' + '@lr.confirmRecords' + '</strong> ?',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "@lr.confirmDelete",
+                    cancelButtonText: "@lr.confirmNo",
+                    closeOnConfirm: false,
+                    closeOnCancel: true,
+                    html: true,
+                    customClass: "tmsconfirm"
+                },
+           function (isConfirm) {
+               if (isConfirm) {
+                   selectedRows.each(function () { grid.removeRow(jQuery(this)); });
+                   swal("@lr.confirmDeleted", "@lr.confirmDeletedMessageMultiple", "success");
+               } else {
+               }
+           });
+
+
+
+            } else {
+
+            }
+        });*@
+        //edit from header
+        jQuery(".tms-grid-done").live("mousedown", function (event) {
+            var checkedLength = jQuery("#Users tr.k-state-selected").length;
+            if (checkedLength == 1) {
+                //jQuery("#Users").data("kendoGrid").editRow(jQuery("#Users tr.k-state-selected"));
+               
+                grid = jQuery("#Users").data("kendoGrid");
+                var data = grid.dataItem(jQuery("#Users tr.k-state-selected"));
+                var ID = data.ID;
+
+                var response = jQuery.ajax({
+                    method: "post",
+                    url: "/Task/EditStatusDone",
+                    dataType: "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ ID: ID }),
+                    success: function (msg) {
+                        var grid = jQuery("#Users").data("kendoGrid");
+                        grid.dataSource.read();
+                    }
+                     
+                });
+
+            } else {
+
+            }
+
+        });
+
+        jQuery(".tms-grid-underway").live("mousedown", function (event) {
+            
+            var checkedLength = jQuery("#Users tr.k-state-selected").length;
+            if (checkedLength == 1) {
+                grid = jQuery("#Users").data("kendoGrid");
+                var data = grid.dataItem(jQuery("#Users tr.k-state-selected"));
+                var ID = data.ID;
+
+                var response = jQuery.ajax({
+                    method: "post",
+                    url: "/Task/EditStatusUnderway",
+                    dataType: "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ ID: ID }),
+                    success: function (msg) {
+                        var grid = jQuery("#Users").data("kendoGrid");
+                        grid.dataSource.read();
+                    }
+
+                });
+            } else {
+
+            }
+
+        });
+
+        jQuery(".tms-grid-Rescheduled").live("mousedown", function (event) {
+            var checkedLength = jQuery("#Users tr.k-state-selected").length;
+            if (checkedLength == 1) {
+                //jQuery("#Users").data("kendoGrid").editRow(jQuery("#Users tr.k-state-selected"));
+                
+                grid = jQuery("#Users").data("kendoGrid");
+                var data = grid.dataItem(jQuery("#Users tr.k-state-selected"));
+                var ID = data.ID;
+                jQuery("#DueDate").val(data.DueDate);
+                jQuery("#ID").val(data.ID);
+                var window = jQuery("#RescheduledModel").data("kendoWindow");
+                window.open();
+                window.center();
+
+            } else {
+
+            }
+
+        });
+    });
+</script>
+
+<script id="toolTipTemplate" type="text/x-kendo-template">
+    @if (User.IsInRole("CanViewTaskDetail"))
+    {
+        <span class="grid-tooltip-icon detail" dat-pid="#=ID#" title="Detail"><i class="mdi mdi-open-in-new"></i></span>}
+    @if (User.IsInRole("CanAddEditDone"))
+    {
+        <span class="grid-tooltip-icon tms-grid-done" dat-uid="#=ID#" title="Done "><i class="mdi mdi-check"></i></span>
+    }
+    @if (User.IsInRole("CanAddEditUnderWay"))
+    {
+        <span class="grid-tooltip-icon tms-grid-underway" dat-uid="#=ID#" title="Underway"><i class="mdi mdi-cached"></i></span>
+    }
+    @if (User.IsInRole("CanAddEditRescheduled"))
+    {
+        <span class="grid-tooltip-icon tms-grid-Rescheduled" dat-uid="#=ID#" title="Reschedule"><i class="mdi mdi-calendar"></i></span>
+    }
+
+    
+       
+    
+   
+   
+</script>
+
+<script type="text/kendo" id="FlagsTemplateformat">
+    <div>
+        #for(var i = 0; i< data.length; i++){#
+        <i class="mdi mdi-flag-triangle tms-flag-icon" style="color:#:data[i].FlagColor#" title="#:data[i].P_FlagName#"></i>
+        #}#
+    </div>
+</script>
+
+<script type="text/javascript">
+    function replaceString(value) {
+        if (value == null || value == "") { return "@TMS.TMSHelper.DefaultPicture()"; } else {
+            return value.replace("~/", "");
+        }
+    }
+</script>
+<script type="text/x-kendo-template" id="UserGridErrorTemplate">
+    # if (messages.length) { #
+    <li class="ErrorDetailhead">
+        <span>#=field#</span>
+        <ul class="DetailsError">
+            # for (var i = 0; i < messages.length; ++i) { #
+            <li>#= messages[i] #</li>
+            # } #
+        </ul>
+    </li>
+    # } #
+</script>
+<script>
+    function UsersLoginGrid_Error(gridName) {
+        return function (args) {
+            if (args.errors) {
+                var grid = jQuery("#" + gridName).data("kendoGrid");
+                grid.editable.element.find(".errors").html('');
+                var validationTemplate = kendo.template(jQuery("#UserGridErrorTemplate").html());
+                grid.one("dataBinding", function (e) {
+                    e.preventDefault();
+                    jQuery.each(args.errors, function (propertyName) {
+                        var renderedTemplate = validationTemplate({ field: propertyName, messages: this.errors });
+                        grid.editable.element.find(".errors").append(renderedTemplate);
+                        grid.editable.element.find(".Alertbox").show();
+                        jQuery('html, body').animate({
+                            scrollTop: jQuery(".Alertbox").offset().top - 50
+                        }, 900);
+                    });
+                });
+            } else if (args.status == "error") {
+                abp.notify.error(lr.ResourceUpdateValidationError, lr.ErrorServerError);
+            }
+        }
+    }
+
+    function UsersLoginGrid_onSave(e) {
+        jQuery(event.srcElement)
+            .addClass("k-state-disabled")
+            .bind("click", disable = function (e) { e.preventDefault(); return false; })
+
+        this.dataSource.one("requestEnd", function () {
+            jQuery("[data-role=window] .k-grid-update").off("click", disable).removeClass("k-state-disabled");
+        });
+
+    }
+    function LoginUserRequestEnd(e) {
+        if (e.response != undefined) {
+            if (e.response == "403") {
+                window.location = LoginUrl;
+            }
+            else if (e.response.Errors == null) {
+                if (e.type == "update") { LoginUser_parentFoldername = null; LoginUserProfileEdit_aid = 0; } if (e.type == "create") { LoginUserProfilePicture = null; LoginUserProfilePicture_aid = 0 }
+            }
+        }
+    }
+    var LoginUserProfilePicture = null;
+    var LoginUserProfilePicture_aid = 0;
+    function LoginUserProfilePictureSuccess(e) {
+        LoginUserProfilePicture = e.response.parentFoldername;
+        LoginUserProfilePicture_aid = e.response.aid;
+    }
+    function GetLoginUserProfilePicture() {
+        if (LoginUserProfilePicture == undefined) { LoginUserProfilePicture = null; }
+        if (LoginUserProfilePicture_aid == undefined) { LoginUserProfilePicture_aid = 0; }
+        return {
+            filename: LoginUserProfilePicture,
+            aid: LoginUserProfilePicture_aid
+        }
+    }
+
+    function LoginUserProfilePictureOnRemove(e) {
+        e.data = {
+            aid: LoginUserProfilePicture_aid
+        }
+    }
+    function LoginUserProfilePictureSelect(e) {
+        var filename = e.files[0].name;
+        var dropvalue = checkfiletypeUserProfilePicture(e.files[0].extension.toLowerCase());
+        if (dropvalue == "-1") {
+            e.preventDefault();
+        } else {
+
+        }
+    }
+    function checkfiletypeUserProfilePicture(filetype) {
+        switch (filetype) {
+            case ".jpg": case ".jpeg": case ".bmp": case ".png":
+                return "1";
+            default:
+                return "-1";
+                break;
+        }
+    }
+
+    function UsersLoginGrid_onEdit(e) {
+        //if current model is not new then remove the Name editor
+
+        var title = jQuery(e.container).parent().find(".k-window-title");
+        var update = jQuery(e.container).parent().find(".k-grid-update");
+        var cancel = jQuery(e.container).parent().find(".k-grid-cancel");
+        //jQuery('<a class="k-button k-button-icontext k-grid-update custom" href="\\#"><span class="k-icon k-i-check"></span>Save & New</a>').insertBefore(".k-grid-update");
+        jQuery(cancel).html('<span class="k-icon k-i-cancel"></span>' + lr.CencelRecordGeneralButton);
+        if (e.model.isNew()) {
+            jQuery("#DateOfBirth").data("kendoDatePicker").value(null);
+            jQuery("#IsSendCreatePasswordEmail").prop('checked', true).change();
+            jQuery('.myP').addClass('hide');
+            LoginUserProfilePicture = null; LoginUserProfilePicture_aid = 0;
+            jQuery("#fileupload").kendoUpload({
+                multiple: false,
+                async: {
+                    saveUrl: '@Url.Content("~/Attachment/SaveOrganizationLogo")',
+                    removeUrl: '@Url.Content("~/Attachment/RemoveOrganizationLogo")',
+                    autoUpload: true
+                },
+                remove: LoginUserProfilePictureOnRemove,
+                success: LoginUserProfilePictureSuccess,
+                select: LoginUserProfilePictureSelect,
+            });
+            jQuery(title).text(lr.AddRecordGeneralTitle);
+            jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.SaveRecordGeneralButton);
+        } else {
+            // edit
+            jQuery("#InitialEmail").val(e.model.Email);
+            jQuery("#ConfirmPassword").removeAttr("data-val-required");
+            jQuery("#Password").removeAttr("data-val-required");
+            jQuery('.CreatePasswordEmail').addClass('hide');
+            //uploa
+            LoginUser_parentFoldername = null; LoginUserProfileEdit_aid = 0;
+            CurrentLoginUserId = e.model.UserID;
+            jQuery("#fileupload").kendoUpload({
+                multiple: false,
+                async: {
+                    saveUrl: '@Url.Content("~/Attachment/SaveOrganizationLogo")',
+                    removeUrl: '@Url.Content("~/Attachment/RemoveOrganizationLogo")',
+                    autoUpload: true
+                },
+                remove: LoginUserProfilePictureEditOnRemove,
+                success: LoginUserProfilePictureEditOnSuccess,
+                select: LoginUserProfilePictureSelect,
+            });
+            jQuery(title).text(lr.EditRecordGeneralTitle);
+            jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.UpdateRecordGeneralButton);
+        }
+        //
+    }
+    var LoginUserProfileEdit_aid = 0; var CurrentUID = null;
+    var LoginUser_parentFoldername = null; var CurrentLoginUserId;
+    function LoginUserProfilePictureEditOnSuccess(e) {
+        LoginUser_parentFoldername = e.response.parentFoldername;
+        LoginUserProfileEdit_aid = e.response.aid;
+        if (currentRowId != null) {
+            var item = jQuery("#Users").data("kendoGrid").dataItem(jQuery("[data-uid='" + currentRowId + "']"));
+            currentRowId = null;
+            item.dirty = true;
+        }
+    }
+    function LoginUserProfilePictureEditOnRemove(e) {
+        e.data = {
+            aid: LoginUserProfileEdit_aid
+        }
+    }
+
+    function GetLoginUserProfilePictureUpdate() {
+        if (LoginUser_parentFoldername == undefined) { LoginUser_parentFoldername = null; }
+        if (LoginUserProfileEdit_aid == undefined) { LoginUserProfileEdit_aid = 0; }
+        return {
+            filename: LoginUser_parentFoldername,
+            aid: LoginUserProfileEdit_aid
+        }
+    }
+</script>
+<script type="text/javascript">
+    //adding remote rule to handle validation based on Remote attribute set in the model.
+    (function (jQuery, kendo) {
+        jQuery.extend(true, kendo.ui.validator, {
+            rules: {
+                remote: function (input) {
+                    if (input.val() == "" || !input.attr("data-val-remote-url")) {
+                        return true;
+                    }
+
+                    if (input.attr("data-val-remote-recieved")) {
+                        input.attr("data-val-remote-recieved", "");
+                        return !(input.attr("data-val-remote"));
+                    }
+
+                    var url = input.attr("data-val-remote-url");
+                    var postData = {};
+                    var splitdata = input.attr("data-val-remote-additionalfields").split(".");
+                    postData[splitdata[1].replace("*", "").replace(",", "")] = input.val();
+                    var othervalue = splitdata[2]; postData[othervalue] = jQuery("#" + othervalue).val();
+                    var validator = this;
+                    var currentInput = input;
+                    input.attr("data-val-remote-requested", true);
+                    jQuery.ajax({
+                        url: url,
+                        type: "POST",
+                        data: JSON.stringify(postData),
+                        dataType: "json",
+                        traditional: true,
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            if (data == true) {
+                                input.attr("data-val-remote", "");
+                            }
+                            else {
+                                input.attr("data-val-remote", data);
+                            }
+                            input.attr("data-val-remote-recieved", true);
+                            validator.validateInput(currentInput);
+
+                        },
+                        error: function () {
+                            input.attr("data-val-remote-recieved", true);
+                            validator.validateInput(currentInput);
+                        }
+                    });
+                    return true;
+                }
+            },
+            messages: {
+                remote: function (input) {
+                    return input.attr("data-val-remote");
+                }
+            }
+        });
+    })(jQuery, kendo);
+</script>
+<script>
+    var tms = tms || {};
+    var currentRowId = null;
+    jQuery(function () {
+        tms.person = tms.person || {};
+
+        tms.person.salutation = {
+            Not_Specified: 0,
+            Salutation_Mr: 1,
+            Salutation_Mrs: 2,
+            Salutation_Ms: 3,
+            Salutation_Dr: 4
+        };
+
+        tms.person.gender = {
+            Not_Specified: 0,
+            Gender_Male: 1,
+            Gender_Female: 2
+        };
+        tms.person.maritialStatus = {
+            Not_Specified: 0,
+            MaritialStatus_Single: 1,
+            MaritialStatus_Married: 2
+        };
+
+
+
+
+    });
+    function SalutationChange(e) {
+        var dataItem = this.dataItem(e.item);
+        var salutation = parseInt(dataItem.Value);
+        var dropdownlist = jQuery("#Gender").data("kendoDropDownList");
+
+        switch (salutation) {
+            case tms.person.salutation.Salutation_Mr:
+                dropdownlist.value("1"); dropdownlist.trigger("change");
+                break;
+            case tms.person.salutation.Salutation_Mrs:
+                dropdownlist.value("2"); dropdownlist.trigger("change");
+                break;
+            case tms.person.salutation.Salutation_Ms:
+                dropdownlist.value("2"); dropdownlist.trigger("change");
+                break;
+            case tms.person.salutation.Salutation_Dr:
+                dropdownlist.value("0"); dropdownlist.trigger("change");
+                break;
+            default:
+                return true;
+        }
+    };
+</script>
+
+<style>
+    .k-grid tr td {
+        overflow: visible;
+    }
+
+    /*.k-icon-plus {
+        background-position: -48px -64px;
+    }*/
+
+    .k-grid td:last-child {
+        padding: 0px;
+    }
+</style>

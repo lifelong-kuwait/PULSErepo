@@ -1,0 +1,57 @@
+﻿@using lr = Resources.Resources;
+@model IEnumerable<TMS.Library.Common.Groups.SecurityGroupsPermission>
+@{
+    string GroupName = (string)ViewData["GroupName"];
+    ViewBag.Title = GroupName;
+    //List<TMS.Library.Common.Groups.SecurityGroupsPermission> Model = (List<TMS.Library.Common.Groups.SecurityGroupsPermission>)ViewData["model"];
+
+}
+@if (TempData["Success"] != null)
+{
+    if (TempData["Success"].ToString() == "Success")
+    {
+        <script>
+            jQuery(function () {
+                swal({
+                    title: '@lr.confirmUpdated',
+                    text: '@lr.RecordUpdatedSuccessfully',
+                    type: "success"
+                });
+            });
+        </script>
+    }
+}
+<style>
+    .right-inner-addon {
+        display: none;
+    }
+</style>
+<div class="form-horizontal">
+    <div class="pageTitle">@GroupName</div>
+    <form method="post" action="@Url.Content("~/Admin/TMSGroupDetail?GroupId=" +Request.QueryString["GroupId"])">
+        @Html.AntiForgeryToken()
+        <input id="GroupId" value="@Request.QueryString["GroupId"]" type="hidden" />
+        @foreach (var codeGroup in Model.GroupBy(x => x.CategoryLabelResource))
+        {
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border">@lr.GetByName(codeGroup.Key)</legend>
+                <div class="control-group">
+                    @foreach (var country in codeGroup)
+                    {
+                        { Html.RenderPartial("_GroupsPermissionRow", country); }
+                    }
+                </div>
+            </fieldset>
+        }
+        @if (User.IsInRole("CanUpdateGroupsDetail"))
+        {
+            <button type="submit" class="k-button k-button-icontext k-primary k-grid-update"><span class="k-icon k-i-check"></span>@lr.Submit</button>
+        }
+    </form>
+</div>
+
+<style>
+    .mTop20 {
+        margin-top: 10px;
+    }
+</style>

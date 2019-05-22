@@ -1,0 +1,209 @@
+﻿@model TMS.Library.TMS.Organization.OrganizationModel
+@*@{
+    string AvatarUrl = "";
+    if (Session["logo"] != null)
+    {
+        AvatarUrl = Session["logo"].ToString();
+
+        if (string.IsNullOrEmpty(Model.LogoPicture))
+        {
+            AvatarUrl = Url.Content("~/Attachment/TMS/Users/20030/636758192345251179/human1.jpg");
+
+            //Url.Content("~/images/i/people.png");
+        }
+        else
+        {
+
+            AvatarUrl = Url.Content(Model.LogoPicture);
+        }
+    }
+            }*@
+
+@using lr = Resources.Resources
+
+
+
+<div class=" Alertbox alert alert-danger" style="display:none">
+    <ul class="errors"></ul>
+</div>
+<input type="hidden" id="modelid" value="@Model.ID">
+<div id="personeditdiv">
+
+</div>
+<div class="form-horizontal form-person-popup">
+    <div class="form-group">
+        @Html.LabelFor(model => model.P_Name, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.P_Name).HtmlAttributes(new { @class = "form-control pfirstname txtrequired", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.P_Name)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ShortName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.ShortName).HtmlAttributes(new { @class = "form-control plast_name", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.ShortName)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.FullName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.FullName).HtmlAttributes(new { @class = "form-control pdisplayname txtrequired", style = "width:100%", @disabled = "disabled" }))
+            @Html.ValidationMessageFor(model => model.FullName)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.S_Name, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.S_Name).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.S_Name)
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Type, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(m => m.Type)
+            .HtmlAttributes(new { style = "width:100%" })
+            .DataTextField("Text")
+            .DataValueField("Value")
+           // .OptionLabel(lr.OrganizationTypeOptionalLabel)
+           .OptionLabel(new { Text = lr.OrganizationTypeOptionalLabel, Value = 0 })
+            .DataSource(dataSource => { dataSource.Read(read => read.Action("OrganizationTypes", "DDL")); }))
+            @Html.ValidationMessageFor(model => model.Type)
+        </div>
+    </div>
+    <div class="form-group" style="margin:0; padding:0px;">
+        @Html.LabelFor(model => model.Logo, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-6 col-lg-6 col-sm-11">
+            @*@(Html.Kendo().Upload().Name("fileupload").Multiple(false).Async(a => a.Save("SaveOrganizationLogo", "Attachment").Remove("RemoveOrganizationLogo", "Attachment").AutoUpload(true)).Events(
+                e => e.Success("OrganizationIndexLogoSuccess").Remove("OrganizationIndexOnRemove").Select("OrganizationIndexAttachmentSelect")))*@
+            <input id="fileupload" name="fileupload" type="file" />
+            @Html.ValidationMessageFor(model => model.Logo)
+     
+            @*<script>
+                    jQuery(document).ready(function () {
+                        jQuery("#files").kendoUpload({
+                            multiple: false,
+                            async: {
+                                saveUrl: '@Url.Content("~/Attachment/SaveOrganizationLogo")',
+                                removeUrl: '@Url.Content("~/Attachment/RemoveOrganizationLogo")',
+                                autoUpload: true
+                            },
+                            select: function (e) {
+                                var fileInfo = e.files[0];
+                                var wrapper = this.wrapper;
+
+                                setTimeout(function () {
+                                    addPreview(fileInfo, wrapper);
+                                });
+                            }
+                        });
+                    });
+
+                    function addPreview(file, wrapper) {
+                        var raw = file.rawFile;
+                        var reader = new FileReader();
+                        debugger;
+                        if (raw) {
+                            reader.onloadend = function () {
+                                debugger;
+                                var preview = jQuery("<img class='image-preview'>").attr("src", this.result);
+
+                                wrapper.find(".k-file[data-uid='" + file.uid + "'] .k-file-extension-wrapper")
+                                  .replaceWith(preview);
+                            };
+
+                            reader.readAsDataURL(raw);
+                        }
+                    }
+            </script>*@
+
+
+
+            <script>
+                    jQuery(document).ready(function () {
+                        jQuery("#files").kendoUpload({
+                            multiple: false,
+                            async: {
+                                saveUrl: '@Url.Content("~/Attachment/SaveOrganizationLogo")',
+                                removeUrl: '@Url.Content("~/Attachment/RemoveOrganizationLogo")',
+                                @*saveUrl: '@Url.Content("~/Attachment/SaveOrganizationLogo")',
+                                removeUrl: '@Url.Content("~/Attachment/RemoveOrganizationLogo")',*@
+                                autoUpload: true
+                            },
+                            remove: OrganizationPictureOnRemove,
+                            success: OrganizationLogoOnSuccess,
+                            select: OrganizationIndexAttachmentSelect,
+                            select: function (e) {
+                                var fileInfo = e.files[0];
+                                var wrapper = this.wrapper;
+
+                                setTimeout(function () {
+                                    addPreview(fileInfo, wrapper);
+                                });
+                            }
+                        });
+                    });
+
+                    function addPreview(file, wrapper) {
+                        var raw = file.rawFile;
+                        var reader = new FileReader();
+                        debugger;
+                        if (raw) {
+                            reader.onloadend = function () {
+                                debugger;
+                                var preview = jQuery("<img class='image-preview'>").attr("src", this.result);
+
+                                wrapper.find(".k-file[data-uid='" + file.uid + "'] .k-file-extension-wrapper")
+                                  .replaceWith(preview);
+                            };
+
+                            reader.readAsDataURL(raw);
+                        }
+                    }
+            </script>
+            <style>
+                .image-preview {
+                    position: relative;
+                    vertical-align: top;
+                    height: 45px;
+                }
+            </style>
+
+        </div>
+        <script>
+    jQuery(document).ready(function (e) {
+        jQuery('.pfirstname , .plast_name').bind('keypress blur', function () {
+            jQuery('.pdisplayname').val(jQuery('.pfirstname').val() + ' ' +
+                                       jQuery('.plast_name').val()
+                                    ).change();
+        });
+    });
+        </script>
+
+        @*<div class="col-md-4 col-lg-4 col-sm-4">
+
+
+                <img src="@AvatarUrl" alt="Image" height="50" width="50" />
+
+            </div>*@
+    </div>
+
+    @*<div class="form-group" style="margin:0; padding:0px;">
+            @Html.LabelFor(model => model.Country, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.Kendo().DropDownListFor(m => m.Country)
+                .HtmlAttributes(new { style = "width:100%" })
+                .DataTextField("Text")
+                .DataValueField("Value")
+                        // .OptionLabel(lr.OrganizationTypeOptionalLabel)
+               .OptionLabel(new { Text = lr.OrganozationCountryOptionalLabel, Value = 0 })
+                        .DataSource(dataSource => { dataSource.Read(read => read.Action("CoreCountries", "DDL")); }))
+                @Html.ValidationMessageFor(model => model.Country)
+            </div>
+        </div>*@
+
+
+</div>

@@ -1,0 +1,298 @@
+DEBUG 2016-09-13 06:35:18,165 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2016-09-13 06:35:18,181 [1    ] Abp.Modules.AbpModuleManager             - Found 11 ABP modules in total.
+DEBUG 2016-09-13 06:35:18,189 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: TMS.Web.TMSWebModule, TMS.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-13 06:35:18,193 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-13 06:35:18,193 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-13 06:35:18,193 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-13 06:35:18,193 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-13 06:35:18,193 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: TMS.TMSDataModule, TMS.EntityFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-13 06:35:18,193 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.EntityFramework.AbpEntityFrameworkModule, Abp.EntityFramework, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-13 06:35:18,193 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: TMS.TMSCoreModule, TMS.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-13 06:35:18,193 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: TMS.TMSApplicationModule, TMS.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-13 06:35:18,193 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: TMS.TMSWebApiModule, TMS.WebApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-13 06:35:18,193 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.WebApi.AbpWebApiModule, Abp.Web.Api, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-13 06:35:18,197 [1    ] Abp.Modules.AbpModuleManager             - 11 modules loaded.
+DEBUG 2016-09-13 06:35:18,521 [1    ] EntityFramework.AbpEntityFrameworkModule - Registering DbContext: TMS.EntityFramework.TMSDbContext, TMS.EntityFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-13 06:35:20,349 [1    ] Abp.Localization.LocalizationManager     - Initializing 3 localization sources.
+DEBUG 2016-09-13 06:35:20,365 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2016-09-13 06:35:20,373 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2016-09-13 06:35:20,373 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: TMS
+DEBUG 2016-09-13 06:35:20,717 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+WARN  2016-09-13 06:35:30,836 [6    ] Abp.Logging.LogHelper                    - ISettingStore is not implemented, using DefaultConfigSettingStore which does not support GetAllListAsync.
+WARN  2016-09-13 06:35:30,962 [6    ] Abp.Logging.LogHelper                    - ISettingStore is not implemented, using DefaultConfigSettingStore which does not support GetAllListAsync.
+DEBUG 2016-09-13 06:41:28,465 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2016-09-13 06:41:28,482 [1    ] Abp.Modules.AbpModuleManager             - Found 5 ABP modules in total.
+DEBUG 2016-09-13 06:41:28,487 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: TMS.Web.TMSWebModule, TMS.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-13 06:41:28,489 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-13 06:41:28,489 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-13 06:41:28,490 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-13 06:41:28,490 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-13 06:41:28,492 [1    ] Abp.Modules.AbpModuleManager             - 5 modules loaded.
+DEBUG 2016-09-13 06:41:30,218 [1    ] Abp.Localization.LocalizationManager     - Initializing 3 localization sources.
+DEBUG 2016-09-13 06:41:30,228 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2016-09-13 06:41:30,229 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2016-09-13 06:41:30,232 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: TMS
+DEBUG 2016-09-13 06:41:30,512 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+WARN  2016-09-13 06:41:37,380 [9    ] Abp.Logging.LogHelper                    - ISettingStore is not implemented, using DefaultConfigSettingStore which does not support GetAllListAsync.
+WARN  2016-09-13 06:41:37,431 [9    ] Abp.Logging.LogHelper                    - ISettingStore is not implemented, using DefaultConfigSettingStore which does not support GetAllListAsync.
+DEBUG 2016-09-13 06:42:20,181 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2016-09-13 06:42:20,200 [1    ] Abp.Modules.AbpModuleManager             - Found 5 ABP modules in total.
+DEBUG 2016-09-13 06:42:20,207 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: TMS.Web.TMSWebModule, TMS.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-13 06:42:20,210 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-13 06:42:20,210 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-13 06:42:20,210 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-13 06:42:20,210 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-13 06:42:20,213 [1    ] Abp.Modules.AbpModuleManager             - 5 modules loaded.
+DEBUG 2016-09-13 06:42:21,872 [1    ] Abp.Localization.LocalizationManager     - Initializing 3 localization sources.
+DEBUG 2016-09-13 06:42:21,886 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2016-09-13 06:42:21,888 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2016-09-13 06:42:21,893 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: TMS
+DEBUG 2016-09-13 06:42:22,184 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+WARN  2016-09-13 06:42:28,427 [6    ] Abp.Logging.LogHelper                    - ISettingStore is not implemented, using DefaultConfigSettingStore which does not support GetAllListAsync.
+WARN  2016-09-13 06:42:28,479 [6    ] Abp.Logging.LogHelper                    - ISettingStore is not implemented, using DefaultConfigSettingStore which does not support GetAllListAsync.
+DEBUG 2016-09-14 16:36:48,333 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2016-09-14 16:36:48,492 [1    ] Abp.Modules.AbpModuleManager             - Found 5 ABP modules in total.
+DEBUG 2016-09-14 16:36:48,501 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: TMS.Web.TMSWebModule, TMS.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 16:36:48,505 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 16:36:48,505 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 16:36:48,505 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 16:36:48,505 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 16:36:48,521 [1    ] Abp.Modules.AbpModuleManager             - 5 modules loaded.
+DEBUG 2016-09-14 16:37:01,105 [1    ] Abp.Localization.LocalizationManager     - Initializing 3 localization sources.
+DEBUG 2016-09-14 16:37:01,255 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2016-09-14 16:37:01,292 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2016-09-14 16:37:01,750 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: TMS
+DEBUG 2016-09-14 16:37:04,297 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+WARN  2016-09-14 16:37:43,183 [9    ] Abp.Logging.LogHelper                    - ISettingStore is not implemented, using DefaultConfigSettingStore which does not support GetAllListAsync.
+WARN  2016-09-14 16:37:43,221 [9    ] Abp.Logging.LogHelper                    - ISettingStore is not implemented, using DefaultConfigSettingStore which does not support GetAllListAsync.
+DEBUG 2016-09-14 17:03:02,446 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2016-09-14 17:03:02,463 [1    ] Abp.Modules.AbpModuleManager             - Found 5 ABP modules in total.
+DEBUG 2016-09-14 17:03:02,468 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: TMS.Web.TMSWebModule, TMS.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 17:03:02,470 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 17:03:02,471 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 17:03:02,471 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 17:03:02,471 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 17:03:02,474 [1    ] Abp.Modules.AbpModuleManager             - 5 modules loaded.
+DEBUG 2016-09-14 17:03:04,798 [1    ] Abp.Localization.LocalizationManager     - Initializing 3 localization sources.
+DEBUG 2016-09-14 17:03:04,809 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2016-09-14 17:03:04,811 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2016-09-14 17:03:04,924 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: TMS
+DEBUG 2016-09-14 17:03:05,287 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+WARN  2016-09-14 17:03:15,473 [8    ] Abp.Logging.LogHelper                    - ISettingStore is not implemented, using DefaultConfigSettingStore which does not support GetAllListAsync.
+WARN  2016-09-14 17:03:15,509 [8    ] Abp.Logging.LogHelper                    - ISettingStore is not implemented, using DefaultConfigSettingStore which does not support GetAllListAsync.
+DEBUG 2016-09-14 17:06:03,559 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2016-09-14 17:06:03,576 [1    ] Abp.Modules.AbpModuleManager             - Found 5 ABP modules in total.
+DEBUG 2016-09-14 17:06:03,584 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: TMS.Web.TMSWebModule, TMS.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 17:06:03,587 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 17:06:03,588 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 17:06:03,588 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 17:06:03,588 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 17:06:03,609 [1    ] Abp.Modules.AbpModuleManager             - 5 modules loaded.
+DEBUG 2016-09-14 17:06:05,889 [1    ] Abp.Localization.LocalizationManager     - Initializing 3 localization sources.
+DEBUG 2016-09-14 17:06:05,912 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2016-09-14 17:06:05,916 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2016-09-14 17:06:05,920 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: TMS
+DEBUG 2016-09-14 17:06:06,293 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2016-09-14 17:46:14,040 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2016-09-14 17:46:14,128 [1    ] Abp.Modules.AbpModuleManager             - Found 5 ABP modules in total.
+DEBUG 2016-09-14 17:46:14,133 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: TMS.Web.TMSWebModule, TMS.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 17:46:14,136 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 17:46:14,136 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 17:46:14,137 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 17:46:14,137 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 17:46:14,163 [1    ] Abp.Modules.AbpModuleManager             - 5 modules loaded.
+DEBUG 2016-09-14 17:46:17,338 [1    ] Abp.Localization.LocalizationManager     - Initializing 3 localization sources.
+DEBUG 2016-09-14 17:46:17,368 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2016-09-14 17:46:17,370 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2016-09-14 17:46:17,413 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: TMS
+DEBUG 2016-09-14 17:46:17,705 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2016-09-14 18:20:35,403 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2016-09-14 18:20:35,454 [1    ] Abp.Modules.AbpModuleManager             - Found 5 ABP modules in total.
+DEBUG 2016-09-14 18:20:35,460 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: TMS.Web.TMSWebModule, TMS.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 18:20:35,465 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 18:20:35,466 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 18:20:35,466 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 18:20:35,466 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 18:20:35,565 [1    ] Abp.Modules.AbpModuleManager             - 5 modules loaded.
+DEBUG 2016-09-14 18:20:39,736 [1    ] Abp.Localization.LocalizationManager     - Initializing 3 localization sources.
+DEBUG 2016-09-14 18:20:39,750 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2016-09-14 18:20:39,779 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2016-09-14 18:20:39,869 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: TMS
+DEBUG 2016-09-14 18:20:40,390 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+WARN  2016-09-14 18:30:41,804 [13   ] Abp.Logging.LogHelper                    - ISettingStore is not implemented, using DefaultConfigSettingStore which does not support GetAllListAsync.
+WARN  2016-09-14 18:30:41,860 [13   ] Abp.Logging.LogHelper                    - ISettingStore is not implemented, using DefaultConfigSettingStore which does not support GetAllListAsync.
+DEBUG 2016-09-14 18:32:52,993 [13   ] Abp.Modules.AbpModuleManager             - Shutting down has been started
+DEBUG 2016-09-14 18:32:52,998 [13   ] Abp.BackgroundJobs.BackgroundJobManager  - Stop background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2016-09-14 18:32:52,998 [13   ] Abp.BackgroundJobs.BackgroundJobManager  - WaitToStop background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2016-09-14 18:32:52,998 [13   ] Abp.Modules.AbpModuleManager             - Shutting down completed.
+DEBUG 2016-09-14 18:32:59,095 [22   ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2016-09-14 18:32:59,149 [22   ] Abp.Modules.AbpModuleManager             - Found 5 ABP modules in total.
+DEBUG 2016-09-14 18:32:59,155 [22   ] Abp.Modules.AbpModuleManager             - Loaded module: TMS.Web.TMSWebModule, TMS.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 18:32:59,158 [22   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 18:32:59,158 [22   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 18:32:59,158 [22   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 18:32:59,158 [22   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 18:32:59,161 [22   ] Abp.Modules.AbpModuleManager             - 5 modules loaded.
+DEBUG 2016-09-14 18:32:59,929 [22   ] Abp.Localization.LocalizationManager     - Initializing 3 localization sources.
+DEBUG 2016-09-14 18:32:59,938 [22   ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2016-09-14 18:32:59,939 [22   ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2016-09-14 18:32:59,964 [22   ] Abp.Localization.LocalizationManager     - Initialized localization source: TMS
+DEBUG 2016-09-14 18:33:00,295 [22   ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2016-09-14 18:34:11,149 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2016-09-14 18:34:11,164 [1    ] Abp.Modules.AbpModuleManager             - Found 5 ABP modules in total.
+DEBUG 2016-09-14 18:34:11,169 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: TMS.Web.TMSWebModule, TMS.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 18:34:11,174 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 18:34:11,174 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 18:34:11,174 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 18:34:11,174 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 18:34:11,174 [1    ] Abp.Modules.AbpModuleManager             - 5 modules loaded.
+DEBUG 2016-09-14 18:34:13,197 [1    ] Abp.Localization.LocalizationManager     - Initializing 3 localization sources.
+DEBUG 2016-09-14 18:34:13,206 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2016-09-14 18:34:13,207 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2016-09-14 18:34:13,209 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: TMS
+DEBUG 2016-09-14 18:34:13,506 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2016-09-14 18:37:27,882 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2016-09-14 18:37:27,906 [1    ] Abp.Modules.AbpModuleManager             - Found 5 ABP modules in total.
+DEBUG 2016-09-14 18:37:27,916 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: TMS.Web.TMSWebModule, TMS.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 18:37:27,919 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 18:37:27,919 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 18:37:27,919 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 18:37:27,920 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 18:37:27,923 [1    ] Abp.Modules.AbpModuleManager             - 5 modules loaded.
+DEBUG 2016-09-14 18:37:29,828 [1    ] Abp.Localization.LocalizationManager     - Initializing 3 localization sources.
+DEBUG 2016-09-14 18:37:29,837 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2016-09-14 18:37:29,839 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2016-09-14 18:37:29,841 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: TMS
+DEBUG 2016-09-14 18:37:30,231 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2016-09-14 19:01:08,279 [83   ] Abp.Modules.AbpModuleManager             - Shutting down has been started
+DEBUG 2016-09-14 19:01:08,279 [83   ] Abp.BackgroundJobs.BackgroundJobManager  - Stop background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2016-09-14 19:01:08,283 [83   ] Abp.BackgroundJobs.BackgroundJobManager  - WaitToStop background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2016-09-14 19:01:08,283 [83   ] Abp.Modules.AbpModuleManager             - Shutting down completed.
+DEBUG 2016-09-14 19:01:13,766 [80   ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2016-09-14 19:01:13,823 [80   ] Abp.Modules.AbpModuleManager             - Found 5 ABP modules in total.
+DEBUG 2016-09-14 19:01:13,826 [80   ] Abp.Modules.AbpModuleManager             - Loaded module: TMS.Web.TMSWebModule, TMS.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:01:13,830 [80   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:01:13,830 [80   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:01:13,830 [80   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:01:13,830 [80   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:01:13,835 [80   ] Abp.Modules.AbpModuleManager             - 5 modules loaded.
+DEBUG 2016-09-14 19:01:14,598 [80   ] Abp.Localization.LocalizationManager     - Initializing 3 localization sources.
+DEBUG 2016-09-14 19:01:14,606 [80   ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2016-09-14 19:01:14,611 [80   ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2016-09-14 19:01:14,634 [80   ] Abp.Localization.LocalizationManager     - Initialized localization source: TMS
+DEBUG 2016-09-14 19:01:14,979 [80   ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2016-09-14 19:11:51,214 [47   ] Abp.Modules.AbpModuleManager             - Shutting down has been started
+DEBUG 2016-09-14 19:11:51,214 [47   ] Abp.BackgroundJobs.BackgroundJobManager  - Stop background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2016-09-14 19:11:51,214 [47   ] Abp.BackgroundJobs.BackgroundJobManager  - WaitToStop background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2016-09-14 19:11:51,214 [47   ] Abp.Modules.AbpModuleManager             - Shutting down completed.
+DEBUG 2016-09-14 19:11:56,242 [80   ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2016-09-14 19:11:56,282 [80   ] Abp.Modules.AbpModuleManager             - Found 5 ABP modules in total.
+DEBUG 2016-09-14 19:11:56,290 [80   ] Abp.Modules.AbpModuleManager             - Loaded module: TMS.Web.TMSWebModule, TMS.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:11:56,290 [80   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:11:56,290 [80   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:11:56,290 [80   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:11:56,290 [80   ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:11:56,294 [80   ] Abp.Modules.AbpModuleManager             - 5 modules loaded.
+DEBUG 2016-09-14 19:11:56,958 [80   ] Abp.Localization.LocalizationManager     - Initializing 3 localization sources.
+DEBUG 2016-09-14 19:11:56,966 [80   ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2016-09-14 19:11:56,966 [80   ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2016-09-14 19:11:56,970 [80   ] Abp.Localization.LocalizationManager     - Initialized localization source: TMS
+DEBUG 2016-09-14 19:11:57,178 [80   ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+DEBUG 2016-09-14 19:19:11,038 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2016-09-14 19:19:11,058 [1    ] Abp.Modules.AbpModuleManager             - Found 5 ABP modules in total.
+DEBUG 2016-09-14 19:19:11,066 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: TMS.Web.TMSWebModule, TMS.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:19:11,070 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:19:11,070 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:19:11,070 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:19:11,070 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:19:11,074 [1    ] Abp.Modules.AbpModuleManager             - 5 modules loaded.
+DEBUG 2016-09-14 19:19:13,178 [1    ] Abp.Localization.LocalizationManager     - Initializing 3 localization sources.
+DEBUG 2016-09-14 19:19:13,194 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2016-09-14 19:19:13,194 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2016-09-14 19:19:13,198 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: TMS
+DEBUG 2016-09-14 19:19:13,502 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+ERROR 2016-09-14 19:19:49,419 [6    ] TMS.Web.Controllers.HomeController       - The file "~/Views/Home/Login.cshtml" cannot be requested directly because it calls the "RenderSection" method.
+System.Web.HttpException (0x80004005): The file "~/Views/Home/Login.cshtml" cannot be requested directly because it calls the "RenderSection" method.
+   at System.Web.WebPages.WebPageBase.EnsurePageCanBeRequestedDirectly(String methodName)
+   at System.Web.WebPages.WebPageBase.RenderSection(String name, Boolean required)
+   at ASP._Page_Views_Home_Login_cshtml.Execute() in d:\Pro Jects\TMS\demo\Templates\MVC\TMS2\TMS.Web\Views\Home\Login.cshtml:line 127
+   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   at System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   at System.Web.WebPages.StartPage.RunPage()
+   at System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   at System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   at System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+ERROR 2016-09-14 19:20:00,652 [9    ] TMS.Web.Controllers.HomeController       - The file "~/Views/Home/Login.cshtml" cannot be requested directly because it calls the "RenderSection" method.
+System.Web.HttpException (0x80004005): The file "~/Views/Home/Login.cshtml" cannot be requested directly because it calls the "RenderSection" method.
+   at System.Web.WebPages.WebPageBase.EnsurePageCanBeRequestedDirectly(String methodName)
+   at System.Web.WebPages.WebPageBase.RenderSection(String name, Boolean required)
+   at ASP._Page_Views_Home_Login_cshtml.Execute() in d:\Pro Jects\TMS\demo\Templates\MVC\TMS2\TMS.Web\Views\Home\Login.cshtml:line 127
+   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   at System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   at System.Web.WebPages.StartPage.RunPage()
+   at System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   at System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   at System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+WARN  2016-09-14 19:20:45,813 [9    ] Abp.Logging.LogHelper                    - ISettingStore is not implemented, using DefaultConfigSettingStore which does not support GetAllListAsync.
+WARN  2016-09-14 19:20:45,861 [9    ] Abp.Logging.LogHelper                    - ISettingStore is not implemented, using DefaultConfigSettingStore which does not support GetAllListAsync.
+DEBUG 2016-09-14 19:37:42,838 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2016-09-14 19:37:42,854 [1    ] Abp.Modules.AbpModuleManager             - Found 5 ABP modules in total.
+DEBUG 2016-09-14 19:37:42,859 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: TMS.Web.TMSWebModule, TMS.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:37:42,861 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:37:42,862 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:37:42,862 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:37:42,862 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:37:42,864 [1    ] Abp.Modules.AbpModuleManager             - 5 modules loaded.
+DEBUG 2016-09-14 19:37:44,663 [1    ] Abp.Localization.LocalizationManager     - Initializing 3 localization sources.
+DEBUG 2016-09-14 19:37:44,673 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2016-09-14 19:37:44,675 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2016-09-14 19:37:44,676 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: TMS
+DEBUG 2016-09-14 19:37:44,965 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+WARN  2016-09-14 19:37:51,264 [6    ] Abp.Logging.LogHelper                    - ISettingStore is not implemented, using DefaultConfigSettingStore which does not support GetAllListAsync.
+WARN  2016-09-14 19:37:51,354 [6    ] Abp.Logging.LogHelper                    - ISettingStore is not implemented, using DefaultConfigSettingStore which does not support GetAllListAsync.
+DEBUG 2016-09-14 19:40:25,859 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2016-09-14 19:40:25,876 [1    ] Abp.Modules.AbpModuleManager             - Found 5 ABP modules in total.
+DEBUG 2016-09-14 19:40:25,882 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: TMS.Web.TMSWebModule, TMS.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:40:25,884 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:40:25,885 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:40:25,885 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:40:25,885 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:40:25,887 [1    ] Abp.Modules.AbpModuleManager             - 5 modules loaded.
+DEBUG 2016-09-14 19:40:27,656 [1    ] Abp.Localization.LocalizationManager     - Initializing 3 localization sources.
+DEBUG 2016-09-14 19:40:27,666 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2016-09-14 19:40:27,667 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2016-09-14 19:40:27,668 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: TMS
+DEBUG 2016-09-14 19:40:27,953 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+WARN  2016-09-14 19:40:33,964 [6    ] Abp.Logging.LogHelper                    - ISettingStore is not implemented, using DefaultConfigSettingStore which does not support GetAllListAsync.
+WARN  2016-09-14 19:40:33,997 [6    ] Abp.Logging.LogHelper                    - ISettingStore is not implemented, using DefaultConfigSettingStore which does not support GetAllListAsync.
+DEBUG 2016-09-14 19:44:18,719 [1    ] Abp.Modules.AbpModuleManager             - Loading Abp modules...
+DEBUG 2016-09-14 19:44:18,741 [1    ] Abp.Modules.AbpModuleManager             - Found 5 ABP modules in total.
+DEBUG 2016-09-14 19:44:18,748 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: TMS.Web.TMSWebModule, TMS.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:44:18,752 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.Mvc.AbpWebMvcModule, Abp.Web.Mvc, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:44:18,752 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebModule, Abp.Web, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:44:18,753 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.Web.AbpWebCommonModule, Abp.Web.Common, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:44:18,753 [1    ] Abp.Modules.AbpModuleManager             - Loaded module: Abp.AbpKernelModule, Abp, Version=0.11.0.2, Culture=neutral, PublicKeyToken=null
+DEBUG 2016-09-14 19:44:18,756 [1    ] Abp.Modules.AbpModuleManager             - 5 modules loaded.
+DEBUG 2016-09-14 19:44:20,924 [1    ] Abp.Localization.LocalizationManager     - Initializing 3 localization sources.
+DEBUG 2016-09-14 19:44:20,933 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: Abp
+DEBUG 2016-09-14 19:44:20,934 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: AbpWeb
+DEBUG 2016-09-14 19:44:20,936 [1    ] Abp.Localization.LocalizationManager     - Initialized localization source: TMS
+DEBUG 2016-09-14 19:44:21,292 [1    ] Abp.BackgroundJobs.BackgroundJobManager  - Start background worker: Abp.BackgroundJobs.BackgroundJobManager
+WARN  2016-09-14 19:44:28,055 [9    ] Abp.Logging.LogHelper                    - ISettingStore is not implemented, using DefaultConfigSettingStore which does not support GetAllListAsync.
+WARN  2016-09-14 19:44:28,105 [9    ] Abp.Logging.LogHelper                    - ISettingStore is not implemented, using DefaultConfigSettingStore which does not support GetAllListAsync.

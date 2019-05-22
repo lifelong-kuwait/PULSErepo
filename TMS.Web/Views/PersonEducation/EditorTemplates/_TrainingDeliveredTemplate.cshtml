@@ -1,0 +1,70 @@
+﻿@model TMS.Library.TMS.Persons.Education.PersonTrainings
+@using lr = Resources.Resources
+<div class=" Alertbox alert alert-danger" style="display:none">
+    <ul class="errors"></ul>
+</div>
+<div class="form-horizontal form-person-popup">
+    <div class="form-group">
+        @Html.LabelFor(model => model.TrainingP_Title, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.TrainingP_Title).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.TrainingP_Title)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.LearningObjective, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.TextAreaFor(c => c.LearningObjective, new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.LearningObjective)
+        </div>
+    </div>
+
+    <div class="form-group" style="margin:0; padding:0px;">
+        @Html.LabelFor(model => model.DurationType, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-4 col-lg-4 col-sm-11">
+            @(Html.Kendo().DropDownListFor(c => c.DurationType).DataTextField("Text").DataValueField("Value").OptionLabel(lr.PersonEducationTrainingDurationOptionalLabel).HtmlAttributes(new { @class = "form-control", style = "width:100%" })
+                                       .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.CourseDurationType>(typeof(TMS.Library.CourseDurationType))))
+            @Html.ValidationMessageFor(model => model.DurationType)
+        </div>
+
+        <div class="col-md-3 col-lg-3 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.CourseDuration).HtmlAttributes(new { @class = "form-control ", style = "width:100%", @placeHolder = lr.PersonEducationTrainingDurationRequired }))
+            @Html.ValidationMessageFor(model => model.CourseDuration)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ClientName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.ClientName).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+        </div>
+    </div>
+
+    @*<div class="form-group" style="margin:0; padding:0px;">
+        @Html.LabelFor(model => model.ClientReferencePersoneName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(model => model.ClientReferencePersoneName).HtmlAttributes(new { @class = "form-control", style = "width:100%" }))
+        </div>
+    </div>
+
+    <div class="form-group" style="margin:0; padding:0px;">
+        @Html.LabelFor(model => model.ClientReferencePersoneTitle, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(model => model.ClientReferencePersoneTitle).HtmlAttributes(new { @class = "form-control", style = "width:100%" }))
+        </div>
+    </div>
+
+    <div class="form-group" style="margin:0; padding:0px;">
+        @Html.LabelFor(model => model.ClientReferencePersonePhone, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(model => model.ClientReferencePersonePhone).HtmlAttributes(new { @class = "form-control", style = "width:100%" }))
+        </div>
+    </div>
+
+    <div class="form-group" style="margin:0; padding:0px;">
+        @Html.LabelFor(model => model.ClientReferencePersoneEmail, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(model => model.ClientReferencePersoneEmail).HtmlAttributes(new { @class = "form-control", style = "width:100%" }))
+        </div>
+    </div>*@
+</div>

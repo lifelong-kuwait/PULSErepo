@@ -1,0 +1,79 @@
+﻿
+@model long
+@using lr = Resources.Resources;
+@{
+    //var Model = IList<TMS.Library.Entities.CRM.CRM_TaskHistory> ViewData["model"];
+    //   ViewBag.Title = Model.P_DisplayName;
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+
+   // List<TMS.Library.Entities.CRM.CRM_TaskHistory> modellist = new List<TMS.Library.Entities.CRM.CRM_TaskHistory>() { Model };
+
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+}
+<script>
+    function CreateVenueAdditionalData() {
+        return {
+            oid: '@Model'
+        }
+    }
+</script>
+
+@{
+    var somearray = new[] {new
+    {
+        Id=1,Description="Done"
+    },new{
+        Id=2,Description="Rescheduled"
+    },new{
+        Id=3,Description="Underway"
+    }};
+}
+<h2>@lr.TaskHistory</h2>
+
+<div class="ChildGrid">
+    @Html.AntiForgeryToken()
+    @(Html.Kendo().Grid<TMS.Library.Entities.CRM.CRM_TaskHistory>()//(modellist)
+            .Name("TaskHistory" + Model)
+      .Columns(columns =>
+      {
+          //columns.Bound(e => e.TaskType);
+          columns.Bound(e => e.Description);
+          columns.Bound(e => e.UserName).Title(lr.AssignTo).Width(145);
+          columns.Bound(e => e.TaskDate).Format("{0: MM-dd-yyyy}").Title(lr.taskdate).Width(145);
+          // columns.Bound(c => c.CreatedOn).Format("{0: dd/MM/yyyy HH.mm.ss}").Title(lr.LastModify).Width(145);
+          columns.ForeignKey(c => c.Status, somearray, "Id", "Description").Width(100);
+          columns.Bound(e => e.AddedByAlias).Width(190).Title(lr.GridAddedBy).ClientTemplate(@"<div class='gridupdated'>
+            <span class='Addedby' >#:AddedByAlias#</span>
+            <span class='date' >#=kendo.toString(CreatedOn,'" + DateFormatScript + @"')#</span>
+            <span class='time' >#=kendo.toString(CreatedOn,'" + TimeFormatScript + @"')#</span>
+        </div>");
+          //       columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy);
+          //  columns.Bound(e => e.UpdatedByAlias).Width(230).Title(lr.ModifiedBy).ClientTemplate(@"<div class='gridupdated'>
+          //    <span class='Addedby' >#:UpdatedByAlias#</span>
+          //    <span class='date' >#=kendo.toString(UpdatedOn,'" + DateFormatScript + @"')#</span>
+          //    <span class='time' >#=kendo.toString(UpdatedOn,'" + TimeFormatScript + @"')#</span>
+          //</div>");
+      })//.ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>))
+        .Groupable()
+     .Sortable().Scrollable().Filterable().Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+        .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
+        .HtmlAttributes(new { style = "height:700px !important;" }).DataSource(dataSource => dataSource.Ajax().PageSize(15).Model(model => model.Id(p => p.ID))
+       .Read(read => read.Action("ManageDetail_Read", "Task", new { TaskID = Model }))
+        //.Create(read => read.Action("ManageConfiguration_Create", "Task"))
+        //  .Update(read => read.Action("ConfigurationUpdate", "Task"))
+        //  .Destroy(read => read.Action("Configuration_Destroy", "Task"))
+          .Events(e => e.Error("GeneralErrorHandler(\"TaskHistory" + Model + "\")").RequestEnd("GridRequestEndUpdate"))
+                        ).NoRecords(lr.GridNoRecordFoundMessage)
+    // .Events(e => e.Error("GeneralErrorHandler(\"ManageConfiguration\")").RequestEnd("GridRequestEndUpdate"))).NoRecords(lr.GridNoRecordFoundMessage)
+    )
+
+ 
+</div>
+
+@*.Data("CreateTrainerAdditionalData")*@
+<style>
+      .input-group {
+        display: none;
+    }
+</style>

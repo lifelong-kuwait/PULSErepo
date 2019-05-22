@@ -1,0 +1,180 @@
+﻿@model string
+@{
+    var Opentype = (int)ViewData["OpenType"];
+}
+@using lr = Resources.Resources;
+
+<script>
+    function CreateTMSNotesAdditionalData() {
+        return {
+            OpenId: '@Model', Opentype: '@Opentype'
+        }
+    }
+
+</script>
+<div class="ChildGrid">
+    @(Html.Kendo().Grid<TMS.Library.Common.TMS_Notes>()
+            .Name("TMS_NotesGrid" + Model)
+      .Columns(columns =>
+     {
+
+         columns.Bound(e => e.NotesText);
+         columns.Bound(e => e.AddedByAlias).Width(190).MinScreenWidth(550).Title(lr.GridAddedBy).ClientTemplate(@"<div class='gridaddedby'>
+<span class='Addedby' >#:AddedByAlias#</span>
+<span class='date' >#=kendo.toString(CreatedDate,'" + DateFormatScript + @"')#</span>
+<span class='time' >#=kendo.toString(CreatedDate,'" + TimeFormatScript + @"')#</span>
+</div>");
+     }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_OpenNotesTemplate").DisplayDeleteConfirmation(false))
+                    .ToolBar(toolbar => toolbar.Template(@<text>
+        <div class="toolbar">
+            @if (Opentype == 1 && User.IsInRole("CanAddEditPersonNotes"))
+            {
+                <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+                <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+            }
+            @if (Opentype == 1 && User.IsInRole("CanDeletePersonNotes"))
+            {
+                <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+            }
+            @if (Opentype == 2 && User.IsInRole("CanAddEditOrganizationNotes"))
+            {
+                <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+                <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+            }
+            @if (Opentype == 2 && User.IsInRole("CanDeleteOrganizationNotes"))
+            {
+                <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+            }
+
+            <a class="k-button tms-grid-detail-notes" onclick="shownotes()"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>
+        </div>
+                    </text>))
+        .Sortable().Selectable(selectable => selectable
+        .Mode(GridSelectionMode.Multiple))
+        .Pageable(pager => pager.Refresh(true)).Scrollable().Filterable().Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
+        .HtmlAttributes(new { style = "height:350px;" }).DataSource(dataSource => dataSource.Ajax().Model(model => { model.Id(m => m.ID); }).PageSize(8)
+        .Read(read => read.Action("OpenNotes_Read", "Common", new { OpenId = Model, Opentype = Opentype }))
+        .Create(read => read.Action("OpenNotes_Create", "Common").Data("CreateTMSNotesAdditionalData"))
+        .Update(read => read.Action("OpenNotes_Update", "Common"))
+        .Destroy(read => read.Action("OpenNotes_Destroy", "Common"))
+                                        .Events(e => e.Error("GeneralErrorHandler(\"TMS_NotesGrid" + Model + "\")").RequestEnd("GridRequestEndUpdate"))
+                        ).NoRecords(lr.GridNoRecordFoundMessage)
+    )
+</div>
+
+<div id="showNotesDetail"></div>
+<script type="text/x-kendo-template" id="notesDetailTemplate">
+    <div class="k-edit-form-container">
+        <div class="form-horizontal form-person-popup">
+            # if (data.length) { #
+            # for (var i = 0; i < data.length; ++i) {  #
+            <div class="speech-bubble">
+                <div class="arrow bottom right"></div>
+                <p>#= data[i].NotesText #</p>
+            </div>
+            <p><span class='Addedby'>#:data[i].AddedByAlias#</span>#= kendo.toString(kendo.parseDate(data[i].CreatedDate), '@DateFormatScript') # #= kendo.toString(kendo.parseDate(data[i].CreatedDate), '@TimeFormatScript') #</p>
+
+            # } #
+            # } #
+        </div>
+    </div>
+</script>
+<script>
+    function shownotes() {
+        var deletewindowTemplate = kendo.template(jQuery("#notesDetailTemplate").html());
+        jQuery.confirm({
+            columnClass: 'col-md-12 col-sm-12 col-xs-12',
+            content: function () {
+                var self = this;
+                return jQuery.ajax({
+                    url: '@Url.Content("~/Common/OpenNotes_GetbyIdType")',
+                    dataType: 'json',
+                    data: CreateTMSNotesAdditionalData(),
+                    method: 'get'
+                }).done(function (response) {
+                    self.setContent(deletewindowTemplate(response));
+                }).fail(function () {
+                    self.setContent('Something went wrong.');
+                });
+            }
+        });
+    }
+</script>
+
+
+<style>
+    .example-right {
+        position: relative;
+        padding: 15px 30px;
+        margin: 0;
+        color: #fff;
+        background: #5a8f00;
+        background: -webkit-gradient(linear, 0 0, 0 100%, from(#b8db29), to(#5a8f00));
+        background: -moz-linear-gradient(#b8db29, #5a8f00);
+        background: -o-linear-gradient(#b8db29, #5a8f00);
+        background: linear-gradient(#b8db29, #5a8f00);
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+        .example-right:after {
+            content: "";
+            position: absolute;
+            bottom: -50px;
+            left: 50px;
+            border-width: 0 20px 50px 0px;
+            border-style: solid;
+            border-color: transparent #5a8f00;
+            display: block;
+            width: 0;
+        }
+
+    .speech-bubble + p {
+        margin: 8px 0 1em 44px;
+        font-style: italic;
+    }
+
+    .speech-bubble {
+        background-color: #f8f8f8;
+        border: 1px solid #c8c8c8;
+        border-radius: 5px;
+        /* width: 110px; */
+        text-align: left;
+        padding: 20px;
+        position: absolute;
+        position: relative;
+        padding: 15px 30px;
+        /* margin: 0; */
+        /* color: #fff; */
+        /* background: #5a8f00; */
+        /* background: -webkit-gradient(linear, 0 0, 0 100%, from(#b8db29), to(#5a8f00)); */
+        background: -moz-linear-gradient(#b8db29, #5a8f00);
+        background: -o-linear-gradient(#b8db29, #5a8f00);
+        /* background: linear-gradient(#b8db29, #5a8f00); */
+        /* -webkit-border-radius: 10px; */
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+        .speech-bubble .arrow {
+            border-style: solid;
+            position: absolute;
+        }
+
+    .bottom {
+        border-color: #c8c8c8 transparent transparent transparent;
+        border-width: 8px 8px 0px 8px;
+        bottom: -8px;
+    }
+
+        .bottom:after {
+            border-color: #f8f8f8 transparent transparent transparent;
+            border-style: solid;
+            border-width: 7px 7px 0px 7px;
+            bottom: 1px;
+            content: "";
+            position: absolute;
+            left: -7px;
+        }
+</style>

@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "ClassDetailReport";
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+}
+
+<div class="ChildGrid">
+
+   </div>
+    <script type="text/javascript">
+        $(function () {
+
+            // Call MCV view on document completed
+            $.ajax({
+                type: "Get",
+                url: "~/Views/Report/Pages/TraineeDetailReport.aspx",
+                data: 'id=55',
+                success: function (document) {
+                    $('#ChildGrid').html(document);
+                }
+            });
+        });
+    </script>
+
+

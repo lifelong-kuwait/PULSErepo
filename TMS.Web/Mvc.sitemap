@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+
+  <mvcSiteMapNode title="Dashboard" controller="Admin" action="Index">
+    <mvcSiteMapNode title="Sales Admin" controller="Task" action="SaleAdminstration"/>
+    <mvcSiteMapNode title="Person" controller="People" action="Person" pT="0">
+      <mvcSiteMapNode title="Detail" controller="People" action="Detail"/>
+
+    </mvcSiteMapNode>
+    
+    <mvcSiteMapNode title="Audit Log" controller="Config" action="AuditLog"/>
+   
+           <mvcSiteMapNode title="Deleted Person" controller="People" action="PersonActive" pT="0">
+      <mvcSiteMapNode title="Detail" controller="People" action="Detail"/>
+             </mvcSiteMapNode>
+    
+      
+      
+      
+    <mvcSiteMapNode title="Trainer" controller="People" action="Person" pT="2">
+      <mvcSiteMapNode title="DetailCard" controller="Trainer" action="DetailCard"/>
+      <mvcSiteMapNode title="RegistrationSlip" controller="Trainer" action="RegistrationSlip"/>
+      <mvcSiteMapNode title="ClassDetail" controller="Trainer" action="ClassDetail"/>
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="Trainee" controller="People" action="Person" pT="1">
+      <mvcSiteMapNode title="TraineeDetailCard" controller="Trainer" action="TraineeDetailCard" />
+      <mvcSiteMapNode title="TraineeRegistrationSlip" controller="Trainer" action="TraineeRegistrationSlip" />
+      <mvcSiteMapNode title="TraineeClassDetail" controller="Trainer" action="TraineeClassDetail" />
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="Organization" controller="Organization" action="Index">
+      <mvcSiteMapNode title="Detail" controller="Organization" action="Detail"/>
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="Courses" controller="Program" action="Course">
+      <mvcSiteMapNode title="Detail" controller="Program" action="CourseDetail"/>
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="Classes" controller="Program" action="Class">
+      <mvcSiteMapNode title="Detail" controller="Program" action="ClassDetail"/>
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="Session" controller="Program" action="Sessions">
+      <mvcSiteMapNode title="Detail" controller="Program" action="SessionsDetail"/>
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="Resource" controller="Resource" action="Index"/>
+    <mvcSiteMapNode title="Lookup" controller="Resource" action="Lookup"/>
+    <mvcSiteMapNode title="Schedule" controller="Program" action="Schedule"/>
+    <mvcSiteMapNode title="Groups" controller="Admin" action="Groups">
+      <mvcSiteMapNode title="Detail" controller="Admin" action="GroupDetail"/>
+      <mvcSiteMapNode title="Detail" controller="Admin" action="TMSGroupDetail"/>
+      <mvcSiteMapNode title="Detail" controller="Admin" action="CRMGroupDetail"/>
+    </mvcSiteMapNode>
+
+
+    <mvcSiteMapNode title="Users" controller="User" action="Index"/>
+    <mvcSiteMapNode title="Office365" controller="Home" action="Office365Enabled"/>
+    <mvcSiteMapNode title="Prerequisite" controller="Admin" action="Prerequisite">
+      <mvcSiteMapNode title="Flags" controller="Config" action="Flags"/>
+      <mvcSiteMapNode title="Venues" controller="Config" action="Venues"/>
+      <mvcSiteMapNode title="Roles" controller="Admin" action="Roles"/>
+      <mvcSiteMapNode title="Vendor" controller="Config" action="Vendors"/>
+      <mvcSiteMapNode title="Categories" controller="Config" action="Categories"/>
+      <mvcSiteMapNode title="Focus Areas" controller="Config" action="FocusAreas"/>
+      <mvcSiteMapNode title="Course Materials" controller="Config" action="CourseMaterials"/>
+      <mvcSiteMapNode title="Degree/Certificates" controller="Config" action="DegreeCertificates"/>
+      <mvcSiteMapNode title="Course Logistics" controller="Config" action="CourseLogisticRequirements"/>
+    </mvcSiteMapNode>
+
+    <mvcSiteMapNode title="Tasks" controller="Task" action="Index">
+      <mvcSiteMapNode title="Task History" controller="Task" action="Detail"/>
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="Prospects" controller="Prospect" action="Index">
+      <mvcSiteMapNode title="Detail" controller="Prospect" action="Detail"/>
+    </mvcSiteMapNode>
+
+    <!--<mvcSiteMapNode title="Tasks" controller="Task" action="Index"/>
+    <mvcSiteMapNode title="Task History" controller="Task" action="Detail"/>-->
+    <!--<mvcSiteMapNode title="Prospects" controller="Prospect" action="Index"/>-->
+
+    <mvcSiteMapNode title="Reports" controller="Task" action="Index">
+      <mvcSiteMapNode title="First Report" controller="Task" action="ThirdReporting"/>
+      <mvcSiteMapNode title="Trainee Detail Report" controller="Task" action="TraineeDetailReport"/>
+      <mvcSiteMapNode title="Class Detail Report" controller="Task" action="ClassDetailReport"/>
+      <mvcSiteMapNode title="Trainer Detail Report" controller="Task" action="TrainerDetailReport"/>
+      <mvcSiteMapNode title="Trainer Detail Report" controller="Task" action="SampleTrainarDetailReport"/>
+      <mvcSiteMapNode title="Invoice Report" controller="Task" action="InvoiceReport"/>
+      <mvcSiteMapNode title="Sales Order Detail Report" controller="Task" action="SalesOrderDetailReport"/>
+      <mvcSiteMapNode title="Report Catalog" controller="Task" action="ReportCatalog"/>
+      <mvcSiteMapNode title="Employee Sales Summary Report" controller="Task" action="EmployeeSalesSummaryReport"/>
+      <mvcSiteMapNode title="List Bound Report" controller="Task" action="ListBoundReport"/>
+    </mvcSiteMapNode>
+  </mvcSiteMapNode>
+
+</mvcSiteMap>

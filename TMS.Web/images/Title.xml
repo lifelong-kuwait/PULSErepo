@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StyleSheet xmlns="http://schemas.telerik.com/reporting/2017/3.0">
+  <StyleRule>
+    <Style>
+      <Padding Left="2pt" Right="2pt" />
+    </Style>
+    <Selectors>
+      <TypeSelector Type="TextItemBase" />
+      <TypeSelector Type="HtmlTextBox" />
+    </Selectors>
+  </StyleRule>
+  <StyleRule>
+    <Style VerticalAlign="Middle">
+      <Font Name="Segoe UI Light" Size="16pt" Bold="True" />
+      <BorderStyle Bottom="Solid" />
+    </Style>
+    <Selectors>
+      <TypeSelector Type="ReportItemBase" />
+    </Selectors>
+  </StyleRule>
+</StyleSheet>

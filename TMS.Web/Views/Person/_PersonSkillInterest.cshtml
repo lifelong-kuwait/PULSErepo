@@ -1,0 +1,21 @@
+﻿@using lr = Resources.Resources;
+@{
+    var Postion = TabStripTabPosition.Left;
+    if (TMS.CultureHelper.IsRighToLeft())
+    {
+        Postion = TabStripTabPosition.Right;
+    }
+}
+@model string
+@( Html.Kendo().TabStrip()
+        .Name("PersonSkillInterestTapStrip")
+                 .SelectedIndex(0).TabPosition(Postion)
+            .Animation(animation => animation.Open(open => open.Fade(FadeDirection.In)))
+             .Items(i =>
+               {
+                   i.Add().Text(lr.FocusAreaTabTitle).LoadContentFrom("Degree", "SkillInterest", new { PersonID = Model });
+                   i.Add().Text(lr.PersonSkillTabTitle).LoadContentFrom("PersonSkill", "SkillInterest", new { PersonID = Model });
+                   i.Add().Text(lr.PersonFieldofInterestTabTitle).LoadContentFrom("PersonInterest", "SkillInterest", new { PersonID = Model });
+               }
+            )
+)

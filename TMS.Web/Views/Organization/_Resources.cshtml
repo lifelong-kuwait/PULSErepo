@@ -1,0 +1,44 @@
+﻿@using lr = Resources.Resources
+@{
+    ViewBag.Title = lr.ResourcePageTitle;
+   
+
+}
+
+<h2>Resource</h2>
+<style>
+    a.k-button.k-button-icontext.k-grid-add {
+    color: #fff;
+}
+</style>
+
+@(Html.Kendo().Grid<TMS.Library.Admin.TMSResource>()
+    .Name("ResourceIndexGrid1")
+       .Columns(columns =>
+         {
+             columns.Bound(p => p.Name).Title(lr.ResourceName).Width(130);
+             columns.Bound(p => p.P_Value).Title(lr.PrimaryLanguageResource).Width(130);
+             columns.Bound(p => p.S_Value).Title(lr.SecondaryLanguageResource).Width(130);
+             columns.Bound(p => p.CreatedDate).Width(130).Format(KendoDateFormat).Title(lr.GridCreatedDate); ;
+             columns.Bound(p => p.CreatedBy).Width(130).Title(lr.GridCreatedBy); ;
+             columns.Command(c => c.Edit().Text(lr.GridEditText)).Title(lr.GridEditColumnHeader).Width(90);
+
+         })
+     .ToolBar(toolbar => toolbar.Create().Text(lr.AddNewResources))
+                    .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_ResourcesTemplate"))
+
+    .Pageable()
+     .Sortable()
+     .Scrollable().Filterable()
+         .HtmlAttributes(new { @style = "height: 420px;" })
+                        .Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
+      .DataSource(dataSource => dataSource
+           .Ajax()
+         .PageSize(10)
+              .Model(model => model.Id(p => p.P_Resourceid))
+         .Create(update => update.Action("Resource_CreateOrganization", "Resource", new { oid = Model }))
+         .Read(read => read.Action("Resource_Read", "Resource").Data("withSearch"))
+             .Update(update => update.Action("Resource_Update", "Resource"))
+                            .Events(events => events.Error("GeneralErrorHandler(\"ResourceIndexGrid\")"))
+    )
+)

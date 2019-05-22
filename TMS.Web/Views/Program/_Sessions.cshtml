@@ -1,0 +1,197 @@
+﻿@model long
+@using lr = Resources.Resources;
+<script>
+        var enumSesssionLangData =@Html.Action("LangData", "DDl");
+
+        function SessionsGridTemplate(data) {
+            if (data !== null) {
+                var SessionsGridTemplate = kendo.template(jQuery("#SessionsGridTemplate").html(), { useWithBlock: false });
+                return SessionsGridTemplate(data);
+            }
+            return '';
+        }
+</script>
+<script type="text/javascript">
+        function SessionGridNested_onEdit(e) {
+            //if current model is not new then remove the Name editor
+            var title = jQuery(e.container).parent().find(".k-window-title");
+            var update = jQuery(e.container).parent().find(".k-grid-update");
+            var cancel = jQuery(e.container).parent().find(".k-grid-cancel");
+            var dropdownlist = jQuery("#ClassID").data("kendoDropDownList");
+            jQuery(cancel).html('<span class="k-icon k-i-cancel"></span>' + lr.CencelRecordGeneralButton);
+            if (e.model.isNew()) {
+                jQuery("#sessionddl").hide();
+                setTimeout(function () {
+                    jQuery(".k-widget.k-tooltip.k-tooltip-validation.k-invalid-msg.field-validation-error").hide();
+                }, 180);
+                dropdownlist.value('@Model'); dropdownlist.trigger("change");
+                dropdownlist.enable(false);
+                jQuery(title).text(lr.AddRecordGeneralTitle);
+                jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.SaveRecordGeneralButton);
+                jQuery("#ScheduleDate").data("kendoDatePicker").value(null);
+               
+            }
+            else {
+                //jQuery("#classdll").remove();
+                var dropdownlist = jQuery("#ClassID").data("kendoDropDownList");
+                dropdownlist.enable(false);
+                jQuery(title).text(lr.EditRecordGeneralTitle);
+                jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.UpdateRecordGeneralButton);
+            }
+            //
+        }
+        function onChangeofSessionTRainer(e) {
+            if (e.sender.value() === "-1") {
+                jQuery("#ManageTrainer").data("kendoGrid").addRow();
+            }
+
+        }
+        var trainerIds;
+
+        function CurrentClassId() {
+            return {
+                ClassID: jQuery("#ClassID").val()
+            }
+        }
+        function filtertrainertoadded() {
+            return {
+                PersonIds: trainerIds, cid: jQuery("#ClassID").val()
+            }
+        }
+        function requestendManageTrainergrid(e) {
+            if (e.type == "create") {
+                var TrainerID = jQuery("#TrainerID").data('kendoDropDownList'); TrainerID.dataSource.read(); TrainerID.value("0");
+            }
+        }
+</script>
+    @(Html.Kendo().Grid<TMS.Library.Entities.TMS.Program.Sessions>()
+            .Name("SessionsGrid" + Model)
+    .Columns(columns =>
+    {
+        columns.Bound(e => e.SessionName).ClientTemplate("#=SessionsGridTemplate(data)#");
+        columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy);
+  
+        columns.Bound(e => e.UpdatedByAlias).Width(170).Title(lr.ModifiedBy).
+ ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"<span class='Addedby'>#=UpdatedByAlias# </span>
+    <span class='date' >#=kendo.toString(UpdatedDate,'" + DateFormatScript + @"')#</span>
+<span class='time' >#=kendo.toString(UpdatedDate,'" + TimeFormatScript + @"')#</span>
+" + @"#} else {#<div>Not Modified</div> </div>#}#");
+    }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_SessionNestedTemplate").DisplayDeleteConfirmation(false))
+          .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>))
+     .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+     .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
+     .Scrollable()
+     .Events(e => e.Edit("SessionGridNested_onEdit").Save("General_onSave"))
+     .HtmlAttributes(new { style = "height:450px !important;" })
+     .DataSource(dataSource => dataSource.Ajax().ServerOperation(true).Model(model => { model.Id(m => m.ID); })
+     .PageSize(5)
+     .Read(read => read.Action("Sessions_Read", "Program", new { ClassId = Model }))
+     .Create(read => read.Action("Sessions_Create", "Program"))
+     .Destroy(read => read.Action("Sessions_Destroy", "Program"))
+     .Update(read => read.Action("Sessions_Update", "Program"))
+     .Events(e => e.Error("GeneralErrorHandler(\"SessionsGrid" + Model + "\")").RequestEnd("GridRequestEndUpdate")))
+     .NoRecords(lr.GridNoRecordFoundMessage)
+    )
+    @helper RenderAddTemplate()
+    {
+        <div class="toolbar">
+            @if (User.IsInRole("CanAddEditSession"))
+            {
+                <a class="k-button tms-grid-add" title="" data-placement="left" data-toggle="tooltip" data-original-title="Tooltip on left">
+                    <span class="tms-grid-icon mdi mdi-plus "></span>
+                </a>
+                <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+            }
+            @if (User.IsInRole("CanDeleteSession"))
+            {
+                <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+            }
+            @*@if (User.IsInRole("CanViewSession"))
+            {
+                <a class="k-button tms-grid-detail-class"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>
+            }*@
+        </div>
+
+}
+
+
+    <script id="SessionsGridTemplate" type="text/kendo">
+        <div class=''>
+            <div class=''>
+                <p>
+                    <span class="heading">
+                        <b>
+                            #:data.SessionName#
+                        </b>
+                    </span>
+                </p>
+                <p>
+                    <label>
+                        #:lr.ClassName#:
+                    </label>
+                    <span>
+                        #:data.ClassName#
+                    </span>
+                </p>
+                <p>
+                    <label>
+                        #:lr.ClassCourse#:
+                    </label>
+                    <span>
+                        #:data.CourseName#
+                    </span>
+                </p>
+                <p>
+                    <label>
+                        #:lr.ClassLanguage#:
+                    </label>
+                    <span>
+                        #:enumvalue(data.LanguageID,enumSesssionLangData)#
+                    </span>
+                </p>
+                <p>
+                    <label>
+                        #:lr.VenueName#:
+                    </label>
+                    <span>
+                        #:data.VenueName#
+                    </span>
+                </p>
+                <p>
+                    <label>
+                        #:lr.ScheduleInfo#:
+                    </label>
+                    <label>
+                        #=kendo.toString(data.ScheduleDate, '@DateFormatScript')#      #:data.StartTimeString#  #:data.EndTimeString#
+                    </label>
+                </p>
+                <p>
+                    <label>Status: </label>
+                    <label>
+                        #if (data.IsAttendanceMarked){ # <span class="mdi mdi-checkbox-blank-circle text-success"></span>    #}else{#  <span class="mdi mdi-checkbox-blank-circle text-danger"></span>  #}#
+
+                    </label>
+                </p>
+            </div>
+        </div>
+    </script>
+
+ 
+    <div class="ChildGrid">
+        @(Html.Kendo().Grid<TMS.Library.Entities.TMS.Program.ClassTrainerMapping>()
+     .Name("ManageTrainer")
+      .Columns(columns =>
+      {
+          columns.Bound(e => e.PersonID).Title(lr.Trainee);//.ClientTemplate("#=PersonTemplateTrainer(data)#");
+
+      }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_ClassTrainerTemplate").DisplayDeleteConfirmation(false))
+        .Sortable()
+        .Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+        //.PersistSelection()
+        .Pageable(pager => pager.Refresh(true)).Scrollable().Filterable().Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
+        .HtmlAttributes(new { style = "height:350px; display:none" }).DataSource(dataSource =>
+        dataSource.Ajax().Model(model => { model.Id(m => m.ID); model.Field(p => p.Person).DefaultValue(new TMS.Library.TMS.Persons.Person()); })
+        .Create(read => read.Action("ManageTrainerPerson_Create", "Program").Data("filtertrainertoadded"))
+        .Events(e => e.Error("GeneralErrorHandler(\"ManageTrainer\")").RequestEnd("requestendManageTrainergrid")))
+        )
+    </div>

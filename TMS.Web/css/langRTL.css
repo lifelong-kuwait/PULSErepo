@@ -1,0 +1,135 @@
+﻿.header .menu {
+    width: 40px;
+    text-align: center;
+    float: right;
+}
+
+.headermeu > span {
+    float: right;
+}
+
+.o365cs-newAL-on.o365cs-nav-navMenu {
+    left: auto !important;
+    right: 0 !important;
+       margin-right: 6px;
+}
+.o365cs-nav-appItem {
+    float: right;
+}
+
+#login{
+
+    direction:rtl;
+}
+.loginfooter{
+
+    direction:rtl;
+}
+.validation-summary-errors {
+
+    direction:rtl;
+}.shortcuts {
+    
+    direction: rtl;
+    float: right;
+}
+
+
+ body.lang-AR .shortcuts > li {
+    float: right !important;
+    direction: rtl !important;
+}
+
+body.lang-AR .shortcuts > li > a, body.lang-AR .shortcuts > li {
+    font-family: 'Droid Arabic Kufi', serif;
+   
+}
+
+
+.o365cs-newAL-on.o365cs-nav-navMenu::after{
+     position: absolute;
+       top: -12px;
+    right: 2px;
+    display: inline-block;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid white;
+    border-left: 12px solid transparent;
+    content: '';
+}
+
+
+/*popup Error ul Template Design classes*/
+
+.Alertbox {
+    padding-right: 20px;
+}
+/*popup Error ul Template Design classes*/
+
+.form-horizontal.form-person-popup{
+    margin-right:4%;
+}
+.form-horizontal.form-person-popup .form-group> .control-label{
+      text-align: left !important;
+}
+
+.tabstrip-popuup{
+            padding: 20px 0px 20px 0px;
+}
+@media screen and (max-width: 1024px) {
+    .form-horizontal .form-group .control-label {
+        margin-right: 15px;
+    }
+}
+
+    .form-group-footer{
+    float: left;
+    }
+
+    .person img {
+    float: right;
+}
+
+    
+.right-inner-addon i{
+    left: 0px;
+}
+.right-inner-addon input{
+    padding-left:30px;
+}
+.gridaddedby {
+        margin-right: -10px;
+}
+ .FlagsHeader{
+     padding-right:0.288em !important;
+ }
+
+  .k-tooltip-content .grid-tooltip-icon{
+           float:right;
+
+     }
+
+
+.grid-tooltip-icon {
+    border-left: 1px solid white;
+}
+
+.k-tooltip-button {
+    float: left;
+}
+
+.grid-tooltip-icon:last-child {
+    margin-left: 15px;
+}
+
+.k-tooltip-button > a.k-i-close {
+    margin-left: 8px;
+    float: left;
+}
+
+.k-edit-form-container .Addedby {
+    padding-left: 10px;
+}
+
+.clearspace {
+    margin-bottom: -7px;
+}

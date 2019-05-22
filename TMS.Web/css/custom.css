@@ -1,0 +1,924 @@
+﻿@font-face {
+    font-family: "wf_segoe-ui_light";
+    src: local("Segoe UI Light"), local("Segoe WP Light"), url('../fonts/Segoe/segoeui-light.woff') format('woff'), url('../fonts/Segoe/segoeui-light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "wf_segoe-ui_normal";
+    src: local("Segoe UI"), local("Segoe WP"), url('../fonts/Segoe/segoeui-regular.woff') format('woff'), url('../fonts/Segoe/segoeui-regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "wf_segoe-ui_semibold";
+    src: local("Segoe UI Semibold"), local("Segoe WP Semibold"), url('../fonts/Segoe/segoeui-semibold.woff') format('woff'), url('../fonts/Segoe/segoeui-semibold.ttf') format('truetype');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "wf_segoe-ui_semilight";
+    src: local("Segoe UI Semilight"), local("Segoe WP Semilight"), url('../fonts/Segoe/segoeui-semilight.woff') format('woff'), url('../fonts/Segoe/segoeui-semilight.ttf') format('truetype');
+}
+/*Coloring thead lable color-profile thead Login form stop white*/
+#login label.error {
+    color: #effeff;
+}
+
+/*this style is added for the front page login validation styles for removing the list bullets*/
+.validation-summary-errors > ul {
+    list-style: none !important;
+}
+
+.loginTextBox {
+    font-family: "SegoeUI-SemiLight-final","Segoe UI SemiLight","Segoe UI WPC Semilight","Segoe UI",Segoe,Tahoma,Helvetica,Arial,sans-serif;
+    border-radius: 0px !important;
+    border: 0;
+    padding: 10px;
+    background: #fff;
+    width: 250px;
+}
+
+.headermeu ul li a {
+    color: black;
+}
+
+.dropdownheader {
+    text-align: left;
+    cursor: pointer;
+}
+
+.headmenu > li:first-child {
+    border-left: 0px solid rgba(255,255,255,0.15);
+}
+
+.userinfo ul li a:hover {
+    text-decoration: none;
+    /*background: none !important;*/
+}
+
+.fa-header-menu {
+    text-align: center;
+}
+
+.LoginDropDown {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+}
+
+    .LoginDropDown > .dropdown-menu {
+        width: 100%;
+    }
+
+.header .menu > a {
+    padding-left: 10px;
+    cursor: pointer;
+}
+/*.LoginDropDown > .dropdown-menu::after {
+            position: absolute;
+            top: -6px;
+            right: 50%;
+            display: inline-block;
+            border-right: 6px solid transparent;
+            border-bottom: 6px solid white;
+            border-left: 6px solid transparent;
+            content: '';
+        }*/
+
+.o365cs-nav-header16 .o365cs-nav-button {
+    display: block;
+    vertical-align: middle;
+    border-width: 0;
+    margin: 0;
+    padding: 0;
+    min-width: 50px;
+    height: 50px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: center;
+    line-height: normal;
+    overflow: visible;
+    cursor: pointer;
+    outline-offset: -1px;
+}
+
+.menu > dropdown-menu::after {
+    position: absolute;
+    top: -6px;
+    right: 13px;
+    display: inline-block;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid white;
+    border-left: 6px solid transparent;
+    content: '';
+}
+
+.o365cs-nav-appTileTitle ms-fcl-w {
+    color: aliceblue;
+}
+
+@-moz-document url-prefix() {
+    .menu {
+        height: 40px;
+    }
+}
+/*Added for Language menu*/
+.breadcrumbs > li.Lang {
+    float: right;
+    padding: 0;
+    border-left: 1px solid #bbb;
+    margin: -5px 0 0 0;
+}
+
+    .breadcrumbs > li.Lang > a {
+
+        padding: 7px 11px 0px;
+        display: block;
+    }
+/*Added for Language menu*/
+/*Added for mobile User Menu*/
+.breadcrumbs > li.xsUser {
+    float: right;
+    padding: 0;
+    border-left: 1px solid #bbb;
+    margin: -5px 0 0 0;
+}
+
+    .breadcrumbs > li.xsUser > a {
+        padding: 7px 11px 0px;
+        display: block;
+    }
+/*Added for mobile User Menu*/
+
+.headmenu .dropdown-menu::after {
+    position: absolute;
+    top: -6px;
+    left: 20px;
+    display: inline-block;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid white;
+    border-left: 6px solid transparent;
+    content: '';
+}
+
+.breadcrumbs > li.Lang > a:hover {
+    text-decoration: none;
+    background: #f7f7f7;
+}
+
+.breadcrumbs > li.xsUser > a:hover {
+    text-decoration: none;
+    background: #f7f7f7;
+}
+
+.breadcrumbs > li.xsUser .dropdown-menu span {
+    font-size: 14px;
+    padding: 2px 10px;
+}
+
+.breadcrumbs > li.xsUser .dropdown-menu small {
+    font-size: 10px;
+    padding: 2px 10px;
+}
+
+@media screen and (max-width: 320px) {
+    .breadcrumbs > li.xsUser > a {
+        padding: 7px 2px 0px;
+    }
+
+    .breadcrumbs > li.right > a {
+        padding: 4px 2px 1px;
+    }
+
+    .breadcrumbs > li.Lang > a {
+        padding: 7px 2px 0px;
+    }
+}
+
+ul.dropdown-menu.transparent {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.not-active {
+    pointer-events: none;
+    cursor: default;
+}
+
+.k-edit-form-container .k-button {
+    color: black;
+}
+
+/*popup Error ul Template Design classes*/
+.DetailsError {
+    list-style: initial;
+}
+
+.Alertbox > ul > li > span {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.Alertbox > ul {
+    list-style: none;
+}
+
+.ErrorDetailhead {
+    padding-bottom: 10px;
+}
+
+.k-grid-Active-Row {
+    background: linear-gradient(to right, rgb(180, 223, 91) 0%, rgb(180, 223, 91) 100%);
+}
+
+.tms-tile-icon {
+    padding: 5px 0px 3px 17px;
+    display: block;
+    font-size: 48px;
+}
+/*popup Error ul Template Design classes*/
+
+/*.*/
+
+.input-group {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.form-horizontal.form-person-popup {
+    width: 94%;
+}
+
+.form-horizontal .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+    margin-bottom: 9px;
+}
+
+.form-horizontal .form-group {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.form-group {
+    margin-bottom: 0px;
+}
+
+@media screen (min-width:992) {
+    .demo-section .k-content .tabstrip-popuup > .k-content k-state-active {
+        min-height: 222px;
+    }
+}
+/*. Custom command Button Style for Grid */
+
+.ChildGrid > abutton,
+.ChildGrid > div.k-grid .k-grid-edit,
+.ChildGrid > div.k-grid .k-grid-delete,
+div.k-grid .k-grid-cancel,
+div.k-grid .k-grid-update {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    text-indent: -444px;
+    min-width: 0;
+    border: 0;
+}
+
+.ChildGrid > div.k-grid .k-grid-edit {
+    background: url('../images/icons/Editable.png') no-repeat;
+}
+
+.ChildGrid > div.k-grid .k-grid-delete {
+    background: url('../images/icons/Destory24.png') no-repeat;
+}
+
+.ChildGrid > div.k-grid .k-grid-cancel {
+    background: url('../images/icons/cancel.png') no-repeat;
+}
+
+.ChildGrid > div.k-grid .k-grid-update {
+    background: url('../images/icons/ok.png') no-repeat;
+}
+
+.form-group-footer > div {
+    list-style: none;
+    padding-bottom: 2em;
+}
+/* theme Configurations*/
+.k-textbox > input, span.k-autocomplete .k-input, span.k-dropdown-wrap .k-input, span.k-numeric-wrap .k-input, span.k-picker-wrap .k-input, span.k-selectbox .k-input {
+    padding: .623em 0;
+}
+
+.k-window .k-edit-buttons {
+    background: none;
+}
+
+.k-i-tick, .k-insert, .k-i-check {
+    background-position: -32px -31px;
+}
+
+.k-button:active .k-i-check, .k-button:not(.k-state-disabled):hover .k-i-check {
+    background-position: -32px -31px;
+}
+
+/*Grid Person Styles*/
+
+.person {
+    cursor: pointer;
+    font-family:"SegoeUI-SemiLight-final","Segoe UI SemiLight","Segoe UI WPC Semilight","Segoe UI",Segoe,Tahoma,Helvetica,Arial,sans-serif;
+}
+
+    .person:after {
+        content: ".";
+        display: block;
+        height: 0;
+        line-height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+
+    .person h2 {
+        font-size: 1.65em;
+        font-weight: normal;
+        padding-top: 4px;
+            text-overflow: ellipsis;
+    overflow: hidden;
+        font-family:"SegoeUI-SemiLight-final","Segoe UI SemiLight","Segoe UI WPC Semilight","Segoe UI",Segoe,Tahoma,Helvetica,Arial,sans-serif;
+    }
+
+    .person h3 {
+        font-size: 1.45em;
+        font-weight: normal;
+            text-overflow: ellipsis;
+    overflow: hidden;
+        font-family:"SegoeUI-SemiLight-final","Segoe UI SemiLight","Segoe UI WPC Semilight","Segoe UI",Segoe,Tahoma,Helvetica,Arial,sans-serif;
+    }
+
+    .person h4 {
+        font-size: 1.3em;
+        font-weight: normal;
+        padding-top: 2px;
+            text-overflow: ellipsis;
+    overflow: hidden;
+        font-family:"SegoeUI-SemiLight-final","Segoe UI SemiLight","Segoe UI WPC Semilight","Segoe UI",Segoe,Tahoma,Helvetica,Arial,sans-serif;
+    }
+
+    .person h5 {
+            font-size: 1.1em;
+    font-weight: normal;
+    padding-top: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family:"SegoeUI-SemiLight-final","Segoe UI SemiLight","Segoe UI WPC Semilight","Segoe UI",Segoe,Tahoma,Helvetica,Arial,sans-serif;
+    }
+
+    .person p {
+        margin: 0;
+    }
+
+    .person img {
+        margin: 5px 10px 5px 5px;
+        width: 70px;
+        height: 70px;
+    }
+
+        .person img.paddig {
+           border: 8px solid #8b949d;
+        }
+
+.gridaddedby .Addedby {
+    font-size: 15px;
+    font-weight: 600;
+    display: block;
+}
+
+.gridaddedby .date {
+    font-size: 13px;
+    display: inline;
+    font-weight: 500;
+
+}
+
+.gridaddedby .time {
+    font-size: 13px;
+    display: inline;
+}
+
+.gridlastmodified .lastmodifed{
+    font-weight:500;
+}
+    .gridlastmodified .datetime {
+        font-size: 11px;
+        font-style: italic;
+        display:block;
+    }
+.person-box {
+    padding: 10px;
+}
+
+.menu-icon {
+    font-size: 48px;
+}
+
+
+
+.tms-flag-icon {
+    font-size: 24px;
+    cursor: pointer;
+    width: 15px;
+    position: relative;
+    display: inline-block;
+}
+ .k-window-titlebar{
+     font-size:1.1em;
+ }
+@media screen and (max-width: 580px) {
+    .tms-flag-icon {
+        font-size: 18px;
+        cursor: pointer;
+        width: 15px;
+    }
+     .k-window-titlebar.k-header{
+        font-size:13px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .person h2 {
+        font-size: 1.3em;
+    }
+
+    .person h5 {
+        font-size: 1.1em;
+    }
+
+    .person p {
+        font-size: 0.9em;
+    }
+
+    .person {
+        line-height: 10px !important;
+    }
+
+    .k-widget.k-tooltip {
+        opacity: 0.9 !important;
+    }
+
+    .person img {
+        margin: 5px 5px 5px 5px;
+        width: 60px;
+        height: 60px;
+    }
+
+    .k-grid td {
+        padding: 4px 4px;
+    }
+
+    .person-box {
+        padding: 5px;
+    }
+
+    .menu-icon {
+        font-size: 40px;
+    }
+
+    .tms-flag-icon {
+        font-size: 15px;
+        width: 10px;
+    }
+     .k-window-titlebar.k-header{
+        font-size:13px;
+    }
+    
+}
+
+@media screen and (max-width: 340px) {
+    .person h2 {
+        font-size: 1.1em;
+    }
+
+    .person h5 {
+        font-size: 0.7em;
+    }
+
+    .person p {
+        font-size: 0.7em;
+    }
+
+    .person img {
+        margin: 5px 5px 5px 5px;
+        width: 50px;
+        height: 50px;
+    }
+
+    .k-widget.k-tooltip {
+        opacity: 0.9 !important;
+    }
+
+    .person {
+        line-height: 10px !important;
+    }
+
+    .k-grid td {
+        padding: 2px 2px;
+    }
+
+    .person-box {
+        padding: 4px;
+    }
+
+    .menu-icon {
+        font-size: 32px;
+    }
+
+    .tms-flag-icon {
+        font-size: 15px;
+        width: 10px;
+    }
+     .k-window-titlebar.k-header{
+        font-size:13px;
+    }
+       .k-widget.k-window {
+        width: 90%;
+    }
+}
+
+
+.grid-tooltip-icon{
+font-size: 24px;
+    display: inline-block;
+    padding: 3px 3px;
+    background-color: #8b949d;
+}
+span.delete:hover i {
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -ms--transform: rotate(360deg);
+    transform: rotate(360deg);
+    color: red;
+}
+
+
+ .k-tooltip-button >a.k-i-close{
+     background: none;
+    color: white;
+    opacity: 1;
+    height: 22px;
+    margin-top: 7px;
+    width: 22px;
+    vertical-align: middle;
+    display: inline;
+    display: table-cell;
+     }
+span.enroll i:hover {
+    -webkit-animation: horizontal 2s ease infinite;
+    animation: horizontal 2s ease infinite;
+}
+
+.k-tooltip-content {
+    vertical-align: middle;
+    cursor: pointer;
+    width: 100%;
+}
+
+    .k-tooltip-content img,
+    .k-tooltip-content p {
+        float: left;
+    }
+
+    .k-tooltip-content p {
+        font-size: 1.4em;
+        padding: 2px;
+        width: 160px;
+        text-align: left;
+    }
+/*Grid Person Styles*/
+
+.right-inner-addon i {
+    position: absolute;
+    padding: 11px 9px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.right-inner-addon {
+    position: relative;
+}
+
+.iconfa-home {
+    font-size: 24px;
+}
+
+
+.k-icon .k-add {
+    color: #004568;
+}
+
+
+    .k-primary:hover {
+        color: #fff;
+        background-color: #006699;
+        border-color: #6dd9ff;
+    }
+
+
+
+.k-column-menu .k-state-active .k-sprite, .k-column-menu .k-state-hover .k-sprite, .k-pager-numbers .k-current-page .k-link:hover:after, .k-scheduler-toolbar > ul.k-scheduler-views > li.k-current-view.k-state-hover > .k-link:after, .k-state-hover .k-icon, .k-state-selected .k-icon {
+    color: #fff;
+}
+
+.k-calendar .k-footer .k-nav-today, .k-calendar .k-link.k-nav-fast, .k-gantt .k-gantt-views > .k-state-selected > .k-link, .k-pager-numbers .k-state-selected, .k-scheduler .k-scheduler-views > .k-state-selected > .k-link {
+    color: #0099cc;
+}
+
+.k-draghandle.k-state-selected:hover, .k-ghost-splitbar-horizontal, .k-ghost-splitbar-vertical, .k-list > .k-state-highlight, .k-list > .k-state-selected, .k-marquee-color, .k-panel > .k-state-selected, .k-scheduler .k-scheduler-toolbar .k-state-selected, .k-scheduler .k-today.k-state-selected, .k-state-selected, .k-state-selected:link, .k-state-selected:visited {
+    border-color: #0099cc;
+}
+
+.k-list > .k-state-focused {
+    border-color: #6dd9ff;
+}
+
+.k-autocomplete.k-state-hover,
+.k-picker-wrap.k-state-hover,
+.k-numeric-wrap.k-state-hover,
+.k-dropdown-wrap.k-state-hover {
+    border-color: #6dd9ff;
+}
+.k-widget.k-tooltip-validation {
+    border-color: #dde0e5;
+    background-color: #dde0e5;
+    color: #515e67;
+}
+
+.k-tooltip-validation .k-callout-n {
+    border-bottom-color: #dde0e5;
+}
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .breadcrumbs {
+        padding: 8px 0px 11px 5px;
+    }
+}
+.skin-color{
+        cursor: pointer;
+}
+
+.k-edit-form-container .Addedby{
+     font-weight:bold;
+ }
+
+.sweet-alert.tmsconfirm .icon.custom{
+        display: block !important;
+      font-size: 70px;
+    /*-webkit-text-stroke: 2px white;*/
+    color:#F8BB86;
+}
+
+.sweet-alert.tmsconfirm .icon.warning {
+    display:none !important;
+}
+.sweet-alert.tmsconfirm .icon.custom:before {
+          content: "\F2FD";
+    display: inline-block;
+    font: normal normal normal 24px/1 "Material Design Icons";
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translate(0, 0);
+}
+
+
+@media only screen and (max-width: 500px) and (min-width: 350px)  
+{
+    .group-permissions label{
+        font-size:14px !important;
+    }
+
+}
+
+@media only screen and (max-width: 350px) and (min-width: 250px)  
+{
+    .group-permissions label{
+        font-size:12px !important;
+    }
+
+}
+td[role="gridcell"] input[type=checkbox] { display:block; } 
+ /*Checkboxes icon*/ 
+.group-permissions label { font-size: 18px; cursor:pointer;    font-weight: 500; }
+input[type=checkbox] { display:none; } /* to hide the checkbox itself */
+input[type=checkbox] +input+ label:before {
+  font-family: FontAwesome;
+  display: inline-block;
+}
+
+input[type=checkbox] +input+ label:before { content: "\f096"; } /**/
+input[type=checkbox] +input+ label:before { letter-spacing: 10px; } /* space between checkbox and label */
+
+input[type=checkbox]:checked +input+ label:before { content: "\f046"; } /* checked icon */
+input[type=checkbox]:checked +input+ label:before { letter-spacing: 5px; } /* allow space for check mark */
+
+ /*Checkboxes icon*/ 
+fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;
+}
+
+    legend.scheduler-border {
+        font-size: 1.2em !important;
+        font-weight: bold !important;
+        text-align: left !important;
+        width:auto;
+        padding:0 10px;
+        border-bottom:none;
+    }
+    
+    
+    .k-grid-toolbar:first-child {
+        padding: 0px 0px;
+    }
+
+    .k-grid-toolbar .k-button:nth-child(even) {
+        background: rgba(255,255,255,0.1);
+    }
+
+    .k-grid-toolbar .k-button {
+        background-color: transparent;
+        padding: 9px 8px;
+      border-left: none;
+      border-bottom:none;
+      border-top:none;
+        border-radius: 0;
+        margin: 0 0;
+border-right: 1px solid;
+        margin-left: -3px;
+    }
+
+        .k-grid-toolbar .k-button:hover {
+            text-decoration: none;
+            color: white;
+        }
+
+    .tms-grid-icon {
+        background: none;
+        opacity: 1 !important;
+        color: white;
+        font-size: 28px;
+    }
+
+   .k-widget.k-tooltip:not(.k-tooltip-validation) {
+        background-color: #515e67;
+    }
+
+    .k-tooltip:not(.k-tooltip-validation) {
+        padding: 0px;max-width:190px;
+    }
+
+    .k-tooltip-button > a:before {
+        background: none;
+        display: inline-block;
+        font: normal normal normal 24px/1 "Material Design Icons";
+        content: "\F158";
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        transform: translate(0, 0);
+    }
+
+
+.pageTitle {
+    font-size: 1.4em !important;
+    font-weight: bold !important;
+    padding: 10px 0;
+}
+
+.nicescroll-cursors {
+    width: 6px !important;
+    border-color: transparent !important;
+}
+
+.k-tooltip-button {
+    display: table-cell;
+}
+
+.k-tooltip-content .grid-tooltip-icon i {
+    color: #ffffff;
+}
+
+.k-animation-container {
+    max-width: 190px;
+    width: 100% !important;
+}
+
+.tmstooltip {
+    max-width: 190px;
+    width: auto;
+}
+
+    .searchbar {
+        border-top: 1px solid white;
+        padding: 9px;
+        color: white;
+    }
+
+        .searchbar .btn {
+            height: auto !important;
+        }
+
+            .searchbar .btn i {
+                vertical-align: text-top;
+            }
+
+        .searchbar .search i {
+            color: white;
+        }
+
+        .searchbar i {
+            opacity: .45;
+        }
+
+            .searchbar i:hover, .searchbar i:focus {
+                opacity: 1;
+            }
+
+    .heading {
+        font-size: 15px;
+        font-weight: bold;
+        font-style: italic;
+    }
+
+    .cursorPointer {
+        cursor: pointer;
+    }
+
+
+/*
+The section is about the the widget search
+  */
+
+.gridsearch {
+    border-top: 1px solid white;
+    padding: 9px;
+    color: white;
+    padding-bottom: 1px;
+}
+
+    .gridsearch .wrap {
+        margin-bottom: 1px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .gridsearch .search-icon {
+        font-size: 24px;
+    }
+
+    .gridsearch .input-group-addon {
+        padding: 1px 7px;
+    }
+
+    .gridsearch .searchinput {
+        display: inline-block;
+        vertical-align: bottom;
+        width: 100%;
+        padding-right: 27px;
+        border: 1px solid #ccc;
+        outline: none;
+    }
+
+.clearspace {
+    width: 20px;
+    display: inline-block;
+    margin-left: -25px;
+}
+
+.clear {
+    width: 20px;
+    transition: max-width 0.3s;
+    overflow: hidden;
+    float: right;
+    display: block;
+    max-width: 0px;
+}
+
+.showicon {
+    cursor: pointer;
+    width: 22px;
+    max-width: 22px;
+}
+
+
+.border2pxsilid{
+    border:2px solid;
+}
+
+/*
+The section is about the the widget search
+  */

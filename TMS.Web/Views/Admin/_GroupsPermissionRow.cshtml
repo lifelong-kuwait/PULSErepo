@@ -1,0 +1,20 @@
+﻿@model TMS.Library.Common.Groups.SecurityGroupsPermission
+           @{
+               var guid = Guid.NewGuid().ToString();
+               string disabled = null;
+               if (User.IsInRole("CanUpdateGroupsDetail")) { disabled = ""; } else { disabled = ",disabled=\"disabled\""; }
+           }
+@using (Html.BeginCollectionItem("permissionsList"))
+{
+    <div class="block mTop20 group-permissions">
+        @Html.CheckBoxFor(m => m.NewChecked, new { id = guid + disabled })
+        <label for="@guid">@Model.PermissionName </label>
+        @Html.HiddenFor(m => m.GroupPermissionId)
+        @Html.HiddenFor(m => m.GroupPermissionCode)
+        @Html.HiddenFor(m => m.IsChecked)
+        @Html.HiddenFor(m => m.GroupId)
+        @Html.HiddenFor(m => m.PermissionNameId)
+        @Html.HiddenFor(m => m.PermissionName)
+        @Html.HiddenFor(m => m.CategoryLabelResource)
+    </div>
+}

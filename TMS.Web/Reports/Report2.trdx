@@ -1,0 +1,234 @@
+<head>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <Font Bold="True" />
+                    </style>
+    <style color="Transparent">
+
+                          <BorderStyle Top="Solid" Bottom="Solid" />
+                          <BorderWidth Top="1.5pt" Bottom="0.5pt" />
+                        </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <Padding Top="0cm" Bottom="0cm" />
+                    </style>
+    <style>
+
+                      <Padding Top="0cm" Bottom="0cm" />
+                    </style>
+    <style>
+
+                      <Padding Top="0.25cm" Bottom="0.25cm" />
+                    </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <Font Bold="True" />
+                    </style>
+    <style color="Transparent">
+
+                          <BorderStyle Top="Solid" Bottom="Solid" />
+                          <BorderWidth Top="1.5pt" Bottom="0.5pt" />
+                        </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <Padding Top="0cm" Bottom="0cm" />
+                    </style>
+    <style>
+
+                      <Padding Top="0cm" Bottom="0cm" />
+                    </style>
+    <style>
+
+                      <Padding Top="0.25cm" Bottom="0.25cm" />
+                    </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <Font Bold="True" />
+                    </style>
+    <style color="Transparent">
+
+                          <BorderStyle Top="Solid" Bottom="Solid" />
+                          <BorderWidth Top="1.5pt" Bottom="0.5pt" />
+                        </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <Padding Top="0cm" Bottom="0cm" />
+                    </style>
+    <style>
+
+                      <Padding Top="0cm" Bottom="0cm" />
+                    </style>
+    <style>
+
+                      <Padding Top="0.25cm" Bottom="0.25cm" />
+                    </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <Font Bold="True" />
+                    </style>
+    <style color="Transparent">
+
+                          <BorderStyle Top="Solid" Bottom="Solid" />
+                          <BorderWidth Top="1.5pt" Bottom="0.5pt" />
+                        </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <Padding Top="0cm" Bottom="0cm" />
+                    </style>
+    <style>
+
+                      <Padding Top="0cm" Bottom="0cm" />
+                    </style>
+    <style>
+
+                      <Padding Top="0.25cm" Bottom="0.25cm" />
+                    </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <Font Bold="True" />
+                    </style>
+    <style color="Transparent">
+
+                          <BorderStyle Top="Solid" Bottom="Solid" />
+                          <BorderWidth Top="1.5pt" Bottom="0.5pt" />
+                        </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <BorderStyle Top="None" />
+                    </style>
+    <style>
+
+                      <Padding Top="0cm" Bottom="0cm" />
+                    </style>
+    <style>
+
+                      <Padding Top="0cm" Bottom="0cm" />
+                    </style>
+    <style>
+
+                      <Padding Top="0.25cm" Bottom="0.25cm" />
+                    </style>
+</head>
+<?xml version="1.0" encoding="utf-8"?>
+<Report Width="194.76mm" UnitOfMeasure="Mm" Name="BarcodesReport" SnapGridSize="0.1in" xmlns="http://schemas.telerik.com/reporting/2012/3.7">
+  <StyleSheet>
+    <StyleRule>
+    </StyleRule>
+  </StyleSheet>
+</Report>

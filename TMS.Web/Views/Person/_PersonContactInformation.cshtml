@@ -1,0 +1,25 @@
+﻿@model string
+@using lr = Resources.Resources;
+@{
+    var Postion = TabStripTabPosition.Left;
+    if (TMS.CultureHelper.IsRighToLeft())
+    {
+        Postion = TabStripTabPosition.Right;
+    }
+}
+
+@(Html.Kendo().TabStrip()
+    .Name("PersonContactTabStrip").TabPosition(Postion)
+            .Animation(animation => animation.Open(open => open.Fade(FadeDirection.In)))
+             .Items(i =>
+               {
+                   i.Add().Text(lr.PersonContactInformationTabTitle).LoadContentFrom("PrimaryAddress", "PersonContact", new { PersonID = Model }).Selected(true);
+                   i.Add().Text(lr.PhoneTabTitle).LoadContentFrom("ContactPhone", "PersonContact", new { PersonID = Model });
+                   i.Add().Text(lr.EmailTabTitle).LoadContentFrom("EmailAddress", "PersonContact", new { PersonID = Model });
+                   i.Add().Text(lr.SecondaryAddressTabTitle).LoadContentFrom("SecondaryAddress", "PersonContact", new { PersonID = Model });
+                   i.Add().Text(lr.LinkTabTitle).LoadContentFrom("PersonLinks", "PersonContact", new { PersonID = Model });
+                   i.Add().Text(lr.AvailabilityTabTitle).LoadContentFrom("PersonAvailability", "PersonContact", new { PersonID = Model });
+               }
+            )
+)
+

@@ -1,0 +1,36 @@
+﻿@model bool
+           @using lr=Resources.Resources;
+@{
+    ViewBag.Title = "Office365Enabled";
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+    
+    
+}
+@if (TempData["Success"] != null)
+{
+    if (TempData["Success"].ToString() == "Success")
+    {
+        <script>
+        jQuery(function () {
+            swal({
+                title: '@lr.confirmUpdated',
+                text: '@lr.RecordUpdatedSuccessfully',
+                type: "success"
+            });
+        });
+        </script>
+    }
+}
+<form action="@Url.Content("~/Home/Office365Enabled")" method="POST">
+    @Html.AntiForgeryToken()
+    <fieldset class="scheduler-border">
+        <legend class="scheduler-border">@lr.Office365Title</legend>
+        <div class="control-group">
+            <div class="block mTop20 group-permissions">
+                @Html.CheckBox("IsOffice365", Model, new { id = "IsOffice365" })
+                <label for="IsOffice365">@lr.Office365Title</label>
+            </div>
+        </div>
+    </fieldset>
+    <button type="submit" class="k-button k-button-icontext k-primary k-grid-update"><span class="k-icon k-i-check"></span>@lr.Submit</button>
+</form>

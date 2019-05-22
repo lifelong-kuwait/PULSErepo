@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "";
+    Layout = null;
+}
+<div id="assignUpdateArea">
+    <div class="MiddleHeadform">
+      
+    </div>
+    @{
+        var msg = string.Empty;
+        if (TempData["msgassign"] != null)
+        {
+            msg = TempData["msgassign"].ToString();
+         
+        }
+        Html.RenderAction("Prospects", "Task");
+        Html.RenderAction("Users", "Task");
+
+    }
+</div>
+<div id="dvRemoveAssign">
+    @using (Ajax.BeginForm("ReassignProspects", "Task", FormMethod.Get, new AjaxOptions
+    {
+
+        OnSuccess = "OnSuccess",
+        OnFailure = "OnFailure",
+        LoadingElementId = "dvLoader",
+        UpdateTargetId = "assignUpdateArea",
+        OnComplete = "OnFinish"
+
+    }, new
+    {
+
+        enctype = "multipart/form-data"
+    }))
+
+    {
+       @Html.AntiForgeryToken()
+        @Html.Hidden("UserID")
+        @Html.Hidden("PersonID")
+      
+    
+        <div class="row">
+            <div class="col-md-11 button-div">
+                <input type="submit" id="btnsave"  class="btn btn-primary" value="Assign" />
+
+            </div>
+        </div>
+    }
+</div>
+<script type="text/javascript">
+    var prospectIds = '';
+    jQuery(document).ready(function () {
+        RegisterClicks();
+    });
+
+    function RegisterClicks() {
+        //for prospects
+        jQuery('.jsprospects input[type="checkbox"]').click(function () {
+            var value = jQuery(this).attr('value');
+            if (jQuery(this).is(":checked")) {
+                PersonID += value + ',';
+            } else {
+                PersonID = PersonID.replace(value + ',', '');
+            }
+            jQuery('#PersonID').val(PersonID);
+
+        });
+        //for users
+        jQuery('.jsuser input[type="radio"]').click(function () {
+            jQuery('#UserID').val(jQuery(this).attr('value'));
+        });
+    }
+
+    function AjaxComplete() {
+        RegisterClicks();
+        //for prospects
+        jQuery('.jsprospects input[type="checkbox"]').each(function () {
+            var value = jQuery(this).attr('value');
+            var savedIds = jQuery('#PersonID').val();
+            if (savedIds.indexOf(value) >= 0) {
+                jQuery(this).attr('checked', true);
+            }
+        });
+        //for users
+        jQuery('.jsuser input[type="radio"]').each(function () {
+            if (jQuery(this).attr('value') == jQuery('#UserID').val()) {
+                jQuery(this).attr('checked', true);
+            }
+        });
+    }
+
+    function OnFinish() {
+        jQuery('#dvRemoveAssign').remove();
+        jQuery('#UserID').val('');
+        jQuery('#PersonID').val('');
+    }
+</script>

@@ -1,0 +1,62 @@
+﻿@model string
+@using lr = Resources.Resources;
+
+<div class="ChildGrid">
+    @(Html.Kendo().Grid<TMS.Library.Common.Address.EmailAddresses>()
+    .Name("PersonEmailAddressGrid" + Model)
+      .Columns(columns =>
+     {
+
+         columns.Bound(e => e.Email).ClientTemplate("<a class='editRowEmail' href='javascript: void(0)'>#=Email# </a> ");
+         columns.Command(cmd =>
+         {  cmd.Destroy(); }).Title("Delete")
+                      .Width(50);
+     }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_EmailAddressTemplate"))
+                    .ToolBar(toolbar => toolbar.Create().Text(lr.AddEmailButtonText))
+     .Sortable()
+          .Pageable(pager => pager
+       .Refresh(true))
+     .Scrollable().Filterable()
+     .Events(e => e.Edit("GeneralPersonGrid_onEdit").Save("PersonChildGrid_onSave"))
+    .HtmlAttributes(new { style = "height:350px;" })
+       .DataSource(dataSource => dataSource
+              .Ajax()
+                   .Model(model =>
+                   {
+                       model.Id(m => m.ID);
+                   })
+
+    .PageSize(8)
+                                    .Read(read => read.Action("EmailAddress_Read", "PersonContact", new { PersonID = Model }))
+                    .Create(read => read.Action("EmailAddress_Create", "PersonContact", new { pid = Model }))
+                            .Update(read => read.Action("EmailAddress_Update", "PersonContact", new { pid = Model }))
+                    .Destroy(read => read.Action("EmailAddress_Destroy", "PersonContact", new { pid = Model }))
+                            .Events(e => e.Error("GeneralErrorHandlerPerson(\"PersonEmailAddressGrid" + Model + "\")").RequestEnd("PersonContactRequestEnd"))
+    ).NoRecords(lr.GridNoRecordFoundMessage)
+    )
+</div>
+
+<script type="text/x-kendo-template" id="PersonEducationErrorTemplate">
+    # if (messages.length) { #
+    <li class="ErrorDetailhead">
+        <span>#=field#</span>
+        <ul class="DetailsError">
+            # for (var i = 0; i < messages.length; ++i) { #
+            <li>#= messages[i] #</li>
+            # } #
+        </ul>
+    </li>
+    # } #
+</script>
+
+
+
+
+<script>
+    jQuery(function () {
+        jQuery(".editRowEmail").live("mousedown", function (event) {
+            grid = jQuery(this).closest("[data-role=grid]").data("kendoGrid");
+            grid.editRow(jQuery(this).closest("tr"));
+        })
+    });
+</script>

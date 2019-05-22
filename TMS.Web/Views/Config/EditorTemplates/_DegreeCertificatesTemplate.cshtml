@@ -1,0 +1,37 @@
+﻿@model TMS.Library.Entities.Common.Configuration.DegreeCertificates
+<div class="Alertbox alert alert-danger" style="display:none">
+    <ul class="errors"></ul>
+</div>
+<input type="hidden" id="modelid" value="@Model.ID">
+<div class="form-horizontal form-person-popup">
+    <div class="form-group">
+        @Html.LabelFor(model => model.PrimaryName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.PrimaryName).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.PrimaryName)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SecondaryName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.SecondaryName).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.SecondaryName)
+        </div>
+    </div>
+  
+    <div class="form-group">
+        @Html.LabelFor(model => model.PrimaryDescription, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.TextAreaFor(c => c.PrimaryDescription, new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.PrimaryDescription)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.SecondaryDescription, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.TextAreaFor(c => c.SecondaryDescription, new { @class = "form-control ", style = "width:100%" }))
+            @Html.ValidationMessageFor(model => model.SecondaryDescription)
+        </div>
+    </div>
+</div>

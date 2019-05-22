@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "VenueDailyUtilizationReport";
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+}
+<style>
+    .input-group {
+        display: none;
+    }
+
+    .col-md-12.col-lg-offset-2 {
+        margin-bottom: 26px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12 col-lg-offset-2">
+        <h3>Venue Daily Utilization Report</h3>
+    </div>
+</div>
+
+
+<div class="ChildGrid">
+    <iframe id="myIframe" scrolling="no" src="~/Views/Report/Pages/VenueDailyUtilizationReport.aspx" height="1000" width="100%">text</iframe>
+
+
+</div>

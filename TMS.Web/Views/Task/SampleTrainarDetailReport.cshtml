@@ -1,0 +1,52 @@
+﻿@using Telerik.Reporting;
+@using Telerik.ReportViewer.Mvc;
+@using ReportingClassLibrary;
+@using lr = Resources.Resources;
+@model TMS.Library.TMS.Persons.Person
+
+@{
+    ViewBag.Title = lr.PersonPageTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var phonenubner = lr.PersonPhoneNumber;
+    var personEmail = lr.PersonContactEmail;
+    var gender = lr.Gender;
+}
+
+@section scripts{
+    <script src="~/ReportViewer/js/telerikReportViewer-11.2.17.1025.min.js"></script>
+    <script src="~/ReportViewer/js/telerikReportViewer-11.2.17.1025.js"></script>
+}
+@section ReportingStyles
+{
+    <link href="~/Content/kendo/telerikReportViewer.css" rel="stylesheet" />
+    <style>
+        #myReportViewer {
+            position: relative;
+            width: 100%;
+            height: 800px;
+            overflow: hidden;
+            font-family: Verdana, Arial;
+        }
+    </style>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+}
+
+@section ReportingScripts
+{
+    @(Html.TelerikReporting().DeferredScripts())
+}
+
+
+@(Html.TelerikReporting().ReportViewer()
+        .Id("myReportViewer")
+        .ServiceUrl("/api/reports/")
+        .ReportSource(new TypeReportSource() { TypeName = typeof(TrainarDetailReport).AssemblyQualifiedName })
+        //.ReportSource(typeReportSource)
+        .ViewMode(ViewModes.INTERACTIVE)
+        .ScaleMode(ScaleModes.SPECIFIC)
+        .Scale(1.0)
+        .EnableAccessibility(true)
+        .PrintMode(PrintMode.AutoSelect)
+        .ParametersAreaVisible(true)
+        .PersistSession(false)
+        .Deferred());

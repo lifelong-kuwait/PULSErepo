@@ -1,0 +1,487 @@
+﻿-*@using lr = Resources.Resources;
+@{
+    var Model = (TMS.Library.TMS.Trainer.Trainer)ViewData["model"];
+    ViewBag.Title = Model.P_DisplayName;
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+    var phonenubner = lr.PersonPhoneNumber;
+    var personEmail = lr.PersonContactEmail;
+    var gender = lr.Gender;
+    List<TMS.Library.TMS.Trainer.Trainer> modellist = new List<TMS.Library.TMS.Trainer.Trainer>() { Model };
+}
+@Html.AntiForgeryToken()
+<div id="inforecords"></div>
+@(Html.Kendo().Grid<TMS.Library.TMS.Trainer.Trainer>(modellist)
+    .Name("PersonDetailGrid")
+    .Columns(columns =>
+    {
+        columns.Bound(e => e.P_DisplayName).ClientTemplate("#=PersonTemplate(data)#").HeaderHtmlAttributes(new { @style = "display: none" });
+    }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_PersonDetailTemplate").DisplayDeleteConfirmation(false))
+    //.ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate() </text>))
+    //.Events(e => e.Edit("PersonDetailGrid_onEdit").Save("Grid_onEdit"))
+    .DataSource(dataSource => dataSource
+    .Ajax().Model(model => { model.Id(m => m.UserID); })
+    .Read(read => read.Action("Person_Read", "People"))
+    .Create(read => read.Action("Person_Create", "People"))//.Data("PersonCreateAttachmentInfoData")
+    .Destroy(read => read.Action("Person_Destroy", "People"))
+        .Update(read => read.Action("Person_Update", "People").Data("PersonProfilePictureData"))
+                  .Events(e => e.Error("GeneralErrorHandler(\"PersonDetailGrid\")")))
+    .NoRecords(lr.GridNoRecordFoundMessage)
+)
+@helper RenderAddTemplate()
+{
+    <div class="toolbar">
+        <a class="k-button tms-grid-add-main"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+        <a class="k-button tms-grid-edit-main"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+        <a class="k-button tms-grid-destroy-main "><span class="tms-grid-icon mdi mdi-delete "></span></a>
+        <a class="k-button tms-grid-exitapp-main"><span class="tms-grid-icon mdi mdi-exit-to-app "></span></a>
+        <a class="k-button tms-grid-phone-main"><span class="tms-grid-icon mdi mdi-phone-settings "></span></a>
+        <a class="k-button tms-grid-pdf-main"><span class="tms-grid-icon mdi mdi-file-pdf "></span></a>
+        <a class="k-button tms-grid-word-main"><span class="tms-grid-icon mdi mdi-file-word "></span></a>
+    </div>
+}
+<script id="PersonTemplate" type="text/kendo">
+    <div class='person-box'>
+        <div class='person'>
+            <div class="col-md-9">
+                <div class=''>
+                    <div class=''>
+                        <p>
+                            <span class="heading">
+                                <h2>
+                                    <b>
+                                        #:data.P_DisplayName# # if (data.NickName!=null){ #(#:data.NickName#)  #}#
+                                    </b>
+                                </h2>
+                            </span>
+                        </p>
+                        # if (data.PersonRegCode!=null) { #
+                        <p>
+                            <label>
+                                @lr.PersonRegistrationCode :
+                            </label>
+                            <span>
+                                #:data.PersonRegCode#
+                            </span>
+                        </p>
+                        #}#
+                        #if(data.Gender!=0){#
+                        <p>
+                            <label>
+                                @lr.Gender :
+                            </label>
+                            <span>
+                                #:data.GenderValue#
+                            </span>
+                        </p>
+                        #}#
+                        # if (data.DateOfBirth!=null) {#
+                        <p>
+                            <label>
+                                @lr.DateOfBirth :
+                            </label>
+                            <span>
+                                #=kendo.toString(data.DateOfBirth, '@DateFormatScript')#
+                            </span>
+                        </p>
+                        #}#
+                        # if (data.NationalIdentity!=null){#
+                        <p>
+                            <label>
+                                @lr.PersonNationality :
+                            </label>
+                            <span>
+                                #:data.NationalIdentity#
+                            </span>
+                        </p>
+                        #}#
+                        @*<p>
+                                <label>
+                                    @lr.OfficialIdentificationType_CivilID :
+                                </label>
+                                <span>
+                                    # if (data.Email!=null) { # #:data.CivilID# #}#
+                                </span>
+                            </p>*@
+                        #if(data.ContactNumber!=null){#
+                        <p>
+                            <label>
+                                @lr.PersonPhoneNumber :
+                            </label>
+                            <span>
+                                #:data.ContactNumber#
+                            </span>
+                        </p>
+                        #}#
+                        # if (data.Email!=null) { #
+                        <p>
+                            <label>
+                                @lr.PersonContactEmail :
+                            </label>
+                            <span>
+                                #:data.Email#
+                            </span>
+                        </p>
+                        #}#
+                        # if (data.Country!=null) { #
+                        <p>
+                            <label>
+                                @lr.AddressCountry :
+                            </label>
+                            <span>
+                                #:data.Country#
+                            </span>
+                        </p>
+                        #}#
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <img src='../#:data.ProfilePicture#' style="width:130px; height:130px !important" class='paddig' alt=''>
+            </div>
+
+
+
+        </div>
+    </div>
+</script>
+@*Detail Card Section*@
+@(Html.Kendo().Grid<TMS.Library.Entities.TMS.Program.Classes>()
+            .Name("ClassGrid")
+    .Columns(columns =>
+    {
+        columns.Bound(e => e.PrimaryClassTitle).ClientTemplate("#=ClassTemplate(data)#").Title("Classes");
+        columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(190).MinScreenWidth(550).Title("");
+    })
+     //.Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_ClassTemplate").DisplayDeleteConfirmation(false))
+     // .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>))
+     .Sortable()//.Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+     .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
+     .Scrollable()
+     //.Events(e => e.Edit("ClassNestedGrid_onEdit").Save("General_onSave"))
+     .HtmlAttributes(new { style = "height:400px !important;" })
+     .DataSource(dataSource => dataSource
+     .Ajax().Model(model => { model.Id(m => m.ID); })
+     .PageSize(5)
+     .Read(read => read.Action("TrainerClass_Read", "Program")))
+     .NoRecords(lr.GridNoRecordFoundMessage)
+)
+<script>
+        var enumClassType =  @(Html.Raw(Json.Encode(TMS.Extensions.EnumToSelectList<TMS.Library.ClassType>(typeof(TMS.Library.ClassType)).ToList())));
+        var enumClassFeeCurrency =@Html.Action("CurrenciesData", "DDl");
+</script>
+<script id="ClassTemplate" type="text/kendo">
+    <div class=''>
+        <div class=''>
+            <p>
+                <span class="heading">
+                    <b>
+                        #:data.PrimaryClassTitle#
+                    </b>
+                </span>
+            </p>
+            <p>
+                <label>
+                    Class Type:
+                </label>
+                <span>
+                    #:enumvalue(data.ClassTypeID,enumClassType)#
+                </span>
+            </p>
+            @*<p>
+                    <label>
+                        #:lr.ClassCourse#:
+                    </label>
+                    <span>
+                        #:data.CourseName#
+                    </span>
+                </p>*@
+            <p>
+                <label>
+                   Class Fee:
+                </label>
+                <span>
+                    #:data.ClassFee#  (#:enumvalue(data.FeeCurrency,enumClassFeeCurrency)#)
+                </span>
+            </p>
+            <p>
+                <label>
+                    Class Dates:
+                </label>
+                <label>
+                    #=kendo.toString(data.StartDate, '@DateFormatScript')# - #=kendo.toString(data.EndDate, '@DateFormatScript')#
+                </label>
+
+            </p>
+        </div>
+    </div>
+</script>
+<script>
+    function ClassNestedGrid_onEdit(e) {
+        //if current model is not new then remove the Name editor
+        var title = jQuery(e.container).parent().find(".k-window-title");
+        var update = jQuery(e.container).parent().find(".k-grid-update");
+        var cancel = jQuery(e.container).parent().find(".k-grid-cancel");
+        jQuery(cancel).html('<span class="k-icon k-i-cancel"></span>' + lr.CencelRecordGeneralButton);
+        if (e.model.isNew()) {
+            jQuery("#courseddl").hide();
+            jQuery(title).text(lr.AddRecordGeneralTitle);
+            jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.SaveRecordGeneralButton);
+            jQuery("#StartDate").data("kendoDatePicker").value(null);
+            jQuery("#EndDate").data("kendoDatePicker").value(null);
+            var ClassDurationType = jQuery("#CourseID").data('kendoDropDownList'); ClassDurationType.value('@Model'); ClassDurationType.trigger("change");
+        }
+        else {
+            jQuery(title).text(lr.EditRecordGeneralTitle);
+            jQuery("#courseddl").remove();
+            jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.UpdateRecordGeneralButton);
+        }
+        //
+    }
+
+    //Class
+    function ClassTemplate(data) {
+        if (data !== null) {
+            var ClassTemplate = kendo.template(jQuery("#ClassTemplate").html(), { useWithBlock: false });
+            return ClassTemplate(data);
+        }
+        return '';
+    }
+</script>
+@*End Detail Card Section*@
+
+<script type="text/javascript">
+    function PersonTemplate(data) {
+        if (data != null) {
+            var personTemplate = kendo.template(jQuery("#PersonTemplate").html(), { useWithBlock: false });
+            return personTemplate(data);
+        }
+        return '';
+    }
+</script>
+
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery(".tms-grid-add-main").live("mousedown", function (event) {
+            jQuery("#PersonGrid").data("kendoGrid").addRow();
+        });
+
+        //destroy from header
+        jQuery(".tms-grid-destroy-main").live("mousedown", function (event) {
+            grid = jQuery("#PersonDetailGrid").data("kendoGrid");
+            var selectedrow = jQuery("#PersonDetailGrid tr:nth(1)");
+
+            swal({
+                title: '@lr.Areyousureyouwanttodeletethisrecord',
+                text: '@lr.Youwillnotbeabletorecover',
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "@lr.confirmDelete",
+                cancelButtonText: "@lr.confirmNo",
+                closeOnConfirm: false,
+                closeOnCancel: true,
+                customClass:"tmsconfirm"
+            },
+               function(isConfirm){
+                   if (isConfirm) {
+                       jQuery("#PersonDetailGrid").data("kendoGrid").removeRow(selectedrow);
+                       swal({
+                           title: '@lr.confirmDeleted',
+                           text:  '@lr.confirmDeletedMessage',
+                           type: "success"
+                       },
+                    function(){
+                        window.location="@Url.Content("~/People/Person")";
+                    });
+                   }
+               });
+        });
+
+
+    //edit from header
+    jQuery(".tms-grid-edit-main").live("mousedown", function (event) {
+        jQuery("#PersonDetailGrid").data("kendoGrid").editRow(jQuery("#PersonDetailGrid tr:nth(1)"));
+    });
+    });
+
+    function onExpand(e) {
+        jQuery('html, body').animate({
+            scrollTop:  e.item.offsetTop
+        }, 1500);
+    }
+</script>
+
+
+<script>
+    var tms = tms || {};
+    (function ($) {
+
+        tms.person = tms.person || {};
+
+        tms.person.salutation = {
+            Not_Specified: 0,
+            Salutation_Mr: 1,
+            Salutation_Mrs: 2,
+            Salutation_Ms: 3,
+            Salutation_Dr: 4
+        };
+
+        tms.person.gender = {
+            Not_Specified: 0,
+            Gender_Male: 1,
+            Gender_Female: 2
+        };
+        tms.person.maritialStatus = {
+            Not_Specified: 0,
+            MaritialStatus_Single: 1,
+            MaritialStatus_Married: 2
+        };
+
+    })(jQuery);
+
+    var PicturelastUploadedFile; var personProfile_aid=0;var personattachmentname = null;
+    var person_parentFoldername=null
+    function PersonPictureOnSuccess(e) {
+        //debugger;
+        //PicturelastUploadedFile = e.response.filename;
+        var item = jQuery("#PersonDetailGrid").data("kendoGrid").dataItem(jQuery("#PersonDetailGrid tr:nth(1)"));
+        item.dirty = true;
+
+        PicturelastUploadedFile = e.response.parentFoldername;
+        personProfile_aid = e.response.aid;
+        person_parentFoldername=e.response.parentFoldername;
+    }
+    function PersonPictureOnRemove(e) {
+        e.data= {
+            parentFoldername: person_parentFoldername,
+            oid:@Model.UserID ,
+            Opentype: 1,
+            aid:personProfile_aid
+        }
+    }
+    function profile_UploadAttachmentData(e) {
+        e.data = { oid:@Model.UserID,otype:1 ,fileType:12};
+    }
+    function person_AttachmentSelect(e) {
+        var filename = e.files[0].name;
+        var dropvalue = checkfiletypeOrganizationlogo(e.files[0].extension.toLowerCase());
+        if (dropvalue == "-1") {
+            e.preventDefault();
+        } else {
+            personattachmentname = filename;
+        }
+    }
+    function checkfiletypeOrganizationlogo(filetype) {
+        switch (filetype) {
+            case ".jpg": case ".jpeg": case ".bmp": case ".png":
+                return "1";
+            default:
+                return "-1";
+                break;
+        }
+    }
+    var AttachmentlastUploadedFileArr = [];
+    function PersononAttachmentOnSuccess(e) {
+        var person = { uid: e.files[0].uid, name: e.response.filename, id: e.response.id };
+        AttachmentlastUploadedFileArr.push(person);
+    }
+    function PersonCreateAttachmentInfoData() {
+        return {
+            picturename: PicturelastUploadedFile,
+            attachmentname: AttachmentlastUploadedFileArr
+        }
+    }
+    function PersonProfilePictureData () {
+        return {
+            filename: PicturelastUploadedFile,
+            aid:  personProfile_aid
+        }
+    }
+
+    function PersonAttachmentsRemove(e) {
+        var findthiselem = jQuery.grep(AttachmentlastUploadedFileArr, function (v) {
+            return v.uid == e.files[0].uid;
+        });
+        var idvalue = findthiselem[0].id.toString()
+        AttachmentlastUploadedFileArr = jQuery.grep(AttachmentlastUploadedFileArr, function (v) {
+            return v.uid != e.files[0].uid;
+        });
+        e.data = {
+            file: idvalue
+        }
+    }
+
+    function SalutationChange(e) {
+        var dataItem = this.dataItem(e.item);
+        var salutation = parseInt(dataItem.Value);
+        var dropdownlist = jQuery("#Gender").data("kendoDropDownList");
+
+        switch (salutation) {
+            case tms.person.salutation.Salutation_Mr:
+                dropdownlist.value("1"); dropdownlist.trigger("change");
+                break;
+            case tms.person.salutation.Salutation_Mrs:
+                dropdownlist.value("2"); dropdownlist.trigger("change");
+                break;
+            case tms.person.salutation.Salutation_Ms:
+                dropdownlist.value("2"); dropdownlist.trigger("change");
+                break;
+            case tms.person.salutation.Salutation_Dr:
+                dropdownlist.value("0"); dropdownlist.trigger("change");
+                break;
+            default:
+                return true;
+        }
+    };
+</script>
+
+
+<script type="text/x-kendo-template" id="showrecordinserted">
+    <div class="alert alert-success">
+        <button data-dismiss="alert" class="close" type="button">×</button>
+        @lr.PersonRecordAddedSuccessfully<strong><a target="_blank" href="@Url.Content("~/People/Detail?pid=")#=data.ID#"> #=data.P_DisplayName#</a></strong>
+    </div>
+</script>
+<script>
+    function requestendpersongrid(e) {
+        if (e.type == "create") {
+            if(e.response.Data[0].ID!=0){
+                showaddedperson();
+            }
+        }
+    }
+    function showaddedperson() {
+        setTimeout(function () {
+            var showrecordinserted = kendo.template(jQuery("#showrecordinserted").html());
+            grid = jQuery("#PersonGrid").data("kendoGrid");
+            var selectedrow = jQuery("#PersonDetailGrid tr:nth(1)");
+            var data = grid.dataItem(selectedrow);
+            var recordaddedrow = showrecordinserted(data);
+            jQuery("#inforecords").append(recordaddedrow);
+        }, 50);
+    }
+</script>
+
+<div id="inforecords"></div>
+<style>
+    .person-box {
+        color: #0c4e6f;
+    }
+
+    #PersonDetailGrid > table tr:first-child td {
+        background: #e2f4fd;
+    }
+
+    #inforecords .alert-success {
+        padding: 5px 5px 5px 15px;
+        font-size: 13px;
+        margin-bottom: 3px;
+    }
+</style>
+
+
+
+@section Scripts
+{
+    <script src="@Url.Content("~/Views/Trainer/Trainer.js")"></script>
+}

@@ -1,0 +1,260 @@
+﻿@model TMS.Library.TMS.Persons.Person
+@{
+    var Salutation = TMS.Extensions.GetDisplayName(Model.SalutationID);
+}
+@using lr = Resources.Resources;
+<div class="container">
+    <div class="row">
+       
+        <div class="col-sm-9">
+
+            <!-- resumt -->
+            <div class="panel panel-default">
+                <div class="panel-heading resume-heading">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="col-xs-12 col-sm-8">
+                                <ul class="list-group">
+                                    <li class="list-group-item">John Doe</li>
+                                    <li class="list-group-item">Software Engineer</li>
+                                    <li class="list-group-item">Google Inc. </li>
+                                    <li class="list-group-item"><i class="fa fa-phone"></i> 000-000-0000 </li>
+                                    <li class="list-group-item"><i class="fa fa-envelope"></i> john@example.com</li>
+                                </ul>
+                            </div>                          
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bs-callout bs-callout-danger">
+                    <h4>Key Expertise</h4>
+                    @*<ul class="list-group">
+                        <li class="list-group-item"> Lorem ipsum dolor sit amet, ea vel prima adhuc </li>
+                        <li class="list-group-item"> Lorem ipsum dolor sit amet, ea vel prima adhuc</li>
+                        <li class="list-group-item"> Lorem ipsum dolor sit amet, ea vel prima adhuc</li>
+                        <li class="list-group-item"> Lorem ipsum dolor sit amet, ea vel prima adhuc</li>
+                        <li class="list-group-item">Lorem ipsum dolor sit amet, ea vel prima adhuc</li>
+                        <li class="list-group-item"> Lorem ipsum dolor sit amet, ea vel prima adhuc</li>
+                    </ul>*@
+                </div>
+                @*<div class="bs-callout bs-callout-danger">
+                    <h4>Language and Platform Skills</h4>
+                    <ul class="list-group">
+                        <a class="list-group-item inactive-link" href="#">
+                            <div class="progress">
+                                <div data-placement="top" style="width: 80%;"
+                                     aria-valuemax="100" aria-valuemin="0" aria-valuenow="80" role="progressbar" class="progress-bar progress-bar-success">
+                                    <span class="sr-only">80%</span>
+                                    <span class="progress-type">Java/ JavaEE/ Spring Framework </span>
+                                </div>
+                            </div>
+                            <div class="progress">
+                                <div data-placement="top" style="width: 70%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="1" role="progressbar" class="progress-bar progress-bar-success">
+                                    <span class="sr-only">70%</span>
+                                    <span class="progress-type">PHP/ Lamp Stack</span>
+                                </div>
+                            </div>
+                            <div class="progress">
+                                <div data-placement="top" style="width: 70%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="1" role="progressbar" class="progress-bar progress-bar-success">
+                                    <span class="sr-only">70%</span>
+                                    <span class="progress-type">JavaScript/ NodeJS/ MEAN stack </span>
+                                </div>
+                            </div>
+                            <div class="progress">
+                                <div data-placement="top" style="width: 65%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="1" role="progressbar" class="progress-bar progress-bar-warning">
+                                    <span class="sr-only">65%</span>
+                                    <span class="progress-type">Python/ Numpy/ Scipy</span>
+                                </div>
+                            </div>
+                            <div class="progress">
+                                <div data-placement="top" style="width: 60%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="60" role="progressbar" class="progress-bar progress-bar-warning">
+                                    <span class="sr-only">60%</span>
+                                    <span class="progress-type">C</span>
+                                </div>
+                            </div>
+                            <div class="progress">
+                                <div data-placement="top" style="width: 50%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" role="progressbar" class="progress-bar progress-bar-warning">
+                                    <span class="sr-only">50%</span>
+                                    <span class="progress-type">C++</span>
+                                </div>
+                            </div>
+                            <div class="progress">
+                                <div data-placement="top" style="width: 10%;" aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" role="progressbar" class="progress-bar progress-bar-danger">
+                                    <span class="sr-only">10%</span>
+                                    <span class="progress-type">Go</span>
+                                </div>
+                            </div>
+                            <div class="progress-meter">
+                                <div style="width: 25%;" class="meter meter-left"><span class="meter-text">I suck</span></div>
+                                <div style="width: 25%;" class="meter meter-left"><span class="meter-text">I know little</span></div>
+                                <div style="width: 30%;" class="meter meter-right"><span class="meter-text">I'm a guru</span></div>
+                                <div style="width: 20%;" class="meter meter-right"><span class="meter-text">I''m good</span></div>
+                            </div>
+                        </a>
+                    </ul>
+                </div>*@
+                <div class="bs-callout bs-callout-danger">
+                    <h4>Education</h4>
+                    <table class="table table-striped table-responsive ">
+                        <thead>
+                            <tr>
+                                <th>Degree</th>
+                                <th>Graduation Year</th>
+                                <th>CGPA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Masters in Computer Science and Engineering</td>
+                                <td>2014</td>
+                                <td> 3.50 </td>
+                            </tr>
+                            <tr>
+                                <td>BSc. in Computer Science and Engineering</td>
+                                <td>2011</td>
+                                <td> 3.25 </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- resume -->
+    </div>
+</div>
+        @*<div class="maincontent">
+            <div class="maincontentinner">
+                <div class="row">
+                    <div class="col-md-4 col-lg-4 profile-left">
+
+                        <div class="widgetbox profile-photo">
+                            <div class="headtitle">
+                                <div class="btn-group">
+                                    <button data-toggle="dropdown" class="btn dropdown-toggle">Action <span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Change Photo</a></li>
+                                        <li><a href="#">Remove Photo</a></li>
+                                    </ul>
+                                </div>
+                                <h4 class="widgettitle">Profile Photo</h4>
+                            </div>
+                            <div class="widgetcontent">
+                                <div class="profilethumb">
+                                    <img src="images/profilethumb.png" alt="" class="img-polaroid" />
+                                </div><!--profilethumb-->
+                            </div>
+                        </div>
+
+
+                        <div class="widgetbox tags">
+                            <h4 class="widgettitle">Tags</h4>
+                            <div class="widgetcontent">
+                                <ul class="taglist">
+                                    <li><a href="">HTML5 <span class="close">&times;</span></a></li>
+                                    <li><a href="">CSS <span class="close">&times;</span></a></li>
+                                    <li><a href="">PHP <span class="close">&times;</span></a></li>
+                                    <li><a href="">jQuery <span class="close">&times;</span></a></li>
+                                    <li><a href="">Java <span class="close">&times;</span></a></li>
+                                    <li><a href="">GWT <span class="close">&times;</span></a></li>
+                                    <li><a href="">CodeNgniter <span class="close">&times;</span></a></li>
+                                    <li><a href="">Bootstrap <span class="close">&times;</span></a></li>
+                                </ul>
+                                <a href="" style="display:block;margin-top:10px">+ Add Tag</a>
+                            </div>
+                        </div>
+
+                    </div><!--col-md-4-->
+                    <div class="col-md-7 col-lg-7">
+
+                        <form action="editprofile.html" class="editprofileform" method="post">
+
+                            <div class="widgetbox login-information">
+                                <h4 class="widgettitle">Login Information</h4>
+                                <div class="widgetcontent form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Username:</label>
+                                        <div class="col-md-10">
+                                            <input type="text" name="username" class="form-control" value="themepixels" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Email:</label>
+                                        <div class="col-md-10">
+                                            <input type="text" name="email" class="form-control" value="you@yourdomain.com" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Firstname:</label>
+                                        <div class="col-md-10">
+                                            <div class="divider10"></div>
+                                            <a href="" class="link">Change Password</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="widgetbox personal-information">
+                                <h4 class="widgettitle">Personal Information</h4>
+                                <div class="widgetcontent form-horizontal">
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Firstname:</label>
+                                        <div class="col-md-10">
+                                            <input type="text" name="firstname" class="form-control" value="Theme" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Lastname:</label>
+                                        <div class="col-md-10">
+                                            <input type="text" name="lastname" class="form-control" value="Pixels" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Location:</label>
+                                        <div class="col-md-10">
+                                            <input type="text" name="location" class="form-control" value="Cebu, Philippines" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Website:</label>
+                                        <div class="col-md-10">
+                                            <input type="text" name="website" class="form-control" value="http://themepixels.com/" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">About You:</label>
+                                        <div class="col-md-10">
+                                            <textarea name="about" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="widgetbox profile-notifications">
+                                <h4 class="widgettitle">Notifications</h4>
+                                <div class="widgetcontent">
+                                    <input type="checkbox" /> Email me when someone mentions me... <br />
+                                    <input type="checkbox" /> Email me when someone follows me...
+                                </div>
+                            </div>
+
+                            <p>
+                                <button type="submit" class="btn btn-primary">Update Profile</button> &nbsp; <a href="" class="btn btn-default">Deactivate your account</a>
+                            </p>
+
+                        </form>
+                    </div><!--col-md-8-->
+                </div><!--row-->
+
+             
+            </div><!--maincontentinner-->
+        </div>*@<!--maincontent-->

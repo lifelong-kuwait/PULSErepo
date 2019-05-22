@@ -1,0 +1,95 @@
+﻿@using lr = Resources.Resources;
+
+
+@(Html.Kendo().Grid<TMS.Library.Entities.Common.Configuration.Categories.TMSCategories>()
+        .Name("CategoriesGrid")
+        .Columns(columns =>
+        {
+            columns.Bound(e => e.PrimaryCategoryName).ClientTemplate("#=CategoriesTemplate(data)#");
+            columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy);
+
+            //  columns.Bound(e => e. UpdatedByAlias).Width(230).Title(lr.ModifiedBy).ClientTemplate(@"<div class='gridupdated'>
+            //    <span class='Addedby' >#:UpdatedByAlias#</span>
+            //    <span class='date' >#=kendo.toString(UpdatedDate,'" + DateFormatScript + @"')#</span>
+            //    <span class='time' >#=kendo.toString(UpdatedDate,'" + TimeFormatScript + @"')#</span>
+            //</div>");
+            columns.Bound(e => e.UpdatedByAlias).Width(170).Title(lr.ModifiedBy).
+ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"<span class='Addedby'>#=UpdatedByAlias# </span>
+    <span class='date' >#=kendo.toString(UpdatedDate,'" + DateFormatScript + @"')#</span>
+<span class='time' >#=kendo.toString(UpdatedDate,'" + TimeFormatScript + @"')#</span>
+" + @"#} else {#<div>Not Modified</div> </div>#}#");
+        })
+         .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>)).Selectable(e => e.Mode(GridSelectionMode.Multiple))
+        .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_CategoriesTemplate").DisplayDeleteConfirmation(false))
+       .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+     .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
+     .Scrollable()
+     .Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
+     .HtmlAttributes(new { style = "height:700px !important;" })
+        .DataSource(dataSource => dataSource.Ajax().PageSize(10).Model(model => { model.Id(p => p.ID); })
+        .Read(read => read.Action("Categories_Read", "Config").Data("withSearch"))
+        .Update(update => update.Action("Categories_Update", "Config"))
+        .Destroy(update => update.Action("Categories_Destroy", "Config"))
+        .Create(update => update.Action("Categories_Create", "Config"))
+        .Events(events => events.Error("GeneralErrorHandler(\"CategoriesGrid\")").RequestEnd("GridRequestEndUpdate")))
+        .NoRecords(lr.GridNoRecordFoundMessage)
+)
+@helper RenderAddTemplate()
+{
+    <div class="toolbar">
+        @if (User.IsInRole("CanAddEditCategory"))
+        {
+            <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+            <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>}
+
+        @if (User.IsInRole("CanDeleteCategory"))
+        {
+            <a class="k-button tms-grid-destroy "><span class="tms-grid-icon mdi mdi-delete "></span></a>
+        }
+    </div>
+    @*@Html.Partial("Static/_gridSearchWidget", lr.CategoryTitle)*@
+
+}
+
+
+<script>
+    var enumCategoryType =  @(Html.Raw(Json.Encode(TMS.Extensions.EnumToSelectList<TMS.Library.CategoryType>(typeof(TMS.Library.CategoryType)).ToList())));
+    function CategoriesTemplate(d) {
+        if (d !== null) {
+            var CategoriesTemplate = kendo.template(jQuery("#CategoriesTemplate").html(), { useWithBlock: false });
+            return CategoriesTemplate(d);
+        }
+        return '';
+    }
+</script>
+
+<script id="CategoriesTemplate" type="text/kendo">
+    <div class=''>
+        <div class=''>
+            <p>
+                <span class="heading">
+                    <b>
+                        #:data.PrimaryCategoryName#
+                    </b>
+                </span>
+            </p>
+
+            <p>
+                <label>
+                    @lr.CategoryType :
+                </label>
+                <span>
+                    #:enumvalue(data.CategoryType,enumCategoryType)#
+                </span>
+            </p>
+            <p>
+                <label>
+                    @lr.VendorCode :
+                </label>
+                <span>
+                    #:data.Code#   #if (data.IsActive){ # <span class="mdi mdi-checkbox-blank-circle text-success"></span>    #}else{#  <span class="mdi mdi-checkbox-blank-circle-outline"></span>  #}#
+                </span>
+            </p>
+        </div>
+    </div>
+</script>

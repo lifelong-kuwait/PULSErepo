@@ -1,0 +1,46 @@
+﻿@model string
+@using lr = Resources.Resources;
+
+<div class="ChildGrid">
+    @(Html.Kendo().Grid<TMS.Library.TMS.Organization.POC.PointsOfContact>()
+                                    .Name("OrganizationPointsOfContact" + Model)
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.PersonName).Width(200);
+          columns.Bound(c => c.RelationName).Width(200);
+          columns.Bound(p => p.IsPrimary).ClientTemplate(
+         "<input type='checkbox' disabled='true' value='#= IsPrimary #' " +
+         "# if (IsPrimary) { #" +
+        "checked='checked'" +
+         "# } #" +
+         " />"
+     ).Title(lr.GridIsPrimary).Width(80).MinScreenWidth(150);
+          columns.Bound(c => c.CreatedBy).Width(200);
+      }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_PointOfContactTemplate").DisplayDeleteConfirmation(false))
+     .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>))
+            .Sortable().Selectable(selectable => selectable
+            .Mode(GridSelectionMode.Multiple))
+            .Pageable(pager => pager
+            .Refresh(true))
+            .Scrollable().Filterable().Events(e => e.Edit("PointOfConctact_EditEvent").Save("General_onSave"))
+            .HtmlAttributes(new { style = "height:350px;" })
+            .DataSource(dataSource => dataSource
+            .Ajax()
+            .Model(model => { model.Id(m => m.ID); }).PageSize(5)
+                    .Read(read => read.Action("PointOfContact_Read", "Organization", new { oid = Model }))
+                    .Create(read => read.Action("PointOfContact_Create", "Organization", new { oid = Model }))
+                    .Update(read => read.Action("PointOfContact_Update", "Organization"))
+                    .Destroy(read => read.Action("PointOfContact_Destroy", "Organization"))
+                                               .Events(e => e.Error("GeneralErrorHandler(\"OrganizationPointsOfContact" + Model + "\")").RequestEnd("GridRequestEndUpdate"))
+            ).NoRecords(lr.GridNoRecordFoundMessage)
+    )
+</div>
+@helper RenderAddTemplate()
+{
+<div class="toolbar">
+        <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+        <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+        <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+    </div>
+
+}

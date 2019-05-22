@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<localizationDictionary culture="ar-KW">
+  <texts>
+    <!--Sweet alerts basics Oveerrides-->
+    <text name="AreYouSure" value="AreYouSure" />
+    <text name="Yes" value="Yes" />
+    <text name="No" value="No" />
+    <!--Sweet alerts basics Oveerrides-->
+
+    <!-- Footer-->
+    <text name="FooterCompanyName" value="2016.LifeLong" />
+    <text name="AllRightsReserved" value="All Rights Reserved" />
+    <!-- Footer-->
+
+    <!--Login-->
+    <text name="Invalidpassword" value="Username or password incorrect." />
+    <text name="EnterUsername" value="Enter username" />
+    <text name="EnterPassword" value="Enter password" />
+    <text name="SignIn" value="Sign In" />
+    <text name="KeepMeSignIn" value="Keep me sign in" />
+    <text name="UserNameRequired" value="Please enter your email" />
+    <text name="UserNameValidationInvalid" value="Please enter a valid email" />
+    <text name="UserNamePassword" value="Please enter your password" />
+
+
+
+
+    <!--Login-->
+  </texts>
+</localizationDictionary>

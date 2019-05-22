@@ -1,0 +1,356 @@
+﻿@using lr = Resources.Resources;
+@{
+    var Model = (TMS.Library.TMS.Organization.OrganizationModel)ViewData["model"];
+    string Title = "";
+    if (Model.FullName != null) { Title = Model.FullName; } else { Title = Model.ShortName; }
+    ViewBag.Title = Title;
+
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+    List<TMS.Library.TMS.Organization.OrganizationModel> modellist = new List<TMS.Library.TMS.Organization.OrganizationModel>() { Model };
+}
+@Html.AntiForgeryToken()
+<div id="inforecords"></div>
+@(Html.Kendo().Grid<TMS.Library.TMS.Organization.OrganizationModel>(modellist)
+        .Name("OrganizationDetailGrid")
+    .Columns(columns =>
+    {
+        columns.Bound(e => e.FullName).ClientTemplate("#=OrganizationTemplate(data)#").HeaderHtmlAttributes(new { @style = "display: none" });
+    }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_OrganizationDetailTemplate").DisplayDeleteConfirmation(false))
+      .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate() </text>))
+                        .Events(e => e.Edit("OrganizationDetailGrid_onEdit").Save("General_onSave"))
+    .DataSource(dataSource => dataSource
+    .Ajax().Model(model => { model.Id(m => m.ID); })
+         .Read(read => read.Action("Organization_Read", "Organization"))
+         .Create(read => read.Action("Organization_Create", "Organization"))
+         .Destroy(read => read.Action("Organization_Destroy", "Organization"))
+             .Update(read => read.Action("Organization_Update", "Organization").Data("OrganizationGetLogo"))
+                                 .Events(e => e.Error("GeneralErrorHandler(\"OrganizationDetailGrid\")")))
+    .NoRecords(lr.GridNoRecordFoundMessage)
+)
+@helper RenderAddTemplate()
+{
+    <div class="toolbar">
+        @if (User.IsInRole("CanAddEditOrganization"))
+        {
+            <a class="k-button tms-grid-add-main"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+            <a class="k-button tms-grid-edit-main"><span class="tms-grid-icon mdi mdi-pencil "></span></a>}
+
+        @if (User.IsInRole("CanDeleteOrganization"))
+        {
+            <a class="k-button tms-grid-destroy-main "><span class="tms-grid-icon mdi mdi-delete "></span></a>
+        }
+    </div>
+}
+<script id="OrganizationTemplate" type="text/kendo">
+    <div class='person-box'>
+        <div class='person'>
+            <img src='../#:data.LogoPicture#' class='paddig' alt=''>
+            <h2>@Title</h2>
+            #if(data.P_DisplayName !=null){#<h2>#:data.P_DisplayName#   #if(data.Purpose !=null){#(#:data.Purpose#) #}# </h2> #}#
+            #if(data.PersonEmail !=null){#<h3>#:data.PersonEmail#</h3> #}#
+            #if(data.CountryCode!=null){# <h3>
+                #:data.CountryCode# #}#  #if(data.ContactNumber!=null){# #:data.ContactNumber# #}#
+                #if(data.Extension!=null){#( #:data.Extension#)
+            </h3>#}#
+        </div>
+    </div>
+</script>
+
+<script type="text/javascript">
+    function OrganizationTemplate(data) {
+        if (data != null) {
+            var organizationTemplate = kendo.template(jQuery("#OrganizationTemplate").html(), { useWithBlock: false });
+            return organizationTemplate(data);
+        }
+        return '';
+    }
+</script>
+
+<script type="text/javascript">
+    jQuery(function () {
+
+        jQuery(".tms-grid-add-main").live("mousedown", function (event) {
+            jQuery("#OrganizationGrid").data("kendoGrid").addRow();
+        });
+
+        //destroy from header
+        jQuery(".tms-grid-destroy-main").live("mousedown", function (event) {
+            grid = jQuery("#OrganizationDetailGrid").data("kendoGrid");
+            var selectedrow = jQuery("#OrganizationDetailGrid tr:nth(1)");
+            swal({
+                title: '@lr.Areyousureyouwanttodeletethisrecord',
+                text: '@lr.Youwillnotbeabletorecover',
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "@lr.confirmDelete",
+                cancelButtonText: "@lr.confirmNo",
+                closeOnConfirm: false,
+                closeOnCancel: true,
+                customClass:"tmsconfirm"
+            },
+        function(isConfirm){
+            if (isConfirm) {
+                jQuery("#PersonDetailGrid").data("kendoGrid").removeRow(selectedrow);
+                swal({
+                    title: '@lr.confirmDeleted',
+                    text:  '@lr.confirmDeletedMessage',
+                    type: "success"
+                },
+             function(){
+                 window.location="@Url.Content("~/People/Person")";
+             });
+            }
+        });
+
+        });
+        //edit from header
+        jQuery(".tms-grid-edit-main").live("mousedown", function (event) {
+            // jQuery("#OrganizationDetailGrid").data("kendoGrid").editRow(jQuery("#OrganizationDetailGrid tr:nth(1)"));
+            var selectedrow =jQuery("#OrganizationDetailGrid tr:nth(1)");
+            if (selectedrow.length == 1) { currentRowId = selectedrow.data().uid; jQuery("#OrganizationDetailGrid").data("kendoGrid").editRow(selectedrow); }
+        });
+    });
+
+    function onExpand(e) {
+        jQuery('html, body').animate({
+            scrollTop:  e.item.offsetTop
+        }, 1500);
+    }
+</script>
+
+@(Html.Kendo().PanelBar()
+        .Name("OrganizationDetailGridChildtemplate" + Model.ID)
+    .ExpandMode(PanelBarExpandMode.Multiple)
+    .Items(i =>
+    {
+        i.Add().Text(lr.PointofContactTabTitle).LoadContentFrom("PointOfContact", "Organization", new { oid = Model.ID });
+        //i.Add().Text(lr.ClassLanguage).LoadContentFrom("OrganizationLanguage", "Organization", new { oid = Model.ID });
+        i.Add().Text(lr.ResourcePageTitle).LoadContentFrom("Resources", "Organization", new { oid = Model.ID });
+        i.Add().Text(lr.AddressTabTitle).LoadContentFrom("OrganizationAddress", "Contact", new { oid = Model.ID });
+        i.Add().Text(lr.LinkTabTitle).LoadContentFrom("OrganizationLinks", "Contact", new { oid = Model.ID });
+        if (User.IsInAnyRoles("CanViewOrganizationAttachments", "CanViewOrganizationNotes"))
+        {
+            i.Add().Text(lr.OthersTabTitle).LoadContentFrom("Others", "Organization", new { oid = Model.ID });
+        }
+
+    }).Events(e => e.Expand("onExpand")))
+
+<script>
+    var OrganizationProfile_aid;var Organizationattachmentname = null;
+    var Organization_parentFoldername=null
+    function OrganizationLogoOnSuccess(e) {
+        Organization_parentFoldername = e.response.parentFoldername;
+        OrganizationProfile_aid = e.response.aid;
+        if (currentRowId != null) {
+            var item = jQuery("#OrganizationDetailGrid").data("kendoGrid").dataItem(jQuery("#OrganizationDetailGrid tr:nth(1)"));
+            currentRowId = null;
+            item.dirty = true;
+        }
+    }
+    function OrganizationGetLogo() {
+        return {
+            filename: Organization_parentFoldername,
+            aid:  OrganizationProfile_aid
+        }
+    }
+
+    function OrganizationPictureOnRemove(e) {
+        e.data= {
+            parentFoldername: Organization_parentFoldername,
+            oid:@Model.ID ,
+            Opentype: 2,
+            aid:OrganizationProfile_aid
+        }
+    }
+    function Organization_UploadAttachmentData(e) {
+        e.data = { oid:@Model.ID,otype:2 ,fileType:12};
+    }
+    function Organization_AttachmentSelect(e) {
+        var filename = e.files[0].name;
+        var dropvalue = checkfiletypeOrganizationlogo(e.files[0].extension.toLowerCase());
+        if (dropvalue == "-1") {
+            e.preventDefault();
+        } else {
+            Organizationattachmentname = filename;
+        }
+    }
+    function checkfiletypeOrganizationlogo(filetype) {
+        switch (filetype) {
+            case ".jpg": case ".jpeg": case ".bmp": case ".png":
+                return "1";
+            default:
+                return "-1";
+                break;
+        }
+    }
+</script>
+
+
+<script>
+
+
+    function OrganizationDetailGrid_onEdit(e) {
+        var title = jQuery(e.container).parent().find(".k-window-title");
+        var update = jQuery(e.container).parent().find(".k-grid-update");
+        var cancel = jQuery(e.container).parent().find(".k-grid-cancel");
+        jQuery(cancel).html('<span class="k-icon k-i-cancel"></span>' + lr.CencelRecordGeneralButton);
+        if (e.model.isNew()) {
+            // add
+            jQuery("#personeditdiv").hide();
+            jQuery(title).text(lr.AddRecordGeneralTitle);
+            jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.SaveRecordGeneralButton);
+
+        } else {
+            // edit
+            jQuery("#personeditdiv").show();
+            jQuery(title).text(lr.EditRecordGeneralTitle);
+            jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.UpdateRecordGeneralButton);
+        }
+        PicturelastUploadedFile = null;
+    }
+
+</script>
+@(Html.Kendo().Grid<TMS.Library.TMS.Organization.OrganizationModel>()
+     .Name("OrganizationGrid")
+     .Columns(columns => { columns.Bound(e => e.FullName); }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_OrganizationTemplate"))
+                 .Events(e => e.Edit("OrganizationIndexGrid_onEdit").Save("General_onSave"))
+ .HtmlAttributes(new { style = "display:none" })
+ .DataSource(dataSource => dataSource
+ .Ajax().Model(model => { model.Id(m => m.ID); })
+                 .Create(read => read.Action("Organization_Create", "Organization").Data("OrganizationIndexGetLogo"))
+         .Events(e => e.Error("GeneralErrorHandler(\"OrganizationGrid\")").RequestEnd("requestendOrganizationGrid")))
+)
+<script type="text/x-kendo-template" id="showrecordinserted">
+    <div class="alert alert-success">
+        <button data-dismiss="alert" class="close" type="button">×</button>
+        @lr.PersonRecordAddedSuccessfully<strong><a target="_blank" href="@Url.Content("~/Organization/Detail?oid=")#=data.ID#"> #:data.FullName ==null ? data.ShortName: data.FullName#</a></strong>
+    </div>
+</script>
+<script>
+
+    var OrganizationIndexLogo;
+    var OrganizationIndex_aid=0; var OrganizationIndexattachmentname = null;
+    function OrganizationIndexLogoSuccess(e) {
+        OrganizationIndexLogo = e.response.parentFoldername;
+        OrganizationIndex_aid = e.response.aid;
+    }
+    function OrganizationIndexGetLogo() {
+        return {
+            filename: OrganizationIndexLogo,
+            aid: OrganizationIndex_aid
+        }
+    }
+
+    function OrganizationIndexOnRemove(e) {
+        e.data= {
+            aid:OrganizationIndex_aid
+        }
+    }
+    function OrganizationIndexAttachmentData(e) {
+
+    }
+    function OrganizationIndexAttachmentSelect(e) {
+        var filename = e.files[0].name;
+        var dropvalue = checkfiletypeOrganizationlogo(e.files[0].extension.toLowerCase());
+        if (dropvalue == "-1") {
+            e.preventDefault();
+        } else {
+            OrganizationIndexattachmentname = filename;
+        }
+    }
+
+    function OrganizationIndexGrid_onEdit(e) {
+        //if current model is not new then remove the Name editor
+
+        var title = jQuery(e.container).parent().find(".k-window-title");
+        var update = jQuery(e.container).parent().find(".k-grid-update");
+        var cancel = jQuery(e.container).parent().find(".k-grid-cancel");
+        //jQuery('<a class="k-button k-button-icontext k-grid-update custom" href="\\#"><span class="k-icon k-i-check"></span>Save & New</a>').insertBefore(".k-grid-update");
+        jQuery(cancel).html('<span class="k-icon k-i-cancel"></span>' + lr.CencelRecordGeneralButton);
+        if (e.model.isNew()) {
+            // add
+            jQuery(title).text(lr.AddRecordGeneralTitle);
+            jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.SaveRecordGeneralButton);
+
+
+            jQuery("#fileupload").kendoUpload({
+                // files:files,
+                multiple: false,
+                async: {
+                    saveUrl: '@Url.Content("~/Attachment/SaveOrganizationLogo")',
+                    removeUrl: '@Url.Content("~/Attachment/RemoveOrganizationLogo")',
+                    autoUpload: true
+                },
+                remove: OrganizationIndexOnRemove,
+                success: OrganizationIndexLogoSuccess,
+                select: OrganizationIndexAttachmentSelect,
+                //upload: UploadAttachmentData
+            });
+        } else {
+
+
+            jQuery(title).text(lr.EditRecordGeneralTitle);
+            jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.UpdateRecordGeneralButton);
+        }
+        //
+    }
+
+    function requestendOrganizationGrid(e) {
+        if (e.type == "create") {
+            showaddedorganization();
+        }
+    }
+    function showaddedorganization() {
+        setTimeout(function () {
+            var showrecordinserted = kendo.template(jQuery("#showrecordinserted").html());
+            grid = jQuery("#OrganizationGrid").data("kendoGrid");
+            var selectedrow = jQuery("#OrganizationDetailGrid tr:nth(1)");
+            var data = grid.dataItem(selectedrow);
+            var recordaddedrow = showrecordinserted(data);
+            jQuery("#inforecords").append(recordaddedrow);
+        }, 50);
+    }
+</script>
+
+<div id="inforecords"></div>
+<style>
+    .person-box {
+        color: #0c4e6f;
+    }
+
+    #PersonDetailGrid > table tr:first-child td {
+        background: #e2f4fd;
+    }
+
+    #inforecords .alert-success {
+        padding: 5px 5px 5px 15px;
+        font-size: 13px;
+        margin-bottom: 3px;
+    }
+</style>
+@section Scripts
+{
+    <script src="@Url.Content("~/Views/Organization/Organization.js")"></script>
+}
+@*This is for the point of contact editing*@
+<script>
+    function PointOfConctact_EditEvent(e) {
+        var title = jQuery(e.container).parent().find(".k-window-title");
+        var update = jQuery(e.container).parent().find(".k-grid-update");
+        var cancel = jQuery(e.container).parent().find(".k-grid-cancel");
+        jQuery(cancel).html('<span class="k-icon k-i-cancel"></span>' + lr.CencelRecordGeneralButton);
+        if (e.model.isNew()) {
+            // add
+            jQuery(title).text(lr.AddRecordGeneralTitle);
+            jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.SaveRecordGeneralButton);
+
+        } else {
+            jQuery(".UserDDL").hide();
+            var dropdownlist = jQuery("#PersonID").data("kendoDropDownList");
+            dropdownlist.enable(false);
+            jQuery(title).text(lr.EditRecordGeneralTitle);
+            jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.UpdateRecordGeneralButton);
+        }
+    }
+</script>

@@ -1,0 +1,122 @@
+﻿@model TMS.Library.Entities.TMS.Program.ClassTraineeMapping
+@using lr = Resources.Resources
+@using Kendo.Mvc.UI.Fluent;
+
+@*<script id="PersonAsTrainerTempalte" type="text/kendo">
+    <div class=''>
+        <div class=''>
+            <p>
+                <span class="heading">
+                    <b>
+                        #:data.P_DisplayName# # if (data.NickName!=null){ #(#:data.NickName#)  #}#
+                    </b>
+                </span>
+            </p>
+
+            <p>
+                <label>
+                    #:data.PersonRegCode#
+                </label>
+                <span>
+
+                </span>
+            </p>
+            <p>
+                <label>
+                    # if (data.Email!=null) { #  #:data.Email# #}#
+                </label>
+                <span>
+
+                </span>
+            </p>
+        </div>
+    </div>
+</script>*@
+
+<script id="PersonAsTraineeTempalte" type="text/kendo">
+    <div class=''>
+        <div class=''>
+            <p>
+                <span class="heading">
+                    <b>
+                        #:data.P_DisplayName# # if (data.NickName!=null){ #(#:data.NickName#)  #}#
+                    </b>
+                </span>
+            </p>
+
+            <p>
+                <label>
+                    #:data.PersonRegCode#
+                </label>
+                <span>
+
+                </span>
+            </p>
+            <p>
+                <label>
+                    #:data.ID#
+                </label>
+                <span>
+
+                </span>
+            </p>
+            <p>
+                <label>
+                    # if (data.Email!=null) { #  #:data.Email# #}#
+                </label>
+                <span>
+
+                </span>
+            </p>
+        </div>
+    </div>
+</script>
+<script type="text/javascript">
+    function PersonAsTraineeTempalte(data) {
+        if (data != null) {
+            var personTemplate = kendo.template(jQuery("#PersonAsTraineeTempalte").html(), { useWithBlock: false });
+            return personTemplate(data);
+        }
+        return '';
+    }
+
+    function onTraineePersonsChange(arg) {
+        personids = this.selectedKeyNames().join(',');
+       
+    }
+
+   
+
+</script>
+
+@(Html.Kendo().Grid<TMS.Library.TMS.Persons.Person>()
+            .Name("TraineePersons")
+      .Columns(columns =>
+      {
+          
+          columns.Select().Width(50).HeaderTemplate("");
+          columns.Bound(e => e.PersonRegCode).Title(lr.Trainee).ClientTemplate("#=PersonAsTraineeTempalte(data)#");
+          columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy);
+      })
+        .Sortable()
+        //.Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+       .PersistSelection()
+         //.Events(ev => ev.Change("onChange"))
+        .Events(e => e.Edit("Grid_onEdit").Save("General_onSave").Change("onTraineePersonsChange"))
+        .Pageable(pager => pager.Refresh(true)).Scrollable().Filterable()
+        .HtmlAttributes(new { style = "height:550px;" }).DataSource(dataSource =>
+        dataSource.Ajax()
+        .Model(model =>
+        {
+            model.Id(p => p.ID);
+            //model.Field(p => p.ID).Editable(false);
+        }
+        )
+.PageSize(10)
+.Read(read => read.Action("ManageTraineePerson_Read", "Program", new { ClassID = Convert.ToInt64(ViewData["ClassID"]) }))
+.Events(e => e.Error("GeneralErrorHandler(\"TraineePersons\")").RequestEnd("GridRequestEndUpdate"))
+        ).NoRecords(lr.GridNoRecordFoundMessage)
+)
+
+
+

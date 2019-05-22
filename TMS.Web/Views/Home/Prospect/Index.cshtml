@@ -1,0 +1,509 @@
+﻿@using lr = Resources.Resources;
+@{
+    ViewBag.Title = lr.PersonPageTitle;
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+    var phonenubner = lr.PersonPhoneNumber;
+    var personEmail = lr.PersonContactEmail;
+    var gender = lr.Gender;
+
+}
+<h2>@lr.ProspectsList</h2>
+@(Html.Kendo().Grid<TMS.Library.TMS.Persons.Person>()
+    .Name("PersonGrid")
+    .Columns(columns =>
+    {
+        columns.Bound(e => e.P_DisplayName).ClientTemplate(@"<div  class='person-box'>
+                <div class='person'>
+                   " +
+                    @" <h2>#:P_DisplayName#</h2>"+ @" <h5>Client Status: #:ClientStatusValue#</h5>"
+                    + @" <h5>Assigned To: #:UserName#</h5>" +
+                    @"# if (Email!=null) { #" +
+                    @"<p>" + personEmail + @"::#:Email#</p> #} if(ContactNumber!=null){#<h5>" + phonenubner + @"::#:ContactNumber#</h5> #}#
+                    #if(Gender!=0){#<h5>" + gender + @"::#:GenderValue#</h5> #}#
+                  
+                </div>"
+               // <img src='../#:ProfilePicture#' class='paddig'  alt=''>
+               );
+        columns.Bound(e => e.PClassTitle).Title(lr.ScheduleClasses).ClientTemplate(@"# if (ScheduleClasses!=null) { #" + @"#=ScheduleClasses#" + @"#} else {#<div>No Schedule Classe added yet</div>#}#").Width(145);
+        columns.Bound(e => e.PClassTitle).Title("Proposed Classes").ClientTemplate(@"# if (PClassTitle!=null) { #" + @"#=PClassTitle#" +@"#} else {#<div>No Proposed Classes added yet</div>#}#").Width(145);
+        columns.Bound(e => e.AddedByAlias).Width(150).Title(lr.GridAddedBy).ClientTemplate(@"<div class='gridaddedby'>
+            <span class='Addedby' >#:AddedByAlias#</span>
+            <span class='date' >#=kendo.toString(CreatedDate,'" + DateFormatScript + @"')#</span>
+            <span class='time' >#=kendo.toString(CreatedDate,'" + TimeFormatScript + @"')#</span>
+        </div>");
+
+        columns.Bound(e => e.UpdatedByAlias).Width(170).Title(lr.ModifiedBy).
+        ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"<span class='Addedby'>#=UpdatedByAlias# </span>
+    <span class='date' >#=kendo.toString(UpdatedDate,'" + DateFormatScript + @"')#</span>
+<span class='time' >#=kendo.toString(UpdatedDate,'" + TimeFormatScript + @"')#</span>
+" + @"#} else {#<div>Not Modified</div> </div>#}#");
+        //.ClientTemplate(@"<div class='gridupdated'>
+        //    <span class='Addedby' >#:UpdatedByAlias#</span>
+        //    <span class='date' >#=kendo.toString(UpdatedDate,'" + DateFormatScript + @"')#</span>
+        //    <span class='time' >#=kendo.toString(UpdatedDate,'" + TimeFormatScript + @"')#</span>
+        //</div>");
+
+    })
+    .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_ProspectTemplate").DisplayDeleteConfirmation(false))
+    .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>)).Groupable()
+    .Sortable().Selectable(selectable => selectable
+    .Mode(GridSelectionMode.Multiple))
+    .Pageable(pager => pager
+    .Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
+    .Scrollable()
+    //.ClientDetailTemplateId("PersonGridChildtemplate")
+    .Filterable().Events(e => e.Edit("PersonGrid_onEdit").Save("Person_onSave"))
+    .HtmlAttributes(new { style = "height:700px !important;" })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Model(model =>
+        {
+            model.Id(m => m.ID);
+            model.Field(p => p.Flags).DefaultValue(new List<TMS.Library.TMS.Admin.Config.PersonFlagsNested>());
+        })
+        .PageSize(15)
+        .Read(read => read.Action("Person_Read", "Prospect").Data("withSearch"))
+        .Create(read => read.Action("Person_Create", "Prospect").Data("PersonCreateAttachmentInfoData"))
+        .Destroy(read => read.Action("Person_Destroy", "Prospect"))
+        .Update(read => read.Action("Person_Update", "Prospect").Data("PersonProfilePictureData"))
+        .Events(e => e.Error("GeneralErrorHandler(\"PersonGrid\")"))
+        ).NoRecords(lr.GridNoRecordFoundMessage)
+)
+
+@{Html.Kendo().Window()
+    .Name("RecordDetailModal")
+    .Draggable(true)
+    .Title("Record Details")
+    .Width(765)
+    .Resizable()
+    .Scrollable(true)
+    .Visible(false)
+    .Modal(true)
+    .Iframe(false)
+    .Render();
+}
+@helper RenderAddTemplate()
+{
+    <div class="toolbar">
+        @if (User.IsInRole("CanAddEditProspects"))
+        {
+            <a class="k-button tms-grid-add" title="" data-placement="left" data-toggle="tooltip" data-original-title="Tooltip on left"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+            <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+        }
+        @if (User.IsInRole("CanDeleteProspect"))
+        {
+            <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>}
+        @if (User.IsInRole("CanViewProspectDetail"))
+        { <a class="k-button tms-grid-detail"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>}
+        @*<a class="k-button tms-grid-exitapp"><span class="tms-grid-icon mdi mdi-exit-to-app "></span></a>*@
+        @if (User.IsInRole("CanAddEditForwardCall"))
+        {
+            <a class="k-button tms-grid-phone"><span class="tms-grid-icon mdi mdi-phone-settings "></span></a>
+        }
+      
+    </div>
+}
+<script type="text/kendo" id="FlagsTemplateformat">
+    <div>
+        #for(var i = 0; i< data.length; i++){#
+        <i class="mdi mdi-flag-triangle tms-flag-icon" style="color:#:data[i].FlagColor#" title="#:data[i].P_FlagName#"></i>
+        #}#
+    </div>
+</script>
+
+<script type="text/javascript">
+    function FlagsTemplate(data) {
+        debugger;
+        if (data != null) {
+            var FlagsTemplate = kendo.template(jQuery("#FlagsTemplateformat").html(), { useWithBlock: false });
+            return FlagsTemplate(data);
+        }
+        return '';
+    }
+    jQuery(function () {
+        debugger;
+        var template = kendo.template(jQuery("#toolTipTemplate").html());
+        //initialize tooltip to grid tbody with filter cells with given CSS class
+        var tooltip = jQuery("#PersonGrid tbody").kendoTooltip({
+            position: "center",
+            autoHide: false,
+            filter: "td:nth-child(1)",
+            showOn: "click",
+            show: function (e) {
+                //get current target row
+                this.popup.element.addClass("tmstooltip");
+                var currentRow = this.target().closest("tr");
+                var grid = jQuery("#PersonGrid").data("kendoGrid");
+                //get current row dataItem
+                var dataItem = grid.dataItem(currentRow);
+
+                //pass the dataItem to the template
+                var generatedTemplate = template(dataItem);
+                //set the generated template to the content of the tooltip
+                this.content.html(generatedTemplate);
+            },
+        }).data("kendoTooltip");
+        jQuery(".edit").live("mousedown", function (event) {
+            debugger;
+            jQuery("#PersonGrid").data("kendoGrid").editRow(jQuery("[data-uid='" + jQuery(this).attr("dat-uid") + "']"));
+        });
+
+        jQuery(".phone").live("mousedown", function (event) {
+            var checkedLength = jQuery("#PersonGrid tr.k-state-selected").length;
+            if (checkedLength == 1) {
+                //jQuery("#Users").data("kendoGrid").editRow(jQuery("#Users tr.k-state-selected"));
+
+                grid = jQuery("#PersonGrid").data("kendoGrid");
+                var data = grid.dataItem(jQuery("#PersonGrid tr.k-state-selected"));
+                var ID = data.ID;
+
+                var response = jQuery.ajax({
+                    method: "post",
+                    url: "/Prospect/ManageForword_Create?pid="+ID,
+                    @*url = '@Url.Content("/Prospect/ManageForword_Create?pid=")' + data.ID,*@
+                    dataType: "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ ID: ID }),
+                    success: function (msg) {
+                        var grid = jQuery("#PersonGrid").data("kendoGrid");
+                        grid.dataSource.read();
+                    }
+
+                });
+
+            } else {
+
+            }
+
+        });
+        jQuery(".delete").live("mousedown", function (event) {
+            debugger;
+            grid = jQuery("#PersonGrid").data("kendoGrid");
+            var selectedRows = jQuery("#PersonGrid tr.k-state-selected");
+            var checkedLength = selectedRows.length;
+            var checkedLength = selectedRows.length;
+            if (checkedLength == 1) {
+                var grid = jQuery("#PersonGrid").data("kendoGrid");
+                var data = grid.dataItem(jQuery("[data-uid='" + jQuery(this).attr("dat-uid") + "']"));  //get the row data so it can be referred later
+
+                swal({
+                    title: '@lr.Areyousureyouwanttodeletethisrecord',
+                    text: '@lr.Youwillnotbeabletorecover',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "@lr.confirmDelete",
+                    cancelButtonText: "@lr.confirmNo",
+                    closeOnConfirm: false,
+                    closeOnCancel: true,
+                    customClass: "tmsconfirm"
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        grid.removeRow(selectedRows);
+                        swal("@lr.confirmDeleted", "@lr.confirmDeletedMessage", "success");
+                    } else {
+                    }
+                });
+            } else if (checkedLength > 1) {
+                var grid = jQuery("#PersonGrid").data("kendoGrid");
+
+
+                swal({
+                    title: '@lr.Areyousureyouwanttodeletetheserecord',
+                    text: '@lr.Youwillnotbeabletorecover' + ' <strong style="font-weight:bold">' + checkedLength + ' ' + '@lr.confirmRecords' + '</strong> ?',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "@lr.confirmDelete",
+                    cancelButtonText: "@lr.confirmNo",
+                    closeOnConfirm: false,
+                    closeOnCancel: true,
+                    html: true,
+                    customClass: "tmsconfirm"
+                },
+              function (isConfirm) {
+                  if (isConfirm) {
+                      selectedRows.each(function () { grid.removeRow(jQuery(this)); });
+                      swal("@lr.confirmDeleted", "@lr.confirmDeletedMessageMultiple", "success");
+                  } else {
+                  }
+              });
+            } else {
+
+            }
+        });
+        jQuery(".detail").live("mousedown", function (event) {
+            debugger;
+            @*var url = '@Url.Content("~/Prospect/Detail?pid=")' + jQuery(this).attr("dat-pid");
+            window.open(url, '_blank');*@
+
+            var pid = jQuery(this).attr("dat-pid");
+            var window = jQuery("#RecordDetailModal").data("kendoWindow");
+            window.content(pid);
+            window.refresh({
+                url: "/Prospect/RecordDetails",
+                data: { pid: pid },
+            });
+            window.center().open();
+        });
+
+        //jQuery(".tms-grid-phone").live("mousedown", function (event) {
+        //    debugger;
+          
+        //    var pid = jQuery(this).attr("dat-pid");
+        //    var window = jQuery("#RecordDetailModal").data("kendoWindow");
+        //    window.content(pid);
+        //    window.refresh({
+        //        url: "/Prospect/RecordDetails",
+        //        data: { pid: pid },
+        //    });
+        //  //  window.center().open();
+        //});
+
+
+        //jQuery(".tms-grid-phone").live("mousedown", function (event) {
+
+        //    var checkedLength = jQuery("#Users tr.k-state-selected").length;
+        //    if (checkedLength == 1) {
+        //        grid = jQuery("#PersonGrid").data("kendoGrid");
+        //        var data = grid.dataItem(jQuery("#Users tr.k-state-selected"));
+        //        var ID = data.ID;
+
+        //        var response = jQuery.ajax({
+        //            method: "post",
+        //            url: "/Task/EditStatusUnderway",
+        //            dataType: "JSON",
+        //            contentType: "application/json; charset=utf-8",
+        //            data: JSON.stringify({ ID: ID }),
+        //            success: function (msg) {
+        //                var grid = jQuery("#PersonGrid").data("kendoGrid");
+        //                grid.dataSource.read();
+        //            }
+
+        //        });
+        //    } else {
+
+        //    }
+
+        //});
+
+
+        @*jQuery(".tms-grid-phone").live("mousedown", function (event) {
+            debugger;
+            var checkedLength = jQuery("#PersonGrid tr.k-state-selected").length;
+            if (checkedLength == 1) {
+                grid = jQuery("#PersonGrid").data("kendoGrid");
+                var data = grid.dataItem(jQuery("#PersonGrid tr.k-state-selected"));
+                var url = '@Url.Content("~/Prospect/ManageForword_Create?pid=")' + data.ID;
+                window.open(url, '_blank');
+            } else {
+
+            }
+
+        });*@
+        jQuery(".tms-grid-phone").live("mousedown", function (event) {
+            var checkedLength = jQuery("#PersonGrid tr.k-state-selected").length;
+            if (checkedLength == 1) {
+                //jQuery("#Users").data("kendoGrid").editRow(jQuery("#Users tr.k-state-selected"));
+
+                grid = jQuery("#PersonGrid").data("kendoGrid");
+                var data = grid.dataItem(jQuery("#PersonGrid tr.k-state-selected"));
+                var ID = data.ID;
+
+                var response = jQuery.ajax({
+                    method: "post",
+                     url: "/Prospect/ManageForword_Create?pid="+ID,
+                    @*url = '@Url.Content("/Prospect/ManageForword_Create?pid=")' + data.ID,*@
+                    dataType: "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ ID: ID }),
+                    success: function (msg) {
+                        var grid = jQuery("#PersonGrid").data("kendoGrid");
+                        grid.dataSource.read();
+                    }
+
+                });
+
+            } else {
+
+            }
+
+        });
+
+        jQuery(".persondetail").live("mousedown", function (event) {
+            //debugger;
+            var url = '@Url.Content("~/Prospect/Detail?pid=")' + jQuery(this).attr("dat-pid");
+            window.open(url, '_blank');
+        });
+
+        jQuery(".tms-grid-detail").live("mousedown", function (event) {
+            debugger;
+            var checkedLength = jQuery("#PersonGrid tr.k-state-selected").length;
+            if (checkedLength == 1) {
+                grid = jQuery("#PersonGrid").data("kendoGrid");
+                var data = grid.dataItem(jQuery("#PersonGrid tr.k-state-selected"));
+                var url = '@Url.Content("~/Prospect/Detail?pid=")' + data.ID;
+                window.open(url, '_blank');
+            } else {
+
+            }
+
+        });
+    });
+</script>
+
+<script id="toolTipTemplate" type="text/x-kendo-template">
+    @if (User.IsInRole("CanViewProspectDetail"))
+    {
+        <span class="grid-tooltip-icon persondetail" dat-pid="#=ID#" title="See the detail of #=P_DisplayName#"><i class=" mdi mdi-open-in-new"></i></span>
+    }
+
+    @*<span class="grid-tooltip-icon detail" dat-pid="#=ID#" title="See the detail of #=P_DisplayName#"><i class="mdi mdi-open-in-new"></i></span>}*@
+    @if (User.IsInRole("CanAddEditProspects"))
+    {
+        <span class="grid-tooltip-icon edit" dat-uid="#=uid#" title="Edit #=P_DisplayName#"><i class="mdi mdi-pencil"></i></span>
+    }
+    @if (User.IsInRole("CanDeleteProspect"))
+    {
+        <span class="grid-tooltip-icon delete" dat-uid="#=uid#" title="Delete"><i class="mdi mdi-delete"></i></span>
+    }
+@if (User.IsInRole("CanAddEditForwardCall"))
+{
+    <span class="grid-tooltip-icon phone" dat-uid="#=uid#" title="Forward #=P_DisplayName#"><i class="mdi mdi-phone-settings"></i></span>
+}
+    @*<a class="grid-tooltip-icon phone" dat-uid="#=uid#"><span class="mdi mdi-phone-settings "></span></a>
+}*@
+    @*<span class=" grid-tooltip-icon enroll" dat-uid="#=uid#" title="Enroll"><i class="mdi mdi-exit-to-app"></i></span>
+    <span class=" grid-tooltip-icon phone" dat-uid="#=uid#" title="Record Communication "><i class="mdi mdi-phone-settings "></i></span>*@
+</script>
+<script>
+    debugger;
+    var tms = tms || {};
+    (function ($) {
+
+        tms.person = tms.person || {};
+
+        tms.person.salutation = {
+            Not_Specified: 0,
+            Salutation_Mr: 1,
+            Salutation_Mrs: 2,
+            Salutation_Ms: 3,
+            Salutation_Dr: 4
+        };
+
+        tms.person.gender = {
+            Not_Specified: 0,
+            Gender_Male: 1,
+            Gender_Female: 2
+        };
+        tms.person.maritialStatus = {
+            Not_Specified: 0,
+            MaritialStatus_Single: 1,
+            MaritialStatus_Married: 2
+        };
+
+    })(jQuery);
+
+    var PicturelastUploadedFile;
+    function PersonPictureOnSuccess(e) {
+        PicturelastUploadedFile = e.response.filename;
+    }
+    var AttachmentlastUploadedFileArr = [];
+    function PersononAttachmentOnSuccess(e) {
+        var person = { uid: e.files[0].uid, name: e.response.filename, id: e.response.id };
+        AttachmentlastUploadedFileArr.push(person);
+    }
+    function PersonProfilePictureData() {
+        return {
+            filename: PicturelastUploadedFile,
+            aid: 0
+        }
+    }
+    function PersonCreateAttachmentInfoData() {
+
+        return {
+            picturename: PicturelastUploadedFile,
+            attachmentname: AttachmentlastUploadedFileArr
+        }
+    }
+
+    function PersonAttachmentsRemove(e) {
+        var findthiselem = jQuery.grep(AttachmentlastUploadedFileArr, function (v) {
+            return v.uid == e.files[0].uid;
+        });
+        var idvalue = findthiselem[0].id.toString()
+        AttachmentlastUploadedFileArr = jQuery.grep(AttachmentlastUploadedFileArr, function (v) {
+            return v.uid != e.files[0].uid;
+        });
+        e.data = {
+            file: idvalue
+        }
+    }
+
+    function SalutationChange(e) {
+        debugger;
+        var dataItem = this.dataItem(e.item);
+        var salutation = parseInt(dataItem.Value);
+        var dropdownlist = jQuery("#Gender").data("kendoDropDownList");
+
+        switch (salutation) {
+            case tms.person.salutation.Salutation_Mr:
+                dropdownlist.value("1"); dropdownlist.trigger("change");
+                break;
+            case tms.person.salutation.Salutation_Mrs:
+                dropdownlist.value("2"); dropdownlist.trigger("change");
+                break;
+            case tms.person.salutation.Salutation_Ms:
+                dropdownlist.value("2"); dropdownlist.trigger("change");
+                break;
+            case tms.person.salutation.Salutation_Dr:
+                dropdownlist.value("0"); dropdownlist.trigger("change");
+                break;
+            default:
+                return true;
+        }
+    };
+</script>
+
+@section Scripts
+{
+    <script src="@Url.Content("~/Views/People/Person.js")"></script>
+}
+
+
+<script>
+    function showof() {
+        swal({
+            title: "Are you sure?",
+            text: "Are you sure that you want to cancel this order?",
+            type: "warning",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            confirmButtonText: "Yes, cancel it!",
+            confirmButtonColor: "#ec6c62"
+        }, function () {
+            $.ajax(
+                    {
+                        type: "get",
+                        url: "/echo/json",
+                        success: function (data) {
+                        }
+                    }
+            )
+          .done(function (data) {
+              swal("Canceled!", "Your order was successfully canceled!", "success");
+              $('#orders-history').load(document.URL + ' #orders-history');
+          })
+          .error(function (data) {
+              swal("Oops", "We couldn't connect to the server!", "error");
+          });
+        });
+    }
+</script>
+<style>
+    .k-grid td:last-child {
+        padding: 0px;
+    }
+</style>
+

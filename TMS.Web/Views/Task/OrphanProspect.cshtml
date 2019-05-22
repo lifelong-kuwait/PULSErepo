@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewBag.Title = "OrphanProspect";
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+}
+
+<h2>Orphan Prospect</h2>
+
+<div id="assignUpdateArea">
+    <div class="MiddleHeadform">
+        @*<h2 style="width: 100%">
+                Reassign Prospect
+            </h2>*@
+    </div>
+    @{
+        var msg = string.Empty;
+        if (TempData["msgassign"] != null)
+        {
+            msg = TempData["msgassign"].ToString();
+            @*<div class="message-div">
+                    <span id="PartialProspectSuccessMessage" class="alert alert-success">@Html.Raw(msg)</span>
+                    @{ Html.RenderAction("Progrss", "Common");}
+                </div>*@
+        }
+        Html.RenderAction("OrphanProspects", "Task");
+        Html.RenderAction("Users", "Task");
+
+        //  TempData["msg"] = null;
+    }
+</div>
+<div id="dvRemoveAssign">
+    @using (Ajax.BeginForm("ReassignProspects", "Task", FormMethod.Get, new AjaxOptions
+    {
+
+        OnSuccess = "OnSuccess",
+        OnFailure = "OnFailure",
+        LoadingElementId = "dvLoader",
+        UpdateTargetId = "assignUpdateArea",
+        OnComplete = "OnFinish"
+
+    }, new
+    {
+
+        enctype = "multipart/form-data"
+    }))
+
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("UserID")
+        @Html.Hidden("PersonID")
+        @*<div class="button-div">
+                <input type="submit" value="Assign" class="btn btn-default" />
+                <input type="button" value="Cancel" class="btn btn-default lifelongBackButton" />
+            </div>*@
+
+        <div class="row">
+            <div class="col-md-11 button-div">
+                <input type="submit" id="btnsave" class="btn btn-primary" value="Assign" />
+
+            </div>
+        </div>
+    }
+</div>
+<script type="text/javascript">
+    var prospectIds = '';
+    jQuery(document).ready(function () {
+        RegisterClicks();
+    });
+
+    function RegisterClicks() {
+        //for prospects
+        jQuery('.jsprospects input[type="checkbox"]').click(function () {
+            var value = jQuery(this).attr('value');
+            if (jQuery(this).is(":checked")) {
+                PersonID += value + ',';
+            } else {
+                PersonID = PersonID.replace(value + ',', '');
+            }
+            jQuery('#PersonID').val(PersonID);
+
+        });
+        //for users
+        jQuery('.jsuser input[type="radio"]').click(function () {
+            jQuery('#UserID').val(jQuery(this).attr('value'));
+        });
+    }
+
+    function AjaxComplete() {
+        RegisterClicks();
+        //for prospects
+        jQuery('.jsprospects input[type="checkbox"]').each(function () {
+            var value = jQuery(this).attr('value');
+            var savedIds = jQuery('#PersonID').val();
+            if (savedIds.indexOf(value) >= 0) {
+                jQuery(this).attr('checked', true);
+            }
+        });
+        //for users
+        jQuery('.jsuser input[type="radio"]').each(function () {
+            if (jQuery(this).attr('value') == jQuery('#UserID').val()) {
+                jQuery(this).attr('checked', true);
+            }
+        });
+    }
+
+    function OnFinish() {
+        jQuery('#dvRemoveAssign').remove();
+        jQuery('#UserID').val('');
+        jQuery('#PersonID').val('');
+    }
+</script>
