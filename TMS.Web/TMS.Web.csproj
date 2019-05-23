@@ -261,9 +261,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\System.Web.WebPages.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\System.Web.WebPages.Deployment.dll</HintPath>
+    <Reference Include="System.Web.WebPages.Deployment">
+      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\System.Web.WebPages.Deployment.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -282,18 +281,20 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Telerik.Reporting.Services.WebApi.dll</HintPath>
     </Reference>
+    <Reference Include="Telerik.ReportViewer.Html5.WebForms, Version=12.1.18.516, Culture=neutral, PublicKeyToken=a9d7983dfcc261be, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Telerik.ReportViewer.Html5.WebForms.dll</HintPath>
+    </Reference>
     <Reference Include="Telerik.ReportViewer.Mvc, Version=11.2.17.1025, Culture=neutral, PublicKeyToken=a9d7983dfcc261be, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Telerik.ReportViewer.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.ReportViewer.WebForms, Version=11.2.17.1025, Culture=neutral, PublicKeyToken=a9d7983dfcc261be, processorArchitecture=MSIL" />
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <HintPath>..\packages\WebActivatorEx.2.0.1\lib\net40\WebActivatorEx.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\WebGrease.dll</HintPath>
+    <Reference Include="WebGrease">
+      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\WebGrease.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
