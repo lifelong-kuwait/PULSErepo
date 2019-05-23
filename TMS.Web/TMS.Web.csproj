@@ -298,6 +298,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\SalesAdministrationController.cs" />
     <Compile Include="DailySummaryDataset.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -5069,6 +5070,7 @@
     <Folder Include="Attachment\TMS\Organization\" />
     <Folder Include="Attachment\TMS\Person\" />
     <Folder Include="UploadTempFolder\" />
+    <Folder Include="Views\Default\" />
     <Folder Include="Views\Exams\" />
     <Folder Include="Views\Reports\" />
   </ItemGroup>
