@@ -297,6 +297,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\MyController.cs" />
     <Compile Include="Controllers\SalesAdministrationController.cs" />
     <Compile Include="DailySummaryDataset.Designer.cs">
       <AutoGen>True</AutoGen>
