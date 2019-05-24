@@ -299,8 +299,6 @@
   <ItemGroup>
     <Compile Include="Controllers\MyController.cs" />
     <Compile Include="Controllers\SalesAdministrationController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
-    <Compile Include="Controllers\TestingController.cs" />
     <Compile Include="Controllers\TestWaqasControllerController.cs" />
     <Compile Include="DailySummaryDataset.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -5075,7 +5073,6 @@
     <Folder Include="Views\Default\" />
     <Folder Include="Views\Exams\" />
     <Folder Include="Views\Reports\" />
-    <Folder Include="Views\Testing\" />
     <Folder Include="Views\TestWaqasController\" />
     <Folder Include="Views\Test\" />
   </ItemGroup>
