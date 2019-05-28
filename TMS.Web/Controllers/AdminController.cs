@@ -152,7 +152,7 @@ namespace TMS.Web.Controllers
         /// <returns>ActionResult.</returns>
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
-      //  [ActivityAuthorize]
+        [ActivityAuthorize]
         [ClaimsAuthorize("CanDeleteGroups")]
         public ActionResult Groups_Destroy([DataSourceRequest] DataSourceRequest request, SecurityGroups _objGroups)
         {

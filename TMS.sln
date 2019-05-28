@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.645
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.Web", "TMS.Web\TMS.Web.csproj", "{404A6D3B-AA85-4E4C-AEEE-1E5026D5F135}"
 EndProject
@@ -93,44 +93,5 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {10E2AFBF-3FD6-4786-AD04-72E6BA9D9014}
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 10
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://124.109.39.25:8080/tfs/defaultcollection
-		SccProjectUniqueName0 = TMS.Library\\TMS.Library.csproj
-		SccProjectTopLevelParentUniqueName0 = TMS.sln
-		SccProjectName0 = TMS.Library
-		SccLocalPath0 = TMS.Library
-		SccProjectUniqueName1 = TMS.DataObjects\\TMS.DataObjects.csproj
-		SccProjectTopLevelParentUniqueName1 = TMS.sln
-		SccProjectName1 = TMS.DataObjects
-		SccLocalPath1 = TMS.DataObjects
-		SccProjectUniqueName2 = TMS.Common\\TMS.Common.csproj
-		SccProjectTopLevelParentUniqueName2 = TMS.sln
-		SccProjectName2 = TMS.Common
-		SccLocalPath2 = TMS.Common
-		SccProjectUniqueName3 = TMS.Business\\TMS.Business.csproj
-		SccProjectTopLevelParentUniqueName3 = TMS.sln
-		SccProjectName3 = TMS.Business
-		SccLocalPath3 = TMS.Business
-		SccLocalPath4 = .
-		SccProjectUniqueName5 = ReportingClassLibrary\\ReportingClassLibrary.csproj
-		SccProjectName5 = ReportingClassLibrary
-		SccLocalPath5 = ReportingClassLibrary
-		SccProjectUniqueName6 = ReportLibrary\\CSharp.ReportLibrary.csproj
-		SccProjectName6 = ReportLibrary
-		SccLocalPath6 = ReportLibrary
-		SccProjectUniqueName7 = Resource\\Resource.csproj
-		SccProjectTopLevelParentUniqueName7 = TMS.sln
-		SccProjectName7 = Resource
-		SccLocalPath7 = Resource
-		SccProjectUniqueName8 = ResourceBuilder\\ResourceBuilder.csproj
-		SccProjectTopLevelParentUniqueName8 = TMS.sln
-		SccProjectName8 = ResourceBuilder
-		SccLocalPath8 = ResourceBuilder
-		SccProjectUniqueName9 = TMS.Web\\TMS.Web.csproj
-		SccProjectName9 = TMS.Web
-		SccLocalPath9 = TMS.Web
 	EndGlobalSection
 EndGlobal
