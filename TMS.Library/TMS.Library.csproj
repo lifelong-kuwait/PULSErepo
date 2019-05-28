@@ -44,7 +44,7 @@
       <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Business\bin\Debug\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages">
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Business\bin\Debug\System.Web.WebPages.dll</HintPath>
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Library\bin\Release\System.Web.WebPages.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
