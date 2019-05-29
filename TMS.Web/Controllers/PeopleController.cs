@@ -193,7 +193,7 @@ namespace TMS.Web.Controllers
 
                 if (_UserBAL.LoginPerson_DuplicationCheckBAL(new Person { Email = _person.Email }) > 0)
                 {
-                    ModelState.AddModelError(lr.UserEmailAlreadyExist, lr.UserEmailAlreadyExist);
+                    ModelState.AddModelError(lr.AddressAddressDublication, lr.AddressAddressDublication);
                     // return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
                 }
                 else

@@ -7,28 +7,28 @@
     <div class="form-group">
         @Html.LabelFor(model => model.CompanyName, new { @class = "col-md-3 col-lg-3 control-label" })
         @*<div class="col-md-4 col-lg-4 col-sm-11">
-            @(Html.Kendo().DropDownListFor(model => model.OrganizationID)
-                    .HtmlAttributes(new { style = "width:100%" })
-                    .DataTextField("Text")
-                    .DataValueField("Value").Filter("contain")
-                    //.OptionLabel(new { Text = lr.OrganizationSelectLabelOptional, Value = 0 })
-                                    .OptionLabel(lr.OrganizationSelectLabelOptional).Events(x => x.Change("onChangeOrganization"))
-                    .DataSource(source =>
-                    {
-                        source.Read(read =>
+                @(Html.Kendo().DropDownListFor(model => model.OrganizationID)
+                        .HtmlAttributes(new { style = "width:100%" })
+                        .DataTextField("Text")
+                        .DataValueField("Value").Filter("contain")
+                        //.OptionLabel(new { Text = lr.OrganizationSelectLabelOptional, Value = 0 })
+                                        .OptionLabel(lr.OrganizationSelectLabelOptional).Events(x => x.Change("onChangeOrganization"))
+                        .DataSource(source =>
                         {
-                            read.Action("OrgnizationForWork", "DDL");
-                        });
-                    })
-            )
-            @Html.ValidationMessageFor(model => model.OrganizationID)
-        </div>*@
-            <div class="col-md-7 col-lg-7 col-sm-11">
-              @(Html.Kendo().TextBoxFor(c => c.CompanyName).HtmlAttributes(new { @class = "form-control ", style = "width:100%", }))
-              @Html.ValidationMessageFor(model => model.CompanyName) 
-            </div>
+                            source.Read(read =>
+                            {
+                                read.Action("OrgnizationForWork", "DDL");
+                            });
+                        })
+                )
+                @Html.ValidationMessageFor(model => model.OrganizationID)
+            </div>*@
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.CompanyName).HtmlAttributes(new { @class = "form-control ", style = "width:100%", }))
+            @Html.ValidationMessageFor(model => model.CompanyName)
+        </div>
     </div>
-  
+
 
 
 
@@ -40,18 +40,18 @@
         </div>
     </div>
     @*<div class="form-group">
-        @Html.LabelFor(model => model.RelationType, new { @class = "col-md-3 col-lg-3 control-label" })
-        <div class="col-md-7 col-lg-7 col-sm-11">
-            @(Html.Kendo().DropDownListFor(c => c.RelationType).DataTextField("Text").DataValueField("Value").OptionLabel(new { Text = lr.PersonWorkExperinceRelationToOrganizationOptionalLabel, Value = 0 }).HtmlAttributes(new { @class = "form-control", style = "width:100%" })
-                                               .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.PersonWorkExperinceRelationToOrganization>(typeof(TMS.Library.PersonWorkExperinceRelationToOrganization))))
-            @Html.ValidationMessageFor(model => model.RelationType)
-        </div>
-    </div>*@
+            @Html.LabelFor(model => model.RelationType, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.Kendo().DropDownListFor(c => c.RelationType).DataTextField("Text").DataValueField("Value").OptionLabel(new { Text = lr.PersonWorkExperinceRelationToOrganizationOptionalLabel, Value = 0 }).HtmlAttributes(new { @class = "form-control", style = "width:100%" })
+                                                   .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.PersonWorkExperinceRelationToOrganization>(typeof(TMS.Library.PersonWorkExperinceRelationToOrganization))))
+                @Html.ValidationMessageFor(model => model.RelationType)
+            </div>
+        </div>*@
     <div class="form-group" style="margin:0; padding:0px;">
         @Html.LabelFor(model => model.JobStatus, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-3 col-lg-3 col-sm-11">
             @(Html.Kendo().DropDownListFor(c => c.JobStatus).DataTextField("Text").DataValueField("Value").OptionLabel(lr.PersonEducationWorkExperiencesJobStatusOptionalLabel).HtmlAttributes(new { @class = "form-control", style = "width:100%" })
-                                       .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.PersonJobStatus>(typeof(TMS.Library.PersonJobStatus))))
+                                               .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.PersonJobStatus>(typeof(TMS.Library.PersonJobStatus))))
             @Html.ValidationMessageFor(model => model.JobStatus)
         </div>
         <div class="col-md-4 col-lg-4 col-sm-11">
@@ -78,23 +78,23 @@
         </div>
     </div>
     @*<div class="form-group" style="margin:0; padding:0px;">
-        @Html.LabelFor(model => model.RefferenceName, new { @class = "col-md-3 col-lg-3 control-label" })
-        <div class="col-md-7 col-lg-7 col-sm-11">
-            @(Html.Kendo().TextBoxFor(model => model.RefferenceName).HtmlAttributes(new { @class = "form-control", style = "width:100%" }))
+            @Html.LabelFor(model => model.RefferenceName, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.Kendo().TextBoxFor(model => model.RefferenceName).HtmlAttributes(new { @class = "form-control", style = "width:100%" }))
+            </div>
         </div>
-    </div>
-    <div class="form-group" style="margin:0; padding:0px;">
-        @Html.LabelFor(model => model.RefferenceEmail, new { @class = "col-md-3 col-lg-3 control-label" })
-        <div class="col-md-7 col-lg-7 col-sm-11">
-            @(Html.Kendo().TextBoxFor(model => model.RefferenceEmail).HtmlAttributes(new { @class = "form-control", style = "width:100%" }))
+        <div class="form-group" style="margin:0; padding:0px;">
+            @Html.LabelFor(model => model.RefferenceEmail, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.Kendo().TextBoxFor(model => model.RefferenceEmail).HtmlAttributes(new { @class = "form-control", style = "width:100%" }))
+            </div>
         </div>
-    </div>
-    <div class="form-group" style="margin:0; padding:0px;">
-        @Html.LabelFor(model => model.RefferencePhone, new { @class = "col-md-3 col-lg-3 control-label" })
-        <div class="col-md-7 col-lg-7 col-sm-11">
-            @(Html.Kendo().TextBoxFor(model => model.RefferencePhone).HtmlAttributes(new { @class = "form-control", style = "width:100%" }))
-        </div>
-    </div>*@
+        <div class="form-group" style="margin:0; padding:0px;">
+            @Html.LabelFor(model => model.RefferencePhone, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.Kendo().TextBoxFor(model => model.RefferencePhone).HtmlAttributes(new { @class = "form-control", style = "width:100%" }))
+            </div>
+        </div>*@
     <div class="form-group" style="margin:0; padding:0px;">
         @Html.LabelFor(model => model.Description, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-7 col-lg-7 col-sm-11">

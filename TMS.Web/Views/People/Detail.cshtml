@@ -11,22 +11,22 @@
 @Html.AntiForgeryToken()
 <div id="inforecords"></div>
 @(Html.Kendo().Grid<TMS.Library.TMS.Persons.Person>(modellist)
-    .Name("PersonDetailGrid")
-    .Columns(columns =>
-    {
-        columns.Bound(e => e.P_DisplayName).ClientTemplate("#=PersonTemplate(data)#").HeaderHtmlAttributes(new { @style = "display: none" });
-        columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Title("Status");
-    }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_PersonDetailTemplate").DisplayDeleteConfirmation(false))
-      .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate() </text>))
-              .Events(e => e.Edit("PersonDetailGrid_onEdit").Save("Grid_onEdit"))
-    .DataSource(dataSource => dataSource
-    .Ajax().Model(model => { model.Id(m => m.ID);})
-    .Read(read => read.Action("Person_Read", "People"))
-    .Create(read => read.Action("Person_Create", "People").Data("PersonProfilePictureData"))
-    .Destroy(read => read.Action("Person_Destroy", "People"))
-        .Update(read => read.Action("Person_Update", "People").Data("PersonProfilePictureData"))
-                  .Events(e => e.Error("GeneralErrorHandler(\"PersonDetailGrid\")")))
-    .NoRecords(lr.GridNoRecordFoundMessage)
+        .Name("PersonDetailGrid")
+        .Columns(columns =>
+        {
+            columns.Bound(e => e.P_DisplayName).ClientTemplate("#=PersonTemplate(data)#").HeaderHtmlAttributes(new { @style = "display: none" });
+            columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Title("Status");
+        }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_PersonDetailTemplate").DisplayDeleteConfirmation(false))
+          .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate() </text>))
+                .Events(e => e.Edit("PersonDetailGrid_onEdit").Save("Grid_onEdit"))
+              .DataSource(dataSource => dataSource
+              .Ajax().Model(model => { model.Id(m => m.ID); })
+              .Read(read => read.Action("Person_Read", "People"))
+              .Create(read => read.Action("Person_Create", "People").Data("PersonProfilePictureData"))
+              .Destroy(read => read.Action("Person_Destroy", "People"))
+                  .Update(read => read.Action("Person_Update", "People").Data("PersonProfilePictureData"))
+                            .Events(e => e.Error("GeneralErrorHandler(\"PersonDetailGrid\")")))
+              .NoRecords(lr.GridNoRecordFoundMessage)
 )
 @helper RenderAddTemplate()
 {
@@ -35,9 +35,9 @@
         <a class="k-button tms-grid-edit-main"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
         <a class="k-button tms-grid-destroy-main "><span class="tms-grid-icon mdi mdi-delete "></span></a>
         @*<a class="k-button tms-grid-exitapp-main"><span class="tms-grid-icon mdi mdi-exit-to-app "></span></a>
-        <a class="k-button tms-grid-phone-main"><span class="tms-grid-icon mdi mdi-phone-settings "></span></a>*@
+            <a class="k-button tms-grid-phone-main"><span class="tms-grid-icon mdi mdi-phone-settings "></span></a>*@
         @*<a class="k-button tms-grid-pdf-main"><span class="tms-grid-icon mdi mdi-file-pdf "></span></a>
-        <a class="k-button tms-grid-word-main"><span class="tms-grid-icon mdi mdi-file-word "></span></a>*@
+            <a class="k-button tms-grid-word-main"><span class="tms-grid-icon mdi mdi-file-word "></span></a>*@
     </div>
 }
 <script id="PersonTemplate" type="text/kendo">
@@ -46,16 +46,16 @@
             <img src='../#:data.ProfilePicture#' class='paddig' alt=''>
             <h2>#:data.P_DisplayName# # if (data.NickName!=null){ #(#:data.NickName#)  #}#</h2>
             #if(data.Designation !=null){#<h3>#:data.Designation#</h3> #}#
-            # if (data.Email!=null) { # <h3> #:data.Email#</h3> #}# 
+            # if (data.Email!=null) { # <h3> #:data.Email#</h3> #}#
             #if(data.ContactNumber!=null){#<h3> #:data.ContactNumber#</h3> #}#
             #if(data.Gender!=0){#<h5>#:data.GenderValue#</h5> #}#
-          
+
             <label>Status: </label>
             <label>
                 #if (data.IsActive!=false){ # <span class="mdi mdi-checkbox-blank-circle text-success"></span>    #}else{#  <span class="mdi mdi-checkbox-blank-circle text-danger"></span>  #}#
 
             </label>
-           
+
         </div>
     </div>
 </script>
@@ -104,11 +104,11 @@
                     function(){
                         window.location="@Url.Content("~/People/Person")";
                     });
-                   } 
+                   }
                });
         });
 
-   
+
     //edit from header
     jQuery(".tms-grid-edit-main").live("mousedown", function (event) {
         jQuery("#PersonDetailGrid").data("kendoGrid").editRow(jQuery("#PersonDetailGrid tr:nth(1)"));
@@ -124,32 +124,32 @@
 
 
 @(Html.Kendo().PanelBar()
-        .Name("PersonDetailGridChildtemplate" + Model.ID)
-    .ExpandMode(PanelBarExpandMode.Multiple)
-    .Items(i =>
-    {
-
-        i.Add().Text(lr.EmailTabTitle).LoadContentFrom("EmailAddress", "Contact", new { PersonID = Model.ID });
-        i.Add().Text(lr.PhoneTabTitle).LoadContentFrom("PersonPhone", "Contact", new { PersonID = Model.ID }); 
-        i.Add().Text(lr.AddressTabTitle).LoadContentFrom("PrimaryAddress", "Contact", new { PersonID = Model.ID });
-        i.Add().Text(lr.LinkTabTitle).LoadContentFrom("PersonLinks", "Contact", new { PersonID = Model.ID });
-        i.Add().Text(lr.PersonDegreeTabTitle).LoadContentFrom("Degree", "PersonEducation", new { PersonID = Model.ID });
-        i.Add().Text(lr.PersonCertificationTabTitle).LoadContentFrom("Certification", "PersonEducation", new { PersonID = Model.ID });
-        i.Add().Text(lr.PersonWorkExperienceTabTitle).LoadContentFrom("WorkExperience", "PersonEducation", new { PersonID = Model.ID });
-        i.Add().Text(lr.PersonTrainingDeliveredTabTitle).LoadContentFrom("TrainingDelivered", "PersonEducation", new { PersonID = Model.ID });
-        i.Add().Text(lr.PersonSkillAreasofFocusTabTitle).LoadContentFrom("PersonSkill", "SkillInterest", new { PersonID = Model.ID });
-        i.Add().Text(lr.AvailabilityTabTitle).LoadContentFrom("PersonAvailability", "Contact", new { PersonID = Model.ID });
-        
-        if (User.IsInRole("CanViewPersonRoles"))
+            .Name("PersonDetailGridChildtemplate" + Model.ID)
+        .ExpandMode(PanelBarExpandMode.Multiple)
+        .Items(i =>
         {
-            i.Add().Text(lr.RolesTabTitile).LoadContentFrom("ManageRoles", "People", new { PersonID = Model.ID });
-        }
-        if (User.IsInAnyRoles("CanViewPersonAchievement", "CanViewPersonSuggestedTraining", "CanViewPersonRelation", "CanViewPersonAttachments", "CanViewPersonNotes"))
-        {
-            i.Add().Text(lr.OthersTabTitle).LoadContentFrom("Others", "People", new { pid = Model.ID });
-        }
 
-    }).Events(e => e.Expand("onExpand")))
+            i.Add().Text(lr.EmailTabTitle).LoadContentFrom("EmailAddress", "Contact", new { PersonID = Model.ID });
+            i.Add().Text(lr.PhoneTabTitle).LoadContentFrom("PersonPhone", "Contact", new { PersonID = Model.ID });
+            i.Add().Text(lr.AddressTabTitle).LoadContentFrom("PrimaryAddress", "Contact", new { PersonID = Model.ID });
+            i.Add().Text(lr.LinkTabTitle).LoadContentFrom("PersonLinks", "Contact", new { PersonID = Model.ID });
+            i.Add().Text(lr.PersonDegreeTabTitle).LoadContentFrom("Degree", "PersonEducation", new { PersonID = Model.ID });
+            i.Add().Text(lr.PersonCertificationTabTitle).LoadContentFrom("Certification", "PersonEducation", new { PersonID = Model.ID });
+            i.Add().Text(lr.PersonWorkExperienceTabTitle).LoadContentFrom("WorkExperience", "PersonEducation", new { PersonID = Model.ID });
+            i.Add().Text(lr.PersonTrainingDeliveredTabTitle).LoadContentFrom("TrainingDelivered", "PersonEducation", new { PersonID = Model.ID });
+            i.Add().Text(lr.PersonSkillAreasofFocusTabTitle).LoadContentFrom("PersonSkill", "SkillInterest", new { PersonID = Model.ID });
+            i.Add().Text(lr.AvailabilityTabTitle).LoadContentFrom("PersonAvailability", "Contact", new { PersonID = Model.ID });
+
+            if (User.IsInRole("CanViewPersonRoles"))
+            {
+                i.Add().Text(lr.RolesTabTitile).LoadContentFrom("ManageRoles", "People", new { PersonID = Model.ID });
+            }
+            if (User.IsInAnyRoles("CanViewPersonAchievement", "CanViewPersonSuggestedTraining", "CanViewPersonRelation", "CanViewPersonAttachments", "CanViewPersonNotes"))
+            {
+                i.Add().Text(lr.OthersTabTitle).LoadContentFrom("Others", "People", new { pid = Model.ID });
+            }
+
+        }).Events(e => e.Expand("onExpand")))
 
 <script>
     var tms = tms || {};
@@ -336,14 +336,14 @@
     }
 </script>
 @(Html.Kendo().Grid<TMS.Library.TMS.Persons.Person>()
- .Name("PersonGrid")
- .Columns(columns => { columns.Bound(e => e.P_DisplayName); }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_PersonTemplate"))
- .Events(e => e.Edit("PersonGrid_onEdit").Save("Person_onSave"))
- .HtmlAttributes(new { style = "display:none" })
- .DataSource(dataSource => dataSource
- .Ajax().Model(model => { model.Id(m => m.ID); })
- .Create(read => read.Action("Person_Create", "People"))
-     .Events(e => e.Error("GeneralErrorHandler(\"PersonGrid\")").RequestEnd("requestendpersongrid")))
+     .Name("PersonGrid")
+     .Columns(columns => { columns.Bound(e => e.P_DisplayName); }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_PersonTemplate"))
+     .Events(e => e.Edit("PersonGrid_onEdit").Save("Person_onSave"))
+     .HtmlAttributes(new { style = "display:none" })
+     .DataSource(dataSource => dataSource
+     .Ajax().Model(model => { model.Id(m => m.ID); })
+     .Create(read => read.Action("Person_Create", "People"))
+         .Events(e => e.Error("GeneralErrorHandler(\"PersonGrid\")").RequestEnd("requestendpersongrid")))
 )
 <script type="text/x-kendo-template" id="showrecordinserted">
     <div class="alert alert-success">
@@ -353,14 +353,14 @@
 </script>
 <script>
     function requestendpersongrid(e) {
-        if (e.type == "create") {  
-            if(e.response.Data[0].ID!=0){
+        if (e.type == "create") {
+            if (e.response.Data[0].ID != 0) {
                 showaddedperson();
             }
         }
     }
     function showaddedperson() {
-        setTimeout(function () {          
+        setTimeout(function () {
             var showrecordinserted = kendo.template(jQuery("#showrecordinserted").html());
             grid = jQuery("#PersonGrid").data("kendoGrid");
             var selectedrow = jQuery("#PersonDetailGrid tr:nth(1)");
@@ -386,7 +386,6 @@
         font-size: 13px;
         margin-bottom: 3px;
     }
-
 </style>
 
 

@@ -68,7 +68,9 @@ namespace TMS.Web.Controllers
             {
                 if (this._objAddressBAL.Address_DuplicationCheckBAL(_AddressesPrimary) > 0)
                 {
-                    return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
+                    ModelState.AddModelError(lr.AddressAddressDublication, lr.AddressAddressDublication);
+
+                  //  return Json(lr.AddressAddressOne, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {

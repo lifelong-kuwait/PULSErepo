@@ -372,7 +372,15 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("ErrorServerError", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Server Error</summary>
+        public static string StartandEndDateConflict
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("StartandEndDateConflict", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>Created Date</summary>
         public static string GridCreatedDate {
                get {
@@ -1906,8 +1914,25 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("AddressAddressOneRequired", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Please Enter Address 1</summary>
+        public static string AddressAddressDublication
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("AddressAddressDublication", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>Please Enter Education Dublication1</summary>
+        public static string EducationEducationDublication
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("EducationEducationDublication", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>Address 2</summary>
+
         public static string AddressAddressTwo {
                get {
                    return (string) resourceProvider.GetResource("AddressAddressTwo", CultureInfo.CurrentUICulture.Name);
