@@ -372,12 +372,20 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("ErrorServerError", CultureInfo.CurrentUICulture.Name);
                }
             }
-        /// <summary>Server Error</summary>
+        /// <summary>Start  and End Date Conflict</summary>
         public static string StartandEndDateConflict
         {
             get
             {
                 return (string)resourceProvider.GetResource("StartandEndDateConflict", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>Start  and End Date Conflict</summary>
+        public static string TrainingTitleAllreadyExists
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("TrainingTitleAllreadyExists", CultureInfo.CurrentUICulture.Name);
             }
         }
 

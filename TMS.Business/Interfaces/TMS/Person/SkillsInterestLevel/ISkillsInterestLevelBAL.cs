@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using System;
 using System.Collections.Generic;
 using TMS.Library.Entities.Common.Configuration;
 using TMS.Library.TMS.Persons.Skills;
@@ -65,7 +66,7 @@ namespace TMS.Business.Interfaces.TMS.SkillsInterestLevel
         /// </summary>
         /// <param name="_objPersonSkillsInterest">The object person skills interest.</param>
         /// <returns>System.Int64.</returns>
-        long PersonSkillsInterest_CreateBAL(string PersonIds,long user,string date,long cid,long OrganizationID);
+        long PersonSkillsInterest_CreateBAL(long PersonIds,long user, DateTime date,long cid,long OrganizationID);
 
         /// <summary>
         /// Persons the skills interest update bal.

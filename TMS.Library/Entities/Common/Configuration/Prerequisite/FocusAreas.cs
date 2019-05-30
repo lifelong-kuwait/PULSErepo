@@ -30,7 +30,8 @@ namespace TMS.Library.Entities.Common.Configuration
         /// <value>The identifier.</value>
         public long ID { get; set; }
 
-        public long FocusID { get; set; }
+       
+
 
         /// <summary>
         /// Gets or sets the name of the primary focus area.
@@ -98,7 +99,7 @@ namespace TMS.Library.Entities.Common.Configuration
         public void MapProperties(DbDataReader dr)
         {
             ID = dr.GetInt64("ID");
-            FocusID= dr.GetInt64("FocusID");
+            
             PrimaryFocusAreaName = dr.GetString("PrimaryFocusAreaName");
             SecondaryFocusAreaName = dr.GetString("SecondaryFocusAreaName");
             OrganizationID = dr.GetInt64("OrganizationID");
@@ -108,8 +109,8 @@ namespace TMS.Library.Entities.Common.Configuration
             UpdatedDate = dr.GetDateTime("UpdatedDate");
             IsDeleted = dr.GetBoolean("IsDeleted");
             IsActive = dr.GetBoolean("IsActive");
-            AddedByAlias = dr.GetString("AddedByAlias");
-            UpdatedByAlias = dr.GetString("UpdatedByAlias");
+            //AddedByAlias = dr.GetString("AddedByAlias");
+            //UpdatedByAlias = dr.GetString("UpdatedByAlias");
         }
     }
 }

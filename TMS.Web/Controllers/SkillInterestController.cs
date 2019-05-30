@@ -52,10 +52,11 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorize("CanAddEditPersonSkillsAreasofFocus")]
         public ActionResult PersonSkill_Create([DataSourceRequest] DataSourceRequest request, string PersonIds, long cid)
         {
+            long PersonIdLong = long.Parse(PersonIds);
             long user = CurrentUser.NameIdentifierInt64;
-            string date = DateTime.Now.ToString();
+            DateTime date = DateTime.Now;
             long OrganizationID = CurrentUser.CompanyID;
-            var list = _objISkillsInterestLevelBAL.PersonSkillsInterest_CreateBAL(PersonIds, user, date, cid, OrganizationID);
+            var list = _objISkillsInterestLevelBAL.PersonSkillsInterest_CreateBAL(PersonIdLong, user, date, cid, OrganizationID);
             return Json(list);
         }
 

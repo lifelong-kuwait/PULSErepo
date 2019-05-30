@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using System;
 using System.Collections.Generic;
 using TMS.Business.Interfaces.TMS.SkillsInterestLevel;
 using TMS.DataObjects.Interfaces.TMS.SkillsInterestLevel;
@@ -92,7 +93,7 @@ namespace TMS.Business.TMS.SkillsInterestLevel
         /// </summary>
         /// <param name="_objPersonSkillsInterest">The object person skills interest.</param>
         /// <returns>System.Int64.</returns>
-        public long PersonSkillsInterest_CreateBAL(string PersonIds,long user,string date,long cid, long OrganizationID)
+        public long PersonSkillsInterest_CreateBAL(long PersonIds,long user, DateTime date,long cid, long OrganizationID)
         {
             return DAL.PersonSkillsInterest_CreateDAL(PersonIds,user,date,cid, OrganizationID);
         }

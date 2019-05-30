@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using System;
 using System.Collections.Generic;
 using TMS.DataObjects.Generics;
 using TMS.DataObjects.Interfaces.TMS.SkillsInterestLevel;
@@ -93,7 +94,7 @@ namespace TMS.DataObjects.TMS.SkillsInterestLevel
         /// </summary>
         /// <param name="_objPersonSkillsInterest">The object person skills interest.</param>
         /// <returns>System.Int64.</returns>
-        public long PersonSkillsInterest_CreateDAL(string PersonIds,long user,string date,long cid, long OrganizationID)
+        public long PersonSkillsInterest_CreateDAL(long PersonIds,long user,DateTime date,long cid, long OrganizationID)
         {
             var parameters = new[] { ParamBuilder.Par("ID", 0) };
             return ExecuteInt64withOutPutparameterSp("TMS_PersonSkillInterestfocus_Create", parameters,

@@ -399,7 +399,6 @@ namespace TMS.DataObjects.TMS
         {
             var parameters = new[] { ParamBuilder.Par("ID", 0) };
             return ExecuteInt64withOutPutparameterSp("TMS_CourseFocus_Create", parameters,
-                            ParamBuilder.Par("FocusID", _Coordinate.FocusID),
                             ParamBuilder.Par("CourseID", CourseId),
                             ParamBuilder.Par("CreatedBy", _Coordinate.CreatedBy),
                             ParamBuilder.Par("CreatedDate", _Coordinate.CreatedDate));
@@ -410,7 +409,6 @@ namespace TMS.DataObjects.TMS
 
             return ExecuteScalarInt32Sp("TMS_CourseFocusArea_Update",
                             ParamBuilder.Par("ID", _Coordinate.ID),
-                            ParamBuilder.Par("FocusID", _Coordinate.FocusID),
                             ParamBuilder.Par("CourseID", CourseId),
                             ParamBuilder.Par("ModifiedBy", _Coordinate.UpdatedBy),
                             ParamBuilder.Par("ModifiedDate", _Coordinate.UpdatedDate));

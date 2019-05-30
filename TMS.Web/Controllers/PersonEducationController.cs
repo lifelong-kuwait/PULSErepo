@@ -215,20 +215,30 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                _personTrainingDelivered.CreatedBy = CurrentUser.NameIdentifierInt64;
-                _personTrainingDelivered.CreatedDate = DateTime.Now;
-                _personTrainingDelivered.PersonID = Convert.ToInt64(pid);
-                _personTrainingDelivered.TrainingType = TrainingType.TrainingType_Existing;
-                var result = _PersonEducationBAL.PersonEducationTrainings_CreateBAL(_personTrainingDelivered);
-                if (result == -1)
+                var _person = _PersonEducationBAL.PersonEducationTrainings_GetAllByPersonIDBAL(pid, (int)TrainingType.TrainingType_Existing);
+                var _personExist = _person.Where(x => x.TrainingP_Title == _personTrainingDelivered.TrainingP_Title).ToList();
+                if (_personExist.Count>0)
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.PersonEducationCertificationsDuplicationMessage);
+                    ModelState.AddModelError(lr.TrainingTitleAllreadyExists, lr.TrainingTitleAllreadyExists);
+
                 }
                 else
                 {
-                    _personTrainingDelivered.ID = result;
+                    _personTrainingDelivered.CreatedBy = CurrentUser.NameIdentifierInt64;
+                    _personTrainingDelivered.CreatedDate = DateTime.Now;
+                    _personTrainingDelivered.PersonID = Convert.ToInt64(pid);
+                    _personTrainingDelivered.TrainingType = TrainingType.TrainingType_Existing;
+                    var result = _PersonEducationBAL.PersonEducationTrainings_CreateBAL(_personTrainingDelivered);
+                    if (result == -1)
+                    {
+                        ModelState.AddModelError(lr.ErrorServerError, lr.PersonEducationCertificationsDuplicationMessage);
+                    }
+                    else
+                    {
+                        _personTrainingDelivered.ID = result;
+                    }
                 }
+               
             }
             var resultData = new[] { _personTrainingDelivered };
             return Json(resultData.ToDataSourceResult(request, ModelState));
@@ -241,13 +251,37 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _personTrainingDelivered.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                _personTrainingDelivered.UpdatedDate = DateTime.Now;
-                _personTrainingDelivered.TrainingType = TrainingType.TrainingType_Existing;
-                var result = _PersonEducationBAL.PersonEducationTrainings_UpdateBAL(_personTrainingDelivered);
-                if (result == -1)
+                var _person = _PersonEducationBAL.PersonEducationTrainings_GetAllByPersonIDBAL(_personTrainingDelivered.PersonID.ToString(), (int)TrainingType.TrainingType_Existing);
+                var _personExist = _person.Where(x => x.TrainingP_Title == _personTrainingDelivered.TrainingP_Title).ToList();
+                if (_personExist.Count > 1)
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    ModelState.AddModelError(lr.TrainingTitleAllreadyExists, lr.TrainingTitleAllreadyExists);
+
+                }
+                else
+                {
+                    if(_personExist.Count <=1)
+                    {
+                        var _personTrainingTitle = _personExist.Where(x => x.ID == _personTrainingDelivered.ID).ToList();
+                        if(_personTrainingTitle.Count==1|| _personTrainingTitle.Count == 0)
+                        {
+                            _personTrainingDelivered.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                            _personTrainingDelivered.UpdatedDate = DateTime.Now;
+                            _personTrainingDelivered.TrainingType = TrainingType.TrainingType_Existing;
+                            var result = _PersonEducationBAL.PersonEducationTrainings_UpdateBAL(_personTrainingDelivered);
+                            if (result == -1)
+                            {
+                                ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                            }
+                        }else
+                        {
+                            ModelState.AddModelError(lr.TrainingTitleAllreadyExists, lr.TrainingTitleAllreadyExists);
+
+                        }
+
+                    }
+
+                  
                 }
             }
             var resultData = new[] { _personTrainingDelivered };
