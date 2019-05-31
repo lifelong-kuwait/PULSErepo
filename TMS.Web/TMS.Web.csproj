@@ -2313,6 +2313,7 @@
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\New TMS.pubxml" />
     <Content Include="Reports\Barcodes Report.trdx">
       <SubType>Designer</SubType>
