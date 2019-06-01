@@ -93,9 +93,18 @@ namespace TMS.Business.TMS.SkillsInterestLevel
         /// </summary>
         /// <param name="_objPersonSkillsInterest">The object person skills interest.</param>
         /// <returns>System.Int64.</returns>
-        public long PersonSkillsInterest_CreateBAL(long PersonIds,long user, DateTime date,long cid, long OrganizationID)
+        public long PersonSkillsInterest_CreateBAL(long PersonId, long OrganizationID, string title, long Type, string description, long CraeatedBy, DateTime date)
         {
-            return DAL.PersonSkillsInterest_CreateDAL(PersonIds,user,date,cid, OrganizationID);
+            return DAL.PersonSkillsInterest_CreateDAL(PersonId, OrganizationID, title, Type, description, CraeatedBy, date); ;
+        }
+        /// <summary>
+        /// Persons the skills interest create bal.
+        /// </summary>
+        /// <param name="_objPersonSkillsInterest">The object person skills interest.</param>
+        /// <returns>System.Int64.</returns>
+        public long PersonSkills_DuplicationCheckBAL(long cid, string _skill, long value)
+        {
+            return DAL.PersonSkills_DuplicationCheckDAL( cid,  _skill,  value); 
         }
 
         /// <summary>

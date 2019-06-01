@@ -488,8 +488,8 @@ namespace TMS.DataObjects.TMS
                         ParamBuilder.Par("PersonID", _objPersonRoles.PersonID),
                         ParamBuilder.Par("Email", obj.Email),
                         ParamBuilder.Par("UpdatedDate", _objPersonRoles.UpdatedDate),
-                        ParamBuilder.Par("UpdatedBy", _objPersonRoles.UpdatedBy),
-                        ParamBuilder.Par("ClientType", _objPersonRoles.ClientType)
+                        ParamBuilder.Par("UpdatedBy", _objPersonRoles.UpdatedBy)
+                       
                     );
         }
 

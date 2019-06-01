@@ -66,7 +66,7 @@ namespace TMS.DataObjects.Interfaces.TMS.SkillsInterestLevel
         /// </summary>
         /// <param name="_objPersonSkillsInterest">The object person skills interest.</param>
         /// <returns>System.Int64.</returns>
-        long PersonSkillsInterest_CreateDAL(long PersonIds,long user, DateTime date,long cid, long OrganizationID);
+        long PersonSkillsInterest_CreateDAL(long PersonId, long OrganizationID, string title, long Type, string description, long user, DateTime date);
 
         /// <summary>
         /// Persons the skills interest update dal.
@@ -74,6 +74,12 @@ namespace TMS.DataObjects.Interfaces.TMS.SkillsInterestLevel
         /// <param name="_objPersonSkillsInterest">The object person skills interest.</param>
         /// <returns>System.Int32.</returns>
         int PersonSkillsInterest_UpdateDAL(PersonSkillsInterest _objPersonSkillsInterest);
+        /// <summary>
+        /// Persons the skills interest update dal.
+        /// </summary>
+        /// <param name="_objPersonSkillsInterest">The object person skills interest.</param>
+        /// <returns>System.Int32.</returns>
+        int PersonSkills_DuplicationCheckDAL(long cid, string _skill, long value);
 
         /// <summary>
         /// Persons the skills interest delete dal.

@@ -60,14 +60,21 @@ namespace TMS.Business.Interfaces.TMS.SkillsInterestLevel
         /// <param name="_objPersonSkillsInterest">The object person skills interest.</param>
         /// <returns>System.Int64.</returns>
         long PersonSkillsInterest_CreateBAL(PersonSkillsInterest _objPersonSkillsInterest);
+        /// <summary>
+        /// Persons the skills interest create bal.
+        /// </summary>
+        /// <param name="_objPersonSkillsInterest">The object person skills interest.</param>
+        /// <returns>System.Int64.</returns>
+        //long PersonSkillsInterest_CreateBAL(long PersonIds,long user, DateTime date,long cid,long OrganizationID);
+        long PersonSkillsInterest_CreateBAL(long PersonId, long OrganizationID, string title, long Type, string description, long user, DateTime date);
 
         /// <summary>
         /// Persons the skills interest create bal.
         /// </summary>
         /// <param name="_objPersonSkillsInterest">The object person skills interest.</param>
         /// <returns>System.Int64.</returns>
-        long PersonSkillsInterest_CreateBAL(long PersonIds,long user, DateTime date,long cid,long OrganizationID);
-
+        //long PersonSkillsInterest_CreateBAL(long PersonIds,long user, DateTime date,long cid,long OrganizationID);
+        long PersonSkills_DuplicationCheckBAL(long cid,string _skill,long value);
         /// <summary>
         /// Persons the skills interest update bal.
         /// </summary>

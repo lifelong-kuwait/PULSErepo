@@ -38,7 +38,7 @@ namespace TMS.DataObjects.TMS.SkillsInterestLevel
         /// <returns>IList&lt;PersonSkill&gt;.</returns>
         public IList<PersonSkill> PersonSkill_GetbyPersonId(long PersonId, long CompanyID)
         {
-            return ExecuteListSp<PersonSkill>("TMS_PersonSkillInterest_GetbyPersonID", ParamBuilder.Par("PersonID", PersonId), ParamBuilder.Par("OrganizationID", CompanyID), ParamBuilder.Par("Type", PersonSKillInterest.PersonSKillInterest_Person_Skills));
+            return ExecuteListSp<PersonSkill>("TMS_PersonSkillInterest_GetbyPersonID", ParamBuilder.Par("PersonID", PersonId), ParamBuilder.Par("OrganizationID", CompanyID));
         }
 
         /// <summary>
@@ -94,15 +94,18 @@ namespace TMS.DataObjects.TMS.SkillsInterestLevel
         /// </summary>
         /// <param name="_objPersonSkillsInterest">The object person skills interest.</param>
         /// <returns>System.Int64.</returns>
-        public long PersonSkillsInterest_CreateDAL(long PersonIds,long user,DateTime date,long cid, long OrganizationID)
+        public long PersonSkillsInterest_CreateDAL(long PersonId, long OrganizationID,string title,long Type,string description,long user,DateTime date )
         {
             var parameters = new[] { ParamBuilder.Par("ID", 0) };
-            return ExecuteInt64withOutPutparameterSp("TMS_PersonSkillInterestfocus_Create", parameters,
-                              ParamBuilder.Par("OrganizationID", OrganizationID),
-                                    ParamBuilder.Par("FocusID", PersonIds),
+            return ExecuteInt64withOutPutparameterSp("TMS_PersonSkillInterest_Create", parameters,
+                                    ParamBuilder.Par("PersonID", PersonId),
+                                    ParamBuilder.Par("OrganizationID", OrganizationID),
+                                    ParamBuilder.Par("Title", title),
+                                    ParamBuilder.Par("Type", Type),
+                                    ParamBuilder.Par("Description", description),
                                     ParamBuilder.Par("CreatedBy", user),
-                                    ParamBuilder.Par("CreatedDate",date),
-                                    ParamBuilder.Par("PersonID",cid));
+                                    ParamBuilder.Par("CreatedDate", date));
+                                    
         }
 
         /// <summary>
@@ -144,6 +147,18 @@ namespace TMS.DataObjects.TMS.SkillsInterestLevel
                                     ParamBuilder.Par("PersonID", _objPersonSkillsInterest.PersonID),
                                     ParamBuilder.Par("Title", _objPersonSkillsInterest.Title),
                                     ParamBuilder.Par("Type", _objPersonSkillsInterest.Type));
+        }
+        /// <summary>
+        /// Persons the skills interest duplication check dal.
+        /// </summary>
+        /// <param name="_objPersonSkillsInterest">The object person skills interest.</param>
+        /// <returns>System.Int32.</returns>
+        public int PersonSkills_DuplicationCheckDAL(long cid, string _skill, long value)
+        {
+            return ExecuteScalarSPInt32("TMS_PersonSkillInterest_DuplicationCheck",
+                                    ParamBuilder.Par("PersonID", cid),
+                                    ParamBuilder.Par("Title", _skill),
+                                    ParamBuilder.Par("Type", value));
         }
 
         #endregion
