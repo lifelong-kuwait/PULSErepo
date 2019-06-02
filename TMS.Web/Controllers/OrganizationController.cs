@@ -88,6 +88,7 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var _OrganizationDub = OrganizationBAL.GetAllOrganizationbyIDBAL(Convert.ToString(CurrentUser.CompanyID), "");
                 bool _valid = false;
                 if (_Organization.P_Name != null)//when Email is Provided
                 {
@@ -122,6 +123,7 @@ namespace TMS.Web.Controllers
                     _Organization.CreatedDate = DateTime.Now;
                     _Organization.UpdatedBy = CurrentUser.NameIdentifierInt64;
                     _Organization.UpdatedDate = DateTime.Now;
+                    _Organization.CompanyID = CurrentUser.CompanyID;
                     //   string _profilePict = string.Empty;
                     // _Organization.LogoPicture = HandleOrganizationIndexLogo(filename, _Organization.ID, aid);
                     _Organization.ID = this.OrganizationBAL.Organizations_CreateBAL(_Organization);

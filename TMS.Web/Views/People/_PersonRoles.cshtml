@@ -16,7 +16,7 @@
         .HtmlAttributes(new { style = "height:350px;" }).DataSource(dataSource => dataSource.Ajax().Model(model => { model.Id(m => m.ID); }).PageSize(8)
         .Read(read => read.Action("ManageRoles_Read", "People", new { PersonID = Model }))
         .Create(read => read.Action("ManageRoles_Create", "People", new { PersonID = Model }))
-        .Update(read => read.Action("ManageRoles_Update", "People"))
+        
         .Destroy(read => read.Action("ManageRoles_Destroy", "People"))
         .Events(e => e.Error("GeneralErrorHandler(\"ConfigRoles" + Model + "\")").RequestEnd("GridRequestEndUpdate"))
                         ).NoRecords(lr.GridNoRecordFoundMessage)
@@ -28,7 +28,6 @@
         @if (User.IsInAnyRoles("CanAddEditPersonRoles"))
         {
             <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
-            <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
         }
         @if (User.IsInAnyRoles("CanDeletePersonRoles"))
         {
