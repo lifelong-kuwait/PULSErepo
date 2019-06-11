@@ -612,8 +612,26 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                 //long ClassID = 30014;
-                _Class.CreatedBy = CurrentUser.NameIdentifierInt64;
+                
+                var Classs = this._ClassBAL.TMS_ClassLogestics_GetAllBAL(ClassID);
+                bool flage = true;
+                foreach (var x in Classs)
+                {
+                    long str = x.ID;
+                    if (str == _Class.ID)
+                    {
+                        flage = false;
+                        break;
+                    }
+                }
+                if (flage == false)
+                {
+                    ModelState.AddModelError(lr.OrganizationNameDublicaton, lr.OrganizationNameDublicaton);
+                }
+                else
+                {
+                    //long ClassID = 30014;
+                    _Class.CreatedBy = CurrentUser.NameIdentifierInt64;
                 _Class.CreatedDate = DateTime.Now;
                 //_Class.OrganizationID = ID;
                 _Class.ID = _ClassBAL.TMS_ClassLogistics_CreateBAL(_Class, ClassID);
@@ -624,6 +642,7 @@ namespace TMS.Web.Controllers
                 // string browserName = req.Browser.Browser;
                 _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
 
+                }
             }
             var resultData = new[] { _Class };
             return Json(resultData.ToDataSourceResult(request, ModelState));

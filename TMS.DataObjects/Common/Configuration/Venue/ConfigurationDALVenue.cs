@@ -303,6 +303,8 @@ namespace TMS.DataObjects.Common.Configuration
                 {
                     case -1:
                         return ExecuteListSp<DDlList>("Venues_ForCourseGetAllByCulturebyOrg", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OrganizationID", CompnayID));
+                    case 3:
+                        return ExecuteListSp<DDlList>("Venues_ForCourseGetAllByCulturebyOrg", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OrganizationID", CompnayID));
 
                     default:
                         return ExecuteListSp<DDlList>("Venues_ByOpenIdAndTypeAndCulturebyOrg", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OpenId", OpenId), ParamBuilder.Par("OpenType", OpenType), ParamBuilder.Par("OrganizationID", CompnayID));
@@ -314,6 +316,8 @@ namespace TMS.DataObjects.Common.Configuration
                 {
                     case -1:
                         return ExecuteListSp<DDlList>("Venues_ForCourseGetAllByCulture", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OrganizationID", CompnayID));
+                    case 3:
+                        return ExecuteListSp<DDlList>("Venues_ForCourseGetAllByCulturebyOrg", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OrganizationID", CompnayID));
 
                     default:
                         return ExecuteListSp<DDlList>("Venues_ByOpenIdAndTypeAndCulture", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OpenId", OpenId), ParamBuilder.Par("OpenType", OpenType), ParamBuilder.Par("OrganizationID", CompnayID));

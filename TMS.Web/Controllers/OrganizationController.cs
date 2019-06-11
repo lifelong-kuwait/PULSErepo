@@ -26,8 +26,8 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorizeAttribute("CanViewOrganization")]
         public ActionResult Index()
         {
-          // var logopicture = this.OrganizationBAL.GetAllOrganizationbypicBAL(CurrentUser.CompanyID);
-        //   Session["logo"] = logopicture;
+            // var logopicture = this.OrganizationBAL.GetAllOrganizationbypicBAL(CurrentUser.CompanyID);
+            //   Session["logo"] = logopicture;
 
             return View();
         }
@@ -35,8 +35,8 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorizeAttribute("CanViewOrganizationDetail")]
         public ActionResult Detail(long oid)
         {
-           /// TMS.Library.TMS.Organization.OrganizationModel mod = new OrganizationModel();
-          //  Session["logo"] = mod.LogoPicture;
+            /// TMS.Library.TMS.Organization.OrganizationModel mod = new OrganizationModel();
+            //  Session["logo"] = mod.LogoPicture;
             if (string.IsNullOrEmpty(oid.ToString()))
             {
                 return RedirectPermanent(Url.Content("~/Organization/Index"));
@@ -76,9 +76,10 @@ namespace TMS.Web.Controllers
                 var _Organization = this.OrganizationBAL.GetAllOrganizationbyIDBAL(Convert.ToString(CurrentUser.CompanyID), SearchText);
                 return Json(_Organization.ToDataSourceResult(request, ModelState));
             }
-            else { 
-            var _Organization = this.OrganizationBAL.GetAllOrganizationBAL(SearchText);
-            return Json(_Organization.ToDataSourceResult(request, ModelState));
+            else
+            {
+                var _Organization = this.OrganizationBAL.GetAllOrganizationBAL(SearchText);
+                return Json(_Organization.ToDataSourceResult(request, ModelState));
             }
         }
 
@@ -89,54 +90,72 @@ namespace TMS.Web.Controllers
             if (ModelState.IsValid)
             {
                 var _OrganizationDub = OrganizationBAL.GetAllOrganizationbyIDBAL(Convert.ToString(CurrentUser.CompanyID), "");
-                bool _valid = false;
-                if (_Organization.P_Name != null)//when Email is Provided
+                bool flage = true;
+                foreach (var x in _OrganizationDub)
                 {
-                    _valid = true;
+                    string str = x.P_Name;
+                    if (str == _Organization.P_Name)
+                    {
+                        flage = false;
+                        break;
+                    }
                 }
-                else if (_Organization.ShortName != null)//when Contact number is provided
+                if (flage == false)
                 {
-                    _valid = true;
+                    ModelState.AddModelError(lr.OrganizationNameDublicaton, lr.OrganizationNameDublicaton);
                 }
                 else
                 {
-                    ModelState.AddModelError(lr.OrganizationFullName, lr.OrganizationEnterFullNameOrShortName);
-                }
-                if (_valid)
-                {
-                    if (_Organization.P_Name != null)
+
+
+                    bool _valid = false;
+                    if (_Organization.P_Name != null)//when Email is Provided
                     {
-                        if (_Organization.ShortName == null)
-                        {
-                            _Organization.FullName = _Organization.P_Name;
-                        }
-                        else
-                        {
-                            _Organization.FullName = _Organization.P_Name + " (" + _Organization.ShortName + ")";
-                        }
+                        _valid = true;
+                    }
+                    else if (_Organization.ShortName != null)//when Contact number is provided
+                    {
+                        _valid = true;
                     }
                     else
                     {
-                        _Organization.FullName = _Organization.ShortName;
+                        ModelState.AddModelError(lr.OrganizationFullName, lr.OrganizationEnterFullNameOrShortName);
                     }
-                    _Organization.CreatedBy = CurrentUser.NameIdentifierInt64;
-                    _Organization.CreatedDate = DateTime.Now;
-                    _Organization.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                    _Organization.UpdatedDate = DateTime.Now;
-                    _Organization.CompanyID = CurrentUser.CompanyID;
-                    //   string _profilePict = string.Empty;
-                    // _Organization.LogoPicture = HandleOrganizationIndexLogo(filename, _Organization.ID, aid);
-                    _Organization.ID = this.OrganizationBAL.Organizations_CreateBAL(_Organization);
-                    var _profilePict = HandleOrganizationIndexLogo(filename,_Organization.ID, aid);
-
-                    if (!string.IsNullOrEmpty(_profilePict))
+                    if (_valid)
                     {
-                        _Organization.LogoPicture = _profilePict;
-                        var res =this.OrganizationBAL.Org_UpdateProfileImageBAL(_Organization);
-                        _Organization.LogoPicture = _profilePict.Replace("~/", "");
-                    }
-                    else { _Organization.LogoPicture = null; }
+                        if (_Organization.P_Name != null)
+                        {
+                            if (_Organization.ShortName == null)
+                            {
+                                _Organization.FullName = _Organization.P_Name;
+                            }
+                            else
+                            {
+                                _Organization.FullName = _Organization.P_Name + " (" + _Organization.ShortName + ")";
+                            }
+                        }
+                        else
+                        {
+                            _Organization.FullName = _Organization.ShortName;
+                        }
+                        _Organization.CreatedBy = CurrentUser.NameIdentifierInt64;
+                        _Organization.CreatedDate = DateTime.Now;
+                        _Organization.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                        _Organization.UpdatedDate = DateTime.Now;
+                        _Organization.CompanyID = CurrentUser.CompanyID;
+                        //   string _profilePict = string.Empty;
+                        // _Organization.LogoPicture = HandleOrganizationIndexLogo(filename, _Organization.ID, aid);
+                        _Organization.ID = this.OrganizationBAL.Organizations_CreateBAL(_Organization);
+                        var _profilePict = HandleOrganizationIndexLogo(filename, _Organization.ID, aid);
 
+                        if (!string.IsNullOrEmpty(_profilePict))
+                        {
+                            _Organization.LogoPicture = _profilePict;
+                            var res = this.OrganizationBAL.Org_UpdateProfileImageBAL(_Organization);
+                            _Organization.LogoPicture = _profilePict.Replace("~/", "");
+                        }
+                        else { _Organization.LogoPicture = null; }
+                    }
                 }
             }
 
@@ -150,42 +169,66 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool _valid = false;
-                if (_Organization.P_Name != null)//when Email is Provided
+                var _OrganizationDub = OrganizationBAL.GetAllOrganizationbyIDBAL(Convert.ToString(CurrentUser.CompanyID), "");
+                bool flage = true;
+                foreach (var x in _OrganizationDub)
                 {
-                    _valid = true;
+                    string str = x.P_Name;
+                    long OrgId = x.ID;
+
+                    if (str == _Organization.P_Name)
+                    {
+                        if (OrgId != _Organization.ID)
+                        {
+                            flage = false;
+                            break;
+                        }
+
+                    }
                 }
-                else if (_Organization.ShortName != null)//when Contact number is provided
+                if (flage == false)
                 {
-                    _valid = true;
+                    ModelState.AddModelError(lr.OrganizationNameDublicaton, lr.OrganizationNameDublicaton);
                 }
                 else
                 {
-                    ModelState.AddModelError(lr.OrganizationFullName, lr.OrganizationEnterFullNameOrShortName);
-                }
-                if (_valid)
-                {
-                    if (_Organization.P_Name != null)
+                    bool _valid = false;
+                    if (_Organization.P_Name != null)//when Email is Provided
                     {
-                        if (_Organization.ShortName == null)
-                        {
-                            _Organization.FullName = _Organization.P_Name;
-                        }
-                        else
-                        {
-                            _Organization.FullName = _Organization.P_Name + " (" + _Organization.ShortName + ")";
-                        }
+                        _valid = true;
+                    }
+                    else if (_Organization.ShortName != null)//when Contact number is provided
+                    {
+                        _valid = true;
                     }
                     else
                     {
-                        _Organization.FullName = _Organization.ShortName;
+                        ModelState.AddModelError(lr.OrganizationFullName, lr.OrganizationEnterFullNameOrShortName);
                     }
-                    _Organization.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                    _Organization.UpdatedDate = DateTime.Now;
-                    string _profilePict = string.Empty;
-                    this.OrganizationBAL.Organizations_UpdateBAL(_Organization);
-                    if (!string.IsNullOrEmpty(filename))
-                        _Organization.LogoPicture = HandleOrganizationLogo(filename, _Organization.ID, aid);
+                    if (_valid)
+                    {
+                        if (_Organization.P_Name != null)
+                        {
+                            if (_Organization.ShortName == null)
+                            {
+                                _Organization.FullName = _Organization.P_Name;
+                            }
+                            else
+                            {
+                                _Organization.FullName = _Organization.P_Name + " (" + _Organization.ShortName + ")";
+                            }
+                        }
+                        else
+                        {
+                            _Organization.FullName = _Organization.ShortName;
+                        }
+                        _Organization.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                        _Organization.UpdatedDate = DateTime.Now;
+                        string _profilePict = string.Empty;
+                        this.OrganizationBAL.Organizations_UpdateBAL(_Organization);
+                        if (!string.IsNullOrEmpty(filename))
+                            _Organization.LogoPicture = HandleOrganizationLogo(filename, _Organization.ID, aid);
+                    }
                 }
             }
 

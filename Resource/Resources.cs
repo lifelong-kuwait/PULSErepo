@@ -2460,7 +2460,16 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("OrganizationFullName", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+
+        /// <summary>FullName</summary>
+        public static string OrganizationNameDublicaton
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("OrganizationNameDublicaton", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>Short Name</summary>
         public static string OrganizationShortName {
                get {

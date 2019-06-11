@@ -323,6 +323,8 @@ namespace TMS.DataObjects.Common.Configuration
             {
                 case -1:
                     return ExecuteListSp<DDlList>("TrainerOpenMapping_ForCourseGetAllByCulture", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OrganizationID", CompnayID));
+                case 3:
+                    return ExecuteListSp<DDlList>("TrainerOpenMapping_ForCourseGetAllByCulture", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OrganizationID", CompnayID));
 
                 default:
                     return ExecuteListSp<DDlList>("TrainerOpenMapping_ByOpenIdAndTypeAndCulture", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OpenId", OpenId), ParamBuilder.Par("OpenType", OpenType), ParamBuilder.Par("OrganizationID", CompnayID));

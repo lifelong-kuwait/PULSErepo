@@ -1113,10 +1113,29 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-               
                 _objlogmap.CreatedBy = CurrentUser.NameIdentifierInt64;
                 _objlogmap.CreatedOn = DateTime.Now;
                 _objlogmap.ClassID = oid;
+                var DublicateCheck=_objConfigurationBAL.ManageClassMeterialMap_GetAllBAL(CurrentUser.CompanyID, oid);
+                bool flage = true;
+                foreach (var x in DublicateCheck)
+                {
+                    string str = x.PrimaryMaterial;
+                    if (str == _objlogmap.PrimaryMaterial)
+                    {
+                        flage = false;
+                        break;
+                    }
+                }
+                if (flage == false)
+                {
+                    ModelState.AddModelError(lr.OrganizationNameDublicaton, lr.OrganizationNameDublicaton);
+                    var resultData1 = new[] { _objlogmap };
+                    return Json(resultData1.ToDataSourceResult(request, ModelState));
+                }
+                else
+                {
+
                 //
                 //if (_objConfigurationBAL.ManageTrainer_DuplicationCheckBAL(_objlogmap) > 0)
                 //{
@@ -1130,7 +1149,9 @@ namespace TMS.Web.Controllers
                     ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
                 _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
 
-                //}
+                    //}
+
+                }
             }
             var resultData = new[] { _objlogmap };
             return Json(resultData.ToDataSourceResult(request, ModelState));
