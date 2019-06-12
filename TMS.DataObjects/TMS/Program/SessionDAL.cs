@@ -172,7 +172,6 @@ namespace TMS.DataObjects.TMS.Program
         {
             return ExecuteScalarInt32Sp("TMS_Sessions_Delete",
                             ParamBuilder.Par("ID", _Sessions.ID),
-
                             ParamBuilder.Par("UpdatedBy", _Sessions.UpdatedBy),
                             ParamBuilder.Par("UpdatedDate", _Sessions.UpdatedDate)
 

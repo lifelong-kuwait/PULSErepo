@@ -218,8 +218,8 @@ namespace TMS.DataObjects.TMS
         public int Session_CheckBAL(Sessions _Course, long CompanyID)
         {
             return ExecuteScalarInt32Sp("TMS_Session_DeleteCheck",
-                        ParamBuilder.Par("ID", _Course.ID),
-                        ParamBuilder.Par("OrganizationID", CompanyID)
+                        ParamBuilder.Par("ID", _Course.ID)
+                        
 
             );
         }

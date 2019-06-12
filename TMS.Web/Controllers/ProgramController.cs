@@ -1241,14 +1241,14 @@ namespace TMS.Web.Controllers
             var Courses = this._SessionBAL.TMS_Sessions_GetALLByCultureBAL(ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
             if (CurrentUser.CompanyID > 0)
             {
-                if (_SessionBAL.User_EmailCheckBAL(CurrentUser.CompanyID, CurrentUser.Email) > 0)
-                {
-                    Courses = this._SessionBAL.TMS_SessionsTrainer_GetALLByCultureBAL(CurrentUser.Email,ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
+                //if (_SessionBAL.User_EmailCheckBAL(CurrentUser.CompanyID, CurrentUser.Email) > 0)
+                //{
+                //    Courses = this._SessionBAL.TMS_SessionsTrainer_GetALLByCultureBAL(CurrentUser.Email,ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
 
-                }
-                else {
+                //}
+               // else {
                     Courses = this._SessionBAL.TMS_SessionsbyOrganization_GetALLByCultureBAL(ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
-                }
+               // }
                 }
            
             var result = new DataSourceResult()

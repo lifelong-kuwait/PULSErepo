@@ -1120,8 +1120,8 @@ namespace TMS.Web.Controllers
                 bool flage = true;
                 foreach (var x in DublicateCheck)
                 {
-                    string str = x.PrimaryMaterial;
-                    if (str == _objlogmap.PrimaryMaterial)
+                    long str = x.CourseMaterialID;
+                    if (str == _objlogmap.CourseMaterialID)
                     {
                         flage = false;
                         break;
@@ -1130,8 +1130,7 @@ namespace TMS.Web.Controllers
                 if (flage == false)
                 {
                     ModelState.AddModelError(lr.OrganizationNameDublicaton, lr.OrganizationNameDublicaton);
-                    var resultData1 = new[] { _objlogmap };
-                    return Json(resultData1.ToDataSourceResult(request, ModelState));
+                   
                 }
                 else
                 {

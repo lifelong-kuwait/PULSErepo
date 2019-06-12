@@ -18,7 +18,7 @@
 </script>
 <div class="ChildGrid">
     @(Html.Kendo().Grid<TMS.Library.Entities.Common.Configuration.ClassMeterialsMapping>()
-            .Name("ManageClassMeterialMap" + Model)
+            .Name("ManageClassMeterialMap")
       .Columns(columns =>
       {
           columns.Bound(e => e.PrimaryMaterial).Title(lr.Description);
@@ -35,7 +35,7 @@
          .Destroy(read => read.Action("ManageClassMeterialMap_Destroy", "Config"))
         //.Update(read => read.Action("MManageCourseMeterialMap_Update", "Config"))
 
-        .Events(e => e.Error("GeneralErrorHandler(\"ManageClassMeterialMap" + Model + "\")").RequestEnd("GridRequestEndUpdate")))
+        .Events(e => e.Error("GeneralErrorHandler(\"ManageClassMeterialMap" + Model+"\")").RequestEnd("GridRequestEndUpdate")))
         .NoRecords(lr.GridNoRecordFoundMessage)
     )
 
@@ -49,11 +49,10 @@
         }
         @if (User.IsInAnyRoles("CanDeleteProgramTrainer"))
         {
-            <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+            @*<a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>*@
         }
     </div>
 
 }
 </div>
 
-@*.Data("CreateTrainerAdditionalData")*@
