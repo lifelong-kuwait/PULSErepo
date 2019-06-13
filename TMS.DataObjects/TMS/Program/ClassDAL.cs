@@ -324,11 +324,12 @@ namespace TMS.DataObjects.TMS.Program
         public int TMS_CourseLanguage_UpdateDAL(MapLanguage _Corelanguage, long CourseId)
         {
             return ExecuteScalarInt32Sp("TMS_CourseLanguage_Update",
-                        ParamBuilder.Par("ID", _Corelanguage.ID),
-                        ParamBuilder.Par("LanguageID", _Corelanguage.LanguageID),
+                        ParamBuilder.Par("OldLanguageID", _Corelanguage.ID),
+                        ParamBuilder.Par("NewLanguageID", _Corelanguage.LanguageID),
                         ParamBuilder.Par("CourseID", CourseId),
                         ParamBuilder.Par("ModifiedBy", _Corelanguage.ModifiedBy),
-                        ParamBuilder.Par("ModifiedDate", _Corelanguage.ModifiedDate)
+                        ParamBuilder.Par("ModifiedDate", _Corelanguage.ModifiedDate),
+                        ParamBuilder.Par("MapperId", _Corelanguage.ID2)
 
             );
         }

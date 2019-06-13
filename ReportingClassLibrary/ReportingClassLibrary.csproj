@@ -38,9 +38,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.DataObjects\bin\Release\System.Web.Mvc.dll</HintPath>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>D:\SPL\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\ReportingClassLibrary\bin\Release\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -48,20 +47,17 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Telerik.Reporting, Version=11.2.17.1025, Culture=neutral, PublicKeyToken=a9d7983dfcc261be, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Telerik.Reporting.dll</HintPath>
+    <Reference Include="Telerik.Reporting">
+      <HintPath>D:\SPL\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\ReportingClassLibrary\bin\Release\Telerik.Reporting.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.Reporting.Services.WebApi, Version=11.2.17.1025, Culture=neutral, PublicKeyToken=a9d7983dfcc261be, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Telerik.Reporting.Services.WebApi.dll</HintPath>
+    <Reference Include="Telerik.Reporting.Services.HttpClient">
+      <HintPath>D:\SPL\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\ReportingClassLibrary\bin\Release\Telerik.Reporting.Services.HttpClient.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.ReportViewer.Mvc, Version=11.2.17.1025, Culture=neutral, PublicKeyToken=a9d7983dfcc261be, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Telerik.ReportViewer.Mvc.dll</HintPath>
+    <Reference Include="Telerik.Reporting.Services.WebApi">
+      <HintPath>D:\SPL\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\ReportingClassLibrary\bin\Release\Telerik.Reporting.Services.WebApi.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.ReportViewer.WinForms, Version=11.2.17.1025, Culture=neutral, PublicKeyToken=a9d7983dfcc261be">
-      <Private>False</Private>
+    <Reference Include="Telerik.ReportViewer.Mvc">
+      <HintPath>D:\SPL\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\ReportingClassLibrary\bin\Release\Telerik.ReportViewer.Mvc.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
