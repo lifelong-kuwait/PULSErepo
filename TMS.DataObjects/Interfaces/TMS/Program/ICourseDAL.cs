@@ -67,6 +67,12 @@ namespace TMS.DataObjects.Interfaces.TMS
         /// <param name="_Course">The course.</param>
         /// <returns>System.Int64.</returns>
         long TMS_Courses_CreateDAL(Course _Course);
+        /// <summary>
+        /// TMSs the courses create dal.
+        /// </summary>
+        /// <param name="_Course">The course.</param>
+        /// <returns>System.Int64.</returns>
+        IList<Sessions> TMS_SessionAttendance_GetAllDAL(Sessions _Course);
 
         /// <summary>
         /// TMSs the courses update dal.

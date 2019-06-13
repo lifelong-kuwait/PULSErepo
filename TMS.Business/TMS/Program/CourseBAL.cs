@@ -127,7 +127,10 @@ namespace TMS.Business.TMS
         {
             return _CourseDAL.Session_CheckBAL(_Course, CompanyID);
         }
-       
+       public IList<Sessions> TMS_SessionAttendance_GetAllBAL(Sessions _Course)
+        {
+            return _CourseDAL.TMS_SessionAttendance_GetAllDAL(_Course);
+        }
         #region Course Coordinate
 
         public IList<CourseCoordinatorMapping> TMS_CourseCoordinate_GetAllBAL(long CourseId)

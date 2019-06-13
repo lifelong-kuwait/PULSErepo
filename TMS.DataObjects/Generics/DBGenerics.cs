@@ -554,6 +554,7 @@ namespace TMS.DataObjects.Generics
                         command.CommandTimeout = CommandTimeout;
                         command.Connection = connection;
                         command.CommandType = commandType;
+                        
                         command.CommandText = query;
 
                         if (prms != null)

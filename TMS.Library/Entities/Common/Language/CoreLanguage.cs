@@ -76,14 +76,14 @@ namespace TMS.Library.Entities.Language
 
         public string AddedByAlias { get; set; }
         public string UpdatedByAlias { get; set; }
-
+        public long ID2 { get; set; }
 
         public void MapProperties(DbDataReader dr)
         {
             ID = dr.GetInt64("ID");
-              LanguageID = dr.GetInt64("LanguageID");
+            LanguageID = dr.GetInt64("LanguageID");
             PrimaryLanguageName = dr.GetString("PrimaryLanguageName");
-           CourseID = dr.GetInt64("CourseID");
+          
             CreatedBy = dr.GetInt64("CreatedBy");
             CreatedDate = dr.GetDateTime("CreatedDate");
             ModifiedBy = dr.GetInt64("ModifiedBy");
@@ -92,6 +92,7 @@ namespace TMS.Library.Entities.Language
             IsActive = dr.GetBoolean("IsActive");
             AddedByAlias = dr.GetString("AddedByAlias");
             UpdatedByAlias = dr.GetString("UpdatedByAlias");
+            ID2= dr.GetInt64("MapperId");
         }
     }
 

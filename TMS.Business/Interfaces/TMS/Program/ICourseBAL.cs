@@ -81,6 +81,7 @@ namespace TMS.Business.Interfaces.TMS
         int TMS_Courses_DeleteBAL(Course _Course);
         int class_CheckBAL(Course _Course, long CompanyID);
         int Session_CheckBAL(Sessions _Course, long CompanyID);
+        IList<Sessions> TMS_SessionAttendance_GetAllBAL(Sessions _Course);
 
         #region Course Coordinator
 
