@@ -97,7 +97,7 @@ namespace TMS.Library.Entities.Coordinator
         public void MapProperties(DbDataReader dr)
         {
             ID = dr.GetInt64("ID");
-            CID = dr.GetInt64("ID");
+            CID = dr.GetInt64("CID");
             DisplayName = dr.GetString("DisplayName");
             AddedByAlias = dr.GetString("AddedByAlias");
             UpdatedByAlias = dr.GetString("UpdatedByAlias");

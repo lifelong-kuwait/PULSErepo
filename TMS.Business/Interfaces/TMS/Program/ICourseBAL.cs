@@ -73,6 +73,7 @@ namespace TMS.Business.Interfaces.TMS
         /// <param name="_Course">The course.</param>
         /// <returns>System.Int32.</returns>
         int TMS_Courses_UpdateBAL(Course _Course);
+        int TMS_Courses_Dublicate_PrimaryNameBAL(Course _Course);
         /// <summary>
         /// TMSs the courses delete bal.
         /// </summary>
@@ -104,7 +105,8 @@ namespace TMS.Business.Interfaces.TMS
         long TMS_CourseFocusArea_CreateBAL(FocusAreas _focusarea, long CourseId);
 
         int TMS_CourseFocusArea_UpdateBAL(FocusAreas _focusarea, long CourseId);
-
+         int TMS_CourseFocusArea_DublicationBAL(FocusAreas _focusarea, long CourseId);
+     
         int TMS_CourseFocusArea_DeleteDAL(FocusAreas _focusarea, long CourseId);
 
         #endregion

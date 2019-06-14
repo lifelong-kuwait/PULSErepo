@@ -80,7 +80,7 @@ namespace TMS.DataObjects.Interfaces.TMS
         /// <param name="_Course">The course.</param>
         /// <returns>System.Int32.</returns>
         int TMS_Courses_UpdateDAL(Course _Course);
-
+        int TMS_Courses_Dublicate_PrimaryNameDAL(Course _Course);
         /// <summary>
         /// TMSs the courses delete dal.
         /// </summary>
@@ -114,9 +114,9 @@ namespace TMS.DataObjects.Interfaces.TMS
         int TMS_CourseFocusArea_UpdateDAL(FocusAreas _focusarea, long CourseId);
 
         int TMS_CourseFocusArea_DeleteDAL(FocusAreas _focusarea, long CourseId);
-
+         int TMS_CourseFocusArea_DublicationDAL(FocusAreas _focusarea, long CourseId);
         #endregion
 
-       // DataSet GetCourseReportDataDAL(long ClassID, long CourseID);
+        // DataSet GetCourseReportDataDAL(long ClassID, long CourseID);
     }
 }
