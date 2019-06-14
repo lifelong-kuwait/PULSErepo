@@ -108,6 +108,10 @@ namespace TMS.Business.TMS
         {
             return _CourseDAL.TMS_Courses_UpdateDAL(_Course);
         }
+      public  int TMS_Courses_Dublicate_PrimaryNameBAL(Course _Course)
+        {
+            return _CourseDAL.TMS_Courses_Dublicate_PrimaryNameDAL(_Course);
+        }
 
         /// <summary>
         /// TMSs the courses delete bal.
@@ -177,7 +181,10 @@ namespace TMS.Business.TMS
         {
             return _CourseDAL.TMS_CourseFocusArea_UpdateDAL(_focusarea, CourseId);
         }
-
+        public int TMS_CourseFocusArea_DublicationBAL(FocusAreas _focusarea, long CourseId)
+        {
+            return _CourseDAL.TMS_CourseFocusArea_DublicationDAL(_focusarea, CourseId);
+        }
         public int TMS_CourseFocusArea_DeleteDAL(FocusAreas _focusarea, long CourseId)
         {
             return _CourseDAL.TMS_CourseFocusArea_DeleteDAL(_focusarea, CourseId);

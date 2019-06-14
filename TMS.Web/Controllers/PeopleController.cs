@@ -312,6 +312,7 @@ namespace TMS.Web.Controllers
             }
             if (_valid)
             {
+               
                 var result = _PersonBAL.Person_UpdateBAL(_person);
                 _person.ProfilePicture = HandlePersonProfilePicture(filename, _person.ID, aid);
                 if (result != -1)

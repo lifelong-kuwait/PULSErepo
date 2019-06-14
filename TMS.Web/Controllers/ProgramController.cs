@@ -111,12 +111,18 @@ namespace TMS.Web.Controllers
                 _Course.OrganizationID = CurrentUser.CompanyID;
                 var codeSuffix = Request.Form["codeSuffix"];
                 _Course.CourseCode = codeSuffix + "-" + _Course.CourseCode;
-                _Course.ID = this._CourseBAL.TMS_Courses_CreateBAL(_Course);
-                string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                if (string.IsNullOrEmpty(ip))
-                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
-
+                if (this._CourseBAL.TMS_Courses_Dublicate_PrimaryNameBAL(_Course) > 0)
+                {
+                    ModelState.AddModelError(lr.PersonSkill, lr.FlagDuplicationCheck);
+                }
+                else
+                {
+                    _Course.ID = this._CourseBAL.TMS_Courses_CreateBAL(_Course);
+                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                    if (string.IsNullOrEmpty(ip))
+                        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+                }
             }
 
             var resultData = new[] { _Course };
@@ -952,7 +958,8 @@ namespace TMS.Web.Controllers
                 {
                     ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
                 }
-            }else
+            }
+            else
             {
                 ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
             }
@@ -1028,14 +1035,23 @@ namespace TMS.Web.Controllers
                 CourseId = Convert.ToInt64(Request.QueryString["CourseId"]);
                 _Class.CreatedBy = CurrentUser.NameIdentifierInt64;
                 _Class.CreatedDate = DateTime.Now;
-                _Class.ID = _CourseBAL.TMS_CourseFocusArea_CreateBAL(_Class, CourseId);
-                string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                if (string.IsNullOrEmpty(ip))
-                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
-                // string browserName = req.Browser.Browser;
-                _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
 
+                if (_CourseBAL.TMS_CourseFocusArea_DublicationBAL(_Class, CourseId) > 0)
+                {
+                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                }
+                else
+                {
+
+
+                    _Class.ID = _CourseBAL.TMS_CourseFocusArea_CreateBAL(_Class, CourseId);
+                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                    if (string.IsNullOrEmpty(ip))
+                        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                    // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
+                    // string browserName = req.Browser.Browser;
+                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+                }
             }
 
             var resultData = new[] { _Class };
@@ -1052,17 +1068,24 @@ namespace TMS.Web.Controllers
                 CourseId = Convert.ToInt64(Request.QueryString["CourseId"]);
                 _Class.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _Class.UpdatedDate = DateTime.Now;
-                var result = _CourseBAL.TMS_CourseFocusArea_UpdateBAL(_Class, CourseId);
-                string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                if (string.IsNullOrEmpty(ip))
-                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
-                // string browserName = req.Browser.Browser;
-                _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Update, System.Web.HttpContext.Current.Request.Browser.Browser);
-
-                if (result == -1)
+                if (_CourseBAL.TMS_CourseFocusArea_DublicationBAL(_Class, CourseId) > 0)
                 {
                     ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                }
+                else
+                {
+                    var result = _CourseBAL.TMS_CourseFocusArea_UpdateBAL(_Class, CourseId);
+                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                    if (string.IsNullOrEmpty(ip))
+                        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                    // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
+                    // string browserName = req.Browser.Browser;
+                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Update, System.Web.HttpContext.Current.Request.Browser.Browser);
+
+                    if (result == -1)
+                    {
+                        ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    }
                 }
             }
             var resultData = new[] { _Class };

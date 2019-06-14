@@ -190,7 +190,18 @@ namespace TMS.DataObjects.TMS
 
             );
         }
-
+        /// <summary>
+        /// TMSs the courses Dublicate primary name check.
+        /// </summary>
+        /// <param name="_Course">The course.</param>
+        /// <returns>System.Int32.</returns>
+        public int TMS_Courses_Dublicate_PrimaryNameDAL(Course _Course)
+        {
+            return ExecuteScalarSPInt32("TMS_Courses_Dublication_Primary_Name",
+                        ParamBuilder.Par("UserID", _Course.CreatedBy),
+                        ParamBuilder.Par("CousrseFirstName", _Course.PrimaryName)
+            );
+        }
         /// <summary>
         /// TMSs the courses delete dal.
         /// </summary>
@@ -365,8 +376,9 @@ namespace TMS.DataObjects.TMS
             
             return ExecuteScalarInt32Sp("TMS_CourseCoordinator_Update",
                             ParamBuilder.Par("ID",_Coordinate.ID),
-                            ParamBuilder.Par("CoordinateID", _Coordinate.ID),
-                            ParamBuilder.Par("CourseID", CourseId),
+                             ParamBuilder.Par("CID", _Coordinate.CID),
+                            ParamBuilder.Par("CoordinateID", _Coordinate.CoordinateID),
+                            ParamBuilder.Par("CourseID", _Coordinate.CourseID),
                             ParamBuilder.Par("ModifiedBy", _Coordinate.ModifiedBy),
                             ParamBuilder.Par("ModifiedDate", _Coordinate.ModifiedDate));
         }
@@ -416,6 +428,7 @@ namespace TMS.DataObjects.TMS
         {
             var parameters = new[] { ParamBuilder.Par("ID", 0) };
             return ExecuteInt64withOutPutparameterSp("TMS_CourseFocus_Create", parameters,
+                            ParamBuilder.Par("FocusID", _Coordinate.ID),
                             ParamBuilder.Par("CourseID", CourseId),
                             ParamBuilder.Par("CreatedBy", _Coordinate.CreatedBy),
                             ParamBuilder.Par("CreatedDate", _Coordinate.CreatedDate));
@@ -441,9 +454,17 @@ namespace TMS.DataObjects.TMS
 
             );
         }
+        public int TMS_CourseFocusArea_DublicationDAL(FocusAreas _focusarea, long CourseId)
+        {
+            return ExecuteScalarSPInt32("TMS_CourseFocus_DublicationCheck",
+                        ParamBuilder.Par("CourseID", CourseId),
+                        ParamBuilder.Par("FocusID", _focusarea.ID),
+                        ParamBuilder.Par("CreatedBy", _focusarea.CreatedBy)
+            );
+        }
 
         #endregion
 
-       
+
     }
 }
