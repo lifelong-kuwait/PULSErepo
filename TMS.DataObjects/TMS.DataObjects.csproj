@@ -38,10 +38,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Dapper">
-      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.DataObjects\bin\Release\Dapper.dll</HintPath>
+      <HintPath>D:\SPL\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.DataObjects\bin\Release\Dapper.dll</HintPath>
     </Reference>
     <Reference Include="DapperExtensions">
-      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.DataObjects\bin\Release\DapperExtensions.dll</HintPath>
+      <HintPath>D:\SPL\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.DataObjects\bin\Release\DapperExtensions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
