@@ -58,7 +58,7 @@ namespace TMS.Web.Controllers
             }
         }
         [HttpPost]
-        public ActionResult RecordDetails(Person pvm,FormCollection form)
+        public ActionResult RecordDetails(Person pvm, FormCollection form)
         {
             return RedirectToAction("~/Prospect/Index");
         }
@@ -72,10 +72,10 @@ namespace TMS.Web.Controllers
 
         [ClaimsAuthorizeAttribute("CanViewProspects")]
         [DontWrapResult]
-        public ActionResult Person_Record_GetAll([DataSourceRequest] DataSourceRequest request,string PSID)
+        public ActionResult Person_Record_GetAll([DataSourceRequest] DataSourceRequest request, string PSID)
         {
             var _person = _PersonBAL.Person_Record_GetALLBAL(PSID);
-             return Json(_person.ToDataSourceResult(request, ModelState));
+            return Json(_person.ToDataSourceResult(request, ModelState));
         }
         #endregion
 
@@ -95,7 +95,7 @@ namespace TMS.Web.Controllers
                 request.PageSize = 10;
             }
 
-            var _person = _PersonBAL.Prospect_GetALLBAL(CurrentCulture,CurrentUser.CompanyID, SearchText);
+            var _person = _PersonBAL.Prospect_GetALLBAL(CurrentCulture, CurrentUser.CompanyID, SearchText);
             return Json(_person.ToDataSourceResult(request, ModelState));
         }
 
@@ -134,9 +134,13 @@ namespace TMS.Web.Controllers
                     var Resp = SavePersonData(_person, ref _profilePict);
                     _person.AddedByAlias = CurrentUser.Name;
                     _person.ID = Resp.ID;
-                    
+                    long val = Convert.ToInt64(_person.AssignedToString);
+                    _person.AssignedTo = val;
                     _person.PersonRegCode = Resp.PersonRegCode;
                     _person.ProfilePicture = _profilePict;
+                    long crmval =(long) _person.CrmClientType;
+                  
+                    
                     if (_person.ID != long.MinValue)
                     {
                         _PersonBAL.ManageAssigned_CreateBAL(_person);
@@ -313,7 +317,7 @@ namespace TMS.Web.Controllers
         [NonAction]
         public PersonResponse SavePersonData(Person _person, ref string _profilePict)
         {
-            var result = _PersonBAL.ProspectInsertNewPersonBAL(_person,3);
+            var result = _PersonBAL.ProspectInsertNewPersonBAL(_person, 3);
             _profilePict = "/images/i/people.png"; // _profilePict=   HandlePersonAttachment(filename, result.ID);
             return result;
         }
@@ -388,16 +392,16 @@ namespace TMS.Web.Controllers
                 //{
                 //    ModelState.AddModelError(lr.PersonPhoneNumber, lr.PersonPhoneDuplication);
                 //}
-             //   else
-              //  {
-                    _objPhoneNumbers.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                    _objPhoneNumbers.UpdatedOn = DateTime.Now;
-                    var result = _PersonBAL.ManageScheduledClasses_UpdateBAL(_objPhoneNumbers);
-                    if (result == -1)
-                    {
-                        ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
-                    }
-              //  }
+                //   else
+                //  {
+                _objPhoneNumbers.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                _objPhoneNumbers.UpdatedOn = DateTime.Now;
+                var result = _PersonBAL.ManageScheduledClasses_UpdateBAL(_objPhoneNumbers);
+                if (result == -1)
+                {
+                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                }
+                //  }
             }
             var resultData = new[] { _objPhoneNumbers };
             return Json(resultData.AsQueryable().ToDataSourceResult(request, ModelState));
@@ -414,7 +418,7 @@ namespace TMS.Web.Controllers
                 _objPhoneNumbers.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _objPhoneNumbers.UpdatedOn = DateTime.Now;
                 var results = _PersonBAL.ManageScheduledClasses_DeleteBAL(_objPhoneNumbers);
-                if (results !=-1)
+                if (results != -1)
                 {
                     ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
                 }
@@ -463,7 +467,7 @@ namespace TMS.Web.Controllers
                 {
                     _mapping.CreatedBy = CurrentUser.NameIdentifierInt64;
                     _mapping.CreatedOn = DateTime.Now;
-                   
+
                     _mapping.ID = _PersonBAL.ManageProposedCourses_CreateBAL(_mapping);
                 }
             }
@@ -554,11 +558,11 @@ namespace TMS.Web.Controllers
                 //}
                 //else
                 //{
-                    _mapping.CreatedBy = CurrentUser.NameIdentifierInt64;
-                    _mapping.CreatedOn = DateTime.Now;
+                _mapping.CreatedBy = CurrentUser.NameIdentifierInt64;
+                _mapping.CreatedOn = DateTime.Now;
 
-                    _mapping.ID = _PersonBAL.ManageCategory_CreateBAL(_mapping);
-              //  }
+                _mapping.ID = _PersonBAL.ManageCategory_CreateBAL(_mapping);
+                //  }
             }
             var resultData = new[] { _mapping };
             return Json(resultData.ToDataSourceResult(request, ModelState));
@@ -663,12 +667,12 @@ namespace TMS.Web.Controllers
             if (ModelState.IsValid)
             {
                 _mapping.PersonID = oid;
-               
-                    _mapping.CreatedBy = CurrentUser.NameIdentifierInt64;
-                    _mapping.CreatedOn = DateTime.Now;
 
-                    _mapping.ID = _PersonBAL.ManageHowHeard_CreateBAL(_mapping);
-                
+                _mapping.CreatedBy = CurrentUser.NameIdentifierInt64;
+                _mapping.CreatedOn = DateTime.Now;
+
+                _mapping.ID = _PersonBAL.ManageHowHeard_CreateBAL(_mapping);
+
             }
             var resultData = new[] { _mapping };
             return Json(resultData.ToDataSourceResult(request, ModelState));
@@ -782,7 +786,7 @@ namespace TMS.Web.Controllers
                 _mapping.CallTime = DateTime.Now;
                 _mapping.CallType = Calltype.Forwarded;
                 _mapping.Notes = "System Generated Call";
-                _mapping.PerformedBy= CurrentUser.NameIdentifierInt64.ToString();
+                _mapping.PerformedBy = CurrentUser.NameIdentifierInt64.ToString();
 
 
                 _mapping.ID = _PersonBAL.ManageRecordCall_CreateBAL(_mapping);

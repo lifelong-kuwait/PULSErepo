@@ -135,7 +135,7 @@ namespace TMS.DataObjects.CustomGenerics
                 cmd.Parameters.AddWithValue("LoyaltyPointRedeemed", _objPerson.LoyaltyPointRedeemed);
                 cmd.Parameters.AddWithValue("Designation", _objPerson.Designation);
                 cmd.Parameters.AddWithValue("Password", _objPerson.Password);
-                 //AssignedTo = dr.GetInt64("AssignedTo");
+                //cmd.Parameters.AddWithValue("AssignedTo",_objPerson.AssignedTo);
                 cmd.Parameters.AddWithValue("Gender", _objPerson.Gender);
                 cmd.Parameters.AddWithValue("Nationality", 0);
                 cmd.Parameters.AddWithValue("Type", _objPerson.Type);

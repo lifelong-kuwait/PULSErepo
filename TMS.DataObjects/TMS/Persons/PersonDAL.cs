@@ -1144,7 +1144,7 @@ namespace TMS.DataObjects.TMS
             return ExecuteInt64withOutPutparameterSp("CRM_UserPersonMapping_Create", parameters,
                       ParamBuilder.Par("PersonID", _mapping.ID),
                         ParamBuilder.Par("AssignedTo", _mapping.AssignedTo),
-                        ParamBuilder.Par("ClientStatus", _mapping.clientstatus),
+                        ParamBuilder.Par("ClientStatus", _mapping.CrmClientType),
                         ParamBuilder.Par("CreatedBy", _mapping.CreatedBy),
                         ParamBuilder.Par("CreatedOn", _mapping.CreatedDate)
                         );

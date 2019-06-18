@@ -484,10 +484,11 @@ namespace TMS.Library.TMS.Persons
         }
         public string ClientStatusValue
         {
-            get
-            {
-                return clientstatus != null ? Fd.GetDisplayName(clientstatus) : "NotSpecified";
-            }
+            get;set;
+            //get
+            //{
+            //    return clientstatus != null ? Fd.GetDisplayName(clientstatus) : "NotSpecified";
+            //}
         }
         //public string personTypeValue
         //{
@@ -601,14 +602,17 @@ namespace TMS.Library.TMS.Persons
         [Display(Name = "LableAssignedTo", ResourceType = typeof(lr))]
         public long? AssignedTo { get; set; }
 
+        [Display(Name = "LableAssignedTo", ResourceType = typeof(lr))]
+        public string AssignedToString { get; set; }
 
-
-        [Display(Name = "CRMClientType", ResourceType = typeof(lr))]
+        [Display(Name = "clientstatus", ResourceType = typeof(lr))]
         public CRMClientType? clientstatus { get; set; }
 
         [Display(Name = "PersonClientType", ResourceType = typeof(lr))]
         public ClientType ClientType { get; set; }
 
+        [Display(Name = "PersonClientType", ResourceType = typeof(lr))]
+        public CRMClientType CrmClientType { get; set; }
         public string UserName { get; set; }
 
         public string ScheduleClasses { get; set; }
@@ -684,10 +688,11 @@ namespace TMS.Library.TMS.Persons
             MaritalStatus = (MaritalStatus)dr.GetByte("MaritalStatus");
             VendorID = dr.GetInt64("VendorID");
             //ProfilePicture = dr.GetStringForProfile("ProfilePicture");
-            if (clientstatus == null)
-                clientstatus = 0;
+            if (ClientType == null)
+                CrmClientType = 0;
             else
-                clientstatus = (CRMClientType)dr.GetByte("ClientStatus");
+                CrmClientType = (CRMClientType)dr.GetByte("ClientStatus");
+            
             AssignedTo = dr.GetInt64("AssignedTo");
             NickName = dr.GetString("NickName");
             Alias = dr.GetString("Alias");
