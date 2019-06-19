@@ -7,9 +7,11 @@ using System.Linq;
 using System.Web.Mvc;
 using TMS.Business.Interfaces;
 using TMS.Business.Interfaces.Common.Address;
+using TMS.Business.Interfaces.TMS;
 using TMS.Business.Interfaces.TMS.Organization;
 using TMS.Library;
 using TMS.Library.Common.Address;
+using TMS.Library.TMS.Persons;
 using lr = Resources.Resources;
 
 namespace TMS.Web.Controllers
@@ -19,10 +21,11 @@ namespace TMS.Web.Controllers
         private readonly IAddressBAL _objAddressBAL;
         private readonly IPersonContactBAL _objPersonContactBAL;
         private readonly IOrganizationBAL _objIOrganizationBAL;
+        private readonly IBALUsers _UserBAL;
 
-        public ContactController(IAddressBAL _objeAddress, IPersonContactBAL _objePersonContact, IOrganizationBAL _objeIOrganizationBAL)
+        public ContactController(IAddressBAL _objeAddress, IPersonContactBAL _objePersonContact, IOrganizationBAL _objeIOrganizationBAL, IBALUsers _User)
         {
-            _objAddressBAL = _objeAddress; _objPersonContactBAL = _objePersonContact; _objIOrganizationBAL = _objeIOrganizationBAL;
+            _objAddressBAL = _objeAddress; _objPersonContactBAL = _objePersonContact; _objIOrganizationBAL = _objeIOrganizationBAL; _UserBAL = _User;
         }
 
         #region"Address"
@@ -70,7 +73,7 @@ namespace TMS.Web.Controllers
                 {
                     ModelState.AddModelError(lr.AddressAddressDublication, lr.AddressAddressDublication);
 
-                  //  return Json(lr.AddressAddressOne, JsonRequestBehavior.AllowGet);
+                    //  return Json(lr.AddressAddressOne, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
@@ -386,7 +389,8 @@ namespace TMS.Web.Controllers
                     ModelState.AddModelError(lr.ErrorServerError, lr.PrimaryContents);
 
                 }
-                else {
+                else
+                {
                     var result = _objPersonContactBAL.PersonPhoneNumbers_DeleteBAL(_objPhoneNumbers, Convert.ToInt64(pid));
                     if (!result)
                     {
@@ -426,19 +430,28 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _objEmailAddresses.CreatedBy = CurrentUser.NameIdentifierInt64;
-                _objEmailAddresses.CreatedDate = DateTime.Now;
-                if (_objPersonContactBAL.PersonEmailAddress_GetCountByPersonIDBAL(Convert.ToInt64(pid)) >= TMSHelper.GetPersonEmailLimit())
+                if (_UserBAL.LoginPerson_DuplicationCheckBAL(new Person { Email = _objEmailAddresses.Email }) > 0)
                 {
-                    ModelState.AddModelError(lr.PersonContactEmail, string.Format(lr.PersonContactEmailLimit, TMSHelper.GetPersonEmailLimit().ToString()));
-                }
-                else if (_objPersonContactBAL.PersonEmailAddress_DuplicationCheckBAL(_objEmailAddresses, Convert.ToInt64(pid)) > 0)
-                {
-                    ModelState.AddModelError(lr.PersonContactEmail, lr.PersonContactEmailDuplicationCheck);
+                    ModelState.AddModelError(lr.UserEmailAlreadyExist, lr.UserEmailAlreadyExist);
+                    // return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
+
                 }
                 else
                 {
-                    _objEmailAddresses.ID = _objPersonContactBAL.PersonEmailAddress_CreateBAL(_objEmailAddresses, Convert.ToInt64(pid));
+                    _objEmailAddresses.CreatedBy = CurrentUser.NameIdentifierInt64;
+                    _objEmailAddresses.CreatedDate = DateTime.Now;
+                    if (_objPersonContactBAL.PersonEmailAddress_GetCountByPersonIDBAL(Convert.ToInt64(pid)) >= TMSHelper.GetPersonEmailLimit())
+                    {
+                        ModelState.AddModelError(lr.PersonContactEmail, string.Format(lr.PersonContactEmailLimit, TMSHelper.GetPersonEmailLimit().ToString()));
+                    }
+                    else if (_objPersonContactBAL.PersonEmailAddress_DuplicationCheckBAL(_objEmailAddresses, Convert.ToInt64(pid)) > 0)
+                    {
+                        ModelState.AddModelError(lr.PersonContactEmail, lr.PersonContactEmailDuplicationCheck);
+                    }
+                    else
+                    {
+                        _objEmailAddresses.ID = _objPersonContactBAL.PersonEmailAddress_CreateBAL(_objEmailAddresses, Convert.ToInt64(pid));
+                    }
                 }
             }
             var resultData = new[] { _objEmailAddresses };
@@ -453,18 +466,27 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _objEmailAddresses.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                _objEmailAddresses.UpdatedDate = DateTime.Now;
-                if (_objPersonContactBAL.PersonEmailAddress_DuplicationCheckBAL(_objEmailAddresses, Convert.ToInt64(pid)) > 0)
+                if (_UserBAL.LoginPerson_DuplicationCheckBAL(new Person { Email = _objEmailAddresses.Email }) > 0)
                 {
-                    ModelState.AddModelError(lr.PersonContactEmail, lr.PersonContactEmailDuplicationCheck);
+                    ModelState.AddModelError(lr.UserEmailAlreadyExist, lr.UserEmailAlreadyExist);
+                    // return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
+
                 }
                 else
                 {
-                    var result = _objPersonContactBAL.PersonEmailAddress_UpdateBAL(_objEmailAddresses, Convert.ToInt64(pid));
-                    if (result == -1)
+                    _objEmailAddresses.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                    _objEmailAddresses.UpdatedDate = DateTime.Now;
+                    if (_objPersonContactBAL.PersonEmailAddress_DuplicationCheckBAL(_objEmailAddresses, Convert.ToInt64(pid)) > 0)
                     {
-                        ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                        ModelState.AddModelError(lr.PersonContactEmail, lr.PersonContactEmailDuplicationCheck);
+                    }
+                    else
+                    {
+                        var result = _objPersonContactBAL.PersonEmailAddress_UpdateBAL(_objEmailAddresses, Convert.ToInt64(pid));
+                        if (result == -1)
+                        {
+                            ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                        }
                     }
                 }
             }

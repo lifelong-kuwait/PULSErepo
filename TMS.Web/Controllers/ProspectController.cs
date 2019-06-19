@@ -22,10 +22,11 @@ namespace TMS.Web.Controllers
         private readonly IAttachmentBAL _AttachmentBAL;
         private readonly IPersonBAL _PersonBAL;
         private readonly IPersonContactBAL _objPersonContactBAL;
+        private readonly IBALUsers _UserBAL;
 
-        public ProspectController(IAttachmentBAL objIAttachmentBAL, IPersonBAL objIPersonBAL, IPersonContactBAL _objePersonContact)
+        public ProspectController(IAttachmentBAL objIAttachmentBAL, IPersonBAL objIPersonBAL, IPersonContactBAL _objePersonContact, IBALUsers _User)
         {
-            _AttachmentBAL = objIAttachmentBAL; _PersonBAL = objIPersonBAL; _objPersonContactBAL = _objePersonContact;
+            _AttachmentBAL = objIAttachmentBAL; _PersonBAL = objIPersonBAL; _objPersonContactBAL = _objePersonContact; _UserBAL = _User;
         }
         // GET: Prospect
         public ActionResult Index()
@@ -106,6 +107,104 @@ namespace TMS.Web.Controllers
             if (ModelState.IsValid)
             {
                 bool _valid = false;
+                if (_UserBAL.LoginPerson_DuplicationCheckBAL(new Person { Email = _person.Email }) > 0)
+                {
+                    ModelState.AddModelError(lr.UserEmailAlreadyExist, lr.UserEmailAlreadyExist);
+                    // return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
+                    _valid = false;
+                }
+                else
+                {
+                    if (_person.Email != null)//when Email is Provided
+                    {
+                        _valid = true;
+                    }
+                    else if (_person.ContactNumber != null)//when Contact number is provided
+                    {
+                        if (_person.CountryCode == 0)//when country code is  provided
+                        {
+                            ModelState.AddModelError(lr.PersonPhoneCountryCode, lr.PersonPhoneNumberProvideCountryocde);
+                        }
+                        else
+                        {
+                            _valid = true;
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(lr.PersonContactEmail, lr.PersonEmailorPhoneRequired);
+                    }
+                    if (_valid)
+                    {
+                        _person.CreatedBy = CurrentUser.NameIdentifierInt64;
+                        _person.CreatedDate = DateTime.Now;
+                        _person.OrganizationID = CurrentUser.CompanyID;
+                        string _profilePict = string.Empty;
+                        var Resp = SavePersonData(_person, ref _profilePict);
+                        _person.AddedByAlias = CurrentUser.Name;
+                        _person.ID = Resp.ID;
+                        long val = Convert.ToInt64(_person.AssignedToString);
+                        _person.AssignedTo = val;
+                        _person.PersonRegCode = Resp.PersonRegCode;
+                        _person.ProfilePicture = _profilePict;
+                        long crmval = (long)_person.CrmClientType;
+
+
+                        if (_person.ID != long.MinValue)
+                        {
+                            _PersonBAL.ManageAssigned_CreateBAL(_person);
+
+                            if (_person.ContactNumber != null)//when ContactNumber is Provided
+                            {
+                                PhoneNumbers _objPhoneNumbers = new PhoneNumbers
+                                {
+                                    ContactNumber = _person.ContactNumber,
+                                    CountryCode = _person.CountryCode,
+                                    IsPrimary = true,
+                                    Extension = _person.Extension,
+                                    CreatedBy = CurrentUser.NameIdentifierInt64,
+                                    CreatedDate = DateTime.Now
+                                };
+                                _person.PhoneID = _objPersonContactBAL.PersonPhoneNumbers_CreateBAL(_objPhoneNumbers, _person.ID);
+                            }
+                            if (_person.Email != null)//when Email is Provided
+                            {
+                                EmailAddresses _objEmailAddresses = new EmailAddresses
+                                {
+                                    Email = _person.Email,
+                                    IsPrimary = true,
+                                    CreatedBy = CurrentUser.NameIdentifierInt64,
+                                    CreatedDate = DateTime.Now
+                                };
+                                _person.EmailID = _objPersonContactBAL.PersonEmailAddress_CreateBAL(_objEmailAddresses, _person.ID);
+                            }
+                        }
+                    }
+                }
+            }
+
+            var resultData = new[] { _person };
+            return Json(resultData.ToDataSourceResult(request, ModelState));
+        }
+
+        [ClaimsAuthorizeAttribute("CanAddEditProspects")]
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        public ActionResult Person_Update([DataSourceRequest] DataSourceRequest request, Person _person, string filename, long aid)
+        {
+            _person.UpdatedBy = CurrentUser.NameIdentifierInt64;
+            _person.UpdatedDate = DateTime.Now;
+
+            bool _valid = false;
+            if (_UserBAL.LoginPerson_DuplicationCheckBAL(new Person { Email = _person.Email }) > 0)
+            {
+                ModelState.AddModelError(lr.UserEmailAlreadyExist, lr.UserEmailAlreadyExist);
+                // return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
+                _valid = false;
+            }
+            else
+            {
+
                 if (_person.Email != null)//when Email is Provided
                 {
                     _valid = true;
@@ -127,164 +226,85 @@ namespace TMS.Web.Controllers
                 }
                 if (_valid)
                 {
-                    _person.CreatedBy = CurrentUser.NameIdentifierInt64;
-                    _person.CreatedDate = DateTime.Now;
-                    _person.OrganizationID = CurrentUser.CompanyID;
-                    string _profilePict = string.Empty;
-                    var Resp = SavePersonData(_person, ref _profilePict);
-                    _person.AddedByAlias = CurrentUser.Name;
-                    _person.ID = Resp.ID;
-                    long val = Convert.ToInt64(_person.AssignedToString);
-                    _person.AssignedTo = val;
-                    _person.PersonRegCode = Resp.PersonRegCode;
-                    _person.ProfilePicture = _profilePict;
-                    long crmval =(long) _person.CrmClientType;
-                  
-                    
-                    if (_person.ID != long.MinValue)
+                    var result = _PersonBAL.Person_UpdateBAL(_person);
+                    _person.ProfilePicture = HandlePersonProfilePicture(filename, _person.ID, aid);
+                    if (result != -1)
                     {
-                        _PersonBAL.ManageAssigned_CreateBAL(_person);
-
-                        if (_person.ContactNumber != null)//when ContactNumber is Provided
+                        if (_person.PhoneID > 0)
                         {
-                            PhoneNumbers _objPhoneNumbers = new PhoneNumbers
+                            if (_person.ContactNumber != null)
                             {
-                                ContactNumber = _person.ContactNumber,
-                                CountryCode = _person.CountryCode,
-                                IsPrimary = true,
-                                Extension = _person.Extension,
-                                CreatedBy = CurrentUser.NameIdentifierInt64,
-                                CreatedDate = DateTime.Now
-                            };
-                            _person.PhoneID = _objPersonContactBAL.PersonPhoneNumbers_CreateBAL(_objPhoneNumbers, _person.ID);
-                        }
-                        if (_person.Email != null)//when Email is Provided
-                        {
-                            EmailAddresses _objEmailAddresses = new EmailAddresses
-                            {
-                                Email = _person.Email,
-                                IsPrimary = true,
-                                CreatedBy = CurrentUser.NameIdentifierInt64,
-                                CreatedDate = DateTime.Now
-                            };
-                            _person.EmailID = _objPersonContactBAL.PersonEmailAddress_CreateBAL(_objEmailAddresses, _person.ID);
-                        }
-                    }
-                }
-            }
-
-            var resultData = new[] { _person };
-            return Json(resultData.ToDataSourceResult(request, ModelState));
-        }
-
-        [ClaimsAuthorizeAttribute("CanAddEditProspects")]
-        [AcceptVerbs(HttpVerbs.Post)]
-        [DontWrapResult]
-        public ActionResult Person_Update([DataSourceRequest] DataSourceRequest request, Person _person, string filename, long aid)
-        {
-            _person.UpdatedBy = CurrentUser.NameIdentifierInt64;
-            _person.UpdatedDate = DateTime.Now;
-
-            bool _valid = false;
-            if (_person.Email != null)//when Email is Provided
-            {
-                _valid = true;
-            }
-            else if (_person.ContactNumber != null)//when Contact number is provided
-            {
-                if (_person.CountryCode == 0)//when country code is  provided
-                {
-                    ModelState.AddModelError(lr.PersonPhoneCountryCode, lr.PersonPhoneNumberProvideCountryocde);
-                }
-                else
-                {
-                    _valid = true;
-                }
-            }
-            else
-            {
-                ModelState.AddModelError(lr.PersonContactEmail, lr.PersonEmailorPhoneRequired);
-            }
-            if (_valid)
-            {
-                var result = _PersonBAL.Person_UpdateBAL(_person);
-                _person.ProfilePicture = HandlePersonProfilePicture(filename, _person.ID, aid);
-                if (result != -1)
-                {
-                    if (_person.PhoneID > 0)
-                    {
-                        if (_person.ContactNumber != null)
-                        {
-                            if (_person.CountryCode != 0)//when country code is  provided
-                            {
-                                PhoneNumbers _objPhoneNumbers = new PhoneNumbers
+                                if (_person.CountryCode != 0)//when country code is  provided
                                 {
-                                    ID = _person.PhoneID,
-                                    ContactNumber = _person.ContactNumber,
-                                    CountryCode = _person.CountryCode,
+                                    PhoneNumbers _objPhoneNumbers = new PhoneNumbers
+                                    {
+                                        ID = _person.PhoneID,
+                                        ContactNumber = _person.ContactNumber,
+                                        CountryCode = _person.CountryCode,
+                                        IsPrimary = true,
+                                        Extension = _person.Extension,
+                                        UpdatedBy = CurrentUser.NameIdentifierInt64,
+                                        UpdatedDate = DateTime.Now
+                                    };
+                                    _objPersonContactBAL.PersonPhoneNumbers_UpdateBAL(_objPhoneNumbers, _person.ID);
+                                }
+                                else
+                                {
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (_person.ContactNumber != null)//when Contact number is provided
+                            {
+                                if (_person.CountryCode == 0)//when country code is  provided
+                                {
+                                    ModelState.AddModelError(lr.PersonPhoneCountryCode, lr.PersonPhoneNumberProvideCountryocde);
+                                }
+                                else
+                                {
+                                    PhoneNumbers _objPhoneNumbers = new PhoneNumbers
+                                    {
+                                        ID = _person.PhoneID,
+                                        ContactNumber = _person.ContactNumber,
+                                        CountryCode = _person.CountryCode,
+                                        IsPrimary = true,
+                                        Extension = _person.Extension,
+                                        CreatedBy = CurrentUser.NameIdentifierInt64,
+                                        CreatedDate = DateTime.Now
+                                    };
+                                    _person.PhoneID = _objPersonContactBAL.PersonPhoneNumbers_CreateBAL(_objPhoneNumbers, _person.ID);
+                                }
+                            }
+                        }
+                        if (_person.EmailID > 0)
+                        {
+                            if (_person.Email != null)//when Email is Provided
+                            {
+                                EmailAddresses _objEmailAddresses = new EmailAddresses
+                                {
+                                    ID = _person.EmailID,
+                                    Email = _person.Email,
                                     IsPrimary = true,
-                                    Extension = _person.Extension,
                                     UpdatedBy = CurrentUser.NameIdentifierInt64,
                                     UpdatedDate = DateTime.Now
                                 };
-                                _objPersonContactBAL.PersonPhoneNumbers_UpdateBAL(_objPhoneNumbers, _person.ID);
-                            }
-                            else
-                            {
+                                _objPersonContactBAL.PersonEmailAddress_UpdateBAL(_objEmailAddresses, _person.ID);
                             }
                         }
-                    }
-                    else
-                    {
-                        if (_person.ContactNumber != null)//when Contact number is provided
+                        else
                         {
-                            if (_person.CountryCode == 0)//when country code is  provided
+                            if (_person.Email != null)//when Email is Provided
                             {
-                                ModelState.AddModelError(lr.PersonPhoneCountryCode, lr.PersonPhoneNumberProvideCountryocde);
-                            }
-                            else
-                            {
-                                PhoneNumbers _objPhoneNumbers = new PhoneNumbers
+                                EmailAddresses _objEmailAddresses = new EmailAddresses
                                 {
-                                    ID = _person.PhoneID,
-                                    ContactNumber = _person.ContactNumber,
-                                    CountryCode = _person.CountryCode,
+                                    Email = _person.Email,
                                     IsPrimary = true,
-                                    Extension = _person.Extension,
                                     CreatedBy = CurrentUser.NameIdentifierInt64,
                                     CreatedDate = DateTime.Now
                                 };
-                                _person.PhoneID = _objPersonContactBAL.PersonPhoneNumbers_CreateBAL(_objPhoneNumbers, _person.ID);
+                                _person.EmailID = _objPersonContactBAL.PersonEmailAddress_CreateBAL(_objEmailAddresses, _person.ID);
                             }
-                        }
-                    }
-                    if (_person.EmailID > 0)
-                    {
-                        if (_person.Email != null)//when Email is Provided
-                        {
-                            EmailAddresses _objEmailAddresses = new EmailAddresses
-                            {
-                                ID = _person.EmailID,
-                                Email = _person.Email,
-                                IsPrimary = true,
-                                UpdatedBy = CurrentUser.NameIdentifierInt64,
-                                UpdatedDate = DateTime.Now
-                            };
-                            _objPersonContactBAL.PersonEmailAddress_UpdateBAL(_objEmailAddresses, _person.ID);
-                        }
-                    }
-                    else
-                    {
-                        if (_person.Email != null)//when Email is Provided
-                        {
-                            EmailAddresses _objEmailAddresses = new EmailAddresses
-                            {
-                                Email = _person.Email,
-                                IsPrimary = true,
-                                CreatedBy = CurrentUser.NameIdentifierInt64,
-                                CreatedDate = DateTime.Now
-                            };
-                            _person.EmailID = _objPersonContactBAL.PersonEmailAddress_CreateBAL(_objEmailAddresses, _person.ID);
                         }
                     }
                 }
@@ -301,16 +321,24 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public ActionResult Prospect_Destroy([DataSourceRequest] DataSourceRequest request, Person _person)
         {
-            _person.UpdatedBy = CurrentUser.NameIdentifierInt64;
-            _person.UpdatedDate = DateTime.Now;
-            var result = _PersonBAL.Person_DeleteBAL(_person);
-            //if (result == -1)
-            //{
-            //    //if()
-            //    //_objPersonContactBAL.PersonEmailAddress_DeleteBAL();
-            //}
-            //var resultData = new[] { _person };
-            return Json(new object[0].ToDataSourceResult(request, ModelState));
+            if (_PersonBAL.ManageCourse_Assigned(_person.ID) > 0)
+            {
+                ModelState.AddModelError(lr.PersonPhoneNumber, lr.PersonPhoneDuplication);
+            }
+            else
+            {
+                _person.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                _person.UpdatedDate = DateTime.Now;
+                var result = _PersonBAL.Person_DeleteBAL(_person);
+
+                //if (result == -1)
+                //{
+                //    //if()
+                //    //_objPersonContactBAL.PersonEmailAddress_DeleteBAL();
+                //}
+                //var resultData = new[] { _person };
+            }
+                return Json(new object[0].ToDataSourceResult(request, ModelState));
             // return Json(resultData.AsQueryable().ToDataSourceResult(request, ModelState));
         }
 
@@ -364,6 +392,7 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                _mapping.PersonID = oid;
                 if (_PersonBAL.ManageScheduleCourse_DuplicationCheckBAL(_mapping) > 0)
                 {
                     ModelState.AddModelError(lr.PersonPhoneNumber, lr.PersonPhoneDuplication);
@@ -384,7 +413,7 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         [ActivityAuthorize]
         [ClaimsAuthorize("CanAddEditScheduleClassess")]
-        public ActionResult PersonPhone_Update([DataSourceRequest] DataSourceRequest request, CRM_classPersonMapping _objPhoneNumbers)
+        public ActionResult ManageScheduledClasses_Update([DataSourceRequest] DataSourceRequest request, CRM_classPersonMapping _objPhoneNumbers)
         {
             if (ModelState.IsValid)
             {
@@ -411,7 +440,7 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         [ActivityAuthorize]
         [ClaimsAuthorize("CanDeleteScheduleClassess")]
-        public ActionResult PersonPhone_Destroy([DataSourceRequest] DataSourceRequest request, CRM_classPersonMapping _objPhoneNumbers)
+        public ActionResult ManageScheduledClasses_Destroy([DataSourceRequest] DataSourceRequest request, CRM_classPersonMapping _objPhoneNumbers)
         {
             if (ModelState.IsValid)
             {
@@ -666,12 +695,31 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _mapping.PersonID = oid;
+                var _Phone = _PersonBAL.ManageHowHeard_GetAllBAL(Convert.ToInt64(oid));
+                bool flage = false;
+                foreach (var x in _Phone)
+                {
+                    if (_mapping.HowHeardID == x.HowHeardID)
+                    {
+                        flage = true;
+                        break;
+                    }
+                }
+                if (flage)
+                {
+                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                }
+                else
+                {
 
-                _mapping.CreatedBy = CurrentUser.NameIdentifierInt64;
-                _mapping.CreatedOn = DateTime.Now;
 
-                _mapping.ID = _PersonBAL.ManageHowHeard_CreateBAL(_mapping);
+                    _mapping.PersonID = oid;
+
+                    _mapping.CreatedBy = CurrentUser.NameIdentifierInt64;
+                    _mapping.CreatedOn = DateTime.Now;
+
+                    _mapping.ID = _PersonBAL.ManageHowHeard_CreateBAL(_mapping);
+                }
 
             }
             var resultData = new[] { _mapping };
@@ -692,14 +740,30 @@ namespace TMS.Web.Controllers
                 //}
                 //   else
                 //  {
-                _objPhoneNumbers.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                _objPhoneNumbers.UpdatedOn = DateTime.Now;
-                var result = _PersonBAL.ManageHowHeard_UpdateBAL(_objPhoneNumbers);
-                if (result == -1)
+                var _Phone = _PersonBAL.ManageHowHeard_GetAllBAL(Convert.ToInt64(_objPhoneNumbers.PersonID));
+                bool flage = false;
+                foreach (var x in _Phone)
+                {
+                    if (_objPhoneNumbers.HowHeardID == x.HowHeardID)
+                    {
+                        flage = true;
+                        break;
+                    }
+                }
+                if (flage)
                 {
                     ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
                 }
-                //  }
+                else
+                {
+                    _objPhoneNumbers.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                    _objPhoneNumbers.UpdatedOn = DateTime.Now;
+                    var result = _PersonBAL.ManageHowHeard_UpdateBAL(_objPhoneNumbers);
+                    if (result == -1)
+                    {
+                        ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    }
+                }
             }
             var resultData = new[] { _objPhoneNumbers };
             return Json(resultData.AsQueryable().ToDataSourceResult(request, ModelState));

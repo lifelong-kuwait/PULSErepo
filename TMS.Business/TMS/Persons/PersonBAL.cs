@@ -639,7 +639,10 @@ namespace TMS.Business.TMS
         {
             return DAL.ManageCourse_DuplicationCheckDAL(_mapping);
         }
-
+        public int ManageCourse_Assigned(long PID)
+        {
+            return DAL.ManageCourse_Assigned(PID);
+        }
         public int ManageScheduleCourse_DuplicationCheckBAL(CRM_classPersonMapping _mapping)
         {
             return DAL.ManageScheduleCourse_DuplicationCheckDAL(_mapping);

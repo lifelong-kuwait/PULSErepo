@@ -179,7 +179,8 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public JsonResult CRM_Classes()
         {
-            return Json(_objIDDLBAL.CRMClasses(CurrentCulture,CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
+            var CrmClasses = _objIDDLBAL.CRMClasses(CurrentCulture, CurrentUser.CompanyID);
+            return Json(CrmClasses, JsonRequestBehavior.AllowGet);
         }
         [DontWrapResult]
         public JsonResult CRM_Courses()

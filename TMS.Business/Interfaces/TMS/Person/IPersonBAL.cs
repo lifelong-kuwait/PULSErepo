@@ -71,8 +71,8 @@ namespace TMS.Business.Interfaces.TMS
         /// <returns>System.Int32.</returns>
         int Person_UpdateBAL(Person _objPerson);
 
-     //  int Prospect_UpdateBAL(Person _objPerson);
-
+        //  int Prospect_UpdateBAL(Person _objPerson);
+        int ManageCourse_Assigned(long PID);
         /// <summary>
         /// Persons the delete bal.
         /// </summary>

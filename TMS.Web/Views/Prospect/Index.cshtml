@@ -65,7 +65,7 @@
         .PageSize(15)
         .Read(read => read.Action("Person_Read", "Prospect").Data("withSearch"))
         .Create(read => read.Action("Person_Create", "Prospect"))
-        .Destroy(read => read.Action("Person_Destroy", "Prospect"))
+        .Destroy(read => read.Action("Prospect_Destroy", "Prospect"))
         .Update(read => read.Action("Person_Update", "Prospect").Data("PersonProfilePictureData"))
         .Events(e => e.Error("GeneralErrorHandler(\"PersonGrid\")"))
         ).NoRecords(lr.GridNoRecordFoundMessage)
@@ -186,10 +186,10 @@
             if (checkedLength == 1) {
                 var grid = jQuery("#PersonGrid").data("kendoGrid");
                 var data = grid.dataItem(jQuery("[data-uid='" + jQuery(this).attr("dat-uid") + "']"));  //get the row data so it can be referred later
-
-                swal({
-                    title: '@lr.Areyousureyouwanttodeletethisrecord',
-                    text: '@lr.Youwillnotbeabletorecover',
+               
+             swal({
+                 title: '@lr.Areyousureyouwanttodeletethisrecord',
+                 text: '@lr.Youwillnotbeabletorecover' ,
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
@@ -405,14 +405,14 @@
             MaritialStatus_Single: 1,
             MaritialStatus_Married: 2
         };
-        alert("jsdkjlghf");
+       
 
         tms.person.maritialStatus = {
             Not_Specified: 0,
             MaritialStatus_Single: 1,
             MaritialStatus_Married: 2
         };
-        tms.person.ClientStatusValue = {
+        tms.person.CrmClientType = {
             Not_Specified : 0,
             Lead : 1,
             Caller : 2,
@@ -459,7 +459,7 @@
     }
 
     function SalutationChange(e) {
-        debugger;
+        //debugger;
         var dataItem = this.dataItem(e.item);
         var salutation = parseInt(dataItem.Value);
         var dropdownlist = jQuery("#Gender").data("kendoDropDownList");

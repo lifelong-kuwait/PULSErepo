@@ -6,6 +6,7 @@
     var phonenubner = lr.PersonPhoneNumber;
     var personEmail = lr.PersonContactEmail;
     var gender = lr.Gender;
+    var clientstatus = lr.CRMClientType;
     List<TMS.Library.TMS.Persons.Person> modellist = new List<TMS.Library.TMS.Persons.Person>() { Model };
 }
 @Html.AntiForgeryToken()
@@ -218,6 +219,14 @@
             MaritialStatus_Single: 1,
             MaritialStatus_Married: 2
         };
+        tms.person.CrmClientType = {
+            Not_Specified: 0,
+            Lead: 1,
+            Caller: 2,
+            Visitor: 3,
+            Trainee: 4
+        };
+
 
     })(jQuery);
 
@@ -380,7 +389,7 @@
 </script>
 @(Html.Kendo().Grid<TMS.Library.TMS.Persons.Person>()
  .Name("PersonGrid")
- .Columns(columns => { columns.Bound(e => e.P_DisplayName); }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_PersonTemplate"))
+ .Columns(columns => { columns.Bound(e => e.P_DisplayName); }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_PersonDetailTemplate"))
  .Events(e => e.Edit("PersonGrid_onEdit").Save("Person_onSave"))
  .HtmlAttributes(new { style = "display:none" })
  .DataSource(dataSource => dataSource

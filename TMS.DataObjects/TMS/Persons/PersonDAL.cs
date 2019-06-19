@@ -1466,7 +1466,13 @@ namespace TMS.DataObjects.TMS
                                   ParamBuilder.Par("CourseID", _mapping.CourseID));
 
         }
+        public int ManageCourse_Assigned(long PID)
+        {
+            return ExecuteScalarSPInt32("CRM_Course_Assigned",
+                      ParamBuilder.Par("PersonID", PID)
+                                 );
 
+        }
         public int ManageScheduleCourse_DuplicationCheckDAL(CRM_classPersonMapping _mapping)
         {
             return ExecuteScalarSPInt32("CRMClass_DuplicationCheck",

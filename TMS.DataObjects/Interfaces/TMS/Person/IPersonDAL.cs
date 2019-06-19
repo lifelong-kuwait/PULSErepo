@@ -61,7 +61,7 @@ namespace TMS.DataObjects.Interfaces.TMS
         Person Person_GetAllByIdDAL(string ID);
         Person Prospect_GetAllByIdDAL(string ID);
 
-        
+        int ManageCourse_Assigned(long PID);
 
         Classes ClassGetByIDDAL(long CurrentClassID);
 
