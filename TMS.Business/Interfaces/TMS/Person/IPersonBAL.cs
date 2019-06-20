@@ -247,7 +247,7 @@ namespace TMS.Business.Interfaces.TMS
 
 
         int ManageScheduledClasses_UpdateBAL(CRM_classPersonMapping _mapping);
-
+        int ManageScheduledClasses_DublicationBAL(CRM_classPersonMapping _mapping);
         int ManageScheduledClasses_DeleteBAL(CRM_classPersonMapping _mapping);
 
         #endregion ScheduledClasses

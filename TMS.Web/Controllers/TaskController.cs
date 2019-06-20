@@ -642,7 +642,7 @@ namespace TMS.Web.Controllers
             }
             catch (Exception ex)
             {
-                throw;
+                
             }
             return View("SaleAdminstration");
         }

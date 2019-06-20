@@ -1256,7 +1256,13 @@ namespace TMS.DataObjects.TMS
                         ParamBuilder.Par("UpdatedBy", _mapping.UpdatedBy),
                         ParamBuilder.Par("UpdatedOn", _mapping.UpdatedOn));
         }
-
+        public int ManageScheduledClasses_DublicationDAL(CRM_classPersonMapping _mapping)
+        {
+            return ExecuteScalarSPInt32("CRM_ClassMapping_Dublication",
+                        ParamBuilder.Par("ClassID", _mapping.ClassID),
+                        ParamBuilder.Par("UpdatedBy", _mapping.UpdatedBy),
+                        ParamBuilder.Par("UpdatedOn", _mapping.UpdatedOn)); 
+        }
         public int ManageScheduledClasses_DeleteDAL(CRM_classPersonMapping _mapping)
         {
             return ExecuteScalarInt32Sp("CRM_ClassSchedule_Delete",

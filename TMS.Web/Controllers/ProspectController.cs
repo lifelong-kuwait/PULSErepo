@@ -417,20 +417,20 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                //if (_objPersonContactBAL.PersonPhoneNumbers_DuplicationCheckBAL(_objPhoneNumbers, Convert.ToInt64(pid)) > 0)
-                //{
-                //    ModelState.AddModelError(lr.PersonPhoneNumber, lr.PersonPhoneDuplication);
-                //}
-                //   else
-                //  {
-                _objPhoneNumbers.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                if (_PersonBAL.ManageScheduledClasses_DublicationBAL(_objPhoneNumbers) > 0)
+                {
+                    ModelState.AddModelError(lr.PersonPhoneNumber, lr.PersonPhoneDuplication);
+                }
+                else
+                {
+                    _objPhoneNumbers.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _objPhoneNumbers.UpdatedOn = DateTime.Now;
                 var result = _PersonBAL.ManageScheduledClasses_UpdateBAL(_objPhoneNumbers);
                 if (result == -1)
                 {
                     ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
                 }
-                //  }
+                  }
             }
             var resultData = new[] { _objPhoneNumbers };
             return Json(resultData.AsQueryable().ToDataSourceResult(request, ModelState));

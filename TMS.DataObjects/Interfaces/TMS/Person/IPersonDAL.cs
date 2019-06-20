@@ -257,7 +257,7 @@ namespace TMS.DataObjects.Interfaces.TMS
 
         int ManageAssigned_DeleteDAL(CRM_UserMapping _mapping);
 
-
+        int ManageScheduledClasses_DublicationDAL(CRM_classPersonMapping _mapping);
 
         #endregion ScheduledClasses
 

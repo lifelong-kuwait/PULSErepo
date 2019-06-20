@@ -566,6 +566,10 @@ namespace TMS.Business.TMS
         {
             return DAL.ManageScheduledClasses_UpdateDAL(_mapping);
         }
+        public int ManageScheduledClasses_DublicationBAL(CRM_classPersonMapping _mapping)
+        {
+            return DAL.ManageScheduledClasses_DublicationDAL(_mapping);
+        }
 
         public int ManageScheduledClasses_DeleteBAL(CRM_classPersonMapping _mapping)
         {
