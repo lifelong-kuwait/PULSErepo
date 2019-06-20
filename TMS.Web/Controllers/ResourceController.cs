@@ -164,7 +164,7 @@ namespace TMS.Web.Controllers
             var resources = _objeResources.GetTMSResourceBAL(request.Page, request.PageSize, ref Total, SearchText).ToList();
             if (CurrentUser.CompanyID > 0)
             {
-                resources = _objeResources.GetTMSResourceBALbyOrganization(request.Page, request.PageSize, ref Total, Convert.ToString(CurrentUser.CompanyID), SearchText).ToList();
+                resources = _objeResources.GetTMSResourceBALbyOrganization(request.Page, request.PageSize, ref Total, Convert.ToString(-2), SearchText).ToList();
             }
 
 

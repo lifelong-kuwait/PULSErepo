@@ -130,7 +130,47 @@ namespace TMS.Web.Controllers
 
             //return Json(this._UserBAL.LoginUsers_GetAllBAL(CurrentCulture).ToDataSourceResult(request, ModelState));
         }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanViewUsers")]
+        public ActionResult Sls_Tasks_Update([DataSourceRequest] DataSourceRequest request, Sls_Task _objTasks)
+        {
+            if (ModelState.IsValid)
+            {
+                _objTasks.ModifiedBy = CurrentUser.NameIdentifierInt64;
+                _objTasks.ModifiedOn = DateTime.Now;
+                _objTasks.ID = _TaskBAL.Tasks_UpdateBAL(_objTasks);
+                if (_objTasks.ID == -1)
+                {
+                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                }
 
+            }
+
+            var resultData = new[] { _objTasks };
+            return Json(resultData.ToDataSourceResult(request, ModelState));
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanViewUsers")]
+        public ActionResult Sls_Tasks_Destroy([DataSourceRequest] DataSourceRequest request, Sls_Task _objTasks)
+        {
+            if (ModelState.IsValid)
+            {
+
+                _objTasks.ModifiedBy = CurrentUser.NameIdentifierInt64;
+                _objTasks.ModifiedOn = DateTime.Now;
+                _objTasks.ID = _TaskBAL.Tasks_DeleteBAL(_objTasks);
+                if (_objTasks.ID == -1)
+                {
+                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                }
+
+            }
+
+            var resultData = new[] { _objTasks };
+            return Json(resultData.ToDataSourceResult(request, ModelState));
+        }
 
         [ClaimsAuthorizeAttribute("CanAddEditPerson")]
         [DontWrapResult]
