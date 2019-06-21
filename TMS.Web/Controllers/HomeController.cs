@@ -52,7 +52,7 @@ namespace TMS.Web.Controllers
 
         [HttpGet]
         public ActionResult Login(string returnUrl)
-        {
+        {            
            // var dd = Crypto.CreatePasswordHash("almas");
             var value = this._Office365UsersBAL.TMS_Setting_GetOffice365BAL();
             var model = new LoginModel { ReturnUrl = returnUrl, isOffice365Enabled = value };
@@ -65,8 +65,8 @@ namespace TMS.Web.Controllers
         public ActionResult Login(LoginModel infoOfData)
         {
             infoOfData.isOffice365Enabled = false;
+            
 
-           
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("", L("Invalidpassword"));
