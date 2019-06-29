@@ -15,6 +15,10 @@ using System.Collections.Generic;
 using TMS.Library;
 using TMS.Library.TMS.Persons;
 using TMS.Business.Interfaces.Common.Configuration;
+using CrystalDecisions.CrystalReports.Engine;
+using System.IO;
+using System.Data;
+using TMS.Business.TMS;
 
 namespace TMS.Web.Controllers
 {
@@ -1185,7 +1189,30 @@ namespace TMS.Web.Controllers
             //return View("~/Views/Report/TrainerDetailReport");
         }
 
+        public ActionResult exportreport()
+        {
+            PersonBAL _CourseBAL = new PersonBAL();
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Report/SPL_Reports"), "AttendancesCourse_Report.rpt"));
 
+            long ClassID = Convert.ToInt64(70019);
+            long CourseID = Convert.ToInt64(70019);
+
+            DataTable dt = _CourseBAL.GetCourseReportData(ClassID, CourseID);
+            rd.SetDataSource(dt);
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+            try
+            {
+                Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                return File(stream, "application/pdf", "Resource1.pdf");
+            }
+            catch
+            {
+                throw;
+            }
+        }
         [ClaimsAuthorize("CanViewReports")]
         public ActionResult VenueDetailReport()
         {

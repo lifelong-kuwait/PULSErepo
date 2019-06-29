@@ -97,6 +97,7 @@
     <Compile Include="Entities\TMS\Program\Schedule.cs" />
     <Compile Include="Entities\TMS\Program\Sessions.cs" />
     <Compile Include="Entities\TMS\Program\TRainerDetail.cs" />
+    <Compile Include="Entities\TMS\Reporting\CourseAttandanceReporting.cs" />
     <Compile Include="Entities\TMS\Task\Sls_Task.cs" />
     <Compile Include="Entities\TMS\Trainer\Trainer.cs" />
     <Compile Include="Enums\Enum.cs" />

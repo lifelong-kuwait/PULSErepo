@@ -102,6 +102,9 @@
     <Reference Include="Castle.Windsor">
       <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Dapper">
       <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Dapper.dll</HintPath>
     </Reference>
@@ -256,6 +259,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ReportingController.cs" />
     <Compile Include="Controllers\SalesAdministrationController.cs" />
     <Compile Include="Controllers\TestWaqasControllerController.cs" />
     <Compile Include="DailySummaryDataset.Designer.cs">
@@ -270,6 +274,12 @@
       <DependentUpon>DailyUtilizationReport.xsd</DependentUpon>
     </Compile>
     <Compile Include="DS_CompanyInfo.Designer.cs" />
+    <Compile Include="Report\SPL_Reports\AttendancesCourse_Report.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AttendancesCourse_Report.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="TrainerDetail.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1966,6 +1976,7 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\materialdesignicons-webfont.svg" />
+    <Content Include="images\91.gif" />
     <Content Include="images\abp-logo.png" />
     <Content Include="Content\bootstrap-cosmo.min.css" />
     <Content Include="Global.asax" />
@@ -5034,6 +5045,7 @@
     <Folder Include="UploadTempFolder\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\Exams\" />
+    <Folder Include="Views\Reporting\" />
     <Folder Include="Views\Reports\" />
     <Folder Include="Views\TestWaqasController\" />
   </ItemGroup>
@@ -5070,6 +5082,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />
@@ -5078,6 +5091,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DailySummaryReport.rdlc" />
     <EmbeddedResource Include="Report\DailyUtilizationReport.rdlc" />
+    <EmbeddedResource Include="Report\SPL_Reports\AttendancesCourse_Report.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AttendancesCourse_Report.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\TrainerDetail.rdlc" />
     <EmbeddedResource Include="Report\Tran_ClassDetailReport.rdlc" />
     <EmbeddedResource Include="Report\Tran_ClassReport.rdlc" />
