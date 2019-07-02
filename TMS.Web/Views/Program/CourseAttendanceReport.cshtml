@@ -1,15 +1,11 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "CourseAttendanceReport";
     Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
 }
-@using lr = Resources.Resources
-@model TMS.Library.Entities.TMS.Reporting.CourseAttandanceReporting
+
 
 <style>
-    .form-group {
-        display: grid;
-    }
-
     .input-group {
         display: none;
     }
@@ -17,101 +13,19 @@
     .col-md-12.col-lg-offset-2 {
         margin-bottom: 26px;
     }
+
     /*li {
         display: none;
     }*/
 </style>
 @*<div class="col-md-offset-2">*@
-<div class="row" style="margin-left:10%;">
+<div class="row">
     <div class="col-md-12 col-lg-offset-2">
         <h3>Course Attendance Report</h3>
     </div>
-    <div class="form-group">
-        <div class="row" style="margin-top:1%;">           
-                @Html.Label("Class", new { @class = "col-md-3 col-lg-3 control-label" })
-                <div class="col-md-7 col-lg-7 col-sm-11">
-                @(Html.Kendo().DropDownList()
-                                                            .Name("Class")
-                                                            .DataTextField("Text")
-                                                            .DataValueField("Value")
-                                                            .DataSource(source =>
-                                                            {
-                                                                source.Read(read =>
-                                                                {
-                                                                    read.Action("Classes", "DDL");
-                                                                });
-                                                            })
-                                                            .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
-                                                                                                                                                .HtmlAttributes(new { style = "width: 100%" })
-                )
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="row" style="margin-top:1%;">
-            @Html.Label("Course", new { @class = "col-md-3 col-lg-3 control-label" })
-            <div class="col-md-7 col-lg-7 col-sm-11">
-                @(Html.Kendo().DropDownList()
-                                                                   .Name("Course")
-                                                                   .DataTextField("Text")
-                                                                   .DataValueField("Value")
-                                                                   .DataSource(source =>
-                                                                   {
-                                                                       source.Read(read =>
-                                                                       {
-                                                                           read.Action("Course", "DDL");
-                                                                       });
-                                                                   })
-                                                                  .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
-                )
+</div>
+<div class="ChildGrid">
+<iframe id="myIframe" scrolling="no" src="~/Views/Report/Pages/CourseAttendance.aspx" height="1000" width="100%">text</iframe>
 
-            </div>
-        </div>
-    </div>
-    <div class="form-group col-md-2 col-lg-2 col-sm-2" style="margin-left:65%;margin-top:1%;">
-        @(Html.Kendo().Button()
-                                                               .Name("primaryTextButton")
-                                                               .HtmlAttributes(new { type = "button", @class = "btn btn-primary k-primary" })
-                                                               .Content("" + @lr.GenerateReport + "")
-        )
-    </div>
-    <div id="wait" style="display:none;width:69px;height:89px;position:absolute;top:50%;left:50%;padding:2px;">
-        <img src='~/images/91.gif' width="64" height="64" />
-        <br>Loading..
-    </div>
-    <div class="row" id="frameForPrint" style="margin-top:5%;">
-
-    </div>
 
 </div>
-
-
-<script>
-    jQuery(function () {
-        jQuery("#primaryTextButton").live("click", function (event) {
-            var courseId = jQuery("#Course").data("kendoDropDownList").value();
-            var classId = jQuery("#Class").data("kendoDropDownList").value();
-            var url1 = '@Html.Raw(@Url.Action("CourseAttendanceReportGenerator", "Reporting"))' + '?courseId=' + courseId + '&classID=' + classId;
-            jQuery.ajax({
-                url: url1,
-                success: function (data) {
-                    document.getElementById('frameForPrint').innerHTML = "";
-                    var div = document.createElement('div');
-                    div.className  = 'col-lg-10 col-sm-3 col-md-7';
-                    div.innerHTML =
-                        '<iframe src="' + url1 + '" width="100%" height="500" style="margin-top:2%;" type = "application/pdf" >';
-                     document.getElementById('frameForPrint').appendChild(div);
-                              }
-            });
-        });
-        jQuery(document).ajaxStart(function () {
-            jQuery("#wait").css("display", "block");
-            jQuery("#primaryTextButton").attr("disabled", true);
-        });
-
-        jQuery(document).ajaxComplete(function () {
-            jQuery("#wait").css("display", "none");
-            jQuery("#primaryTextButton").removeAttr("disabled");
-        });
-    });
-</script>

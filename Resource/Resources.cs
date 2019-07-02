@@ -71,13 +71,7 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("AddRecordGeneralTitle", CultureInfo.CurrentUICulture.Name);
                }
             }
-        public static string GenerateReport
-        {
-            get
-            {
-                return (string)resourceProvider.GetResource("GenerateReport", CultureInfo.CurrentUICulture.Name);
-            }
-        }
+            
         /// <summary>Edit</summary>
         public static string EditRecordGeneralTitle {
                get {
