@@ -65,6 +65,7 @@
   <ItemGroup>
     <Reference Include="Abp">
       <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Abp.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="Abp.AutoMapper">
       <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Abp.AutoMapper.dll</HintPath>
