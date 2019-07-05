@@ -1751,7 +1751,6 @@ namespace TMS.Web.Controllers
 
         #endregion Attendance
 
-
         #region Schedule
         [ClaimsAuthorize("CanViewSchedule")]
         [DontWrapResult]
@@ -1761,10 +1760,10 @@ namespace TMS.Web.Controllers
         }
         [ClaimsAuthorize("CanViewSchedule")]
         [DontWrapResult]
-        public virtual JsonResult Schedule_Read()
+        public virtual JsonResult Schedule_Read(string courseId,string classId)
         {
-            long? CourseID = 0;
-            long? ClassID = 0;
+            long? CourseID = Convert.ToInt64(courseId);
+            long? ClassID = Convert.ToInt64(classId);
             return new JsonResult { Data = _AttendanceBAL.ManageScheduleBAL(CurrentUser.CompanyID, CourseID, ClassID), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
 
             // return Json(_AttendanceBAL.ManageScheduleBAL(CurrentUser.CompanyID,CourseID,ClassID).ToDataSourceResult());
@@ -1786,6 +1785,7 @@ namespace TMS.Web.Controllers
 
         //    return Json(obgcity);
         //}
+
 
         #endregion Schedule
     }

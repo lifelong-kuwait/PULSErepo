@@ -21,6 +21,25 @@
         </script>
     }
 }
+        <script>
+            jQuery('#checkbox_id2').change(function () {
+
+
+                jQuery('.checkBoxClass').prop("checked", this.checked);
+
+            });
+
+            jQuery('.checkBoxClass').change(function () {
+
+                if (jQuery('input:checkbox:checked.checkBoxClass').length === jQuery("input:checkbox.checkBoxClass").length) {
+                    jQuery('#checkbox_id2').prop("checked", true);
+                }
+                else {
+                    jQuery('#checkbox_id2').prop("checked", false);
+                }
+
+            })
+        </script>
 <style>
     .right-inner-addon {
         display: none;
@@ -29,6 +48,15 @@
 <div class="form-horizontal">
     <div class="pageTitle">@GroupName</div>
     <form method="post" action="@Url.Content("~/Admin/CRMGroupDetail?GroupId=" +Request.QueryString["GroupId"])">
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border">Click to Check All</legend>
+            <div class="control-group">
+                <div class="custom-checkbox">
+                    <input type="checkbox" class="checkbox-inline" id="checkbox_id2" value="true" style="display:inline-table;" />
+                    <label class="checkbox-inline" for="checkbox_id2">Click To check All</label>
+                </div>
+            </div>
+        </fieldset>
         @Html.AntiForgeryToken()
         <input id="GroupId" value="@Request.QueryString["GroupId"]" type="hidden" />
         @foreach (var codeGroup in Model.GroupBy(x => x.CategoryLabelResource))
@@ -45,7 +73,7 @@
         }
         @if (User.IsInRole("CanUpdateGroupsDetail"))
         {
-            <button type="submit" class="k-button k-button-icontext k-primary k-grid-update"><span class="k-icon k-i-check"></span>@lr.Submit</button>
+            <button type="submit" class="k-button k-button-icontext k-primary k-grid-update" style="float: right"><span class="k-icon k-i-check"></span>@lr.Submit</button>
         }
     </form>
 </div>

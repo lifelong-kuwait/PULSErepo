@@ -327,8 +327,8 @@ namespace TMS.Web.Controllers
                 return GroupData.PrimaryGroupName;
             }
         }
-
-        [ClaimsAuthorize("CanViewCRMGroups")]
+        [HttpPost]
+        [ClaimsAuthorize("CanViewGroupsDetail")]
         public ActionResult CRMGroupDetail(List<SecurityGroupsPermission> permissionsList)
 
         {

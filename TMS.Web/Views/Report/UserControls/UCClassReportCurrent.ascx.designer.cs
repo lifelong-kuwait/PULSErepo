@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TMS.Web.Views.Report.UserControls {
-    
-    
-    public partial class UCClassReportCurrent {
-        
+namespace TMS.Web.Views.Report.UserControls
+{
+
+
+    public partial class UCClassReportCurrent
+    {
+
         /// <summary>
         /// ScriptManager1 control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace TMS.Web.Views.Report.UserControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager ScriptManager1;
-        
+
         /// <summary>
         /// UpTraineeReport control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace TMS.Web.Views.Report.UserControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpTraineeReport;
-        
+
         /// <summary>
         /// VsClassDetailReport control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace TMS.Web.Views.Report.UserControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ValidationSummary VsClassDetailReport;
-        
+
         /// <summary>
         /// TxtFromYear control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace TMS.Web.Views.Report.UserControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxtFromYear;
-        
+
         /// <summary>
         /// DdlAddMonths control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace TMS.Web.Views.Report.UserControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DdlAddMonths;
-        
+
         /// <summary>
         /// TxtToYear control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace TMS.Web.Views.Report.UserControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxtToYear;
-        
+
         /// <summary>
         /// DdlCourseCategory control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace TMS.Web.Views.Report.UserControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DdlCourseCategory;
-        
+
         /// <summary>
         /// ReportViewer1 control.
         /// </summary>

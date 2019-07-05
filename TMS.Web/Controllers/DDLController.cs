@@ -298,6 +298,11 @@ namespace TMS.Web.Controllers
         {
             return Json(_objIDDLBAL.Courses_GetAllByCultureBAL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
         }
+        [DontWrapResult]
+        public JsonResult Classes()
+        {
+            return Json(_objIDDLBAL.ClassDDLBAL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
+        }
 
         #endregion Class
 

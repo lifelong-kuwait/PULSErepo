@@ -121,17 +121,17 @@
     .Items(i =>
     {
 
-        //if (User.IsInRole("CanViewTMSGroups"))
-        //{
-        //i.Add().Text("TMS").LoadContentFrom("TMSGroupDetail", "Admin");
-        i.Add().Text("TMS").LoadContentFrom("TMSGroupDetail", "Admin", new {GroupId = ViewData["GroupId"] });
-   // }
-   //     if (User.IsInRole("CanViewCRMGroups"))
-  //  {
-        i.Add().Text("CRM").LoadContentFrom("CRMGroupDetail", "Admin", new { GroupId = ViewData["GroupId"] });
-        //i.Add().Text("CRM").LoadContentFrom("CRMGroupDetail", "Admin");
-  //  }
-}).Events(e => e.Expand("onExpand")))
+       // if (User.IsInRole("CanViewTMSGroups"))
+       // {
+            //i.Add().Text("TMS").LoadContentFrom("TMSGroupDetail", "Admin");
+            i.Add().Text("TMS").LoadContentFrom("TMSGroupDetail", "Admin", new {GroupId = ViewData["GroupId"] });
+       // }
+       // if (User.IsInRole("CanViewCRMGroups"))
+       // {
+            i.Add().Text("CRM").LoadContentFrom("CRMGroupDetail", "Admin", new { GroupId = ViewData["GroupId"] });
+            //i.Add().Text("CRM").LoadContentFrom("CRMGroupDetail", "Admin");
+       // }
+    }).Events(e => e.Expand("onExpand")))
 
 
 
@@ -167,7 +167,8 @@
                            text:  '@lr.confirmDeletedMessage',
                            type: "success"
                        },
-                    function(){
+                           function () {
+                               alert('hello class');
                         window.location="@Url.Content("~/Program/Class")";
                     });
                    }
@@ -177,6 +178,7 @@
     //edit from header
     jQuery(".tms-grid-edit-main").live("mousedown", function (event) {
         jQuery("#ClassDetailGrid").data("kendoGrid").editRow(jQuery("#ClassDetailGrid tr:nth(1)"));
+        alert('hello');
     });
     });
 

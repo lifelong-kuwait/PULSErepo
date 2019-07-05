@@ -7,7 +7,7 @@
 @using (Html.BeginCollectionItem("permissionsList"))
 {
     <div class="block mTop20 group-permissions">
-        @Html.CheckBoxFor(m => m.NewChecked, new { id = guid + disabled })
+        @Html.CheckBoxFor(m => m.NewChecked, new { @class = "checkBoxClass",@id = guid + disabled })
         <label for="@guid">@Model.PermissionName </label>
         @Html.HiddenFor(m => m.GroupPermissionId)
         @Html.HiddenFor(m => m.GroupPermissionCode)

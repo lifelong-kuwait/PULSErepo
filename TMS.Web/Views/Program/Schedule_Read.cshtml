@@ -3,7 +3,7 @@
     ViewBag.Title = "Schedule_Read";
     Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
 }
-
+@using lr = Resources.Resources;
 
 
 
@@ -20,25 +20,103 @@
         background-color: #80BFC8;
     }
 
-  .right-inner-addon {
-    display: none;
-}
-  .fc button .fc-icon {
-    position: relative;
-    top: -.05em;
-    margin: 0 .2em;
-    /* vertical-align: middle; */
-}
+    .right-inner-addon {
+        display: none;
+    }
+
+    .fc button .fc-icon {
+        position: relative;
+        top: -.05em;
+        margin: 0 .2em;
+        /* vertical-align: middle; */
+    }
+
+    span.fc-time {
+        display: none;
+    }
 </style>
-<h2>Schedule</h2>
+
+
+<style>
+    .form-group {
+        display: grid;
+    }
+
+    .input-group {
+        display: none;
+    }
+
+    .col-md-12.col-lg-offset-2 {
+        margin-bottom: 26px;
+    }
+    /*li {
+        display: none;
+    }*/
+</style>
+@*<div class="col-md-offset-2">*@
+
+<div class="row" style="margin-left:10%;">
+   
+    <div class="form-group">
+
+        <div class="row" style="margin-top:1%;">
+            @Html.Label("Class", new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.Kendo().DropDownList()
+                                                                                                            .Name("Class")
+                                                                                                            .DataTextField("Text")
+                                                                                                            .DataValueField("Value")
+                                                                                                            .DataSource(source =>
+                                                                                                            {
+                                                                                                                source.Read(read =>
+                                                                                                                {
+                                                                                                                    read.Action("Classes", "DDL");
+                                                                                                                });
+                                                                                                            })
+                                                                                                            .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
+                                                                                                                                                                                                .HtmlAttributes(new { style = "width: 100%" })
+                )
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row" style="margin-top:1%;">
+            @Html.Label("Course", new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.Kendo().DropDownList()
+                                                                                                           .Name("Course")
+                                                                                                           .DataTextField("Text")
+                                                                                                           .DataValueField("Value")
+                                                                                                           .DataSource(source =>
+                                                                                                           {
+                                                                                                               source.Read(read =>
+                                                                                                               {
+                                                                                                                   read.Action("Course", "DDL");
+                                                                                                               });
+                                                                                                           })
+                                                                                                          .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
+                )
+
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-md-2 col-lg-2 col-sm-2" style="margin-left:65%;margin-top:1%;">
+        @(Html.Kendo().Button()
+                                                                                                       .Name("primaryTextButton")
+                                                                                                       .HtmlAttributes(new { type = "button", @class = "btn btn-primary k-primary" })
+                                                                                                       .Content("" + @lr.ActivitySummaryReport + "")
+        )
+    </div>
 
 
 
-@*<a class="k-button mdi mdi-magnify search-icon"><span class="tms-grid-icon mdi mdi-magnify search-icon" onclick="ScheduleTemplate(0)"></span></a>*@
-<div id="calender"></div><div class="row">
+</div>
+
+
+
+
+<div id="calender" style="margin-top:2%; margin-left:4%" class="col-lg-10 col-md-8"></div><div class="row">
     <div class="col-lg-8 col-md-8">
-
-
         <div id="myModal" class="modal fade" role="dialog">
             <div class="modal-dialog" style="margin-top: 70px;">
                 <div class="modal-content">
@@ -49,10 +127,10 @@
                     <div class="modal-body">
                         <p id="pDetails"></p>
                     </div>
-                 
+
+                </div>
             </div>
         </div>
-            </div>
     </div>
 </div>
 
@@ -64,29 +142,32 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 
     <script>
-        jQuery(document).ready(function () {
+        jQuery(function () {
+            jQuery("#primaryTextButton").live("click", function (event) {
             var events = [];
-
+            var courseId = jQuery("#Course").data("kendoDropDownList").value();
+            var classId = jQuery("#Class").data("kendoDropDownList").value();
+            var url1 = '@Html.Raw(@Url.Action("Schedule_Read", "Program"))' + '?courseId=' + courseId + '&classID=' + classId;
             jQuery.ajax({
+                url: url1,
                 type: "GET",
-                url: "/Program/Schedule_Read",
                 success: function (data) {
                     jQuery.each(data, function (i, v) {
                         events.push({
-                            title:v.EndTime, //v.SessionName,
+                            title: v.EndTimes, //v.SessionName,
                             ScheduleDate: v.ScheduleDate,
                             description: v.CourseName,
                             FullName: v.FullName,
-                            SessionName:v.SessionName,
+                            SessionName: v.SessionName,
                             VenueName: v.VenueName,
                             ClassTitle: v.ClassTitle,
-                            start: moment(v.StartTime ),
+                            start: moment(v.StartTime),
                             StartDate: v.StartDate,
-                            end: moment(v.EndTime),
-                            end: v.EndTime != null ?(v.EndTime) : null,
+                            end: moment(v.EndTimes),
+                            end: v.EndTimes != null ? (v.EndTimes) : null,
                             color: v.ThemeColor,
                             allDay: v.IsFullDay
-                           
+
                         });
                     })
                     debugger
@@ -96,7 +177,7 @@
                     alert('failed');
                 }
             })
-
+            })
             function GenerateCalender(events) {
                 jQuery('#calender').fullCalendar('destroy');
                 jQuery('#calender').fullCalendar({
@@ -113,12 +194,12 @@
                     events: events,
                     eventClick: function (calEvent, jsEvent, view) {
 
-                       jQuery('#myModal #eventTitle').text(moment(calEvent.title));
-                       var $description = jQuery('<div/>');
-                       //$description.append(jQuery('<p/>').html('<b>Start:</b>' + calEvent.StartDate));
-                       // if (calEvent.end != null) {
-                       //     $description.append(jQuery('<p/>').html('<b>End:</b>' + calEvent.EndDate));
-                       //  }
+                        jQuery('#myModal #eventTitle').text(moment(calEvent.title));
+                        var $description = jQuery('<div/>');
+                        //$description.append(jQuery('<p/>').html('<b>Start:</b>' + calEvent.StartDate));
+                        // if (calEvent.end != null) {
+                        //     $description.append(jQuery('<p/>').html('<b>End:</b>' + calEvent.EndDate));
+                        //  }
                         var dateget = calEvent.ScheduleDate.substr(6)
                         var currentTime = new Date(parseInt(dateget));
                         var month = currentTime.getMonth() + 1;
