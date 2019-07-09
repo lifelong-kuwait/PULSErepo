@@ -663,6 +663,7 @@ namespace TMS.Library.TMS.Persons
             Designation = dr.GetString("Designation");
             Password = dr.GetString("Password");
             Gender = (Gender)dr.GetByte("Gender");
+            ProfilePicture = dr.GetString("ProfilePicture");
             //Nationality = (Nationality)dr.GetByte("Nationality");
             Type = dr.GetByte("Type");
             IsCoordinator = dr.GetBoolean("IsCoordinator");
