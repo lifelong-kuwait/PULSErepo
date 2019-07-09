@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCWeeklyUtilizationReport.ascx.cs" Inherits="TMS.Web.Views.Report.UserControls.UCWeeklyUtilizationReport" %>
 
 
-<%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
+<%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
 <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
  <link href="../../../Content/bootstrap.css" rel="stylesheet" />

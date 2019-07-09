@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCVenueDetailUtilizationReport.ascx.cs" Inherits="TMS.Web.Views.Report.UserControls.UCVenueDetailUtilizationReport" %>
-<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
+<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
 <asp:UpdatePanel runat="server" ID="UpTraineeReport" UpdateMode="Conditional">

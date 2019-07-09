@@ -44,7 +44,7 @@ namespace TMS.Web.Controllers
 
       
         protected override IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)
-        {
+      {
             string cultureName = null;
 
             // Attempt to read the culture cookie from Request
