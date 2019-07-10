@@ -266,6 +266,7 @@ namespace TMS.Library.TMS.Persons
 
 
         string _Dates = "Fri Nov 23 2010 16:44:41 GMT+0500 (Pakistan Standard Time)";
+        //"Fri Nov 23 2010 16:44:41 GMT+0500 (Pakistan Standard Time)"
         public string Dates
         {
             get
@@ -509,6 +510,8 @@ namespace TMS.Library.TMS.Persons
         /// </summary>
         /// <value>The alias.</value>
         [Display(Name = "PersonAlias", ResourceType = typeof(lr))]
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "UserNickNameRequired")]
+
         public string Alias { get; set; }
 
         /// <summary>
