@@ -1,0 +1,96 @@
+﻿using Microsoft.Reporting.WebForms;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using TMS.Business.Common.DDL;
+using TMS.Business.Interfaces.Common.DDL;
+using TMS.Business.TMS;
+
+namespace TMS.Web.Views.Report.SpLReports
+{
+    public partial class ReportView : ReportBasePage
+    {
+        public readonly IDDLBAL _objIDDLBAL = null;//For the Resorces Table Interface
+                                                   // private readonly IPersonBAL _PersonBAL;
+        private static DataSet _GetTrainerDetailsForReports;
+        DDLBAL ddl = new DDLBAL();
+        PersonBAL _CourseBAL = new PersonBAL();
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                string classid=Request.QueryString["ClassID"];
+                string courseid = Request.QueryString["courseId"];
+                RenderReportModels(this.ReportDataObj, classid, courseid);
+            }
+        }
+
+        private void RenderReportModels(ReportData reportData, string classid, string courseid)
+        {
+            long ClassID = Convert.ToInt64(classid);
+            long CourseID = Convert.ToInt64(courseid);
+
+           
+            // Reset report properties.
+            ReportViewerRSFReports.Height = Unit.Parse("100%");
+            ReportViewerRSFReports.Width = Unit.Parse("100%");
+            ReportViewerRSFReports.CssClass = "table";
+
+            // Clear out any previous datasources.
+            this.ReportViewerRSFReports.LocalReport.DataSources.Clear();
+
+            // Set report mode for local processing.
+            ReportViewerRSFReports.ProcessingMode = ProcessingMode.Local;
+
+            // Validate report source.
+            var rptPath = Server.MapPath(@"../../../Report/" + reportData.ReportName + ".rdlc");
+
+            //@"E:\RSFERP_SourceCode\RASolarERP\RASolarERP\Reports\Report\" + reportData.ReportName + ".rdlc";
+            //Server.MapPath(@"./Report/ClosingInventory.rdlc");
+
+            if (!File.Exists(rptPath))
+                return;
+
+            // Set report path.
+            this.ReportViewerRSFReports.LocalReport.ReportPath = rptPath;
+
+            // Set report parameters.
+            var rpPms = ReportViewerRSFReports.LocalReport.GetParameters();
+            foreach (var rpm in rpPms)
+            {
+                var p = reportData.ReportParameters.SingleOrDefault(o => o.ParameterName.ToLower() == rpm.Name.ToLower());
+                if (p != null)
+                {
+                    ReportParameter rp = new ReportParameter(rpm.Name, p.Value);
+                    ReportViewerRSFReports.LocalReport.SetParameters(rp);
+                }
+            }
+
+            ////Set data paramater for report SP execution
+            //objClosingInventory = dal.ClosingInventoryReport(this.ReportDataObj.DataParameters[0].Value);
+
+            //// Load the dataSource.
+            // ReportViewerRSFReports.LocalReport.DataSources.Clear();
+            //var dsmems = ReportViewerRSFReports.LocalReport.GetDataSourceNames();
+            // ReportViewerRSFReports.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", objClosingInventory));
+            // ReportViewerRSFReports.RefreshReport();
+            // Refresh the ReportViewer.
+            DataTable dt = _CourseBAL.GetCourseReportData(ClassID, CourseID);
+            ReportViewerRSFReports.ProcessingMode = ProcessingMode.Local;
+            //ReportViewerRSFReports.LocalReport.ReportPath = Server.MapPath("~/Report/Tran_ViewCourseAttendanceReport.rdlc");
+            //  DataSet ds = GetTrainerDetailsForReports;
+            ReportViewerRSFReports.LocalReport.DataSources.Clear();
+            //ReportViewerRSFReports.Reset();
+            ReportDataSource datasource = new ReportDataSource("VewCourseAttendanceReportDataSet", dt);
+            ReportViewerRSFReports.LocalReport.DataSources.Add(datasource);
+
+            
+            this.ReportViewerRSFReports.LocalReport.Refresh();
+        }
+    }
+}

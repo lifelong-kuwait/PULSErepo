@@ -20,17 +20,17 @@ namespace TMS.Web {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("VewCourseAttendanceReportDataSet")]
+    [global::System.Xml.Serialization.XmlRootAttribute("TMS_SPL_PULSEDataSet")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class VewCourseAttendanceReportDataSet : global::System.Data.DataSet {
+    public partial class TMS_SPL_PULSEDataSet : global::System.Data.DataSet {
         
-        private Tran_AttendancesCourse_GetReportDataDataTable tableTran_AttendancesCourse_GetReportData;
+        private Resources1DataTable tableResources1;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public VewCourseAttendanceReportDataSet() {
+        public TMS_SPL_PULSEDataSet() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -41,7 +41,7 @@ namespace TMS.Web {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        protected VewCourseAttendanceReportDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected TMS_SPL_PULSEDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -54,8 +54,8 @@ namespace TMS.Web {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["Tran_AttendancesCourse_GetReportData"] != null)) {
-                    base.Tables.Add(new Tran_AttendancesCourse_GetReportDataDataTable(ds.Tables["Tran_AttendancesCourse_GetReportData"]));
+                if ((ds.Tables["Resources1"] != null)) {
+                    base.Tables.Add(new Resources1DataTable(ds.Tables["Resources1"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -79,9 +79,9 @@ namespace TMS.Web {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public Tran_AttendancesCourse_GetReportDataDataTable Tran_AttendancesCourse_GetReportData {
+        public Resources1DataTable Resources1 {
             get {
-                return this.tableTran_AttendancesCourse_GetReportData;
+                return this.tableResources1;
             }
         }
         
@@ -127,7 +127,7 @@ namespace TMS.Web {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            VewCourseAttendanceReportDataSet cln = ((VewCourseAttendanceReportDataSet)(base.Clone()));
+            TMS_SPL_PULSEDataSet cln = ((TMS_SPL_PULSEDataSet)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -152,8 +152,8 @@ namespace TMS.Web {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["Tran_AttendancesCourse_GetReportData"] != null)) {
-                    base.Tables.Add(new Tran_AttendancesCourse_GetReportDataDataTable(ds.Tables["Tran_AttendancesCourse_GetReportData"]));
+                if ((ds.Tables["Resources1"] != null)) {
+                    base.Tables.Add(new Resources1DataTable(ds.Tables["Resources1"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -188,10 +188,10 @@ namespace TMS.Web {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tableTran_AttendancesCourse_GetReportData = ((Tran_AttendancesCourse_GetReportDataDataTable)(base.Tables["Tran_AttendancesCourse_GetReportData"]));
+            this.tableResources1 = ((Resources1DataTable)(base.Tables["Resources1"]));
             if ((initTable == true)) {
-                if ((this.tableTran_AttendancesCourse_GetReportData != null)) {
-                    this.tableTran_AttendancesCourse_GetReportData.InitVars();
+                if ((this.tableResources1 != null)) {
+                    this.tableResources1.InitVars();
                 }
             }
         }
@@ -199,18 +199,18 @@ namespace TMS.Web {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "VewCourseAttendanceReportDataSet";
+            this.DataSetName = "TMS_SPL_PULSEDataSet";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/VewCourseAttendanceReportDataSet.xsd";
+            this.Namespace = "http://tempuri.org/TMS_SPL_PULSEDataSet1.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableTran_AttendancesCourse_GetReportData = new Tran_AttendancesCourse_GetReportDataDataTable();
-            base.Tables.Add(this.tableTran_AttendancesCourse_GetReportData);
+            this.tableResources1 = new Resources1DataTable();
+            base.Tables.Add(this.tableResources1);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private bool ShouldSerializeTran_AttendancesCourse_GetReportData() {
+        private bool ShouldSerializeResources1() {
             return false;
         }
         
@@ -225,7 +225,7 @@ namespace TMS.Web {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            VewCourseAttendanceReportDataSet ds = new VewCourseAttendanceReportDataSet();
+            TMS_SPL_PULSEDataSet ds = new TMS_SPL_PULSEDataSet();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -270,47 +270,37 @@ namespace TMS.Web {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public delegate void Tran_AttendancesCourse_GetReportDataRowChangeEventHandler(object sender, Tran_AttendancesCourse_GetReportDataRowChangeEvent e);
+        public delegate void Resources1RowChangeEventHandler(object sender, Resources1RowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class Tran_AttendancesCourse_GetReportDataDataTable : global::System.Data.TypedTableBase<Tran_AttendancesCourse_GetReportDataRow> {
+        public partial class Resources1DataTable : global::System.Data.TypedTableBase<Resources1Row> {
             
-            private global::System.Data.DataColumn columnID;
+            private global::System.Data.DataColumn columnResourceId;
             
-            private global::System.Data.DataColumn columnFullName;
+            private global::System.Data.DataColumn columnCulture;
             
-            private global::System.Data.DataColumn columnCourseName;
+            private global::System.Data.DataColumn columnName;
             
-            private global::System.Data.DataColumn columnClassName;
+            private global::System.Data.DataColumn columnValue;
             
-            private global::System.Data.DataColumn columnTrainers;
+            private global::System.Data.DataColumn columnOrganizationID;
             
-            private global::System.Data.DataColumn columnCoordinators;
+            private global::System.Data.DataColumn columnCreatedBy;
             
-            private global::System.Data.DataColumn columnSessionStatistic;
+            private global::System.Data.DataColumn columnCreatedDate;
             
-            private global::System.Data.DataColumn columnSumP;
+            private global::System.Data.DataColumn columnUpdatedBy;
             
-            private global::System.Data.DataColumn columnSumA;
-            
-            private global::System.Data.DataColumn columnSumL;
-            
-            private global::System.Data.DataColumn columnSumQ;
-            
-            private global::System.Data.DataColumn columnSumU;
-            
-            private global::System.Data.DataColumn columnAttendancePercentage;
-            
-            private global::System.Data.DataColumn columnRowIndex;
+            private global::System.Data.DataColumn columnUpdatedDate;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public Tran_AttendancesCourse_GetReportDataDataTable() {
-                this.TableName = "Tran_AttendancesCourse_GetReportData";
+            public Resources1DataTable() {
+                this.TableName = "Resources1";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -318,7 +308,7 @@ namespace TMS.Web {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal Tran_AttendancesCourse_GetReportDataDataTable(global::System.Data.DataTable table) {
+            internal Resources1DataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -335,120 +325,80 @@ namespace TMS.Web {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected Tran_AttendancesCourse_GetReportDataDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected Resources1DataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn IDColumn {
+            public global::System.Data.DataColumn ResourceIdColumn {
                 get {
-                    return this.columnID;
+                    return this.columnResourceId;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn FullNameColumn {
+            public global::System.Data.DataColumn CultureColumn {
                 get {
-                    return this.columnFullName;
+                    return this.columnCulture;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn CourseNameColumn {
+            public global::System.Data.DataColumn NameColumn {
                 get {
-                    return this.columnCourseName;
+                    return this.columnName;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn ClassNameColumn {
+            public global::System.Data.DataColumn ValueColumn {
                 get {
-                    return this.columnClassName;
+                    return this.columnValue;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn TrainersColumn {
+            public global::System.Data.DataColumn OrganizationIDColumn {
                 get {
-                    return this.columnTrainers;
+                    return this.columnOrganizationID;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn CoordinatorsColumn {
+            public global::System.Data.DataColumn CreatedByColumn {
                 get {
-                    return this.columnCoordinators;
+                    return this.columnCreatedBy;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn SessionStatisticColumn {
+            public global::System.Data.DataColumn CreatedDateColumn {
                 get {
-                    return this.columnSessionStatistic;
+                    return this.columnCreatedDate;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn SumPColumn {
+            public global::System.Data.DataColumn UpdatedByColumn {
                 get {
-                    return this.columnSumP;
+                    return this.columnUpdatedBy;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn SumAColumn {
+            public global::System.Data.DataColumn UpdatedDateColumn {
                 get {
-                    return this.columnSumA;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn SumLColumn {
-                get {
-                    return this.columnSumL;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn SumQColumn {
-                get {
-                    return this.columnSumQ;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn SumUColumn {
-                get {
-                    return this.columnSumU;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn AttendancePercentageColumn {
-                get {
-                    return this.columnAttendancePercentage;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn RowIndexColumn {
-                get {
-                    return this.columnRowIndex;
+                    return this.columnUpdatedDate;
                 }
             }
             
@@ -463,65 +413,60 @@ namespace TMS.Web {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public Tran_AttendancesCourse_GetReportDataRow this[int index] {
+            public Resources1Row this[int index] {
                 get {
-                    return ((Tran_AttendancesCourse_GetReportDataRow)(this.Rows[index]));
+                    return ((Resources1Row)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event Tran_AttendancesCourse_GetReportDataRowChangeEventHandler Tran_AttendancesCourse_GetReportDataRowChanging;
+            public event Resources1RowChangeEventHandler Resources1RowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event Tran_AttendancesCourse_GetReportDataRowChangeEventHandler Tran_AttendancesCourse_GetReportDataRowChanged;
+            public event Resources1RowChangeEventHandler Resources1RowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event Tran_AttendancesCourse_GetReportDataRowChangeEventHandler Tran_AttendancesCourse_GetReportDataRowDeleting;
+            public event Resources1RowChangeEventHandler Resources1RowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event Tran_AttendancesCourse_GetReportDataRowChangeEventHandler Tran_AttendancesCourse_GetReportDataRowDeleted;
+            public event Resources1RowChangeEventHandler Resources1RowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void AddTran_AttendancesCourse_GetReportDataRow(Tran_AttendancesCourse_GetReportDataRow row) {
+            public void AddResources1Row(Resources1Row row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public Tran_AttendancesCourse_GetReportDataRow AddTran_AttendancesCourse_GetReportDataRow(string FullName, string CourseName, string ClassName, string Trainers, string Coordinators, string SessionStatistic, int SumP, int SumA, int SumL, int SumQ, int SumU, double AttendancePercentage, int RowIndex) {
-                Tran_AttendancesCourse_GetReportDataRow rowTran_AttendancesCourse_GetReportDataRow = ((Tran_AttendancesCourse_GetReportDataRow)(this.NewRow()));
+            public Resources1Row AddResources1Row(string Culture, string Name, string Value, long OrganizationID, long CreatedBy, System.DateTime CreatedDate, long UpdatedBy, System.DateTime UpdatedDate) {
+                Resources1Row rowResources1Row = ((Resources1Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
-                        FullName,
-                        CourseName,
-                        ClassName,
-                        Trainers,
-                        Coordinators,
-                        SessionStatistic,
-                        SumP,
-                        SumA,
-                        SumL,
-                        SumQ,
-                        SumU,
-                        AttendancePercentage,
-                        RowIndex};
-                rowTran_AttendancesCourse_GetReportDataRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowTran_AttendancesCourse_GetReportDataRow);
-                return rowTran_AttendancesCourse_GetReportDataRow;
+                        Culture,
+                        Name,
+                        Value,
+                        OrganizationID,
+                        CreatedBy,
+                        CreatedDate,
+                        UpdatedBy,
+                        UpdatedDate};
+                rowResources1Row.ItemArray = columnValuesArray;
+                this.Rows.Add(rowResources1Row);
+                return rowResources1Row;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public Tran_AttendancesCourse_GetReportDataRow FindByID(long ID) {
-                return ((Tran_AttendancesCourse_GetReportDataRow)(this.Rows.Find(new object[] {
-                            ID})));
+            public Resources1Row FindByResourceId(long ResourceId) {
+                return ((Resources1Row)(this.Rows.Find(new object[] {
+                            ResourceId})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                Tran_AttendancesCourse_GetReportDataDataTable cln = ((Tran_AttendancesCourse_GetReportDataDataTable)(base.Clone()));
+                Resources1DataTable cln = ((Resources1DataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -529,112 +474,84 @@ namespace TMS.Web {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new Tran_AttendancesCourse_GetReportDataDataTable();
+                return new Resources1DataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             internal void InitVars() {
-                this.columnID = base.Columns["ID"];
-                this.columnFullName = base.Columns["FullName"];
-                this.columnCourseName = base.Columns["CourseName"];
-                this.columnClassName = base.Columns["ClassName"];
-                this.columnTrainers = base.Columns["Trainers"];
-                this.columnCoordinators = base.Columns["Coordinators"];
-                this.columnSessionStatistic = base.Columns["SessionStatistic"];
-                this.columnSumP = base.Columns["SumP"];
-                this.columnSumA = base.Columns["SumA"];
-                this.columnSumL = base.Columns["SumL"];
-                this.columnSumQ = base.Columns["SumQ"];
-                this.columnSumU = base.Columns["SumU"];
-                this.columnAttendancePercentage = base.Columns["AttendancePercentage"];
-                this.columnRowIndex = base.Columns["RowIndex"];
+                this.columnResourceId = base.Columns["ResourceId"];
+                this.columnCulture = base.Columns["Culture"];
+                this.columnName = base.Columns["Name"];
+                this.columnValue = base.Columns["Value"];
+                this.columnOrganizationID = base.Columns["OrganizationID"];
+                this.columnCreatedBy = base.Columns["CreatedBy"];
+                this.columnCreatedDate = base.Columns["CreatedDate"];
+                this.columnUpdatedBy = base.Columns["UpdatedBy"];
+                this.columnUpdatedDate = base.Columns["UpdatedDate"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             private void InitClass() {
-                this.columnID = new global::System.Data.DataColumn("ID", typeof(long), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnID);
-                this.columnFullName = new global::System.Data.DataColumn("FullName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnFullName);
-                this.columnCourseName = new global::System.Data.DataColumn("CourseName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCourseName);
-                this.columnClassName = new global::System.Data.DataColumn("ClassName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnClassName);
-                this.columnTrainers = new global::System.Data.DataColumn("Trainers", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTrainers);
-                this.columnCoordinators = new global::System.Data.DataColumn("Coordinators", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCoordinators);
-                this.columnSessionStatistic = new global::System.Data.DataColumn("SessionStatistic", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSessionStatistic);
-                this.columnSumP = new global::System.Data.DataColumn("SumP", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSumP);
-                this.columnSumA = new global::System.Data.DataColumn("SumA", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSumA);
-                this.columnSumL = new global::System.Data.DataColumn("SumL", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSumL);
-                this.columnSumQ = new global::System.Data.DataColumn("SumQ", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSumQ);
-                this.columnSumU = new global::System.Data.DataColumn("SumU", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSumU);
-                this.columnAttendancePercentage = new global::System.Data.DataColumn("AttendancePercentage", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnAttendancePercentage);
-                this.columnRowIndex = new global::System.Data.DataColumn("RowIndex", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnRowIndex);
+                this.columnResourceId = new global::System.Data.DataColumn("ResourceId", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnResourceId);
+                this.columnCulture = new global::System.Data.DataColumn("Culture", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCulture);
+                this.columnName = new global::System.Data.DataColumn("Name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnName);
+                this.columnValue = new global::System.Data.DataColumn("Value", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnValue);
+                this.columnOrganizationID = new global::System.Data.DataColumn("OrganizationID", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOrganizationID);
+                this.columnCreatedBy = new global::System.Data.DataColumn("CreatedBy", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCreatedBy);
+                this.columnCreatedDate = new global::System.Data.DataColumn("CreatedDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCreatedDate);
+                this.columnUpdatedBy = new global::System.Data.DataColumn("UpdatedBy", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUpdatedBy);
+                this.columnUpdatedDate = new global::System.Data.DataColumn("UpdatedDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUpdatedDate);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnID}, true));
-                this.columnID.AutoIncrement = true;
-                this.columnID.AutoIncrementSeed = -1;
-                this.columnID.AutoIncrementStep = -1;
-                this.columnID.AllowDBNull = false;
-                this.columnID.ReadOnly = true;
-                this.columnID.Unique = true;
-                this.columnFullName.AllowDBNull = false;
-                this.columnFullName.MaxLength = 255;
-                this.columnCourseName.AllowDBNull = false;
-                this.columnCourseName.MaxLength = 255;
-                this.columnClassName.AllowDBNull = false;
-                this.columnClassName.MaxLength = 50;
-                this.columnTrainers.ReadOnly = true;
-                this.columnTrainers.MaxLength = 2147483647;
-                this.columnCoordinators.ReadOnly = true;
-                this.columnCoordinators.MaxLength = 2147483647;
-                this.columnSessionStatistic.ReadOnly = true;
-                this.columnSessionStatistic.MaxLength = 50;
-                this.columnSumP.ReadOnly = true;
-                this.columnSumA.ReadOnly = true;
-                this.columnSumL.ReadOnly = true;
-                this.columnSumQ.ReadOnly = true;
-                this.columnSumU.ReadOnly = true;
-                this.columnAttendancePercentage.ReadOnly = true;
-                this.columnRowIndex.ReadOnly = true;
+                                this.columnResourceId}, true));
+                this.columnResourceId.AutoIncrement = true;
+                this.columnResourceId.AutoIncrementSeed = -1;
+                this.columnResourceId.AutoIncrementStep = -1;
+                this.columnResourceId.AllowDBNull = false;
+                this.columnResourceId.ReadOnly = true;
+                this.columnResourceId.Unique = true;
+                this.columnCulture.AllowDBNull = false;
+                this.columnCulture.MaxLength = 10;
+                this.columnName.AllowDBNull = false;
+                this.columnName.MaxLength = 100;
+                this.columnValue.AllowDBNull = false;
+                this.columnValue.MaxLength = 4000;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public Tran_AttendancesCourse_GetReportDataRow NewTran_AttendancesCourse_GetReportDataRow() {
-                return ((Tran_AttendancesCourse_GetReportDataRow)(this.NewRow()));
+            public Resources1Row NewResources1Row() {
+                return ((Resources1Row)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new Tran_AttendancesCourse_GetReportDataRow(builder);
+                return new Resources1Row(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(Tran_AttendancesCourse_GetReportDataRow);
+                return typeof(Resources1Row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.Tran_AttendancesCourse_GetReportDataRowChanged != null)) {
-                    this.Tran_AttendancesCourse_GetReportDataRowChanged(this, new Tran_AttendancesCourse_GetReportDataRowChangeEvent(((Tran_AttendancesCourse_GetReportDataRow)(e.Row)), e.Action));
+                if ((this.Resources1RowChanged != null)) {
+                    this.Resources1RowChanged(this, new Resources1RowChangeEvent(((Resources1Row)(e.Row)), e.Action));
                 }
             }
             
@@ -642,8 +559,8 @@ namespace TMS.Web {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.Tran_AttendancesCourse_GetReportDataRowChanging != null)) {
-                    this.Tran_AttendancesCourse_GetReportDataRowChanging(this, new Tran_AttendancesCourse_GetReportDataRowChangeEvent(((Tran_AttendancesCourse_GetReportDataRow)(e.Row)), e.Action));
+                if ((this.Resources1RowChanging != null)) {
+                    this.Resources1RowChanging(this, new Resources1RowChangeEvent(((Resources1Row)(e.Row)), e.Action));
                 }
             }
             
@@ -651,8 +568,8 @@ namespace TMS.Web {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.Tran_AttendancesCourse_GetReportDataRowDeleted != null)) {
-                    this.Tran_AttendancesCourse_GetReportDataRowDeleted(this, new Tran_AttendancesCourse_GetReportDataRowChangeEvent(((Tran_AttendancesCourse_GetReportDataRow)(e.Row)), e.Action));
+                if ((this.Resources1RowDeleted != null)) {
+                    this.Resources1RowDeleted(this, new Resources1RowChangeEvent(((Resources1Row)(e.Row)), e.Action));
                 }
             }
             
@@ -660,14 +577,14 @@ namespace TMS.Web {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.Tran_AttendancesCourse_GetReportDataRowDeleting != null)) {
-                    this.Tran_AttendancesCourse_GetReportDataRowDeleting(this, new Tran_AttendancesCourse_GetReportDataRowChangeEvent(((Tran_AttendancesCourse_GetReportDataRow)(e.Row)), e.Action));
+                if ((this.Resources1RowDeleting != null)) {
+                    this.Resources1RowDeleting(this, new Resources1RowChangeEvent(((Resources1Row)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void RemoveTran_AttendancesCourse_GetReportDataRow(Tran_AttendancesCourse_GetReportDataRow row) {
+            public void RemoveResources1Row(Resources1Row row) {
                 this.Rows.Remove(row);
             }
             
@@ -676,7 +593,7 @@ namespace TMS.Web {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                VewCourseAttendanceReportDataSet ds = new VewCourseAttendanceReportDataSet();
+                TMS_SPL_PULSEDataSet ds = new TMS_SPL_PULSEDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -694,7 +611,7 @@ namespace TMS.Web {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "Tran_AttendancesCourse_GetReportDataDataTable";
+                attribute2.FixedValue = "Resources1DataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -738,349 +655,199 @@ namespace TMS.Web {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class Tran_AttendancesCourse_GetReportDataRow : global::System.Data.DataRow {
+        public partial class Resources1Row : global::System.Data.DataRow {
             
-            private Tran_AttendancesCourse_GetReportDataDataTable tableTran_AttendancesCourse_GetReportData;
+            private Resources1DataTable tableResources1;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal Tran_AttendancesCourse_GetReportDataRow(global::System.Data.DataRowBuilder rb) : 
+            internal Resources1Row(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableTran_AttendancesCourse_GetReportData = ((Tran_AttendancesCourse_GetReportDataDataTable)(this.Table));
+                this.tableResources1 = ((Resources1DataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public long ID {
+            public long ResourceId {
                 get {
-                    return ((long)(this[this.tableTran_AttendancesCourse_GetReportData.IDColumn]));
+                    return ((long)(this[this.tableResources1.ResourceIdColumn]));
                 }
                 set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.IDColumn] = value;
+                    this[this.tableResources1.ResourceIdColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string FullName {
+            public string Culture {
                 get {
-                    return ((string)(this[this.tableTran_AttendancesCourse_GetReportData.FullNameColumn]));
+                    return ((string)(this[this.tableResources1.CultureColumn]));
                 }
                 set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.FullNameColumn] = value;
+                    this[this.tableResources1.CultureColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string CourseName {
+            public string Name {
                 get {
-                    return ((string)(this[this.tableTran_AttendancesCourse_GetReportData.CourseNameColumn]));
+                    return ((string)(this[this.tableResources1.NameColumn]));
                 }
                 set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.CourseNameColumn] = value;
+                    this[this.tableResources1.NameColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string ClassName {
+            public string Value {
                 get {
-                    return ((string)(this[this.tableTran_AttendancesCourse_GetReportData.ClassNameColumn]));
+                    return ((string)(this[this.tableResources1.ValueColumn]));
                 }
                 set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.ClassNameColumn] = value;
+                    this[this.tableResources1.ValueColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string Trainers {
-                get {
-                    try {
-                        return ((string)(this[this.tableTran_AttendancesCourse_GetReportData.TrainersColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Trainers\' in table \'Tran_AttendancesCourse_GetReportData\' i" +
-                                "s DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.TrainersColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string Coordinators {
+            public long OrganizationID {
                 get {
                     try {
-                        return ((string)(this[this.tableTran_AttendancesCourse_GetReportData.CoordinatorsColumn]));
+                        return ((long)(this[this.tableResources1.OrganizationIDColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Coordinators\' in table \'Tran_AttendancesCourse_GetReportDat" +
-                                "a\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'OrganizationID\' in table \'Resources1\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.CoordinatorsColumn] = value;
+                    this[this.tableResources1.OrganizationIDColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string SessionStatistic {
+            public long CreatedBy {
                 get {
                     try {
-                        return ((string)(this[this.tableTran_AttendancesCourse_GetReportData.SessionStatisticColumn]));
+                        return ((long)(this[this.tableResources1.CreatedByColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SessionStatistic\' in table \'Tran_AttendancesCourse_GetRepor" +
-                                "tData\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'CreatedBy\' in table \'Resources1\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.SessionStatisticColumn] = value;
+                    this[this.tableResources1.CreatedByColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int SumP {
+            public System.DateTime CreatedDate {
                 get {
                     try {
-                        return ((int)(this[this.tableTran_AttendancesCourse_GetReportData.SumPColumn]));
+                        return ((global::System.DateTime)(this[this.tableResources1.CreatedDateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SumP\' in table \'Tran_AttendancesCourse_GetReportData\' is DB" +
-                                "Null.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'CreatedDate\' in table \'Resources1\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.SumPColumn] = value;
+                    this[this.tableResources1.CreatedDateColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int SumA {
+            public long UpdatedBy {
                 get {
                     try {
-                        return ((int)(this[this.tableTran_AttendancesCourse_GetReportData.SumAColumn]));
+                        return ((long)(this[this.tableResources1.UpdatedByColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SumA\' in table \'Tran_AttendancesCourse_GetReportData\' is DB" +
-                                "Null.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'UpdatedBy\' in table \'Resources1\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.SumAColumn] = value;
+                    this[this.tableResources1.UpdatedByColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int SumL {
+            public System.DateTime UpdatedDate {
                 get {
                     try {
-                        return ((int)(this[this.tableTran_AttendancesCourse_GetReportData.SumLColumn]));
+                        return ((global::System.DateTime)(this[this.tableResources1.UpdatedDateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SumL\' in table \'Tran_AttendancesCourse_GetReportData\' is DB" +
-                                "Null.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'UpdatedDate\' in table \'Resources1\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.SumLColumn] = value;
+                    this[this.tableResources1.UpdatedDateColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int SumQ {
-                get {
-                    try {
-                        return ((int)(this[this.tableTran_AttendancesCourse_GetReportData.SumQColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SumQ\' in table \'Tran_AttendancesCourse_GetReportData\' is DB" +
-                                "Null.", e);
-                    }
-                }
-                set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.SumQColumn] = value;
-                }
+            public bool IsOrganizationIDNull() {
+                return this.IsNull(this.tableResources1.OrganizationIDColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int SumU {
-                get {
-                    try {
-                        return ((int)(this[this.tableTran_AttendancesCourse_GetReportData.SumUColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SumU\' in table \'Tran_AttendancesCourse_GetReportData\' is DB" +
-                                "Null.", e);
-                    }
-                }
-                set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.SumUColumn] = value;
-                }
+            public void SetOrganizationIDNull() {
+                this[this.tableResources1.OrganizationIDColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public double AttendancePercentage {
-                get {
-                    try {
-                        return ((double)(this[this.tableTran_AttendancesCourse_GetReportData.AttendancePercentageColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'AttendancePercentage\' in table \'Tran_AttendancesCourse_GetR" +
-                                "eportData\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.AttendancePercentageColumn] = value;
-                }
+            public bool IsCreatedByNull() {
+                return this.IsNull(this.tableResources1.CreatedByColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int RowIndex {
-                get {
-                    try {
-                        return ((int)(this[this.tableTran_AttendancesCourse_GetReportData.RowIndexColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'RowIndex\' in table \'Tran_AttendancesCourse_GetReportData\' i" +
-                                "s DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.RowIndexColumn] = value;
-                }
+            public void SetCreatedByNull() {
+                this[this.tableResources1.CreatedByColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsTrainersNull() {
-                return this.IsNull(this.tableTran_AttendancesCourse_GetReportData.TrainersColumn);
+            public bool IsCreatedDateNull() {
+                return this.IsNull(this.tableResources1.CreatedDateColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetTrainersNull() {
-                this[this.tableTran_AttendancesCourse_GetReportData.TrainersColumn] = global::System.Convert.DBNull;
+            public void SetCreatedDateNull() {
+                this[this.tableResources1.CreatedDateColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsCoordinatorsNull() {
-                return this.IsNull(this.tableTran_AttendancesCourse_GetReportData.CoordinatorsColumn);
+            public bool IsUpdatedByNull() {
+                return this.IsNull(this.tableResources1.UpdatedByColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetCoordinatorsNull() {
-                this[this.tableTran_AttendancesCourse_GetReportData.CoordinatorsColumn] = global::System.Convert.DBNull;
+            public void SetUpdatedByNull() {
+                this[this.tableResources1.UpdatedByColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsSessionStatisticNull() {
-                return this.IsNull(this.tableTran_AttendancesCourse_GetReportData.SessionStatisticColumn);
+            public bool IsUpdatedDateNull() {
+                return this.IsNull(this.tableResources1.UpdatedDateColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetSessionStatisticNull() {
-                this[this.tableTran_AttendancesCourse_GetReportData.SessionStatisticColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsSumPNull() {
-                return this.IsNull(this.tableTran_AttendancesCourse_GetReportData.SumPColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetSumPNull() {
-                this[this.tableTran_AttendancesCourse_GetReportData.SumPColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsSumANull() {
-                return this.IsNull(this.tableTran_AttendancesCourse_GetReportData.SumAColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetSumANull() {
-                this[this.tableTran_AttendancesCourse_GetReportData.SumAColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsSumLNull() {
-                return this.IsNull(this.tableTran_AttendancesCourse_GetReportData.SumLColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetSumLNull() {
-                this[this.tableTran_AttendancesCourse_GetReportData.SumLColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsSumQNull() {
-                return this.IsNull(this.tableTran_AttendancesCourse_GetReportData.SumQColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetSumQNull() {
-                this[this.tableTran_AttendancesCourse_GetReportData.SumQColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsSumUNull() {
-                return this.IsNull(this.tableTran_AttendancesCourse_GetReportData.SumUColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetSumUNull() {
-                this[this.tableTran_AttendancesCourse_GetReportData.SumUColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsAttendancePercentageNull() {
-                return this.IsNull(this.tableTran_AttendancesCourse_GetReportData.AttendancePercentageColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetAttendancePercentageNull() {
-                this[this.tableTran_AttendancesCourse_GetReportData.AttendancePercentageColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsRowIndexNull() {
-                return this.IsNull(this.tableTran_AttendancesCourse_GetReportData.RowIndexColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetRowIndexNull() {
-                this[this.tableTran_AttendancesCourse_GetReportData.RowIndexColumn] = global::System.Convert.DBNull;
+            public void SetUpdatedDateNull() {
+                this[this.tableResources1.UpdatedDateColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1088,22 +855,22 @@ namespace TMS.Web {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public class Tran_AttendancesCourse_GetReportDataRowChangeEvent : global::System.EventArgs {
+        public class Resources1RowChangeEvent : global::System.EventArgs {
             
-            private Tran_AttendancesCourse_GetReportDataRow eventRow;
+            private Resources1Row eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public Tran_AttendancesCourse_GetReportDataRowChangeEvent(Tran_AttendancesCourse_GetReportDataRow row, global::System.Data.DataRowAction action) {
+            public Resources1RowChangeEvent(Resources1Row row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public Tran_AttendancesCourse_GetReportDataRow Row {
+            public Resources1Row Row {
                 get {
                     return this.eventRow;
                 }
@@ -1119,7 +886,7 @@ namespace TMS.Web {
         }
     }
 }
-namespace TMS.Web.VewCourseAttendanceReportDataSetTableAdapters {
+namespace TMS.Web.TMS_SPL_PULSEDataSetTableAdapters {
     
     
     /// <summary>
@@ -1131,7 +898,7 @@ namespace TMS.Web.VewCourseAttendanceReportDataSetTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class Tran_AttendancesCourse_GetReportDataTableAdapter : global::System.ComponentModel.Component {
+    public partial class Resources1TableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
@@ -1145,7 +912,7 @@ namespace TMS.Web.VewCourseAttendanceReportDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public Tran_AttendancesCourse_GetReportDataTableAdapter() {
+        public Resources1TableAdapter() {
             this.ClearBeforeFill = true;
         }
         
@@ -1242,29 +1009,56 @@ namespace TMS.Web.VewCourseAttendanceReportDataSetTableAdapters {
             this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "Tran_AttendancesCourse_GetReportData";
-            tableMapping.ColumnMappings.Add("ID", "ID");
-            tableMapping.ColumnMappings.Add("FullName", "FullName");
-            tableMapping.ColumnMappings.Add("CourseName", "CourseName");
-            tableMapping.ColumnMappings.Add("ClassName", "ClassName");
-            tableMapping.ColumnMappings.Add("Trainers", "Trainers");
-            tableMapping.ColumnMappings.Add("Coordinators", "Coordinators");
-            tableMapping.ColumnMappings.Add("SessionStatistic", "SessionStatistic");
-            tableMapping.ColumnMappings.Add("SumP", "SumP");
-            tableMapping.ColumnMappings.Add("SumA", "SumA");
-            tableMapping.ColumnMappings.Add("SumL", "SumL");
-            tableMapping.ColumnMappings.Add("SumQ", "SumQ");
-            tableMapping.ColumnMappings.Add("SumU", "SumU");
-            tableMapping.ColumnMappings.Add("AttendancePercentage", "AttendancePercentage");
-            tableMapping.ColumnMappings.Add("RowIndex", "RowIndex");
+            tableMapping.DataSetTable = "Resources1";
+            tableMapping.ColumnMappings.Add("ResourceId", "ResourceId");
+            tableMapping.ColumnMappings.Add("Culture", "Culture");
+            tableMapping.ColumnMappings.Add("Name", "Name");
+            tableMapping.ColumnMappings.Add("Value", "Value");
+            tableMapping.ColumnMappings.Add("OrganizationID", "OrganizationID");
+            tableMapping.ColumnMappings.Add("CreatedBy", "CreatedBy");
+            tableMapping.ColumnMappings.Add("CreatedDate", "CreatedDate");
+            tableMapping.ColumnMappings.Add("UpdatedBy", "UpdatedBy");
+            tableMapping.ColumnMappings.Add("UpdatedDate", "UpdatedDate");
             this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Resources1] WHERE (([ResourceId] = @Original_ResourceId))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ResourceId", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ResourceId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Resources1] ([Culture], [Name], [Value], [OrganizationID], [Cr" +
+                "eatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate]) VALUES (@Culture, @Name, @V" +
+                "alue, @OrganizationID, @CreatedBy, @CreatedDate, @UpdatedBy, @UpdatedDate)";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Culture", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Culture", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Value", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Value", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OrganizationID", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OrganizationID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CreatedBy", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreatedBy", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CreatedDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreatedDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UpdatedBy", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UpdatedBy", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UpdatedDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UpdatedDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Resources1] SET [Culture] = @Culture, [Name] = @Name, [Value] = @Value, [OrganizationID] = @OrganizationID, [CreatedBy] = @CreatedBy, [CreatedDate] = @CreatedDate, [UpdatedBy] = @UpdatedBy, [UpdatedDate] = @UpdatedDate WHERE (([ResourceId] = @Original_ResourceId))";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Culture", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Culture", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Value", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Value", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OrganizationID", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OrganizationID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CreatedBy", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreatedBy", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CreatedDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreatedDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UpdatedBy", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UpdatedBy", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UpdatedDate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UpdatedDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ResourceId", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ResourceId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EIS_AppDB"].ConnectionString;
+            this._connection.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["TMS_SPL_PULSEConnectionString"].ConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1273,45 +1067,17 @@ namespace TMS.Web.VewCourseAttendanceReportDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "dbo.Tran_AttendancesCourse_GetReportData";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.StoredProcedure;
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CourseID", global::System.Data.SqlDbType.BigInt, 8, global::System.Data.ParameterDirection.Input, 19, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ClassID", global::System.Data.SqlDbType.BigInt, 8, global::System.Data.ParameterDirection.Input, 19, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WeekStartDate", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 23, 3, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WeekEndDate", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 23, 3, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].CommandText = "SELECT ResourceId, Culture, Name, Value, OrganizationID, CreatedBy, CreatedDate, " +
+                "UpdatedBy, UpdatedDate FROM dbo.Resources1";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(VewCourseAttendanceReportDataSet.Tran_AttendancesCourse_GetReportDataDataTable dataTable, global::System.Nullable<long> CourseID, global::System.Nullable<long> ClassID, global::System.Nullable<global::System.DateTime> WeekStartDate, global::System.Nullable<global::System.DateTime> WeekEndDate) {
+        public virtual int Fill(TMS_SPL_PULSEDataSet.Resources1DataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((CourseID.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[1].Value = ((long)(CourseID.Value));
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((ClassID.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[2].Value = ((long)(ClassID.Value));
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((WeekStartDate.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[3].Value = ((System.DateTime)(WeekStartDate.Value));
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((WeekEndDate.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[4].Value = ((System.DateTime)(WeekEndDate.Value));
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
             }
@@ -1323,35 +1089,201 @@ namespace TMS.Web.VewCourseAttendanceReportDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual VewCourseAttendanceReportDataSet.Tran_AttendancesCourse_GetReportDataDataTable GetData(global::System.Nullable<long> CourseID, global::System.Nullable<long> ClassID, global::System.Nullable<global::System.DateTime> WeekStartDate, global::System.Nullable<global::System.DateTime> WeekEndDate) {
+        public virtual TMS_SPL_PULSEDataSet.Resources1DataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((CourseID.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[1].Value = ((long)(CourseID.Value));
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((ClassID.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[2].Value = ((long)(ClassID.Value));
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((WeekStartDate.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[3].Value = ((System.DateTime)(WeekStartDate.Value));
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((WeekEndDate.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[4].Value = ((System.DateTime)(WeekEndDate.Value));
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            VewCourseAttendanceReportDataSet.Tran_AttendancesCourse_GetReportDataDataTable dataTable = new VewCourseAttendanceReportDataSet.Tran_AttendancesCourse_GetReportDataDataTable();
+            TMS_SPL_PULSEDataSet.Resources1DataTable dataTable = new TMS_SPL_PULSEDataSet.Resources1DataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(TMS_SPL_PULSEDataSet.Resources1DataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(TMS_SPL_PULSEDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "Resources1");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(long Original_ResourceId) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((long)(Original_ResourceId));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string Culture, string Name, string Value, global::System.Nullable<long> OrganizationID, global::System.Nullable<long> CreatedBy, global::System.Nullable<global::System.DateTime> CreatedDate, global::System.Nullable<long> UpdatedBy, global::System.Nullable<global::System.DateTime> UpdatedDate) {
+            if ((Culture == null)) {
+                throw new global::System.ArgumentNullException("Culture");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(Culture));
+            }
+            if ((Name == null)) {
+                throw new global::System.ArgumentNullException("Name");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(Name));
+            }
+            if ((Value == null)) {
+                throw new global::System.ArgumentNullException("Value");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Value));
+            }
+            if ((OrganizationID.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((long)(OrganizationID.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((CreatedBy.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((long)(CreatedBy.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((CreatedDate.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((System.DateTime)(CreatedDate.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((UpdatedBy.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((long)(UpdatedBy.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((UpdatedDate.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((System.DateTime)(UpdatedDate.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string Culture, string Name, string Value, global::System.Nullable<long> OrganizationID, global::System.Nullable<long> CreatedBy, global::System.Nullable<global::System.DateTime> CreatedDate, global::System.Nullable<long> UpdatedBy, global::System.Nullable<global::System.DateTime> UpdatedDate, long Original_ResourceId) {
+            if ((Culture == null)) {
+                throw new global::System.ArgumentNullException("Culture");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(Culture));
+            }
+            if ((Name == null)) {
+                throw new global::System.ArgumentNullException("Name");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(Name));
+            }
+            if ((Value == null)) {
+                throw new global::System.ArgumentNullException("Value");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Value));
+            }
+            if ((OrganizationID.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((long)(OrganizationID.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((CreatedBy.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((long)(CreatedBy.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((CreatedDate.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((System.DateTime)(CreatedDate.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((UpdatedBy.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((long)(UpdatedBy.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((UpdatedDate.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((System.DateTime)(UpdatedDate.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((long)(Original_ResourceId));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
         }
     }
     
@@ -1367,6 +1299,8 @@ namespace TMS.Web.VewCourseAttendanceReportDataSetTableAdapters {
         
         private UpdateOrderOption _updateOrder;
         
+        private Resources1TableAdapter _resources1TableAdapter;
+        
         private bool _backupDataSetBeforeUpdate;
         
         private global::System.Data.IDbConnection _connection;
@@ -1379,6 +1313,20 @@ namespace TMS.Web.VewCourseAttendanceReportDataSetTableAdapters {
             }
             set {
                 this._updateOrder = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
+        public Resources1TableAdapter Resources1TableAdapter {
+            get {
+                return this._resources1TableAdapter;
+            }
+            set {
+                this._resources1TableAdapter = value;
             }
         }
         
@@ -1401,6 +1349,10 @@ namespace TMS.Web.VewCourseAttendanceReportDataSetTableAdapters {
                 if ((this._connection != null)) {
                     return this._connection;
                 }
+                if (((this._resources1TableAdapter != null) 
+                            && (this._resources1TableAdapter.Connection != null))) {
+                    return this._resources1TableAdapter.Connection;
+                }
                 return null;
             }
             set {
@@ -1414,6 +1366,9 @@ namespace TMS.Web.VewCourseAttendanceReportDataSetTableAdapters {
         public int TableAdapterInstanceCount {
             get {
                 int count = 0;
+                if ((this._resources1TableAdapter != null)) {
+                    count = (count + 1);
+                }
                 return count;
             }
         }
@@ -1423,8 +1378,17 @@ namespace TMS.Web.VewCourseAttendanceReportDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private int UpdateUpdatedRows(VewCourseAttendanceReportDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateUpdatedRows(TMS_SPL_PULSEDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
+            if ((this._resources1TableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Resources1.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._resources1TableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             return result;
         }
         
@@ -1433,8 +1397,16 @@ namespace TMS.Web.VewCourseAttendanceReportDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private int UpdateInsertedRows(VewCourseAttendanceReportDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateInsertedRows(TMS_SPL_PULSEDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
+            if ((this._resources1TableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Resources1.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._resources1TableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             return result;
         }
         
@@ -1443,8 +1415,16 @@ namespace TMS.Web.VewCourseAttendanceReportDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private int UpdateDeletedRows(VewCourseAttendanceReportDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        private int UpdateDeletedRows(TMS_SPL_PULSEDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
+            if ((this._resources1TableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Resources1.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._resources1TableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             return result;
         }
         
@@ -1477,12 +1457,17 @@ namespace TMS.Web.VewCourseAttendanceReportDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public virtual int UpdateAll(VewCourseAttendanceReportDataSet dataSet) {
+        public virtual int UpdateAll(TMS_SPL_PULSEDataSet dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }
             if ((dataSet.HasChanges() == false)) {
                 return 0;
+            }
+            if (((this._resources1TableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._resources1TableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
             }
             global::System.Data.IDbConnection workConnection = this.Connection;
             if ((workConnection == null)) {
@@ -1516,6 +1501,15 @@ namespace TMS.Web.VewCourseAttendanceReportDataSetTableAdapters {
             try {
                 // ---- Prepare for update -----------
                 //
+                if ((this._resources1TableAdapter != null)) {
+                    revertConnections.Add(this._resources1TableAdapter, this._resources1TableAdapter.Connection);
+                    this._resources1TableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._resources1TableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._resources1TableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._resources1TableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._resources1TableAdapter.Adapter);
+                    }
+                }
                 // 
                 //---- Perform updates -----------
                 //
@@ -1573,6 +1567,10 @@ namespace TMS.Web.VewCourseAttendanceReportDataSetTableAdapters {
             finally {
                 if (workConnOpened) {
                     workConnection.Close();
+                }
+                if ((this._resources1TableAdapter != null)) {
+                    this._resources1TableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._resources1TableAdapter]));
+                    this._resources1TableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

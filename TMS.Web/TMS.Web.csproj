@@ -281,6 +281,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\SalesAdministrationController.cs" />
+    <Compile Include="Controllers\SPl_Test_ReportsController.cs" />
     <Compile Include="Controllers\TestWaqasControllerController.cs" />
     <Compile Include="DailySummaryDataset.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -294,6 +295,11 @@
       <DependentUpon>DailyUtilizationReport.xsd</DependentUpon>
     </Compile>
     <Compile Include="DS_CompanyInfo.Designer.cs" />
+    <Compile Include="TMS_SPL_PULSEDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TMS_SPL_PULSEDataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="TrainerDetail.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -404,6 +410,17 @@
     </Compile>
     <Compile Include="Views\Report\Pages\WeeklySummeryReport.aspx.designer.cs">
       <DependentUpon>WeeklySummeryReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\ReportBasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\ReportData.cs" />
+    <Compile Include="Views\Report\SpLReports\ReportView.aspx.cs">
+      <DependentUpon>ReportView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\ReportView.aspx.designer.cs">
+      <DependentUpon>ReportView.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Report\UserControls\UCClassReportCurrent.ascx.cs">
       <DependentUpon>UCClassReportCurrent.ascx</DependentUpon>
@@ -4292,6 +4309,7 @@
     <Content Include="Views\Report\Pages\VenueMatrixReport.aspx" />
     <Content Include="Views\Report\Pages\ViewClassTimeTable.aspx" />
     <Content Include="Views\Report\Pages\WeeklySummeryReport.aspx" />
+    <Content Include="Views\Report\SpLReports\ReportView.aspx" />
     <Content Include="Views\Report\UserControls\UCClassReport.ascx" />
     <Content Include="Views\Report\UserControls\UCClassReportCurrent.ascx" />
     <Content Include="Views\Report\UserControls\UCClassReportFuture.ascx" />
@@ -4335,6 +4353,17 @@
     </Content>
     <Content Include="TrainerDetail.xsc">
       <DependentUpon>TrainerDetail.xsd</DependentUpon>
+    </Content>
+    <Content Include="TMS_SPL_PULSEDataSet1.xsc">
+      <DependentUpon>TMS_SPL_PULSEDataSet1.xsd</DependentUpon>
+    </Content>
+    <None Include="TMS_SPL_PULSEDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TMS_SPL_PULSEDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="TMS_SPL_PULSEDataSet1.xss">
+      <DependentUpon>TMS_SPL_PULSEDataSet1.xsd</DependentUpon>
     </Content>
     <None Include="TrainerDetail.xsd">
       <SubType>Designer</SubType>
@@ -4446,6 +4475,7 @@
     <Content Include="Views\Admin\GroupDetails.cshtml" />
     <Content Include="Views\Admin\TMSGroupDetail.cshtml" />
     <Content Include="Views\Config\AuditLog.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\ReportViewer.cshtml" />
     <None Include="WeeklySummaryDataset.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>WeeklySummaryDataset1.Designer.cs</LastGenOutput>
@@ -5082,6 +5112,10 @@
       <Project>{5bb71d9a-df63-4863-87fe-4552ba27420f}</Project>
       <Name>TMS.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TMS.DataObjects\TMS.DataObjects.csproj">
+      <Project>{A16CFE52-802D-4D4E-A7E3-9C271F21EACA}</Project>
+      <Name>TMS.DataObjects</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TMS.Library\TMS.Library.csproj">
       <Project>{df954994-9c97-447c-afb1-9ea6f3027f80}</Project>
       <Name>TMS.Library</Name>
@@ -5102,6 +5136,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DailySummaryReport.rdlc" />
     <EmbeddedResource Include="Report\DailyUtilizationReport.rdlc" />
+    <EmbeddedResource Include="Report\Resources1.rdlc" />
     <EmbeddedResource Include="Report\TrainerDetail.rdlc" />
     <EmbeddedResource Include="Report\Tran_ClassDetailReport.rdlc" />
     <EmbeddedResource Include="Report\Tran_ClassReport.rdlc" />
