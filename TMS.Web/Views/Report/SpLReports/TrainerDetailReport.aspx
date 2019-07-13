@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ReportView.aspx.cs" Inherits="TMS.Web.Views.Report.SpLReports.ReportView" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TrainerDetailReport.aspx.cs" Inherits="TMS.Web.Views.Report.SpLReports.TrainerDetailReport" %>
 
 <%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
 <!DOCTYPE html>

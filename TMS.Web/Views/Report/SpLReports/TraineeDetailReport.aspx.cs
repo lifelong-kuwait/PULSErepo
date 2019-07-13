@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -13,41 +12,43 @@ using TMS.Business.TMS;
 
 namespace TMS.Web.Views.Report.SpLReports
 {
-    public partial class ReportView : ReportBasePage
+    public partial class TraineeDetailReport : ReportBasePage
     {
         public readonly IDDLBAL _objIDDLBAL = null;//For the Resorces Table Interface
                                                    // private readonly IPersonBAL _PersonBAL;
         private static DataSet _GetTrainerDetailsForReports;
         DDLBAL ddl = new DDLBAL();
-        PersonBAL _CourseBAL = new PersonBAL();
+        PersonBAL _PersonBAL = new PersonBAL();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                string classid=Request.QueryString["ClassID"];
+                string classid = Request.QueryString["ClassID"];
                 string courseid = Request.QueryString["courseId"];
-                RenderReportModels(this.ReportDataObj, classid, courseid);
+                string trainer = Request.QueryString["trainer"];
+                RenderReportModels(this.ReportDataObj, classid, courseid, trainer);
             }
         }
 
-        private void RenderReportModels(ReportData reportData, string classid, string courseid)
+        private void RenderReportModels(ReportData reportData, string courseid, string classid, string trainer)
         {
             long ClassID = Convert.ToInt64(classid);
             long CourseID = Convert.ToInt64(courseid);
+            long TrainerID = Convert.ToInt64(trainer);
 
-           
+
             // Reset report properties.
             ReportViewerRSFReports.Height = Unit.Parse("100%");
             ReportViewerRSFReports.Width = Unit.Parse("100%");
             ReportViewerRSFReports.CssClass = "table";
             var rptPath = Server.MapPath(@"../../../Report/" + reportData.ReportName + ".rdlc");
             this.ReportViewerRSFReports.LocalReport.ReportPath = rptPath;
-            DataTable dt = _CourseBAL.GetCourseReportData(ClassID, CourseID);
+            DataTable dt = _PersonBAL.GetTrainerDetailsForReports(CourseID, TrainerID);
             ReportViewerRSFReports.ProcessingMode = ProcessingMode.Local;
-           ReportViewerRSFReports.LocalReport.DataSources.Clear();
-           ReportViewerRSFReports.LocalReport.DataSources.Add(new ReportDataSource("VewCourseAttendanceReportDataSet", dt));
-           ReportViewerRSFReports.LocalReport.Refresh();
-           //ReportViewerRSFReports.RefreshReport();
+            ReportViewerRSFReports.LocalReport.DataSources.Clear();
+            ReportViewerRSFReports.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt));
+            ReportViewerRSFReports.LocalReport.Refresh();
+            //ReportViewerRSFReports.RefreshReport();
             //// Clear out any previous datasources.
             //this.ReportViewerRSFReports.LocalReport.DataSources.Clear();
 

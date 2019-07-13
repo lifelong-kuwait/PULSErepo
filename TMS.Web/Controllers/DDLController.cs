@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using TMS.Business.Common.DDL;
 using TMS.Business.Interfaces.Common.Configuration;
 using TMS.Business.Interfaces.Common.DDL;
 using TMS.Business.Interfaces.TMS.Organization;
@@ -14,7 +15,7 @@ namespace TMS.Web.Controllers
         public readonly IOrganizationBAL _objeobjIOrganizationBAL = null;//For the Resorces Table Interface
         public readonly IDDLBAL _objIDDLBAL = null;//For the Resorces Table Interface
         public readonly IConfigurationBAL _objIConfigBAL = null;//For the Resorces Table Interface
-
+        DDLBAL ddl = new DDLBAL();
         public DDLController(IOrganizationBAL objIOrganizationBAL, IDDLBAL ObjDDLBAL, IConfigurationBAL ObjConfigBAL)
         {
             _objeobjIOrganizationBAL = objIOrganizationBAL;
@@ -330,21 +331,28 @@ namespace TMS.Web.Controllers
             return Json(_objIDDLBAL.Classes_ByCourseIdAndCultureBAL(CurrentCulture, CourseId, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
         }
 
+
         [DontWrapResult]
         public JsonResult Roles() => Json(_objIDDLBAL.Roles_GetAllByCultureBAL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
         [DontWrapResult]
         public JsonResult Trainer(int OpenType, long OpenId) => Json(_objIConfigBAL.ManageTrainer_GetAllByCultureBAL(CurrentCulture, OpenType, OpenId, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
-        //
+        [DontWrapResult]
+        public JsonResult DDLTrainer() => Json(ddl.TrainerDDLBAL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
+        [DontWrapResult]
+        public JsonResult DDLVenue() => Json(ddl.VenueDDLBAL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
+
         //
         [DontWrapResult]
         public JsonResult CourseLogistic() => Json(_objIConfigBAL.CourseLogistic_GetAllByCultureBALL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
-    //    [DontWrapResult]
+        //    [DontWrapResult]
         //public JsonResult CourseLogistic()
         //{
         //    var logistic = _objIConfigBAL.CourseLogistic_GetAllByCultureBALL(CurrentCulture, CurrentUser.CompanyID);
         //  return  Json(logistic, JsonRequestBehavior.AllowGet);
-        //}
-            
+        //}ddl.Class_TraineeDDLBAL(CurrentCulture, CompanyID, Convert.ToInt64(DdlClass.SelectedValue)
+        //[DontWrapResult]
+        //public JsonResult ClassTrainer() => Json(ddl.Class_TraineeDDLBAL(CurrentCulture, CurrentUser.CompanyID,), JsonRequestBehavior.AllowGet);
+
 
         [DontWrapResult]
         public JsonResult CourseMeterial() => Json(_objIConfigBAL.CourseMeterial_GetAllByCultureBAL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);

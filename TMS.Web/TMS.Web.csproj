@@ -411,6 +411,13 @@
     <Compile Include="Views\Report\Pages\WeeklySummeryReport.aspx.designer.cs">
       <DependentUpon>WeeklySummeryReport.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Report\SpLReports\ClassDetailReport.aspx.cs">
+      <DependentUpon>ClassDetailReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\ClassDetailReport.aspx.designer.cs">
+      <DependentUpon>ClassDetailReport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Report\SpLReports\ReportBasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -421,6 +428,27 @@
     </Compile>
     <Compile Include="Views\Report\SpLReports\ReportView.aspx.designer.cs">
       <DependentUpon>ReportView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\TraineeDetailReport.aspx.cs">
+      <DependentUpon>TraineeDetailReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\TraineeDetailReport.aspx.designer.cs">
+      <DependentUpon>TraineeDetailReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\TrainerDetailReport.aspx.cs">
+      <DependentUpon>TrainerDetailReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\TrainerDetailReport.aspx.designer.cs">
+      <DependentUpon>TrainerDetailReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\VenueDetailReport.aspx.cs">
+      <DependentUpon>VenueDetailReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\VenueDetailReport.aspx.designer.cs">
+      <DependentUpon>VenueDetailReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Report\UserControls\UCClassReportCurrent.ascx.cs">
       <DependentUpon>UCClassReportCurrent.ascx</DependentUpon>
@@ -4309,7 +4337,11 @@
     <Content Include="Views\Report\Pages\VenueMatrixReport.aspx" />
     <Content Include="Views\Report\Pages\ViewClassTimeTable.aspx" />
     <Content Include="Views\Report\Pages\WeeklySummeryReport.aspx" />
+    <Content Include="Views\Report\SpLReports\ClassDetailReport.aspx" />
     <Content Include="Views\Report\SpLReports\ReportView.aspx" />
+    <Content Include="Views\Report\SpLReports\TraineeDetailReport.aspx" />
+    <Content Include="Views\Report\SpLReports\TrainerDetailReport.aspx" />
+    <Content Include="Views\Report\SpLReports\VenueDetailReport.aspx" />
     <Content Include="Views\Report\UserControls\UCClassReport.ascx" />
     <Content Include="Views\Report\UserControls\UCClassReportCurrent.ascx" />
     <Content Include="Views\Report\UserControls\UCClassReportFuture.ascx" />
@@ -4476,6 +4508,11 @@
     <Content Include="Views\Admin\TMSGroupDetail.cshtml" />
     <Content Include="Views\Config\AuditLog.cshtml" />
     <Content Include="Views\SPl_Test_Reports\ReportViewer.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\Trainer_Detail_Report.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\Trainee_Detail_Report.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\Class_Detail_Report.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\Venue_Detail_Report.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\Venue_Ocupancy_Detail_Report.cshtml" />
     <None Include="WeeklySummaryDataset.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>WeeklySummaryDataset1.Designer.cs</LastGenOutput>

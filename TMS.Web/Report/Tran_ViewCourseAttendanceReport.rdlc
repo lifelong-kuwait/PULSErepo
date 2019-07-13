@@ -1360,15 +1360,14 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>2in</Height>
+    <Height>1.77083in</Height>
     <Style />
   </Body>
-  <Width>6.8796in</Width>
+  <Width>6.39002in</Width>
   <Page>
     <PageHeader>
       <Height>0.56944in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
-      <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
         <Image Name="Image1">
           <Source>Embedded</Source>

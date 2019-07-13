@@ -1,0 +1,192 @@
+﻿
+@{
+    ViewBag.Title = "Trainee_Detail_Report";
+}
+
+
+
+
+
+@using lr = Resources.Resources;
+
+
+
+<style>
+    div#calender {
+        width: 1082px;
+    }
+
+    .fc-content {
+        color: #000;
+    }
+
+    td.fc-day.fc-widget-content.fc-sun.fc-today.fc-state-highlight {
+        background-color: #80BFC8;
+    }
+
+    .right-inner-addon {
+        display: none;
+    }
+
+    .fc button .fc-icon {
+        position: relative;
+        top: -.05em;
+        margin: 0 .2em;
+        /* vertical-align: middle; */
+    }
+
+    span.fc-time {
+        display: none;
+    }
+</style>
+
+
+<style>
+    .form-group {
+        display: grid;
+    }
+
+    .input-group {
+        display: none;
+    }
+
+    .col-md-12.col-lg-offset-2 {
+        margin-bottom: 26px;
+    }
+    /*li {
+        display: none;
+    }*/
+</style>
+@*<div class="col-md-offset-2">*@
+<div class="row" style="margin-left:40%;">
+    <div class="form-group">
+        <h2>Trainer Detail Report</h2>
+    </div>
+</div>
+<div class="form-group" style="margin-left:10%;">
+    <div class="form-group">
+        <div class="row" style="margin-top:1%;">
+            @Html.Label("Course", new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.Kendo().DropDownList()
+                                                                                                                                                                   .Name("Course")
+                                                                                                                                                                   .DataTextField("Text")
+                                                                                                                                                                   .DataValueField("Value")
+                                                                                                                                                                   .DataSource(source =>
+                                                                                                                                                                   {
+                                                                                                                                                                       source.Read(read =>
+                                                                                                                                                                       {
+                                                                                                                                                                           read.Action("Course", "DDL");
+                                                                                                                                                                       });
+                                                                                                                                                                   })
+                                                                                                                                                                  .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
+                )
+
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row" style="margin-top:1%;">
+            @Html.Label("Class", new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.Kendo().DropDownList()
+                                                                                                                                                                    .Name("Class")
+                                                                                                                                                                    .DataTextField("Text")
+                                                                                                                                                                    .DataValueField("Value")
+                                                                                                                                                                    .DataSource(source =>
+                                                                                                                                                                    {
+                                                                                                                                                                        source.Read(read =>
+                                                                                                                                                                        {
+                                                                                                                                                                            read.Action("Classes", "DDL");
+                                                                                                                                                                        });
+                                                                                                                                                                    })
+                                                                                                                                                                    .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
+                                                                                                                                                                                                                                                        .HtmlAttributes(new { style = "width: 100%" })
+                )
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row" style="margin-top:1%;">
+            @Html.Label("Trainer", new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.Kendo().DropDownList()
+                                                                                                                                                                   .Name("Trainer")
+                                                                                                                                                                   .DataTextField("Text")
+                                                                                                                                                                   .DataValueField("Value")
+                                                                                                                                                                   .DataSource(source =>
+                                                                                                                                                                   {
+                                                                                                                                                                       source.Read(read =>
+                                                                                                                                                                       {
+                                                                                                                                                                           read.Action("DDLTrainer", "DDL");
+                                                                                                                                                                       });
+                                                                                                                                                                   })
+                                                                                                                                                                  .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
+                )
+
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-md-2 col-lg-2 col-sm-2" style="margin-left:65%;margin-top:1%;">
+        @(Html.Kendo().Button()
+                                                                                                                                                               .Name("H2")
+                                                                                                                                                               .HtmlAttributes(new { type = "button", @class = "btn btn-primary k-primary" })
+                                                                                                                                                               .Content("" + @lr.ActivitySummaryReport + "")
+        )
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-10">
+        <iframe id="ifrmReportViewer" frameborder="0" EnableEventValidation="false" src="" width="1000" height="1000" style="overflow:hidden;" allowtransparency="true" allowfullscreen></iframe>
+    </div>
+</div>
+
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#H2").live("click", function (event) {
+            jQuery("#H2").attr("disabled", true);
+            alert(jQuery("#Trainer").data("kendoDropDownList").value());
+            if (jQuery("#Class").data("kendoDropDownList").value() < 0 || jQuery("#Course").data("kendoDropDownList").value() < 0 || jQuery("#Trainer").data("kendoDropDownList").value() < 0) {
+
+            } else {
+                url = "../Views/Report/SpLReports/TraineeDetailReport.aspx?rptmode=local&reportname=Tran_TraineeDetailReport&ClassID=" + jQuery("#Class").data("kendoDropDownList").value() + "&CourseID=" + jQuery("#Course").data("kendoDropDownList").value() + "&trainer=" + jQuery("#Trainer").data("kendoDropDownList").value() + "";
+            var myframe = document.getElementById("ifrmReportViewer");
+            if (myframe !== null) {
+                if (myframe.src) {
+                    myframe.src = url;
+                }
+                else if (myframe.contentWindow !== null && myframe.contentWindow.location !== null) {
+                    myframe.contentWindow.location = url;
+                }
+                else { myframe.setAttribute('src', url); }
+                }
+            }
+            jQuery("#H2").attr("disabled", false);
+            return false;
+        });
+        //jQuery("#Class").live("change", function (event) {
+        //    var classId = jQuery("#Class").data("kendoDropDownList").value();
+        //    var response = jQuery.ajax({
+        //        method: "post",
+        //        url: "/SPl_Test_Reports/ClassTrainer?ClassID=" + classId,
+        //        dataType: "JSON",
+        //        contentType: "application/json; charset=utf-8",
+        //        data: JSON.stringify({ ClassID: classId }),
+        //        success: function (msg) {
+        //            //jQuery("#Class").kendoDropDownList({
+        //            //    jQuery.each(JSON.parse(msg), function (i, item) {
+        //            //        dataSource: data[i].Text;
+        //            //        dataSource: data[i].Value;
+        //            //    })
+        //            //});
+        //        }
+        //    });
+        //    console.log(JSON.parse(jsonResult));
+        //    jQuery("#Trainer").data("kendoDropDownList").dataSource = new kendo.data.DataSource({
+        //        type: "json",
+        //        data: response
+        //    });
+
+        //});
+    });
+</script>
