@@ -1,0 +1,207 @@
+﻿
+@{
+    ViewBag.Title = "Class_Future_Report";
+}
+@using lr = Resources.Resources;
+<style>
+    div#calender {
+        width: 1082px;
+    }
+
+    .fc-content {
+        color: #000;
+    }
+
+    td.fc-day.fc-widget-content.fc-sun.fc-today.fc-state-highlight {
+        background-color: #80BFC8;
+    }
+
+    .right-inner-addon {
+        display: none;
+    }
+
+    .fc button .fc-icon {
+        position: relative;
+        top: -.05em;
+        margin: 0 .2em;
+        /* vertical-align: middle; */
+    }
+
+    span.fc-time {
+        display: none;
+    }
+</style>
+
+
+<style>
+    .form-group {
+        display: grid;
+    }
+
+    .input-group {
+        display: none;
+    }
+
+    .col-md-12.col-lg-offset-2 {
+        margin-bottom: 26px;
+    }
+    /*li {
+        display: none;
+    }*/
+</style>
+@*<div class="col-md-offset-2">*@
+<div class="row" style="margin-left:40%;">
+    <div class="form-group">
+        <h2>Class Future Report</h2>
+    </div>
+</div>
+<div class="form-group" style="margin-left:10%;">
+    <div class="form-group">
+        <div class="row" style="margin-top:1%;">
+            @Html.Label("Start Date", new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-8">
+                @(Html.Kendo().DatePicker()
+                                                                                                 .Name("Start_Date")
+                                                                                                 .Value(DateTime.Now.Date)
+                                                                                                 .Format("{0:MM/dd/yyyy}")
+                                                                                                 .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
+                                                                                                 .DateInput()
+                )
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row" style="margin-top:1%;">
+            @Html.Label("Course Category", new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-8">
+                @(Html.Kendo().DropDownList()
+                                                                            .Name("Course")
+                                                                            .DataTextField("Text")
+                                                                            .DataValueField("Value")
+                                                                            .OptionLabel("--Please select Course Category--")
+                                                                            //.DataSource(source =>
+                                                                            //  {
+                                                                            //      source.Read(read =>
+                                                                            //      {
+                                                                            //          read.Action("GetAllCourseCategories", "DDL");
+                                                                            //      });
+                                                                            //  })
+                                                                            .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
+                )
+
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row" style="margin-top:1%;">
+            @Html.Label("Class Category", new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-8">
+                @(Html.Kendo().DropDownList()
+                                                                                .Name("Class_Category")
+                                                                                .DataTextField("_name")
+                                                                                .DataValueField("_value")
+                                                                                .OptionLabel("--Please select Class Category--")
+                                                                                .DataSource(source =>
+                                                                                {
+                                                                                    source.Read(read =>
+                                                                                    {
+                                                                                        read.Action("ClassTypeDDL", "DDL");
+                                                                                    });
+                                                                                })
+                                                                                .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
+                                                                                .HtmlAttributes(new { style = "width: 100%" })
+                )
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-md-2 col-lg-2 col-sm-2" style="margin-left:65%;margin-top:1%;">
+        @(Html.Kendo().Button()
+                                                                  .Name("H2")
+                                                                  .HtmlAttributes(new { type = "button", @class = "btn btn-primary k-primary" })
+                                                                  .Content("" + @lr.ActivitySummaryReport + "")
+        )
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-10">
+        <iframe id="ifrmReportViewer" frameborder="0" EnableEventValidation="false" src="" width="1000" height="1000" style="overflow:hidden;" allowtransparency="true" allowfullscreen></iframe>
+    </div>
+</div>
+
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#H2").live("click", function (event) {
+            var datepicker = jQuery("#Start_Date").data("kendoDatePicker");
+            startDate = new Date(datepicker.value());
+            startDate = kendo.toString(startDate, "dd/MM/yyyy");
+            if (jQuery("#Class_Category").data("kendoDropDownList").value().trim().length <= 0 || jQuery("#Course").data("kendoDropDownList").value().trim().length <= 0 || startDate.toString().trim().length <= 0) {
+                console.log('null value');
+            } else {
+                url = "../Views/Report/SpLReports/ClassFutureReport.aspx?rptmode=local&reportname=Tran_ClassReport&ClassID=" + jQuery("#Class_Category").data("kendoDropDownList").value() + "&CourseID=" + jQuery("#Course").data("kendoDropDownList").value() + "&StartDate=" + startDate + "";
+                var myframe = document.getElementById("ifrmReportViewer");
+                if (myframe !== null) {
+                    if (myframe.src) {
+                        myframe.src = url;
+                    }
+                    else if (myframe.contentWindow !== null && myframe.contentWindow.location !== null) {
+                        myframe.contentWindow.location = url;
+                    }
+                    else { myframe.setAttribute('src', url); }
+                }
+            }
+            jQuery("#H2").attr("disabled", false);
+            return false;
+        });
+
+        jQuery("#Class").live("change", function (event) {
+            var classId = jQuery("#Class").data("kendoDropDownList").value();
+            jQuery.ajax({
+                method: "post",
+                url: "/SPl_Test_Reports/classStatAndEndDate?ClassID=" + classId,
+                dataType: "JSON",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ ClassID: classId }),
+                success: function (msg) {
+                    jQuery("#startDate").val(msg.Data.StartDate).change();
+                    jQuery("#endDate").val(msg.Data.EndDate).change();
+                }
+            });
+        });
+        //jQuery("#Start_Date").live("change", function (event) {
+        //    var datepickerStart = jQuery("#Start_Date").data("kendoDatePicker");
+        //    startDate = new Date(datepickerStart.value());
+        //    startDate = kendo.toString(startDate, "dd/MM/yyyy")
+        //    jQuery.ajax({
+        //        method: "post",
+        //        url: "/SPl_Test_Reports/addInDate?date=" + startDate,
+        //        dataType: "JSON",
+        //        contentType: "application/json; charset=utf-8",
+        //        data: JSON.stringify({ date: startDate }),
+        //        success: function (msg) {
+
+        //            jQuery("#End_Date").val(msg.Data.endDate).change();
+
+        //        }
+        //    });
+        //});
+        jQuery(window).on("load", function (event) {
+            jQuery.ajax({
+                method: "post",
+                url: "/DDL/GetAllCourseCategories",
+                dataType: "JSON",
+                contentType: "application/json; charset=utf-8",
+                success: function (msg1) {
+                    msg1.push({ Text: " Select All", Value: 0,  Selected: true });
+                    jQuery("#Course").kendoDropDownList({
+                        OptionLabel: "--Please select Course Category--",
+                        dataTextField: "Text",
+                        dataValueField: "Value",
+                        dataSource: msg1,
+                        height: 100
+                    })
+                }
+            });
+        });
+    });
+</script>
+

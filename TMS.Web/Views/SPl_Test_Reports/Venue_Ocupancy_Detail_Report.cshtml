@@ -133,11 +133,12 @@
     </div>
     <div class="form-group">
         <div class="row" style="margin-top:1%;">
-            @Html.Label("Class", new { @class = "col-md-3 col-lg-3 control-label" })
+            @Html.Label("Start Date", new { @class = "col-md-3 col-lg-3 control-label" })
             <div class="col-md-7 col-lg-7 col-sm-11">
                 @(Html.Kendo().DatePicker()
-                 .Name("datetimepickerStart")
+                 .Name("Start_Date")
                  .Value(DateTime.Now.Date)
+                 .Format("{0:dd/MM/yyyy}")
                  .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
                  .DateInput()
                 )
@@ -146,11 +147,12 @@
     </div>
     <div class="form-group">
         <div class="row" style="margin-top:1%;">
-            @Html.Label("Class", new { @class = "col-md-3 col-lg-3 control-label" })
+            @Html.Label("End Date", new { @class = "col-md-3 col-lg-3 control-label" })
             <div class="col-md-7 col-lg-7 col-sm-11">
                 @(Html.Kendo().DatePicker()
-                         .Name("datetimepickerend")
+                         .Name("End_Date")
                          .Value(DateTime.Now.Date)
+                         .Format("{0:dd/MM/yyyy}")
                          .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
                          .DateInput()
                 )
@@ -175,11 +177,16 @@
     jQuery(function () {
         jQuery("#H2").live("click", function (event) {
             jQuery("#H2").attr("disabled", true);
-
-            if (jQuery("#Class").data("kendoDropDownList").value() < 0 || jQuery("#Course").data("kendoDropDownList").value() < 0 || jQuery("#Venue").data("kendoDropDownList").value() < 0) {
+            var datepicker = jQuery("#Start_Date").data("kendoDatePicker");
+            startDate = new Date(datepicker.value());
+            startDate=kendo.toString(startDate, "dd/MM/yyyy");
+            var datepickerend = jQuery("#End_Date").data("kendoDatePicker");
+            endtDate = new Date(datepickerend.value());
+            endtDate = kendo.toString(startDate, "dd/MM/yyyy");
+           if (jQuery("#Class").data("kendoDropDownList").value() < 0 || jQuery("#Course").data("kendoDropDownList").value() < 0 || jQuery("#Venue").data("kendoDropDownList").value() < 0) {
 
             } else {
-                url = "../Views/Report/SpLReports/VenueDetailReport.aspx?rptmode=local&reportname=Tran_VenueDetailReport&ClassID=" + jQuery("#Class").data("kendoDropDownList").value() + "&CourseID=" + jQuery("#Course").data("kendoDropDownList").value() + "&Venue=" + jQuery("#Venue").data("kendoDropDownList").value() + "";
+               url = "../Views/Report/SpLReports/VenueOccupancyReport.aspx?rptmode=local&reportname=Tran_VenueOccupancyReport&ClassID=" + jQuery("#Class").data("kendoDropDownList").value() + "&CourseID=" + jQuery("#Course").data("kendoDropDownList").value() + "&Venue=" + jQuery("#Venue").data("kendoDropDownList").value() + "&StartDate=" + startDate + "&EndDate=" + endtDate + "";
             var myframe = document.getElementById("ifrmReportViewer");
             if (myframe !== null) {
                 if (myframe.src) {

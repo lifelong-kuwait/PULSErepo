@@ -6,6 +6,8 @@ using TMS.Business.Common.DDL;
 using TMS.Business.Interfaces.Common.Configuration;
 using TMS.Business.Interfaces.Common.DDL;
 using TMS.Business.Interfaces.TMS.Organization;
+using TMS.Library;
+using static TMS.UtilityFunctions;
 using lr = Resources.Resources;
 
 namespace TMS.Web.Controllers
@@ -304,7 +306,8 @@ namespace TMS.Web.Controllers
         {
             return Json(_objIDDLBAL.ClassDDLBAL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
         }
-
+      
+           
         #endregion Class
 
         #region SystemDefined Languages
@@ -340,7 +343,16 @@ namespace TMS.Web.Controllers
         public JsonResult DDLTrainer() => Json(ddl.TrainerDDLBAL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
         [DontWrapResult]
         public JsonResult DDLVenue() => Json(ddl.VenueDDLBAL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
-
+        [DontWrapResult]
+        public JsonResult GetAllCourseCategories()
+        {
+            return Json(ddl.GetAllCourseCategories(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
+        }
+        [DontWrapResult]
+        public JsonResult ClassTypeDDL ()
+        {
+            return Json(EnumManager.GetEnumCollection(typeof(ClassType)), JsonRequestBehavior.AllowGet);
+        }
         //
         [DontWrapResult]
         public JsonResult CourseLogistic() => Json(_objIConfigBAL.CourseLogistic_GetAllByCultureBALL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
