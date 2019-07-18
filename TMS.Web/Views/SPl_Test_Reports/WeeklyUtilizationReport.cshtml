@@ -139,7 +139,7 @@
                 || startDateTo.toString().trim().length <= 0) {
                 console.log('null value');
             } else {
-                url = "../Views/Report/SpLReports/WeeklyUtilizationReport.aspx?rptmode=local&reportname=DailyUtilizationReport&Venue=" + jQuery("#Venue").data("kendoDropDownList").value() + "&StartDate=" + startDateFrom + "&startDateTo=" + startDateTo + "";
+                url = "../Views/Report/SpLReports/WeeklyUtilizationReport.aspx?rptmode=local&reportname=WeeklyUtilizationReport&Venue=" + jQuery("#Venue").data("kendoDropDownList").value() + "&StartDate=" + startDateFrom + "&startDateTo=" + startDateTo + "";
                 var myframe = document.getElementById("ifrmReportViewer");
                 if (myframe !== null) {
                     if (myframe.src) {

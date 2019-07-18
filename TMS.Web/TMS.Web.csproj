@@ -425,6 +425,13 @@
     <Compile Include="Views\Report\SpLReports\ClassFutureReport.aspx.designer.cs">
       <DependentUpon>ClassFutureReport.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Report\SpLReports\CoursePeriodicReport.aspx.cs">
+      <DependentUpon>CoursePeriodicReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\CoursePeriodicReport.aspx.designer.cs">
+      <DependentUpon>CoursePeriodicReport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Report\SpLReports\ReportBasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -491,6 +498,13 @@
     </Compile>
     <Compile Include="Views\Report\SpLReports\ClassCurrentReport.aspx.designer.cs">
       <DependentUpon>ClassCurrentReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\ViewTraineePeriodicReport.aspx.cs">
+      <DependentUpon>ViewTraineePeriodicReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\ViewTraineePeriodicReport.aspx.designer.cs">
+      <DependentUpon>ViewTraineePeriodicReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Report\SpLReports\WeeklyUtilizationReport.aspx.cs">
       <DependentUpon>WeeklyUtilizationReport.aspx</DependentUpon>
@@ -2433,6 +2447,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile3.pubxml" />
     <None Include="Properties\PublishProfiles\New TMS.pubxml" />
     <Content Include="Reports\Barcodes Report.trdx">
       <SubType>Designer</SubType>
@@ -4388,6 +4403,7 @@
     <Content Include="Views\Report\Pages\WeeklySummeryReport.aspx" />
     <Content Include="Views\Report\SpLReports\ClassDetailReport.aspx" />
     <Content Include="Views\Report\SpLReports\ClassFutureReport.aspx" />
+    <Content Include="Views\Report\SpLReports\CoursePeriodicReport.aspx" />
     <Content Include="Views\Report\SpLReports\ReportView.aspx" />
     <Content Include="Views\Report\SpLReports\TraineeDetailReport.aspx" />
     <Content Include="Views\Report\SpLReports\TrainerDetailReport.aspx" />
@@ -4397,6 +4413,7 @@
     <Content Include="Views\Report\SpLReports\VenueOccupancyReport.aspx" />
     <Content Include="Views\Report\SpLReports\ViewAttendanceReport.aspx" />
     <Content Include="Views\Report\SpLReports\ClassCurrentReport.aspx" />
+    <Content Include="Views\Report\SpLReports\ViewTraineePeriodicReport.aspx" />
     <Content Include="Views\Report\SpLReports\WeeklyUtilizationReport.aspx" />
     <Content Include="Views\Report\UserControls\UCClassReport.ascx" />
     <Content Include="Views\Report\UserControls\UCClassReportCurrent.ascx" />
@@ -4575,6 +4592,8 @@
     <Content Include="Views\SPl_Test_Reports\VenueDetailUtilizationReport.cshtml" />
     <Content Include="Views\SPl_Test_Reports\WeeklyUtilizationReport.cshtml" />
     <Content Include="Views\SPl_Test_Reports\VenueDailyUtilizationReport.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\TraineePeriodicReport.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\CoursePeriodicReport.cshtml" />
     <None Include="WeeklySummaryDataset.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>WeeklySummaryDataset1.Designer.cs</LastGenOutput>

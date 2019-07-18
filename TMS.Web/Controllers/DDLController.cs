@@ -354,6 +354,7 @@ namespace TMS.Web.Controllers
             return Json(EnumManager.GetEnumCollection(typeof(ClassType)), JsonRequestBehavior.AllowGet);
         }
         //
+
         [DontWrapResult]
         public JsonResult CourseLogistic() => Json(_objIConfigBAL.CourseLogistic_GetAllByCultureBALL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
         //    [DontWrapResult]

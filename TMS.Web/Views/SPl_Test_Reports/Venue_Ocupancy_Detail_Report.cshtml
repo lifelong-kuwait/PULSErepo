@@ -76,6 +76,7 @@
                                                                                                                                                                                                            .Name("Course")
                                                                                                                                                                                                            .DataTextField("Text")
                                                                                                                                                                                                            .DataValueField("Value")
+                                                                                                                                                                                                           .OptionLabel("---Select Course---")
                                                                                                                                                                                                            .DataSource(source =>
                                                                                                                                                                                                            {
                                                                                                                                                                                                                source.Read(read =>
@@ -97,13 +98,8 @@
                                                                                                                                                                                                             .Name("Class")
                                                                                                                                                                                                             .DataTextField("Text")
                                                                                                                                                                                                             .DataValueField("Value")
-                                                                                                                                                                                                            .DataSource(source =>
-                                                                                                                                                                                                            {
-                                                                                                                                                                                                                source.Read(read =>
-                                                                                                                                                                                                                {
-                                                                                                                                                                                                                    read.Action("Classes", "DDL");
-                                                                                                                                                                                                                });
-                                                                                                                                                                                                            })
+                                                                                                                                                                                                           .OptionLabel("---Select Class---")
+
                                                                                                                                                                                                             .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
                                                                                                                                                                                                                                                                                                 .HtmlAttributes(new { style = "width: 100%" })
                 )
@@ -118,6 +114,8 @@
                                                                                                                                                                                                             .Name("Venue")
                                                                                                                                                                                                             .DataTextField("Text")
                                                                                                                                                                                                             .DataValueField("Value")
+                                                                                                                                                                                                           .OptionLabel("---Select Venue---")
+
                                                                                                                                                                                                             .DataSource(source =>
                                                                                                                                                                                                             {
                                                                                                                                                                                                                 source.Read(read =>
@@ -183,7 +181,7 @@
             var datepickerend = jQuery("#End_Date").data("kendoDatePicker");
             endtDate = new Date(datepickerend.value());
             endtDate = kendo.toString(startDate, "dd/MM/yyyy");
-           if (jQuery("#Class").data("kendoDropDownList").value() < 0 || jQuery("#Course").data("kendoDropDownList").value() < 0 || jQuery("#Venue").data("kendoDropDownList").value() < 0) {
+            if (jQuery("#Class").data("kendoDropDownList").value().trim().length <= 0 || jQuery("#Course").data("kendoDropDownList").value().trim().length <=  0 || jQuery("#Venue").data("kendoDropDownList").value().trim().length <=  0) {
 
             } else {
                url = "../Views/Report/SpLReports/VenueOccupancyReport.aspx?rptmode=local&reportname=Tran_VenueOccupancyReport&ClassID=" + jQuery("#Class").data("kendoDropDownList").value() + "&CourseID=" + jQuery("#Course").data("kendoDropDownList").value() + "&Venue=" + jQuery("#Venue").data("kendoDropDownList").value() + "&StartDate=" + startDate + "&EndDate=" + endtDate + "";
@@ -201,30 +199,28 @@
             jQuery("#H2").attr("disabled", false);
             return false;
         });
-       
-        //jQuery("#Class").live("change", function (event) {
-        //    var classId = jQuery("#Class").data("kendoDropDownList").value();
-        //    var response = jQuery.ajax({
-        //        method: "post",
-        //        url: "/SPl_Test_Reports/ClassTrainer?ClassID=" + classId,
-        //        dataType: "JSON",
-        //        contentType: "application/json; charset=utf-8",
-        //        data: JSON.stringify({ ClassID: classId }),
-        //        success: function (msg) {
-        //            //jQuery("#Class").kendoDropDownList({
-        //            //    jQuery.each(JSON.parse(msg), function (i, item) {
-        //            //        dataSource: data[i].Text;
-        //            //        dataSource: data[i].Value;
-        //            //    })
-        //            //});
-        //        }
-        //    });
-        //    console.log(JSON.parse(jsonResult));
-        //    jQuery("#Trainer").data("kendoDropDownList").dataSource = new kendo.data.DataSource({
-        //        type: "json",
-        //        data: response
-        //    });
+        jQuery("#Course").live("change", function (event) {
+            var classId = jQuery("#Course").data("kendoDropDownList").value();
+            if (jQuery("#Course").data("kendoDropDownList").value().trim().length <= 0) {
 
-        //});
+            } else {
+                jQuery.ajax({
+                    method: "post",
+                    url: "/SPl_Test_Reports/Course_Class?course=" + classId,
+                    dataType: "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ course: classId }),
+                    success: function (msg) {
+                        jQuery("#Class").kendoDropDownList({
+                            OptionLabel: "--Please select Class--",
+                            dataTextField: "Text",
+                            dataValueField: "Value",
+                            dataSource: msg,
+                            height: 100
+                        })
+                    }
+                });
+            }
+        });
     });
 </script>

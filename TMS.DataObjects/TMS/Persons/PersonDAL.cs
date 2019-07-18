@@ -26,6 +26,7 @@ using TMS.Library.Entities.Common.Configuration.Venues;
 using System.Data.Common;
 using TMS.Library.Entities.TMS.Program;
 using TMS.Library.Entities.CRM;
+using TMS.Library.ModelMapper;
 
 namespace TMS.DataObjects.TMS
 {
@@ -40,6 +41,7 @@ namespace TMS.DataObjects.TMS
         /// Persons the get alldal.
         /// </summary>
         /// <returns>IList&lt;Person&gt;.</returns>
+        private string ConnectionString = DBHelper.ConnectionString;
         public IList<Person> Person_GetALLDAL(int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText)
         {
             List<Person> Person = new List<Person>();
@@ -354,7 +356,7 @@ namespace TMS.DataObjects.TMS
         {
             return ExecuteListSp<PersonRelation>("TMS_PersonRelationToPerson_GetbyPersonId", ParamBuilder.Par("PersonID", PersonID));
         }
-
+       
         /// <summary>
         /// Persons the relation to person create dal.
         /// </summary>
@@ -1464,6 +1466,14 @@ namespace TMS.DataObjects.TMS
                         ParamBuilder.Par("CreatedOn", _person.CreatedOn)
                         );
         }
+       public IList<DDlList> GetCourseFromTimeSpanDALDDL(DateTime startDate,DateTime endDate)
+        {
+            return ExecuteListSp<DDlList>("TMS_Courses_GetCourseFromTimeSpan", ParamBuilder.Par("StartDAte", startDate), ParamBuilder.Par("EndDate", endDate));
+        }
+        public IList<DDlList> GetCourseFromTimeSpanListDAL(DateTime StartTime, DateTime EndTime)
+        {
+            return ExecuteListSp<DDlList>("TMS_Courses_GetCourseFromTimeSpan", ParamBuilder.Par("StartDAte", StartTime), ParamBuilder.Par("EndDate", EndTime));
+        }
 
         public int ManageCourse_DuplicationCheckDAL(CRM_CourseMapping _mapping)
         {
@@ -1484,6 +1494,57 @@ namespace TMS.DataObjects.TMS
             return ExecuteScalarSPInt32("CRMClass_DuplicationCheck",
                      ParamBuilder.Par("PersonID", _mapping.PersonID),
                                  ParamBuilder.Par("ClassID", _mapping.ClassID));
+        }
+        public IList<T> ExecuteListSp<T>(string query, params DbParameter[] prms) where T : new()
+        {
+            IList<T> objectList = new List<T>();
+            T obj = default(T);
+
+            try
+            {
+                using (DbConnection connection = Factory.CreateConnection())
+                {
+                    connection.ConnectionString = ConnectionString;
+
+                    using (DbCommand command = Factory.CreateCommand())
+                    {
+                        command.CommandTimeout = 30;
+                        command.Connection = connection;
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+                        command.CommandText = query;
+
+                        if (prms != null)
+                        {
+                            command.Parameters.AddRange(prms);
+                        }
+
+                        connection.Open();
+
+                        using (DbDataReader dataReader = command.ExecuteReader(CommandBehavior.CloseConnection))
+                        {
+                            if (dataReader.HasRows)
+                            {
+                                while (dataReader.Read())
+                                {
+                                    obj = new T();
+
+                                    IDataMapper mapper = obj as IDataMapper;
+                                    mapper.MapProperties(dataReader);
+
+                                    objectList.Add(obj);
+                                }
+                            }
+
+                            dataReader.Close();
+                        }
+                    }
+                }
+            }
+            finally
+            {
+            }
+
+            return objectList;
         }
 
 

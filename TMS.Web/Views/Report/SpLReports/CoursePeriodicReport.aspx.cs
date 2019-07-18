@@ -13,7 +13,7 @@ using TMS.Business.TMS;
 
 namespace TMS.Web.Views.Report.SpLReports
 {
-    public partial class ViewAttendanceReport : ReportBasePage
+    public partial class CoursePeriodicReport : ReportBasePage
     {
         public readonly IDDLBAL _objIDDLBAL = null;//For the Resorces Table Interface
                                                    // private readonly IPersonBAL _PersonBAL;
@@ -24,32 +24,36 @@ namespace TMS.Web.Views.Report.SpLReports
         {
             if (!IsPostBack)
             {
-                string classid = Request.QueryString["ClassID"];
-                string courseId = Request.QueryString["CourseID"];
+
+                string ClassID = Request.QueryString["Class"];
                 string startDate = Request.QueryString["StartDate"];
-                string endDate = Request.QueryString["EndDate"];
-                RenderReportModels(this.ReportDataObj, courseId, classid, startDate, endDate);
+                string EndDate = Request.QueryString["EndDate"];
+
+                RenderReportModels(this.ReportDataObj, ClassID, startDate, EndDate);
             }
         }
 
-        private void RenderReportModels(ReportData reportData, string courseId, string classid, string startDate, string endDate)
+        private void RenderReportModels(ReportData reportData, string ClassID, string startDate, string EndDate)
         {
-            long ClassID = Convert.ToInt64(classid);
-            long CourseId = Convert.ToInt64(courseId);
-            DateTime startdatet = DateTime.ParseExact(startDate, "dd/MM/yyyy",
-                                           CultureInfo.InvariantCulture);
-            DateTime enddatet = DateTime.ParseExact(endDate, "MM/dd/yyyy",
-                                           CultureInfo.InvariantCulture);
+            DateTime StartDate = DateTime.ParseExact(startDate, "dd/MM/yyyy",
+                                       CultureInfo.InvariantCulture);
+            DateTime endDate = DateTime.ParseExact(EndDate, "dd/MM/yyyy",
+                                       CultureInfo.InvariantCulture);
+            int classID = Convert.ToInt32(ClassID);
+
+
             // Reset report properties.
             ReportViewerRSFReports.Height = Unit.Parse("100%");
             ReportViewerRSFReports.Width = Unit.Parse("100%");
             ReportViewerRSFReports.CssClass = "table";
             var rptPath = Server.MapPath(@"../../../Report/" + reportData.ReportName + ".rdlc");
             this.ReportViewerRSFReports.LocalReport.ReportPath = rptPath;
-            DataTable dt = _PersonBAL.AttendanceReports(CourseId, ClassID, startdatet, enddatet);
+            //DataTable dt = _PersonBAL.ClassFutureReport(CurrentCourseCategoryID, ClassReportStartDateFrom, ClassReportStartDateTo, ShowFutureClasses, ClassTypeID);
+            //DataTable dt = _PersonBAL.DailyUtilizationReport(Startday, courseID);
+            DataTable dt = _PersonBAL.GetConductedCoursesData(StartDate, endDate, classID);
             ReportViewerRSFReports.ProcessingMode = ProcessingMode.Local;
             ReportViewerRSFReports.LocalReport.DataSources.Clear();
-            ReportViewerRSFReports.LocalReport.DataSources.Add(new ReportDataSource("VewTraineeAttendanceReportDataSet", dt));
+            ReportViewerRSFReports.LocalReport.DataSources.Add(new ReportDataSource("ConductedCoursesReport", dt));
             ReportViewerRSFReports.LocalReport.Refresh();
             //ReportViewerRSFReports.RefreshReport();
             //// Clear out any previous datasources.

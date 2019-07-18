@@ -10,7 +10,7 @@
 namespace TMS.Web.Views.Report.SpLReports {
     
     
-    public partial class TraineeDetailReport {
+    public partial class CoursePeriodicReport {
         
         /// <summary>
         /// form1 control.

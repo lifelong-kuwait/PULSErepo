@@ -279,7 +279,7 @@ namespace TMS.Business.Interfaces.TMS
 
         #endregion Record Visit    
 
-
+        IList<DDlList> GetCourseFromTimeSpanDALBAL(DateTime startDate, DateTime endDate);
         int ManageCourse_DuplicationCheckBAL(CRM_CourseMapping _mapping);
         int ManageScheduleCourse_DuplicationCheckBAL(CRM_classPersonMapping _mapping);
         

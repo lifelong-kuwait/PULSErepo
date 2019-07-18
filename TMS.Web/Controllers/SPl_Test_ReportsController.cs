@@ -1,6 +1,7 @@
 ﻿using Abp.Web.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -8,7 +9,7 @@ using TMS.Business.Common.DDL;
 using TMS.Business.Interfaces.TMS;
 using TMS.Business.TMS;
 using TMS.Library.Entities.TMS.Program;
-
+using System.Globalization;
 namespace TMS.Web.Controllers
 {
     public class SPl_Test_ReportsController : TMSControllerBase
@@ -67,6 +68,14 @@ namespace TMS.Web.Controllers
         }
         [ClaimsAuthorize("CanViewReports")]
         [DontWrapResult]
+        public ActionResult WeeklyUtilizationReport()
+        {
+            ViewData["reportUrl"] = "~/Report/WeeklyUtilizationReport/";
+
+            return View();
+        }
+        [ClaimsAuthorize("CanViewReports")]
+        [DontWrapResult]
         public ActionResult Weekly_Attandence_Report()
         {
             ViewData["reportUrl"] = "~/Report/Tran_ViewAttendanceReport/";
@@ -107,6 +116,30 @@ namespace TMS.Web.Controllers
         }
         [ClaimsAuthorize("CanViewReports")]
         [DontWrapResult]
+        public ActionResult TraineePeriodicReport()
+        {
+            ViewData["reportUrl"] = "~/Report/Tran_ViewTraineePeriodicReport/";
+
+            return View();
+        }
+        [ClaimsAuthorize("CanViewReports")]
+        [DontWrapResult]
+        public ActionResult CoursePeriodicReport()
+        {
+            ViewData["reportUrl"] = "~/Report/Tran_ConductedCoursesReport/";
+
+            return View();
+        }//Schedules
+        [ClaimsAuthorize("CanViewReports")]
+        [DontWrapResult]
+        public ActionResult Schedules()
+        {
+            ViewData["reportUrl"] = "~/Report/Tran_ConductedCoursesReport/";
+
+            return View();
+        }
+        [ClaimsAuthorize("CanViewReports")]
+        [DontWrapResult]
         [HttpPost]
         public ActionResult ClassTrainer(string ClassID)
         {
@@ -114,7 +147,9 @@ namespace TMS.Web.Controllers
           var result= Json(ddl.Course_ClassDDLBAL(CurrentCulture, CurrentUser.CompanyID, ClassId), JsonRequestBehavior.AllowGet);
             return Json(result);
         }
-         [ClaimsAuthorize("CanViewReports")]
+
+       
+     
         [DontWrapResult]
         [HttpPost]
         public ActionResult classStatAndEndDate(string ClassID)
@@ -125,15 +160,53 @@ namespace TMS.Web.Controllers
             var result = Json(new { StartDate = ""+CurrentClass.StartDate.ToString()+"", EndDate = "" + CurrentClass.EndDate.ToString() + "" }, JsonRequestBehavior.AllowGet);
             return Json(result);
         }
-        [ClaimsAuthorize("CanViewReports")]
+        
         [DontWrapResult]
         [HttpPost]
         public ActionResult addInDate(string date)
         {
-            DateTime startDate = Convert.ToDateTime(date);
-            string newdate = startDate.AddDays(6).ToShortDateString();
+            DateTime startDate = DateTime.ParseExact(date, "dd/MM/yyyy",
+                                       CultureInfo.InvariantCulture);
+            string newdate = startDate.AddDays(6).ToString("MM/dd/yyyy");
+         
             var result = Json(new { endDate = "" + newdate + "" }, JsonRequestBehavior.AllowGet);
             return Json(result);
         }
+       
+        [DontWrapResult]
+        [HttpPost]
+        public JsonResult selectCourseBtTime(string startdate,string enddate)
+        {
+            DateTime startDate = DateTime.ParseExact(startdate, "dd/MM/yyyy",
+                                       CultureInfo.InvariantCulture); 
+            DateTime endDate = DateTime.ParseExact(enddate, "dd/MM/yyyy",
+                                       CultureInfo.InvariantCulture); 
+            return Json(_PersonBAL.GetCourseFromTimeSpanDALBAL(startDate, endDate), JsonRequestBehavior.AllowGet);
+        }
+      
+        [DontWrapResult]
+        [HttpPost]
+        public JsonResult selectClassBtTime(string startdate, string enddate)
+        {
+            DateTime startDate = DateTime.ParseExact(startdate, "dd/MM/yyyy",
+                                       CultureInfo.InvariantCulture);
+            DateTime endDate = DateTime.ParseExact(enddate, "dd/MM/yyyy",
+                                       CultureInfo.InvariantCulture);
+            return Json(_PersonBAL.GetCourseFromTimeSpan(startDate, endDate), JsonRequestBehavior.AllowGet);
+        }
+       
+        [DontWrapResult]
+        [HttpPost]
+        public JsonResult Class_Trainer(string classId)
+        {
+           return Json(ddl.Class_TrainerDDLBAL(CurrentCulture, CurrentUser.CompanyID, Convert.ToInt64(classId)), JsonRequestBehavior.AllowGet);
+        }
+        [DontWrapResult]
+        [HttpPost]
+        public JsonResult Course_Class(string course)
+        {
+            return Json(ddl.Course_ClassDDLBAL(CurrentCulture, CurrentUser.CompanyID, Convert.ToInt64(course)), JsonRequestBehavior.AllowGet);
+        }
+        // ddl.Course_ClassDDLBAL(CurrentCulture, CompanyID, Convert.ToInt64(DdlCourse.SelectedValue))
     }
 }

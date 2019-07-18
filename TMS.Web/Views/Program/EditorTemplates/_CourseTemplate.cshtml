@@ -54,7 +54,7 @@
         </div>
 
         <div class="col-md-3 col-lg-3 col-sm-11">
-            @(Html.Kendo().TextBoxFor(c => c.CourseDuration).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @(Html.Kendo().TextBoxFor(c => c.CourseDuration).HtmlAttributes(new { @class = "form-control ", style = "width:85%" }))
             @Html.ValidationMessageFor(model => model.CourseDuration)
         </div>
     </div>
@@ -101,7 +101,7 @@
         </div>
 
         <div class="col-md-3 col-lg-3 col-sm-11">
-            @(Html.Kendo().TextBoxFor(c => c.CourseFee).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @(Html.Kendo().TextBoxFor(c => c.CourseFee).HtmlAttributes(new { @class = "form-control ", style = "width:85%" }))
             @Html.ValidationMessageFor(model => model.CourseFee)
         </div>
     </div>
@@ -117,7 +117,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.PreRequisites, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-7 col-lg-7 col-sm-11">
-            @(Html.TextAreaFor(c => c.PreRequisites, new { @class = "form-control ", style = "width:100%" }))
+            @(Html.TextAreaFor(c => c.PreRequisites, new { @class = "form-control ", style = "width:94%" }))
             @Html.ValidationMessageFor(model => model.PreRequisites)
         </div>
     </div>
@@ -125,7 +125,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Notes, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-7 col-lg-7 col-sm-11">
-            @(Html.TextAreaFor(c => c.Notes, new { @class = "form-control ", style = "width:100%" }))
+            @(Html.TextAreaFor(c => c.Notes, new { @class = "form-control ", style = "width:94%" }))
             @Html.ValidationMessageFor(model => model.Notes)
         </div>
     </div>

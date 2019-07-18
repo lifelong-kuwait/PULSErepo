@@ -96,13 +96,6 @@
                         .DataTextField("Text")
                         .DataValueField("Value")
                         .OptionLabel("--Please select Class--")
-                        //.DataSource(source =>
-                        //{
-                        //    source.Read(read =>
-                        //    {
-                        //        read.Action("Classes", "DDL");
-                        //    });
-                        //})
                         .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
                         .HtmlAttributes(new { style = "width: 100%" })
                 )
@@ -181,6 +174,7 @@
             startDate = kendo.toString(startDate, "dd/MM/yyyy");
             var datepickerend = jQuery("#End_Date").val();
             endtDate = kendo.toString(datepickerend, "dd/MM/yyyy");
+           
             if (jQuery("#Class").data("kendoDropDownList").value().trim().length <= 0 || jQuery("#Course").data("kendoDropDownList").value().trim().length <= 0 || endtDate.toString().trim().length <= 0 || startDate.toString().trim().length <= 0) {
                 console.log('null value');
           } else
@@ -203,17 +197,21 @@
 
         jQuery("#Class").live("change", function (event) {
             var classId = jQuery("#Class").data("kendoDropDownList").value();
-           jQuery.ajax({
-                method: "post",
-                url: "/SPl_Test_Reports/classStatAndEndDate?ClassID=" + classId,
-                dataType: "JSON",
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify({ ClassID: classId }),
-                success: function (msg) {
-                    jQuery("#startDate").val(msg.Data.StartDate).change();
-                    jQuery("#endDate").val(msg.Data.EndDate).change();
-                }
-            });
+            if (classId.trim().length <= 0) {
+                console.log('null value');
+            } else {
+                jQuery.ajax({
+                    method: "post",
+                    url: "/SPl_Test_Reports/classStatAndEndDate?ClassID=" + classId,
+                    dataType: "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ ClassID: classId }),
+                    success: function (msg) {
+                        jQuery("#startDate").val(msg.Data.StartDate).change();
+                        jQuery("#endDate").val(msg.Data.EndDate).change();
+                    }
+                });
+            }
         });
         jQuery("#Start_Date").live("change", function (event) {
             var datepickerStart = jQuery("#Start_Date").data("kendoDatePicker");
@@ -226,45 +224,49 @@
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify({ date: startDate }),
                 success: function (msg) {
-                  
-                    jQuery("#End_Date").val(msg.Data.endDate).change();
+                    startDate = kendo.toString(msg.Data.endDate, "dd/MM/yyyy")
+                    jQuery("#End_Date").val(startDate).change();
                    
                 }
             });
         });
         jQuery("#Course").live("change", function (event) {
             var classId = jQuery("#Course").data("kendoDropDownList").value();
-           jQuery.ajax({
-                method: "post",
-                url: "/SPl_Test_Reports/ClassTrainer?ClassID=" + classId,
-                dataType: "JSON",
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify({ ClassID: classId }),
-                success: function (msg1) {
-                   jQuery("#Class").kendoDropDownList({
-                        OptionLabel: "--Please select Class--",
-                        dataTextField: "Text",
-                        dataValueField: "Value",
-                        dataSource: msg1.Data,
-                        height: 100
-                       })
-                        .closest(".k-widget")
-                        .attr("id", "products_wrapper");
-                    if (msg1.Data != null) {
-                        jQuery.ajax({
-                            method: "post",
-                            url: "/SPl_Test_Reports/classStatAndEndDate?ClassID=" + msg1.Data[0].Value,
-                            dataType: "JSON",
-                            contentType: "application/json; charset=utf-8",
-                            data: JSON.stringify({ ClassID: msg1.Data[0].Value }),
-                            success: function (msg2) {
-                                jQuery("#startDate").val(msg2.Data.StartDate).change();
-                                jQuery("#endDate").val(msg2.Data.EndDate).change();
-                            }
+            if (classId.trim().length <= 0) {
+                console.log('null value');
+            } else {
+                jQuery.ajax({
+                    method: "post",
+                    url: "/SPl_Test_Reports/ClassTrainer?ClassID=" + classId,
+                    dataType: "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ ClassID: classId }),
+                    success: function (msg1) {
+                        jQuery("#Class").kendoDropDownList({
+                            OptionLabel: "--Please select Class--",
+                            dataTextField: "Text",
+                            dataValueField: "Value",
+                            dataSource: msg1.Data,
+                            height: 100
                         })
+                            .closest(".k-widget")
+                            .attr("id", "products_wrapper");
+                        if (msg1.Data != null) {
+                            jQuery.ajax({
+                                method: "post",
+                                url: "/SPl_Test_Reports/classStatAndEndDate?ClassID=" + msg1.Data[0].Value,
+                                dataType: "JSON",
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify({ ClassID: msg1.Data[0].Value }),
+                                success: function (msg2) {
+                                    jQuery("#startDate").val(msg2.Data.StartDate).change();
+                                    jQuery("#endDate").val(msg2.Data.EndDate).change();
+                                }
+                            })
+                        }
                     }
-                }
-            });
+                });
+            }
         });
     });
 </script>

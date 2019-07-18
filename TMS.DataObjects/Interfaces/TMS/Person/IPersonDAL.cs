@@ -174,9 +174,9 @@ namespace TMS.DataObjects.Interfaces.TMS
         IList<PersonRolesMapping> TMS_PersonRolesMapping_GetbyPersonIDDAL(long PersonID,long CompanyID , int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText);
 
         IList<Person> TMS_Coordinate_GetAllByCultureDAL(string culture);
-
-
-       DataTable GetTrainerDetailsForReportsDAL(long ClssID, long TrainerID);
+        IList<DDlList> GetCourseFromTimeSpanDALDDL(DateTime StartTime, DateTime EndTime);
+        //GetCourseFromTimeSpanDAL
+        DataTable GetTrainerDetailsForReportsDAL(long ClssID, long TrainerID);
 
         DataTable GetTraineeDetailsForReportsDAL(long ClssID, long TrainerID);
         DataTable GetTraineePeriodicDataDAL(DateTime StartDate, DateTime EndDate, long CourseID);
@@ -185,6 +185,7 @@ namespace TMS.DataObjects.Interfaces.TMS
         DataTable GetVenueDetailsForReportsDAL(long ClssID, long VenueID);
 
         DataTable GetCourseFromTimeSpanDAL(DateTime StartTime, DateTime EndTime);
+        IList<DDlList> GetCourseFromTimeSpanListDAL(DateTime StartTime, DateTime EndTime);
         DataTable ClassFutureReportDAL(long CurrentCourseCategoryID, DateTime ClassReportStartDateFrom, DateTime ClassReportStartDateTo, int ClassTypeID, bool ShowFutureClasses);
         DataTable AttendanceReportsDAL(long CourseID, long ClassID, DateTime startdate, DateTime enddate);
         DataTable GetOccVenueDetailsForReportsDAL(long ClassID, long VenueID, DateTime StartTime, DateTime EndTime);
