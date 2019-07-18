@@ -2448,6 +2448,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile3.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile4.pubxml" />
     <None Include="Properties\PublishProfiles\New TMS.pubxml" />
     <Content Include="Reports\Barcodes Report.trdx">
       <SubType>Designer</SubType>
@@ -5252,22 +5253,22 @@
     <EmbeddedResource Include="Reports\Report2.resx">
       <DependentUpon>Report2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report\DailySummaryReport.rdlc" />
-    <EmbeddedResource Include="Report\DailyUtilizationReport.rdlc" />
-    <EmbeddedResource Include="Report\Resources1.rdlc" />
-    <EmbeddedResource Include="Report\TrainerDetail.rdlc" />
-    <EmbeddedResource Include="Report\Tran_ClassDetailReport.rdlc" />
-    <EmbeddedResource Include="Report\Tran_ClassReport.rdlc" />
-    <EmbeddedResource Include="Report\Tran_ClassTraineeReport.rdlc" />
-    <EmbeddedResource Include="Report\Tran_ConductedCoursesReport.rdlc" />
-    <EmbeddedResource Include="Report\Tran_TraineeDetailReport.rdlc" />
-    <EmbeddedResource Include="Report\Tran_TrainerDetailReport.rdlc" />
-    <EmbeddedResource Include="Report\Tran_VenueDetailReport.rdlc" />
-    <EmbeddedResource Include="Report\Tran_VenueOccupancyReport.rdlc" />
-    <EmbeddedResource Include="Report\Tran_ViewAttendanceReport.rdlc" />
-    <EmbeddedResource Include="Report\Tran_ViewCourseAttendanceReport.rdlc" />
-    <EmbeddedResource Include="Report\Tran_ViewTraineePeriodicReport.rdlc" />
-    <EmbeddedResource Include="Report\WeeklyUtilizationReport.rdlc" />
+    <Content Include="Report\DailySummaryReport.rdlc" />
+    <Content Include="Report\DailyUtilizationReport.rdlc" />
+    <Content Include="Report\Resources1.rdlc" />
+    <Content Include="Report\TrainerDetail.rdlc" />
+    <Content Include="Report\Tran_ClassDetailReport.rdlc" />
+    <Content Include="Report\Tran_ClassReport.rdlc" />
+    <Content Include="Report\Tran_ClassTraineeReport.rdlc" />
+    <Content Include="Report\Tran_ConductedCoursesReport.rdlc" />
+    <Content Include="Report\Tran_TraineeDetailReport.rdlc" />
+    <Content Include="Report\Tran_TrainerDetailReport.rdlc" />
+    <Content Include="Report\Tran_VenueDetailReport.rdlc" />
+    <Content Include="Report\Tran_VenueOccupancyReport.rdlc" />
+    <Content Include="Report\Tran_ViewAttendanceReport.rdlc" />
+    <Content Include="Report\Tran_ViewCourseAttendanceReport.rdlc" />
+    <Content Include="Report\Tran_ViewTraineePeriodicReport.rdlc" />
+    <Content Include="Report\WeeklyUtilizationReport.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

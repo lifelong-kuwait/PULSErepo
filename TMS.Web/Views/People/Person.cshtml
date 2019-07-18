@@ -1,6 +1,6 @@
 ﻿@using lr = Resources.Resources;
 @using TMS.Library
-@model long
+@model long?
 @{
     ViewBag.Title = lr.PersonPageTitle;
     Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
@@ -10,7 +10,7 @@
     var organizationName = lr.PersonOrganization;
     var gender = lr.Gender;
     var org = lr.OrganizationFullName;
-
+    var Alias = lr.PersonAlias;
 }
 @if ((int)personType.Trainer == Model)
 {
@@ -35,7 +35,7 @@
                       #if(OrganizationName!=null){#<p>" + org + @" : #:OrganizationName#</p> #}#
                       #if(RoleName!=null){#<p>" + role + @" : #:RoleName#</p> #}#
                     #if(Gender!=0){#<p>" + gender + @" : #:GenderValue#</p> #}#
-
+                     #if( Alias !=null){#<p>" +Alias+ @" : #: Alias#</p> #}#
                 </div>"
                );
         columns.Bound(e => e.AddedByAlias).Width(190).MinScreenWidth(550).Title(lr.GridAddedBy).ClientTemplate(@"<div class='gridaddedby'>
@@ -140,7 +140,7 @@
         return '';
     }
     jQuery(function () {
-       //debugger;
+    //   debugger;
         var template = kendo.template(jQuery("#toolTipTemplate").html());
         //initialize tooltip to grid tbody with filter cells with given CSS class
         var tooltip = jQuery("#PersonGrid tbody").kendoTooltip({
@@ -155,7 +155,7 @@
                 var grid = jQuery("#PersonGrid").data("kendoGrid");
                 //get current row dataItem
                 var dataItem = grid.dataItem(currentRow);
-
+              console.log(dataItem);
                 //pass the dataItem to the template
                 var generatedTemplate = template(dataItem);
                 //set the generated template to the content of the tooltip
@@ -163,7 +163,7 @@
             },
         }).data("kendoTooltip");
         jQuery(".edit").live("mousedown", function (event) {
-            //debugger;
+           // debugger;
             jQuery("#PersonGrid").data("kendoGrid").editRow(jQuery("[data-uid='" + jQuery(this).attr("dat-uid") + "']"));
         });
 
@@ -202,7 +202,7 @@
 
 
         jQuery(".delete").live("mousedown", function (event) {
-            //debugger;
+           // debugger;
             grid = jQuery("#PersonGrid").data("kendoGrid");
             var selectedRows = jQuery("#PersonGrid tr.k-state-selected");
             var checkedLength = selectedRows.length;
@@ -277,13 +277,13 @@
             window.open(url, '_blank');
         });
         jQuery(".persondetail").live("mousedown", function (event) {
-            //debugger;
+           // debugger;
             var url = '@Url.Content("~/People/Detail?pid=")' + jQuery(this).attr("dat-pid");
             window.open(url, '_blank');
         });
 
         jQuery(".tms-grid-detail").live("mousedown", function (event) {
-            //debugger;
+           // debugger;
             var checkedLength = jQuery("#PersonGrid tr.k-state-selected").length;
             if (checkedLength == 1) {
                 grid = jQuery("#PersonGrid").data("kendoGrid");
@@ -298,7 +298,7 @@
         });
 
         jQuery(".Registrationdetail").live("mousedown", function (event) {
-            //debugger;
+         //  debugger;
             var url = '@Url.Content("~/Trainer/RegistrationSlip?pid=")' + jQuery(this).attr("dat-pid");
             window.open(url, '_blank');
         });
@@ -320,7 +320,7 @@
         });
 
         jQuery(".Classdetail").live("mousedown", function (event) {
-            //debugger;
+          //  debugger;
             var url = '@Url.Content("~/Trainer/ClassDetail?pid=")' + jQuery(this).attr("dat-pid");
             window.open(url, '_blank');
         });
@@ -328,7 +328,7 @@
 
 
         jQuery(".tms-grid-detail_Class").live("mousedown", function (event) {
-            //debugger;
+         //  debugger;
             var checkedLength = jQuery("#PersonGrid tr.k-state-selected").length;
             if (checkedLength == 1) {
                 grid = jQuery("#PersonGrid").data("kendoGrid");
@@ -342,7 +342,7 @@
         });
 
         jQuery(".tms-grid-Persondetail").live("mousedown", function (event) {
-            //debugger;
+         //   debugger;
             var checkedLength = jQuery("#PersonGrid tr.k-state-selected").length;
             if (checkedLength == 1) {
                 grid = jQuery("#PersonGrid").data("kendoGrid");
@@ -355,13 +355,13 @@
         });
 
         jQuery(".detailtrainee").live("mousedown", function (event) {
-            // debugger;
+           //  debugger;
             var url = '@Url.Content("~/Trainer/TraineeDetailCard?pid=")' + jQuery(this).attr("dat-pid");
             window.open(url, '_blank');
         });
 
         jQuery(".tms-grid-detailtrainee").live("mousedown", function (event) {
-            //debugger;
+       //   debugger;
             var checkedLength = jQuery("#PersonGrid tr.k-state-selected").length;
             if (checkedLength == 1) {
                 grid = jQuery("#PersonGrid").data("kendoGrid");
@@ -450,7 +450,7 @@
                             var checkedLength = jQuery("#PersonGrid tr.k-state-selected").length;
                             if (checkedLength == 1) {
                                 //jQuery("#Users").data("kendoGrid").editRow(jQuery("#Users tr.k-state-selected"));
-                                debugger
+                            //    debugger
                                 grid = jQuery("#PersonGrid").data("kendoGrid");
                                 var data = grid.dataItem(jQuery("#PersonGrid tr.k-state-selected"));
                                 var ID = data.ID;
@@ -510,7 +510,7 @@
                        var checkedLength = jQuery("#PersonGrid tr.k-state-selected").length;
                        if (checkedLength == 1) {
                            //jQuery("#Users").data("kendoGrid").editRow(jQuery("#Users tr.k-state-selected"));
-                           debugger
+                         //  debugger
                            grid = jQuery("#PersonGrid").data("kendoGrid");
                            var data = grid.dataItem(jQuery("#PersonGrid tr.k-state-selected"));
                            var ID = data.ID;

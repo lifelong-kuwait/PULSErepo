@@ -286,7 +286,7 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorizeAttribute("CanAddEditPerson")]
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
-       //[DisableValidation]
+      [DisableValidation]
         public ActionResult Person_Update([DataSourceRequest] DataSourceRequest request, Person _person, string filename, long aid)
         {
             _person.UpdatedBy = CurrentUser.NameIdentifierInt64;
@@ -434,7 +434,7 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorizeAttribute("CanDeletePerson")]
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
-        //[DisableValidation]
+        [DisableValidation]
         public ActionResult Person_Destroy([DataSourceRequest] DataSourceRequest request, Person _person)
         {
 

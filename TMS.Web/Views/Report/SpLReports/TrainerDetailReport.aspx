@@ -11,7 +11,7 @@
     <form id="form1" runat="server">
        <div class="col-md-8" style="height: 700px;width: 100%;">
               <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-              <rsweb:ReportViewer ID="ReportViewerRSFReports" runat="server"  IsReadyForRendering="false" AsyncRendering="false" ProcessingMode="Remote" Width="797px" ></rsweb:ReportViewer>
+              <rsweb:ReportViewer ID="ReportViewerRSFReports" runat="server"  IsReadyForRendering="false" AsyncRendering="false" ProcessingMode="Remote" Width="797px" ><LocalReport ReportPath="../../../Report/Tran_TrainerDetailReport.rdlc"></LocalReport></rsweb:ReportViewer>
          </div>
     </form>
 </body>

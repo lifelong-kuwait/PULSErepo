@@ -444,7 +444,7 @@ namespace TMS.Library.TMS.Trainer
         /// </summary>
         /// <value>The flag i ds.</value>
         public string FlagIDs { get; set; }
-
+        public string UpdatedByAlias { get; set; }
         /// <summary>
         /// Maps the properties.
         /// </summary>
@@ -501,7 +501,7 @@ namespace TMS.Library.TMS.Trainer
             MaritalStatus = (MaritalStatus)dr.GetByte("MaritalStatus");
             VendorID = dr.GetInt64("VendorID");
             ProfilePicture = dr.GetStringForProfile("ProfilePicture");
-
+            UpdatedByAlias = dr.GetString("UpdatedByAlias");
             NickName = dr.GetString("NickName");
             Alias = dr.GetString("Alias");
             AddedByAlias = dr.GetString("AddedByAlias");

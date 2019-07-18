@@ -42,6 +42,7 @@ namespace TMS.DataObjects.CustomGenerics
                 SqlCommand cmd = new SqlCommand("TMS_Trainer_Create", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("ID", _objPerson.ID);
+                cmd.Parameters.AddWithValue("Alias", _objPerson.Alias);
                 cmd.Parameters.AddWithValue("SalutationID", _objPerson.SalutationID);
                 cmd.Parameters.AddWithValue("P_FirstName", _objPerson.P_FirstName);
                 cmd.Parameters.AddWithValue("P_LastName", _objPerson.P_LastName);
