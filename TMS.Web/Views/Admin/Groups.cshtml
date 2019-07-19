@@ -37,11 +37,10 @@
 )
 <script id="toolTipTemplate" type="text/x-kendo-template">
 
-    <span class="grid-tooltip-icon groupdetail" dat-id="#=GroupId#" title="See the detail of #=PrimaryGroupName#"><i class="mdi mdi-open-in-new"></i></span>
+    <span class="grid-tooltip-icon groupdetail" data-uid="#=GroupId#" title="See the detail of #=PrimaryGroupName#"><i class="mdi mdi-open-in-new"></i></span>
 
-    <span class="grid-tooltip-icon edit" dat-id="#=GroupId#" title="Edit #=GroupId#"><i class="mdi mdi-pencil"></i></span>
-
-    <span class="grid-tooltip-icon delete" dat-id="#=GroupId#" title="Delete"><i class="mdi mdi-delete"></i></span>
+   
+    <span class="grid-tooltip-icon delete" data-uid="#=GroupId#" title="Delete"><i class="mdi mdi-delete"></i></span>
 
 </script>
 
@@ -62,6 +61,7 @@
 </script>
 <script>
     jQuery(function () {
+        
         var template = kendo.template(jQuery("#toolTipTemplate").html());
         //initialize tooltip to grid tbody with filter cells with given CSS class
         var tooltip = jQuery("#SecurityGroups tbody").kendoTooltip({
@@ -87,9 +87,12 @@
             var url = '@Url.Content("~/Admin/GroupDetail?GroupId=")' + testvalueGroupId;
             window.open(url, '_blank');
         });
+       
         jQuery(".edit").live("mousedown", function (event) {
-            debugger; 
-            jQuery("#SecurityGroups").data("kendoGrid").editRow(jQuery("[data-id=" + jQuery(this).attr("dat-id") + "]"));
+           /// debugger; 
+            alert("Edit Click");
+            jQuery("#SecurityGroups").data("kendoGrid").editRow(jQuery("[data-id=" + jQuery(this).attr("data-id") + "]"));
+           
         });
         jQuery(".delete").live("mousedown", function (event) {
            // debugger;
@@ -158,13 +161,12 @@
         });
     });
     function UsersLoginGrid_onEdit(e) {
-        debugger;
-        
+       
         //if current model is not new then remove the Name editor
         var title = jQuery(e.container).parent().find(".k-window-title");
         var update = jQuery(e.container).parent().find(".k-grid-update");
         var cancel = jQuery(e.container).parent().find(".k-grid-cancel");
-        alert('hello world');
+       
         //jQuery('<a class="k-button k-button-icontext k-grid-update custom" href="\\#"><span class="k-icon k-i-check"></span>Save & New</a>').insertBefore(".k-grid-update");
         @*jQuery(cancel).html('<span class="k-icon k-i-cancel"></span>' + lr.CencelRecordGeneralButton);
         if (e.model.isNew()) {
@@ -211,7 +213,7 @@
         //
     }
     function UsersLoginGrid_onSave(e) {
-        debugger;
+        console.log(e);
 
         jQuery(event.srcElement)
             .addClass("k-state-disabled")

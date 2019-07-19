@@ -2449,6 +2449,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile3.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile4.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile5.pubxml" />
     <None Include="Properties\PublishProfiles\New TMS.pubxml" />
     <Content Include="Reports\Barcodes Report.trdx">
       <SubType>Designer</SubType>

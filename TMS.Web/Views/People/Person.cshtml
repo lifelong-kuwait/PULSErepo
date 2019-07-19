@@ -140,7 +140,7 @@
         return '';
     }
     jQuery(function () {
-    //   debugger;
+       //debugger;
         var template = kendo.template(jQuery("#toolTipTemplate").html());
         //initialize tooltip to grid tbody with filter cells with given CSS class
         var tooltip = jQuery("#PersonGrid tbody").kendoTooltip({
@@ -155,15 +155,16 @@
                 var grid = jQuery("#PersonGrid").data("kendoGrid");
                 //get current row dataItem
                 var dataItem = grid.dataItem(currentRow);
-              console.log(dataItem);
                 //pass the dataItem to the template
                 var generatedTemplate = template(dataItem);
-                //set the generated template to the content of the tooltip
+                               //set the generated template to the content of the tooltip
                 this.content.html(generatedTemplate);
+              
             },
         }).data("kendoTooltip");
         jQuery(".edit").live("mousedown", function (event) {
            // debugger;
+            alert('edit click');
             jQuery("#PersonGrid").data("kendoGrid").editRow(jQuery("[data-uid='" + jQuery(this).attr("dat-uid") + "']"));
         });
 

@@ -67,7 +67,8 @@ namespace TMS.Library.TMS.Trainer
         [Display(Name = "PersonS_FirstName", ResourceType = typeof(lr))]
         //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "PersonS_FirstNameRequired")]
         public string S_FirstName { get; set; }
-
+        [Display(Name = "clientstatus", ResourceType = typeof(lr))]
+        public CRMClientType? CRMClientType { get; set; }
         /// <summary>
         /// Gets or sets the last name of the s.
         /// </summary>
@@ -488,7 +489,10 @@ namespace TMS.Library.TMS.Trainer
             Type = dr.GetByte("Type");
             IsCoordinator = dr.GetBoolean("IsCoordinator");
             Rating = dr.GetInt32("Rating");
-            ClientType = (ClientType)dr.GetByte("ClientType");
+            if (CRMClientType == null)
+                CRMClientType = 0;
+            else
+                CRMClientType = (CRMClientType)dr.GetByte("CrmClientType");
             CreatedBy = dr.GetInt64("CreatedBy");
             CreatedDate = dr.GetDateTime("CreatedDate");
             UpdatedBy = dr.GetInt64("UpdatedBy");
@@ -515,6 +519,7 @@ namespace TMS.Library.TMS.Trainer
             PClassTitle = dr.GetString("PClassTitle");
             FlagCount = dr.GetInt32("FlagCount");
             FlagIDs = dr.GetString("FlagIDs");
+
         }
 
     }
