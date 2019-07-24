@@ -115,6 +115,9 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="ExtensionMethods">
       <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\ExtensionMethods.dll</HintPath>
     </Reference>
@@ -443,6 +446,13 @@
     <Compile Include="Views\Report\SpLReports\ReportView.aspx.designer.cs">
       <DependentUpon>ReportView.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Report\SpLReports\SchedueReport.aspx.cs">
+      <DependentUpon>SchedueReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\SchedueReport.aspx.designer.cs">
+      <DependentUpon>SchedueReport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Report\SpLReports\TraineeDetailReport.aspx.cs">
       <DependentUpon>TraineeDetailReport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -456,6 +466,27 @@
     </Compile>
     <Compile Include="Views\Report\SpLReports\TrainerDetailReport.aspx.designer.cs">
       <DependentUpon>TrainerDetailReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\UserControls\UCVenueMatrixReport.ascx.cs">
+      <DependentUpon>UCVenueMatrixReport.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\UserControls\UCVenueMatrixReport.ascx.designer.cs">
+      <DependentUpon>UCVenueMatrixReport.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\UserControls\UCViewClassTimeTable.ascx.cs">
+      <DependentUpon>UCViewClassTimeTable.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\UserControls\UCViewClassTimeTable.ascx.designer.cs">
+      <DependentUpon>UCViewClassTimeTable.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\UserControls\VenueMatrixUserControl.ascx.cs">
+      <DependentUpon>VenueMatrixUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\UserControls\VenueMatrixUserControl.ascx.designer.cs">
+      <DependentUpon>VenueMatrixUserControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Views\Report\SpLReports\VenueDailyUtilizationReport.aspx.cs">
       <DependentUpon>VenueDailyUtilizationReport.aspx</DependentUpon>
@@ -484,6 +515,13 @@
     </Compile>
     <Compile Include="Views\Report\SpLReports\VenueOccupancyReport.aspx.designer.cs">
       <DependentUpon>VenueOccupancyReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\Venue_Matrix_Report.aspx.cs">
+      <DependentUpon>Venue_Matrix_Report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\Venue_Matrix_Report.aspx.designer.cs">
+      <DependentUpon>Venue_Matrix_Report.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Report\SpLReports\ViewAttendanceReport.aspx.cs">
       <DependentUpon>ViewAttendanceReport.aspx</DependentUpon>
@@ -569,26 +607,12 @@
     <Compile Include="Views\Report\UserControls\UCVenueDetailUtilizationReport.ascx.designer.cs">
       <DependentUpon>UCVenueDetailUtilizationReport.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Report\UserControls\UCVenueMatrixReport.ascx.cs">
-      <DependentUpon>UCVenueMatrixReport.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Report\UserControls\UCVenueMatrixReport.ascx.designer.cs">
-      <DependentUpon>UCVenueMatrixReport.ascx</DependentUpon>
-    </Compile>
     <Compile Include="Views\Report\UserControls\UCViewAttendanceReport.ascx.cs">
       <DependentUpon>UCViewAttendanceReport.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\Report\UserControls\UCViewAttendanceReport.ascx.designer.cs">
       <DependentUpon>UCViewAttendanceReport.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Report\UserControls\UCViewClassTimeTable.ascx.cs">
-      <DependentUpon>UCViewClassTimeTable.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Report\UserControls\UCViewClassTimeTable.ascx.designer.cs">
-      <DependentUpon>UCViewClassTimeTable.ascx</DependentUpon>
     </Compile>
     <Compile Include="Views\Report\UserControls\UCWeeklyUtilizationReport.ascx.cs">
       <DependentUpon>UCWeeklyUtilizationReport.ascx</DependentUpon>
@@ -2450,6 +2474,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile3.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile4.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile5.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile6.pubxml" />
     <None Include="Properties\PublishProfiles\New TMS.pubxml" />
     <Content Include="Reports\Barcodes Report.trdx">
       <SubType>Designer</SubType>
@@ -4407,12 +4432,17 @@
     <Content Include="Views\Report\SpLReports\ClassFutureReport.aspx" />
     <Content Include="Views\Report\SpLReports\CoursePeriodicReport.aspx" />
     <Content Include="Views\Report\SpLReports\ReportView.aspx" />
+    <Content Include="Views\Report\SpLReports\SchedueReport.aspx" />
     <Content Include="Views\Report\SpLReports\TraineeDetailReport.aspx" />
     <Content Include="Views\Report\SpLReports\TrainerDetailReport.aspx" />
+    <Content Include="Views\Report\SpLReports\UserControls\UCVenueMatrixReport.ascx" />
+    <Content Include="Views\Report\SpLReports\UserControls\UCViewClassTimeTable.ascx" />
+    <Content Include="Views\Report\SpLReports\UserControls\VenueMatrixUserControl.ascx" />
     <Content Include="Views\Report\SpLReports\VenueDailyUtilizationReport.aspx" />
     <Content Include="Views\Report\SpLReports\VenueDetailReport.aspx" />
     <Content Include="Views\Report\SpLReports\VenueDetailUtilizationReport.aspx" />
     <Content Include="Views\Report\SpLReports\VenueOccupancyReport.aspx" />
+    <Content Include="Views\Report\SpLReports\Venue_Matrix_Report.aspx" />
     <Content Include="Views\Report\SpLReports\ViewAttendanceReport.aspx" />
     <Content Include="Views\Report\SpLReports\ClassCurrentReport.aspx" />
     <Content Include="Views\Report\SpLReports\ViewTraineePeriodicReport.aspx" />
@@ -4428,9 +4458,7 @@
     <Content Include="Views\Report\UserControls\UCTrainerDetailReport.ascx" />
     <Content Include="Views\Report\UserControls\UCVenueDetailReport.ascx" />
     <Content Include="Views\Report\UserControls\UCVenueDetailUtilizationReport.ascx" />
-    <Content Include="Views\Report\UserControls\UCVenueMatrixReport.ascx" />
     <Content Include="Views\Report\UserControls\UCViewAttendanceReport.ascx" />
-    <Content Include="Views\Report\UserControls\UCViewClassTimeTable.ascx" />
     <Content Include="Views\Report\UserControls\UCViewCourseAttendanceReport.ascx" />
     <Content Include="Views\Report\UserControls\UCWeeklyUtilizationReport.ascx" />
     <Content Include="Views\Resource\Lookup.js" />
@@ -4596,6 +4624,8 @@
     <Content Include="Views\SPl_Test_Reports\VenueDailyUtilizationReport.cshtml" />
     <Content Include="Views\SPl_Test_Reports\TraineePeriodicReport.cshtml" />
     <Content Include="Views\SPl_Test_Reports\CoursePeriodicReport.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\VenueMatrixReport.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\Schedules.cshtml" />
     <None Include="WeeklySummaryDataset.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>WeeklySummaryDataset1.Designer.cs</LastGenOutput>

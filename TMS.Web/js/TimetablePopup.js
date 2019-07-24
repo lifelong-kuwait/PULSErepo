@@ -2,7 +2,7 @@
 author: istockphp.com
 */
 jQuery(function () {
-    debugger
+    //debugger
     jQuery("a.topopup").click(function ($) {
 
 

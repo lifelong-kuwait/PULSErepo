@@ -16,7 +16,10 @@ using TMS.Library.Entities.Common.Configuration.Venues;
 using TMS.Web.Core;
 using System.Security.Principal;
 using System.Web.Mvc;
-namespace TMS.Web.Views.Report.UserControls
+using TMS.Web.Views.Report.UserControls;
+using Abp.Extensions;
+
+namespace TMS.Web.Views.Report.SpLReports.UserControls
 {
     public partial class UCVenueMatrixReport : System.Web.UI.UserControl
     {
@@ -76,7 +79,9 @@ namespace TMS.Web.Views.Report.UserControls
             set { _Color = value; }
         }
 
-      
+        public static string venueId { get; internal set; }
+        public static string startDate { get; internal set; }
+
         long CompanyID =  Convert.ToInt64(HttpContext.Current.Session["CompanyID"]);
         #endregion
 
@@ -92,10 +97,23 @@ namespace TMS.Web.Views.Report.UserControls
             if (!IsPostBack)
             {
                 long CompanyID = Convert.ToInt64(HttpContext.Current.Session["CompanyID"]);
-
+                CurrentVenueID = Convert.ToInt64(venueId);
                 // CompanyID = user.CompanyID;
-                BindDropDownlists();
-              
+                // BindDropDownlists();
+                String str = startDate;
+                var words = str.Split(@"/");
+               
+                if (CurrentVenueID != 0)
+                {
+                    BindRecords(Convert.ToInt32(words[1]), Convert.ToInt32(words[0]));
+                    pnlNoData.Visible = false;
+                    pnlReport.Visible = true;
+                }
+                else
+                {
+                    pnlNoData.Visible = true;
+                    pnlReport.Visible = false;
+                }
             }
         }
         protected void gvEvents_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -120,28 +138,28 @@ namespace TMS.Web.Views.Report.UserControls
 
         }
 
-        protected void ddlVenues_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                CurrentVenueID = ddlVenues.SelectedValue == string.Empty ? 0 : Convert.ToInt64(ddlVenues.SelectedValue);
-                if (CurrentVenueID != 0)
-                {
-                    BindRecords(Convert.ToInt32(ddlYear.SelectedValue), Convert.ToInt32(ddlMonth.SelectedValue));
-                    pnlNoData.Visible = false;
-                    pnlReport.Visible = true;
-                }
-                else
-                {
-                    pnlNoData.Visible = true;
-                    pnlReport.Visible = false;
-                }
-        }
-            catch (Exception ex)
-            {
-               // ExceptionHandler.HandleTrainingException(ex, "ddlVenues_SelectedIndexChanged", false);
-            }
-}
+//        protected void ddlVenues_SelectedIndexChanged(object sender, EventArgs e)
+//        {
+//            try
+//            {
+//                CurrentVenueID = ddlVenues.SelectedValue == string.Empty ? 0 : Convert.ToInt64(ddlVenues.SelectedValue);
+//                if (CurrentVenueID != 0)
+//                {
+//                    BindRecords(Convert.ToInt32(ddlYear.SelectedValue), Convert.ToInt32(ddlMonth.SelectedValue));
+//                    pnlNoData.Visible = false;
+//                    pnlReport.Visible = true;
+//                }
+//                else
+//                {
+//                    pnlNoData.Visible = true;
+//                    pnlReport.Visible = false;
+//                }
+//        }
+//            catch (Exception ex)
+//            {
+//               // ExceptionHandler.HandleTrainingException(ex, "ddlVenues_SelectedIndexChanged", false);
+//            }
+//}
         #endregion
 
         #region Methods
@@ -352,21 +370,21 @@ namespace TMS.Web.Views.Report.UserControls
         /// <para>Created By: Tanweer </para> 
         /// <para>Created Date: 9/23/2013 </para> 
         /// </summary>
-        private void BindDropDownlists()
-        {
-            //try
-            //{
-            //  DropDownUtil.FillDropDown(ddlVenues, ddl.VenueDDLBAL(CurrentCulture, CompanyID), "Text", "Value", "Venue");
-                DropDownUtil.FillDropDown(ddlVenues, ddl.VenueDDLBAL(CurrentCulture, CompanyID), "Text", "Value", "Venue");
+        //private void BindDropDownlists()
+        //{
+        //    //try
+        //    //{
+        //    //  DropDownUtil.FillDropDown(ddlVenues, ddl.VenueDDLBAL(CurrentCulture, CompanyID), "Text", "Value", "Venue");
+        //        DropDownUtil.FillDropDown(ddlVenues, ddl.VenueDDLBAL(CurrentCulture, CompanyID), "Text", "Value", "Venue");
 
-                UtilityFunctions.GetMyMonthList(ddlMonth, true);
-                UtilityFunctions.FillDropDownWithYears(ddlYear, 3, 6, true);
-            //}
-            //catch (Exception ex)
-            //{
-            //  //  ExceptionHandler.HandleTrainingException(ex, "BindDropDownlists", false);
-            //}
-        }
+        //        UtilityFunctions.GetMyMonthList(ddlMonth, true);
+        //        UtilityFunctions.FillDropDownWithYears(ddlYear, 3, 6, true);
+        //    //}
+        //    //catch (Exception ex)
+        //    //{
+        //    //  //  ExceptionHandler.HandleTrainingException(ex, "BindDropDownlists", false);
+        //    //}
+        //}
 
 
         //public  Venues CurrentVenue
@@ -398,7 +416,7 @@ namespace TMS.Web.Views.Report.UserControls
 
                 string VenueCode = string.Empty;
 
-                if (ddlVenues.SelectedIndex > 0)
+                if (venueId !=null)
                 {
                  //   AppContext.CurrentVenue = null;
                  //   AppContext.CurrentVenueID = UtilityFunctions.MapValue<long>(ddlVenues.SelectedValue, typeof(long));
@@ -412,9 +430,11 @@ namespace TMS.Web.Views.Report.UserControls
                     Text = "<b>" + VenueCode + "</b>"
                 };
                 row.Cells.Add(cell);
-
-                int year = Convert.ToInt32(ddlYear.SelectedValue);
-                int month = Convert.ToInt32(ddlMonth.SelectedValue);
+                String str = startDate;
+                var words = str.Split(@"/");
+              
+                int year = Convert.ToInt32(words[1]);
+                int month = Convert.ToInt32(words[0]);
 
                 int days = DateTime.DaysInMonth(year, month);
                 for (int i = 1; i <= days; i++)

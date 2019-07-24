@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Abp.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -13,7 +14,7 @@ using TMS.Library;
 using TMS.Library.Entities.TMS.Program;
 using static TMS.UtilityFunctions;
 
-namespace TMS.Web.Views.Report.UserControls
+namespace TMS.Web.Views.Report.SpLReports.UserControls
 {
     public partial class UCViewClassTimeTable : System.Web.UI.UserControl
     {
@@ -31,11 +32,15 @@ namespace TMS.Web.Views.Report.UserControls
             get { return _myColorList ?? (_myColorList = new MyColorLists()); }
             set { _myColorList = value; }
         }
-        public  Classes CurrentClass;
+        public Classes CurrentClass;
         DDLBAL ddl = new DDLBAL();
         PersonBAL _PersonBAL = new PersonBAL();
 
         long CompanyID = 0;
+        internal static string ClassIDCall;
+        internal static string CourseIDCall;
+        internal static object CompanyIDCall;
+
         public string CurrentCulture
         {
             get
@@ -43,114 +48,117 @@ namespace TMS.Web.Views.Report.UserControls
                 return CultureInfo.CurrentUICulture.ToString().ToLower();
             }
         }
+
+        public static string startDate { get; internal set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                CompanyID = Convert.ToInt64(HttpContext.Current.Session["CompanyID"]);
-
-                BindDropDowns();
-               
-            }
-        }
-
-
-        protected void DdlMonth_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
+                CompanyID = Convert.ToInt64(CompanyIDCall);
                 generateCalander();
+                // BindDropDowns();
 
-                ShowHideControlsForPrinter();
             }
-            catch (Exception Ex)
-            {
-              //  ExceptionHandler.HandleTrainingException(Ex, "DdlMonth_SelectedIndexChanged", false);
-            }
-
-        }
-        protected void DdlCourse_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                LblClassDuration.Text = string.Empty;
-              //  AppContext.TimeTableClassID = null;
-              //  AppContext.TimeTableCourseID = UtilityFunctions.MapValue<Int64>(DdlCourse.SelectedValue, typeof(long)); ;
-                ClassesGetByCourseID();
-                generateCalander();
-
-                ShowHideControlsForPrinter();
-            }
-            catch (Exception Ex)
-            {
-              //  ExceptionHandler.HandleTrainingException(Ex, "DdlCourse_SelectedIndexChanged", false);
-            }
-
-        }
-        protected void DdlClass_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (DdlClass.SelectedIndex > 0)
-                    ClassDuration(UtilityFunctions.MapValue<Int64>(DdlClass.SelectedValue, typeof(long)));
-              //  AppContext.TimeTableClassID = UtilityFunctions.MapValue<Int64>(DdlClass.SelectedValue, typeof(long));
-              //  AppContext.TimeTableCourseID = null;
-                generateCalander();
-
-                ShowHideControlsForPrinter();
-            }
-            catch (Exception Ex)
-            {
-             //   ExceptionHandler.HandleTrainingException(Ex, "DdlClass_SelectedIndexChanged", false);
-            }
-
         }
 
 
+        //protected void DdlMonth_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        generateCalander();
+
+        //        ShowHideControlsForPrinter();
+        //    }
+        //    catch (Exception Ex)
+        //    {
+        //      //  ExceptionHandler.HandleTrainingException(Ex, "DdlMonth_SelectedIndexChanged", false);
+        //    }
+
+        //}
+        //protected void DdlCourse_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        LblClassDuration.Text = string.Empty;
+        //      //  AppContext.TimeTableClassID = null;
+        //      //  AppContext.TimeTableCourseID = UtilityFunctions.MapValue<Int64>(DdlCourse.SelectedValue, typeof(long)); ;
+        //        ClassesGetByCourseID();
+        //        generateCalander();
+
+        //        ShowHideControlsForPrinter();
+        //    }
+        //    catch (Exception Ex)
+        //    {
+        //      //  ExceptionHandler.HandleTrainingException(Ex, "DdlCourse_SelectedIndexChanged", false);
+        //    }
+
+        //}
+        //protected void DdlClass_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (DdlClass.SelectedIndex > 0)
+        //            ClassDuration(UtilityFunctions.MapValue<Int64>(DdlClass.SelectedValue, typeof(long)));
+        //      //  AppContext.TimeTableClassID = UtilityFunctions.MapValue<Int64>(DdlClass.SelectedValue, typeof(long));
+        //      //  AppContext.TimeTableCourseID = null;
+        //        generateCalander();
+
+        //        ShowHideControlsForPrinter();
+        //    }
+        //    catch (Exception Ex)
+        //    {
+        //     //   ExceptionHandler.HandleTrainingException(Ex, "DdlClass_SelectedIndexChanged", false);
+        //    }
+
+        //}
 
 
-        private void ShowHideControlsForPrinter()
-        {
-            try
-            {
-                if (DdlClass.SelectedIndex > 0)
-                {
-                    LblClassName.Text = DdlClass.SelectedItem.Text;
-                    LblClassName.Visible = DdlClass.SelectedIndex > 0;
-                }
-                if (DdlCourse.SelectedIndex > 0)
-                {
-                    LblCourseName.Text = DdlCourse.SelectedItem.Text;
-                    LblCourseName.Visible = DdlCourse.SelectedIndex > 0;
-                }
-                LblCalenderSpan.Text = DdlYear.SelectedItem.Text + " - " + DdlMonth.SelectedItem.Text;
-            }
-            catch (Exception Ex)
-            {
-              //  ExceptionHandler.HandleTrainingException(Ex, "ShowHideControlsForPrinter", false);
-            }
-        }
-        private void BindDropDowns()
-        {
-            try
-            {
 
-               
-            
-                DropDownUtil.FillDropDown(DdlCourse, ddl.CourseDDLBAL(CurrentCulture, CompanyID), "Text", "Value", "Course");
-                DropDownUtil.FillDropDown(DdlClass, ddl.ClassDDLBAL(CurrentCulture, CompanyID), "Text", "Value", "Class");
-                UtilityFunctions.FillDropDownWithYears(DdlYear, 5, 20, false);
-                UtilityFunctions.FillDropDownListFromEnumCollection(DdlMonth, EnumManager.GetEnumCollection(typeof(Month)), true, "Month");
-                DdlYear.SelectedValue = DdlYear.Items.FindByText(UtilityFunctions.GetCurrentDateTime().Year.ToString()).ToString();
-                DdlMonth.SelectedValue = UtilityFunctions.GetCurrentDateTime().Month.ToString();
-                generateCalander();
 
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //private void ShowHideControlsForPrinter()
+        //{
+        //    try
+        //    {
+        //        if (DdlClass.SelectedIndex > 0)
+        //        {
+        //            LblClassName.Text = DdlClass.SelectedItem.Text;
+        //            LblClassName.Visible = DdlClass.SelectedIndex > 0;
+        //        }
+        //        if (DdlCourse.SelectedIndex > 0)
+        //        {
+        //            LblCourseName.Text = DdlCourse.SelectedItem.Text;
+        //            LblCourseName.Visible = DdlCourse.SelectedIndex > 0;
+        //        }
+        //        LblCalenderSpan.Text = DdlYear.SelectedItem.Text + " - " + DdlMonth.SelectedItem.Text;
+        //    }
+        //    catch (Exception Ex)
+        //    {
+        //      //  ExceptionHandler.HandleTrainingException(Ex, "ShowHideControlsForPrinter", false);
+        //    }
+        //}
+        //private void BindDropDowns()
+        //{
+        //    try
+        //    {
+
+
+
+        //        DropDownUtil.FillDropDown(DdlCourse, ddl.CourseDDLBAL(CurrentCulture, CompanyID), "Text", "Value", "Course");
+        //        DropDownUtil.FillDropDown(DdlClass, ddl.ClassDDLBAL(CurrentCulture, CompanyID), "Text", "Value", "Class");
+        //        UtilityFunctions.FillDropDownWithYears(DdlYear, 5, 20, false);
+        //        UtilityFunctions.FillDropDownListFromEnumCollection(DdlMonth, EnumManager.GetEnumCollection(typeof(Month)), true, "Month");
+        //        DdlYear.SelectedValue = DdlYear.Items.FindByText(UtilityFunctions.GetCurrentDateTime().Year.ToString()).ToString();
+        //        DdlMonth.SelectedValue = UtilityFunctions.GetCurrentDateTime().Month.ToString();
+        //        generateCalander();
+
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
         /// <summary>
         /// <para>Description:
@@ -158,25 +166,25 @@ namespace TMS.Web.Views.Report.UserControls
         /// <para>Created By: Majid ali </para> 
         /// <para>Created Date: 9/26/2013 </para> 
         /// </summary>
-        private void ClassesGetByCourseID()
-        {
-            try
-            {
-                if (DdlCourse.SelectedIndex > 0)
-                {
-                    DropDownUtil.FillDropDown(DdlClass, ddl.Course_ClassDDLBAL(CurrentCulture, CompanyID, Convert.ToInt64(DdlCourse.SelectedValue)), "Text", "Value", "Class");
-                }
-                else
-                {
-                    BindDropDowns();
-                    // UCReport.ClearReport();
-                }
-            }
-            catch (Exception)
-            {
+        //private void ClassesGetByCourseID()
+        //{
+        //    try
+        //    {
+        //        if (DdlCourse.SelectedIndex > 0)
+        //        {
+        //            DropDownUtil.FillDropDown(DdlClass, ddl.Course_ClassDDLBAL(CurrentCulture, CompanyID, Convert.ToInt64(DdlCourse.SelectedValue)), "Text", "Value", "Class");
+        //        }
+        //        else
+        //        {
+        //            BindDropDowns();
+        //            // UCReport.ClearReport();
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
 
-            }
-        }
+        //    }
+        //}
 
         /// <summary>
         /// <para>Description:
@@ -191,55 +199,56 @@ namespace TMS.Web.Views.Report.UserControls
             {
                 long? ClassID = 0;
                 long? CourseID = 0;
-                if (DdlClass.SelectedIndex <= 0)
+                if (ClassIDCall == null)
                 {
                     ClassID = 0;
                 }
                 else
                 {
-                    ClassID= Convert.ToInt64(DdlClass.SelectedValue);
+                    ClassID = Convert.ToInt64(ClassIDCall);
                 }
 
-                if (DdlCourse.SelectedIndex <= 0)
+                if (CourseIDCall == null)
                 {
                     CourseID = 0;
                 }
                 else
                 {
-                    CourseID = Convert.ToInt64(DdlCourse.SelectedValue);
+                    CourseID = Convert.ToInt64(CourseIDCall);
                 }
-                    
-               
-                DataTable list = _PersonBAL.SessionsByCourseAndClassID(ClassID,CourseID,CompanyID );
+
+
+                DataTable list = _PersonBAL.SessionsByCourseAndClassID( CourseID, ClassID, 90055);
                 Table tb = new Table();
+
 
                 TableHeaderCell thSunday = new TableHeaderCell();
                 thSunday.Text = UtilityFunctions.GetEnumDescrptionFromObjectValue(typeof(Days), Days.Days_Sunday);
-                thSunday.Width = 137;
+                thSunday.Width = 120;
 
                 TableHeaderCell thMonday = new TableHeaderCell();
                 thMonday.Text = UtilityFunctions.GetEnumDescrptionFromObjectValue(typeof(Days), Days.Days_Monday);
-                thMonday.Width = 137;
+                thMonday.Width = 120;
 
                 TableHeaderCell thTuesday = new TableHeaderCell();
                 thTuesday.Text = UtilityFunctions.GetEnumDescrptionFromObjectValue(typeof(Days), Days.Days_Tuesday);
-                thTuesday.Width = 137;
+                thTuesday.Width = 120;
 
                 TableHeaderCell thWednesday = new TableHeaderCell();
                 thWednesday.Text = UtilityFunctions.GetEnumDescrptionFromObjectValue(typeof(Days), Days.Days_Wednesday);
-                thWednesday.Width = 137;
+                thWednesday.Width = 120;
 
                 TableHeaderCell thThursday = new TableHeaderCell();
                 thThursday.Text = UtilityFunctions.GetEnumDescrptionFromObjectValue(typeof(Days), Days.Days_Thursday);
-                thThursday.Width = 137;
+                thThursday.Width = 120;
 
                 TableHeaderCell thFriday = new TableHeaderCell();
                 thFriday.Text = UtilityFunctions.GetEnumDescrptionFromObjectValue(typeof(Days), Days.Days_Friday);
-                thFriday.Width = 137;
+                thFriday.Width = 120;
 
                 TableHeaderCell thSaturday = new TableHeaderCell();
                 thSaturday.Text = UtilityFunctions.GetEnumDescrptionFromObjectValue(typeof(Days), Days.Days_Saturday);
-                thSaturday.Width = 137;
+                thSaturday.Width = 120;
 
                 TableHeaderRow th = new TableHeaderRow();
                 th.Cells.Add(thSunday);
@@ -257,11 +266,11 @@ namespace TMS.Web.Views.Report.UserControls
                     for (int j = 0; j < 7; j++)
                     {
                         TableCell tc1 = new TableCell();
-                        tc1.Height = 137;
+                        tc1.Height = 120;
                         tr.Cells.Add(tc1);
 
                     }
-                    tr.Height = 60;
+                    tr.Height = 50;
                     tb.GridLines = GridLines.Both;
                     tb.CssClass = "timetable";
                     tb.Rows.Add(tr);
@@ -269,25 +278,29 @@ namespace TMS.Web.Views.Report.UserControls
                 }
                 CalendarContainer.Controls.Add(tb);
                 //***********************************************
-
-                DateTime dt = new DateTime(Convert.ToInt32(DdlYear.SelectedValue), Convert.ToInt32(DdlMonth.SelectedValue), 1);
+                String str = startDate;
+                var words = str.Split(@"/");
+                int monthDDl = Convert.ToInt32(words[0]);
+                int yearDDl = Convert.ToInt32(words[1]);
+                DateTime dt = new DateTime(Convert.ToInt32(words[1]), Convert.ToInt32(words[0]), 1);
                 //int fDay = (int)dt.DayOfWeek + 1;
                 int fDay = (int)dt.DayOfWeek;
-                int totalDaysInMonth = DateTime.DaysInMonth(Convert.ToInt32(DdlYear.SelectedValue), Convert.ToInt32(DdlMonth.SelectedValue));
+                int totalDaysInMonth = DateTime.DaysInMonth(Convert.ToInt32(words[1]), Convert.ToInt32(words[0]));
                 int day = 0;
                 int indexOfCalender = 0;
                 int nextMontDays = 0;
                 int TotalDaysInlastMonth = 0;
-                int month = int.Parse(DdlMonth.SelectedValue);
-                int year = int.Parse(DdlYear.SelectedValue);
+                int month = int.Parse(words[0]);
+                int year = int.Parse(words[1]);
                 int LnkBtnID = 0;
-                if (Convert.ToInt32(DdlMonth.SelectedValue) == 1)
+                
+                if (Convert.ToInt32(words[0]) == 1)
                 {
-                    TotalDaysInlastMonth = DateTime.DaysInMonth(Convert.ToInt32(DdlYear.SelectedValue) - 1, 12);
+                    TotalDaysInlastMonth = DateTime.DaysInMonth(Convert.ToInt32(words[1]), 12);
                 }
                 else
                 {
-                    TotalDaysInlastMonth = DateTime.DaysInMonth(Convert.ToInt32(DdlYear.SelectedValue), Convert.ToInt32(DdlMonth.SelectedValue) - 1);
+                    TotalDaysInlastMonth = DateTime.DaysInMonth(Convert.ToInt32(words[1]), Convert.ToInt32(words[0]));
                 }
                 int count = tb.Rows.Count * tb.Rows[0].Cells.Count;
 
@@ -297,9 +310,9 @@ namespace TMS.Web.Views.Report.UserControls
                     {
                         ++indexOfCalender;
 
-                        if (indexOfCalender == (DateTime.Now.Day + fDay) && (DdlMonth.SelectedValue.ToString() == DateTime.Now.Month.ToString()) && (DdlYear.SelectedValue.ToString() == DateTime.Now.Year.ToString()))
+                        if (indexOfCalender == (DateTime.Now.Day + fDay) && (words[0] == DateTime.Now.Month.ToString()) && (words[1] == DateTime.Now.Year.ToString()))
                             tb.Rows[dayOfWeek].Cells[weekOfMonth].Style.Add("background-color", "LimeGreen");// = System.Drawing.Color.LimeGreen;
-                       
+
 
                         if (indexOfCalender <= fDay && day < totalDaysInMonth)
                         {
@@ -308,8 +321,8 @@ namespace TMS.Web.Views.Report.UserControls
                             linkbutton.Text = (TotalDaysInlastMonth - fDay).ToString() + "<br/>";
                             tb.Rows[dayOfWeek].Cells[weekOfMonth].Controls.Add(linkbutton);
                             linkbutton.Enabled = false;
-                            int TempYear = month == 1 ? (year - 1) : year;
-                            int TempMonth = month == 1 ? 12 : month - 1;
+                            int TempYear = month == 1 ? (year) : year;
+                            int TempMonth = month == 1 ? 12 : month;
                             int TempDay = (TotalDaysInlastMonth - fDay);
                             SetControlsInCells(list, indexOfCalender, TempYear, TempMonth, TempDay, linkbutton, LnkBtnID, tb, dayOfWeek, weekOfMonth);
 
@@ -318,8 +331,12 @@ namespace TMS.Web.Views.Report.UserControls
                         {
                             ++day;
                             LinkButton linkbutton = new LinkButton();
+                                   
                             if (indexOfCalender - 1 == fDay)
-                                linkbutton.Text = DdlMonth.SelectedItem.Text.ToString() + "<br/> " + day.ToString() + "<br/>";
+                            {
+                                string monthName1 = new DateTime(yearDDl, monthDDl, 1)
+                       .ToString("MMMM", CultureInfo.CreateSpecificCulture("en"));
+                                linkbutton.Text = monthName1 + "<br/> " + day.ToString() + "<br/>"; }
                             else
                                 linkbutton.Text = day.ToString() + "<br/>";
 
@@ -334,12 +351,16 @@ namespace TMS.Web.Views.Report.UserControls
                             LinkButton linkbutton = new LinkButton();
                             if (nextMontDays == 1)
                             {
-                                if (DdlMonth.SelectedValue == "12")
+                                if (words[0] == "12")
                                     linkbutton.Text = UtilityFunctions.GetEnumDescrptionFromObjectValue(typeof(Month), Month.Month_January) + "<br/>" + nextMontDays.ToString() + "<br/>";
                                 else
                                 {
-                                    if (DdlMonth.Items.Count > DdlMonth.SelectedIndex + 1)
-                                        linkbutton.Text = DdlMonth.Items[DdlMonth.SelectedIndex + 1].Text + "<br/>" + nextMontDays.ToString() + "<br/>";
+                                    if (12 > monthDDl)
+                                    {
+                                        string monthName1 = new DateTime(yearDDl, monthDDl+1, 1)
+                         .ToString("MMMM", CultureInfo.CreateSpecificCulture("en"));
+                                        linkbutton.Text = monthName1 + "<br/>" + nextMontDays.ToString() + "<br/>";
+                                    }
                                     else
                                         linkbutton.Text = UtilityFunctions.GetEnumDescrptionFromObjectValue(typeof(Month), Month.Month_January) + "<br/>" + nextMontDays.ToString() + "<br/>";
                                 }
@@ -360,10 +381,10 @@ namespace TMS.Web.Views.Report.UserControls
                     }
                 }
 
-                if (Convert.ToInt32(DdlMonth.SelectedValue) == 1)
-                    TotalDaysInlastMonth = DateTime.DaysInMonth(Convert.ToInt32(DdlYear.SelectedValue) - 1, 12);
+                if (Convert.ToInt32(monthDDl) == 1)
+                    TotalDaysInlastMonth = DateTime.DaysInMonth(Convert.ToInt32(yearDDl) , 12);
                 else
-                    TotalDaysInlastMonth = DateTime.DaysInMonth(Convert.ToInt32(DdlYear.SelectedValue), Convert.ToInt32(DdlMonth.SelectedValue) - 1);
+                    TotalDaysInlastMonth = DateTime.DaysInMonth(Convert.ToInt32(yearDDl), Convert.ToInt32(monthDDl) );
 
                 //DateTime d1;//
                 //if (month == 1)
@@ -531,21 +552,21 @@ namespace TMS.Web.Views.Report.UserControls
         /// <para>Created Date: 9/26/2013 </para> 
         /// </summary>
         /// <param name="ClassID"></param>
-        private void ClassDuration(long ClassID)
-        {
-            // AppContext.CurrentClassID = ClassID;
-            // AppContext.CurrentClassDetailMapping = null;
-            //if (!_PersonBAL.ClassGetByID(ClassID))
-            //{
-            //    return;
-            //}
-          long  CurrentClassID = UtilityFunctions.MapValue<Int64>(DdlClass.SelectedValue, typeof(Int64));
-            CurrentClass = _PersonBAL.ClassGetByID(CurrentClassID);
-            LblClassDuration.Text = string.Empty;
-       //     if (AppContext.CurrentClass != null)
-                LblClassDuration.Text = "ClassDuration" + Convert.ToDateTime(CurrentClass.StartDate).ToShortDateString() + " - " + Convert.ToDateTime(CurrentClass.EndDate).ToShortDateString(); ;
+        // private void ClassDuration(long ClassID)
+        // {
+        //     // AppContext.CurrentClassID = ClassID;
+        //     // AppContext.CurrentClassDetailMapping = null;
+        //     //if (!_PersonBAL.ClassGetByID(ClassID))
+        //     //{
+        //     //    return;
+        //     //}
+        //   long  CurrentClassID = UtilityFunctions.MapValue<Int64>(DdlClass.SelectedValue, typeof(Int64));
+        //     CurrentClass = _PersonBAL.ClassGetByID(CurrentClassID);
+        //     LblClassDuration.Text = string.Empty;
+        ////     if (AppContext.CurrentClass != null)
+        //         LblClassDuration.Text = "ClassDuration" + Convert.ToDateTime(CurrentClass.StartDate).ToShortDateString() + " - " + Convert.ToDateTime(CurrentClass.EndDate).ToShortDateString(); ;
 
-        }
+        // }
 
 
 
@@ -556,7 +577,7 @@ namespace TMS.Web.Views.Report.UserControls
 
 
 
-   public  class MyColor
+    public class MyColor
     {
         public string DisplayName { get; set; }
         public string Name { get; set; }

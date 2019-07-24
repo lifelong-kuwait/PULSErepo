@@ -28,6 +28,6 @@ namespace TMS.Web.Views.Report.Pages {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::TMS.Web.Views.Report.UserControls.UCViewClassTimeTable UCViewClassTimeTable;
+        protected global::TMS.Web.Views.Report.SpLReports.UserControls.UCViewClassTimeTable UCViewClassTimeTable;
     }
 }

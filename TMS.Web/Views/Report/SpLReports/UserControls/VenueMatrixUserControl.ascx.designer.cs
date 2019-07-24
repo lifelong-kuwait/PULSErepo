@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TMS.Web.Views.Report.UserControls {
+namespace TMS.Web.Views.Report.SpLReports.UserControls {
     
     
-    public partial class UCVenueMatrixReport {
+    public partial class VenueMatrixUserControl {
         
         /// <summary>
         /// upEvents control.
@@ -83,5 +83,8 @@ namespace TMS.Web.Views.Report.UserControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlNoData;
+
+        public static string venueId { get; internal set; }
+        public static string startDate { get; internal set; }
     }
 }

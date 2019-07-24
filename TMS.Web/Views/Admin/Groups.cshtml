@@ -4,43 +4,43 @@
 }
 <h2>@lr.GroupsTitle</h2>
 @(Html.Kendo().Grid<TMS.Library.Common.Groups.SecurityGroups>().Name("SecurityGroups")
-           .Columns(columns =>
-             {
-                 columns.Bound(p => p.PrimaryGroupName);
-                 columns.Bound(p => p.SecondaryGroupName);
-                 columns.Bound(e => e.CreatedBy).Width(190).MinScreenWidth(550).Title(lr.GridAddedBy).ClientTemplate(@"<div class='gridaddedby'>
+               .Columns(columns =>
+                 {
+                     columns.Bound(p => p.PrimaryGroupName);
+                     columns.Bound(p => p.SecondaryGroupName);
+                     columns.Bound(e => e.CreatedBy).Width(190).MinScreenWidth(550).Title(lr.GridAddedBy).ClientTemplate(@"<div class='gridaddedby'>
 #if(AddedByAlias!=null){#<span class='Addedby' >#:AddedByAlias#</span>#}#
 <span class='date' >#=kendo.toString(CreatedDate,'" + DateFormatScript + @"')#</span>
 <span class='time' >#=kendo.toString(CreatedDate,'" + TimeFormatScript + @"')#</span>
 </div>");
-             })
-        .ToolBar(toolbar => toolbar.Template(@<text>
-        <div class="toolbar">
-            <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
-            <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
-            <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
-            <a class="k-button tms-grid-detail"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>
-        </div>
-    </text>))
-    .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_SecurityGroupTemplate").DisplayDeleteConfirmation(false))
-    .Sortable().Scrollable().Filterable().Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
-    .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
-    .HtmlAttributes(new { style = "height:700px !important;" })
-    .Events(e => e.Edit("UsersLoginGrid_onEdit").Save("UsersLoginGrid_onSave"))
-    .DataSource(dataSource => dataSource.Ajax().PageSize(15).Model(model => model.Id(p => p.GroupId))
-    .Create(update => update.Action("Groups_Create", "Admin"))
-    .Read(read => read.Action("Groups_Read", "Admin").Data("withSearch"))
-    .Update(update => update.Action("Groups_Update", "Admin"))
-    .Destroy(update => update.Action("Groups_Destroy", "Admin"))
-    .Events(events => events.Error("GeneralErrorHandler(\"SecurityGroups\")"))
-    )
+                 })
+            .ToolBar(toolbar => toolbar.Template(@<text>
+                <div class="toolbar">
+                    <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+                    <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+                    <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+                    <a class="k-button tms-grid-detail"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>
+                </div>
+            </text>))
+                .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_SecurityGroupTemplate").DisplayDeleteConfirmation(false))
+                .Sortable().Scrollable().Filterable().Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+                .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
+                .HtmlAttributes(new { style = "height:700px !important;" })
+                .Events(e => e.Edit("UsersLoginGrid_onEdit").Save("UsersLoginGrid_onSave"))
+                .DataSource(dataSource => dataSource.Ajax().PageSize(15).Model(model => model.Id(p => p.GroupId))
+                .Create(update => update.Action("Groups_Create", "Admin"))
+                .Read(read => read.Action("Groups_Read", "Admin").Data("withSearch"))
+                .Update(update => update.Action("Groups_Update", "Admin"))
+                .Destroy(update => update.Action("Groups_Destroy", "Admin"))
+                .Events(events => events.Error("GeneralErrorHandler(\"SecurityGroups\")"))
+                )
 )
 <script id="toolTipTemplate" type="text/x-kendo-template">
 
-    <span class="grid-tooltip-icon groupdetail" data-uid="#=GroupId#" title="See the detail of #=PrimaryGroupName#"><i class="mdi mdi-open-in-new"></i></span>
+    <span class="grid-tooltip-icon groupdetail" dat-id="#=GroupId#" title="See the detail of #=PrimaryGroupName#"><i class="mdi mdi-open-in-new"></i></span>
 
    
-    <span class="grid-tooltip-icon delete" data-uid="#=GroupId#" title="Delete"><i class="mdi mdi-delete"></i></span>
+    <span class="grid-tooltip-icon delete" dat-id="#=GroupId#" title="Delete"><i class="mdi mdi-delete"></i></span>
 
 </script>
 
@@ -61,7 +61,6 @@
 </script>
 <script>
     jQuery(function () {
-        
         var template = kendo.template(jQuery("#toolTipTemplate").html());
         //initialize tooltip to grid tbody with filter cells with given CSS class
         var tooltip = jQuery("#SecurityGroups tbody").kendoTooltip({
@@ -87,12 +86,9 @@
             var url = '@Url.Content("~/Admin/GroupDetail?GroupId=")' + testvalueGroupId;
             window.open(url, '_blank');
         });
-       
         jQuery(".edit").live("mousedown", function (event) {
-           /// debugger; 
-            alert("Edit Click");
-            jQuery("#SecurityGroups").data("kendoGrid").editRow(jQuery("[data-id=" + jQuery(this).attr("data-id") + "]"));
-           
+            debugger;
+            jQuery("#SecurityGroups").data("kendoGrid").editRow(jQuery("[data-id=" + jQuery(this).attr("dat-id") + "]"));
         });
         jQuery(".delete").live("mousedown", function (event) {
            // debugger;
@@ -161,12 +157,13 @@
         });
     });
     function UsersLoginGrid_onEdit(e) {
-       
+        debugger;
+
         //if current model is not new then remove the Name editor
         var title = jQuery(e.container).parent().find(".k-window-title");
         var update = jQuery(e.container).parent().find(".k-grid-update");
         var cancel = jQuery(e.container).parent().find(".k-grid-cancel");
-       
+        alert('hello world');
         //jQuery('<a class="k-button k-button-icontext k-grid-update custom" href="\\#"><span class="k-icon k-i-check"></span>Save & New</a>').insertBefore(".k-grid-update");
         @*jQuery(cancel).html('<span class="k-icon k-i-cancel"></span>' + lr.CencelRecordGeneralButton);
         if (e.model.isNew()) {
@@ -213,7 +210,7 @@
         //
     }
     function UsersLoginGrid_onSave(e) {
-        console.log(e);
+      //  debugger;
 
         jQuery(event.srcElement)
             .addClass("k-state-disabled")

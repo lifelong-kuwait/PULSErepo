@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCViewClassTimeTable.ascx.cs" Inherits="TMS.Web.Views.Report.UserControls.UCViewClassTimeTable" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCViewClassTimeTable.ascx.cs" Inherits="TMS.Web.Views.Report.SpLReports.UserControls.UCViewClassTimeTable" %>
 
 
 <script src="../../../Scripts/jquery-2.1.4.js"></script>
@@ -25,56 +25,19 @@ span.ScheduleSessionName {
         <fieldset>
             <asp:ValidationSummary HeaderText="" CssClass="validationsummary" runat="server"
                 ID="vldSummaryDegrees" ValidationGroup="VgTimeTable" DisplayMode="BulletList" />
-            <div class="row">
-      
-            <div class="col-md-2">
-                 <strong>Course</strong>
-                   
-            </div>
-            <div class="col-md-7">
-                    <asp:DropDownList runat="server" ID="DdlCourse" class="form-control" AutoPostBack="True"
-                        OnSelectedIndexChanged="DdlCourse_SelectedIndexChanged" />
-                 </div>
-                       </div>
-              <div class="row" style="margin-top:10px">
-      
-            <div class="col-md-2">
-                 <strong>Class</strong>
-                     
-            </div>
-            <div class="col-md-3">
-                    <asp:DropDownList runat="server" ID="DdlClass" class="form-control" OnSelectedIndexChanged="DdlClass_SelectedIndexChanged"
-                        AutoPostBack="True" />
-                </div>
-                 <div class="col-md-4">
-                  
-                        <asp:Label runat="server" ID="LblClassDuration" class="form-control" Style="cursor: default;"></asp:Label>
-              
-                 </div>
-                       </div>
-              <div class="row" style="margin-top:10px">
-      
-            <div class="col-md-2">
-                 <strong> Timetable Duration</strong>
-                     
-            </div>
-            <div class="col-md-3">
-               
-                    <asp:DropDownList runat="server" ID="DdlYear" AutoPostBack="True" class="form-control" OnSelectedIndexChanged="DdlMonth_SelectedIndexChanged" />
-                    </div>
-            <div class="col-md-4">
-                    <asp:DropDownList runat="server" ID="DdlMonth" class="form-control" AutoPostBack="True"
-                        OnSelectedIndexChanged="DdlMonth_SelectedIndexChanged" />
-                  
-              </div>
-                  </div>
+           
+            
+           
+                 
              <div class="row">
            <div  class="col-md-4 pull-right"  style="margin-top:10px; margin-bottom:10px">
               <asp:LinkButton ID="btnPrint" runat="server" ToolTip="Print" class="btn btn-success"
             OnClientClick="PrintFeedbacks(); return false;">&nbsp;<span title="Timetable">Print</span></asp:LinkButton>
                </div>
                  </div>
+            
             <div class="PrintingArea">
+                <h1 style="margin-left:25%;">Time Table Schedule</h1>
                 <asp:Label runat="server" ID="LblCourseName" Style="display: none;" />
                 <asp:Label runat="server" ID="LblClassName" Style="display: none;" />
                 <asp:Label runat="server" ID="LblCalenderSpan" Style="display: none;" />
@@ -86,9 +49,9 @@ span.ScheduleSessionName {
                             <div class="ScheduleColorRepeater">
                                 <table style="width: 100%">
                                     <tr>
-                                        <td style='<%# "border:1px solid #dcdcdc; width: 5%; background:"+Eval("Color")+";" %>'>
+                                        <td style='<%# "border:1px solid #dcdcdc; width: 3%; background:"+Eval("Color")+";" %>'>
                                         </td>
-                                        <td style="width: 95%">
+                                        <td style="width: 80%">
                                             <%#Eval("DisplayName") %>
                                         </td>
                                     </tr>
@@ -99,6 +62,7 @@ span.ScheduleSessionName {
                     </asp:Repeater>
                 </div>
             </div>
+                
         </fieldset>
     </ContentTemplate>
 </asp:UpdatePanel>

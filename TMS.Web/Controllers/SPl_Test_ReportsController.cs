@@ -134,6 +134,14 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public ActionResult Schedules()
         {
+          
+
+            return View();
+        }
+        [ClaimsAuthorize("CanViewReports")]
+        [DontWrapResult]
+        public ActionResult VenueMatrixReport()
+        {
             ViewData["reportUrl"] = "~/Report/Tran_ConductedCoursesReport/";
 
             return View();

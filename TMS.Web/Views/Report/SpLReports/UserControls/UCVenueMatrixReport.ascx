@@ -1,38 +1,10 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCVenueMatrixReport.ascx.cs" Inherits="TMS.Web.Views.Report.UserControls.UCVenueMatrixReport" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCVenueMatrixReport.ascx.cs" Inherits="TMS.Web.Views.Report.SpLReports.UserControls.UCVenueMatrixReport" %>
 
 
 <asp:updatepanel runat="server" id="upEvents">
     <ContentTemplate>
         <fieldset>
-            <div class="row">
-      
-            <div class="col-md-1">
-                <strong>Year/Month</strong> 
-              </div>
-            <div class="col-md-2">
-               
-                    <asp:DropDownList runat="server" ID="ddlYear" class="dropdown form-control"  AutoPostBack="True"
-                        OnSelectedIndexChanged="ddlVenues_SelectedIndexChanged" />
-                </div>
-                 <div class="col-md-3">
-                    <asp:DropDownList runat="server" ID="ddlMonth" class="dropdown form-control"  AutoPostBack="True"
-                        OnSelectedIndexChanged="ddlVenues_SelectedIndexChanged" />
-                   </div>
-            
-        </div>
-       
-               <div class="row" style="margin-top: 10px">
-      
-            <div class="col-md-1">
-        
-                 <strong>Venue</strong>  
-        
-                </div>
-                    <div class="col-md-5" id="classd">
-                    <asp:DropDownList runat="server" ID="ddlVenues" class="dropdown form-control"  AutoPostBack="True"
-                        OnSelectedIndexChanged="ddlVenues_SelectedIndexChanged" />
-                  
-               </div></div>
+           
             <asp:Panel runat="server" ID="pnlReport" Visible="False">
                <%-- <a href='<%= UtilityFunctions.GetPageUrl("Page_Dashboard").Replace("~",string.Empty) %>'
                     id="BtnBack" class="btn btn-small btn-custom"><i class="icon-white icon-circle-arrow-left"
@@ -40,8 +12,7 @@
                <a id="btnPrint" onclick="PrintReport();" class="btn btn-small btn-custom  AlignToRight">
                             <i class="icon-white icon-print" title="Print"></i>&nbsp;
                             <%=TrainingResourceManager.GetButtonText("Common_Button_Print") %>--%>
-               </a>
-               <br />
+              
                 <div style="clear: both">
                 </div>
                 <div class="PrintingArea" style="margin-bottom: 5px; overflow: hidden;">
