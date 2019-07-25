@@ -2165,6 +2165,13 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("PersonSkill", CultureInfo.CurrentUICulture.Name);
                }
             }
+        public static string VenueOcupaidByOther
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("VenueOcupaidByOther", CultureInfo.CurrentUICulture.Name);
+            }
+        }
         //public static string Coursescheck
         //{
         //    get
@@ -2172,7 +2179,7 @@ namespace Resources {
         //        return (string)resourceProvider.GetResource("Coursescheck", CultureInfo.CurrentUICulture.Name);
         //    }
         //}
-        
+
         //public static string Courses
         //{
         //    get
@@ -2397,7 +2404,22 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("Areyousureyouwanttodeletethisrecord", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Are you sure you want to delete this record?</summary>
+        public static string AttandanceMarked
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("AttandanceMarked", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Oops
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Oopss", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>Yes</summary>
         public static string confirmYes {
                get {

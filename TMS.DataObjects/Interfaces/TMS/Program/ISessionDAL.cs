@@ -90,7 +90,7 @@ namespace TMS.DataObjects.Interfaces.TMS.Program
         /// <param name="Sessions">The sessions.</param>
         /// <returns>SessionCreationRules.</returns>
         SessionCreationRules TMS_Session_CheckValidSessionDAL(Sessions Sessions);
-
+        int GetSessionVenueOccupancyDetailDAL(Sessions Sessions);
         int User_EmailCheckDAL(long CompanyID, string Email);
 
         List<Sessions> TMS_SessionsTrainer_GetALLByCultureDAL(string Email, long ClassID, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText, string Oid);

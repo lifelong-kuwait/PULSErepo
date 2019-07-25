@@ -136,7 +136,12 @@ namespace TMS.Business.TMS
             return _CourseDAL.TMS_SessionAttendance_GetAllDAL(_Course);
         }
         #region Course Coordinate
-
+        public IList<Sessions> TMS_SessionAttendance_GetAllByIDBAL(int _Course)
+        {
+            
+                return _CourseDAL.TMS_SessionAttendance_GetAllByIDDAL(_Course);
+            
+        }
         public IList<CourseCoordinatorMapping> TMS_CourseCoordinate_GetAllBAL(long CourseId)
         {
             return _CourseDAL.TMS_CourseCoordinator_GetAllDAL(CourseId);

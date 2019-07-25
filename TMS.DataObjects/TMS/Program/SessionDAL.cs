@@ -226,6 +226,16 @@ namespace TMS.DataObjects.TMS.Program
 
             return SessionCreationRules;
         }
+        public int GetSessionVenueOccupancyDetailDAL(Sessions Sessions)
+        {
+            
+            return ExecuteScalarSPInt32("TMS_ScheduleVenueOccupancyConflict",
+                           ParamBuilder.Par("ScheduleDate", Sessions.ScheduleDate),
+                           ParamBuilder.Par("StartTime", Sessions.StartTime),
+                           ParamBuilder.Par("EndTime", Sessions.EndTime),
+                           ParamBuilder.Par("VenueID", Sessions.VenueID)
+           );
+        }
 
         public int User_EmailCheckDAL(long CompanyID, string Email)
         {

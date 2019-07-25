@@ -123,7 +123,10 @@ namespace TMS.Business.TMS.Program
         /// <param name="Sessions">The sessions.</param>
         /// <returns>SessionCreationRules.</returns>
         public SessionCreationRules GetClassDetailByClassIdForNewSessionBAL(Sessions Sessions) { return _SessionBAL.TMS_Session_CheckValidSessionDAL(Sessions); }
-
+        public int GetSessionVenueOccupancyDetailBAL(Sessions Sessions)
+        {
+             return _SessionBAL.GetSessionVenueOccupancyDetailDAL(Sessions); 
+        }
         public int User_EmailCheckBAL(long CompanyID, string Email)
         {
             return _SessionBAL.User_EmailCheckDAL(CompanyID,Email);

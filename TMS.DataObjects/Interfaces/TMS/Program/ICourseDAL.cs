@@ -73,7 +73,7 @@ namespace TMS.DataObjects.Interfaces.TMS
         /// <param name="_Course">The course.</param>
         /// <returns>System.Int64.</returns>
         IList<Sessions> TMS_SessionAttendance_GetAllDAL(Sessions _Course);
-
+        IList<Sessions> TMS_SessionAttendance_GetAllByIDDAL(int _Course);
         /// <summary>
         /// TMSs the courses update dal.
         /// </summary>

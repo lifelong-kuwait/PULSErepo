@@ -26,7 +26,7 @@
     .Name("PersonGrid")
     .Columns(columns =>
     {
-        columns.Bound(e => e.P_DisplayName).ClientTemplate(@"<div  class='person-box'>
+        columns.Bound(e => e.P_DisplayName).Filterable(true).ClientTemplate(@"<div  class='person-box'>
                 <div class='person'>
                     <img src='../#:ProfilePicture#' class='paddig'  alt=''>" +
                     @"<h3>#:P_DisplayName#</h3>" +

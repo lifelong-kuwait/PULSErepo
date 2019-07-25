@@ -96,13 +96,13 @@
                                                                                                                                             .DataTextField("Text")
                                                                                                                                             .DataValueField("Value")
                                                                                                                                             .OptionLabel("---Select Class---")
-                                                                                                                                            .DataSource(source =>
-                                                                                                                                            {
-                                                                                                                                                source.Read(read =>
-                                                                                                                                                {
-                                                                                                                                                    read.Action("Classes", "DDL");
-                                                                                                                                                });
-                                                                                                                                            })
+                                                                                                                                            //.DataSource(source =>
+                                                                                                                                            //{
+                                                                                                                                            //    source.Read(read =>
+                                                                                                                                            //    {
+                                                                                                                                            //        read.Action("Classes", "DDL");
+                                                                                                                                            //    });
+                                                                                                                                            //})
                                                                                                                                             .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
                                                                                                                                                                                                                                 .HtmlAttributes(new { style = "width: 100%" })
                 )
@@ -169,5 +169,6 @@
                 });
             }
         });
+
     });
 </script>

@@ -83,7 +83,7 @@ namespace TMS.Business.Interfaces.TMS
         int class_CheckBAL(Course _Course, long CompanyID);
         int Session_CheckBAL(Sessions _Course, long CompanyID);
         IList<Sessions> TMS_SessionAttendance_GetAllBAL(Sessions _Course);
-
+        IList<Sessions> TMS_SessionAttendance_GetAllByIDBAL(int _Course);
         #region Course Coordinator
 
         IList<CourseCoordinatorMapping> TMS_CourseCoordinate_GetAllBAL(long CourseId);

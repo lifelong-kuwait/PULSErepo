@@ -251,6 +251,23 @@ namespace TMS.DataObjects.TMS
             return Course;// ExecuteListSp<LoginUserAddGroups>("TMS_Groups_GetAllByCulture", ParamBuilder.ParNVarChar("Culture", culture, 5));
 
         }
+        public IList<Sessions> TMS_SessionAttendance_GetAllByIDDAL(int _Course)
+        {
+            List<Sessions> Course = new List<Sessions>();
+            var conString = DBHelper.ConnectionString;
+            using (var conn = new SqlConnection(conString))
+            {
+                conn.Open();
+                string qry = @"TMS_Session_Attandance_DeleteCheck";
+                DynamicParameters param = new DynamicParameters();
+
+                param.Add("@ID", _Course);
+                Course = conn.Query<Sessions>(qry.ToString(), param, commandType: System.Data.CommandType.StoredProcedure).AsList<Sessions>();
+                conn.Close();
+            }
+            return Course;// ExecuteListSp<LoginUserAddGroups>("TMS_Groups_GetAllByCulture", ParamBuilder.ParNVarChar("Culture", culture, 5));
+
+        }
         //  int Session_CheckBAL(Sessions _Course, long CompanyID);
         #region Course Coordinator
         public IList<CourseCoordinatorMapping> TMS_CourseCoordinator_GetAllDAL(long CourseID)

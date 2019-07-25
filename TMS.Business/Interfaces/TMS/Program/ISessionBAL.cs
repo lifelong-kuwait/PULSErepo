@@ -97,7 +97,7 @@ namespace TMS.Business.Interfaces.TMS.Program
         /// <param name="Sessions">The sessions.</param>
         /// <returns>SessionCreationRules.</returns>
         SessionCreationRules GetClassDetailByClassIdForNewSessionBAL(Sessions Sessions);
-
+        int GetSessionVenueOccupancyDetailBAL(Sessions Sessions);
         int User_EmailCheckBAL(long CompanyID, string Email);
 
     }
