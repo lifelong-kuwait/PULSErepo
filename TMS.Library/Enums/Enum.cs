@@ -584,8 +584,8 @@ namespace TMS.Library
     {
         [Display(Name = "NotSpecified", ResourceType = typeof(lr))]
         CategoryType_NotSpecified = 0,
-        [Display(Name = "CategoryTypeFeedbackCategory", ResourceType = typeof(lr))]
-        CategoryType_Feedback_Category = 1,
+        //[Display(Name = "CategoryTypeFeedbackCategory", ResourceType = typeof(lr))]
+        //CategoryType_Feedback_Category = 1,
         [Display(Name = "CategoryTypeCourseCategory", ResourceType = typeof(lr))]
         CategoryType_Course_Category = 2,
     }

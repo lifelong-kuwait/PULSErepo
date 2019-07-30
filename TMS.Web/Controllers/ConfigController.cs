@@ -659,6 +659,7 @@ namespace TMS.Web.Controllers
             {
                 request.PageSize = 10;
             }
+           
             var Classs = _objConfigurationBAL.TMSCategories_GetAllBAL(startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
             if (CurrentUser.CompanyID > 0)
             {

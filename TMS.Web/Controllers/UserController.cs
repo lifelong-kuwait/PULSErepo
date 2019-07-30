@@ -215,7 +215,7 @@ namespace TMS.Web.Controllers
                         {
                             _objUsers.CreatedBy = CurrentUser.NameIdentifierInt64;
                             _objUsers.CreatedDate = DateTime.Now;
-                            _objUsers.CompanyID = CurrentUser.CompanyID;
+                            //_objUsers.CompanyID = CurrentUser.CompanyID;
                             _objUsers.AddedByAlias = CurrentUser.Name;
                             _objUsers.Password = Crypto.CreatePasswordHash(_objUsers.Password);
                             _objUsers.UserID = this._UserBAL.LoginUsers_CreateBAL(ref _objUsers);//.PersonEmailAddress_CreateBAL(_objGroups);

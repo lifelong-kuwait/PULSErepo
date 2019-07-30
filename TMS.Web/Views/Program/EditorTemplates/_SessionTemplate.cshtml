@@ -91,7 +91,7 @@
             .HtmlAttributes(new { style = "width:100%" })
             .DataTextField("Text")
             .DataValueField("Value")
-            .OptionLabel(lr.TrainerOptionalLabel).Events(x=>x.Change("onChangeofSessionTrainer"))
+            .OptionLabel(lr.TrainerOptionalLabel)
             //  .OptionLabel(new { Text = lr.VenueOpenTypeOptionalLabel, Value = 0 })
             .DataSource(dataSource =>
             {

@@ -663,7 +663,7 @@ namespace TMS.Library.Entities.TMS.Program
         /// </summary>
         /// <value>The evaluation link.</value>
         [Display(Name = "ClassEvaluationLink", ResourceType = typeof(lr))]
-        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "ClassEvalutionlinkRequired")]
+        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "ClassEvalutionlinkRequired")]
         public string EvaluationLink { get; set; }
 
         /// <summary>
@@ -671,7 +671,7 @@ namespace TMS.Library.Entities.TMS.Program
         /// </summary>
         /// <value>The follow up.</value>
         [Display(Name = "ClassFollowUp", ResourceType = typeof(lr))]
-        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "ClassFollowUpRequired")]
+      //  [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "ClassFollowUpRequired")]
         public string FollowUp { get; set; }
 
         /// <summary>
@@ -739,7 +739,7 @@ namespace TMS.Library.Entities.TMS.Program
         /// <value>The discount.</value>
         [Display(Name = "ClassDiscount", ResourceType = typeof(lr))]
         [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "ClassDiscountRequired")]
-        [Range(0.01, 100, ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "GeneralGreaterThanZeroLessThanHundredRange")]
+        [Range(0.0, 100, ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "GeneralGreaterThanZeroLessThanHundredRange")]
         public float Discount { get; set; }
 
         /// <summary>

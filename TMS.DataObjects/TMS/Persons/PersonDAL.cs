@@ -332,7 +332,8 @@ namespace TMS.DataObjects.TMS
         {
             return ExecuteScalarSPInt32("TMS_Person_Delete",
                            // ParamBuilder.OutPar("IsDeleted" ,_objPerson.IsDeleted),
-                           ParamBuilder.Par("ID", _objPerson.ID),
+                           ParamBuilder.Par("ID", _objPerson.ID), 
+                            ParamBuilder.Par("EmailId", _objPerson.EmailID),
                            ParamBuilder.Par("UpdatedBy", _objPerson.UpdatedBy),
                            ParamBuilder.Par("UpdatedDate", _objPerson.UpdatedDate));
         }

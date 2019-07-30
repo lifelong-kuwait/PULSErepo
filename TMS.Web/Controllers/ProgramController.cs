@@ -262,8 +262,17 @@ namespace TMS.Web.Controllers
                 if (dtEndTime < _Class.StartTime)
                     dtEndTime = dtEndTime.AddDays(1);
                 _Class.EndTime = dtEndTime;
+                if(_Class.EvaluationLink==null)
+                {
+                    _Class.EvaluationLink = "";
+                }
+                if(_Class.FollowUp==null)
+                {
+                    _Class.FollowUp = "";
+                }
 
-                _Class.ID = _ClassBAL.TMS_Classes_CreateBAL(_Class);
+
+                     _Class.ID = _ClassBAL.TMS_Classes_CreateBAL(_Class);
                 string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
                 if (string.IsNullOrEmpty(ip))
                     ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
@@ -290,6 +299,14 @@ namespace TMS.Web.Controllers
                 if (dtEndTime < _Class.StartTime)
                     dtEndTime = dtEndTime.AddDays(1);
                 _Class.EndTime = dtEndTime;
+                if (_Class.EvaluationLink == null)
+                {
+                    _Class.EvaluationLink = "";
+                }
+                if (_Class.FollowUp == null)
+                {
+                    _Class.FollowUp = "";
+                }
                 _ClassBAL.TMS_Classes_UpdateBAL(_Class);
                 string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
                 if (string.IsNullOrEmpty(ip))
