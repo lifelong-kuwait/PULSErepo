@@ -262,17 +262,17 @@ namespace TMS.Web.Controllers
                 if (dtEndTime < _Class.StartTime)
                     dtEndTime = dtEndTime.AddDays(1);
                 _Class.EndTime = dtEndTime;
-                if(_Class.EvaluationLink==null)
+                if (_Class.EvaluationLink == null)
                 {
                     _Class.EvaluationLink = "";
                 }
-                if(_Class.FollowUp==null)
+                if (_Class.FollowUp == null)
                 {
                     _Class.FollowUp = "";
                 }
 
 
-                     _Class.ID = _ClassBAL.TMS_Classes_CreateBAL(_Class);
+                _Class.ID = _ClassBAL.TMS_Classes_CreateBAL(_Class);
                 string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
                 if (string.IsNullOrEmpty(ip))
                     ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
@@ -292,29 +292,38 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _Class.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                _Class.UpdatedDate = DateTime.Now;
-                _Class.StartTime = UtilityFunctions.MapValue<DateTime>(_Class.StartDate.ToShortDateString() + " " + _Class.StartTimeString, typeof(DateTime));
-                DateTime dtEndTime = UtilityFunctions.MapValue<DateTime>(_Class.EndDate.ToShortDateString() + " " + _Class.EndTimeString, typeof(DateTime));
-                if (dtEndTime < _Class.StartTime)
-                    dtEndTime = dtEndTime.AddDays(1);
-                _Class.EndTime = dtEndTime;
-                if (_Class.EvaluationLink == null)
+                int sessioncount = _ClassBAL.TMS_Classes_SessionCountBAL(_Class.ID);
+                if (_Class.MaximumSessionPerDay < sessioncount)
                 {
-                    _Class.EvaluationLink = "";
+                    ModelState.AddModelError(lr.MaximumSessionConflict, lr.MaximumSessionConflict);
                 }
-                if (_Class.FollowUp == null)
+                else
                 {
-                    _Class.FollowUp = "";
-                }
-                _ClassBAL.TMS_Classes_UpdateBAL(_Class);
-                string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                if (string.IsNullOrEmpty(ip))
-                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
-                // string browserName = req.Browser.Browser;
-                _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Update, System.Web.HttpContext.Current.Request.Browser.Browser);
 
+
+                    _Class.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                    _Class.UpdatedDate = DateTime.Now;
+                    _Class.StartTime = UtilityFunctions.MapValue<DateTime>(_Class.StartDate.ToShortDateString() + " " + _Class.StartTimeString, typeof(DateTime));
+                    DateTime dtEndTime = UtilityFunctions.MapValue<DateTime>(_Class.EndDate.ToShortDateString() + " " + _Class.EndTimeString, typeof(DateTime));
+                    if (dtEndTime < _Class.StartTime)
+                        dtEndTime = dtEndTime.AddDays(1);
+                    _Class.EndTime = dtEndTime;
+                    if (_Class.EvaluationLink == null)
+                    {
+                        _Class.EvaluationLink = "";
+                    }
+                    if (_Class.FollowUp == null)
+                    {
+                        _Class.FollowUp = "";
+                    }
+                    _ClassBAL.TMS_Classes_UpdateBAL(_Class);
+                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                    if (string.IsNullOrEmpty(ip))
+                        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                    // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
+                    // string browserName = req.Browser.Browser;
+                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Update, System.Web.HttpContext.Current.Request.Browser.Browser);
+                }
             }
 
             var resultData = new[] { _Class };
@@ -328,19 +337,27 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _Class.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                _Class.UpdatedDate = DateTime.Now;
-                var result = _ClassBAL.TMS_Classes_DeleteDAL(_Class);
-                string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                if (string.IsNullOrEmpty(ip))
-                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
-                // string browserName = req.Browser.Browser;
-                _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Delete, System.Web.HttpContext.Current.Request.Browser.Browser);
-
-                if (result == -1)
+                int sessioncount = _ClassBAL.TMS_Classes_SessionCountBAL(_Class.ID);
+                if (sessioncount>0)
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    ModelState.AddModelError(lr.MaximumSessionConflictDelete, lr.MaximumSessionConflictDelete);
+                }
+                else
+                {
+                    _Class.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                    _Class.UpdatedDate = DateTime.Now;
+                    var result = _ClassBAL.TMS_Classes_DeleteDAL(_Class);
+                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                    if (string.IsNullOrEmpty(ip))
+                        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                    // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
+                    // string browserName = req.Browser.Browser;
+                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Delete, System.Web.HttpContext.Current.Request.Browser.Browser);
+
+                    if (result == -1)
+                    {
+                        ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    }
                 }
             }
             var resultData = new[] { _Class };
@@ -1386,7 +1403,7 @@ namespace TMS.Web.Controllers
                     _Sessions.ClassID = ClassID;
                     if (VerifyBussinessRules(_Sessions))
                     {
-                        if( _SessionBAL.GetSessionVenueOccupancyDetailBAL(_Sessions)>0)
+                        if (_SessionBAL.GetSessionVenueOccupancyDetailBAL(_Sessions) > 0)
                         {
                             ModelState.AddModelError(lr.VenueOcupaidByOther, lr.VenueOcupaidByOther);
                         }
@@ -1475,23 +1492,23 @@ namespace TMS.Web.Controllers
             var resultData = new[] { _Sessions };
             return Json(resultData.ToDataSourceResult(request, ModelState));
         }
-        
-             [AcceptVerbs(HttpVerbs.Post)]
+
+        [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
         [ClaimsAuthorize("CanDeleteSession")]
         [DisableValidation]
-        public JsonResult SessionDelteChk( int _Sessions)
+        public JsonResult SessionDelteChk(int _Sessions)
         {
             bool result = false;
             var _returnValue = _CourseBAL.TMS_SessionAttendance_GetAllByIDBAL(_Sessions);
             if (_returnValue.Count > 0)
             {
-                result= false;
+                result = false;
 
             }
             else
             {
-                result= true;
+                result = true;
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -1815,7 +1832,7 @@ namespace TMS.Web.Controllers
         }
         [ClaimsAuthorize("CanViewSchedule")]
         [DontWrapResult]
-        public virtual JsonResult Schedule_Read(string courseId,string classId)
+        public virtual JsonResult Schedule_Read(string courseId, string classId)
         {
             long? CourseID = Convert.ToInt64(courseId);
             long? ClassID = Convert.ToInt64(classId);

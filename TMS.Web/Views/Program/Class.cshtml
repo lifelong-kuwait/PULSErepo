@@ -305,23 +305,23 @@ function ClassTemplate(data) {
             <p>
                 <label>
                    
-                    Class Title
-                </label>
+                    Class Code :
+                </label> 
                 <span>
-                    #:data.PrimaryClassTitle#
-                </span>
-            </p>
-            <p>
-                <label>
-                    Class Name
-                </label>
-                <span class="heading">
                     #:data.ClassName#
                 </span>
             </p>
             <p>
                 <label>
-                  Class Type
+                    Class Name :
+                </label>
+                <span class="heading">
+                    #:data.PrimaryClassTitle#
+                </span>
+            </p>
+            <p>
+                <label>
+                  Class Type :
                 </label>
                 <span>
                     #:enumvalue(data.ClassTypeID,enumClassType)#
@@ -329,23 +329,23 @@ function ClassTemplate(data) {
             </p>
             <p>
                 <label>
-                   Course
+                   Course Name:
                 </label>
                 <span>
                     #:data.CourseName#
                 </span>
             </p>
-            <p>
+            @*<p>
                 <label>
                    Class Fee
                 </label>
                 <span>
                     #:data.ClassFee#  (#:enumvalue(data.FeeCurrency,enumClassFeeCurrency)#)
                 </span>
-            </p>
+            </p>*@
             <p>
                 <label>
-                   Class Dates
+                   Class Dates :
                 </label>
                 <label>
                     #=kendo.toString(data.StartDate, '@DateFormatScript')# - #=kendo.toString(data.EndDate, '@DateFormatScript')#

@@ -372,6 +372,22 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("ErrorServerError", CultureInfo.CurrentUICulture.Name);
                }
             }
+        /// <summary>Server Error</summary>
+        public static string MaximumSessionConflict
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("MaximumSessionConflict", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>Server Error</summary>
+        public static string MaximumSessionConflictDelete
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("MaximumSessionConflictDelete", CultureInfo.CurrentUICulture.Name);
+            }
+        }
         /// <summary>Start  and End Date Conflict</summary>
         public static string StartandEndDateConflict
         {

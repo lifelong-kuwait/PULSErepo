@@ -90,7 +90,13 @@ namespace TMS.DataObjects.Interfaces.TMS
         /// <returns>System.Int32.</returns>
         int TMS_Classes_UpdateDAL(Classes _Classes);
         /// <summary>
-        /// TMSs the classes delete dal.
+        /// TMSs the classes update dal.
+        /// </summary>
+        /// <param name="_Classes">The classes.</param>
+        /// <returns>System.Int32.</returns>
+        int TMS_Classes_SessionCountDAL(long _ClassesID);
+        /// <summary>
+        /// TMSs the classes delete dal.int TMS_Classes_SessionCount(int _ClassesID)
         /// </summary>
         /// <param name="_Classes">The classes.</param>
         /// <returns>System.Int32.</returns>

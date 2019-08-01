@@ -129,12 +129,21 @@ namespace TMS.Business.TMS.Program
 
         /// <summary>
         /// TMSs the classes update bal.
-        /// </summary>
+        /// </summary>;
         /// <param name="_Classes">The classes.</param>
         /// <returns>System.Int32.</returns>
         public int TMS_Classes_UpdateBAL(Classes _Classes)
         {
             return _ClassDAL.TMS_Classes_UpdateDAL(_Classes);
+        }
+        /// <summary>
+        /// TMSs the classes update bal.
+        /// </summary>int TMS_Classes_SessionCount(int _ClassesID);
+        /// <param name="_Classes">The classes.</param>
+        /// <returns>System.Int32.</returns>
+        public int TMS_Classes_SessionCountBAL(long _ClassesID)
+        {
+            return _ClassDAL.TMS_Classes_SessionCountDAL(_ClassesID);
         }
         /// <summary>
         /// TMSs the classes delete dal.

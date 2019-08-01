@@ -23,6 +23,8 @@ using TMS.Library.TMS;
 using TMS.Library.TMS.Persons;
 using TMS.Library.Entities.Language;
 using TMS.Library.Entities.Common.Configuration;
+using System;
+using System.Data;
 
 namespace TMS.DataObjects.TMS.Program
 {
@@ -305,13 +307,35 @@ namespace TMS.DataObjects.TMS.Program
 
             );
         }
-
         /// <summary>
+        /// TMSs the classes update dal.
+        /// </summary>
+        /// <param name="_Classes">The classes.</param>
+        /// <returns>System.Int32.</returns>
+        public int TMS_Classes_SessionCountDAL(long _ClassesID)
+        {
+
+
+
+            DataSet avd = ExecuteDataSetSP("ClassSessionCount",
+                        ParamBuilder.Par("@ClassID", Convert.ToInt64(_ClassesID)));
+            if(avd.Tables[0].Rows.Count <= 0)
+            {
+                return 0;
+            }
+            else
+            {
+                int i = Convert.ToInt32(avd.Tables[0].Rows[0]["maximum"]);
+                return i;
+            }
+            
+        }
+        /// <summary>int TMS_Classes_SessionCountDAL(int _ClassesID);
         /// TMSs the classes delete dal.
         /// </summary>
         /// <param name="_Classes">The classes.</param>
         /// <returns>System.Int32.</returns>
-        public int TMS_Classes_DeleteDAL(Classes _Classes)
+            public int TMS_Classes_DeleteDAL(Classes _Classes)
         {
             return ExecuteScalarInt32Sp("TMS_Classes_Delete",
                         ParamBuilder.Par("ID", _Classes.ID),

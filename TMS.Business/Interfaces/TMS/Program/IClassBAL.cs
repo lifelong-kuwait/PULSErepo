@@ -86,6 +86,12 @@ namespace TMS.Business.Interfaces.TMS.Program
         /// <returns>System.Int32.</returns>
         int TMS_Classes_UpdateBAL(Classes _Classes);
         /// <summary>
+        /// TMSs the classes update bal.
+        /// </summary>
+        /// <param name="_Classes">The classes.</param>
+        /// <returns>System.Int32.</returns>
+        int TMS_Classes_SessionCountBAL(long _ClassesID);
+        /// <summary>
         /// TMSs the classes delete dal.
         /// </summary>
         /// <param name="_Classes">The classes.</param>

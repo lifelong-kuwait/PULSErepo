@@ -397,8 +397,53 @@ namespace TMS.DataObjects.Generics
             return dsResult;
         }
 
+        /// <summary>
+        /// Executes the data set.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="prms">The PRMS.</param>
+        /// <returns>DataSet.</returns>
+        public DataSet ExecuteDataSetSP(string query, params DbParameter[] prms)
+        {
+            DataSet dsResult = new DataSet();
+            try
+            {
+                using (DbConnection connection = Factory.CreateConnection())
+                {
+                    connection.ConnectionString = ConnectionString;
 
-      
+                    using (DbCommand command = Factory.CreateCommand())
+                    {
+                        command.CommandTimeout = CommandTimeout;
+                        command.Connection = connection;
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.CommandText = query;
+
+                        if (prms != null)
+                        {
+                            command.Parameters.AddRange(prms);
+                        }
+
+                        //connection.Open();
+                        DbDataAdapter adapter = Factory.CreateDataAdapter();
+                        adapter.SelectCommand = command;
+
+                        // Fill the DataTable.
+
+                        adapter.Fill(dsResult);
+
+                        //connection.Close();
+                    }
+                }
+            }
+            finally
+            {
+            }
+
+            return dsResult;
+        }
+
+
 
         /// <summary>
         /// Executes the scalar.
