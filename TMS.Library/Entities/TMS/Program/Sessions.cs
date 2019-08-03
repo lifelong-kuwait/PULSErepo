@@ -172,6 +172,7 @@ namespace TMS.Library.Entities.TMS.Program
         /// </summary>
         /// <value>The name of the class.</value>
         public string ClassName { get; set; }
+        public string ClassName2 { get; set; }
         /// <summary>
         /// Gets or sets the name of the trainer.
         /// </summary>

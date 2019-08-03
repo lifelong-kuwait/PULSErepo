@@ -242,6 +242,7 @@ namespace TMS.Business.Interfaces.Common.Configuration
         /// <param name="OpenId">The open identifier.</param>
         /// <returns>IList&lt;DDlList&gt;.</returns>
         IList<DDlList> ManageTrainer_GetAllByCultureBAL(string culture, int OpenType, long OpenId,long CompnayID);
+        IList<DDlList> ManageVenue_GetAllByCultureBAL(string culture, int OpenType, long OpenId, long CompnayID);
 
         #endregion Trainer
 

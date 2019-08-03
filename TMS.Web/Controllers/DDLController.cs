@@ -340,6 +340,9 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public JsonResult Trainer(int OpenType, long OpenId) => Json(_objIConfigBAL.ManageTrainer_GetAllByCultureBAL(CurrentCulture, OpenType, OpenId, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
         [DontWrapResult]
+        public JsonResult VenueByClassId(int OpenType, long OpenId) => Json(_objIConfigBAL.ManageVenue_GetAllByCultureBAL(CurrentCulture, OpenType, OpenId, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
+
+        [DontWrapResult]
         public JsonResult DDLTrainer() => Json(ddl.TrainerDDLBAL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
         [DontWrapResult]
         public JsonResult DDLVenue() => Json(ddl.VenueDDLBAL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);

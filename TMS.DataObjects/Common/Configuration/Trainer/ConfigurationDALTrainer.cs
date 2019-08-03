@@ -330,6 +330,26 @@ namespace TMS.DataObjects.Common.Configuration
                     return ExecuteListSp<DDlList>("TrainerOpenMapping_ByOpenIdAndTypeAndCulture", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OpenId", OpenId), ParamBuilder.Par("OpenType", OpenType), ParamBuilder.Par("OrganizationID", CompnayID));
             }
         }
+        /// <summary>
+        /// Manages the trainer get all by culture dal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <param name="OpenType">Type of the open.</param>
+        /// <param name="OpenId">The open identifier.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
+        public IList<DDlList> ManageVenue_GetAllByCultureDAL(string culture, int OpenType, long OpenId, long CompnayID)
+        {
+            //switch (OpenType)
+            //{
+            //    case -1:
+            //        return ExecuteListSp<DDlList>("TrainerOpenMapping_ForCourseGetAllByCulture", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OrganizationID", CompnayID));
+            //    case 3:
+            //        return ExecuteListSp<DDlList>("TrainerOpenMapping_ForCourseGetAllByCulture", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OrganizationID", CompnayID));
+
+            //    default:
+                    return ExecuteListSp<DDlList>("Venues_ByOpenIdAndTypeAndCulture", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OpenId", OpenId), ParamBuilder.Par("OpenType", OpenType), ParamBuilder.Par("OrganizationID", CompnayID));
+            //}
+        }
 
         #endregion Add Edit Delete GetAll GetByID for the Trainer
     }

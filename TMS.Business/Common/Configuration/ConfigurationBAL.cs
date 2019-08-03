@@ -345,6 +345,15 @@ namespace TMS.Business.Common.Configuration
         /// <returns>IList&lt;DDlList&gt;.</returns>
         public IList<DDlList> ManageTrainer_GetAllByCultureBAL(string culture, int OpenType, long OpenId, long CompnayID) => _ConfigurationDAL.ManageTrainer_GetAllByCultureDAL(culture, OpenType, OpenId,CompnayID);
 
+        /// <summary>
+        /// Manages the trainer get all by culture bal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <param name="OpenType">Type of the open.</param>
+        /// <param name="OpenId">The open identifier.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
+        public IList<DDlList> ManageVenue_GetAllByCultureBAL(string culture, int OpenType, long OpenId, long CompnayID) => _ConfigurationDAL.ManageVenue_GetAllByCultureDAL(culture, OpenType, OpenId, CompnayID);
+
         #endregion Trainer
 
         #region Vendors

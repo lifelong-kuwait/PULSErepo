@@ -131,7 +131,7 @@
           //  .OptionLabel(new { Text = lr.VenueOpenTypeOptionalLabel, Value = 0 })
             .DataSource(dataSource =>
             {
-                dataSource.Read(read => read.Action("Venues", "DDL").Data("filteSessionrrelateditems"))
+                dataSource.Read(read => read.Action("VenueByClassId", "DDL").Data("filteSessionrrelateditems"))
                 .ServerFiltering(true);
             }).CascadeFrom("ClassID"))
            

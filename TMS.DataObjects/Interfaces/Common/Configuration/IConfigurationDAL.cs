@@ -264,6 +264,14 @@ namespace TMS.DataObjects.Interfaces.Common.Configuration
         /// <param name="OpenId">The open identifier.</param>
         /// <returns>IList&lt;DDlList&gt;.</returns>
         IList<DDlList> ManageTrainer_GetAllByCultureDAL(string culture, int OpenType, long OpenId, long CompnayID);
+        /// <summary>
+        /// Manages the trainer get all by culture dal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <param name="OpenType">Type of the open.</param>
+        /// <param name="OpenId">The open identifier.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
+        IList<DDlList> ManageVenue_GetAllByCultureDAL(string culture, int OpenType, long OpenId, long CompnayID);
 
         #endregion Trainer
 

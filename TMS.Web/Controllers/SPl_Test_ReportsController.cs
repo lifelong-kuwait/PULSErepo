@@ -211,6 +211,12 @@ namespace TMS.Web.Controllers
         }
         [DontWrapResult]
         [HttpPost]
+        public JsonResult Class_Trainee(string classId)
+        {
+            return Json(ddl.Class_TraineeDDLBAL(CurrentCulture, CurrentUser.CompanyID, Convert.ToInt64(classId)), JsonRequestBehavior.AllowGet);
+        }
+        [DontWrapResult]
+        [HttpPost]
         public JsonResult Course_Class(string course)
         {
             return Json(ddl.Course_ClassDDLBAL(CurrentCulture, CurrentUser.CompanyID, Convert.ToInt64(course)), JsonRequestBehavior.AllowGet);

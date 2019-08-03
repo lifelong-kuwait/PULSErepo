@@ -43,7 +43,7 @@ namespace TMS.Web.Views.Report.SpLReports
             ReportViewerRSFReports.CssClass = "table";
             var rptPath = Server.MapPath(@"../../../Report/" + reportData.ReportName + ".rdlc");
             this.ReportViewerRSFReports.LocalReport.ReportPath = rptPath;
-            DataTable dt = _PersonBAL.GetTrainerDetailsForReports(CourseID, TrainerID);
+            DataTable dt = _PersonBAL.GetTraineeDetailsForReports(CourseID, TrainerID);
             ReportViewerRSFReports.ProcessingMode = ProcessingMode.Local;
             ReportViewerRSFReports.LocalReport.DataSources.Clear();
             ReportViewerRSFReports.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt));

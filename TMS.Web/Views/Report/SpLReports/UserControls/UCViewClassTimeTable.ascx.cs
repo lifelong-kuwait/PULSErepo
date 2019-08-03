@@ -218,7 +218,7 @@ namespace TMS.Web.Views.Report.SpLReports.UserControls
                 }
 
 
-                DataTable list = _PersonBAL.SessionsByCourseAndClassID( CourseID, ClassID, 90055);
+                DataTable list = _PersonBAL.SessionsByCourseAndClassID( CourseID, ClassID, CompanyID);
                 Table tb = new Table();
 
 

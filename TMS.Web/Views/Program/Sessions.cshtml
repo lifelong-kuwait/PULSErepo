@@ -239,18 +239,36 @@
                 },
                 function (isConfirm) {
                     if (isConfirm) {
-                        grid.removeRow(selectedRows);
-                        swal({
-                           title: '@lr.confirmDeleted',
-                           text:  '@lr.confirmDeletedMessage',
-                           type: "success"
-                       },
-                    function(){
-                        window.location="@Url.Content("~/Program/Sessions")";
+                        jQuery.ajax({
+                            method: "post",
+                            url: "/Program/SessionDelteChk",
+                            dataType: "JSON",
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify({ _Sessions: data.ID }),
+                            success: function (msg) {
+                                if (!msg) {
+                                    swal({
+                                        title: '@lr.Oops',
+                                        text: '@lr.AttandanceMarked ',
+                                        type: "error"
+                                    });
+                                } else {
+                                     grid.removeRow(selectedRows);
+                                        swal({
+                                           title: '@lr.confirmDeleted',
+                                           text:  '@lr.confirmDeletedMessage',
+                                           type: "success"
+                                       },
+                                    function(){
+                                         window.location="@Url.Content("~/Program/Sessions")";
+                                        });
+                                                }
+                                            }
                         });
+
                    }
                 });
-            } else if (checkedLength > 1) {
+            } @*else if (checkedLength > 1) {
                 var grid = jQuery("#SessionsGrid").data("kendoGrid");
 
                 swal({
@@ -282,7 +300,7 @@
 
 
 
-            } else {
+            }*@ else {
 
             }
         });
@@ -337,31 +355,24 @@
             </p>
             <p>
                 <label>
-                    Class Name
+                    Class Title :
                 </label>
                 <span>
-                    #:data.ClassName#
+                    #:data.ClassName2#
                 </span>
             </p>
             <p>
                 <label>
-                    Class Course
+                    Class Course :
                 </label>
                 <span>
                     #:data.CourseName#
                 </span>
             </p>
+
             <p>
                 <label>
-                    Class Language
-                </label>
-                <span>
-                    #:enumvalue(data.LanguageID,enumSesssionLangData)#
-                </span>
-            </p>
-            <p>
-                <label>
-                    Venue Name
+                    Venue Name :
                 </label>
                 <span>
                     #:data.VenueName#
@@ -369,14 +380,14 @@
             </p>
             <p>
                 <label>
-                    Schedule Info
+                    Schedule Info :
                 </label>
                 <label>
                     #=kendo.toString(data.ScheduleDate, '@DateFormatScript')#      #:data.StartTimeString#  #:data.EndTimeString#
                 </label>
             </p>
             <p>
-                <label>Status: </label>
+                <label>Status : </label>
                 <label>
                     #if (data.IsAttendanceMarked){ # <span class="mdi mdi-checkbox-blank-circle text-success"></span>    #}else{#  <span class="mdi mdi-checkbox-blank-circle text-danger"></span>  #}#
 

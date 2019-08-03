@@ -387,7 +387,25 @@ namespace TMS.Web.Controllers
                 }
             }
         }
-
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanDeleteClass")]
+        [DisableValidation]
+        public JsonResult ClassDelteChk(long _ClassID)
+        {
+            bool result = false;
+            int sessioncount = _ClassBAL.TMS_Classes_SessionCountBAL(_ClassID);
+            if (sessioncount > 0)
+            {
+                result = false;
+                //ModelState.AddModelError(lr.MaximumSessionConflictDelete, lr.MaximumSessionConflictDelete);
+            }
+            else
+            {
+                result = true;
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         [ClaimsAuthorize("CanViewProgramTrainee")]
         [DontWrapResult]
         public ActionResult ManageTrainee(long ClassId)

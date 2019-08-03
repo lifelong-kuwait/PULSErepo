@@ -29,7 +29,7 @@ function ClassTemplate(data) {
 " + @"#} else {#<div>Not Modified</div> </div>#}#");
     }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_ClassTemplate").DisplayDeleteConfirmation(false))
           .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>))
-     .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+     .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
      .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
      .Scrollable()
      .Events(e => e.Edit("ClassGrid_onEdit").Save("General_onSave"))
@@ -148,18 +148,36 @@ function ClassTemplate(data) {
                 },
                 function (isConfirm) {
                     if (isConfirm) {
-                        grid.removeRow(selectedRows);
-                        swal({
-                           title: '@lr.confirmDeleted',
-                           text:  '@lr.confirmDeletedMessage',
-                           type: "success"
-                       },
-                    function(){
-                         window.location="@Url.Content("~/Program/Class")";
+                        jQuery.ajax({
+                            method: "post",
+                            url: "/Program/ClassDelteChk",
+                            dataType: "JSON",
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify({ _ClassID: data.ID }),
+                            success: function (msg) {
+                                if (!msg) {
+                                    swal({
+                                        title: '@lr.Oops',
+                                        text: '@lr.MaximumSessionConflictDelete ',
+                                        type: "error"
+                                    });
+                                } else {
+                                     grid.removeRow(selectedRows);
+                                        swal({
+                                           title: '@lr.confirmDeleted',
+                                           text:  '@lr.confirmDeletedMessage',
+                                           type: "success"
+                                       },
+                                    function(){
+                                         window.location="@Url.Content("~/Program/Class")";
+                                        });
+                                                }
+                                            }
                         });
+
                    }
                 });
-            } else if (checkedLength > 1) {
+            }@*else if (checkedLength > 1) {
                 var grid = jQuery("#ClassGrid").data("kendoGrid");
 
 
@@ -189,7 +207,7 @@ function ClassTemplate(data) {
                         });
                    }
               });
-            } else {
+            }*@ else {
 
             }
         });
