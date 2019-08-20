@@ -1,160 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="VewTraineeAttendanceReportDataSet">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>b4470af0-3ce5-4a8d-a1aa-b27a558fed1d</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="VewTraineeAttendanceReportDataSet">
-      <Fields>
-        <Field Name="ID">
-          <DataField>ID</DataField>
-          <rd:TypeName>System.Int64</rd:TypeName>
-        </Field>
-        <Field Name="FullName">
-          <DataField>FullName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="CourseName">
-          <DataField>CourseName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ClassName">
-          <DataField>ClassName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Trainers">
-          <DataField>Trainers</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Coordinators">
-          <DataField>Coordinators</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Monday">
-          <DataField>Monday</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Tuesday">
-          <DataField>Tuesday</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Wednesday">
-          <DataField>Wednesday</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Thursday">
-          <DataField>Thursday</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Friday">
-          <DataField>Friday</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Saturday">
-          <DataField>Saturday</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Sunday">
-          <DataField>Sunday</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="SumP">
-          <DataField>SumP</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="SumA">
-          <DataField>SumA</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="SumL">
-          <DataField>SumL</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="SumQ">
-          <DataField>SumQ</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="StartDate">
-          <DataField>StartDate</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="EndDate">
-          <DataField>EndDate</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="RowIndex">
-          <DataField>RowIndex</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="SumU">
-          <DataField>SumU</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="AttendancePercentage">
-          <DataField>AttendancePercentage</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>VewTraineeAttendanceReportDataSet</DataSourceName>
-        <CommandText>/* Local Query */</CommandText>
-      </Query>
-      <rd:DataSetInfo>
-        <rd:DataSetName>VewTraineeAttendanceReportDataSet</rd:DataSetName>
-        <rd:SchemaPath>D:\EISApplication\SourceCode\Lifelong.EIS.TrainingWeb\VewTraineeAttendanceReportDataSet.xsd</rd:SchemaPath>
-        <rd:TableName>Tran_Attendances_GetReportData</rd:TableName>
-        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
-        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>Tran_Attendances_GetReportDataTableAdapter</rd:TableAdapterName>
-      </rd:DataSetInfo>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Tablix Name="Tablix2">
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.44133in</Width>
+              <Width>0.46886in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.43602in</Width>
+              <Width>0.46355in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.47244in</Width>
+              <Width>0.49997in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.47244in</Width>
+              <Width>0.49997in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.47244in</Width>
+              <Width>0.49997in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.47244in</Width>
+              <Width>0.49997in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.47244in</Width>
+              <Width>0.39488in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.22155in</Width>
+              <Width>0.24908in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.22155in</Width>
+              <Width>0.24908in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.22155in</Width>
+              <Width>0.24908in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.22155in</Width>
+              <Width>0.21783in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.22155in</Width>
+              <Width>0.322in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1438,7 +1323,7 @@ format(cdate(Fields!StartDate.Value).AddDays(6), "dddd") = "Friday", "LightGrey"
           <TablixMembers>
             <TablixMember>
               <TablixHeader>
-                <Size>0.20881in</Size>
+                <Size>0.23634in</Size>
                 <CellContents>
                   <Textbox Name="Textbox36">
                     <CanGrow>true</CanGrow>
@@ -1476,7 +1361,7 @@ format(cdate(Fields!StartDate.Value).AddDays(6), "dddd") = "Friday", "LightGrey"
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>1.61763in</Size>
+                    <Size>1.64516in</Size>
                     <CellContents>
                       <Textbox Name="Textbox18">
                         <CanGrow>true</CanGrow>
@@ -1516,7 +1401,7 @@ format(cdate(Fields!StartDate.Value).AddDays(6), "dddd") = "Friday", "LightGrey"
             </TablixMember>
             <TablixMember>
               <TablixHeader>
-                <Size>0.20881in</Size>
+                <Size>0.23634in</Size>
                 <CellContents>
                   <Textbox Name="Textbox37">
                     <CanGrow>true</CanGrow>
@@ -1555,7 +1440,7 @@ format(cdate(Fields!StartDate.Value).AddDays(6), "dddd") = "Friday", "LightGrey"
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>1.61763in</Size>
+                    <Size>1.64516in</Size>
                     <CellContents>
                       <Textbox Name="Textbox74">
                         <CanGrow>true</CanGrow>
@@ -1615,7 +1500,7 @@ format(cdate(Fields!StartDate.Value).AddDays(6), "dddd") = "Friday", "LightGrey"
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>0.20881in</Size>
+                    <Size>0.23634in</Size>
                     <CellContents>
                       <Textbox Name="Textbox38">
                         <CanGrow>true</CanGrow>
@@ -1651,7 +1536,7 @@ format(cdate(Fields!StartDate.Value).AddDays(6), "dddd") = "Friday", "LightGrey"
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>1.61763in</Size>
+                        <Size>1.64516in</Size>
                         <CellContents>
                           <Textbox Name="Group1">
                             <CanGrow>true</CanGrow>
@@ -1692,7 +1577,7 @@ format(cdate(Fields!StartDate.Value).AddDays(6), "dddd") = "Friday", "LightGrey"
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>0.20881in</Size>
+                    <Size>0.23634in</Size>
                     <CellContents>
                       <Textbox Name="Textbox39">
                         <CanGrow>true</CanGrow>
@@ -1737,7 +1622,7 @@ format(cdate(Fields!StartDate.Value).AddDays(6), "dddd") = "Friday", "LightGrey"
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>1.61763in</Size>
+                        <Size>1.64516in</Size>
                         <CellContents>
                           <Textbox Name="Textbox40">
                             <CanGrow>true</CanGrow>
@@ -1794,7 +1679,7 @@ format(cdate(Fields!StartDate.Value).AddDays(6), "dddd") = "Friday", "LightGrey"
         <Top>0.955in</Top>
         <Left>0.125in</Left>
         <Height>1in</Height>
-        <Width>6.17374in</Width>
+        <Width>6.49574in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2061,7 +1946,7 @@ format(cdate(Fields!StartDate.Value).AddDays(6), "dddd") = "Friday", "LightGrey"
     <Height>2.11379in</Height>
     <Style />
   </Body>
-  <Width>6.29874in</Width>
+  <Width>6.85082in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>
@@ -2069,6 +1954,122 @@ format(cdate(Fields!StartDate.Value).AddDays(6), "dddd") = "Friday", "LightGrey"
     <BottomMargin>1in</BottomMargin>
     <Style />
   </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="VewTraineeAttendanceReportDataSet">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>b4470af0-3ce5-4a8d-a1aa-b27a558fed1d</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="VewTraineeAttendanceReportDataSet">
+      <Query>
+        <DataSourceName>VewTraineeAttendanceReportDataSet</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="ID">
+          <DataField>ID</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="FullName">
+          <DataField>FullName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CourseName">
+          <DataField>CourseName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ClassName">
+          <DataField>ClassName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Trainers">
+          <DataField>Trainers</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Coordinators">
+          <DataField>Coordinators</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Monday">
+          <DataField>Monday</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Tuesday">
+          <DataField>Tuesday</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Wednesday">
+          <DataField>Wednesday</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Thursday">
+          <DataField>Thursday</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Friday">
+          <DataField>Friday</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Saturday">
+          <DataField>Saturday</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Sunday">
+          <DataField>Sunday</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SumP">
+          <DataField>SumP</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SumA">
+          <DataField>SumA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SumL">
+          <DataField>SumL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SumQ">
+          <DataField>SumQ</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="StartDate">
+          <DataField>StartDate</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="EndDate">
+          <DataField>EndDate</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RowIndex">
+          <DataField>RowIndex</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SumU">
+          <DataField>SumU</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="AttendancePercentage">
+          <DataField>AttendancePercentage</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>VewTraineeAttendanceReportDataSet</rd:DataSetName>
+        <rd:SchemaPath>D:\EISApplication\SourceCode\Lifelong.EIS.TrainingWeb\VewTraineeAttendanceReportDataSet.xsd</rd:SchemaPath>
+        <rd:TableName>Tran_Attendances_GetReportData</rd:TableName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>Tran_Attendances_GetReportDataTableAdapter</rd:TableAdapterName>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
   <EmbeddedImages>
     <EmbeddedImage Name="GUST_LOGO">
       <MIMEType>image/jpeg</MIMEType>
@@ -2080,6 +2081,6 @@ TXufX507Rqw1sunLdPrv18jx/qUJ3lSnp99jqZfCIvIIbmS6i8lYoYImBO07FEYxlM5d8kAf3sc9a+Lx
 0YJJx3OM/oAPyFSWLQAUAFAH/9k=</ImageData>
     </EmbeddedImage>
   </EmbeddedImages>
-  <rd:ReportID>86b0695e-c771-4163-8a9e-0b87344a0fc2</rd:ReportID>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>86b0695e-c771-4163-8a9e-0b87344a0fc2</rd:ReportID>
 </Report>

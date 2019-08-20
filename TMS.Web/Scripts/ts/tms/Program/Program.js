@@ -45,8 +45,18 @@ function CourseGrid_onEdit(e) {
     }
     else {
         // edit
-        jQuery("#CourseCategoryCode").text(e.model.CourseCode.split("-")[0]);
-        jQuery("#CourseCode").val(e.model.CourseCode.split("-")[1]).trigger("change");
+        var cstring = '';
+        console.log(e.model.CourseCategoryId);
+        jQuery.getJSON(baseurl + 'Program/CourseCategoryCode/' + e.model.CourseCategoryId, function (data) {
+            jQuery("#CourseCategoryCode").text(data);
+            var ret = e.model.CourseCode.replace(data+'-', '');
+            
+            jQuery("#CourseCode").val(ret).trigger("change");
+        });
+
+        
+        
+        
         jQuery(title).text(lr.EditRecordGeneralTitle);
         jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.UpdateRecordGeneralButton);
     }
@@ -146,7 +156,8 @@ function onChangeClassId(e) {
             if (!data.IsLastSessionExist && !data.MinTraineeNotAdded) {
                 updateSessionSettings(data);
             }
-            else { //CannotProceed
+            else {
+                //CannotProceed
                 if (data.IsLastSessionExist) {
                     swal({
                         title: lr.CannotProceed,
@@ -158,7 +169,8 @@ function onChangeClassId(e) {
                         customClass: "tmsconfirm border2pxsilid",
                     }, function (isConfirm) {
                         if (isConfirm) {
-                            jQuery("#SessionsGrid").data("kendoGrid").cancelRow();
+                            window.location.reload();
+                           // jQuery("#SessionsGrid").data("kendoGrid").refresh();
                         }
                         else {
                         }
@@ -177,7 +189,7 @@ function onChangeClassId(e) {
                         customClass: "tmsconfirm border2pxsilid",
                     }, function (isConfirm) {
                         if (isConfirm) {
-                            jQuery("#SessionsGrid").data("kendoGrid").cancelRow();
+                            window.location.reload();
                         }
                         else {
                         }

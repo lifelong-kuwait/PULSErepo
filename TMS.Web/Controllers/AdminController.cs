@@ -23,9 +23,11 @@ using TMS.Business.Interfaces.Common.Groups;
 using TMS.Library.Common.Groups;
 using TMS.Library.Entities.Common.Roles;
 using lr = Resources.Resources;
+using TMS.Web.Core;
 
 namespace TMS.Web.Controllers
 {
+    [SessionTimeout]
     public class AdminController : TMSControllerBase
     {
         private readonly IGroupsBAL _Groups;

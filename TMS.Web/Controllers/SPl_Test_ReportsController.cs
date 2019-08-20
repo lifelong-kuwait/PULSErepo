@@ -10,8 +10,11 @@ using TMS.Business.Interfaces.TMS;
 using TMS.Business.TMS;
 using TMS.Library.Entities.TMS.Program;
 using System.Globalization;
+using TMS.Web.Core;
+
 namespace TMS.Web.Controllers
 {
+    [SessionTimeout]
     public class SPl_Test_ReportsController : TMSControllerBase
     {
         DDLBAL ddl = new DDLBAL();

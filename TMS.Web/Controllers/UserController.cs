@@ -14,10 +14,12 @@ using TMS.Business.Interfaces.TMS;
 using TMS.Common;
 using TMS.Common.Utilities;
 using TMS.Library.Users;
+using TMS.Web.Core;
 using lr = Resources.Resources;
 
 namespace TMS.Web.Controllers
 {
+    [SessionTimeout]
     public class UserController : TMSControllerBase
     {
         private IBALUsers _UserBAL { get; set; }

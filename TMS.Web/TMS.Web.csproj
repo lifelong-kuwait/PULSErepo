@@ -286,6 +286,7 @@
     <Compile Include="Controllers\SalesAdministrationController.cs" />
     <Compile Include="Controllers\SPl_Test_ReportsController.cs" />
     <Compile Include="Controllers\TestWaqasControllerController.cs" />
+    <Compile Include="Core\SessionTimeoutAttribute.cs" />
     <Compile Include="DailySummaryDataset.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2476,6 +2477,9 @@
     <None Include="Properties\PublishProfiles\FolderProfile13.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile14.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile15.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile16.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile17.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile18.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile3.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile4.pubxml" />
@@ -4635,6 +4639,8 @@
     <Content Include="Views\SPl_Test_Reports\CoursePeriodicReport.cshtml" />
     <Content Include="Views\SPl_Test_Reports\VenueMatrixReport.cshtml" />
     <Content Include="Views\SPl_Test_Reports\Schedules.cshtml" />
+    <Content Include="Views\Config\_VenueClass.cshtml" />
+    <Content Include="Views\Config\EditorTemplates\_NestedVenueClassTemplate.cshtml" />
     <None Include="WeeklySummaryDataset.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>WeeklySummaryDataset1.Designer.cs</LastGenOutput>

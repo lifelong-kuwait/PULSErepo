@@ -10,10 +10,12 @@ using System.Web;
 using System.Web.Mvc;
 using TMS.Business.Interfaces.TMS;
 using TMS.Library.Users;
+using TMS.Web.Core;
 using lr = Resources.Resources;
 
 namespace TMS.Web.Controllers
 {
+    
     public class HomeController : TMSControllerBase
     {
         private readonly IBALUsers BALUsers;
@@ -25,11 +27,12 @@ namespace TMS.Web.Controllers
         }
         UserHistory userlogin = new UserHistory();
         LoginUsers objloginuser = new LoginUsers();
+        [SessionTimeout]
         public ActionResult Index()
         {
             return View();
         }
-
+        [SessionTimeout]
         public ActionResult Main()
         {
             return View();

@@ -6,7 +6,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.48958in</Width>
+              <Width>1.68093in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -99,7 +99,7 @@
           <TablixMembers>
             <TablixMember>
               <TablixHeader>
-                <Size>1in</Size>
+                <Size>1.19135in</Size>
                 <CellContents>
                   <Textbox Name="Textbox6">
                     <CanGrow>true</CanGrow>
@@ -138,7 +138,7 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>0.75in</Size>
+                    <Size>0.94135in</Size>
                     <CellContents>
                       <Textbox Name="Textbox108">
                         <CanGrow>true</CanGrow>
@@ -177,7 +177,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>1.09375in</Size>
+                        <Size>1.2851in</Size>
                         <CellContents>
                           <Textbox Name="Textbox106">
                             <CanGrow>true</CanGrow>
@@ -216,7 +216,7 @@
                       <TablixMembers>
                         <TablixMember>
                           <TablixHeader>
-                            <Size>0.90625in</Size>
+                            <Size>1.0976in</Size>
                             <CellContents>
                               <Textbox Name="Textbox104">
                                 <CanGrow>true</CanGrow>
@@ -274,7 +274,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>1in</Size>
+                <Size>1.19135in</Size>
                 <CellContents>
                   <Textbox Name="Group1">
                     <CanGrow>true</CanGrow>
@@ -310,7 +310,7 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>0.75in</Size>
+                    <Size>0.94135in</Size>
                     <CellContents>
                       <Textbox Name="Capacity">
                         <CanGrow>true</CanGrow>
@@ -346,7 +346,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>1.09375in</Size>
+                        <Size>1.2851in</Size>
                         <CellContents>
                           <Textbox Name="VenueCodeID">
                             <CanGrow>true</CanGrow>
@@ -382,7 +382,7 @@
                       <TablixMembers>
                         <TablixMember>
                           <TablixHeader>
-                            <Size>0.90625in</Size>
+                            <Size>1.0976in</Size>
                             <CellContents>
                               <Textbox Name="Cost">
                                 <CanGrow>true</CanGrow>
@@ -428,7 +428,7 @@
         <Top>1.22229in</Top>
         <Left>0.14833in</Left>
         <Height>0.46875in</Height>
-        <Width>5.23958in</Width>
+        <Width>6.19635in</Width>
         <Style>
           <Border>
             <Style>None</Style>

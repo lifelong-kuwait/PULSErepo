@@ -88,17 +88,20 @@
         @Html.LabelFor(model => model.TrainerID, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-7 col-lg-7 col-sm-11">
             @(Html.Kendo().DropDownListFor(m => m.TrainerID)
-            .HtmlAttributes(new { style = "width:100%" })
-            .DataTextField("Text")
-            .DataValueField("Value")
-            .OptionLabel(lr.TrainerOptionalLabel)
-            //  .OptionLabel(new { Text = lr.VenueOpenTypeOptionalLabel, Value = 0 })
-            .DataSource(dataSource =>
+                    .HtmlAttributes(new { style = "width:100%" })
+                    .DataTextField("Text")
+                    .DataValueField("Value")
+                    .OptionLabel(lr.TrainerOptionalLabel)
+                    //  .OptionLabel(new { Text = lr.VenueOpenTypeOptionalLabel, Value = 0 })
+                    .DataSource(dataSource =>
+                    {
+                        dataSource.Read(read => read.Action("Trainer", "DDL").Data("filteSessionrrelateditems"))
+                        .ServerFiltering(true);
+                    }).CascadeFrom("ClassID")
+            .Events(e =>
             {
-                dataSource.Read(read => read.Action("Trainer", "DDL").Data("filteSessionrrelateditems"))
-                .ServerFiltering(true);
-            }).CascadeFrom("ClassID"))
-
+                e.Change("onChange");
+            }))
             @Html.ValidationMessageFor(model => model.TrainerID)
         </div>
     </div>

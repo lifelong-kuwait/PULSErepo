@@ -69,7 +69,7 @@
     {
         if (User.IsInRole("CanViewVenue"))
         {
-            i.Add().Text(lr.VenueTabTitle).LoadContentFrom("ManageVenues", "Config", new { OpenId = Model.ID, Opentype = 2 });
+            i.Add().Text(lr.VenueTabTitle).LoadContentFrom("ManageVenuesClass", "Config", new { OpenId = Model.ID, Opentype = 2 });
         }
         if (User.IsInRole("CanViewProgramTrainer"))
         {

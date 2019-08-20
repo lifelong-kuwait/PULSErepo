@@ -7,11 +7,13 @@ using TMS.Business.Interfaces.Common.Configuration;
 using TMS.Business.Interfaces.Common.DDL;
 using TMS.Business.Interfaces.TMS.Organization;
 using TMS.Library;
+using TMS.Web.Core;
 using static TMS.UtilityFunctions;
 using lr = Resources.Resources;
 
 namespace TMS.Web.Controllers
 {
+    [SessionTimeout]
     public class DDLController : TMSControllerBase
     {
         public readonly IOrganizationBAL _objeobjIOrganizationBAL = null;//For the Resorces Table Interface
@@ -321,6 +323,9 @@ namespace TMS.Web.Controllers
 
         [DontWrapResult]
         public JsonResult Venues(int OpenType, long OpenId) => Json(_objIConfigBAL.Venues_GetAllByCultureBAL(CurrentCulture, OpenType, OpenId, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
+       
+        [DontWrapResult]
+        public JsonResult VenuesForClass(int OpenType, long OpenId) => Json(_objIConfigBAL.Venues_GetAllByClassBAL(CurrentCulture, OpenType, OpenId, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
 
         [DontWrapResult]
         public JsonResult ClasesbyCourseId()

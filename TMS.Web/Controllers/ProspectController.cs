@@ -13,10 +13,12 @@ using TMS.Library.Common.Attachment;
 using TMS.Library.Entities.CRM;
 using TMS.Library.TMS.Persons;
 using TMS.Library.TMS.Persons.Others;
+using TMS.Web.Core;
 using lr = Resources.Resources;
 
 namespace TMS.Web.Controllers
 {
+    [SessionTimeout]
     public class ProspectController : TMSControllerBase
     {
         private readonly IAttachmentBAL _AttachmentBAL;

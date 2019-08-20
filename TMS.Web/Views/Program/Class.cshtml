@@ -20,8 +20,8 @@ function ClassTemplate(data) {
             .Name("ClassGrid")
     .Columns(columns =>
     {
-        columns.Bound(e => e.PrimaryClassTitle).ClientTemplate("#=ClassTemplate(data)#");
-        columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy);
+        columns.Bound(e => e.PrimaryClassTitle).ClientTemplate("#=ClassTemplate(data)#").Filterable(true);
+        columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy).Filterable(true);
         columns.Bound(e => e.UpdatedByAlias).Width(170).Title(lr.ModifiedBy).
  ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"<span class='Addedby'>#=UpdatedByAlias# </span>
     <span class='date' >#=kendo.toString(UpdatedDate,'" + DateFormatScript + @"')#</span>
@@ -32,10 +32,11 @@ function ClassTemplate(data) {
      .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
      .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
      .Scrollable()
+     .Filterable()
      .Events(e => e.Edit("ClassGrid_onEdit").Save("General_onSave"))
      .HtmlAttributes(new { style = "height:700px !important;" })
      .DataSource(dataSource => dataSource.Ajax().ServerOperation(true).Model(model => { model.Id(m => m.ID); })
-     .PageSize(5)
+     .PageSize(50)
     .Read(read => read.Action("Class_Read", "Program").Data("withSearch"))
      .Create(read => read.Action("Class_Create", "Program"))
      .Destroy(read => read.Action("Class_Destroy", "Program"))

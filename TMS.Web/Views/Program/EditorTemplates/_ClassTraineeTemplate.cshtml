@@ -3,35 +3,35 @@
 @using Kendo.Mvc.UI.Fluent;
 
 @*<script id="PersonAsTrainerTempalte" type="text/kendo">
-    <div class=''>
         <div class=''>
-            <p>
-                <span class="heading">
-                    <b>
-                        #:data.P_DisplayName# # if (data.NickName!=null){ #(#:data.NickName#)  #}#
-                    </b>
-                </span>
-            </p>
+            <div class=''>
+                <p>
+                    <span class="heading">
+                        <b>
+                            #:data.P_DisplayName# # if (data.NickName!=null){ #(#:data.NickName#)  #}#
+                        </b>
+                    </span>
+                </p>
 
-            <p>
-                <label>
-                    #:data.PersonRegCode#
-                </label>
-                <span>
+                <p>
+                    <label>
+                        #:data.PersonRegCode#
+                    </label>
+                    <span>
 
-                </span>
-            </p>
-            <p>
-                <label>
-                    # if (data.Email!=null) { #  #:data.Email# #}#
-                </label>
-                <span>
+                    </span>
+                </p>
+                <p>
+                    <label>
+                        # if (data.Email!=null) { #  #:data.Email# #}#
+                    </label>
+                    <span>
 
-                </span>
-            </p>
+                    </span>
+                </p>
+            </div>
         </div>
-    </div>
-</script>*@
+    </script>*@
 
 <script id="PersonAsTraineeTempalte" type="text/kendo">
     <div class=''>
@@ -71,7 +71,18 @@
         </div>
     </div>
 </script>
+<script>
+    //jQuery(function () {
+    //    //debugger;
+    //    //jQuery(".tms-serach").live("click", function (event) {
+    //    //    // debugger;
+    //    //    console.log('hello');
+    //    //    // jQuery("#PersonGrid").data("kendoGrid").editRow(jQuery("[data-uid='" + jQuery(this).attr("dat-uid") + "']"));
+    //    //});
+    //});
+</script>
 <script type="text/javascript">
+    var searchtextval = '';
     function PersonAsTraineeTempalte(data) {
         if (data != null) {
             var personTemplate = kendo.template(jQuery("#PersonAsTraineeTempalte").html(), { useWithBlock: false });
@@ -79,44 +90,89 @@
         }
         return '';
     }
+    var wage = document.getElementById("searchBox1");
+    wage.addEventListener("keydown", function (e) {
+        if (e.keyCode === 13) {
+            searchtextval = wage.value;
+            jQuery('#TraineePersons').data('kendoGrid').dataSource.read();
+        }
+    });
+    document.getElementById("btnSearch1").addEventListener("click", function () {
+        searchtextval = wage.value;
+        jQuery('#TraineePersons').data('kendoGrid').dataSource.read();
+    });
 
     function onTraineePersonsChange(arg) {
         personids = this.selectedKeyNames().join(',');
-       
     }
+    function withSearch() {
+        return {
+            SearchText: searchtextval,
+        }
 
-   
-
+    }
+    
 </script>
 
-@(Html.Kendo().Grid<TMS.Library.TMS.Persons.Person>()
-            .Name("TraineePersons")
-      .Columns(columns =>
-      {
-          
-          columns.Select().Width(50).HeaderTemplate("");
-          columns.Bound(e => e.PersonRegCode).Title(lr.Trainee).ClientTemplate("#=PersonAsTraineeTempalte(data)#");
-          columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy);
-      })
-        .Sortable()
-        //.Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
-       .PersistSelection()
-         //.Events(ev => ev.Change("onChange"))
-        .Events(e => e.Edit("Grid_onEdit").Save("General_onSave").Change("onTraineePersonsChange"))
-        .Pageable(pager => pager.Refresh(true)).Scrollable().Filterable()
-        .HtmlAttributes(new { style = "height:550px;" }).DataSource(dataSource =>
-        dataSource.Ajax()
-        .Model(model =>
-        {
-            model.Id(p => p.ID);
-            //model.Field(p => p.ID).Editable(false);
-        }
-        )
-.PageSize(10)
-.Read(read => read.Action("ManageTraineePerson_Read", "Program", new { ClassID = Convert.ToInt64(ViewData["ClassID"]) }))
-.Events(e => e.Error("GeneralErrorHandler(\"TraineePersons\")").RequestEnd("GridRequestEndUpdate"))
-        ).NoRecords(lr.GridNoRecordFoundMessage)
-)
+<div class="pageheader2">
+    <div class="row tms-row">
+        <div class="gridsearch">
+            <div class="col-md-offset-1 col-md-10">
+                <div class="input-group">
+                    <div class="right-inner-addon">
+                        @*<i class="mdi mdi-magnify " id="btnSearch"></i>*@
+                        <span class="input-group-addon cursorPointer tms-gridsearch" id="btnSearch1"><i class="mdi mdi-magnify search-icon"></i></span>
+                        <input type="search" class="form-control tms-serach" id="searchBox1" placeholder="To search type and hit enter...">
+                        @*<span class="input-group-addon cursorPointer tms-gridsearch" id="btnSearch"><i class="mdi mdi-magnify search-icon"></i></span>*@
+                    </div>
 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<div class=" col-md-offset-1 col-md-10">
+        <div class="right-inner-addon">
+            <i class="mdi mdi-magnify "></i>
+            <input type="search" class="form-control tms-serach" name="keyword" placeholder="To search type and hit enter..." />
+        </div>
+    </div>*@
+
+@(Html.Kendo().Grid<TMS.Library.TMS.Persons.Person>()
+                                .Name("TraineePersons")
+                          .Columns(columns =>
+                          {
+                              columns.Select().HeaderTemplate(@<text><input name="selectedProducts" type="checkbox" title="select product"/> </text>).Width(50);
+                                       columns.Bound(e=> e.PersonRegCode).Filterable(true).Title(lr.Trainee).ClientTemplate("#=PersonAsTraineeTempalte(data)#");
+                                columns.Bound(e => e.AddedByAlias).Filterable(true).ClientTemplate("#=addedbytemplate(data)#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy);
+                                })
+                                .Sortable()
+                                .Selectable(selectable => selectable.Enabled(false))
+                                //.Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+                                .PersistSelection(true)
+                                //.Events(ev => ev.Change("onChange"))
+                                .Events(e => e.Edit("Grid_onEdit").Save("General_onSave").Change("onTraineePersonsChange"))
+                                //.Pageable(pager => pager.Refresh(false))
+                                .Scrollable()
+                                
+                                //.Pageable(pager => pager
+                                //.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true)
+                                // )
+
+                                .HtmlAttributes(new { style = "height:550px;" }).DataSource(dataSource =>
+                                dataSource.Ajax()
+                                .Model(model =>
+                                {
+                                model.Id(p => p.ID);
+                                //model.Field(p => p.ID).Editable(false);
+                                }
+                                )
+                                .PageSize(10000)
+                                .Read(read => read.Action("ManageTraineePerson_Read", "Program", new { ClassID = Convert.ToInt64(ViewData["ClassID"]) }).Data("withSearch"))
+                                .Events(e => e.Error("GeneralErrorHandler(\"TraineePersons\")").RequestEnd("GridRequestEndUpdate"))
+                                ).NoRecords(lr.GridNoRecordFoundMessage)
+                                )
 
 

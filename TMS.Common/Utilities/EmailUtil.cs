@@ -38,8 +38,8 @@ namespace TMS.Common.Utilities
         /// <returns>System.String.</returns>
         public string GetBody(Int64 _UserID,string Displayname, bool isPrimary,ref string Subject)
        {
-
-           string _URL = UtilityFunctions.AddQuerystringVar(UtilityFunctions.GetConfigurationValue("SITEURL") + ("User/Reset"), "uid", _UserID.ToString());
+            //UtilityFunctions.GetConfigurationValue("SITEURL")
+           string _URL = UtilityFunctions.AddQuerystringVar("http://13.88.187.74:9080/" + ("User/Reset"), "uid", _UserID.ToString());
            _URL = UtilityFunctions.AddQuerystringVar(_URL, "vc", "4");
            _URL = UtilityFunctions.AddQuerystringVar(_URL, "ts",  DateTime.Now.ToString("yyyyMMddHHmmssfff"));
            string fullname = Displayname;

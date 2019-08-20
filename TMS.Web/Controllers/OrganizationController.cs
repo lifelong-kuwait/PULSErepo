@@ -9,10 +9,12 @@ using TMS.Business.Interfaces.TMS.Organization;
 using TMS.Library.Common.Attachment;
 using TMS.Library.TMS.Organization;
 using TMS.Library.TMS.Organization.POC;
+using TMS.Web.Core;
 using lr = Resources.Resources;
 
 namespace TMS.Web.Controllers
 {
+    [SessionTimeout]
     public class OrganizationController : TMSControllerBase
     {
         private readonly IOrganizationBAL OrganizationBAL;

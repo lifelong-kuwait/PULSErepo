@@ -12,10 +12,12 @@ using TMS.Library.Entities.Common.Configuration.Vendor;
 using TMS.Library.Entities.Common.Configuration.Venues;
 using TMS.Library.Entities.Common.Roles;
 using TMS.Library.TMS.Admin.Config;
+using TMS.Web.Core;
 using lr = Resources.Resources;
 
 namespace TMS.Web.Controllers
 {
+    [SessionTimeout]
     public class ConfigController : TMSControllerBase
     {
         private readonly IConfigurationBAL _objConfigurationBAL;
@@ -294,6 +296,13 @@ namespace TMS.Web.Controllers
         {
             ViewData["OpenType"] = Opentype;
             return PartialView("_Venues", OpenId);
+        }
+        [ClaimsAuthorize("CanViewPrgramVenues")]
+        [DontWrapResult]
+        public ActionResult ManageVenuesClass(int Opentype, long OpenId)
+        {
+            ViewData["OpenType"] = Opentype;
+            return PartialView("_VenueClass", OpenId);
         }
 
         [DontWrapResult]

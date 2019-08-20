@@ -16,9 +16,10 @@ using TMS.Library;
 using TMS.Library.TMS.Persons;
 using TMS.Business.Interfaces.Common.Configuration;
 using Abp.Runtime.Validation;
-
+using TMS.Web.Core;
 namespace TMS.Web.Controllers
 {
+    [SessionTimeout]
     public class ProgramController : TMSControllerBase
     {
         private readonly ICourseBAL _CourseBAL;
@@ -212,6 +213,8 @@ namespace TMS.Web.Controllers
             var startRowIndex = (request.Page - 1) * request.PageSize;
             int Total = 0;
             var SearchText = Request.Form["SearchText"];
+            if(SearchText=="")
+                SearchText=null;
             if (request.PageSize == 0)
             {
                 request.PageSize = 10;
@@ -254,55 +257,15 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _Class.CreatedBy = CurrentUser.NameIdentifierInt64;
-                _Class.CreatedDate = DateTime.Now;
-                _Class.OrganizationID = CurrentUser.CompanyID;
-                _Class.StartTime = UtilityFunctions.MapValue<DateTime>(_Class.StartDate.ToShortDateString() + " " + _Class.StartTimeString, typeof(DateTime));
-                DateTime dtEndTime = UtilityFunctions.MapValue<DateTime>(_Class.EndDate.ToShortDateString() + " " + _Class.EndTimeString, typeof(DateTime));
-                if (dtEndTime < _Class.StartTime)
-                    dtEndTime = dtEndTime.AddDays(1);
-                _Class.EndTime = dtEndTime;
-                if (_Class.EvaluationLink == null)
+                DateTime t1 = Convert.ToDateTime(_Class.StartTimeString);
+                DateTime t2 = Convert.ToDateTime(_Class.EndTimeString);
+                int value = DateTime.Compare(t1, t2);
+                // checking 
+                if (value < 0)
                 {
-                    _Class.EvaluationLink = "";
-                }
-                if (_Class.FollowUp == null)
-                {
-                    _Class.FollowUp = "";
-                }
-
-
-                _Class.ID = _ClassBAL.TMS_Classes_CreateBAL(_Class);
-                string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                if (string.IsNullOrEmpty(ip))
-                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
-                // string browserName = req.Browser.Browser;
-                _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
-
-            }
-
-            var resultData = new[] { _Class };
-            return Json(resultData.ToDataSourceResult(request, ModelState));
-        }
-
-        [ClaimsAuthorize("CanAddEditClass")]
-        [DontWrapResult]
-        public ActionResult Class_Update([DataSourceRequest] DataSourceRequest request, Classes _Class)
-        {
-            if (ModelState.IsValid)
-            {
-                int sessioncount = _ClassBAL.TMS_Classes_SessionCountBAL(_Class.ID);
-                if (_Class.MaximumSessionPerDay < sessioncount)
-                {
-                    ModelState.AddModelError(lr.MaximumSessionConflict, lr.MaximumSessionConflict);
-                }
-                else
-                {
-
-
-                    _Class.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                    _Class.UpdatedDate = DateTime.Now;
+                    _Class.CreatedBy = CurrentUser.NameIdentifierInt64;
+                    _Class.CreatedDate = DateTime.Now;
+                    _Class.OrganizationID = CurrentUser.CompanyID;
                     _Class.StartTime = UtilityFunctions.MapValue<DateTime>(_Class.StartDate.ToShortDateString() + " " + _Class.StartTimeString, typeof(DateTime));
                     DateTime dtEndTime = UtilityFunctions.MapValue<DateTime>(_Class.EndDate.ToShortDateString() + " " + _Class.EndTimeString, typeof(DateTime));
                     if (dtEndTime < _Class.StartTime)
@@ -316,13 +279,75 @@ namespace TMS.Web.Controllers
                     {
                         _Class.FollowUp = "";
                     }
-                    _ClassBAL.TMS_Classes_UpdateBAL(_Class);
+
+
+                    _Class.ID = _ClassBAL.TMS_Classes_CreateBAL(_Class);
                     string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
                     if (string.IsNullOrEmpty(ip))
                         ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
                     // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
                     // string browserName = req.Browser.Browser;
-                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Update, System.Web.HttpContext.Current.Request.Browser.Browser);
+                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+
+                }
+                else
+                {
+                    ModelState.AddModelError(lr.SessionTimeConflict, lr.StartandEndDateConflict);
+                }
+            }
+
+            var resultData = new[] { _Class };
+            return Json(resultData.ToDataSourceResult(request, ModelState));
+        }
+
+        [ClaimsAuthorize("CanAddEditClass")]
+        [DontWrapResult]
+        public ActionResult Class_Update([DataSourceRequest] DataSourceRequest request, Classes _Class)
+        {
+            if (ModelState.IsValid)
+            {
+                DateTime t1 = Convert.ToDateTime(_Class.StartTimeString);
+                DateTime t2 = Convert.ToDateTime(_Class.EndTimeString);
+                int value = DateTime.Compare(t1, t2);
+                // checking 
+                if (value < 0)
+                {
+                    int sessioncount = _ClassBAL.TMS_Classes_SessionCountBAL(_Class.ID);
+                    if (_Class.MaximumSessionPerDay < sessioncount)
+                    {
+                        ModelState.AddModelError(lr.MaximumSessionConflict, lr.MaximumSessionConflict);
+                    }
+                    else
+                    {
+
+
+                        _Class.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                        _Class.UpdatedDate = DateTime.Now;
+                        _Class.StartTime = UtilityFunctions.MapValue<DateTime>(_Class.StartDate.ToShortDateString() + " " + _Class.StartTimeString, typeof(DateTime));
+                        DateTime dtEndTime = UtilityFunctions.MapValue<DateTime>(_Class.EndDate.ToShortDateString() + " " + _Class.EndTimeString, typeof(DateTime));
+                        if (dtEndTime < _Class.StartTime)
+                            dtEndTime = dtEndTime.AddDays(1);
+                        _Class.EndTime = dtEndTime;
+                        if (_Class.EvaluationLink == null)
+                        {
+                            _Class.EvaluationLink = "";
+                        }
+                        if (_Class.FollowUp == null)
+                        {
+                            _Class.FollowUp = "";
+                        }
+                        _ClassBAL.TMS_Classes_UpdateBAL(_Class);
+                        string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                        if (string.IsNullOrEmpty(ip))
+                            ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                        // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
+                        // string browserName = req.Browser.Browser;
+                        _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Update, System.Web.HttpContext.Current.Request.Browser.Browser);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(lr.SessionTimeConflict, lr.StartandEndDateConflict);
                 }
             }
 
@@ -338,7 +363,7 @@ namespace TMS.Web.Controllers
             if (ModelState.IsValid)
             {
                 int sessioncount = _ClassBAL.TMS_Classes_SessionCountBAL(_Class.ID);
-                if (sessioncount>0)
+                if (sessioncount > 0)
                 {
                     ModelState.AddModelError(lr.MaximumSessionConflictDelete, lr.MaximumSessionConflictDelete);
                 }
@@ -366,6 +391,29 @@ namespace TMS.Web.Controllers
 
         [ClaimsAuthorize("CanViewClass")]
         public ActionResult ClassDetail()
+        {
+            var id = Request.QueryString["id"];
+            if (string.IsNullOrEmpty(id))
+            {
+                return RedirectPermanent(Url.Content("~/Program/Class"));
+            }
+            else
+            {
+                var data = _ClassBAL.TMS_Classes_GetByIdBAL(id);
+                if (data == null)
+                {
+                    ViewData["model"] = Url.Content("~/Program/Class");
+                    return View("Static/NotFound");
+                }
+                else
+                {
+                    ViewData["model"] = data;
+                    return View();
+                }
+            }
+        }
+        [ClaimsAuthorize("CanViewClass")]
+        public ActionResult ClassDetail2()
         {
             var id = Request.QueryString["id"];
             if (string.IsNullOrEmpty(id))
@@ -624,7 +672,7 @@ namespace TMS.Web.Controllers
                 {
                     Data = Class,
                     Total = Total   /// Process data (paging and sorting applied)
-                                  //Total = Total // Total number of records
+                    //Total = Total // Total number of records
                 };
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
@@ -1415,31 +1463,49 @@ namespace TMS.Web.Controllers
             {
                 if (VerifyBussinessRules(_Sessions))
                 {
-                    _Sessions.CreatedBy = CurrentUser.NameIdentifierInt64;
-                    _Sessions.CreatedDate = DateTime.Now;
-                    _Sessions.OrganizationID = CurrentUser.CompanyID;
-                    _Sessions.ClassID = ClassID;
-                    if (VerifyBussinessRules(_Sessions))
+                    DateTime t1 = Convert.ToDateTime(_Sessions.StartTimeString);
+                    DateTime t2 = Convert.ToDateTime(_Sessions.EndTimeString);
+                    int value = DateTime.Compare(t1, t2);
+                    // checking 
+                    if (value < 0)
                     {
-                        if (_SessionBAL.GetSessionVenueOccupancyDetailBAL(_Sessions) > 0)
+
+
+                        _Sessions.CreatedBy = CurrentUser.NameIdentifierInt64;
+                        _Sessions.CreatedDate = DateTime.Now;
+                        _Sessions.OrganizationID = CurrentUser.CompanyID;
+                        _Sessions.ClassID = ClassID;
+                        if (VerifyBussinessRules(_Sessions))
                         {
-                            ModelState.AddModelError(lr.VenueOcupaidByOther, lr.VenueOcupaidByOther);
-                        }
-                        else
-                        {
-                            _Sessions.ID = this._SessionBAL.TMS_Sessions_CreateBAL(_Sessions);
-                            string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                            if (string.IsNullOrEmpty(ip))
-                                ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                            // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
-                            // string browserName = req.Browser.Browser;
-                            _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+                            if (_SessionBAL.GetSessionVenueOccupancyDetailBAL(_Sessions) > 0)
+                            {
+                                ModelState.AddModelError(lr.VenueOcupaidByOther, lr.VenueOcupaidByOther);
+                            }
+                            else
+                            {
+                                _Sessions.ID = this._SessionBAL.TMS_Sessions_CreateBAL(_Sessions);
+                                string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                                if (string.IsNullOrEmpty(ip))
+                                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                                // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
+                                // string browserName = req.Browser.Browser;
+                                _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+
+                            }
+
 
                         }
-
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(lr.SessionTimeConflict, lr.StartandEndDateConflict);
 
                     }
+
+
                 }
+
+
             }
 
             var resultData = new[] { _Sessions };
@@ -1456,19 +1522,32 @@ namespace TMS.Web.Controllers
                 _Sessions.UpdatedDate = DateTime.Now;
                 if (VerifyBussinessRules(_Sessions))
                 {
-                    if (_SessionBAL.GetSessionVenueOccupancyDetailBAL(_Sessions) > 0)
+                    //int value = DateTime.Compare(_Sessions.StartTime, _Sessions.EndTime);
+                    DateTime t1 = Convert.ToDateTime(_Sessions.StartTimeString);
+                    DateTime t2 = Convert.ToDateTime(_Sessions.EndTimeString);
+                    int value = DateTime.Compare(t1, t2);
+                    // checking 
+                    if (value < 0)
                     {
-                        ModelState.AddModelError(lr.VenueOcupaidByOther, lr.VenueOcupaidByOther);
+                        if (_SessionBAL.GetSessionVenueOccupancyDetailBAL(_Sessions) > 0)
+                        {
+                            ModelState.AddModelError(lr.VenueOcupaidByOther, lr.VenueOcupaidByOther);
+                        }
+                        else
+                        {
+                            this._SessionBAL.TMS_Sessions_UpdateBAL(_Sessions);
+                            string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                            if (string.IsNullOrEmpty(ip))
+                                ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                            // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
+                            // string browserName = req.Browser.Browser;
+                            _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Update, System.Web.HttpContext.Current.Request.Browser.Browser);
+                        }
                     }
                     else
                     {
-                        this._SessionBAL.TMS_Sessions_UpdateBAL(_Sessions);
-                        string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                        if (string.IsNullOrEmpty(ip))
-                            ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                        // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
-                        // string browserName = req.Browser.Browser;
-                        _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Update, System.Web.HttpContext.Current.Request.Browser.Browser);
+                        ModelState.AddModelError(lr.SessionTimeConflict, lr.StartandEndDateConflict);
+
                     }
                 }
             }
@@ -1559,7 +1638,7 @@ namespace TMS.Web.Controllers
             }
             else if (!result.IsValidSessionDateTime)
             {
-                ModelState.AddModelError(lr.SessionStartTime, lr.SessionIsValidSessionDateTime);
+                ModelState.AddModelError(lr.SessionTimeConflict, lr.SessionIsValidSessionTime);
                 return false;
             }
             else if (!result.IsValidScheduleDate)
@@ -1577,11 +1656,17 @@ namespace TMS.Web.Controllers
                 ModelState.AddModelError(lr.VenueName, lr.SessionIsValidVenueTime);
                 return false;
             }
+            else if (!result.IsValidVenueAvailabilityTime)
+            {
+                ModelState.AddModelError(lr.VenueAvailabelTimeRange, lr.VenueAvailabelTimeRangeIssue);
+                return false;
+            }
             else if (!string.IsNullOrEmpty(result.ConflictNames.Trim()))
             {
                 ModelState.AddModelError(lr.ClassMaximumSessionPerDay, string.Format(lr.SessionConflictNames, result.ConflictNames.Trim()));
                 return false;
             }
+           
             return isValid;
             //if (CurrentSessionPresenter.MaximumLimitReached(ClassID, CurrentSessionID, ObjSession.ScheduleDate)) //some how completed
             //{
@@ -1797,6 +1882,7 @@ namespace TMS.Web.Controllers
                 {
                     foreach (var _Attendance in Attendance)
                     {
+
                         _Attendance.CreatedBy = CurrentUser.NameIdentifierInt64;
                         _Attendance.CreatedOn = DateTime.Now;
                         _Attendance.UpdatedBy = CurrentUser.NameIdentifierInt64;
@@ -1832,6 +1918,7 @@ namespace TMS.Web.Controllers
                         _Attendance.Date = DateTime.Now;
                         _Attendance.OrganizationID = CurrentUser.CompanyID;
                         _Attendance.ID = _AttendanceBAL.MarkTraineesAttendanceBAL(_Attendance, Atttype);
+
                     }
                 }
             }

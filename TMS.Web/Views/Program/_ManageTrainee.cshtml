@@ -22,51 +22,67 @@
              PersonIds: personids, cid: '@Model'
          }
     }
+   
 
+    function onClick(e) {
+        if (jQuery(e.target).hasClass("k-checkbox-label")) {
+            return;
+        }
+       var row = jQuery(e.target).closest("tr");
+        var checkbox = jQuery(row).find(".k-checkbox");
+        checkbox.checked = true;
+        checkbox.click();
+    };
 
 </script>
-
 <div class="ChildGrid">
     @(Html.Kendo().Grid<TMS.Library.Entities.TMS.Program.ClassTraineeMapping>()
-            .Name("ManageTrainee" + Model)
-      .Columns(columns =>
-      {
-          columns.Select().Width(50).HeaderTemplate("");
-          columns.Bound(e => e.PersonID).Title(lr.Trainee).ClientTemplate("#=PersonTemplate(data)#");
-          //columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy);
+                            .Name("ManageTrainee" + Model)
+                      .Columns(columns =>
+                      {
 
-      }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_ClassTraineeTemplate").DisplayDeleteConfirmation(false).AdditionalViewData(new { ClassID = Model }))
-                    .ToolBar(toolbar => toolbar.Template(@<text> @RenderAddTemplate()</text>))
-        .Sortable()
-        .Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+                          columns.Select().Width(50);
+                          columns.Bound(e => e.PersonID).Title(lr.Trainee).ClientTemplate("#=PersonTemplate(data)#");
+              //columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy);
 
-        .PersistSelection()
-        .Pageable(pager => pager.Refresh(true)).Scrollable().Filterable().Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
-        .HtmlAttributes(new { style = "height:350px;" }).DataSource(dataSource =>
-        dataSource.Ajax().Model(model => { model.Id(m => m.ID); model.Field(p => p.Person).DefaultValue(new TMS.Library.TMS.Persons.Person()); })
-        .PageSize(8)
-        .Read(read => read.Action("ManageTrainee_Read", "Program", new { ClassID = Model }))
-        .Create(read => read.Action("ManageTrainee_Create", "Program").Data("filterPersontoadded"))
-        .Destroy(read => read.Action("ManageTrainee_Destroy", "Program"))
+          }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_ClassTraineeTemplate").DisplayDeleteConfirmation(false).AdditionalViewData(new { ClassID = Model }))
+                                    .ToolBar(toolbar => toolbar.Template(@<text> @RenderAddTemplate()</text>))
+                                     .Sortable()
+                                    
+                                        .Selectable(selection =>
+                                        {
+                                            selection.Enabled(false);
+                                           
+                                        })
+                                        .PersistSelection(true)
+                                        
+                                        .Pageable(pager => pager.Refresh(true)).Scrollable().Filterable().Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
+                                        .HtmlAttributes(new { style = "height:350px;" }).DataSource(dataSource =>
+                                        dataSource.Ajax().Model(model => { model.Id(m => m.ID); model.Field(p => p.Person).DefaultValue(new TMS.Library.TMS.Persons.Person()); })
+                                        .PageSize(8)
+                                        
+                                        .Read(read => read.Action("ManageTrainee_Read", "Program", new { ClassID = Model }))
+                                        .Create(read => read.Action("ManageTrainee_Create", "Program").Data("filterPersontoadded"))
+                                        .Destroy(read => read.Action("ManageTrainee_Destroy", "Program"))
 
-        .Events(e => e.Error("GeneralErrorHandler(\"ManageTrainee" + Model + "\")").RequestEnd("GridRequestEndUpdate"))
-                        ).NoRecords(lr.GridNoRecordFoundMessage)
+                                        .Events(e => e.Error("GeneralErrorHandler(\"ManageTrainee" + Model + "\")").RequestEnd("GridRequestEndUpdate"))
+                                                        ).NoRecords(lr.GridNoRecordFoundMessage)
     )
 
     @helper RenderAddTemplate()
     {
-    <div class="toolbar">
-        @*@if (User.IsInAnyRoles("CanAddEditProgramTrainee"))
-            {*@
-        <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
-        @*}*@
-        @if (User.IsInAnyRoles("CanDeleteProgramTrainee"))
-        {
-            <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
-        }
-    </div>
+        <div class="toolbar">
+            @*@if (User.IsInAnyRoles("CanAddEditProgramTrainee"))
+                {*@
+            <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+            @*}*@
+            @if (User.IsInAnyRoles("CanDeleteProgramTrainee"))
+            {
+                <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+            }
+        </div>
 
-}
+    }
 </div>
 
 <script id="PersonTemplate" type="text/kendo">

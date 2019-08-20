@@ -273,7 +273,11 @@ namespace TMS.Business.Common.Configuration
         {
             return _ConfigurationDAL.Venues_GetAllByCultureDAL(culture, OpenType, OpenId,CompnayID);
         }
-
+       
+        public IList<DDlList> Venues_GetAllByClassBAL(string culture, int OpenType, long OpenId, long CompnayID)
+        {
+            return _ConfigurationDAL.Venues_GetAllByClassDAL(culture, OpenType, OpenId, CompnayID);
+        }
         public IList<DDlList> Venues_GetAllByCultureBAL(string culture, long CompnayID)
         {
             return _ConfigurationDAL.Venues_GetAllByCultureDAL(culture, CompnayID);

@@ -182,7 +182,7 @@ namespace TMS.Web.Views.Report.SpLReports.UserControls
                 DataSource.Columns.Add("Time");
 
                 var start = DateTime.Today;
-                var clockQuery = from offset in Enumerable.Range(16, 28)
+                var clockQuery = from offset in Enumerable.Range(15, 34)
                                  select start.AddMinutes(30 * offset);
                 //adding times in the ist column
                 foreach (var time in clockQuery)

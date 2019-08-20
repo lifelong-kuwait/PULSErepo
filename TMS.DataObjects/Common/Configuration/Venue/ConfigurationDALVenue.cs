@@ -329,6 +329,20 @@ namespace TMS.DataObjects.Common.Configuration
             }
            
         }
+        /// <summary>
+        /// Venues the get all by culture dal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <param name="OpenType">Type of the open.</param>
+        /// <param name="OpenId">The open identifier.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
+        public IList<DDlList> Venues_GetAllByClassDAL(string culture, int OpenType, long OpenId, long CompnayID)
+        {
+           
+                return ExecuteListSp<DDlList>("VenueOpenMapping_GetByClassVenues", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OpenId", OpenId), ParamBuilder.Par("OpenType", 3));
+            
+
+        }
 
         public IList<DDlList> Venues_GetAllByCultureDAL(string culture, long CompnayID)
         {

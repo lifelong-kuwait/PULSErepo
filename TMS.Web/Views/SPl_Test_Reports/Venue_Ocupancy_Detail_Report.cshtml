@@ -180,7 +180,7 @@
             startDate=kendo.toString(startDate, "dd/MM/yyyy");
             var datepickerend = jQuery("#End_Date").data("kendoDatePicker");
             endtDate = new Date(datepickerend.value());
-            endtDate = kendo.toString(startDate, "dd/MM/yyyy");
+            endtDate = kendo.toString(endtDate, "dd/MM/yyyy");
             if (jQuery("#Class").data("kendoDropDownList").value().trim().length <= 0 || jQuery("#Course").data("kendoDropDownList").value().trim().length <=  0 || jQuery("#Venue").data("kendoDropDownList").value().trim().length <=  0) {
 
             } else {

@@ -18,9 +18,10 @@ using TMS.Library;
 using TMS.Business.Interfaces.Common.Configuration;
 using TMS.Library.Entities.CRM;
 using Abp.Runtime.Validation;
-
+using TMS.Web.Core;
 namespace TMS.Web.Controllers
 {
+    [SessionTimeout]
     public class PeopleController : TMSControllerBase
     {
         private readonly IAttachmentBAL _AttachmentBAL;

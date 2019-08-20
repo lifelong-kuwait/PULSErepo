@@ -4018,7 +4018,15 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("SessionStartTime", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Start Time</summary>
+        public static string SessionTimeConflict
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("SessionTimeConflict", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>End Time</summary>
         public static string SessionEndTime {
                get {
@@ -4060,7 +4068,24 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("ClassMaximumSessionPerDay", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+
+        /// <summary>Maximum Session Per Day</summary>
+        public static string VenueAvailabelTimeRange
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("VenueAvailabelTimeRange", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>Maximum Session Per Day</summary>
+        public static string VenueAvailabelTimeRangeIssue
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("VenueAvailabelTimeRangeIssue", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>Minimum Trainee</summary>
         public static string ClassMinimumTrainee {
                get {
@@ -4950,7 +4975,15 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("SessionIsValidSessionDateTime", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Specified date/time for the session conflicts with other sessions of the class</summary>
+        public static string SessionIsValidSessionTime
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("SessionIsValidSessionTime", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>Scheduled date should be between class start and end dates</summary>
         public static string SessionIsValidScheduleDate {
                get {

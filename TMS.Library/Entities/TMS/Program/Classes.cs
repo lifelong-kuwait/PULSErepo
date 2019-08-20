@@ -883,6 +883,11 @@ namespace TMS.Library.Entities.TMS.Program
         /// </summary>
         /// <value>The conflict names.</value>
         public string ConflictNames { get; set; }
+        /// <summary>
+        /// Gets or sets the conflict names.
+        /// </summary>
+        /// <value>The conflict names.</value>
+        public bool IsValidVenueAvailabilityTime { get; set; }
     }
 
     /// <summary>

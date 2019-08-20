@@ -6,25 +6,25 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.06696in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.06696in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.06696in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.06696in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.06696in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.06696in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.06696in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -505,7 +505,7 @@
         </TablixRowHierarchy>
         <DataSetName>DS_ClassReportByCourseCategoryID</DataSetName>
         <Height>0.5in</Height>
-        <Width>7in</Width>
+        <Width>7.46875in</Width>
         <Style>
           <Border>
             <Style>None</Style>
