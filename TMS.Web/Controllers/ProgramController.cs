@@ -1593,11 +1593,11 @@ namespace TMS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
         [ClaimsAuthorize("CanDeleteSession")]
-        [DisableValidation]
-        public JsonResult SessionDelteChk(int _Sessions)
+        
+        public JsonResult SessionDelteChk(string _Sessions)
         {
             bool result = false;
-            var _returnValue = _CourseBAL.TMS_SessionAttendance_GetAllByIDBAL(_Sessions);
+            var _returnValue = _CourseBAL.TMS_SessionAttendance_GetAllByIDBAL(Convert.ToInt32(_Sessions));
             if (_returnValue.Count > 0)
             {
                 result = false;

@@ -290,7 +290,7 @@
                 grid = jQuery("#PersonGrid").data("kendoGrid");
                 var data = grid.dataItem(jQuery("#PersonGrid tr.k-state-selected"));
                 var url = '@Url.Content("~/Trainer/DetailCard?pid=")' + data.ID;
-                console.log(data.ID);
+               
                 window.open(url, '_blank');
             } else {
 

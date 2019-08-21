@@ -4641,6 +4641,7 @@
     <Content Include="Views\SPl_Test_Reports\Schedules.cshtml" />
     <Content Include="Views\Config\_VenueClass.cshtml" />
     <Content Include="Views\Config\EditorTemplates\_NestedVenueClassTemplate.cshtml" />
+    <Content Include="Views\User\ResetUserPassword.cshtml" />
     <None Include="WeeklySummaryDataset.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>WeeklySummaryDataset1.Designer.cs</LastGenOutput>

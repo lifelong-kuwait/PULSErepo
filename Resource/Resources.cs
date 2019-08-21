@@ -2419,7 +2419,37 @@ namespace Resources {
                get {
                    return (string) resourceProvider.GetResource("Areyousureyouwanttodeletethisrecord", CultureInfo.CurrentUICulture.Name);
                }
+        }  /// <summary>Are you sure you want to delete this record?</summary>
+        public static string SomeFieldsAreEmpty
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("SomeFieldsAreEmpty", CultureInfo.CurrentUICulture.Name);
             }
+        }
+        /// <summary>Are you sure you want to delete this record?</summary>
+        public static string SomeFieldsAreEmptyOrNewPasswordMustBeGreater
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("SomeFieldsAreEmptyOrNewPasswordMustBeGreater", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>Are you sure you want to delete this record?</summary>
+        public static string NewPasswordDoesnotMatch
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("NewPasswordDoesnotMatch", CultureInfo.CurrentUICulture.Name);
+            }
+        } /// <summary>Are you sure you want to delete this record?</summary>
+        public static string NewPasswordDoesnotMatchExplain
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("NewPasswordDoesnotMatchExplain", CultureInfo.CurrentUICulture.Name);
+            }
+        }
         /// <summary>Are you sure you want to delete this record?</summary>
         public static string AttandanceMarked
         {
@@ -3460,7 +3490,14 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("UserConfirmPassword", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Confirm New Password</summary>
+        public static string UserConfirmNewPassword
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("UserConfirmNewPassword", CultureInfo.CurrentUICulture.Name);
+            }
+        }
         /// <summary>Confirm Password and Password do not match</summary>
         public static string UserConfirmPasswordNotMatch {
                get {

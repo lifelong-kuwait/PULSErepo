@@ -22,12 +22,13 @@ namespace TMS.Web.Controllers
     [SessionTimeout]
     public class UserController : TMSControllerBase
     {
+
         private IBALUsers _UserBAL { get; set; }
         private readonly IAttachmentBAL _AttachmentBAL;
         private readonly IGroupsBAL _Groups;
         public UserController(IBALUsers balUser, IAttachmentBAL _AttachmentBAL, IGroupsBAL _Groups)
         {
-            _UserBAL = balUser; this._AttachmentBAL = _AttachmentBAL; this._Groups=_Groups;
+            _UserBAL = balUser; this._AttachmentBAL = _AttachmentBAL; this._Groups = _Groups;
         }
 
         public ActionResult Async_Save(IEnumerable<HttpPostedFileBase> files)
@@ -120,6 +121,24 @@ namespace TMS.Web.Controllers
                 return RedirectPermanent("~/Home/Login");
             }
         }
+        public ActionResult ResetUserPassword()
+        {
+            //need to update the logic check if the user belong to system then show him the change c password then also check on timestamp like only k=link is valid for thee 24 hours
+            //long UserID = Convert.ToInt64(UtilityFunctions.GetQueryString("uid"));
+            //string timestamp = UtilityFunctions.GetQueryString("ts");
+            //long CurrentPersonID = Convert.ToInt32(UtilityFunctions.GetQueryString("pid"));
+            //long ChangePassword = Convert.ToInt32(UtilityFunctions.GetQueryString("vc"));
+            //if ((UserID > 0 && ChangePassword > 0) || (CurrentPersonID > 0 && ChangePassword > 0))
+            //{
+
+            return View();
+            //}
+            //else
+            //{
+            //    return RedirectPermanent("~/Home/Login");
+            //}
+        }
+
         [HttpPost]
         public ActionResult Reset(ChangePasswordModel model)
         {
@@ -137,6 +156,36 @@ namespace TMS.Web.Controllers
             }
             return View(model);
         }
+        [HttpPost]
+        public JsonResult ResetPassword(string oldPassword,string newPassword,string confirmPassword)
+        {
+            bool result = false;
+            var _objUser = this._UserBAL.LoginUserBAL(CurrentUser.Email);
+            if (_objUser != null)//check if the email is found
+            {
+                if (Crypto.VerifyPassword(oldPassword, _objUser.Password))
+                {
+                    result = true;
+                }
+                 if(newPassword.Equals(confirmPassword))
+                {
+                    result = true;
+                }
+            }
+            if(result)
+            { 
+            LoginUsers _objUsers = new LoginUsers
+                {
+                    Password = Crypto.CreatePasswordHash(newPassword),
+                    UserID = Convert.ToInt64(Session["UserId"]),
+                    UpdatedBy = Convert.ToInt64(Session["UserId"]),
+                    UpdatedDate = DateTime.UtcNow
+                };
+                var res = this._UserBAL.LoginUsers_UpdatePasswordBAL(_objUsers);
+                
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         [ClaimsAuthorize("CanViewUsers")]
         public ActionResult Index()
         {
@@ -148,7 +197,7 @@ namespace TMS.Web.Controllers
         public ActionResult LoginUser_Read([DataSourceRequest] DataSourceRequest request)
         {
             var startRowIndex = (request.Page - 1) * request.PageSize;
-         //   int Total = 0;
+            //   int Total = 0;
             var SearchText = Request.Form["SearchText"];
             if (request.PageSize == 0)
             {
@@ -229,7 +278,7 @@ namespace TMS.Web.Controllers
                         _objUsers.CreatedDate = DateTime.Now;
                         _objUsers.CompanyID = CurrentUser.CompanyID;
                         _objUsers.AddedByAlias = CurrentUser.Name;
-                        _objUsers.Password = "";                        
+                        _objUsers.Password = "";
                         _objUsers.UserID = this._UserBAL.LoginUsers_CreateBAL(ref _objUsers);//.PersonEmailAddress_CreateBAL(_objGroups);
                         if (_objUsers.IsSendCreatePasswordEmail)
                         {
@@ -258,12 +307,12 @@ namespace TMS.Web.Controllers
             return Json(resultData.ToDataSourceResult(request, ModelState));
         }
 
-       
+
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
         [ActivityAuthorize]
         [ClaimsAuthorize("CanAddEditUsers")]
-        public ActionResult LoginUser_Update([DataSourceRequest] DataSourceRequest request, LoginUsers _objUsers,string filename, long aid)
+        public ActionResult LoginUser_Update([DataSourceRequest] DataSourceRequest request, LoginUsers _objUsers, string filename, long aid)
         {
             if (ModelState.IsValid)
             {
@@ -400,11 +449,28 @@ namespace TMS.Web.Controllers
         {
             if (CurrentUser.CompanyID > 0)
             {
-                return Json(this._Groups.TMS_Groups_GetAllByOrganizationCultureBAL(CurrentCulture,CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
+                return Json(this._Groups.TMS_Groups_GetAllByOrganizationCultureBAL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
             }
-            else {
+            else
+            {
                 return Json(this._Groups.TMS_Groups_GetAllByCultureBAL(CurrentCulture), JsonRequestBehavior.AllowGet);
             }
+        }
+        [DontWrapResult]
+        public JsonResult UserPasswordVerify(string _password)
+        {
+            bool result = false;
+            var _objUser = this._UserBAL.LoginUserBAL(CurrentUser.Email);
+            if (_objUser != null)//check if the email is found
+            {
+                if (Crypto.VerifyPassword(_password, _objUser.Password))
+                {
+                    result = true;
+                }
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+
         }
         #endregion
     }

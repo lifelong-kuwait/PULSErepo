@@ -39,6 +39,89 @@
         display: none;
     }
 </style>
+<style>
+    #loader {
+        position: relative;
+        left: 50%;
+        top: 50%;
+        z-index: 1;
+        width: 150px;
+        height: 150px;
+        margin: -75px 0 0 -75px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 120px;
+        height: 120px;
+        display: none;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+
+    -webkit-keyframes spin {
+        0%
+
+    {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+
+    }
+
+    keyframes spin {
+        0%
+
+    {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+
+    }
+
+
+    .animate-bottom {
+        position: relative;
+        -webkit-animation-name: animatebottom;
+        -webkit-animation-duration: 1s;
+        animation-name: animatebottom;
+        animation-duration: 1s
+    }
+
+    -webkit-keyframes animatebottom {
+        from
+
+    {
+        bottom: -100px;
+        opacity: 0
+    }
+
+    to {
+        bottom: 0px;
+        opacity: 1
+    }
+
+    }
+
+    keyframes animatebottom {
+        from
+
+    {
+        bottom: -100px;
+        opacity: 0
+    }
+
+    to {
+        bottom: 0;
+        opacity: 1
+    }
+    }
+</style>
 
 
 <style>
@@ -69,18 +152,18 @@
             @Html.Label("Course", new { @class = "col-md-3 col-lg-3 control-label" })
             <div class="col-md-7 col-lg-7 col-sm-11">
                 @(Html.Kendo().DropDownList()
-                                                                                                                                                                   .Name("Course")
-                                                                                                                                                                   .DataTextField("Text")
-                                                                                                                                                                   .DataValueField("Value")
-                                                                                                                                                                   .OptionLabel("--Please select Course--")
-                                                                                                                                                                   .DataSource(source =>
-                                                                                                                                                                   {
-                                                                                                                                                                       source.Read(read =>
-                                                                                                                                                                       {
-                                                                                                                                                                           read.Action("Course", "DDL");
-                                                                                                                                                                       });
-                                                                                                                                                                   })
-                                                                                                                                                                  .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
+                                                                                                                                                                           .Name("Course")
+                                                                                                                                                                           .DataTextField("Text")
+                                                                                                                                                                           .DataValueField("Value")
+                                                                                                                                                                           .OptionLabel("--Please select Course--")
+                                                                                                                                                                           .DataSource(source =>
+                                                                                                                                                                           {
+                                                                                                                                                                               source.Read(read =>
+                                                                                                                                                                               {
+                                                                                                                                                                                   read.Action("Course", "DDL");
+                                                                                                                                                                               });
+                                                                                                                                                                           })
+                                                                                                                                                                          .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
                 )
 
             </div>
@@ -91,19 +174,19 @@
             @Html.Label("Class", new { @class = "col-md-3 col-lg-3 control-label" })
             <div class="col-md-7 col-lg-7 col-sm-11">
                 @(Html.Kendo().DropDownList()
-                                                                                                                                                                    .Name("Class")
-                                                                                                                                                                    .DataTextField("Text")
-                                                                                                                                                                    .DataValueField("Value")
-                                                                                                                                                                   .OptionLabel("--Please select Class--")
-                                                                                                                                                                    //.DataSource(source =>
-                                                                                                                                                                    //{
-                                                                                                                                                                    //    source.Read(read =>
-                                                                                                                                                                    //    {
-                                                                                                                                                                    //        read.Action("Classes", "DDL");
-                                                                                                                                                                    //    });
-                                                                                                                                                                    //})
-                                                                                                                                                                    .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
-                                                                                                                                                                                                                                                        .HtmlAttributes(new { style = "width: 100%" })
+                                                                                                                                                                            .Name("Class")
+                                                                                                                                                                            .DataTextField("Text")
+                                                                                                                                                                            .DataValueField("Value")
+                                                                                                                                                                           .OptionLabel("--Please select Class--")
+                                                                                                                                                                            //.DataSource(source =>
+                                                                                                                                                                            //{
+                                                                                                                                                                            //    source.Read(read =>
+                                                                                                                                                                            //    {
+                                                                                                                                                                            //        read.Action("Classes", "DDL");
+                                                                                                                                                                            //    });
+                                                                                                                                                                            //})
+                                                                                                                                                                            .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
+                                                                                                                                                                                                                                                                .HtmlAttributes(new { style = "width: 100%" })
                 )
             </div>
         </div>
@@ -113,11 +196,11 @@
             @Html.Label("Trainee", new { @class = "col-md-3 col-lg-3 control-label" })
             <div class="col-md-7 col-lg-7 col-sm-11">
                 @(Html.Kendo().DropDownList()
-                                                                                                                                                                   .Name("Trainee")
-                                                                                                                                                                   .DataTextField("Text")
-                                                                                                                                                                   .DataValueField("Value")
-                                                                                                                                                                   .OptionLabel("--Please select Trainer--")
-                                                                                                                                                                  .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
+                                                                                                                                                                           .Name("Trainee")
+                                                                                                                                                                           .DataTextField("Text")
+                                                                                                                                                                           .DataValueField("Value")
+                                                                                                                                                                           .OptionLabel("--Please select Trainer--")
+                                                                                                                                                                          .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
                 )
 
             </div>
@@ -125,15 +208,16 @@
     </div>
     <div class="form-group col-md-2 col-lg-2 col-sm-2" style="margin-left:65%;margin-top:1%;">
         @(Html.Kendo().Button()
-                                                                                                                                                               .Name("H2")
-                                                                                                                                                               .HtmlAttributes(new { type = "button", @class = "btn btn-primary k-primary" })
-                                                                                                                                                               .Content("" + @lr.ActivitySummaryReport + "")
+                                                                                                                                                                       .Name("H2")
+                                                                                                                                                                       .HtmlAttributes(new { type = "button", @class = "btn btn-primary k-primary" })
+                                                                                                                                                                       .Content("" + @lr.ActivitySummaryReport + "")
         )
     </div>
 </div>
+<div id="loader"></div>
 <div class="row">
     <div class="col-lg-10">
-        <iframe id="ifrmReportViewer" frameborder="0" EnableEventValidation="false" src="" width="1000" height="1000" style="overflow:hidden;" allowtransparency="true" allowfullscreen></iframe>
+        <iframe id="ifrmReportViewer" frameborder="0" EnableEventValidation="false" src="" width="1000" height="1000" style="overflow:hidden;" allowtransparency="true" onload="showPage();" allowfullscreen></iframe>
     </div>
 </div>
 
@@ -141,19 +225,21 @@
     jQuery(function () {
         jQuery("#H2").live("click", function (event) {
             jQuery("#H2").attr("disabled", true);
-            if (jQuery("#Class").data("kendoDropDownList").value().trim().length <= 0 || jQuery("#Course").data("kendoDropDownList").value().trim().length <= 0 || jQuery("#Trainee").data("kendoDropDownList").value().trim().length <=0) {
+            if (jQuery("#Class").data("kendoDropDownList").value().trim().length <= 0 || jQuery("#Course").data("kendoDropDownList").value().trim().length <= 0 || jQuery("#Trainee").data("kendoDropDownList").value().trim().length <= 0) {
 
             } else {
                 url = "../Views/Report/SpLReports/TraineeDetailReport.aspx?rptmode=local&reportname=Tran_TraineeDetailReport&ClassID=" + jQuery("#Class").data("kendoDropDownList").value() + "&CourseID=" + jQuery("#Course").data("kendoDropDownList").value() + "&trainer=" + jQuery("#Trainee").data("kendoDropDownList").value() + "";
-            var myframe = document.getElementById("ifrmReportViewer");
-            if (myframe !== null) {
-                if (myframe.src) {
-                    myframe.src = url;
-                }
-                else if (myframe.contentWindow !== null && myframe.contentWindow.location !== null) {
-                    myframe.contentWindow.location = url;
-                }
-                else { myframe.setAttribute('src', url); }
+                var myframe = document.getElementById("ifrmReportViewer");
+                if (myframe !== null) {
+                    if (myframe.src) {
+                        myframe.src = url;
+                        document.getElementById("loader").style.display = "block";
+                       
+                    }
+                    else if (myframe.contentWindow !== null && myframe.contentWindow.location !== null) {
+                        myframe.contentWindow.location = url;
+                    }
+                    else { myframe.setAttribute('src', url); }
                 }
             }
             jQuery("#H2").attr("disabled", false);
@@ -217,4 +303,12 @@
             });
         });
     });
+</script>
+<script>
+   
+
+    function showPage() {
+        document.getElementById("loader").style.display = "none";
+
+    }
 </script>
