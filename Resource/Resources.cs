@@ -748,14 +748,22 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("PersonBasicInfoTab", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+       
         /// <summary>Registration Code</summary>
         public static string PersonRegistrationCode {
                get {
                    return (string) resourceProvider.GetResource("PersonRegistrationCode", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Registration Code</summary>
+        public static string clientstatus
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("clientstatus", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>Select Salutation</summary>
         public static string PersonSalutationRequired {
                get {
@@ -2463,6 +2471,13 @@ namespace Resources {
             get
             {
                 return (string)resourceProvider.GetResource("Oopss", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string SessionAttandanceMarked
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("SessionAttandanceMarked", CultureInfo.CurrentUICulture.Name);
             }
         }
 
@@ -5466,7 +5481,13 @@ namespace Resources {
                 return (string)resourceProvider.GetResource("TraineeRegistrationNo", CultureInfo.CurrentUICulture.Name);
             }
         }
-
+        public static string RollNo
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("RollNo", CultureInfo.CurrentUICulture.Name);
+            }
+        }
 
         public static string MarkAllPresent
         {

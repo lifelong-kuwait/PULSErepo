@@ -110,7 +110,7 @@ namespace TMS.DataObjects.Interfaces.Common.DDL
         /// User the get allfor DDL dal.
         /// </summary>
         /// <returns>IList&lt;DDlList&gt;.</returns>
-        IList<DDlList> UserGetAllforDDL_DAL();
+        IList<DDlList> UserGetAllforDDL_DAL(long companyId);
 
         /// <summary>
         /// User the get allfor DDL dal.

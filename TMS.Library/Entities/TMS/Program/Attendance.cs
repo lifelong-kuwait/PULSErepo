@@ -50,7 +50,7 @@ namespace TMS.Library.Entities.TMS.Program
 
         public string TraineeName { get; set; }
 
-
+        public string RollNo { get; set; }
         public DateTime Date { get; set; }
 
         public Boolean IsMarked { get; set; }
@@ -98,6 +98,7 @@ namespace TMS.Library.Entities.TMS.Program
             this.UpdatedOn = Convert.ToDateTime(dr["UpdatededOn"]);
             this.IsDeleted = Convert.ToBoolean(dr["IsDeleted"]);
             this.IsActive = Convert.ToBoolean(dr["IsActive"]);
+            this.RollNo = Convert.ToString(dr["RollNo"]);
         }
         #endregion
 

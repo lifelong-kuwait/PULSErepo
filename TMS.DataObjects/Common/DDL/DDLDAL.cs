@@ -158,9 +158,9 @@ namespace TMS.DataObjects.Common.DDL
             return ExecuteListSp<DDlList>("TMS_PersonDDL", ParamBuilder.Par("OrganizationID", CompanyID));
 
         }
-        public IList<DDlList> UserGetAllforDDL_DAL()
+        public IList<DDlList> UserGetAllforDDL_DAL(long CompanyId)
         {
-            return ExecuteListSp<DDlList>("TMS_UserDDL");
+            return ExecuteListSp<DDlList>("TMS_UserDDL", ParamBuilder.Par("CompantID", CompanyId));
         }
 
         public IList<DDlList> UserGetAllUnassignedforDDL_DAL()

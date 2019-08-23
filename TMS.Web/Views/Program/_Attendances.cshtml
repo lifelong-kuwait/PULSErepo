@@ -14,9 +14,13 @@
         <table class="table table-striped" id="tbl">
             <thead>
                 <tr>
-                  
+
                     <th>
                         @lr.TraineeRegistrationNo
+
+                    </th>
+                    <th>
+                        @lr.RollNo
 
                     </th>
                     <th>
@@ -26,45 +30,50 @@
                         @lr.AttendanceType
                     </th>
                     <th>
-                       
-                        <p><b> Mark All Present </b> @Html.RadioButton("Present", "Mark All Present")
+
+                        <p>
+                            <b> Mark All Present </b> @Html.RadioButton("Present", "Mark All Present")
 
                             @Html.RadioButton("Present", "Absent All", new { @checked = true, @id = "Markpresent" })
                             @*<span class="glyphicon glyphicon-refresh"></span>*@
                         </p>
-                      
+
                     </th>
-                  
+
                 </tr>
             </thead>
     
         <tbody>
             @for (var i = 0; i < Model.Count; i++)
             {
-                <tr>
-                   
-                    <td>
-                        @Html.TextBoxFor(m => m[i].ClassTraineesID, new { @readonly = "readonly" })
+            <tr>
 
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => m[i].TraineeName)
+                <td>
+                    @Html.TextBoxFor(m => m[i].RollNo, new { @readonly = "readonly" })
 
-                    </td>
-                    <td>
-                        @(Html.Kendo().DropDownListFor(m => m[i].AttendanceType).DataTextField("Text").DataValueField("Value")
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m[i].ClassTraineesID, new { @readonly = "readonly" })
 
-  .HtmlAttributes(new { @class = "form-control", style = "width:200px" })
-  .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.AttendanceType>(typeof(TMS.Library.AttendanceType))))
+                </td>
+                <td>
+                    @Html.DisplayFor(m => m[i].TraineeName)
 
-         </td>
-                    <td>
-                        @Html.HiddenFor(m => m[i].ID)
+                </td>
+                <td>
+                    @(Html.Kendo().DropDownListFor(m => m[i].AttendanceType).DataTextField("Text").DataValueField("Value")
 
-                    </td>
-                  
-                   
-                </tr>
+      .HtmlAttributes(new { @class = "form-control", style = "width:200px" })
+      .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.AttendanceType>(typeof(TMS.Library.AttendanceType))))
+
+                </td>
+                <td>
+                    @Html.HiddenFor(m => m[i].ID)
+
+                </td>
+
+
+            </tr>
             }
             <tr>
                 <td></td>

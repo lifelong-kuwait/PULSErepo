@@ -207,7 +207,7 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public JsonResult UserAll()
         {
-            return Json(_objIDDLBAL.UserGetAllforDDL_BAL(), JsonRequestBehavior.AllowGet);
+            return Json(_objIDDLBAL.UserGetAllforDDL_BAL(CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
         }
 
         [DontWrapResult]

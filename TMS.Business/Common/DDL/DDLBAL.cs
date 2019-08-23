@@ -172,9 +172,9 @@ namespace TMS.Business.Common.DDL
         /// Users the get allfor DDL bal.
         /// </summary>
         /// <returns>IList&lt;DDlList&gt;.</returns>
-        public IList<DDlList> UserGetAllforDDL_BAL()
+        public IList<DDlList> UserGetAllforDDL_BAL(long companyId)
         {
-            return DAL.UserGetAllforDDL_DAL();
+            return DAL.UserGetAllforDDL_DAL(companyId);
         }
 
         /// <summary>

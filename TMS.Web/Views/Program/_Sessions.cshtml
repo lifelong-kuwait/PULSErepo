@@ -78,7 +78,7 @@
 " + @"#} else {#<div>Not Modified</div> </div>#}#");
     }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_SessionNestedTemplate").DisplayDeleteConfirmation(false))
           .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>))
-     .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+     .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
      .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
      .Scrollable()
      .Events(e => e.Edit("SessionGridNested_onEdit").Save("General_onSave"))

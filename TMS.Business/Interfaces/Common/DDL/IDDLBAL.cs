@@ -114,7 +114,7 @@ namespace TMS.Business.Interfaces.Common.DDL
         /// Users the get allfor DDL bal.
         /// </summary>
         /// <returns>IList&lt;DDlList&gt;.</returns>
-        IList<DDlList> UserGetAllforDDL_BAL();
+        IList<DDlList> UserGetAllforDDL_BAL(long companyId);
 
         IList<DDlList> UserGetAllUnassignedforDDL_BAL();
 
