@@ -70,7 +70,7 @@ namespace TMS.Library.TMS.Persons
         /// <value>The first name of the p.</value>
         [Display(Name = "PersonP_FirstName", ResourceType = typeof(lr))]
         [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "PersonP_FirstNameRequired")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "PersonP_FirstNameRequired")]
+        //[RegularExpression(@"^[a-zA-Z]+$", ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "PersonP_FirstNameRequired")]
         public string P_FirstName { get; set; }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace TMS.Library.TMS.Persons
         /// <value>The last name of the p.</value>
         [Display(Name = "PersonP_LastName", ResourceType = typeof(lr))]
         [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "PersonP_LastNameRequired")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "PersonP_LastNameRequired")]
+       // [RegularExpression(@"^[a-zA-Z]+$", ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "PersonP_LastNameRequired")]
         public string P_LastName { get; set; }
 
         /// <summary>

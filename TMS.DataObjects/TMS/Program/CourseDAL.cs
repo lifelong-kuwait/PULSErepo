@@ -455,7 +455,8 @@ namespace TMS.DataObjects.TMS
         {
 
             return ExecuteScalarInt32Sp("TMS_CourseFocusArea_Update",
-                            ParamBuilder.Par("ID", _Coordinate.ID),
+                            ParamBuilder.Par("FocusID", _Coordinate.ID),
+                            ParamBuilder.Par("OldID", _Coordinate.OLdID),
                             ParamBuilder.Par("CourseID", CourseId),
                             ParamBuilder.Par("ModifiedBy", _Coordinate.UpdatedBy),
                             ParamBuilder.Par("ModifiedDate", _Coordinate.UpdatedDate));

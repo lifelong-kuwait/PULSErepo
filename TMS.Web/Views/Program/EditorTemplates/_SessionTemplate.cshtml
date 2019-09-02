@@ -3,10 +3,14 @@
 <script type="text/javascript">
     function filteSessionrrelateditems() {
         return {
-            OpenId: jQuery("#ClassID").val(), OpenType: 2
+            OpenId: jQuery("#ClassID").val(), OpenType: 2, 
         };
     }
-
+    function filteSessionrrelateditems2() {
+        return {
+            ClassID: jQuery("#ClassID").val()
+        };
+    }
 </script>
 <div class="Alertbox alert alert-danger" style="display:none">
     <ul class="errors"></ul>
@@ -38,12 +42,16 @@
         @Html.LabelFor(model => model.LanguageID, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-7 col-lg-7 col-sm-11">
             @(Html.Kendo().DropDownListFor(m => m.LanguageID)
-            .HtmlAttributes(new { style = "width:100%" })
-            .DataTextField("Text")
-            .DataValueField("Value")
-            .OptionLabel(lr.ClassLanguageOptionalLabel)
-            // .OptionLabel(new { Text = lr.CourseCategoryOptionalLabel, Value = 0 })
-            .DataSource(dataSource => { dataSource.Read(read => read.Action("Lang", "DDL")); }))
+                    .HtmlAttributes(new { style = "width:100%" })
+                    .DataTextField("Text")
+                    .DataValueField("Value")
+                    .OptionLabel(lr.ClassLanguageOptionalLabel)
+                     // .OptionLabel(new { Text = lr.CourseCategoryOptionalLabel, Value = 0 })
+                     .DataSource(dataSource =>
+                     {
+                         dataSource.Read(read => read.Action("LanguageClassDDL", "DDL").Data("filteSessionrrelateditems2"))
+                        .ServerFiltering(true);
+                     }).CascadeFrom("ClassID"))
             @Html.ValidationMessageFor(model => model.LanguageID)
         </div>
     </div>

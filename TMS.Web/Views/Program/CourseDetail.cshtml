@@ -141,8 +141,10 @@
                 closeOnCancel: true,
                 customClass:"tmsconfirm"
             },
-               function(isConfirm){
+                function (isConfirm) {
+                   
                    if (isConfirm) {
+                      
                        jQuery("#CourseDetailGrid").data("kendoGrid").removeRow(selectedrow);
                        swal({
                            title: '@lr.confirmDeleted',

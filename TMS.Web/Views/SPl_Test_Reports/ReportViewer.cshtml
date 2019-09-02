@@ -233,6 +233,11 @@
         });
         jQuery("#Course").live("change", function (event) {
             var classId = jQuery("#Course").data("kendoDropDownList").value();
+            console.log(classId);
+            var ddl = jQuery("#Class").data("kendoDropDownList");
+            ddl.dataSource.data([]); // clears dataSource
+            ddl.text(""); // clears visible text
+            ddl.value(""); 
             if (jQuery("#Course").data("kendoDropDownList").value().trim().length <= 0) {
 
             } else {
@@ -258,7 +263,6 @@
     });
     function showPage() {
         document.getElementById("loader").style.display = "none";
-
     }
 </script>
 <script type="text/javascript">

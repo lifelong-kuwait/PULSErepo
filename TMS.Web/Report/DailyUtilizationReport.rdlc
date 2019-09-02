@@ -1,124 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="DailyUtilizationReport">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>2463f7c6-263c-4bcf-a1db-55b525870858</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DailyUtilizationReport">
-      <Fields>
-        <Field Name="VenueName">
-          <DataField>VenueName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Capacity">
-          <DataField>Capacity</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ScheduleDate">
-          <DataField>ScheduleDate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="AvailableTime">
-          <DataField>AvailableTime</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Utilization">
-          <DataField>Utilization</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Seven">
-          <DataField>Seven</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Eight">
-          <DataField>Eight</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Nine">
-          <DataField>Nine</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Ten">
-          <DataField>Ten</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Eleven">
-          <DataField>Eleven</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Twelwe">
-          <DataField>Twelwe</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Thirteen">
-          <DataField>Thirteen</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Fourteen">
-          <DataField>Fourteen</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Fifteen">
-          <DataField>Fifteen</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Sixteen">
-          <DataField>Sixteen</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Seventeen">
-          <DataField>Seventeen</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Eighteen">
-          <DataField>Eighteen</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Nineteen">
-          <DataField>Nineteen</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Twenty">
-          <DataField>Twenty</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Twentyone">
-          <DataField>Twentyone</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Twentytwo">
-          <DataField>Twentytwo</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Twentythree">
-          <DataField>Twentythree</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Twentyfour">
-          <DataField>Twentyfour</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DailyUtilizationReport</DataSourceName>
-        <CommandText>/* Local Query */</CommandText>
-      </Query>
-      <rd:DataSetInfo>
-        <rd:DataSetName>DailyUtilizationReport</rd:DataSetName>
-        <rd:SchemaPath>D:\Gust\EISApplication\SourceCode\Lifelong.EIS.TrainingWeb\DailyUtilizationReport.xsd</rd:SchemaPath>
-        <rd:TableName>Tran_Class_DailyUtilizationReport</rd:TableName>
-        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
-        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>Tran_Class_DailyUtilizationReportTableAdapter</rd:TableAdapterName>
-      </rd:DataSetInfo>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Tablix Name="Tablix1">
@@ -1642,7 +1523,7 @@
   <Width>19.35977in</Width>
   <Page>
     <PageHeader>
-      <Height>1in</Height>
+      <Height>1.06125in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1660,6 +1541,38 @@
             </Border>
           </Style>
         </Image>
+        <Textbox Name="Textbox1">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Venue Daily Utilization Report</Value>
+                  <Style>
+                    <FontSize>30pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox1</rd:DefaultName>
+          <Top>0.50917in</Top>
+          <Left>2.93999in</Left>
+          <Height>0.4375in</Height>
+          <Width>6.20459in</Width>
+          <ZIndex>1</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
       </ReportItems>
       <Style>
         <Border>
@@ -1715,9 +1628,7 @@
               <TextRuns>
                 <TextRun>
                   <Value>="Page " &amp; Globals!PageNumber &amp; " of " &amp; Globals!TotalPages</Value>
-                  <Style>
-                    <FontSize>8pt</FontSize>
-                  </Style>
+                  <Style />
                 </TextRun>
               </TextRuns>
               <Style>
@@ -1745,10 +1656,8 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>=DateString()</Value>
-                  <Style>
-                    <FontSize>8pt</FontSize>
-                  </Style>
+                  <Value>=Globals!ExecutionTime</Value>
+                  <Style />
                 </TextRun>
               </TextRuns>
               <Style>
@@ -1786,6 +1695,126 @@
     <BottomMargin>1in</BottomMargin>
     <Style />
   </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DailyUtilizationReport">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>2463f7c6-263c-4bcf-a1db-55b525870858</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DailyUtilizationReport">
+      <Query>
+        <DataSourceName>DailyUtilizationReport</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="VenueName">
+          <DataField>VenueName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Capacity">
+          <DataField>Capacity</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ScheduleDate">
+          <DataField>ScheduleDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="AvailableTime">
+          <DataField>AvailableTime</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Utilization">
+          <DataField>Utilization</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Seven">
+          <DataField>Seven</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Eight">
+          <DataField>Eight</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Nine">
+          <DataField>Nine</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Ten">
+          <DataField>Ten</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Eleven">
+          <DataField>Eleven</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Twelwe">
+          <DataField>Twelwe</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Thirteen">
+          <DataField>Thirteen</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Fourteen">
+          <DataField>Fourteen</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Fifteen">
+          <DataField>Fifteen</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Sixteen">
+          <DataField>Sixteen</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Seventeen">
+          <DataField>Seventeen</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Eighteen">
+          <DataField>Eighteen</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Nineteen">
+          <DataField>Nineteen</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Twenty">
+          <DataField>Twenty</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Twentyone">
+          <DataField>Twentyone</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Twentytwo">
+          <DataField>Twentytwo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Twentythree">
+          <DataField>Twentythree</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Twentyfour">
+          <DataField>Twentyfour</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>DailyUtilizationReport</rd:DataSetName>
+        <rd:SchemaPath>D:\Gust\EISApplication\SourceCode\Lifelong.EIS.TrainingWeb\DailyUtilizationReport.xsd</rd:SchemaPath>
+        <rd:TableName>Tran_Class_DailyUtilizationReport</rd:TableName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>Tran_Class_DailyUtilizationReportTableAdapter</rd:TableAdapterName>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
   <EmbeddedImages>
     <EmbeddedImage Name="PACELogo">
       <MIMEType>image/png</MIMEType>
@@ -1804,6 +1833,6 @@ JEoJWF7mwOp7ZLwpKKcm6gC1tFvHZ8WCtvDh/M291tf0x9jliyi+nnC+53okJ99d9aGWw4vzmSwQyyRh
 ZrYDK7OEEBF5m2nVFMJxx+8J9poS7DA/hVTcDhJwR8Xcl9lKsVzZDwOWmWt5fTBzeqVMiEsDsRLFD07+EstwPyyzWOVFASWLa7n5t1f9PTW/WQ4ubd1hRNEmZ16LpWTVeZ8Lg9Y7MOoVXwlHPhecOnPbpeNMf++M7chG0aGisqwtq8HmT7EILBUgxeBK69TvEkuZmS/sIGBumSvqnZMatUxam9T1RjerLWajI1aURSsrzFH/lAlOD2KypetvuUlxX9v/zxl1Z0ZVX31If66sZj2OQmABsnjyWaMa3l2pnv8DwaDVRiDrgUgAAAAASUVORK5CYII=</ImageData>
     </EmbeddedImage>
   </EmbeddedImages>
-  <rd:ReportID>f97a2dbe-720b-4af0-ab7d-ddedc9d8efa7</rd:ReportID>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>f97a2dbe-720b-4af0-ab7d-ddedc9d8efa7</rd:ReportID>
 </Report>

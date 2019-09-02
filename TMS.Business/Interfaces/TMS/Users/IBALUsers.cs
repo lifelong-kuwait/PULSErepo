@@ -133,6 +133,7 @@ namespace TMS.Business.Interfaces.TMS
         /// 
         IList<LoginUsers> TrainerUsers_GetAllBAL(string culture);
         int DeletePerson_CheckBAL(ClassTrainerMapping classTrainerMapping);
+        string Person_AllAssignPersonClassesBAL(ClassTrainerMapping classTrainerMapping);
         #endregion
     }
 }

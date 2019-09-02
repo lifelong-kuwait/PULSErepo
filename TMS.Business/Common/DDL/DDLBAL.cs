@@ -268,8 +268,24 @@ namespace TMS.Business.Common.DDL
         {
             return DAL.ProgramLanguages_GetAllByCultureDAL(culture);
         }
-
-
+        /// <summary>
+        /// Programs the languages get all by culture bal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
+        public IList<DDlList> ProgramLanguages_GetAllByCourseCultureBAL(string culture)
+        {
+            return DAL.ProgramLanguages_GetAllByCourseCultureDAL(culture);
+        }
+        /// <summary>
+        /// Programs the languages get all by culture bal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
+        public IList<DDlList> ProgramLanguages_GetAllByClassCultureBAL(string culture)
+        {
+            return DAL.ProgramLanguages_GetAllByClassCultureDAL(culture);
+        }
         /// <summary>
         /// Course the get all by culture bal.
         /// </summary>

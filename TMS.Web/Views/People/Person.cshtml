@@ -53,7 +53,7 @@
     .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_PersonTemplate").DisplayDeleteConfirmation(false))
     .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>)).Groupable()
     .Sortable().Selectable(selectable => selectable
-    .Mode(GridSelectionMode.Multiple))
+    .Mode(GridSelectionMode.Single))
     .Pageable(pager => pager
     .Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
     .Scrollable()
@@ -225,17 +225,36 @@
                     customClass: "tmsconfirm"
                 },
                 function (isConfirm) {
-                    if (isConfirm) {
-                        grid.removeRow(selectedRows);
-                        swal({
-                           title: '@lr.confirmDeleted',
-                           text:  '@lr.confirmDeletedMessage',
-                           type: "success"
-                       },
-                    function(){
-                        window.location="@Url.Content("~/People/Person?pT=" + ViewData["RoleID"])";
-                        });
-                   }
+                     if (isConfirm) {
+                             jQuery.ajax({
+                                 method: "post",
+                                 url: "/People/PersonDeleteChk",
+                                 dataType: "JSON",
+                                 contentType: "application/json; charset=utf-8",
+                                 data: JSON.stringify({ _Sessions: data.ID }),
+                                 success: function (msg) {
+                                     if (!msg=="") {
+                                         swal({
+                                             title: '@lr.Oops',
+                                             text: '@lr.PersonAssignedToDiffentClasses :' + msg,
+                                             type: "error"
+                                         });
+                                         window.location.reload;
+                                     }
+                                     else {
+                                         grid.removeRow(selectedRows);
+                                         swal({
+                                             title: '@lr.confirmDeleted',
+                                             text: '@lr.confirmDeletedMessage',
+                                             type: "success"
+                                         },
+                                             function () {
+                                                 window.location.reload;
+                                             });
+                                     }
+                                 }
+                             });
+                         }
                 });
             } else if (checkedLength > 1) {
                 var grid = jQuery("#PersonGrid").data("kendoGrid");

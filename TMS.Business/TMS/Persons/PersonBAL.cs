@@ -652,9 +652,9 @@ namespace TMS.Business.TMS
             return DAL.ManageScheduleCourse_DuplicationCheckDAL(_mapping);
         }
 
-        public IList<DDlList> GetCourseFromTimeSpanDALBAL(DateTime startDate, DateTime endDate)
+        public IList<DDlList> GetCourseFromTimeSpanDALBAL(DateTime startDate, DateTime endDate,long userid)
         {
-            return DAL.GetCourseFromTimeSpanDALDDL(startDate, endDate);
+            return DAL.GetCourseFromTimeSpanDALDDL(startDate, endDate, userid);
         }
         
         public IList<DDlList> GetCourseFromTimeSpanBAL(DateTime startDate, DateTime endDate)

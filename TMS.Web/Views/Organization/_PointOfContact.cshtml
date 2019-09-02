@@ -7,6 +7,8 @@
       .Columns(columns =>
       {
           columns.Bound(c => c.PersonName).Width(200);
+          columns.Bound(c => c.email).Width(200);
+         
           columns.Bound(c => c.RelationName).Width(200);
           columns.Bound(p => p.IsPrimary).ClientTemplate(
          "<input type='checkbox' disabled='true' value='#= IsPrimary #' " +

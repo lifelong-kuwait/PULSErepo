@@ -169,6 +169,18 @@ namespace TMS.DataObjects.Interfaces.Common.DDL
         /// <returns>IList&lt;DDlList&gt;.</returns>
         IList<DDlList> ProgramLanguages_GetAllByCultureDAL(string culture);
         /// <summary>
+        /// Programs the languages get all by culture dal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
+        IList<DDlList> ProgramLanguages_GetAllByCourseCultureDAL(string culture);
+        /// <summary>
+        /// Programs the languages get all by culture dal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
+        IList<DDlList> ProgramLanguages_GetAllByClassCultureDAL(string culture);
+        /// <summary>
         /// Courseses the get all by culture dal.
         /// </summary>
         /// <param name="culture">The culture.</param>

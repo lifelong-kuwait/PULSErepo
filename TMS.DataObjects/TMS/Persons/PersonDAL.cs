@@ -312,7 +312,7 @@ namespace TMS.DataObjects.TMS
                             ParamBuilder.Par("ClientType", _objPerson.ClientType),
                             ParamBuilder.Par("UpdatedBy", _objPerson.UpdatedBy),
                             ParamBuilder.Par("UpdatedDate", _objPerson.UpdatedDate),
-                            ParamBuilder.Par("IsActive", _objPerson.IsActive),
+                            ParamBuilder.Par("IsActive", true),
                             ParamBuilder.Par("UserID", _objPerson.UserID),
                             ParamBuilder.Par("AdditionalComments", _objPerson.AdditionalComments),
                             ParamBuilder.Par("IsOnline", _objPerson.IsOnline),
@@ -1467,9 +1467,9 @@ namespace TMS.DataObjects.TMS
                         ParamBuilder.Par("CreatedOn", _person.CreatedOn)
                         );
         }
-       public IList<DDlList> GetCourseFromTimeSpanDALDDL(DateTime startDate,DateTime endDate)
+       public IList<DDlList> GetCourseFromTimeSpanDALDDL(DateTime startDate,DateTime endDate,long useri)
         {
-            return ExecuteListSp<DDlList>("TMS_Courses_GetCourseFromTimeSpan", ParamBuilder.Par("StartDAte", startDate), ParamBuilder.Par("EndDate", endDate));
+            return ExecuteListSp<DDlList>("TMS_Courses_GetCourseFromTimeSpan", ParamBuilder.Par("StartDAte", startDate), ParamBuilder.Par("EndDate", endDate),ParamBuilder.Par("CreatedByID", useri));
         }
         public IList<DDlList> GetCourseFromTimeSpanListDAL(DateTime StartTime, DateTime EndTime)
         {

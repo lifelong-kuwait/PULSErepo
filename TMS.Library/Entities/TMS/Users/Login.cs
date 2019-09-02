@@ -102,7 +102,7 @@ namespace TMS.Library.Users
         /// </summary>
         /// <value>The password.</value>
          [Required]
-        [Display(Name = "UserPassword", ResourceType = typeof(lr))]
+        [Display(Name = "UserOldPassword", ResourceType = typeof(lr))]
 
         public string OldPassword { get; set; }
         /// <summary>

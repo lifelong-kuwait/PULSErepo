@@ -163,6 +163,18 @@ namespace TMS.Business.Interfaces.Common.DDL
         /// <returns>IList&lt;DDlList&gt;.</returns>
         IList<DDlList> ProgramLanguages_GetAllByCultureBAL(string culture);
         /// <summary>
+        /// Programs the languages get all by culture bal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
+        IList<DDlList> ProgramLanguages_GetAllByCourseCultureBAL(string culture);
+        /// <summary>
+        /// Programs the languages get all by culture bal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
+        IList<DDlList> ProgramLanguages_GetAllByClassCultureBAL(string culture);
+        /// <summary>
         /// Courseses the get all by culture bal.
         /// </summary>
         /// <param name="culture">The culture.</param>

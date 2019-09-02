@@ -317,6 +317,11 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public JsonResult Lang() => Json(_objIDDLBAL.ProgramLanguages_GetAllByCultureBAL(CurrentCulture), JsonRequestBehavior.AllowGet);
 
+        [DontWrapResult]
+        public JsonResult LanguageDDL(long courseId) => Json(_objIDDLBAL.ProgramLanguages_GetAllByCourseCultureBAL(Convert.ToString( courseId)), JsonRequestBehavior.AllowGet);
+        [DontWrapResult]
+        public JsonResult LanguageClassDDL(long ClassID) => Json(_objIDDLBAL.ProgramLanguages_GetAllByClassCultureBAL(Convert.ToString(ClassID)), JsonRequestBehavior.AllowGet);
+
         public ActionResult LangData() => PartialView("DropDownData", _objIDDLBAL.ProgramLanguages_GetAllByCultureBAL(CurrentCulture));
 
         #endregion SystemDefined Languages

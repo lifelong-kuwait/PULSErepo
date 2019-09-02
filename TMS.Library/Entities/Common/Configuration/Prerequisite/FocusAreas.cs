@@ -69,7 +69,7 @@ namespace TMS.Library.Entities.Common.Configuration
         /// </summary>
         /// <value>The updated by.</value>
         public long? UpdatedBy { get; set; }
-
+        public long? OLdID { get; set; }
         /// <summary>
         /// Gets or sets the updated date.
         /// </summary>
@@ -109,7 +109,8 @@ namespace TMS.Library.Entities.Common.Configuration
             UpdatedDate = dr.GetDateTime("UpdatedDate");
             IsDeleted = dr.GetBoolean("IsDeleted");
             IsActive = dr.GetBoolean("IsActive");
-            //AddedByAlias = dr.GetString("AddedByAlias");
+            AddedByAlias = dr.GetString("AddedByAlias");
+            OLdID= dr.GetInt64("ID");
             //UpdatedByAlias = dr.GetString("UpdatedByAlias");
         }
     }

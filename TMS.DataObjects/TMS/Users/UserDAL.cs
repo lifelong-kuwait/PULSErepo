@@ -595,7 +595,8 @@ namespace TMS.DataObjects
         public int LoginPerson_DuplicationCheckDAL(Person  objperson)
         {
             return ExecuteScalarSPInt32("TMS_Person_DuplicationCheck",
-             ParamBuilder.Par("Email", objperson.Email)
+             ParamBuilder.Par("Email", objperson.Email),
+             ParamBuilder.Par("createdBy", objperson.CreatedBy)
                   );
         }
 
@@ -606,6 +607,14 @@ namespace TMS.DataObjects
              ParamBuilder.Par("PersonID", classTrainerMapping.PersonID)
                   );
         }
+        public string Person_AllAssignPersonClassesDAL(ClassTrainerMapping classTrainerMapping)
+        {
+            return ExecuteScalarNvarchar("TMS_TrainerClassGetMapping_GetAll",
+             ParamBuilder.Par("PersonID", classTrainerMapping.PersonID),
+              ParamBuilder.Par("StartTime", classTrainerMapping.CreatedDate)
+                  );
+        }
+        
 
         #endregion
 

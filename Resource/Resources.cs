@@ -323,7 +323,21 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("ResourceUpdateValidationError", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Some Error Occur on Server Side</summary>
+        public static string LanguageDublication
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("LanguageDublication", CultureInfo.CurrentUICulture.Name);
+            }
+        }    /// <summary>Some Error Occur on Server Side</summary>
+        public static string DubliocationHappen
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("DubliocationHappen", CultureInfo.CurrentUICulture.Name);
+            }
+        }
         /// <summary>Lookup Primary Name</summary>
         public static string LookupPrimaryName {
                get {
@@ -394,6 +408,14 @@ namespace Resources {
             get
             {
                 return (string)resourceProvider.GetResource("StartandEndDateConflict", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>Start  and End Date Conflict</summary>
+        public static string StartandEndTimeConflict
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("StartandEndTimeConflict", CultureInfo.CurrentUICulture.Name);
             }
         }
         /// <summary>Start  and End Date Conflict</summary>
@@ -2330,7 +2352,14 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("GridAddedBy", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Added by</summary>
+        public static string Language
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Language", CultureInfo.CurrentUICulture.Name);
+            }
+        }
         /// <summary>Please Enter Email or Phone Number</summary>
         public static string PersonEmailorPhoneRequired {
                get {
@@ -2471,6 +2500,13 @@ namespace Resources {
             get
             {
                 return (string)resourceProvider.GetResource("Oopss", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string PersonAssignedToDiffentClasses
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("PersonAssignedToDiffentClasses", CultureInfo.CurrentUICulture.Name);
             }
         }
         public static string SessionAttandanceMarked
@@ -3491,7 +3527,15 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("UserEmailAlreadyExist", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>User Email Already Exist</summary>
+        public static string CourseLogisticRequirementID
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CourseLogisticRequirementID", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>Password</summary>
         public static string UserPassword {
                get {
@@ -4127,6 +4171,14 @@ namespace Resources {
             get
             {
                 return (string)resourceProvider.GetResource("VenueAvailabelTimeRange", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>Maximum Session Per Day</summary>
+        public static string UserOldPassword
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("UserOldPassword", CultureInfo.CurrentUICulture.Name);
             }
         }
         /// <summary>Maximum Session Per Day</summary>
@@ -4862,7 +4914,15 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("RolesPrimaryName", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Role name</summary>
+        public static string PrintReport
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("PrintReport", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>Role secondary name</summary>
         public static string RolesSecondaryName {
                get {
@@ -5345,7 +5405,14 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("CourseMaterialsTitle", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Course Materials</summary>
+        public static string CLassMaterialsTitle
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CLassMaterialsTitle", CultureInfo.CurrentUICulture.Name);
+            }
+        }
         /// <summary>Course Materials</summary>
         public static string CourseMaterialsPermissionName {
                get {
@@ -5450,7 +5517,15 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("CourseLogisticRequirementsTitle", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Course Logistic Requirements</summary>
+        public static string ClassLogisticRequirementsTitle
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("ClassLogisticRequirementsTitle", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>Pre Requisites</summary>
         public static string CoursePreRequisites {
                get {

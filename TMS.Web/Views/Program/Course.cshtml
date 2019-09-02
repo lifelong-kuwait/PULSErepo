@@ -36,7 +36,7 @@
      .Events(e => e.Edit("CourseGrid_onEdit").Save("General_onSave"))
      .HtmlAttributes(new { style = "height:700px !important;" })
      .DataSource(dataSource => dataSource.Ajax().ServerOperation(true).Model(model => { model.Id(m => m.ID); })
-     .PageSize(5)
+     .PageSize(10)
      .Read(read => read.Action("Course_Read", "Program").Data("withSearch"))
      .Create(read => read.Action("Course_Create", "Program").Data("courseAddtionalData"))
      .Destroy(read => read.Action("Course_Destroy", "Program"))

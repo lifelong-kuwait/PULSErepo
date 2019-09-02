@@ -348,10 +348,15 @@ namespace TMS.Business.TMS
 
             return _DAL.TrainerUsers_GetAllDAL(culture);
         }
-
+        
         int IBALUsers.DeletePerson_CheckBAL(ClassTrainerMapping classTrainerMapping)
         {
             return _DAL.DeletePerson_CheckDAL(classTrainerMapping);
+        }
+        
+            string IBALUsers.Person_AllAssignPersonClassesBAL(ClassTrainerMapping classTrainerMapping)
+        {
+            return _DAL.Person_AllAssignPersonClassesDAL(classTrainerMapping);
         }
         #endregion
     }

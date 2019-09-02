@@ -5,7 +5,14 @@
     <ContentTemplate>
         <fieldset>
             <div class="row">
-      
+        <div class="row">
+           <div  class="col-md-4 pull-right"  style="margin-top:10px; margin-bottom:10px">
+              <asp:LinkButton ID="btnPrint" runat="server" ToolTip="Print" class="btn btn-success"
+            OnClientClick="PrintFeedbacks(); return false;">&nbsp;<span title="Timetable">Print</span></asp:LinkButton>
+               </div>
+                 </div>
+            
+            <div class="PrintingArea">
             <div class="col-md-1">
                 <strong>Year/Month</strong> 
               </div>
@@ -14,7 +21,7 @@
                     <asp:DropDownList runat="server" ID="ddlYear" class="dropdown form-control"  AutoPostBack="True"
                         OnSelectedIndexChanged="ddlVenues_SelectedIndexChanged" />
                 </div>
-                 <div class="col-md-3">
+            <div class="col-md-3">
                     <asp:DropDownList runat="server" ID="ddlMonth" class="dropdown form-control"  AutoPostBack="True"
                         OnSelectedIndexChanged="ddlVenues_SelectedIndexChanged" />
                    </div>
@@ -44,7 +51,7 @@
                <br />
                 <div style="clear: both">
                 </div>
-                <div class="PrintingArea" style="margin-bottom: 5px; overflow: hidden;">
+               
                     <div style="float: left">
                         <asp:GridView runat="server" ID="gvEvents" GridLines="Both" Width="100%" OnRowDataBound="gvEvents_RowDataBound" />
                     </div>
@@ -65,19 +72,18 @@
                             </ItemTemplate>
                         </asp:Repeater>
                     </div>
-                </div>
+                
             </asp:Panel>
             <asp:Panel runat="server" ID="pnlNoData" Visible="False">
                 <table width="100%" cellspacing="0" cellpadding="0" border="0" class="gridpage">
                     <tbody>
                         <tr>
-                            <%--<td class="nodatafound">
-                                <asp:Label ID="lblNoDataFound" runat="server"><%=TrainingResourceManager.GetTableFooter("Footer_Common_NoDataFound") %></asp:Label>
-                            </td>--%>
+                           
                         </tr>
                     </tbody>
                 </table>
             </asp:Panel>
+                </div>
         </fieldset>
     </ContentTemplate>
 </asp:updatepanel>

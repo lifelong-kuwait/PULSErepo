@@ -292,7 +292,7 @@ namespace TMS.Web.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(lr.SessionTimeConflict, lr.StartandEndDateConflict);
+                    ModelState.AddModelError(lr.SessionTimeConflict, lr.StartandEndTimeConflict);
                 }
             }
 
@@ -347,7 +347,7 @@ namespace TMS.Web.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(lr.SessionTimeConflict, lr.StartandEndDateConflict);
+                    ModelState.AddModelError(lr.SessionTimeConflict, lr.StartandEndTimeConflict);
                 }
             }
 
@@ -871,7 +871,7 @@ namespace TMS.Web.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    ModelState.AddModelError(lr.DubliocationHappen, lr.LanguageDublication);
                 }
             }
 
@@ -1139,7 +1139,7 @@ namespace TMS.Web.Controllers
 
                 if (_CourseBAL.TMS_CourseFocusArea_DublicationBAL(_Class, CourseId) > 0)
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    ModelState.AddModelError(lr.DubliocationHappen, lr.DubliocationHappen);
                 }
                 else
                 {
@@ -1171,7 +1171,7 @@ namespace TMS.Web.Controllers
                 _Class.UpdatedDate = DateTime.Now;
                 if (_CourseBAL.TMS_CourseFocusArea_DublicationBAL(_Class, CourseId) > 0)
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    ModelState.AddModelError(lr.DubliocationHappen, lr.DubliocationHappen);
                 }
                 else
                 {
@@ -1183,10 +1183,7 @@ namespace TMS.Web.Controllers
                     // string browserName = req.Browser.Browser;
                     _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Update, System.Web.HttpContext.Current.Request.Browser.Browser);
 
-                    if (result == -1)
-                    {
-                        ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
-                    }
+                   
                 }
             }
             var resultData = new[] { _Class };
@@ -1525,6 +1522,8 @@ namespace TMS.Web.Controllers
                     //int value = DateTime.Compare(_Sessions.StartTime, _Sessions.EndTime);
                     DateTime t1 = Convert.ToDateTime(_Sessions.StartTimeString);
                     DateTime t2 = Convert.ToDateTime(_Sessions.EndTimeString);
+                    string date= Convert.ToDateTime(_Sessions.ScheduleDate).ToString("MM-dd-yyyy");
+                    _Sessions.ScheduleDate = Convert.ToDateTime(date);
                     int value = DateTime.Compare(t1, t2);
                     // checking 
                     if (value < 0)
@@ -1546,7 +1545,7 @@ namespace TMS.Web.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError(lr.SessionTimeConflict, lr.StartandEndDateConflict);
+                        ModelState.AddModelError(lr.SessionTimeConflict, lr.StartandEndTimeConflict);
 
                     }
                 }

@@ -174,7 +174,7 @@ namespace TMS.Web.Controllers
                 {
                     return Json(true, JsonRequestBehavior.AllowGet);
                 }
-                if (this._UserBAL.LoginUsers_DuplicationCheckBAL(new LoginUsers { Email = Email }) > 0)
+                if (this._UserBAL.LoginUsers_DuplicationCheckBAL(new LoginUsers { Email = Email,CompanyID=CurrentUser.CompanyID }) > 0)
                 {
                     return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
                 }
@@ -193,9 +193,9 @@ namespace TMS.Web.Controllers
             {
                 bool _valid = false;
 
-                if (_UserBAL.LoginPerson_DuplicationCheckBAL(new Person { Email = _person.Email }) > 0)
+                if (_UserBAL.LoginPerson_DuplicationCheckBAL(new Person { Email = _person.Email,CreatedBy=CurrentUser.NameIdentifierInt64 }) > 0)
                 {
-                    ModelState.AddModelError(lr.AddressAddressDublication, lr.AddressAddressDublication);
+                    ModelState.AddModelError(lr.PersonContactEmailDuplicationCheck, lr.PersonContactEmailDuplicationCheck);
                     // return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
                 }
                 else
@@ -453,6 +453,23 @@ namespace TMS.Web.Controllers
             }
 
 
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanDeleteSession")]
+
+        public JsonResult PersonDeleteChk(string _Sessions)
+        {
+            var result = "";
+            if (_UserBAL.DeletePerson_CheckBAL(new ClassTrainerMapping { PersonID = Convert.ToInt64(_Sessions) }) > 0)
+            {
+                result = _UserBAL.Person_AllAssignPersonClassesBAL(new ClassTrainerMapping { PersonID = Convert.ToInt64(_Sessions),CreatedDate=DateTime.Now });
+            }
+            else
+            {
+                result = "";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [NonAction]

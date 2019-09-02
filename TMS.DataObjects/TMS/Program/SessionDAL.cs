@@ -217,7 +217,9 @@ namespace TMS.DataObjects.TMS.Program
                 conn.Open();
                 DynamicParameters dbParam = new DynamicParameters();
                 dbParam.AddDynamicParams(new { ClassID = Sessions.ClassID, SessionID = Sessions.ID, VenueID= Sessions.VenueID, TrainerID = Sessions.TrainerID , ScheduleDate = Sessions.ScheduleDate,
-                    StartTime = Sessions.StartTime,  EndTime = Sessions.EndTime, 
+                    StartTime = Sessions.StartTime,  EndTime = Sessions.EndTime,
+                    StartTimeString=Sessions.StartTimeString,
+                    EndTimeString=Sessions.EndTimeString,
                 });
 
                 SessionCreationRules = conn.Query<SessionCreationRules>("TMS_Session_CheckValidSession", dbParam, commandType: System.Data.CommandType.StoredProcedure).FirstOrDefault<SessionCreationRules>();

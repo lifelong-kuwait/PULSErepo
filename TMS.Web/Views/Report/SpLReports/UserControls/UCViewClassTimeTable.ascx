@@ -37,7 +37,10 @@ span.ScheduleSessionName {
                  </div>
             
             <div class="PrintingArea">
+                <div class="row">
                 <h1 style="margin-left:25%;">Time Table Schedule</h1>
+                    
+                </div>
                 <asp:Label runat="server" ID="LblCourseName" Style="display: none;" />
                 <asp:Label runat="server" ID="LblClassName" Style="display: none;" />
                 <asp:Label runat="server" ID="LblCalenderSpan" Style="display: none;" />

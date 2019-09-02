@@ -129,6 +129,7 @@ namespace TMS.Library.Entities.Common.Configuration
         /// Gets or sets the class identifier.
         /// </summary>
         /// <value>The class identifier.</value>
+         [Display(Name = "CourseLogisticRequirementID", ResourceType = typeof(lr))]
         public long CourseLogisticRequirementID { get; set; }
 
         /// <summary>

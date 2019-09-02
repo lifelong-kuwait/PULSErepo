@@ -130,6 +130,7 @@ namespace TMS.DataObjects.Interfaces
         /// <returns>IList&lt;LoginUsers&gt;.</returns>
         IList<LoginUsers> TrainerUsers_GetAllDAL(string culture);
         int DeletePerson_CheckDAL(ClassTrainerMapping classTrainerMapping);
+        string Person_AllAssignPersonClassesDAL(ClassTrainerMapping classTrainerMapping);
         #endregion
     }
 }

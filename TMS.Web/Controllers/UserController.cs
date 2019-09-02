@@ -219,7 +219,7 @@ namespace TMS.Web.Controllers
             if (CurrentUser.CompanyID > 0)
             {
                 //var _userdata = this._UserBAL.LoginUsersOrganization_GetAllBAL(CurrentCulture, Convert.ToString(CurrentUser.CompanyID), startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
-                var _userdata = this._UserBAL.LoginUsersOrganization_GetAllBAL(CurrentCulture, Convert.ToString(CurrentUser.CompanyID), SearchText);
+                var _userdata = this._UserBAL.LoginUsersOrganization_GetAllBAL(CurrentCulture, Convert.ToString(CurrentUser.NameIdentifierInt64), SearchText);
                 return Json(_userdata.ToDataSourceResult(request, ModelState));
                 //var result = new DataSourceResult()
                 //{

@@ -191,8 +191,15 @@ namespace TMS.Web.Controllers
             DateTime startDate = DateTime.ParseExact(startdate, "dd/MM/yyyy",
                                        CultureInfo.InvariantCulture); 
             DateTime endDate = DateTime.ParseExact(enddate, "dd/MM/yyyy",
-                                       CultureInfo.InvariantCulture); 
-            return Json(_PersonBAL.GetCourseFromTimeSpanDALBAL(startDate, endDate), JsonRequestBehavior.AllowGet);
+                                       CultureInfo.InvariantCulture);
+            long id = 0;
+            if(CurrentUser.CompanyID==-1)
+            { id = -1; }
+            else
+            {
+                id = CurrentUser.NameIdentifierInt64;
+            }
+            return Json(_PersonBAL.GetCourseFromTimeSpanDALBAL(startDate, endDate,id), JsonRequestBehavior.AllowGet);
         }
       
         [DontWrapResult]

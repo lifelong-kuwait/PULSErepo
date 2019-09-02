@@ -10,11 +10,11 @@
                     {
                         columns.Bound(e => e.PrimaryRequirementName).ClientTemplate("#=CourseLogisticRequirementsTemplate(data)#");
                         columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy);
-                        columns.Bound(e => e.UpdatedByAlias).Width(170).Title(lr.ModifiedBy).
-ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"<span class='Addedby'>#=UpdatedByAlias# </span>
-    <span class='date' >#=kendo.toString(UpdatedDate,'" + DateFormatScript + @"')#</span>
-<span class='time' >#=kendo.toString(UpdatedDate,'" + TimeFormatScript + @"')#</span>
-" + @"#} else {#<div>Not Modified</div> </div>#}#");
+                        //                        columns.Bound(e => e.UpdatedByAlias).Width(170).Title(lr.ModifiedBy).
+                        //ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"<span class='Addedby'>#=UpdatedByAlias# </span>
+                        //    <span class='date' >#=kendo.toString(UpdatedDate,'" + DateFormatScript + @"')#</span>
+                        //<span class='time' >#=kendo.toString(UpdatedDate,'" + TimeFormatScript + @"')#</span>
+                        //" + @"#} else {#<div>Not Modified</div> </div>#}#");
                     })
                      .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>)).Selectable(e => e.Mode(GridSelectionMode.Multiple))
                             .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_CourseLogisticRequirementsTemplate").DisplayDeleteConfirmation(false))

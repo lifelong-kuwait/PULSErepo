@@ -256,8 +256,25 @@ namespace TMS.DataObjects.Common.DDL
         {
             return ExecuteListSp<DDlList>("ProgramLanguages_GetAllByCulture", ParamBuilder.Par("culture", culture)); ;
         }
-
         /// <summary>
+        /// Programs the languages get all by culture dal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
+        public IList<DDlList> ProgramLanguages_GetAllByCourseCultureDAL(string culture)
+        {
+            return ExecuteListSp<DDlList>("TMS_CourseLanguage_DDL", ParamBuilder.Par("CourseID", culture)); ;
+        }
+        /// <summary>
+        /// Programs the languages get all by culture dal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
+        public IList<DDlList> ProgramLanguages_GetAllByClassCultureDAL(string culture)
+        {
+            return ExecuteListSp<DDlList>("TMS_ClassLanguage_DDL", ParamBuilder.Par("ClassID", culture)); ;
+        }
+        /// <summary>ProgramLanguages_GetAllByClassCultureDAL
         /// Courseses the get all by culture dal.
         /// </summary>
         /// <param name="culture">The culture.</param>

@@ -174,7 +174,7 @@ namespace TMS.DataObjects.Interfaces.TMS
         IList<PersonRolesMapping> TMS_PersonRolesMapping_GetbyPersonIDDAL(long PersonID,long CompanyID , int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText);
 
         IList<Person> TMS_Coordinate_GetAllByCultureDAL(string culture);
-        IList<DDlList> GetCourseFromTimeSpanDALDDL(DateTime StartTime, DateTime EndTime);
+        IList<DDlList> GetCourseFromTimeSpanDALDDL(DateTime StartTime, DateTime EndTime,long userid);
         //GetCourseFromTimeSpanDAL
         DataTable GetTrainerDetailsForReportsDAL(long ClssID, long TrainerID);
 

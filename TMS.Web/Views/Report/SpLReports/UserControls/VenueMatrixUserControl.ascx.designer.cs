@@ -22,6 +22,15 @@ namespace TMS.Web.Views.Report.SpLReports.UserControls {
         protected global::System.Web.UI.UpdatePanel upEvents;
         
         /// <summary>
+        /// btnPrint control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnPrint;
+        
+        /// <summary>
         /// ddlYear control.
         /// </summary>
         /// <remarks>
@@ -83,8 +92,5 @@ namespace TMS.Web.Views.Report.SpLReports.UserControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlNoData;
-
-        public static string venueId { get; internal set; }
-        public static string startDate { get; internal set; }
     }
 }

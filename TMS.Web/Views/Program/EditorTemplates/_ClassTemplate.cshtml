@@ -1,6 +1,13 @@
 ﻿@model TMS.Library.Entities.TMS.Program.Classes
 @using lr = Resources.Resources
+<script type="text/javascript">
+    function filteSessionrrelateditems() {
+        return {
+            courseId: jQuery("#CourseID").val(), OpenType: 2
+        };
+    }
 
+</script>
 <div class="Alertbox alert alert-danger" style="display:none">
     <ul class="errors"></ul>
 </div>
@@ -24,12 +31,12 @@
         @Html.LabelFor(model => model.CourseID, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-7 col-lg-7 col-sm-11">
             @(Html.Kendo().DropDownListFor(m => m.CourseID)
-            .HtmlAttributes(new { style = "width:100%" })
-            .DataTextField("Text")
-            .DataValueField("Value")
-            .OptionLabel(lr.ClassCourseOptionalLabel).Events(x => x.Change("onChangeCourseId"))
-            // .OptionLabel(new { Text = lr.CourseCategoryOptionalLabel, Value = 0 })
-            .DataSource(dataSource => { dataSource.Read(read => read.Action("Course", "DDL")); }))
+                    .HtmlAttributes(new { style = "width:100%" })
+                    .DataTextField("Text")
+                    .DataValueField("Value")
+                    .OptionLabel(lr.ClassCourseOptionalLabel).Events(x => x.Change("onChangeCourseId"))
+                    // .OptionLabel(new { Text = lr.CourseCategoryOptionalLabel, Value = 0 })
+                    .DataSource(dataSource => { dataSource.Read(read => read.Action("Course", "DDL")); }))
             @Html.ValidationMessageFor(model => model.CourseID)
         </div>
     </div>
@@ -44,12 +51,14 @@
         @Html.LabelFor(model => model.LanguageID, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-7 col-lg-7 col-sm-11">
             @(Html.Kendo().DropDownListFor(m => m.LanguageID)
-            .HtmlAttributes(new { style = "width:100%" })
-            .DataTextField("Text")
-            .DataValueField("Value")
-            .OptionLabel(lr.ClassLanguageOptionalLabel)
-            // .OptionLabel(new { Text = lr.CourseCategoryOptionalLabel, Value = 0 })
-            .DataSource(dataSource => { dataSource.Read(read => read.Action("Lang", "DDL")); }))
+                    .HtmlAttributes(new { style = "width:100%" })
+                    .DataTextField("Text")
+                    .DataValueField("Value")
+                    .OptionLabel(lr.ClassLanguageOptionalLabel)
+                    // .OptionLabel(new { Text = lr.CourseCategoryOptionalLabel, Value = 0 })
+                    .DataSource(dataSource => { dataSource.Read(read => read.Action("LanguageDDL", "DDL").Data("filteSessionrrelateditems"))
+                        .ServerFiltering(true);
+                    }).CascadeFrom("CourseID"))
             @Html.ValidationMessageFor(model => model.LanguageID)
         </div>
     </div>
@@ -57,21 +66,21 @@
     <div class="form-group">
         @Html.LabelFor(model => model.ClassTypeID, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-7 col-lg-7 col-sm-11">
-          @(Html.Kendo().DropDownListFor(c => c.ClassTypeID).DataTextField("Text").DataValueField("Value")
-           //   .OptionLabel(new { Text = lr.ClassTypeOptionalLabel, Value = 0 })
-              .OptionLabel(lr.ClassTypeOptionalLabel)
-              .HtmlAttributes(new { @class = "form-control", style = "width:100%" })
-                                               .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.ClassType>(typeof(TMS.Library.ClassType))))
-        @Html.ValidationMessageFor(model => model.ClassTypeID)
+            @(Html.Kendo().DropDownListFor(c => c.ClassTypeID).DataTextField("Text").DataValueField("Value")
+                        //   .OptionLabel(new { Text = lr.ClassTypeOptionalLabel, Value = 0 })
+                        .OptionLabel(lr.ClassTypeOptionalLabel)
+                        .HtmlAttributes(new { @class = "form-control", style = "width:100%" })
+                                                         .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.ClassType>(typeof(TMS.Library.ClassType))))
+            @Html.ValidationMessageFor(model => model.ClassTypeID)
         </div>
     </div>
 
-    
+
     <div class="form-group" style="margin:0; padding:0px;">
         @Html.LabelFor(model => model.ClassDurationType, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-4 col-lg-4 col-sm-11">
             @(Html.Kendo().DropDownListFor(c => c.ClassDurationType).DataTextField("Text").DataValueField("Value").OptionLabel(new { Text = lr.CourseDurationTypeOptionalLabel, Value = 0 }).HtmlAttributes(new { @class = "form-control", style = "width:100%" })
-                                               .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.CourseDurationType>(typeof(TMS.Library.CourseDurationType))))
+                                                       .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.CourseDurationType>(typeof(TMS.Library.CourseDurationType))))
             @Html.ValidationMessageFor(model => model.ClassDurationType)
         </div>
 
@@ -85,15 +94,15 @@
         @Html.LabelFor(model => model.StartDate, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-7 col-lg-7 col-sm-11">
             @(Html.Kendo().DatePickerFor(x => x.StartDate).Start(CalendarView.Month).Depth(CalendarView.Month).Format(KendoDateFormat)
-                .HtmlAttributes(new { style = "width: 100%" , value = "" })
-                )
+                        .HtmlAttributes(new { style = "width: 100%", value = "" })
+            )
             @Html.ValidationMessageFor(model => model.StartDate)
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(model => model.EndDate, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-7 col-lg-7 col-sm-11">
-            @(Html.Kendo().DatePickerFor(x => x.EndDate).Start(CalendarView.Month).Depth(CalendarView.Month).Format(KendoDateFormat).HtmlAttributes(new { style = "width: 100%",value = "" }))
+            @(Html.Kendo().DatePickerFor(x => x.EndDate).Start(CalendarView.Month).Depth(CalendarView.Month).Format(KendoDateFormat).HtmlAttributes(new { style = "width: 100%", value = "" }))
 
             @Html.ValidationMessageFor(model => model.EndDate)
         </div>
@@ -102,26 +111,26 @@
         @Html.LabelFor(model => model.StartTimeString, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-7 col-lg-7 col-sm-11">
             @(Html.Kendo().DropDownListFor(m => m.StartTimeString)
-            .HtmlAttributes(new { style = "width:100%" })
-            .DataTextField("Text")
-            .DataValueField("Value")
-            .OptionLabel(lr.SessionStartTimeOptionalLabel)
-            // .OptionLabel(new { Text = lr.CourseCategoryOptionalLabel, Value = 0 })
-            .BindTo(TMS.DropDownUtil.FillSessionTimeDropDown()))
+                    .HtmlAttributes(new { style = "width:100%" })
+                    .DataTextField("Text")
+                    .DataValueField("Value")
+                    .OptionLabel(lr.SessionStartTimeOptionalLabel)
+                    // .OptionLabel(new { Text = lr.CourseCategoryOptionalLabel, Value = 0 })
+                    .BindTo(TMS.DropDownUtil.FillSessionTimeDropDown()))
             @Html.ValidationMessageFor(model => model.StartTimeString)
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(model => model.EndTimeString, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-7 col-lg-7 col-sm-11">
-           @(Html.Kendo().DropDownListFor(m => m.EndTimeString)
-            .HtmlAttributes(new { style = "width:100%" })
-            .DataTextField("Text")
-            .DataValueField("Value")
-            .OptionLabel(lr.SessionEndTimeOptionalLabel)
-            // .OptionLabel(new { Text = lr.CourseCategoryOptionalLabel, Value = 0 })
-            .BindTo(TMS.DropDownUtil.FillSessionTimeDropDown()))
-        @Html.ValidationMessageFor(model => model.EndTimeString)
+            @(Html.Kendo().DropDownListFor(m => m.EndTimeString)
+                     .HtmlAttributes(new { style = "width:100%" })
+                     .DataTextField("Text")
+                     .DataValueField("Value")
+                     .OptionLabel(lr.SessionEndTimeOptionalLabel)
+                     // .OptionLabel(new { Text = lr.CourseCategoryOptionalLabel, Value = 0 })
+                     .BindTo(TMS.DropDownUtil.FillSessionTimeDropDown()))
+            @Html.ValidationMessageFor(model => model.EndTimeString)
         </div>
     </div>
     <div class="form-group">
@@ -143,7 +152,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.MinimumAttendanceRequirement, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-7 col-lg-7 col-sm-11">
-            @(Html.Kendo().TextBoxFor(c => c.MinimumAttendanceRequirement).HtmlAttributes(new { @class = "form-control ", style = "width:100%",@text=1 }))
+            @(Html.Kendo().TextBoxFor(c => c.MinimumAttendanceRequirement).HtmlAttributes(new { @class = "form-control ", style = "width:100%", @text = 1 }))
             @Html.ValidationMessageFor(model => model.MinimumAttendanceRequirement)
         </div>
     </div>
@@ -173,12 +182,12 @@
         @Html.LabelFor(model => model.ClassFee, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-4 col-lg-4 col-sm-11">
             @(Html.Kendo().DropDownListFor(m => m.FeeCurrency)
-            .HtmlAttributes(new { style = "width:100%" })
-            .DataTextField("Text")
-            .DataValueField("Value")
-                     .OptionLabel(lr.CourseFeeCurrencyOptionalLabel)
-                    // .OptionLabel(new { Text = lr.CourseFeeCurrencyOptionalLabel, Value = 0 })
-                    .DataSource(dataSource => { dataSource.Read(read => read.Action("Currencies", "DDL")); }))
+                    .HtmlAttributes(new { style = "width:100%" })
+                    .DataTextField("Text")
+                    .DataValueField("Value")
+                             .OptionLabel(lr.CourseFeeCurrencyOptionalLabel)
+                            // .OptionLabel(new { Text = lr.CourseFeeCurrencyOptionalLabel, Value = 0 })
+                            .DataSource(dataSource => { dataSource.Read(read => read.Action("Currencies", "DDL")); }))
             @Html.ValidationMessageFor(model => model.FeeCurrency)
         </div>
 
@@ -206,19 +215,19 @@
         @Html.LabelFor(model => model.TranslationRequiredID, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-7 col-lg-7 col-sm-11">
             @(Html.Kendo().DropDownListFor(m => m.TranslationRequiredID)
-            .HtmlAttributes(new { style = "width:100%" })
-            .DataTextField("Text")
-            .DataValueField("Value")
-            //.OptionLabel(lr.ClassTranslationRequiredOptionalLabel)
-            .OptionLabel(new { Text = lr.ClassTranslationRequiredOptionalLabel, Value = 0 })
-            .DataSource(dataSource => { dataSource.Read(read => read.Action("Lang", "DDL")); }))
+                    .HtmlAttributes(new { style = "width:100%" })
+                    .DataTextField("Text")
+                    .DataValueField("Value")
+                    //.OptionLabel(lr.ClassTranslationRequiredOptionalLabel)
+                    .OptionLabel(new { Text = lr.ClassTranslationRequiredOptionalLabel, Value = 0 })
+                    .DataSource(dataSource => { dataSource.Read(read => read.Action("Lang", "DDL")); }))
             @Html.ValidationMessageFor(model => model.TranslationRequiredID)
         </div>
     </div>
 </div>
 
 <style>
-     input.k-checkbox + label{
+    input.k-checkbox + label {
         line-height: 1.25em;
     }
 </style>

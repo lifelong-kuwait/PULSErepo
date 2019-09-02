@@ -464,8 +464,8 @@ namespace TMS.Web.Controllers
                 _objtrainer.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _objtrainer.UpdatedDate = DateTime.Now;
                 //
-                if (_objConfigurationBAL.ManageTrainer_AvalabilityCheckBAL(_objtrainer) > 0)
-                {
+                //if (_objConfigurationBAL.ManageTrainer_AvalabilityCheckBAL(_objtrainer) > 0)
+                //{
                     if (_objConfigurationBAL.ManageTrainer_DuplicationCheckBAL(_objtrainer) > 0)
                     {
                         ModelState.AddModelError(lr.Trainer, lr.TrainerDuplicationCheck);
@@ -483,11 +483,11 @@ namespace TMS.Web.Controllers
                             ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
                         }
                     }
-                }
-                else
-                {
-                    ModelState.AddModelError(lr.Trainer, "Trainer is not available for this Class Date.");
-                }
+                //}
+                //else
+                //{
+                //    ModelState.AddModelError(lr.Trainer, "Trainer is not available for this Class Date.");
+                //}
             }
             var resultData = new[] { _objtrainer };
             return Json(resultData.AsQueryable().ToDataSourceResult(request, ModelState));
@@ -1066,9 +1066,9 @@ namespace TMS.Web.Controllers
 
 
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        [DontWrapResult]
-        [ClaimsAuthorize("CanDeleteProgramTrainer")]
+        //[AcceptVerbs(HttpVerbs.Post)]
+        //[DontWrapResult]
+        //[ClaimsAuthorize("CanDeleteProgramTrainer")]
         public ActionResult ManageCourseMeterialMap_Destroy([DataSourceRequest] DataSourceRequest request, CourseMeterialsMapping _objlogmap)
         {
             if (ModelState.IsValid)

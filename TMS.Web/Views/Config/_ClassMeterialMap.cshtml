@@ -35,7 +35,7 @@
          .Destroy(read => read.Action("ManageClassMeterialMap_Destroy", "Config"))
         //.Update(read => read.Action("MManageCourseMeterialMap_Update", "Config"))
 
-        .Events(e => e.Error("GeneralErrorHandler(\"ManageClassMeterialMap" + Model+"\")").RequestEnd("GridRequestEndUpdate")))
+        .Events(e => e.Error("GeneralErrorHandler(\"ManageClassMeterialMap\")").RequestEnd("GridRequestEndUpdate")))
         .NoRecords(lr.GridNoRecordFoundMessage)
     )
 
@@ -49,7 +49,7 @@
         }
         @if (User.IsInAnyRoles("CanDeleteProgramTrainer"))
         {
-            @*<a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>*@
+            <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
         }
     </div>
 
