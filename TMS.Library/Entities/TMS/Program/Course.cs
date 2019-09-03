@@ -51,7 +51,7 @@ namespace TMS.Library.TMS
         [Display(Name = "CourseCategory", ResourceType = typeof(lr))]
         [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "CourseCategoryRequired")]
         public long CourseCategoryId { get; set; }
-
+        public string CourseCategoryName { get; set; }
         /// <summary>
         /// Gets or sets the duration of the course.
         /// </summary>
@@ -75,7 +75,7 @@ namespace TMS.Library.TMS
         public long CourseVendorID { get; set; }
 
 
-        public long OrganizationID { get; set; }    
+        public long OrganizationID { get; set; }
 
         /// <summary>
         /// Gets or sets the rating.
@@ -192,7 +192,7 @@ namespace TMS.Library.TMS
         public string AddedByAlias { get; set; }
         public string UpdatedByAlias { get; set; }
 
-        
+
     }
     public class CourseLogisticRequirementsMapping
     {

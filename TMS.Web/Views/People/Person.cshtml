@@ -233,13 +233,24 @@
                                  contentType: "application/json; charset=utf-8",
                                  data: JSON.stringify({ _Sessions: data.ID }),
                                  success: function (msg) {
-                                     if (!msg=="") {
+                                     if (msg == -1) {
+                                          grid.removeRow(selectedRows);
+                                         swal({
+                                             title: '@lr.confirmDeleted',
+                                             text: '@lr.confirmDeletedMessage',
+                                             type: "success"
+                                         },
+                                             function () {
+                                                 window.location.reload;
+                                             });
+                                     } else if (!msg == "") {
                                          swal({
                                              title: '@lr.Oops',
                                              text: '@lr.PersonAssignedToDiffentClasses :' + msg,
                                              type: "error"
                                          });
-                                         window.location.reload;
+                                             window.location.reload;
+                                         
                                      }
                                      else {
                                          grid.removeRow(selectedRows);
