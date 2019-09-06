@@ -39,7 +39,7 @@
               <Width>0.21783in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.322in</Width>
+              <Width>0.62408in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -55,7 +55,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>P = Present, A = Absent, LE = Left Early, L = Late</Value>
+                              <Value>P = Present, A = Absent, LE = Left Early, LA = Late</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontWeight>Normal</FontWeight>
@@ -1679,7 +1679,7 @@ format(cdate(Fields!StartDate.Value).AddDays(6), "dddd") = "Friday", "LightGrey"
         <Top>1.73625in</Top>
         <Left>0.46868in</Left>
         <Height>1in</Height>
-        <Width>6.49574in</Width>
+        <Width>6.79782in</Width>
         <Style>
           <Border>
             <Style>None</Style>

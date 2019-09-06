@@ -430,7 +430,7 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_UserBAL.LoginPerson_DuplicationCheckBAL(new Person { Email = _objEmailAddresses.Email }) > 0)
+                if (_UserBAL.LoginPerson_DuplicationCheckBAL(new Person { Email = _objEmailAddresses.Email, CreatedBy = CurrentUser.NameIdentifierInt64 }) > 0)
                 {
                     ModelState.AddModelError(lr.UserEmailAlreadyExist, lr.UserEmailAlreadyExist);
                     // return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
@@ -466,7 +466,7 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_UserBAL.LoginPerson_DuplicationCheckBAL(new Person { Email = _objEmailAddresses.Email }) > 1)
+                if (_UserBAL.LoginPerson_DuplicationCheckBAL(new Person { Email = _objEmailAddresses.Email,CreatedBy=CurrentUser.NameIdentifierInt64 }) > 1)
                 {
                     ModelState.AddModelError(lr.UserEmailAlreadyExist, lr.UserEmailAlreadyExist);
                     // return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);

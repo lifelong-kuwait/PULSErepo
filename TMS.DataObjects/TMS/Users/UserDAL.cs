@@ -592,6 +592,20 @@ namespace TMS.DataObjects
              ParamBuilder.Par("Email", _objUsers.Email)
                   );
         }
+        /// <summary>
+        /// Logins the users duplication check dal.
+        /// </summary>
+        /// <param name="_objUsers">The object users.</param>
+        /// <returns>System.Int32.</returns>
+        public int LoginUsers_DuplicationCheckUpdateDAL(LoginUsers _objUsers)
+        {
+            return ExecuteScalarSPInt32("TMS_Users_DuplicationCheckUpdate",
+             ParamBuilder.Par("Email", _objUsers.Email),
+             ParamBuilder.Par("UserID ", _objUsers.UserID)
+
+                  );
+        }
+        
         public int LoginPerson_DuplicationCheckDAL(Person  objperson)
         {
             return ExecuteScalarSPInt32("TMS_Person_DuplicationCheck",
@@ -599,7 +613,16 @@ namespace TMS.DataObjects
              ParamBuilder.Par("createdBy", objperson.CreatedBy)
                   );
         }
+        public int LoginPerson_DuplicationCheckUpdateDAL(Person objperson)
+        {
+            return ExecuteScalarSPInt32("TMS_Person_DuplicationCheckForUpdate",
+             ParamBuilder.Par("Email", objperson.Email),
+             ParamBuilder.Par("createdBy", objperson.CreatedBy),
+             ParamBuilder.Par("PersonID", objperson.ID)
 
+                  );
+        }
+        
 
         public int DeletePerson_CheckDAL(ClassTrainerMapping classTrainerMapping)
         {

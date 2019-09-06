@@ -45,12 +45,8 @@ function CourseGrid_onEdit(e) {
     }
     else {
         // edit
-        var str = e.model.CourseCode;
-        str = str.replace(e.model.CourseCategoryName, "");
-        str = str.slice(1);
-        //var myNewString = e.model.CourseCode.replace("data-", "");
-        jQuery("#CourseCategoryCode").text(e.model.CourseCategoryName);
-        jQuery("#CourseCode").val(str).trigger("change");
+        jQuery("#CourseCategoryCode").text(e.model.CourseCode.split("-")[0]);
+        jQuery("#CourseCode").val(e.model.CourseCode.split("-")[1]).trigger("change");
         jQuery(title).text(lr.EditRecordGeneralTitle);
         jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.UpdateRecordGeneralButton);
     }

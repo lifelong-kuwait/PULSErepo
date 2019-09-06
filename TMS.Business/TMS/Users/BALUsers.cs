@@ -318,9 +318,19 @@ namespace TMS.Business.TMS
         {
             return _DAL.LoginUsers_DuplicationCheckDAL(_objUsers);
         }
+        
+        public int LoginUsers_DuplicationCheckUpdateBAL(LoginUsers _objUsers)
+        {
+            return _DAL.LoginUsers_DuplicationCheckUpdateDAL(_objUsers);
+        }
         public int LoginPerson_DuplicationCheckBAL(Person objperson)
         {
             return _DAL.LoginPerson_DuplicationCheckDAL(objperson);
+        }
+        
+        public int LoginPerson_DuplicationCheckUpdateBAL(Person objperson)
+        {
+            return _DAL.LoginPerson_DuplicationCheckUpdateDAL(objperson);
         }
         int DeletePerson_CheckBAL(ClassTrainerMapping classTrainerMapping)
         {

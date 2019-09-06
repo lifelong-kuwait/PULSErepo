@@ -157,7 +157,7 @@ namespace TMS.Web.Controllers
             return View(model);
         }
         [HttpPost]
-        public JsonResult ResetPassword(string oldPassword,string newPassword,string confirmPassword)
+        public JsonResult ResetPassword(string oldPassword, string newPassword, string confirmPassword)
         {
             bool result = false;
             var _objUser = this._UserBAL.LoginUserBAL(CurrentUser.Email);
@@ -167,14 +167,14 @@ namespace TMS.Web.Controllers
                 {
                     result = true;
                 }
-                 if(newPassword.Equals(confirmPassword))
+                if (newPassword.Equals(confirmPassword))
                 {
                     result = true;
                 }
             }
-            if(result)
-            { 
-            LoginUsers _objUsers = new LoginUsers
+            if (result)
+            {
+                LoginUsers _objUsers = new LoginUsers
                 {
                     Password = Crypto.CreatePasswordHash(newPassword),
                     UserID = Convert.ToInt64(Session["UserId"]),
@@ -182,7 +182,7 @@ namespace TMS.Web.Controllers
                     UpdatedDate = DateTime.UtcNow
                 };
                 var res = this._UserBAL.LoginUsers_UpdatePasswordBAL(_objUsers);
-                
+
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -252,7 +252,7 @@ namespace TMS.Web.Controllers
             {
                 if (this._UserBAL.LoginUsers_DuplicationCheckBAL(new LoginUsers { Email = _objUsers.Email }) > 0)
                 {
-                    return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
+                    ModelState.AddModelError(lr.UserEmailAlreadyExist, lr.DubliocationHappen);
                 }
                 else
                 {
@@ -316,52 +316,60 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_objUsers.ConfirmPassword != _objUsers.Password)
+                if (this._UserBAL.LoginUsers_DuplicationCheckUpdateBAL(new LoginUsers { Email = _objUsers.Email,UserID=_objUsers.UserID}) > 0)
                 {
-
-                    ModelState.AddModelError(lr.UserConfirmPassword, lr.UserConfirmPasswordNotMatch);
+                    //return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
+                    ModelState.AddModelError(lr.UserEmailAlreadyExist, lr.DubliocationHappen);
                 }
                 else
                 {
-                    _objUsers.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                    _objUsers.UpdatedDate = DateTime.Now;
-                    if (String.IsNullOrEmpty(_objUsers.Password))
+                    if (_objUsers.ConfirmPassword != _objUsers.Password)
                     {
-                        //update with password otherwise
-                        var image = HandlProfilePicture(filename, _objUsers.UserID, aid);
-                        if (!string.IsNullOrEmpty(image))
-                        {
-                            _objUsers.ProfileImage = image;
-                            var res = this._UserBAL.LoginUsers_UpdateProfileImageBAL(_objUsers);
-                            _objUsers.ProfileImage = image.Replace("~/", "");
-                        }
-                        var result = this._UserBAL.LoginUsers_UpdateBAL(_objUsers);
-                        if (result == -1)
-                        {
-                            ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
-                        }
+
+                        ModelState.AddModelError(lr.UserConfirmPassword, lr.UserConfirmPasswordNotMatch);
                     }
                     else
                     {
-                        var image = HandlProfilePicture(filename, _objUsers.UserID, aid);
-                        if (!string.IsNullOrEmpty(image))
+                        _objUsers.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                        _objUsers.UpdatedDate = DateTime.Now;
+                        if (String.IsNullOrEmpty(_objUsers.Password))
                         {
-                            _objUsers.ProfileImage = image;
-                            var res = this._UserBAL.LoginUsers_UpdateProfileImageBAL(_objUsers);
-                            _objUsers.ProfileImage = image.Replace("~/", "");
-                        }
-                        var result = this._UserBAL.LoginUsers_UpdateBAL(_objUsers);
-                        if (result == -1)
-                        {
-                            ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                            //update with password otherwise
+                            var image = HandlProfilePicture(filename, _objUsers.UserID, aid);
+                            if (!string.IsNullOrEmpty(image))
+                            {
+                                _objUsers.ProfileImage = image;
+                                var res = this._UserBAL.LoginUsers_UpdateProfileImageBAL(_objUsers);
+                                _objUsers.ProfileImage = image.Replace("~/", "");
+                            }
+                            var result = this._UserBAL.LoginUsers_UpdateBAL(_objUsers);
+                            if (result == -1)
+                            {
+                                ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                            }
                         }
                         else
                         {
+                            var image = HandlProfilePicture(filename, _objUsers.UserID, aid);
+                            if (!string.IsNullOrEmpty(image))
+                            {
+                                _objUsers.ProfileImage = image;
+                                var res = this._UserBAL.LoginUsers_UpdateProfileImageBAL(_objUsers);
+                                _objUsers.ProfileImage = image.Replace("~/", "");
+                            }
+                            var result = this._UserBAL.LoginUsers_UpdateBAL(_objUsers);
+                            if (result == -1)
+                            {
+                                ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                            }
+                            else
+                            {
 
-                            _objUsers.Password = Crypto.CreatePasswordHash(_objUsers.Password);
-                            var res = this._UserBAL.LoginUsers_UpdatePasswordBAL(_objUsers);
-                            _objUsers.Password = null;
-                            _objUsers.ConfirmPassword = null;
+                                _objUsers.Password = Crypto.CreatePasswordHash(_objUsers.Password);
+                                var res = this._UserBAL.LoginUsers_UpdatePasswordBAL(_objUsers);
+                                _objUsers.Password = null;
+                                _objUsers.ConfirmPassword = null;
+                            }
                         }
                     }
                 }

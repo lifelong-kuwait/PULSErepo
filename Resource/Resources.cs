@@ -2763,7 +2763,22 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("PointofContactDuplicationMessage", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Person already in Point of contacts</summary>
+        public static string CurrentUserPointOfContactAssignIssue
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CurrentUserPointOfContactAssignIssue", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>Person already in Point of contacts</summary>
+        public static string PointOfContactAssignIssue
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("PointOfContactAssignIssue", CultureInfo.CurrentUICulture.Name);
+            }
+        }
         /// <summary>Cannot Add Same Link again</summary>
         public static string OrganizationContactLinkDuplicationCheck {
                get {

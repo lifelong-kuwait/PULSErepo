@@ -113,8 +113,9 @@ namespace TMS.Business.Interfaces.TMS
         /// <param name="_objUsers">The object users.</param>
         /// <returns>System.Int32.</returns>
         int LoginUsers_DuplicationCheckBAL(LoginUsers _objUsers);
+        int LoginUsers_DuplicationCheckUpdateBAL(LoginUsers _objUsers);
         int LoginPerson_DuplicationCheckBAL(Person person);
-
+        int LoginPerson_DuplicationCheckUpdateBAL(Person person);
         /// <summary>
         /// Logins the users update profile image bal.
         /// </summary>

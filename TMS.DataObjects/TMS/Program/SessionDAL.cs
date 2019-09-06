@@ -50,7 +50,7 @@ namespace TMS.DataObjects.TMS.Program
                 using (var multi = conn.QueryMultiple("TMS_Sessions_GetALLByCulture", dbParam, commandType: System.Data.CommandType.StoredProcedure))
                 {
                     Sessions = multi.Read<Sessions>().AsList<Sessions>();
-                    Total = multi.Read<int>().FirstOrDefault<int>();
+                    //Total = multi.Read<int>().FirstOrDefault<int>();
                 }
 
                 conn.Close();
@@ -108,20 +108,48 @@ namespace TMS.DataObjects.TMS.Program
                 using (var multi = conn.QueryMultiple("TMS_Sessions_GetALLByCultureandOrganization", dbParam, commandType: System.Data.CommandType.StoredProcedure))
                 {
                     Sessions = multi.Read<Sessions>().AsList<Sessions>();
-                    Total = multi.Read<int>().FirstOrDefault<int>();
+                    //Total = multi.Read<int>().FirstOrDefault<int>();
                 }
 
                 conn.Close();
             }
             return Sessions.ToList();
         }
+        /// <summary>
+        /// TMSs the sessions get all by culture dal.
+        /// </summary>
+        /// <param name="ClassID">The class identifier.</param>
+        /// <param name="StartRowIndex">Start index of the row.</param>
+        /// <param name="PageSize">Size of the page.</param>
+        /// <param name="Total">The total.</param>
+        /// <param name="SortExpression">The sort expression.</param>
+        /// <param name="SearchText">The search text.</param>
+        /// <returns>List&lt;Sessions&gt;.</returns>
+        public List<Sessions> TMS_SessionsbyOrganization_GetALLSessionsByCultureDAL(long ClassID, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText, string Oid)
+        {
+            List<Sessions> Sessions = new List<Sessions>();
+            using (var conn = new SqlConnection(DBHelper.ConnectionString))
+            {
+                conn.Open();
+                DynamicParameters dbParam = new DynamicParameters();
+                dbParam.AddDynamicParams(new { ClassID = ClassID, StartRowIndex = StartRowIndex, PageSize = PageSize, SortExpression = SortExpression, SearchText = SearchText, Oid = Oid });
+                using (var multi = conn.QueryMultiple("TMS_Sessions_GetALLSessionsByCultureandOrganization", dbParam, commandType: System.Data.CommandType.StoredProcedure))
+                {
+                    Sessions = multi.Read<Sessions>().AsList<Sessions>();
+                    //Total = multi.Read<int>().FirstOrDefault<int>();
+                }
 
+                conn.Close();
+            }
+            return Sessions.ToList();
+        }
+        
         /// <summary>
         /// TMSs the sessions create dal.
         /// </summary>
         /// <param name="_Sessions">The sessions.</param>
         /// <returns>System.Int64.</returns>
-        public long TMS_Sessions_CreateDAL(Sessions _Sessions)
+        public long TMS_Sessions_CreateDAL(Sessions _Sessions) 
         {
             var parameters = new[] { ParamBuilder.Par("ID", 0) };
             return ExecuteInt64withOutPutparameterSp("TMS_Sessions_Create", parameters,

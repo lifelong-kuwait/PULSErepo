@@ -37,7 +37,7 @@
                          .Scrollable().Filterable().Events(e => e.Edit("OrganizationIndexGrid_onEdit").Save("General_onSave"))
      .HtmlAttributes(new { style = "height:700px !important;" })
      .DataSource(dataSource => dataSource.Ajax().Model(model => { model.Id(m => m.ID);  })
-     .PageSize(15)
+     .PageSize(5)
      .Read(read => read.Action("Organization_Read", "Organization").Data("withSearch"))
      .Create(read => read.Action("Organization_Create", "Organization").Data("OrganizationIndexGetLogo"))
      .Destroy(read => read.Action("Organization_Destroy", "Organization"))

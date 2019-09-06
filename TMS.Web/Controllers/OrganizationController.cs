@@ -323,15 +323,22 @@ namespace TMS.Web.Controllers
             if (ModelState.IsValid)
             {
                 _PointsOfContact.OrganizationID = Convert.ToInt64(oid);
-                if (this.OrganizationBAL.PointOfContact_DuplicationCheckBAL(_PointsOfContact) == 0)
+                if (_PointsOfContact.PersonID == CurrentUser.NameIdentifierInt64)
                 {
-                    _PointsOfContact.CreatedBy = CurrentUser.NameIdentifierInt64;
-                    _PointsOfContact.CreatedDate = DateTime.Now;
-                    _PointsOfContact.ID = this.OrganizationBAL.PointOfContact_CreateBAL(_PointsOfContact);
+                    ModelState.AddModelError(lr.PointOfContactAssignIssue, lr.CurrentUserPointOfContactAssignIssue);
                 }
                 else
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.PointofContactDuplicationMessage);
+                    if (this.OrganizationBAL.PointOfContact_DuplicationCheckBAL(_PointsOfContact) == 0)
+                    {
+                        _PointsOfContact.CreatedBy = CurrentUser.NameIdentifierInt64;
+                        _PointsOfContact.CreatedDate = DateTime.Now;
+                        _PointsOfContact.ID = this.OrganizationBAL.PointOfContact_CreateBAL(_PointsOfContact);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(lr.ErrorServerError, lr.PointofContactDuplicationMessage);
+                    }
                 }
             }
 
@@ -346,15 +353,21 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _PointsOfContact.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                _PointsOfContact.UpdatedDate = DateTime.Now;
-                var result = this.OrganizationBAL.PointOfContact_UpdateBAL(_PointsOfContact);
-                if (result == -1)
+                if (_PointsOfContact.PersonID == CurrentUser.NameIdentifierInt64)
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    ModelState.AddModelError(lr.PointOfContactAssignIssue, lr.CurrentUserPointOfContactAssignIssue);
+                }
+                else
+                {
+                    _PointsOfContact.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                    _PointsOfContact.UpdatedDate = DateTime.Now;
+                    var result = this.OrganizationBAL.PointOfContact_UpdateBAL(_PointsOfContact);
+                    if (result == -1)
+                    {
+                        ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    }
                 }
             }
-
             var resultData = new[] { _PointsOfContact };
             return Json(resultData.ToDataSourceResult(request, ModelState));
         }

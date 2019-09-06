@@ -62,7 +62,7 @@
             model.Id(m => m.ID);
             model.Field(p => p.Flags).DefaultValue(new List<TMS.Library.TMS.Admin.Config.PersonFlagsNested>());
         })
-        .PageSize(15)
+        .PageSize(5)
         .Read(read => read.Action("Person_Read", "Prospect").Data("withSearch"))
         .Create(read => read.Action("Person_Create", "Prospect"))
         .Destroy(read => read.Action("Prospect_Destroy", "Prospect"))

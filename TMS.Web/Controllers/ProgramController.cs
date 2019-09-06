@@ -221,17 +221,29 @@ namespace TMS.Web.Controllers
             }
             long CourseId = 0;
             CourseId = Convert.ToInt64(Request.QueryString["CourseId"]);
-            var Classs = this._ClassBAL.TMS_Classes_GetAllBAL(CourseId, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
-            if (CurrentUser.CompanyID > 0)
+            List<Classes> Classs=new List<Classes>();
+            if (CurrentUser.CompanyID < 0)
             {
-                Classs = this._ClassBAL.TMS_ClassesByOrganization_GetAllBAL(CourseId, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
+                 Classs = this._ClassBAL.TMS_Classes_GetAllBAL(CourseId, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
             }
-            var result = new DataSourceResult()
+            
+           else if (CurrentUser.CompanyID > 0)
             {
-                Data = Classs, // Process data (paging and sorting applied)
-                Total = Total // Total number of records
-            };
-            return Json(result);
+                if(CourseId<=0)
+                {
+                    Classs = this._ClassBAL.TMS_ClassesAllByOrganization_GetAllBAL(CourseId, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
+                }
+                else
+                {
+                    Classs = this._ClassBAL.TMS_ClassesByOrganization_GetAllBAL(CourseId, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
+                }
+            }
+            //var result = new DataSourceResult()
+            //{
+            //    Data = Classs, // Process data (paging and sorting applied)
+            //    Total = Total // Total number of records
+            //};
+            return Json(Classs.ToDataSourceResult(request, ModelState));
         }
 
         [ClaimsAuthorize("CanViewClass")]
@@ -1430,26 +1442,29 @@ namespace TMS.Web.Controllers
             {
                 request.PageSize = 10;
             }
-
-            var Courses = this._SessionBAL.TMS_Sessions_GetALLByCultureBAL(ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
-            if (CurrentUser.CompanyID > 0)
+            List<Sessions> Sessions = new List<Sessions>();
+            if (CurrentUser.CompanyID <= 0)
             {
-                //if (_SessionBAL.User_EmailCheckBAL(CurrentUser.CompanyID, CurrentUser.Email) > 0)
-                //{
-                //    Courses = this._SessionBAL.TMS_SessionsTrainer_GetALLByCultureBAL(CurrentUser.Email,ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
-
-                //}
-                // else {
-                Courses = this._SessionBAL.TMS_SessionsbyOrganization_GetALLByCultureBAL(ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
-                // }
+                Sessions = this._SessionBAL.TMS_Sessions_GetALLByCultureBAL(ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
+            }
+            else if (CurrentUser.CompanyID > 0)
+            {
+                if(ClassID<=0)
+                { 
+                Sessions = this._SessionBAL.TMS_SessionsbyOrganization_GetALLSessionsByCultureBAL(ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
+                }
+                else
+                {
+                    Sessions = this._SessionBAL.TMS_SessionsbyOrganization_GetALLByCultureBAL(ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
+                }
             }
 
             var result = new DataSourceResult()
             {
-                Data = Courses, // Process data (paging and sorting applied)
-                Total = Total // Total number of records
+                Data = Sessions, // Process data (paging and sorting applied)
+                //Total = Total // Total number of records
             };
-            return Json(result);
+            return Json(Sessions.ToDataSourceResult(request, ModelState));
         }
 
         [ClaimsAuthorize("CanAddEditSession")]

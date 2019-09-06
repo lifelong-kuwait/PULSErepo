@@ -109,8 +109,11 @@ namespace TMS.DataObjects.Interfaces
         /// </summary>
         /// <param name="_objUsers">The object users.</param>
         /// <returns>System.Int32.</returns>
-        int LoginUsers_DuplicationCheckDAL(LoginUsers _objUsers);
+        int LoginUsers_DuplicationCheckDAL(LoginUsers _objUsers); 
+        int LoginUsers_DuplicationCheckUpdateDAL(LoginUsers _objUsers);
         int LoginPerson_DuplicationCheckDAL(Library.TMS.Persons.Person objperson);
+        int LoginPerson_DuplicationCheckUpdateDAL(Library.TMS.Persons.Person objperson);
+        
         /// <summary>
         /// Logins the users update profile image dal.
         /// </summary>

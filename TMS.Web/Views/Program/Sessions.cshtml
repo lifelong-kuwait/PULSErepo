@@ -31,12 +31,15 @@
     }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_SessionTemplate").DisplayDeleteConfirmation(false))
                       .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>))
                                    .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
-                                   .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
+                                   
+                                   .Pageable(pager => 
+                                   pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
                                    .Scrollable()
+                                   //.Filterable().Events(e => e.Edit("PersonGrid_onEdit").Save("Person_onSave"))
                                    .Events(e => e.Edit("SessionGrid_onEdit").Save("General_onSave"))
                                    .HtmlAttributes(new { style = "height:700px !important;" })
-                                   .DataSource(dataSource => dataSource.Ajax().ServerOperation(true).Model(model => { model.Id(m => m.ID); })
-                                   .PageSize(50)
+                                   .DataSource(dataSource => dataSource.Ajax().Model(model => { model.Id(m => m.ID); })
+                                   .PageSize(5)
                                    .Read(read => read.Action("Sessions_Read", "Program"))
                                    .Create(read => read.Action("Sessions_Create", "Program"))
                                    .Destroy(read => read.Action("Sessions_Destroy", "Program"))

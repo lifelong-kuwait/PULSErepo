@@ -36,7 +36,7 @@ function ClassTemplate(data) {
      .Events(e => e.Edit("ClassGrid_onEdit").Save("General_onSave"))
      .HtmlAttributes(new { style = "height:700px !important;" })
      .DataSource(dataSource => dataSource.Ajax().ServerOperation(true).Model(model => { model.Id(m => m.ID); })
-     .PageSize(50)
+     .PageSize(5)
      .Read(read => read.Action("Class_Read", "Program").Data("withSearch"))
      .Create(read => read.Action("Class_Create", "Program"))
      .Destroy(read => read.Action("Class_Destroy", "Program"))

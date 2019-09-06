@@ -109,7 +109,7 @@ namespace TMS.Web.Controllers
             if (ModelState.IsValid)
             {
                 bool _valid = false;
-                if (_UserBAL.LoginPerson_DuplicationCheckBAL(new Person { Email = _person.Email }) > 0)
+                if (_UserBAL.LoginPerson_DuplicationCheckBAL(new Person { Email = _person.Email,CreatedBy=CurrentUser.CompanyID }) > 0)
                 {
                     ModelState.AddModelError(lr.UserEmailAlreadyExist, lr.UserEmailAlreadyExist);
                     // return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
