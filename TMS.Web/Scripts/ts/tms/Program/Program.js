@@ -45,8 +45,13 @@ function CourseGrid_onEdit(e) {
     }
     else {
         // edit
-        jQuery("#CourseCategoryCode").text(e.model.CourseCode.split("-")[0]);
-        jQuery("#CourseCode").val(e.model.CourseCode.split("-")[1]).trigger("change");
+        jQuery("#CourseCategoryCode").prop("disabled", true);
+        jQuery("#CourseCode").prop("disabled", true);
+        var couCat = e.model.CourseCode;
+       // "data-123".replace('data-', '');
+        couCat = couCat.replace(e.model.CourseCategoryName,'');
+        jQuery("#CourseCategoryCode").text(e.model.CourseCategoryName);
+        jQuery("#CourseCode").val(couCat.slice(1)).trigger("change");
         jQuery(title).text(lr.EditRecordGeneralTitle);
         jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.UpdateRecordGeneralButton);
     }
@@ -158,9 +163,10 @@ function onChangeClassId(e) {
                         customClass: "tmsconfirm border2pxsilid",
                     }, function (isConfirm) {
                         if (isConfirm) {
-                            jQuery("#SessionsGrid").data("kendoGrid").cancelRow();
+                            window.location.reload();
                         }
                         else {
+                            window.location.reload();
                         }
                     });
                     //
@@ -177,9 +183,10 @@ function onChangeClassId(e) {
                         customClass: "tmsconfirm border2pxsilid",
                     }, function (isConfirm) {
                         if (isConfirm) {
-                            jQuery("#SessionsGrid").data("kendoGrid").cancelRow();
+                            window.location.reload();
                         }
                         else {
+                            window.location.reload();
                         }
                     });
                 }

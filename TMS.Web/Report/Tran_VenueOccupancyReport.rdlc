@@ -322,7 +322,7 @@
         </TablixRowHierarchy>
         <DataSetName>OccupancyReport</DataSetName>
         <Height>0.5in</Height>
-        <Width>6.73959in</Width>
+        <Width>6.73957in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -394,8 +394,10 @@
         </Border>
       </Style>
     </PageHeader>
-    <LeftMargin>1in</LeftMargin>
-    <RightMargin>1in</RightMargin>
+    <PageHeight>11.69in</PageHeight>
+    <PageWidth>8.27in</PageWidth>
+    <LeftMargin>0.5in</LeftMargin>
+    <RightMargin>0.5in</RightMargin>
     <TopMargin>1in</TopMargin>
     <BottomMargin>1in</BottomMargin>
     <Style />

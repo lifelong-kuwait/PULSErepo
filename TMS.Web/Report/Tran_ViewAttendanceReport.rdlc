@@ -55,9 +55,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>P = Present, A = Absent, LE = Left Early, LA = Late</Value>
+                              <Value>P = Present, A = Absent, LE = Left Early, LA = Late,Q=Quit</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                                 <TextDecoration>None</TextDecoration>
                                 <Color>#000000</Color>
@@ -1990,15 +1991,17 @@ format(cdate(Fields!StartDate.Value).AddDays(6), "dddd") = "Friday", "LightGrey"
         </Style>
       </Image>
     </ReportItems>
-    <Height>2.93671in</Height>
+    <Height>2.82213in</Height>
     <Style />
   </Body>
   <Width>7.54874in</Width>
   <Page>
-    <LeftMargin>1in</LeftMargin>
-    <RightMargin>1in</RightMargin>
-    <TopMargin>1in</TopMargin>
-    <BottomMargin>1in</BottomMargin>
+    <PageHeight>11.69in</PageHeight>
+    <PageWidth>8.27in</PageWidth>
+    <LeftMargin>0.25in</LeftMargin>
+    <RightMargin>0.25in</RightMargin>
+    <TopMargin>0.5in</TopMargin>
+    <BottomMargin>0.5in</BottomMargin>
     <Style />
   </Page>
   <AutoRefresh>0</AutoRefresh>

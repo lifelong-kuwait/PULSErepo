@@ -2490,6 +2490,8 @@
     <None Include="Properties\PublishProfiles\FolderProfile25.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile26.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile27.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile28.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile29.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile3.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile4.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile5.pubxml" />

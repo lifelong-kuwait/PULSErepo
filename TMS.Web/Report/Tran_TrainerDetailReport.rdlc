@@ -587,10 +587,10 @@ Format(Fields!EndDate.Value,"dd MMM yyyy")</Value>
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>2in</Height>
+        <Height>0.52083in</Height>
         <Style />
       </Body>
-      <Width>6.51042in</Width>
+      <Width>6.375in</Width>
       <Page>
         <PageHeader>
           <Height>0.71875in</Height>
@@ -678,6 +678,7 @@ Z5+Tk9pgzjwezq81HbZHNQWzhUGA/bhUBGrSdDnhKBkEWx5fJG8rGThWxollSMHM52Ar+aPWIUtpTbPZ
 QawuNdcYhhzlh3CUzT3iMnhHaBSMTFzxDNUYXNvBWZVYbMrmHfY1iMuQL201+WhZk9VTQFtwogsPiLyXJxQaL47jdrietB+Pi6UFQHLqxHO8uujUchO5xQviGe40ZeDZhAMhk4I4AjF76z8ziLiGxBMYfNzOiepiweynVQM8o+4VnzTkXX2OG4hrSDwBb6ClrdMcSmF22Y4nns+pJ2IeEGCKdij5E1CiY3EDsdSfUHcM1w8PiPzIF2ufZeFCU5vxFqgHsxIfH63CYP3Z+C3ymLq65INaJm+u6Vzcwrt01nLvaa07Hg2uJPnjHuNJMePRQowdgleEa40rSV0vqiZD1bNHwbJAf1BvhHz5jhuKa4tLSb1XKjnY+kfD2HzxPpgIvEN/431QNhORPF6KPGY8HjyocCAkUrCO0jBmBSqRJYDBRA3zvS8hLZ9WJZp72nLmhO0EZjezjCUIVdna3mUCNHaXcSBCPhCX01HztuWamAnlQUAO06CdCHI5vcusxP/HRfW/b8PZiKkz9dV6Q753dxeY+AQDmqRaYbuqcuIbU1WjoCX88+lLfH2hwm4t9SYewf4Gz2kTSxMEgQT2HSvhQNgNTReffLikcBEElxQuguCSwkUQXFK4CIJLChdBcEnhIgguKVwEwSWFiyC4pHARBJcULoLgksJFEFxSuAiCSwoXQXBJ4SIILilcBMElhYsguKRwEQSXFC6C4JLCRQBE/h8L5rKJ41JzogAAAABJRU5ErkJggg==</ImageData>
     </EmbeddedImage>
   </EmbeddedImages>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>f9667340-3fcd-49aa-98ef-8093c5191d2f</rd:ReportID>
 </Report>

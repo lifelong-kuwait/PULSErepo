@@ -425,10 +425,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>Tran_Venues_GetVenueDetailsForReport</DataSetName>
-        <Top>1.22229in</Top>
-        <Left>0.14833in</Left>
+        <Top>1.19452in</Top>
+        <Left>0.00532in</Left>
         <Height>0.46875in</Height>
-        <Width>6.19635in</Width>
+        <Width>6.19633in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -914,8 +914,8 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>Tran_Venues_GetVenueDetailsForReport</DataSetName>
-        <Top>0.40291in</Top>
-        <Left>0.14833in</Left>
+        <Top>0.37514in</Top>
+        <Left>0.00532in</Left>
         <Height>0.5in</Height>
         <Width>6.19635in</Width>
         <ZIndex>1</ZIndex>
@@ -949,8 +949,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox9</rd:DefaultName>
-        <Top>0.06944in</Top>
-        <Left>0.15354in</Left>
+        <Top>0.04167in</Top>
+        <Left>0.01053in</Left>
         <Height>0.26402in</Height>
         <Width>1.48072in</Width>
         <ZIndex>2</ZIndex>
@@ -990,8 +990,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox9</rd:DefaultName>
-        <Top>0.97236in</Top>
-        <Left>0.15354in</Left>
+        <Top>0.94459in</Top>
+        <Left>0.01053in</Left>
         <Height>0.23604in</Height>
         <Width>1.58489in</Width>
         <ZIndex>3</ZIndex>
@@ -1011,7 +1011,7 @@
     <Height>1.69104in</Height>
     <Style />
   </Body>
-  <Width>6.64467in</Width>
+  <Width>6.21968in</Width>
   <Page>
     <PageHeader>
       <Height>0.69792in</Height>
@@ -1039,7 +1039,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
           <Top>0.3425in</Top>
-          <Left>1.99182in</Left>
+          <Left>1.83828in</Left>
           <Height>0.25in</Height>
           <Width>2.58333in</Width>
           <Style>
@@ -1056,7 +1056,7 @@
           <Source>Embedded</Source>
           <Value>pace</Value>
           <Sizing>FitProportional</Sizing>
-          <Left>0.02835in</Left>
+          <Top>0.07292in</Top>
           <Height>0.625in</Height>
           <Width>1.19667in</Width>
           <ZIndex>1</ZIndex>
@@ -1073,6 +1073,8 @@
         </Border>
       </Style>
     </PageHeader>
+    <LeftMargin>1in</LeftMargin>
+    <RightMargin>0.25in</RightMargin>
     <Style />
   </Page>
   <AutoRefresh>0</AutoRefresh>

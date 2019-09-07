@@ -565,8 +565,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>Tran_Classes_GetClassDetailsForReport</DataSetName>
-        <Top>0.125in</Top>
-        <Left>0.46875in</Left>
+        <Top>0.13889in</Top>
         <Height>0.5in</Height>
         <Width>7.77423in</Width>
         <Style>
@@ -591,7 +590,7 @@
         </Paragraphs>
         <rd:DefaultName>ExecutionTime</rd:DefaultName>
         <Top>0.68056in</Top>
-        <Left>6.61798in</Left>
+        <Left>6.26381in</Left>
         <Height>0.1875in</Height>
         <Width>1.44792in</Width>
         <ZIndex>1</ZIndex>
@@ -614,7 +613,7 @@
       </BackgroundImage>
     </Style>
   </Body>
-  <Width>8.63416in</Width>
+  <Width>7.77423in</Width>
   <Page>
     <PageHeader>
       <Height>0.76042in</Height>
@@ -641,7 +640,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
           <Top>0.31126in</Top>
-          <Left>3.21547in</Left>
+          <Left>2.99672in</Left>
           <Height>0.27083in</Height>
           <Width>2.22917in</Width>
           <Style>
@@ -659,7 +658,7 @@
           <Value>pacenew</Value>
           <Sizing>FitProportional</Sizing>
           <Top>0.11806in</Top>
-          <Left>0.05952in</Left>
+          <Left>0.2991in</Left>
           <Height>0.57292in</Height>
           <Width>1.26042in</Width>
           <ZIndex>1</ZIndex>
@@ -676,7 +675,8 @@
         </Border>
       </Style>
     </PageHeader>
-    <LeftMargin>0.5in</LeftMargin>
+    <LeftMargin>0.25in</LeftMargin>
+    <RightMargin>0.25in</RightMargin>
     <Style />
   </Page>
   <AutoRefresh>0</AutoRefresh>

@@ -617,7 +617,7 @@ Format(Fields!EndDate.Value,"dd MMM yyyy")</Value>
     <Height>0.63036in</Height>
     <Style />
   </Body>
-  <Width>6.42211in</Width>
+  <Width>6.44294in</Width>
   <Page>
     <PageHeader>
       <Height>0.71875in</Height>
@@ -662,6 +662,7 @@ Format(Fields!EndDate.Value,"dd MMM yyyy")</Value>
           <Source>Embedded</Source>
           <Value>pace</Value>
           <Sizing>FitProportional</Sizing>
+          <Top>0.03819in</Top>
           <Left>0.14583in</Left>
           <Height>0.625in</Height>
           <Width>1.19667in</Width>
