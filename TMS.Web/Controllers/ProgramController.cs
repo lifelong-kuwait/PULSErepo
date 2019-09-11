@@ -291,6 +291,10 @@ namespace TMS.Web.Controllers
                     {
                         _Class.FollowUp = "";
                     }
+                    if(_Class.SecondaryClassTitle==null)
+                    {
+                        _Class.SecondaryClassTitle = "";
+                    }
 
 
                     _Class.ID = _ClassBAL.TMS_Classes_CreateBAL(_Class);

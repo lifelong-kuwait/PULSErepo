@@ -27,7 +27,7 @@ namespace TMS.Web.Views.Report.SpLReports
 
                 string venueID = Request.QueryString["Venue"];
                 string startDate = Request.QueryString["StartDate"];
-              
+               
 
                 RenderReportModels(this.ReportDataObj, venueID, startDate);
             }
@@ -40,7 +40,8 @@ namespace TMS.Web.Views.Report.SpLReports
            
             int venueid = Convert.ToInt32(venueID);
 
-
+             
+            long CompanyId = Convert.ToInt64(HttpContext.Current.Session["CompanyID"]);
             // Reset report properties.
             ReportViewerRSFReports.Height = Unit.Parse("100%");
             ReportViewerRSFReports.Width = Unit.Parse("100%");
@@ -48,7 +49,7 @@ namespace TMS.Web.Views.Report.SpLReports
             var rptPath = Server.MapPath(@"../../../Report/" + reportData.ReportName + ".rdlc");
             this.ReportViewerRSFReports.LocalReport.ReportPath = rptPath;
             //DataTable dt = _PersonBAL.ClassFutureReport(CurrentCourseCategoryID, ClassReportStartDateFrom, ClassReportStartDateTo, ShowFutureClasses, ClassTypeID);
-           DataTable dt = _PersonBAL.DailyUtilizationReport(Startday, venueid);
+           DataTable dt = _PersonBAL.DailyUtilizationReport(Startday, venueid, Convert.ToInt64(CompanyId));
             ReportViewerRSFReports.ProcessingMode = ProcessingMode.Local;
             ReportViewerRSFReports.LocalReport.DataSources.Clear();
             ReportViewerRSFReports.LocalReport.DataSources.Add(new ReportDataSource("DailyUtilizationReport", dt));

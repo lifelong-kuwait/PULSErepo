@@ -582,14 +582,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="SumL1">
+                    <Textbox Name="SumLA1">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!SumL.Value</Value>
+                              <Value>=Fields!SumLA.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -598,7 +598,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>SumL1</rd:DefaultName>
+                      <rd:DefaultName>SumLA1</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -824,14 +824,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox51">
+                    <Textbox Name="SumLA">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!SumL.Value)</Value>
+                              <Value>=Sum(Fields!SumLA.Value)</Value>
                               <Style>
                                 <Color>White</Color>
                               </Style>
@@ -842,7 +842,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox51</rd:DefaultName>
+                      <rd:DefaultName>SumLA</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1655,7 +1655,7 @@
     <Height>1.79402in</Height>
     <Style />
   </Body>
-  <Width>11.01588in</Width>
+  <Width>9.49505in</Width>
   <Page>
     <PageHeader>
       <Height>0.56944in</Height>
@@ -1711,6 +1711,38 @@
             <PaddingBottom>2pt</PaddingBottom>
           </Style>
         </Textbox>
+        <Textbox Name="Textbox11">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Course Attandence Report</Value>
+                  <Style>
+                    <FontSize>18pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox11</rd:DefaultName>
+          <Top>0.12375in</Top>
+          <Left>2.4675in</Left>
+          <Height>0.37625in</Height>
+          <Width>3.17685in</Width>
+          <ZIndex>2</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
       </ReportItems>
       <Style>
         <Border>
@@ -1744,6 +1776,18 @@
         <Field Name="ID">
           <DataField>ID</DataField>
           <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="OrganizationID">
+          <DataField>OrganizationID</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="P_Name">
+          <DataField>P_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Logo">
+          <DataField>Logo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="FullName">
           <DataField>FullName</DataField>
@@ -1789,6 +1833,10 @@
           <DataField>SumU</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
+        <Field Name="SumLA">
+          <DataField>SumLA</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="AttendancePercentage">
           <DataField>AttendancePercentage</DataField>
           <rd:TypeName>System.Double</rd:TypeName>
@@ -1799,12 +1847,12 @@
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>VewCourseAttendanceReportDataSet</rd:DataSetName>
-        <rd:SchemaPath>C:\GUST\SourceCode\Lifelong.EIS.TrainingWeb\VewCourseAttendanceReportDataSet.xsd</rd:SchemaPath>
-        <rd:TableName>Tran_AttendancesCourse_GetReportData</rd:TableName>
+        <rd:DataSetName>CourseAttendanceDataSet</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\SynergicProfessional\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\CourseAttendanceDataSet.xsd</rd:SchemaPath>
+        <rd:TableName>TMS_AttendancesCourse_GetReportData</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>Tran_AttendancesCourse_GetReportDataTableAdapter</rd:TableAdapterName>
+        <rd:TableAdapterName>TMS_AttendancesCourse_GetReportDataTableAdapter</rd:TableAdapterName>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>

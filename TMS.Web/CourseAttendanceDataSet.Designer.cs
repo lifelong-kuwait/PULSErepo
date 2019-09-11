@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace Lifelong.EIS.TrainingWeb {
+namespace TMS.Web {
     
     
     /// <summary>
@@ -20,17 +20,17 @@ namespace Lifelong.EIS.TrainingWeb {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("VewCourseAttendanceReportDataSet")]
+    [global::System.Xml.Serialization.XmlRootAttribute("CourseAttendanceDataSet")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class VewCourseAttendanceReportDataSet : global::System.Data.DataSet {
+    public partial class CourseAttendanceDataSet : global::System.Data.DataSet {
         
-        private Tran_AttendancesCourse_GetReportDataDataTable tableTran_AttendancesCourse_GetReportData;
+        private TMS_AttendancesCourse_GetReportDataDataTable tableTMS_AttendancesCourse_GetReportData;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public VewCourseAttendanceReportDataSet() {
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public CourseAttendanceDataSet() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -40,8 +40,8 @@ namespace Lifelong.EIS.TrainingWeb {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected VewCourseAttendanceReportDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        protected CourseAttendanceDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -54,8 +54,8 @@ namespace Lifelong.EIS.TrainingWeb {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["Tran_AttendancesCourse_GetReportData"] != null)) {
-                    base.Tables.Add(new Tran_AttendancesCourse_GetReportDataDataTable(ds.Tables["Tran_AttendancesCourse_GetReportData"]));
+                if ((ds.Tables["TMS_AttendancesCourse_GetReportData"] != null)) {
+                    base.Tables.Add(new TMS_AttendancesCourse_GetReportDataDataTable(ds.Tables["TMS_AttendancesCourse_GetReportData"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -76,17 +76,17 @@ namespace Lifelong.EIS.TrainingWeb {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public Tran_AttendancesCourse_GetReportDataDataTable Tran_AttendancesCourse_GetReportData {
+        public TMS_AttendancesCourse_GetReportDataDataTable TMS_AttendancesCourse_GetReportData {
             get {
-                return this.tableTran_AttendancesCourse_GetReportData;
+                return this.tableTMS_AttendancesCourse_GetReportData;
             }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -99,7 +99,7 @@ namespace Lifelong.EIS.TrainingWeb {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public new global::System.Data.DataTableCollection Tables {
             get {
@@ -108,7 +108,7 @@ namespace Lifelong.EIS.TrainingWeb {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public new global::System.Data.DataRelationCollection Relations {
             get {
@@ -117,7 +117,7 @@ namespace Lifelong.EIS.TrainingWeb {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         protected override void InitializeDerivedDataSet() {
             this.BeginInit();
             this.InitClass();
@@ -125,35 +125,35 @@ namespace Lifelong.EIS.TrainingWeb {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            VewCourseAttendanceReportDataSet cln = ((VewCourseAttendanceReportDataSet)(base.Clone()));
+            CourseAttendanceDataSet cln = ((CourseAttendanceDataSet)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         protected override bool ShouldSerializeTables() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         protected override bool ShouldSerializeRelations() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         protected override void ReadXmlSerializable(global::System.Xml.XmlReader reader) {
             if ((this.DetermineSchemaSerializationMode(reader) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["Tran_AttendancesCourse_GetReportData"] != null)) {
-                    base.Tables.Add(new Tran_AttendancesCourse_GetReportDataDataTable(ds.Tables["Tran_AttendancesCourse_GetReportData"]));
+                if ((ds.Tables["TMS_AttendancesCourse_GetReportData"] != null)) {
+                    base.Tables.Add(new TMS_AttendancesCourse_GetReportDataDataTable(ds.Tables["TMS_AttendancesCourse_GetReportData"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -171,7 +171,7 @@ namespace Lifelong.EIS.TrainingWeb {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         protected override global::System.Xml.Schema.XmlSchema GetSchemaSerializable() {
             global::System.IO.MemoryStream stream = new global::System.IO.MemoryStream();
             this.WriteXmlSchema(new global::System.Xml.XmlTextWriter(stream, null));
@@ -180,42 +180,42 @@ namespace Lifelong.EIS.TrainingWeb {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         internal void InitVars() {
             this.InitVars(true);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tableTran_AttendancesCourse_GetReportData = ((Tran_AttendancesCourse_GetReportDataDataTable)(base.Tables["Tran_AttendancesCourse_GetReportData"]));
+            this.tableTMS_AttendancesCourse_GetReportData = ((TMS_AttendancesCourse_GetReportDataDataTable)(base.Tables["TMS_AttendancesCourse_GetReportData"]));
             if ((initTable == true)) {
-                if ((this.tableTran_AttendancesCourse_GetReportData != null)) {
-                    this.tableTran_AttendancesCourse_GetReportData.InitVars();
+                if ((this.tableTMS_AttendancesCourse_GetReportData != null)) {
+                    this.tableTMS_AttendancesCourse_GetReportData.InitVars();
                 }
             }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "VewCourseAttendanceReportDataSet";
+            this.DataSetName = "CourseAttendanceDataSet";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/VewCourseAttendanceReportDataSet.xsd";
+            this.Namespace = "http://tempuri.org/CourseAttendanceDataSet.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableTran_AttendancesCourse_GetReportData = new Tran_AttendancesCourse_GetReportDataDataTable();
-            base.Tables.Add(this.tableTran_AttendancesCourse_GetReportData);
+            this.tableTMS_AttendancesCourse_GetReportData = new TMS_AttendancesCourse_GetReportDataDataTable();
+            base.Tables.Add(this.tableTMS_AttendancesCourse_GetReportData);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeTran_AttendancesCourse_GetReportData() {
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        private bool ShouldSerializeTMS_AttendancesCourse_GetReportData() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
@@ -223,9 +223,9 @@ namespace Lifelong.EIS.TrainingWeb {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            VewCourseAttendanceReportDataSet ds = new VewCourseAttendanceReportDataSet();
+            CourseAttendanceDataSet ds = new CourseAttendanceDataSet();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -269,17 +269,23 @@ namespace Lifelong.EIS.TrainingWeb {
             return type;
         }
         
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void Tran_AttendancesCourse_GetReportDataRowChangeEventHandler(object sender, Tran_AttendancesCourse_GetReportDataRowChangeEvent e);
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public delegate void TMS_AttendancesCourse_GetReportDataRowChangeEventHandler(object sender, TMS_AttendancesCourse_GetReportDataRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class Tran_AttendancesCourse_GetReportDataDataTable : global::System.Data.TypedTableBase<Tran_AttendancesCourse_GetReportDataRow> {
+        public partial class TMS_AttendancesCourse_GetReportDataDataTable : global::System.Data.TypedTableBase<TMS_AttendancesCourse_GetReportDataRow> {
             
             private global::System.Data.DataColumn columnID;
+            
+            private global::System.Data.DataColumn columnOrganizationID;
+            
+            private global::System.Data.DataColumn columnP_Name;
+            
+            private global::System.Data.DataColumn columnLogo;
             
             private global::System.Data.DataColumn columnFullName;
             
@@ -298,27 +304,29 @@ namespace Lifelong.EIS.TrainingWeb {
             private global::System.Data.DataColumn columnSumA;
             
             private global::System.Data.DataColumn columnSumL;
-            private global::System.Data.DataColumn columnSumLA;
+            
             private global::System.Data.DataColumn columnSumQ;
             
             private global::System.Data.DataColumn columnSumU;
+            
+            private global::System.Data.DataColumn columnSumLA;
             
             private global::System.Data.DataColumn columnAttendancePercentage;
             
             private global::System.Data.DataColumn columnRowIndex;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Tran_AttendancesCourse_GetReportDataDataTable() {
-                this.TableName = "Tran_AttendancesCourse_GetReportData";
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public TMS_AttendancesCourse_GetReportDataDataTable() {
+                this.TableName = "TMS_AttendancesCourse_GetReportData";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal Tran_AttendancesCourse_GetReportDataDataTable(global::System.Data.DataTable table) {
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal TMS_AttendancesCourse_GetReportDataDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -334,14 +342,14 @@ namespace Lifelong.EIS.TrainingWeb {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected Tran_AttendancesCourse_GetReportDataDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected TMS_AttendancesCourse_GetReportDataDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn IDColumn {
                 get {
                     return this.columnID;
@@ -349,7 +357,31 @@ namespace Lifelong.EIS.TrainingWeb {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn OrganizationIDColumn {
+                get {
+                    return this.columnOrganizationID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn P_NameColumn {
+                get {
+                    return this.columnP_Name;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn LogoColumn {
+                get {
+                    return this.columnLogo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn FullNameColumn {
                 get {
                     return this.columnFullName;
@@ -357,7 +389,7 @@ namespace Lifelong.EIS.TrainingWeb {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn CourseNameColumn {
                 get {
                     return this.columnCourseName;
@@ -365,7 +397,7 @@ namespace Lifelong.EIS.TrainingWeb {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn ClassNameColumn {
                 get {
                     return this.columnClassName;
@@ -373,7 +405,7 @@ namespace Lifelong.EIS.TrainingWeb {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn TrainersColumn {
                 get {
                     return this.columnTrainers;
@@ -381,7 +413,7 @@ namespace Lifelong.EIS.TrainingWeb {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn CoordinatorsColumn {
                 get {
                     return this.columnCoordinators;
@@ -389,7 +421,7 @@ namespace Lifelong.EIS.TrainingWeb {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn SessionStatisticColumn {
                 get {
                     return this.columnSessionStatistic;
@@ -397,7 +429,7 @@ namespace Lifelong.EIS.TrainingWeb {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn SumPColumn {
                 get {
                     return this.columnSumP;
@@ -405,7 +437,7 @@ namespace Lifelong.EIS.TrainingWeb {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn SumAColumn {
                 get {
                     return this.columnSumA;
@@ -413,23 +445,15 @@ namespace Lifelong.EIS.TrainingWeb {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn SumLColumn {
                 get {
                     return this.columnSumL;
                 }
             }
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn SumLAColumn
-            {
-                get
-                {
-                    return this.columnSumLA;
-                }
-            }
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn SumQColumn {
                 get {
                     return this.columnSumQ;
@@ -437,7 +461,7 @@ namespace Lifelong.EIS.TrainingWeb {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn SumUColumn {
                 get {
                     return this.columnSumU;
@@ -445,7 +469,15 @@ namespace Lifelong.EIS.TrainingWeb {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn SumLAColumn {
+                get {
+                    return this.columnSumLA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn AttendancePercentageColumn {
                 get {
                     return this.columnAttendancePercentage;
@@ -453,7 +485,7 @@ namespace Lifelong.EIS.TrainingWeb {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn RowIndexColumn {
                 get {
                     return this.columnRowIndex;
@@ -461,7 +493,7 @@ namespace Lifelong.EIS.TrainingWeb {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -470,37 +502,57 @@ namespace Lifelong.EIS.TrainingWeb {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Tran_AttendancesCourse_GetReportDataRow this[int index] {
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public TMS_AttendancesCourse_GetReportDataRow this[int index] {
                 get {
-                    return ((Tran_AttendancesCourse_GetReportDataRow)(this.Rows[index]));
+                    return ((TMS_AttendancesCourse_GetReportDataRow)(this.Rows[index]));
                 }
             }
             
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event Tran_AttendancesCourse_GetReportDataRowChangeEventHandler Tran_AttendancesCourse_GetReportDataRowChanging;
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event TMS_AttendancesCourse_GetReportDataRowChangeEventHandler TMS_AttendancesCourse_GetReportDataRowChanging;
             
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event Tran_AttendancesCourse_GetReportDataRowChangeEventHandler Tran_AttendancesCourse_GetReportDataRowChanged;
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event TMS_AttendancesCourse_GetReportDataRowChangeEventHandler TMS_AttendancesCourse_GetReportDataRowChanged;
             
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event Tran_AttendancesCourse_GetReportDataRowChangeEventHandler Tran_AttendancesCourse_GetReportDataRowDeleting;
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event TMS_AttendancesCourse_GetReportDataRowChangeEventHandler TMS_AttendancesCourse_GetReportDataRowDeleting;
             
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event Tran_AttendancesCourse_GetReportDataRowChangeEventHandler Tran_AttendancesCourse_GetReportDataRowDeleted;
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event TMS_AttendancesCourse_GetReportDataRowChangeEventHandler TMS_AttendancesCourse_GetReportDataRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddTran_AttendancesCourse_GetReportDataRow(Tran_AttendancesCourse_GetReportDataRow row) {
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void AddTMS_AttendancesCourse_GetReportDataRow(TMS_AttendancesCourse_GetReportDataRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Tran_AttendancesCourse_GetReportDataRow AddTran_AttendancesCourse_GetReportDataRow(string FullName, string CourseName, string ClassName, string Trainers, string Coordinators, string SessionStatistic, int SumP, int SumA, int SumL,int SumLA, int SumQ, int SumU, double AttendancePercentage, int RowIndex) {
-                Tran_AttendancesCourse_GetReportDataRow rowTran_AttendancesCourse_GetReportDataRow = ((Tran_AttendancesCourse_GetReportDataRow)(this.NewRow()));
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public TMS_AttendancesCourse_GetReportDataRow AddTMS_AttendancesCourse_GetReportDataRow(
+                        long OrganizationID, 
+                        string P_Name, 
+                        string Logo, 
+                        string FullName, 
+                        string CourseName, 
+                        string ClassName, 
+                        string Trainers, 
+                        string Coordinators, 
+                        string SessionStatistic, 
+                        int SumP, 
+                        int SumA, 
+                        int SumL, 
+                        int SumQ, 
+                        int SumU, 
+                        int SumLA, 
+                        double AttendancePercentage, 
+                        int RowIndex) {
+                TMS_AttendancesCourse_GetReportDataRow rowTMS_AttendancesCourse_GetReportDataRow = ((TMS_AttendancesCourse_GetReportDataRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
+                        OrganizationID,
+                        P_Name,
+                        Logo,
                         FullName,
                         CourseName,
                         ClassName,
@@ -510,41 +562,44 @@ namespace Lifelong.EIS.TrainingWeb {
                         SumP,
                         SumA,
                         SumL,
-                        SumLA,
                         SumQ,
                         SumU,
+                        SumLA,
                         AttendancePercentage,
                         RowIndex};
-                rowTran_AttendancesCourse_GetReportDataRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowTran_AttendancesCourse_GetReportDataRow);
-                return rowTran_AttendancesCourse_GetReportDataRow;
+                rowTMS_AttendancesCourse_GetReportDataRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowTMS_AttendancesCourse_GetReportDataRow);
+                return rowTMS_AttendancesCourse_GetReportDataRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Tran_AttendancesCourse_GetReportDataRow FindByID(long ID) {
-                return ((Tran_AttendancesCourse_GetReportDataRow)(this.Rows.Find(new object[] {
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public TMS_AttendancesCourse_GetReportDataRow FindByID(long ID) {
+                return ((TMS_AttendancesCourse_GetReportDataRow)(this.Rows.Find(new object[] {
                             ID})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                Tran_AttendancesCourse_GetReportDataDataTable cln = ((Tran_AttendancesCourse_GetReportDataDataTable)(base.Clone()));
+                TMS_AttendancesCourse_GetReportDataDataTable cln = ((TMS_AttendancesCourse_GetReportDataDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new Tran_AttendancesCourse_GetReportDataDataTable();
+                return new TMS_AttendancesCourse_GetReportDataDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             internal void InitVars() {
                 this.columnID = base.Columns["ID"];
+                this.columnOrganizationID = base.Columns["OrganizationID"];
+                this.columnP_Name = base.Columns["P_Name"];
+                this.columnLogo = base.Columns["Logo"];
                 this.columnFullName = base.Columns["FullName"];
                 this.columnCourseName = base.Columns["CourseName"];
                 this.columnClassName = base.Columns["ClassName"];
@@ -554,18 +609,24 @@ namespace Lifelong.EIS.TrainingWeb {
                 this.columnSumP = base.Columns["SumP"];
                 this.columnSumA = base.Columns["SumA"];
                 this.columnSumL = base.Columns["SumL"];
-                this.columnSumLA = base.Columns["SumLA"];
                 this.columnSumQ = base.Columns["SumQ"];
                 this.columnSumU = base.Columns["SumU"];
+                this.columnSumLA = base.Columns["SumLA"];
                 this.columnAttendancePercentage = base.Columns["AttendancePercentage"];
                 this.columnRowIndex = base.Columns["RowIndex"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             private void InitClass() {
                 this.columnID = new global::System.Data.DataColumn("ID", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnID);
+                this.columnOrganizationID = new global::System.Data.DataColumn("OrganizationID", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOrganizationID);
+                this.columnP_Name = new global::System.Data.DataColumn("P_Name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnP_Name);
+                this.columnLogo = new global::System.Data.DataColumn("Logo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLogo);
                 this.columnFullName = new global::System.Data.DataColumn("FullName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFullName);
                 this.columnCourseName = new global::System.Data.DataColumn("CourseName", typeof(string), null, global::System.Data.MappingType.Element);
@@ -584,12 +645,12 @@ namespace Lifelong.EIS.TrainingWeb {
                 base.Columns.Add(this.columnSumA);
                 this.columnSumL = new global::System.Data.DataColumn("SumL", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSumL);
-                this.columnSumLA = new global::System.Data.DataColumn("SumLA", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSumLA);
                 this.columnSumQ = new global::System.Data.DataColumn("SumQ", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSumQ);
                 this.columnSumU = new global::System.Data.DataColumn("SumU", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSumU);
+                this.columnSumLA = new global::System.Data.DataColumn("SumLA", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSumLA);
                 this.columnAttendancePercentage = new global::System.Data.DataColumn("AttendancePercentage", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAttendancePercentage);
                 this.columnRowIndex = new global::System.Data.DataColumn("RowIndex", typeof(int), null, global::System.Data.MappingType.Element);
@@ -597,11 +658,12 @@ namespace Lifelong.EIS.TrainingWeb {
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
                 this.columnID.AutoIncrement = true;
-                this.columnID.AutoIncrementSeed = -1;
-                this.columnID.AutoIncrementStep = -1;
                 this.columnID.AllowDBNull = false;
                 this.columnID.ReadOnly = true;
                 this.columnID.Unique = true;
+                this.columnOrganizationID.AllowDBNull = false;
+                this.columnP_Name.MaxLength = 255;
+                this.columnLogo.MaxLength = 150;
                 this.columnFullName.AllowDBNull = false;
                 this.columnFullName.MaxLength = 255;
                 this.columnCourseName.AllowDBNull = false;
@@ -617,79 +679,79 @@ namespace Lifelong.EIS.TrainingWeb {
                 this.columnSumP.ReadOnly = true;
                 this.columnSumA.ReadOnly = true;
                 this.columnSumL.ReadOnly = true;
-                this.columnSumLA.ReadOnly = true;
                 this.columnSumQ.ReadOnly = true;
                 this.columnSumU.ReadOnly = true;
+                this.columnSumLA.ReadOnly = true;
                 this.columnAttendancePercentage.ReadOnly = true;
                 this.columnRowIndex.ReadOnly = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Tran_AttendancesCourse_GetReportDataRow NewTran_AttendancesCourse_GetReportDataRow() {
-                return ((Tran_AttendancesCourse_GetReportDataRow)(this.NewRow()));
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public TMS_AttendancesCourse_GetReportDataRow NewTMS_AttendancesCourse_GetReportDataRow() {
+                return ((TMS_AttendancesCourse_GetReportDataRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new Tran_AttendancesCourse_GetReportDataRow(builder);
+                return new TMS_AttendancesCourse_GetReportDataRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(Tran_AttendancesCourse_GetReportDataRow);
+                return typeof(TMS_AttendancesCourse_GetReportDataRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.Tran_AttendancesCourse_GetReportDataRowChanged != null)) {
-                    this.Tran_AttendancesCourse_GetReportDataRowChanged(this, new Tran_AttendancesCourse_GetReportDataRowChangeEvent(((Tran_AttendancesCourse_GetReportDataRow)(e.Row)), e.Action));
+                if ((this.TMS_AttendancesCourse_GetReportDataRowChanged != null)) {
+                    this.TMS_AttendancesCourse_GetReportDataRowChanged(this, new TMS_AttendancesCourse_GetReportDataRowChangeEvent(((TMS_AttendancesCourse_GetReportDataRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.Tran_AttendancesCourse_GetReportDataRowChanging != null)) {
-                    this.Tran_AttendancesCourse_GetReportDataRowChanging(this, new Tran_AttendancesCourse_GetReportDataRowChangeEvent(((Tran_AttendancesCourse_GetReportDataRow)(e.Row)), e.Action));
+                if ((this.TMS_AttendancesCourse_GetReportDataRowChanging != null)) {
+                    this.TMS_AttendancesCourse_GetReportDataRowChanging(this, new TMS_AttendancesCourse_GetReportDataRowChangeEvent(((TMS_AttendancesCourse_GetReportDataRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.Tran_AttendancesCourse_GetReportDataRowDeleted != null)) {
-                    this.Tran_AttendancesCourse_GetReportDataRowDeleted(this, new Tran_AttendancesCourse_GetReportDataRowChangeEvent(((Tran_AttendancesCourse_GetReportDataRow)(e.Row)), e.Action));
+                if ((this.TMS_AttendancesCourse_GetReportDataRowDeleted != null)) {
+                    this.TMS_AttendancesCourse_GetReportDataRowDeleted(this, new TMS_AttendancesCourse_GetReportDataRowChangeEvent(((TMS_AttendancesCourse_GetReportDataRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.Tran_AttendancesCourse_GetReportDataRowDeleting != null)) {
-                    this.Tran_AttendancesCourse_GetReportDataRowDeleting(this, new Tran_AttendancesCourse_GetReportDataRowChangeEvent(((Tran_AttendancesCourse_GetReportDataRow)(e.Row)), e.Action));
+                if ((this.TMS_AttendancesCourse_GetReportDataRowDeleting != null)) {
+                    this.TMS_AttendancesCourse_GetReportDataRowDeleting(this, new TMS_AttendancesCourse_GetReportDataRowChangeEvent(((TMS_AttendancesCourse_GetReportDataRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveTran_AttendancesCourse_GetReportDataRow(Tran_AttendancesCourse_GetReportDataRow row) {
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void RemoveTMS_AttendancesCourse_GetReportDataRow(TMS_AttendancesCourse_GetReportDataRow row) {
                 this.Rows.Remove(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                VewCourseAttendanceReportDataSet ds = new VewCourseAttendanceReportDataSet();
+                CourseAttendanceDataSet ds = new CourseAttendanceDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -707,7 +769,7 @@ namespace Lifelong.EIS.TrainingWeb {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "Tran_AttendancesCourse_GetReportDataDataTable";
+                attribute2.FixedValue = "TMS_AttendancesCourse_GetReportDataDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -751,411 +813,477 @@ namespace Lifelong.EIS.TrainingWeb {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class Tran_AttendancesCourse_GetReportDataRow : global::System.Data.DataRow {
+        public partial class TMS_AttendancesCourse_GetReportDataRow : global::System.Data.DataRow {
             
-            private Tran_AttendancesCourse_GetReportDataDataTable tableTran_AttendancesCourse_GetReportData;
+            private TMS_AttendancesCourse_GetReportDataDataTable tableTMS_AttendancesCourse_GetReportData;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal Tran_AttendancesCourse_GetReportDataRow(global::System.Data.DataRowBuilder rb) : 
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal TMS_AttendancesCourse_GetReportDataRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableTran_AttendancesCourse_GetReportData = ((Tran_AttendancesCourse_GetReportDataDataTable)(this.Table));
+                this.tableTMS_AttendancesCourse_GetReportData = ((TMS_AttendancesCourse_GetReportDataDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public long ID {
                 get {
-                    return ((long)(this[this.tableTran_AttendancesCourse_GetReportData.IDColumn]));
+                    return ((long)(this[this.tableTMS_AttendancesCourse_GetReportData.IDColumn]));
                 }
                 set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.IDColumn] = value;
+                    this[this.tableTMS_AttendancesCourse_GetReportData.IDColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public long OrganizationID {
+                get {
+                    return ((long)(this[this.tableTMS_AttendancesCourse_GetReportData.OrganizationIDColumn]));
+                }
+                set {
+                    this[this.tableTMS_AttendancesCourse_GetReportData.OrganizationIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string P_Name {
+                get {
+                    try {
+                        return ((string)(this[this.tableTMS_AttendancesCourse_GetReportData.P_NameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'P_Name\' in table \'TMS_AttendancesCourse_GetReportData\' is D" +
+                                "BNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTMS_AttendancesCourse_GetReportData.P_NameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Logo {
+                get {
+                    try {
+                        return ((string)(this[this.tableTMS_AttendancesCourse_GetReportData.LogoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Logo\' in table \'TMS_AttendancesCourse_GetReportData\' is DBN" +
+                                "ull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTMS_AttendancesCourse_GetReportData.LogoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string FullName {
                 get {
-                    return ((string)(this[this.tableTran_AttendancesCourse_GetReportData.FullNameColumn]));
+                    return ((string)(this[this.tableTMS_AttendancesCourse_GetReportData.FullNameColumn]));
                 }
                 set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.FullNameColumn] = value;
+                    this[this.tableTMS_AttendancesCourse_GetReportData.FullNameColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string CourseName {
                 get {
-                    return ((string)(this[this.tableTran_AttendancesCourse_GetReportData.CourseNameColumn]));
+                    return ((string)(this[this.tableTMS_AttendancesCourse_GetReportData.CourseNameColumn]));
                 }
                 set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.CourseNameColumn] = value;
+                    this[this.tableTMS_AttendancesCourse_GetReportData.CourseNameColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string ClassName {
                 get {
-                    return ((string)(this[this.tableTran_AttendancesCourse_GetReportData.ClassNameColumn]));
+                    return ((string)(this[this.tableTMS_AttendancesCourse_GetReportData.ClassNameColumn]));
                 }
                 set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.ClassNameColumn] = value;
+                    this[this.tableTMS_AttendancesCourse_GetReportData.ClassNameColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string Trainers {
                 get {
                     try {
-                        return ((string)(this[this.tableTran_AttendancesCourse_GetReportData.TrainersColumn]));
+                        return ((string)(this[this.tableTMS_AttendancesCourse_GetReportData.TrainersColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Trainers\' in table \'Tran_AttendancesCourse_GetReportData\' i" +
-                                "s DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Trainers\' in table \'TMS_AttendancesCourse_GetReportData\' is" +
+                                " DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.TrainersColumn] = value;
+                    this[this.tableTMS_AttendancesCourse_GetReportData.TrainersColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string Coordinators {
                 get {
                     try {
-                        return ((string)(this[this.tableTran_AttendancesCourse_GetReportData.CoordinatorsColumn]));
+                        return ((string)(this[this.tableTMS_AttendancesCourse_GetReportData.CoordinatorsColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Coordinators\' in table \'Tran_AttendancesCourse_GetReportDat" +
-                                "a\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Coordinators\' in table \'TMS_AttendancesCourse_GetReportData" +
+                                "\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.CoordinatorsColumn] = value;
+                    this[this.tableTMS_AttendancesCourse_GetReportData.CoordinatorsColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string SessionStatistic {
                 get {
                     try {
-                        return ((string)(this[this.tableTran_AttendancesCourse_GetReportData.SessionStatisticColumn]));
+                        return ((string)(this[this.tableTMS_AttendancesCourse_GetReportData.SessionStatisticColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SessionStatistic\' in table \'Tran_AttendancesCourse_GetRepor" +
-                                "tData\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'SessionStatistic\' in table \'TMS_AttendancesCourse_GetReport" +
+                                "Data\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.SessionStatisticColumn] = value;
+                    this[this.tableTMS_AttendancesCourse_GetReportData.SessionStatisticColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public int SumP {
                 get {
                     try {
-                        return ((int)(this[this.tableTran_AttendancesCourse_GetReportData.SumPColumn]));
+                        return ((int)(this[this.tableTMS_AttendancesCourse_GetReportData.SumPColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SumP\' in table \'Tran_AttendancesCourse_GetReportData\' is DB" +
-                                "Null.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'SumP\' in table \'TMS_AttendancesCourse_GetReportData\' is DBN" +
+                                "ull.", e);
                     }
                 }
                 set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.SumPColumn] = value;
+                    this[this.tableTMS_AttendancesCourse_GetReportData.SumPColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public int SumA {
                 get {
                     try {
-                        return ((int)(this[this.tableTran_AttendancesCourse_GetReportData.SumAColumn]));
+                        return ((int)(this[this.tableTMS_AttendancesCourse_GetReportData.SumAColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SumA\' in table \'Tran_AttendancesCourse_GetReportData\' is DB" +
-                                "Null.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'SumA\' in table \'TMS_AttendancesCourse_GetReportData\' is DBN" +
+                                "ull.", e);
                     }
                 }
                 set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.SumAColumn] = value;
+                    this[this.tableTMS_AttendancesCourse_GetReportData.SumAColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public int SumL {
                 get {
                     try {
-                        return ((int)(this[this.tableTran_AttendancesCourse_GetReportData.SumLColumn]));
+                        return ((int)(this[this.tableTMS_AttendancesCourse_GetReportData.SumLColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SumL\' in table \'Tran_AttendancesCourse_GetReportData\' is DB" +
-                                "Null.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'SumL\' in table \'TMS_AttendancesCourse_GetReportData\' is DBN" +
+                                "ull.", e);
                     }
                 }
                 set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.SumLColumn] = value;
+                    this[this.tableTMS_AttendancesCourse_GetReportData.SumLColumn] = value;
                 }
             }
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int SumLA
-            {
-                get
-                {
-                    try
-                    {
-                        return ((int)(this[this.tableTran_AttendancesCourse_GetReportData.SumLAColumn]));
-                    }
-                    catch (global::System.InvalidCastException e)
-                    {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SumL\' in table \'Tran_AttendancesCourse_GetReportData\' is DB" +
-                                "Null.", e);
-                    }
-                }
-                set
-                {
-                    this[this.tableTran_AttendancesCourse_GetReportData.SumLAColumn] = value;
-                }
-            }
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public int SumQ {
                 get {
                     try {
-                        return ((int)(this[this.tableTran_AttendancesCourse_GetReportData.SumQColumn]));
+                        return ((int)(this[this.tableTMS_AttendancesCourse_GetReportData.SumQColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SumQ\' in table \'Tran_AttendancesCourse_GetReportData\' is DB" +
-                                "Null.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'SumQ\' in table \'TMS_AttendancesCourse_GetReportData\' is DBN" +
+                                "ull.", e);
                     }
                 }
                 set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.SumQColumn] = value;
+                    this[this.tableTMS_AttendancesCourse_GetReportData.SumQColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public int SumU {
                 get {
                     try {
-                        return ((int)(this[this.tableTran_AttendancesCourse_GetReportData.SumUColumn]));
+                        return ((int)(this[this.tableTMS_AttendancesCourse_GetReportData.SumUColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SumU\' in table \'Tran_AttendancesCourse_GetReportData\' is DB" +
+                        throw new global::System.Data.StrongTypingException("The value for column \'SumU\' in table \'TMS_AttendancesCourse_GetReportData\' is DBN" +
+                                "ull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTMS_AttendancesCourse_GetReportData.SumUColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int SumLA {
+                get {
+                    try {
+                        return ((int)(this[this.tableTMS_AttendancesCourse_GetReportData.SumLAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SumLA\' in table \'TMS_AttendancesCourse_GetReportData\' is DB" +
                                 "Null.", e);
                     }
                 }
                 set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.SumUColumn] = value;
+                    this[this.tableTMS_AttendancesCourse_GetReportData.SumLAColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public double AttendancePercentage {
                 get {
                     try {
-                        return ((double)(this[this.tableTran_AttendancesCourse_GetReportData.AttendancePercentageColumn]));
+                        return ((double)(this[this.tableTMS_AttendancesCourse_GetReportData.AttendancePercentageColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'AttendancePercentage\' in table \'Tran_AttendancesCourse_GetR" +
-                                "eportData\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'AttendancePercentage\' in table \'TMS_AttendancesCourse_GetRe" +
+                                "portData\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.AttendancePercentageColumn] = value;
+                    this[this.tableTMS_AttendancesCourse_GetReportData.AttendancePercentageColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public int RowIndex {
                 get {
                     try {
-                        return ((int)(this[this.tableTran_AttendancesCourse_GetReportData.RowIndexColumn]));
+                        return ((int)(this[this.tableTMS_AttendancesCourse_GetReportData.RowIndexColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'RowIndex\' in table \'Tran_AttendancesCourse_GetReportData\' i" +
-                                "s DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'RowIndex\' in table \'TMS_AttendancesCourse_GetReportData\' is" +
+                                " DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableTran_AttendancesCourse_GetReportData.RowIndexColumn] = value;
+                    this[this.tableTMS_AttendancesCourse_GetReportData.RowIndexColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsP_NameNull() {
+                return this.IsNull(this.tableTMS_AttendancesCourse_GetReportData.P_NameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetP_NameNull() {
+                this[this.tableTMS_AttendancesCourse_GetReportData.P_NameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsLogoNull() {
+                return this.IsNull(this.tableTMS_AttendancesCourse_GetReportData.LogoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetLogoNull() {
+                this[this.tableTMS_AttendancesCourse_GetReportData.LogoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsTrainersNull() {
-                return this.IsNull(this.tableTran_AttendancesCourse_GetReportData.TrainersColumn);
+                return this.IsNull(this.tableTMS_AttendancesCourse_GetReportData.TrainersColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetTrainersNull() {
-                this[this.tableTran_AttendancesCourse_GetReportData.TrainersColumn] = global::System.Convert.DBNull;
+                this[this.tableTMS_AttendancesCourse_GetReportData.TrainersColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsCoordinatorsNull() {
-                return this.IsNull(this.tableTran_AttendancesCourse_GetReportData.CoordinatorsColumn);
+                return this.IsNull(this.tableTMS_AttendancesCourse_GetReportData.CoordinatorsColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetCoordinatorsNull() {
-                this[this.tableTran_AttendancesCourse_GetReportData.CoordinatorsColumn] = global::System.Convert.DBNull;
+                this[this.tableTMS_AttendancesCourse_GetReportData.CoordinatorsColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsSessionStatisticNull() {
-                return this.IsNull(this.tableTran_AttendancesCourse_GetReportData.SessionStatisticColumn);
+                return this.IsNull(this.tableTMS_AttendancesCourse_GetReportData.SessionStatisticColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetSessionStatisticNull() {
-                this[this.tableTran_AttendancesCourse_GetReportData.SessionStatisticColumn] = global::System.Convert.DBNull;
+                this[this.tableTMS_AttendancesCourse_GetReportData.SessionStatisticColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsSumPNull() {
-                return this.IsNull(this.tableTran_AttendancesCourse_GetReportData.SumPColumn);
+                return this.IsNull(this.tableTMS_AttendancesCourse_GetReportData.SumPColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetSumPNull() {
-                this[this.tableTran_AttendancesCourse_GetReportData.SumPColumn] = global::System.Convert.DBNull;
+                this[this.tableTMS_AttendancesCourse_GetReportData.SumPColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsSumANull() {
-                return this.IsNull(this.tableTran_AttendancesCourse_GetReportData.SumAColumn);
+                return this.IsNull(this.tableTMS_AttendancesCourse_GetReportData.SumAColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetSumANull() {
-                this[this.tableTran_AttendancesCourse_GetReportData.SumAColumn] = global::System.Convert.DBNull;
+                this[this.tableTMS_AttendancesCourse_GetReportData.SumAColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsSumLNull() {
-                return this.IsNull(this.tableTran_AttendancesCourse_GetReportData.SumLColumn);
+                return this.IsNull(this.tableTMS_AttendancesCourse_GetReportData.SumLColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetSumLNull() {
-                this[this.tableTran_AttendancesCourse_GetReportData.SumLColumn] = global::System.Convert.DBNull;
+                this[this.tableTMS_AttendancesCourse_GetReportData.SumLColumn] = global::System.Convert.DBNull;
             }
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsSumLANull()
-            {
-                return this.IsNull(this.tableTran_AttendancesCourse_GetReportData.SumLAColumn);
-            }
-
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetSumLANull()
-            {
-                this[this.tableTran_AttendancesCourse_GetReportData.SumLAColumn] = global::System.Convert.DBNull;
-            }
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsSumQNull() {
-                return this.IsNull(this.tableTran_AttendancesCourse_GetReportData.SumQColumn);
+                return this.IsNull(this.tableTMS_AttendancesCourse_GetReportData.SumQColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetSumQNull() {
-                this[this.tableTran_AttendancesCourse_GetReportData.SumQColumn] = global::System.Convert.DBNull;
+                this[this.tableTMS_AttendancesCourse_GetReportData.SumQColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsSumUNull() {
-                return this.IsNull(this.tableTran_AttendancesCourse_GetReportData.SumUColumn);
+                return this.IsNull(this.tableTMS_AttendancesCourse_GetReportData.SumUColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetSumUNull() {
-                this[this.tableTran_AttendancesCourse_GetReportData.SumUColumn] = global::System.Convert.DBNull;
+                this[this.tableTMS_AttendancesCourse_GetReportData.SumUColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsSumLANull() {
+                return this.IsNull(this.tableTMS_AttendancesCourse_GetReportData.SumLAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetSumLANull() {
+                this[this.tableTMS_AttendancesCourse_GetReportData.SumLAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsAttendancePercentageNull() {
-                return this.IsNull(this.tableTran_AttendancesCourse_GetReportData.AttendancePercentageColumn);
+                return this.IsNull(this.tableTMS_AttendancesCourse_GetReportData.AttendancePercentageColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetAttendancePercentageNull() {
-                this[this.tableTran_AttendancesCourse_GetReportData.AttendancePercentageColumn] = global::System.Convert.DBNull;
+                this[this.tableTMS_AttendancesCourse_GetReportData.AttendancePercentageColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsRowIndexNull() {
-                return this.IsNull(this.tableTran_AttendancesCourse_GetReportData.RowIndexColumn);
+                return this.IsNull(this.tableTMS_AttendancesCourse_GetReportData.RowIndexColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetRowIndexNull() {
-                this[this.tableTran_AttendancesCourse_GetReportData.RowIndexColumn] = global::System.Convert.DBNull;
+                this[this.tableTMS_AttendancesCourse_GetReportData.RowIndexColumn] = global::System.Convert.DBNull;
             }
         }
         
         /// <summary>
         ///Row event argument class
         ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class Tran_AttendancesCourse_GetReportDataRowChangeEvent : global::System.EventArgs {
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public class TMS_AttendancesCourse_GetReportDataRowChangeEvent : global::System.EventArgs {
             
-            private Tran_AttendancesCourse_GetReportDataRow eventRow;
+            private TMS_AttendancesCourse_GetReportDataRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Tran_AttendancesCourse_GetReportDataRowChangeEvent(Tran_AttendancesCourse_GetReportDataRow row, global::System.Data.DataRowAction action) {
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public TMS_AttendancesCourse_GetReportDataRowChangeEvent(TMS_AttendancesCourse_GetReportDataRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Tran_AttendancesCourse_GetReportDataRow Row {
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public TMS_AttendancesCourse_GetReportDataRow Row {
                 get {
                     return this.eventRow;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataRowAction Action {
                 get {
                     return this.eventAction;
@@ -1164,7 +1292,7 @@ namespace Lifelong.EIS.TrainingWeb {
         }
     }
 }
-namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters {
+namespace TMS.Web.CourseAttendanceDataSetTableAdapters {
     
     
     /// <summary>
@@ -1176,7 +1304,7 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class Tran_AttendancesCourse_GetReportDataTableAdapter : global::System.ComponentModel.Component {
+    public partial class TMS_AttendancesCourse_GetReportDataTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
@@ -1189,13 +1317,13 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
         private bool _clearBeforeFill;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public Tran_AttendancesCourse_GetReportDataTableAdapter() {
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public TMS_AttendancesCourse_GetReportDataTableAdapter() {
             this.ClearBeforeFill = true;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
             get {
                 if ((this._adapter == null)) {
@@ -1206,7 +1334,7 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         internal global::System.Data.SqlClient.SqlConnection Connection {
             get {
                 if ((this._connection == null)) {
@@ -1234,7 +1362,7 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         internal global::System.Data.SqlClient.SqlTransaction Transaction {
             get {
                 return this._transaction;
@@ -1260,7 +1388,7 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
             get {
                 if ((this._commandCollection == null)) {
@@ -1271,7 +1399,7 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public bool ClearBeforeFill {
             get {
                 return this._clearBeforeFill;
@@ -1282,13 +1410,16 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitAdapter() {
             this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "Tran_AttendancesCourse_GetReportData";
+            tableMapping.DataSetTable = "TMS_AttendancesCourse_GetReportData";
             tableMapping.ColumnMappings.Add("ID", "ID");
+            tableMapping.ColumnMappings.Add("OrganizationID", "OrganizationID");
+            tableMapping.ColumnMappings.Add("P_Name", "P_Name");
+            tableMapping.ColumnMappings.Add("Logo", "Logo");
             tableMapping.ColumnMappings.Add("FullName", "FullName");
             tableMapping.ColumnMappings.Add("CourseName", "CourseName");
             tableMapping.ColumnMappings.Add("ClassName", "ClassName");
@@ -1298,41 +1429,39 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
             tableMapping.ColumnMappings.Add("SumP", "SumP");
             tableMapping.ColumnMappings.Add("SumA", "SumA");
             tableMapping.ColumnMappings.Add("SumL", "SumL");
-            tableMapping.ColumnMappings.Add("SumLA", "SumLA");
             tableMapping.ColumnMappings.Add("SumQ", "SumQ");
             tableMapping.ColumnMappings.Add("SumU", "SumU");
+            tableMapping.ColumnMappings.Add("SumLA", "SumLA");
             tableMapping.ColumnMappings.Add("AttendancePercentage", "AttendancePercentage");
             tableMapping.ColumnMappings.Add("RowIndex", "RowIndex");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EIS_AppDB"].ConnectionString;
+            this._connection.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitCommandCollection() {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "dbo.Tran_AttendancesCourse_GetReportData";
+            this._commandCollection[0].CommandText = "dbo.TMS_AttendancesCourse_GetReportData";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.StoredProcedure;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CourseID", global::System.Data.SqlDbType.BigInt, 8, global::System.Data.ParameterDirection.Input, 19, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ClassID", global::System.Data.SqlDbType.BigInt, 8, global::System.Data.ParameterDirection.Input, 19, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WeekStartDate", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 23, 3, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WeekEndDate", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 23, 3, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(VewCourseAttendanceReportDataSet.Tran_AttendancesCourse_GetReportDataDataTable dataTable, global::System.Nullable<long> CourseID, global::System.Nullable<long> ClassID, global::System.Nullable<global::System.DateTime> WeekStartDate, global::System.Nullable<global::System.DateTime> WeekEndDate) {
+        public virtual int Fill(CourseAttendanceDataSet.TMS_AttendancesCourse_GetReportDataDataTable dataTable, global::System.Nullable<long> CourseID, global::System.Nullable<long> ClassID) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((CourseID.HasValue == true)) {
                 this.Adapter.SelectCommand.Parameters[1].Value = ((long)(CourseID.Value));
@@ -1345,18 +1474,6 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
             }
             else {
                 this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((WeekStartDate.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[3].Value = ((System.DateTime)(WeekStartDate.Value));
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((WeekEndDate.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[4].Value = ((System.DateTime)(WeekEndDate.Value));
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -1366,10 +1483,10 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual VewCourseAttendanceReportDataSet.Tran_AttendancesCourse_GetReportDataDataTable GetData(global::System.Nullable<long> CourseID, global::System.Nullable<long> ClassID, global::System.Nullable<global::System.DateTime> WeekStartDate, global::System.Nullable<global::System.DateTime> WeekEndDate) {
+        public virtual CourseAttendanceDataSet.TMS_AttendancesCourse_GetReportDataDataTable GetData(global::System.Nullable<long> CourseID, global::System.Nullable<long> ClassID) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((CourseID.HasValue == true)) {
                 this.Adapter.SelectCommand.Parameters[1].Value = ((long)(CourseID.Value));
@@ -1383,19 +1500,7 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
             else {
                 this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
-            if ((WeekStartDate.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[3].Value = ((System.DateTime)(WeekStartDate.Value));
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((WeekEndDate.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[4].Value = ((System.DateTime)(WeekEndDate.Value));
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            VewCourseAttendanceReportDataSet.Tran_AttendancesCourse_GetReportDataDataTable dataTable = new VewCourseAttendanceReportDataSet.Tran_AttendancesCourse_GetReportDataDataTable();
+            CourseAttendanceDataSet.TMS_AttendancesCourse_GetReportDataDataTable dataTable = new CourseAttendanceDataSet.TMS_AttendancesCourse_GetReportDataDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -1418,7 +1523,7 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
         private global::System.Data.IDbConnection _connection;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public UpdateOrderOption UpdateOrder {
             get {
                 return this._updateOrder;
@@ -1429,7 +1534,7 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -1440,7 +1545,7 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         public global::System.Data.IDbConnection Connection {
             get {
@@ -1455,7 +1560,7 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         public int TableAdapterInstanceCount {
             get {
@@ -1468,8 +1573,8 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
         ///Update rows in top-down order.
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateUpdatedRows(VewCourseAttendanceReportDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        private int UpdateUpdatedRows(CourseAttendanceDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             return result;
         }
@@ -1478,8 +1583,8 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
         ///Insert rows in top-down order.
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateInsertedRows(VewCourseAttendanceReportDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        private int UpdateInsertedRows(CourseAttendanceDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             return result;
         }
@@ -1488,8 +1593,8 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
         ///Delete rows in bottom-up order.
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateDeletedRows(VewCourseAttendanceReportDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        private int UpdateDeletedRows(CourseAttendanceDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
             return result;
         }
@@ -1498,7 +1603,7 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
         ///Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private global::System.Data.DataRow[] GetRealUpdatedRows(global::System.Data.DataRow[] updatedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             if (((updatedRows == null) 
                         || (updatedRows.Length < 1))) {
@@ -1522,8 +1627,8 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
         ///Update all changes to the dataset.
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public virtual int UpdateAll(VewCourseAttendanceReportDataSet dataSet) {
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public virtual int UpdateAll(CourseAttendanceDataSet dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }
@@ -1633,13 +1738,13 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         protected virtual void SortSelfReferenceRows(global::System.Data.DataRow[] rows, global::System.Data.DataRelation relation, bool childFirst) {
             global::System.Array.Sort<global::System.Data.DataRow>(rows, new SelfReferenceComparer(relation, childFirst));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         protected virtual bool MatchTableAdapterConnection(global::System.Data.IDbConnection inputConnection) {
             if ((this._connection != null)) {
                 return true;
@@ -1657,7 +1762,7 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
         /// <summary>
         ///Update Order Option
         ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public enum UpdateOrderOption {
             
             InsertUpdateDelete = 0,
@@ -1668,7 +1773,7 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
         /// <summary>
         ///Used to sort self-referenced table's rows
         ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private class SelfReferenceComparer : object, global::System.Collections.Generic.IComparer<global::System.Data.DataRow> {
             
             private global::System.Data.DataRelation _relation;
@@ -1676,7 +1781,7 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
             private int _childFirst;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             internal SelfReferenceComparer(global::System.Data.DataRelation relation, bool childFirst) {
                 this._relation = relation;
                 if (childFirst) {
@@ -1688,7 +1793,7 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             private global::System.Data.DataRow GetRoot(global::System.Data.DataRow row, out int distance) {
                 global::System.Diagnostics.Debug.Assert((row != null));
                 global::System.Data.DataRow root = row;
@@ -1727,7 +1832,7 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public int Compare(global::System.Data.DataRow row1, global::System.Data.DataRow row2) {
                 if (object.ReferenceEquals(row1, row2)) {
                     return 0;

@@ -36,7 +36,7 @@
               <Width>0.24908in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.21783in</Width>
+              <Width>0.33241in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.62408in</Width>
@@ -527,7 +527,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>L</Value>
+                              <Value>LA</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontWeight>Bold</FontWeight>
@@ -563,7 +563,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>%</Value>
+                              <Value>    %</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontWeight>Bold</FontWeight>
@@ -1680,7 +1680,7 @@ format(cdate(Fields!StartDate.Value).AddDays(6), "dddd") = "Friday", "LightGrey"
         <Top>1.73625in</Top>
         <Left>0.46868in</Left>
         <Height>1in</Height>
-        <Width>6.79782in</Width>
+        <Width>6.9124in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1998,7 +1998,6 @@ format(cdate(Fields!StartDate.Value).AddDays(6), "dddd") = "Friday", "LightGrey"
   <Page>
     <PageHeight>11.69in</PageHeight>
     <PageWidth>8.27in</PageWidth>
-    <LeftMargin>0.25in</LeftMargin>
     <RightMargin>0.25in</RightMargin>
     <TopMargin>0.5in</TopMargin>
     <BottomMargin>0.5in</BottomMargin>

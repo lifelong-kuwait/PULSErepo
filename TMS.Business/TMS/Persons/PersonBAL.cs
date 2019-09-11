@@ -424,9 +424,9 @@ namespace TMS.Business.TMS
             return DAL.DailyVenueUtalizationReportsDAL(Startday, Endday, venueid);
         }
 
-        public DataTable DailyUtilizationReport(DateTime day, int type)
+        public DataTable DailyUtilizationReport(DateTime day, int type,long companyID)
         {
-            return DAL.DailyUtilizationReportDAL(day, type);
+            return DAL.DailyUtilizationReportDAL(day, type, companyID);
         }
 
         public DataTable GetTraineePeriodicData(DateTime StartDate, DateTime EndDate,long CourseID)

@@ -114,7 +114,7 @@ namespace TMS.Web.Controllers
         public ActionResult VenueDailyUtilizationReport()
         {
             ViewData["reportUrl"] = "~/Report/WeeklyUtilizationReport/";
-
+            ViewData["CompanyID"] = CurrentUser.CompanyID;
             return View();
         }
         [ClaimsAuthorize("CanViewReports")]

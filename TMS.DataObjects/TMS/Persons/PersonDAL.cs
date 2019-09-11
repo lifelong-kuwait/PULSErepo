@@ -909,13 +909,14 @@ namespace TMS.DataObjects.TMS
             }
         }
 
-        public DataTable DailyUtilizationReportDAL(DateTime day, int type)
+        public DataTable DailyUtilizationReportDAL(DateTime day, int type,long companyID)
         {
             DataTable dt = new DataTable();
             var conString = DBHelper.ConnectionString;
 
             SqlCommand cmd = new SqlCommand("TMS_Class_DailyUtilizationReport");
             cmd.Parameters.AddWithValue("@Date", day);
+            cmd.Parameters.AddWithValue("@OrganizationID", companyID);
             cmd.Parameters.AddWithValue("@venuetype", type);
 
 

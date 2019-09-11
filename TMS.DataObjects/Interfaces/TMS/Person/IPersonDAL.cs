@@ -192,7 +192,7 @@ namespace TMS.DataObjects.Interfaces.TMS
         DataTable GetCourseReportDataDAL(long ClassID, long CourseID);
 
         DataTable DailyVenueUtalizationReportsDAL(DateTime Startday, DateTime Endday, long venueid);
-        DataTable DailyUtilizationReportDAL(DateTime day, int type);
+        DataTable DailyUtilizationReportDAL(DateTime day, int type,long companyID);
         DataTable GetClassDetailReportDataDAL(long ClassID, long CourseID);
         DataTable GetDataForVenueMatrix(long VenueID);
 

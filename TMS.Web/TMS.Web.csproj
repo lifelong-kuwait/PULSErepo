@@ -287,6 +287,11 @@
     <Compile Include="Controllers\SPl_Test_ReportsController.cs" />
     <Compile Include="Controllers\TestWaqasControllerController.cs" />
     <Compile Include="Core\SessionTimeoutAttribute.cs" />
+    <Compile Include="CourseAttendanceDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CourseAttendanceDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DailySummaryDataset.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -623,6 +628,21 @@
       <DependentUpon>UCWeeklyUtilizationReport.ascx</DependentUpon>
     </Compile>
     <Compile Include="ViewTraineePeriodicReportDataSet.Designer.cs" />
+    <Compile Include="weekatten.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>weekatten.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="WeeklyAttendance.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WeeklyAttendance.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="weeklyDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>weeklyDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="WeeklySummaryDataset.Designer.cs" />
     <Compile Include="WeeklySummaryDataset1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -634,6 +654,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>WeeklyUtilizationReport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="wweklyDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>wweklyDataSet.xsd</DependentUpon>
     </Compile>
     <Content Include="Abp\Framework\scripts\abp.js" />
     <Content Include="Abp\Framework\scripts\libs\abp.blockUI.js" />
@@ -2437,6 +2462,17 @@
     </Content>
     <Content Include="DailySummaryDataset.xsc">
       <DependentUpon>DailySummaryDataset.xsd</DependentUpon>
+    </Content>
+    <Content Include="CourseAttendanceDataSet.xsc">
+      <DependentUpon>CourseAttendanceDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="CourseAttendanceDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CourseAttendanceDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="CourseAttendanceDataSet.xss">
+      <DependentUpon>CourseAttendanceDataSet.xsd</DependentUpon>
     </Content>
     <None Include="DailySummaryDataset.xsd">
       <Generator>MSDataSetGenerator</Generator>
@@ -4653,6 +4689,39 @@
     <Content Include="Views\Config\_VenueClass.cshtml" />
     <Content Include="Views\Config\EditorTemplates\_NestedVenueClassTemplate.cshtml" />
     <Content Include="Views\User\ResetUserPassword.cshtml" />
+    <Content Include="WeeklyAttendance.xsc">
+      <DependentUpon>WeeklyAttendance.xsd</DependentUpon>
+    </Content>
+    <Content Include="weekatten.xsc">
+      <DependentUpon>weekatten.xsd</DependentUpon>
+    </Content>
+    <None Include="weekatten.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>weekatten.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="weekatten.xss">
+      <DependentUpon>weekatten.xsd</DependentUpon>
+    </Content>
+    <None Include="WeeklyAttendance.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>WeeklyAttendance.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="WeeklyAttendance.xss">
+      <DependentUpon>WeeklyAttendance.xsd</DependentUpon>
+    </Content>
+    <Content Include="weeklyDataSet.xsc">
+      <DependentUpon>weeklyDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="weeklyDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>weeklyDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="weeklyDataSet.xss">
+      <DependentUpon>weeklyDataSet.xsd</DependentUpon>
+    </Content>
     <None Include="WeeklySummaryDataset.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>WeeklySummaryDataset1.Designer.cs</LastGenOutput>
@@ -4671,6 +4740,17 @@
     </None>
     <Content Include="WeeklyUtilizationReport.xss">
       <DependentUpon>WeeklyUtilizationReport.xsd</DependentUpon>
+    </Content>
+    <Content Include="wweklyDataSet.xsc">
+      <DependentUpon>wweklyDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="wweklyDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>wweklyDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="wweklyDataSet.xss">
+      <DependentUpon>wweklyDataSet.xsd</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -5327,6 +5407,7 @@
     <Content Include="Report\Tran_ViewCourseAttendanceReport.rdlc" />
     <Content Include="Report\Tran_ViewTraineePeriodicReport.rdlc" />
     <Content Include="Report\WeeklyUtilizationReport.rdlc" />
+    <EmbeddedResource Include="Report\Report1.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
