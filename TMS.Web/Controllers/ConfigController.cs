@@ -2,6 +2,7 @@
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using TMS.Business.Interfaces.Common.Configuration;
@@ -199,17 +200,23 @@ namespace TMS.Web.Controllers
             {
                 request.PageSize = 10;
             }
-            var Classs = this._objConfigurationBAL.Venues_GetAllBAL(startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
-            if (CurrentUser.CompanyID > 0)
+            List<Venues> Classs = new List<Venues>();
+            if (CurrentUser.CompanyID < 0)
+            {
+                Classs = this._objConfigurationBAL.Venues_GetAllBAL(startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
+
+            }
+            else if (CurrentUser.CompanyID > 0)
             {
                 Classs = this._objConfigurationBAL.VenuesbyOrganization_GetAllBAL(startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText,Convert.ToString(CurrentUser.CompanyID));
             }
-            var result = new DataSourceResult()
-            {
-                Data = Classs, // Process data (paging and sorting applied)
-                Total = Total // Total number of records
-            };
-            return Json(result);
+            //var result = new DataSourceResult()
+            //{
+            //    Data = Classs, // Process data (paging and sorting applied)
+            //    Total = Total // Total number of records
+            //};
+            //var resultData = new[] { Classs };
+            return Json(Classs.ToDataSourceResult(request, ModelState));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]

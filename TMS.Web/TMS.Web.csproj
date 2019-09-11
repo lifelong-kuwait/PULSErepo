@@ -628,20 +628,10 @@
       <DependentUpon>UCWeeklyUtilizationReport.ascx</DependentUpon>
     </Compile>
     <Compile Include="ViewTraineePeriodicReportDataSet.Designer.cs" />
-    <Compile Include="weekatten.Designer.cs">
+    <Compile Include="WeeklyAttendanceReportData.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>weekatten.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="WeeklyAttendance.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WeeklyAttendance.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="weeklyDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>weeklyDataSet.xsd</DependentUpon>
+      <DependentUpon>WeeklyAttendanceReportData.xsd</DependentUpon>
     </Compile>
     <Compile Include="WeeklySummaryDataset.Designer.cs" />
     <Compile Include="WeeklySummaryDataset1.Designer.cs">
@@ -654,11 +644,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>WeeklyUtilizationReport.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="wweklyDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>wweklyDataSet.xsd</DependentUpon>
     </Compile>
     <Content Include="Abp\Framework\scripts\abp.js" />
     <Content Include="Abp\Framework\scripts\libs\abp.blockUI.js" />
@@ -2529,6 +2514,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile28.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile29.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile3.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile30.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile4.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile5.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile6.pubxml" />
@@ -4689,38 +4675,16 @@
     <Content Include="Views\Config\_VenueClass.cshtml" />
     <Content Include="Views\Config\EditorTemplates\_NestedVenueClassTemplate.cshtml" />
     <Content Include="Views\User\ResetUserPassword.cshtml" />
-    <Content Include="WeeklyAttendance.xsc">
-      <DependentUpon>WeeklyAttendance.xsd</DependentUpon>
+    <Content Include="WeeklyAttendanceReportData.xsc">
+      <DependentUpon>WeeklyAttendanceReportData.xsd</DependentUpon>
     </Content>
-    <Content Include="weekatten.xsc">
-      <DependentUpon>weekatten.xsd</DependentUpon>
-    </Content>
-    <None Include="weekatten.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>weekatten.Designer.cs</LastGenOutput>
+    <None Include="WeeklyAttendanceReportData.xsd">
       <SubType>Designer</SubType>
-    </None>
-    <Content Include="weekatten.xss">
-      <DependentUpon>weekatten.xsd</DependentUpon>
-    </Content>
-    <None Include="WeeklyAttendance.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>WeeklyAttendance.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
+      <LastGenOutput>WeeklyAttendanceReportData.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="WeeklyAttendance.xss">
-      <DependentUpon>WeeklyAttendance.xsd</DependentUpon>
-    </Content>
-    <Content Include="weeklyDataSet.xsc">
-      <DependentUpon>weeklyDataSet.xsd</DependentUpon>
-    </Content>
-    <None Include="weeklyDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>weeklyDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="weeklyDataSet.xss">
-      <DependentUpon>weeklyDataSet.xsd</DependentUpon>
+    <Content Include="WeeklyAttendanceReportData.xss">
+      <DependentUpon>WeeklyAttendanceReportData.xsd</DependentUpon>
     </Content>
     <None Include="WeeklySummaryDataset.xsd">
       <Generator>MSDataSetGenerator</Generator>
@@ -4740,17 +4704,6 @@
     </None>
     <Content Include="WeeklyUtilizationReport.xss">
       <DependentUpon>WeeklyUtilizationReport.xsd</DependentUpon>
-    </Content>
-    <Content Include="wweklyDataSet.xsc">
-      <DependentUpon>wweklyDataSet.xsd</DependentUpon>
-    </Content>
-    <None Include="wweklyDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>wweklyDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="wweklyDataSet.xss">
-      <DependentUpon>wweklyDataSet.xsd</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>

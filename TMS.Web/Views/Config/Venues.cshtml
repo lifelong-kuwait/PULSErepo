@@ -24,10 +24,12 @@ ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"
        .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
      .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
      .Scrollable()
+     
      .Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
      .HtmlAttributes(new { style = "height:700px !important;" })
         .Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
         .DataSource(dataSource => dataSource.Ajax().PageSize(10).Model(model => { model.Id(p => p.ID); })
+        .PageSize(5)
         .Read(read => read.Action("Venues_Read", "Config").Data("withSearch"))
         .Update(update => update.Action("Venues_Update", "Config"))
         .Destroy(update => update.Action("Venues_Destroy", "Config"))
