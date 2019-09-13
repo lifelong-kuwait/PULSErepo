@@ -504,7 +504,11 @@ namespace TMS.DataObjects.TMS
         public int TMS_PersonRolesMapping_DeleteDAL(PersonRolesMapping _objPersonRoles)
         {
             Person obj = Person_GetAllByIdDAL(Convert.ToString(_objPersonRoles.PersonID));
-
+            if(obj.Email==null)
+            {
+                obj.Email = "";
+            }
+            
             return ExecuteScalarInt32Sp("TMS_PersonRolesMapping_Delete",
                         ParamBuilder.Par("ID", _objPersonRoles.ID),
                         ParamBuilder.Par("RoleID", _objPersonRoles.RoleID),

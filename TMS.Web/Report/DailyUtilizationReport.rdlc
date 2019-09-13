@@ -178,7 +178,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>7:00 AM</Value>
+                              <Value>7:30 AM</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -213,7 +213,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>8:00 AM</Value>
+                              <Value>8:30 AM</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -248,7 +248,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>9:00 AM</Value>
+                              <Value>9:30 AM</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -283,7 +283,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>10:00 AM</Value>
+                              <Value>10:30 AM</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -318,7 +318,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>11:00 AM</Value>
+                              <Value>11:30 AM</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -353,7 +353,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>12:00 PM</Value>
+                              <Value>12:30 PM</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -388,7 +388,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>1:00 PM</Value>
+                              <Value>1:30 PM</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -423,7 +423,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>2:00 PM</Value>
+                              <Value>2:30 PM</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -458,7 +458,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>3:00 PM</Value>
+                              <Value>3:30 PM</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -493,7 +493,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>4:00 PM</Value>
+                              <Value>4:30 PM</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -528,7 +528,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>5:00 PM</Value>
+                              <Value>5:30 PM</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -563,7 +563,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>6:00 PM</Value>
+                              <Value>6:30 PM</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -598,7 +598,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>7:00 PM</Value>
+                              <Value>7:30 PM</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -633,7 +633,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>8:00 PM</Value>
+                              <Value>8:30 PM</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -668,7 +668,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>9:00 PM</Value>
+                              <Value>9:30 PM</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -703,7 +703,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>10:00 PM</Value>
+                              <Value>10:30 PM</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -738,7 +738,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>11:00 PM</Value>
+                              <Value>11:30 PM</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -773,7 +773,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>12:00 AM</Value>
+                              <Value>12:30 AM</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>

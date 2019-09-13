@@ -12,7 +12,7 @@
               <Width>1.92969in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.05468in</Width>
+              <Width>2.26303in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -322,7 +322,7 @@
         </TablixRowHierarchy>
         <DataSetName>OccupancyReport</DataSetName>
         <Height>0.5in</Height>
-        <Width>6.73957in</Width>
+        <Width>6.94792in</Width>
         <Style>
           <Border>
             <Style>None</Style>
