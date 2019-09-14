@@ -186,7 +186,7 @@ namespace TMS.DataObjects.Interfaces.TMS
 
         DataTable GetCourseFromTimeSpanDAL(DateTime StartTime, DateTime EndTime);
         IList<DDlList> GetCourseFromTimeSpanListDAL(DateTime StartTime, DateTime EndTime);
-        DataTable ClassFutureReportDAL(long CurrentCourseCategoryID, DateTime ClassReportStartDateFrom, DateTime ClassReportStartDateTo, int ClassTypeID, bool ShowFutureClasses);
+        DataTable ClassFutureReportDAL(long CurrentCourseCategoryID, DateTime ClassReportStartDateFrom, DateTime ClassReportStartDateTo, int ClassTypeID, bool ShowFutureClasses,long CompanyId);
         DataTable AttendanceReportsDAL(long CourseID, long ClassID, DateTime startdate, DateTime enddate);
         DataTable GetOccVenueDetailsForReportsDAL(long ClassID, long VenueID, DateTime StartTime, DateTime EndTime);
         DataTable GetCourseReportDataDAL(long ClassID, long CourseID);

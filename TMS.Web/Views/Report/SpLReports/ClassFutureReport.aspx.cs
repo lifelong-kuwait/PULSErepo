@@ -33,6 +33,8 @@ namespace TMS.Web.Views.Report.SpLReports
 
         private void RenderReportModels(ReportData reportData, string courseid, string classid,string startDate)
         {
+            long CompanyId = Convert.ToInt64(HttpContext.Current.Session["CompanyID"]);
+
             int ClassID = Convert.ToInt32(classid);
             long CourseID = Convert.ToInt64(courseid);
             DateTime Toyear = new DateTime(2099, 12, 31);
@@ -46,7 +48,7 @@ namespace TMS.Web.Views.Report.SpLReports
             var rptPath = Server.MapPath(@"../../../Report/" + reportData.ReportName + ".rdlc");
             this.ReportViewerRSFReports.LocalReport.ReportPath = rptPath;
             //DataTable dt = _PersonBAL.GetClassDetailReportData(Convert.ToInt64(classid), Convert.ToInt64(courseid));
-           DataTable dt = _PersonBAL.ClassFutureReport(CourseID, startdatet, Toyear, ShowFutureClasses, ClassID);
+           DataTable dt = _PersonBAL.ClassFutureReport(CourseID, startdatet, Toyear, ShowFutureClasses, ClassID, CompanyId);
             ReportViewerRSFReports.ProcessingMode = ProcessingMode.Local;
             ReportViewerRSFReports.LocalReport.DataSources.Clear();
             ReportViewerRSFReports.LocalReport.DataSources.Add(new ReportDataSource("DS_ClassReportByCourseCategoryID", dt));

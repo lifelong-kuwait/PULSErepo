@@ -132,12 +132,13 @@ namespace TMS.Web.Views.Report.UserControls
                 {
                     DateTime Fromyear = UtilityFunctions.MapValue<DateTime>(TxtFromYear.Text, typeof(DateTime));
                     DateTime Toyear = UtilityFunctions.MapValue<DateTime>(TxtToYear.Text, typeof(DateTime));
+                    long CompanyId = Convert.ToInt64(HttpContext.Current.Session["CompanyID"]);
 
                     CurrentCourseCategoryID = UtilityFunctions.MapValue<long>(DdlCourseCategory.SelectedValue, typeof(long));
                     ClassReportStartDateFrom = Fromyear;// new DateTime(Fromyear, UtilityFunctions.MapValue<int>(TxtFromYear, typeof(int)), 1);
                     ClassReportStartDateTo = Toyear;// new DateTime(Toyear, UtilityFunctions.MapValue<int>(TxtFromYear, typeof(int)), 1);
                     ShowFutureClasses = false;
-                    DataTable dt = _PersonBAL.ClassFutureReport(CurrentCourseCategoryID, ClassReportStartDateFrom, ClassReportStartDateTo, ShowFutureClasses, ClassTypeID);
+                    DataTable dt = _PersonBAL.ClassFutureReport(CurrentCourseCategoryID, ClassReportStartDateFrom, ClassReportStartDateTo, ShowFutureClasses, ClassTypeID, CompanyId);
                     ReportViewer1.ProcessingMode = ProcessingMode.Local;
                     ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/Report/Tran_ClassReport.rdlc");
                     //  DataSet ds = GetTrainerDetailsForReports;

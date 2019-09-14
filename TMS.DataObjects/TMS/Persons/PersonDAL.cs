@@ -853,9 +853,9 @@ namespace TMS.DataObjects.TMS
             }
         }
 
-        public DataTable ClassFutureReportDAL(long CurrentCourseCategoryID, DateTime ClassReportStartDateFrom, DateTime ClassReportStartDateTo, int ClassTypeID, bool ShowFutureClasses = false)
+        public DataTable ClassFutureReportDAL(long CurrentCourseCategoryID, DateTime ClassReportStartDateFrom, DateTime ClassReportStartDateTo, int ClassTypeID, bool ShowFutureClasses,long CompanyId)
         {
-
+            ShowFutureClasses = false;
             DataTable dt = new DataTable();
             var conString = DBHelper.ConnectionString;
 
@@ -865,6 +865,7 @@ namespace TMS.DataObjects.TMS
             cmd.Parameters.AddWithValue("@DateFrom", ClassReportStartDateFrom);
             cmd.Parameters.AddWithValue("@DateTo", ClassReportStartDateTo);
             cmd.Parameters.AddWithValue("@ShowFutureClasses", ShowFutureClasses);
+            cmd.Parameters.AddWithValue("@CompanyId", CompanyId);
 
             using (SqlConnection con = new SqlConnection(conString))
             {

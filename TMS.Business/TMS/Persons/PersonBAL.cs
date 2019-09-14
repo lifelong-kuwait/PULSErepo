@@ -401,9 +401,9 @@ namespace TMS.Business.TMS
             return DAL.AttendanceReportsDAL(CourseID,ClassID, startdate, enddate);
         }
 
-        public DataTable ClassFutureReport(long CurrentCourseCategoryID,DateTime ClassReportStartDateFrom,DateTime ClassReportStartDateTo,bool ShowFutureClasses,int ClassTypeID)
+        public DataTable ClassFutureReport(long CurrentCourseCategoryID,DateTime ClassReportStartDateFrom,DateTime ClassReportStartDateTo,bool ShowFutureClasses,int ClassTypeID,long CompanyId)
         {
-            return DAL.ClassFutureReportDAL(CurrentCourseCategoryID, ClassReportStartDateFrom, ClassReportStartDateTo, ClassTypeID, ShowFutureClasses);
+            return DAL.ClassFutureReportDAL(CurrentCourseCategoryID, ClassReportStartDateFrom, ClassReportStartDateTo, ClassTypeID, ShowFutureClasses, CompanyId);
         }
         
         public DataTable GetCourseFromTimeSpan(DateTime StartTime, DateTime EndTime)
