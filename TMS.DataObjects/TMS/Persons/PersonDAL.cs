@@ -913,6 +913,34 @@ namespace TMS.DataObjects.TMS
 
             }
         }
+        public DataTable DailyVenueUtalizationReports2DAL(DateTime Startday, DateTime Endday, long venueid)
+        {
+            DataTable dt = new DataTable();
+            var conString = DBHelper.ConnectionString;
+
+            SqlCommand cmd = new SqlCommand("TMS_Class_WeeklyUtilizationReport2");
+            cmd.Parameters.AddWithValue("@StartDate", Startday);
+            cmd.Parameters.AddWithValue("@EndDate", Endday);
+            cmd.Parameters.AddWithValue("@VenueID", venueid);
+
+
+            using (SqlConnection con = new SqlConnection(conString))
+            {
+                using (SqlDataAdapter sda = new SqlDataAdapter())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    sda.SelectCommand = cmd;
+                    using (DataSet dsCustomers = new DataSet())
+                    {
+                        sda.Fill(dsCustomers, "Customers");
+                        return dsCustomers.Tables[0];
+                    }
+                }
+
+
+            }
+        }
 
         public DataTable DailyUtilizationReportDAL(DateTime day, int type,long companyID)
         {

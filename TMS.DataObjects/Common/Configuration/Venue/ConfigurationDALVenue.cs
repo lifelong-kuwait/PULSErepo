@@ -87,7 +87,18 @@ namespace TMS.DataObjects.Common.Configuration
             }
             return Venue.ToList();
         }
-
+        /// <summary>
+        /// Venues the create dal.
+        /// </summary>
+        /// <param name="_Venues">The venues.</param>
+        /// <returns>System.Int64.</returns>
+        public long VenuesForDestroy_GetAllDAL(long _Venues)
+        {
+            var parameters = new[] { ParamBuilder.Par("Count", 0) };
+            return ExecuteInt64withOutPutparameterSp("Venue_Delete_Cheque", parameters,
+                    ParamBuilder.Par("VenueID", _Venues)
+                    );
+        }
         /// <summary>
         /// Venues the create dal.
         /// </summary>

@@ -6,12 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using TMS.Business.Interfaces.Common.Configuration;
+using TMS.Business.Interfaces.TMS.Program;
 using TMS.Library;
 using TMS.Library.Entities.Common.Configuration;
 using TMS.Library.Entities.Common.Configuration.Categories;
 using TMS.Library.Entities.Common.Configuration.Vendor;
 using TMS.Library.Entities.Common.Configuration.Venues;
 using TMS.Library.Entities.Common.Roles;
+using TMS.Library.Entities.TMS.Program;
 using TMS.Library.TMS.Admin.Config;
 using TMS.Web.Core;
 using lr = Resources.Resources;
@@ -22,10 +24,10 @@ namespace TMS.Web.Controllers
     public class ConfigController : TMSControllerBase
     {
         private readonly IConfigurationBAL _objConfigurationBAL;
-
-        public ConfigController(IConfigurationBAL _objIConfigurationBAL)
+        private readonly IClassBAL _ClassBAL;
+        public ConfigController(IConfigurationBAL _objIConfigurationBAL, IClassBAL _ClassIBAL)
         {
-            _objConfigurationBAL = _objIConfigurationBAL;
+            _objConfigurationBAL = _objIConfigurationBAL; _ClassBAL = _ClassIBAL;
         }
 
         #region Flags
@@ -292,7 +294,26 @@ namespace TMS.Web.Controllers
             var resultData = new[] { _objVenues };
             return Json(resultData.AsQueryable().ToDataSourceResult(request, ModelState));
         }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        //[ClaimsAuthorize("CanDeleteSession")]
 
+        public JsonResult VenuesDelteChk(string _Sessions)
+        {
+            bool result = false;
+            var _returnValue  = this._objConfigurationBAL.VenuesForDestroy_GetAllBAL(Convert.ToInt64(_Sessions));
+
+            if (_returnValue > 0)
+            {
+                result = false;
+
+            }
+            else
+            {
+                result = true;
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         #endregion Venues
 
         #region Venues Detail added for Open Type
@@ -431,6 +452,25 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                IList<ClassTraineeMapping> ClassTrainee=null;
+                if (CurrentUser.CompanyID > 0)
+                {
+                    ClassTrainee= _ClassBAL.ClassTraineeMapping_GetAllBALOrganization(CurrentCulture, oid, CurrentUser.CompanyID);
+                }
+                else
+                {
+                    ClassTrainee= _ClassBAL.ClassTraineeMapping_GetAllBAL(CurrentCulture, oid);
+                }
+                var item = ClassTrainee
+                .Cast<ClassTraineeMapping>().Where(i => i.PersonID== _objtrainer.PersonID);
+                if(item!=null)
+                {
+                    ModelState.AddModelError(lr.Trainee, lr.ClassTraineeCannotAssignAsTrainee);
+                }
+                else
+                {
+
+                
                 _objtrainer.CreatedBy = CurrentUser.NameIdentifierInt64;
                 _objtrainer.CreatedDate = DateTime.Now;
                 _objtrainer.OpenId = oid;
@@ -451,11 +491,12 @@ namespace TMS.Web.Controllers
 
                 }
 
-                //  }
-                //else
-                //{
-                //    ModelState.AddModelError(lr.Trainer,"Trainer is not available for this Class Date.");
-                //}
+                    //  }
+                    //else
+                    //{
+                    //    ModelState.AddModelError(lr.Trainer,"Trainer is not available for this Class Date.");
+                    //}
+                }
             }
             var resultData = new[] { _objtrainer };
             return Json(resultData.ToDataSourceResult(request, ModelState));

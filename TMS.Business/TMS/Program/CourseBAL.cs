@@ -71,6 +71,19 @@ namespace TMS.Business.TMS
             return _CourseDAL.TMS_CoursesByOrganization_GetAllDAL(StartRowIndex, PageSize, ref Total, SortExpression, SearchText,Oid);
         }
         /// <summary>
+        /// TMSs the courses get all bal.
+        /// </summary>
+        /// <param name="StartRowIndex">Start index of the row.</param>
+        /// <param name="PageSize">Size of the page.</param>
+        /// <param name="Total">The total.</param>
+        /// <param name="SortExpression">The sort expression.</param>
+        /// <param name="SearchText">The search text.</param>
+        /// <returns>List&lt;Course&gt;.</returns>
+        public long TMS_CoursesDeleteCheck(string CourseId, string Oid)
+        {
+            return _CourseDAL.TMS_CoursesDeleteCheckDAL( CourseId,  Oid);
+        }
+        /// <summary>long TMS_CoursesDeleteCheck(string CourseId, string Oid);
         /// TMSs the courses get by identifier bal.
         /// </summary>
         /// <param name="ID">The identifier.</param>

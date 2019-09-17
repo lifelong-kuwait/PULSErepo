@@ -324,6 +324,22 @@ namespace Resources {
                }
             }
         /// <summary>Some Error Occur on Server Side</summary>
+        public static string ClassTrainerCannotAssignAsTrainee
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("ClassTrainerCannotAssignAsTrainee", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>Some Error Occur on Server Side</summary>
+        public static string ClassTraineeCannotAssignAsTrainee
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("ClassTraineeCannotAssignAsTrainee", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>Some Error Occur on Server Side</summary>
         public static string LanguageDublication
         {
             get
@@ -4186,6 +4202,23 @@ namespace Resources {
             get
             {
                 return (string)resourceProvider.GetResource("VenueAvailabelTimeRange", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
+        /// <summary>Maximum Session Per Day</summary>
+        public static string VenueIsInUse
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("VenueIsInUse", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>Maximum Session Per Day</summary>
+        public static string CourseIsAssigned 
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CourseIsAssigned", CultureInfo.CurrentUICulture.Name);
             }
         }
         /// <summary>Maximum Session Per Day</summary>

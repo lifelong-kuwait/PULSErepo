@@ -287,7 +287,7 @@
             var classId = jQuery("#Class").data("kendoDropDownList").value();
             jQuery.ajax({
                 method: "post",
-                url: "/SPl_Test_Reports/Class_Trainer?classId=" + classId,
+                url: "/SPl_Test_Reports/Class_Trainee?classId=" + classId,
                 dataType: "JSON",
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify({ classId: classId }),

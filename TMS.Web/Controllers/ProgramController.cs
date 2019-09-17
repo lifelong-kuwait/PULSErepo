@@ -17,6 +17,8 @@ using TMS.Library.TMS.Persons;
 using TMS.Business.Interfaces.Common.Configuration;
 using Abp.Runtime.Validation;
 using TMS.Web.Core;
+using TMS.Library.Entities.Common.Roles;
+
 namespace TMS.Web.Controllers
 {
     [SessionTimeout]
@@ -94,6 +96,26 @@ namespace TMS.Web.Controllers
             };
             return Json(result);
         }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        //[ClaimsAuthorize("CanDeleteSession")]
+
+        public JsonResult CourseDelteChk(string _Sessions)
+        {
+            bool result = false;
+            var _returnValue = this._CourseBAL.TMS_CoursesDeleteCheck(Convert.ToString(_Sessions),CurrentUser.CompanyID.ToString());
+
+            if (_returnValue > 0)
+            {
+                result = false;
+
+            }
+            else
+            {
+                result = true;
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
         [ClaimsAuthorize("CanViewCourse")]
         [DontWrapResult]
@@ -162,25 +184,37 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _Course.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                _Course.UpdatedDate = DateTime.Now;
-                if (_CourseBAL.class_CheckBAL(_Course, CurrentUser.CompanyID) > 0)
+
+                bool result1 = false;
+                var _returnValue = this._CourseBAL.TMS_CoursesDeleteCheck(_Course.ID.ToString(), CurrentUser.CompanyID.ToString());
+
+                if (_returnValue > 0)
                 {
-                    ModelState.AddModelError(lr.PersonSkill, lr.FlagDuplicationCheck);
+                    result1 = false;
+
                 }
                 else
                 {
-                    var result = this._CourseBAL.TMS_Courses_DeleteBAL(_Course);
-                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                    if (string.IsNullOrEmpty(ip))
-                        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                    // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
-                    // string browserName = req.Browser.Browser;
-                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Delete, System.Web.HttpContext.Current.Request.Browser.Browser);
-
-                    if (result == -1)
+                    _Course.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                    _Course.UpdatedDate = DateTime.Now;
+                    if (_CourseBAL.class_CheckBAL(_Course, CurrentUser.CompanyID) > 0)
                     {
-                        ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                        ModelState.AddModelError(lr.PersonSkill, lr.FlagDuplicationCheck);
+                    }
+                    else
+                    {
+                        var result = this._CourseBAL.TMS_Courses_DeleteBAL(_Course);
+                        string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                        if (string.IsNullOrEmpty(ip))
+                            ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                        // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
+                        // string browserName = req.Browser.Browser;
+                        _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Delete, System.Web.HttpContext.Current.Request.Browser.Browser);
+
+                        if (result == -1)
+                        {
+                            ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                        }
                     }
                 }
             }
@@ -213,23 +247,23 @@ namespace TMS.Web.Controllers
             var startRowIndex = (request.Page - 1) * request.PageSize;
             int Total = 0;
             var SearchText = Request.Form["SearchText"];
-            if(SearchText=="")
-                SearchText=null;
+            if (SearchText == "")
+                SearchText = null;
             if (request.PageSize == 0)
             {
                 request.PageSize = 10;
             }
             long CourseId = 0;
             CourseId = Convert.ToInt64(Request.QueryString["CourseId"]);
-            List<Classes> Classs=new List<Classes>();
+            List<Classes> Classs = new List<Classes>();
             if (CurrentUser.CompanyID < 0)
             {
-                 Classs = this._ClassBAL.TMS_Classes_GetAllBAL(CourseId, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
+                Classs = this._ClassBAL.TMS_Classes_GetAllBAL(CourseId, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
             }
-            
-           else if (CurrentUser.CompanyID > 0)
+
+            else if (CurrentUser.CompanyID > 0)
             {
-                if(CourseId<=0)
+                if (CourseId <= 0)
                 {
                     Classs = this._ClassBAL.TMS_ClassesAllByOrganization_GetAllBAL(CourseId, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
                 }
@@ -291,7 +325,7 @@ namespace TMS.Web.Controllers
                     {
                         _Class.FollowUp = "";
                     }
-                    if(_Class.SecondaryClassTitle==null)
+                    if (_Class.SecondaryClassTitle == null)
                     {
                         _Class.SecondaryClassTitle = "";
                     }
@@ -540,22 +574,45 @@ namespace TMS.Web.Controllers
         public ActionResult ManageTrainee_Create([DataSourceRequest] DataSourceRequest request, string PersonIds, long cid)
         {
             ClassTraineeMapping _Classes = new ClassTraineeMapping();
-            if (ModelState.IsValid)
+            List<TrainerOpenMapping> ManageTrainer = _objConfigurationBAL.ManageTrainer_GetAllBAL(Convert.ToInt32(cid), 2);
+            bool flage = true;
+            long trainerid = -1;
+            foreach (var x in ManageTrainer)
             {
-                //  string PersonIds = "2233";
-                _Classes.CreatedBy = CurrentUser.NameIdentifierInt64;
-                _Classes.CreatedDate = DateTime.Now;
-                _Classes.ClassID = cid;
-                _Classes.ID = _ClassBAL.TMS_ClassTraineeMapping_CreateBAL(_Classes, PersonIds);
-                string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                if (string.IsNullOrEmpty(ip))
-                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
-                // string browserName = req.Browser.Browser;
-                _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+                if (PersonIds.Contains(x.PersonID.ToString()))
+                {
+                    flage = false;
+                    trainerid = x.PersonID;
+                    break;
+                }
+            }
+            if (flage == false)
+            {
+                ModelState.AddModelError(lr.Trainer, lr.ClassTrainerCannotAssignAsTrainee);
+            }
+            else
+            {
 
+
+
+                if (ModelState.IsValid)
+                {
+                    //  string PersonIds = "2233";
+                    _Classes.CreatedBy = CurrentUser.NameIdentifierInt64;
+                    _Classes.CreatedDate = DateTime.Now;
+                    _Classes.ClassID = cid;
+                    _Classes.ID = _ClassBAL.TMS_ClassTraineeMapping_CreateBAL(_Classes, PersonIds);
+                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                    if (string.IsNullOrEmpty(ip))
+                        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                    // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
+                    // string browserName = req.Browser.Browser;
+                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+
+                }
             }
             var resultData = new[] { _Classes };
+
             return Json(resultData.ToDataSourceResult(request, ModelState));
         }
 
@@ -1199,7 +1256,7 @@ namespace TMS.Web.Controllers
                     // string browserName = req.Browser.Browser;
                     _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Update, System.Web.HttpContext.Current.Request.Browser.Browser);
 
-                   
+
                 }
             }
             var resultData = new[] { _Class };
@@ -1453,9 +1510,9 @@ namespace TMS.Web.Controllers
             }
             else if (CurrentUser.CompanyID > 0)
             {
-                if(ClassID<=0)
-                { 
-                Sessions = this._SessionBAL.TMS_SessionsbyOrganization_GetALLSessionsByCultureBAL(ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
+                if (ClassID <= 0)
+                {
+                    Sessions = this._SessionBAL.TMS_SessionsbyOrganization_GetALLSessionsByCultureBAL(ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
                 }
                 else
                 {
@@ -1541,7 +1598,7 @@ namespace TMS.Web.Controllers
                     //int value = DateTime.Compare(_Sessions.StartTime, _Sessions.EndTime);
                     DateTime t1 = Convert.ToDateTime(_Sessions.StartTimeString);
                     DateTime t2 = Convert.ToDateTime(_Sessions.EndTimeString);
-                    string date= Convert.ToDateTime(_Sessions.ScheduleDate).ToString("MM-dd-yyyy");
+                    string date = Convert.ToDateTime(_Sessions.ScheduleDate).ToString("MM-dd-yyyy");
                     _Sessions.ScheduleDate = Convert.ToDateTime(date);
                     int value = DateTime.Compare(t1, t2);
                     // checking 
@@ -1611,7 +1668,7 @@ namespace TMS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
         [ClaimsAuthorize("CanDeleteSession")]
-        
+
         public JsonResult SessionDelteChk(string _Sessions)
         {
             bool result = false;
@@ -1627,6 +1684,7 @@ namespace TMS.Web.Controllers
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
         [ClaimsAuthorize("CanAddEditSession")]
         [DontWrapResult]
         public JsonResult ClassDetailById(string id, string sid)
@@ -1684,7 +1742,7 @@ namespace TMS.Web.Controllers
                 ModelState.AddModelError(lr.ClassMaximumSessionPerDay, string.Format(lr.SessionConflictNames, result.ConflictNames.Trim()));
                 return false;
             }
-           
+
             return isValid;
             //if (CurrentSessionPresenter.MaximumLimitReached(ClassID, CurrentSessionID, ObjSession.ScheduleDate)) //some how completed
             //{

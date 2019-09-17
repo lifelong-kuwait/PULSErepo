@@ -423,7 +423,10 @@ namespace TMS.Business.TMS
         {
             return DAL.DailyVenueUtalizationReportsDAL(Startday, Endday, venueid);
         }
-
+        public DataTable DailyVenueUtalizationReports2(DateTime Startday, DateTime Endday, long venueid)
+        {
+            return DAL.DailyVenueUtalizationReports2DAL(Startday, Endday, venueid);
+        }
         public DataTable DailyUtilizationReport(DateTime day, int type,long companyID)
         {
             return DAL.DailyUtilizationReportDAL(day, type, companyID);

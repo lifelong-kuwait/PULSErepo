@@ -88,6 +88,23 @@ namespace TMS.DataObjects.TMS
             }
             return Course.ToList();
         }
+        /// <summary>
+        /// TMSs the courses get all dal.
+        /// </summary>
+        /// <param name="StartRowIndex">Start index of the row.</param>
+        /// <param name="PageSize">Size of the page.</param>
+        /// <param name="Total">The total.</param>
+        /// <param name="SortExpression">The sort expression.</param>
+        /// <param name="SearchText">The search text.</param>
+        /// <returns>List&lt;Course&gt;.</returns>
+        public long TMS_CoursesDeleteCheckDAL(string CourseId, string Oid)
+        {
+            var parameters = new[] { ParamBuilder.Par("Count", 0) };
+            return ExecuteInt64withOutPutparameterSp("Course_Delete_Cheque", parameters,
+                    ParamBuilder.Par("CourseID", CourseId),
+                     ParamBuilder.Par("OID", Oid)
+                    );
+        }
 
         /// <summary>
         /// TMSs the courses get by identifier dal.

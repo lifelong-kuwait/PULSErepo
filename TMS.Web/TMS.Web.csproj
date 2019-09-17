@@ -304,6 +304,11 @@
       <DependentUpon>DailyUtilizationReport.xsd</DependentUpon>
     </Compile>
     <Compile Include="DS_CompanyInfo.Designer.cs" />
+    <Compile Include="TMS_Class_WeeklyUtilizationReport2DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TMS_Class_WeeklyUtilizationReport2DataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="TMS_SPL_PULSEDataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -556,6 +561,13 @@
     </Compile>
     <Compile Include="Views\Report\SpLReports\WeeklyUtilizationReport.aspx.designer.cs">
       <DependentUpon>WeeklyUtilizationReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\WeeklyUtilizationReport2.aspx.cs">
+      <DependentUpon>WeeklyUtilizationReport2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\WeeklyUtilizationReport2.aspx.designer.cs">
+      <DependentUpon>WeeklyUtilizationReport2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Report\UserControls\UCClassReportCurrent.ascx.cs">
       <DependentUpon>UCClassReportCurrent.ascx</DependentUpon>
@@ -4494,6 +4506,7 @@
     <Content Include="Views\Report\SpLReports\ClassCurrentReport.aspx" />
     <Content Include="Views\Report\SpLReports\ViewTraineePeriodicReport.aspx" />
     <Content Include="Views\Report\SpLReports\WeeklyUtilizationReport.aspx" />
+    <Content Include="Views\Report\SpLReports\WeeklyUtilizationReport2.aspx" />
     <Content Include="Views\Report\UserControls\UCClassReport.ascx" />
     <Content Include="Views\Report\UserControls\UCClassReportCurrent.ascx" />
     <Content Include="Views\Report\UserControls\UCClassReportFuture.ascx" />
@@ -4538,6 +4551,17 @@
     </Content>
     <Content Include="TMS_SPL_PULSEDataSet1.xsc">
       <DependentUpon>TMS_SPL_PULSEDataSet1.xsd</DependentUpon>
+    </Content>
+    <Content Include="TMS_Class_WeeklyUtilizationReport2DataSet.xsc">
+      <DependentUpon>TMS_Class_WeeklyUtilizationReport2DataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="TMS_Class_WeeklyUtilizationReport2DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TMS_Class_WeeklyUtilizationReport2DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="TMS_Class_WeeklyUtilizationReport2DataSet.xss">
+      <DependentUpon>TMS_Class_WeeklyUtilizationReport2DataSet.xsd</DependentUpon>
     </Content>
     <None Include="TMS_SPL_PULSEDataSet1.xsd">
       <Generator>MSDataSetGenerator</Generator>
@@ -4679,6 +4703,7 @@
     <Content Include="WeeklyAttendanceReportData.xsc">
       <DependentUpon>WeeklyAttendanceReportData.xsd</DependentUpon>
     </Content>
+    <Content Include="Views\SPl_Test_Reports\WeeklyUtilizationReport2.cshtml" />
     <None Include="WeeklyAttendanceReportData.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -5362,6 +5387,7 @@
     <Content Include="Report\Tran_ViewTraineePeriodicReport.rdlc" />
     <Content Include="Report\WeeklyUtilizationReport.rdlc" />
     <EmbeddedResource Include="Report\Report1.rdlc" />
+    <EmbeddedResource Include="Report\WeeklyUtilizationReport2.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

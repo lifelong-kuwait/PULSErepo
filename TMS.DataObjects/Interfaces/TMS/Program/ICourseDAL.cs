@@ -46,7 +46,16 @@ namespace TMS.DataObjects.Interfaces.TMS
         /// <param name="SearchText">The search text.</param>
         /// <returns>List&lt;Course&gt;.</returns>
         List<Course> TMS_CoursesByOrganization_GetAllDAL(int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid);
-
+        /// <summary>
+        /// TMSs the courses get all dal.
+        /// </summary>
+        /// <param name="StartRowIndex">Start index of the row.</param>
+        /// <param name="PageSize">Size of the page.</param>
+        /// <param name="Total">The total.</param>
+        /// <param name="SortExpression">The sort expression.</param>
+        /// <param name="SearchText">The search text.</param>
+        /// <returns>List&lt;Course&gt;.</returns>
+        long TMS_CoursesDeleteCheckDAL(string CourseId, string Oid);
         /// <summary>
         /// TMSs the courses get by identifier dal.
         /// </summary>

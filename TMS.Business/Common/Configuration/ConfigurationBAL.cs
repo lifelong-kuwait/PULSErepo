@@ -180,7 +180,20 @@ namespace TMS.Business.Common.Configuration
         {
             return _ConfigurationDAL.VenuesbyOrganization_GetAllDAL(StartRowIndex, PageSize, ref Total, SortExpression, SearchText,Oid);
         }
-
+        /// <summary>
+        /// Venue the get all bal.
+        /// </summary>
+        /// <param name="StartRowIndex">Start index of the row.</param>
+        /// <param name="PageSize">Size of the page.</param>
+        /// <param name="Total">The total.</param>
+        /// <param name="SortExpression">The sort expression.</param>
+        /// <param name="SearchText">The search text.</param>
+        /// <returns>List&lt;Venues&gt;.</returns>
+        public long VenuesForDestroy_GetAllBAL(long venueID)
+        {
+            return _ConfigurationDAL.VenuesForDestroy_GetAllDAL(venueID);
+        }
+        
         /// <summary>
         /// Venue the create bal.
         /// </summary>

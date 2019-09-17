@@ -79,6 +79,14 @@ namespace TMS.Web.Controllers
         }
         [ClaimsAuthorize("CanViewReports")]
         [DontWrapResult]
+        public ActionResult WeeklyUtilizationReport2()
+        {
+            ViewData["reportUrl"] = "~/Report/WeeklyUtilizationReport2/";
+
+            return View();
+        }
+        [ClaimsAuthorize("CanViewReports")]
+        [DontWrapResult]
         public ActionResult Weekly_Attandence_Report()
         {
             ViewData["reportUrl"] = "~/Report/Tran_ViewAttendanceReport/";

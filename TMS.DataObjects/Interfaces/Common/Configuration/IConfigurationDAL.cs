@@ -131,7 +131,18 @@ namespace TMS.DataObjects.Interfaces.Common.Configuration
         /// <returns>List&lt;Venues&gt;.</returns>
         List<Venues> VenuesbyOrganization_GetAllDAL(int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid);
 
+        /// <summary>
+        /// Venues the get all dal.
+        /// </summary>
+        /// <param name="StartRowIndex">Start index of the row.</param>
+        /// <param name="PageSize">Size of the page.</param>
+        /// <param name="Total">The total.</param>
+        /// <param name="SortExpression">The sort expression.</param>
+        /// <param name="SearchText">The search text.</param>
+        /// <returns>List&lt;Venues&gt;.</returns>
+        long VenuesForDestroy_GetAllDAL(long venueID);
 
+        
         /// <summary>
         /// Venues the create dal.
         /// </summary>

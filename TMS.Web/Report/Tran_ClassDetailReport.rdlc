@@ -234,7 +234,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Format(Fields!StartTime.Value,"HH:mm")</Value>
+                              <Value>=Fields!StartTime.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -264,7 +264,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Format(Fields!EndTime.Value,"HH:mm")</Value>
+                              <Value>=Fields!EndTime.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -283,6 +283,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>

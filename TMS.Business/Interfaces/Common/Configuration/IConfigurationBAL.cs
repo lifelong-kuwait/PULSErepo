@@ -110,6 +110,16 @@ namespace TMS.Business.Interfaces.Common.Configuration
         /// <param name="SearchText">The search text.</param>
         /// <returns>List&lt;Venues&gt;.</returns>
         List<Venues> VenuesbyOrganization_GetAllBAL(int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid);
+        /// <summary>
+        /// Venueses the get all bal.
+        /// </summary>
+        /// <param name="StartRowIndex">Start index of the row.</param>
+        /// <param name="PageSize">Size of the page.</param>
+        /// <param name="Total">The total.</param>
+        /// <param name="SortExpression">The sort expression.</param>
+        /// <param name="SearchText">The search text.</param>
+        /// <returns>List&lt;Venues&gt;.</returns>
+        long VenuesForDestroy_GetAllBAL(long venueID);
 
 
         /// <summary>
