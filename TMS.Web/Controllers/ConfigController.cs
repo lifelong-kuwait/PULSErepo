@@ -462,8 +462,8 @@ namespace TMS.Web.Controllers
                     ClassTrainee= _ClassBAL.ClassTraineeMapping_GetAllBAL(CurrentCulture, oid);
                 }
                 var item = ClassTrainee
-                .Cast<ClassTraineeMapping>().Where(i => i.PersonID== _objtrainer.PersonID);
-                if(item!=null)
+                .Cast<ClassTraineeMapping>().Where(i => i.PersonID== _objtrainer.PersonID).ToList();
+                if(item.Count>0)
                 {
                     ModelState.AddModelError(lr.Trainee, lr.ClassTraineeCannotAssignAsTrainee);
                 }

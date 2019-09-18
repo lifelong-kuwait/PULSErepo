@@ -6,73 +6,73 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.03187in</Width>
+              <Width>0.89645in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.91221in</Width>
+              <Width>0.67744in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>0.5625in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.73512in</Width>
+              <Width>0.56845in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.92361in</Width>
+              <Width>0.68403in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.91221in</Width>
+              <Width>0.51638in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.91221in</Width>
+              <Width>0.58929in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.91221in</Width>
+              <Width>0.65029in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.91221in</Width>
+              <Width>0.65179in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.91221in</Width>
+              <Width>0.62054in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.91221in</Width>
+              <Width>0.55208in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.91221in</Width>
+              <Width>0.66221in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.91221in</Width>
+              <Width>0.64138in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.91221in</Width>
+              <Width>0.64138in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.91221in</Width>
+              <Width>0.64138in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.91221in</Width>
+              <Width>0.66221in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.91221in</Width>
+              <Width>0.62054in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.91221in</Width>
+              <Width>0.69196in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.91221in</Width>
+              <Width>0.66221in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.91221in</Width>
+              <Width>0.59971in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.91221in</Width>
+              <Width>0.63096in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.91221in</Width>
+              <Width>0.65179in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.91221in</Width>
+              <Width>0.61013in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -90,6 +90,7 @@
                             <TextRun>
                               <Value>Room Number</Value>
                               <Style>
+                                <FontSize>7pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -122,6 +123,7 @@
                             <TextRun>
                               <Value>Days</Value>
                               <Style>
+                                <FontSize>7pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -154,6 +156,7 @@
                             <TextRun>
                               <Value>Dates</Value>
                               <Style>
+                                <FontSize>7pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -186,6 +189,7 @@
                             <TextRun>
                               <Value>Capacity</Value>
                               <Style>
+                                <FontSize>7pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -218,6 +222,7 @@
                             <TextRun>
                               <Value>Utilization %</Value>
                               <Style>
+                                <FontSize>7pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -248,8 +253,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>7:30 AM</Value>
+                              <Value>7:00 AM</Value>
                               <Style>
+                                <FontSize>7pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -283,8 +289,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>8:30 AM</Value>
+                              <Value>8:00 AM</Value>
                               <Style>
+                                <FontSize>7pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -318,8 +325,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>9:30 AM</Value>
+                              <Value>9:00 AM</Value>
                               <Style>
+                                <FontSize>7pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -353,8 +361,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>10:30 AM</Value>
+                              <Value>10:00 AM</Value>
                               <Style>
+                                <FontSize>7pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -388,8 +397,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>11:30 AM</Value>
+                              <Value>11:00 AM</Value>
                               <Style>
+                                <FontSize>7pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -423,8 +433,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>12:30 PM</Value>
+                              <Value>12:00 PM</Value>
                               <Style>
+                                <FontSize>7pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -458,8 +469,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>1:30 PM</Value>
+                              <Value>1:00 PM</Value>
                               <Style>
+                                <FontSize>7pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -493,8 +505,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>2:30 PM</Value>
+                              <Value>2:00 PM</Value>
                               <Style>
+                                <FontSize>7pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -528,8 +541,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>3:30 PM</Value>
+                              <Value>3:00 PM</Value>
                               <Style>
+                                <FontSize>7pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -563,8 +577,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>4:30 PM</Value>
+                              <Value>4:00 PM</Value>
                               <Style>
+                                <FontSize>7pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -598,8 +613,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>5:30 PM</Value>
+                              <Value>5:00 PM</Value>
                               <Style>
+                                <FontSize>7pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -633,8 +649,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>6:30 PM</Value>
+                              <Value>6:00 PM</Value>
                               <Style>
+                                <FontSize>7pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -668,8 +685,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>7:30 PM</Value>
+                              <Value>7:00 PM</Value>
                               <Style>
+                                <FontSize>7pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -703,8 +721,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>8:30 PM</Value>
+                              <Value>8:00 PM</Value>
                               <Style>
+                                <FontSize>7pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -738,8 +757,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>9:30 PM</Value>
+                              <Value>9:00 PM</Value>
                               <Style>
+                                <FontSize>7pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -773,8 +793,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>10:30 PM</Value>
+                              <Value>10:00 PM</Value>
                               <Style>
+                                <FontSize>7pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -808,8 +829,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>11:30 PM</Value>
+                              <Value>11:00 PM</Value>
                               <Style>
+                                <FontSize>7pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -843,8 +865,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>12:00 AM</Value>
+                              <Value>12:00 PM</Value>
                               <Style>
+                                <FontSize>7pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -884,7 +907,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!VenueName.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -913,7 +938,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!DayName.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -941,8 +968,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Format(Fields!ScheduleDate.Value,"dd-MMMM")</Value>
-                              <Style />
+                              <Value>=Format(Fields!ScheduleDate.Value,"dd-MMM")</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -971,7 +1000,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!Capacity.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -1000,7 +1031,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=FormatNumber(Fields!Utilization.Value,2)</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -1030,6 +1063,7 @@
                             <TextRun>
                               <Value>=Fields!Seven.Value</Value>
                               <Style>
+                                <FontSize>8pt</FontSize>
                                 <Color>White</Color>
                               </Style>
                             </TextRun>
@@ -1062,6 +1096,7 @@
                             <TextRun>
                               <Value>=Fields!Eight.Value</Value>
                               <Style>
+                                <FontSize>8pt</FontSize>
                                 <Color>White</Color>
                               </Style>
                             </TextRun>
@@ -1094,6 +1129,7 @@
                             <TextRun>
                               <Value>=Fields!Nine.Value</Value>
                               <Style>
+                                <FontSize>8pt</FontSize>
                                 <Color>White</Color>
                               </Style>
                             </TextRun>
@@ -1126,6 +1162,7 @@
                             <TextRun>
                               <Value>=Fields!Ten.Value</Value>
                               <Style>
+                                <FontSize>8pt</FontSize>
                                 <Color>White</Color>
                               </Style>
                             </TextRun>
@@ -1158,6 +1195,7 @@
                             <TextRun>
                               <Value>=Fields!Eleven.Value</Value>
                               <Style>
+                                <FontSize>8pt</FontSize>
                                 <Color>White</Color>
                               </Style>
                             </TextRun>
@@ -1190,6 +1228,7 @@
                             <TextRun>
                               <Value>=Fields!Twelwe.Value</Value>
                               <Style>
+                                <FontSize>8pt</FontSize>
                                 <Color>White</Color>
                               </Style>
                             </TextRun>
@@ -1222,6 +1261,7 @@
                             <TextRun>
                               <Value>=Fields!Thirteen.Value</Value>
                               <Style>
+                                <FontSize>8pt</FontSize>
                                 <Color>White</Color>
                               </Style>
                             </TextRun>
@@ -1254,6 +1294,7 @@
                             <TextRun>
                               <Value>=Fields!Fourteen.Value</Value>
                               <Style>
+                                <FontSize>8pt</FontSize>
                                 <Color>White</Color>
                               </Style>
                             </TextRun>
@@ -1286,6 +1327,7 @@
                             <TextRun>
                               <Value>=Fields!Fifteen.Value</Value>
                               <Style>
+                                <FontSize>8pt</FontSize>
                                 <Color>White</Color>
                               </Style>
                             </TextRun>
@@ -1318,6 +1360,7 @@
                             <TextRun>
                               <Value>=Fields!Sixteen.Value</Value>
                               <Style>
+                                <FontSize>8pt</FontSize>
                                 <Color>White</Color>
                               </Style>
                             </TextRun>
@@ -1350,6 +1393,7 @@
                             <TextRun>
                               <Value>=Fields!Seventeen.Value</Value>
                               <Style>
+                                <FontSize>8pt</FontSize>
                                 <Color>White</Color>
                               </Style>
                             </TextRun>
@@ -1382,6 +1426,7 @@
                             <TextRun>
                               <Value>=Fields!Eighteen.Value</Value>
                               <Style>
+                                <FontSize>8pt</FontSize>
                                 <Color>White</Color>
                               </Style>
                             </TextRun>
@@ -1414,6 +1459,7 @@
                             <TextRun>
                               <Value>=Fields!Nineteen.Value</Value>
                               <Style>
+                                <FontSize>8pt</FontSize>
                                 <Color>White</Color>
                               </Style>
                             </TextRun>
@@ -1446,6 +1492,7 @@
                             <TextRun>
                               <Value>=Fields!Twenty.Value</Value>
                               <Style>
+                                <FontSize>8pt</FontSize>
                                 <Color>White</Color>
                               </Style>
                             </TextRun>
@@ -1478,6 +1525,7 @@
                             <TextRun>
                               <Value>=Fields!Twentyone.Value</Value>
                               <Style>
+                                <FontSize>8pt</FontSize>
                                 <Color>White</Color>
                               </Style>
                             </TextRun>
@@ -1510,6 +1558,7 @@
                             <TextRun>
                               <Value>=Fields!Twentytwo.Value</Value>
                               <Style>
+                                <FontSize>8pt</FontSize>
                                 <Color>White</Color>
                               </Style>
                             </TextRun>
@@ -1542,6 +1591,7 @@
                             <TextRun>
                               <Value>=Fields!Twentythree.Value</Value>
                               <Style>
+                                <FontSize>8pt</FontSize>
                                 <Color>White</Color>
                               </Style>
                             </TextRun>
@@ -1574,6 +1624,7 @@
                             <TextRun>
                               <Value>=Fields!Twentyfour.Value</Value>
                               <Style>
+                                <FontSize>8pt</FontSize>
                                 <Color>White</Color>
                               </Style>
                             </TextRun>
@@ -1637,9 +1688,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>WeeklyUtilizationDataSet</DataSetName>
-        <Top>1.02083in</Top>
+        <Top>0.10416in</Top>
+        <Left>0.02054in</Left>
         <Height>0.5in</Height>
-        <Width>21.02259in</Width>
+        <Width>14.6851in</Width>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -1647,13 +1699,13 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>2in</Height>
+    <Height>0.625in</Height>
     <Style />
   </Body>
-  <Width>21.02259in</Width>
+  <Width>14.73063in</Width>
   <Page>
     <PageHeader>
-      <Height>1in</Height>
+      <Height>0.655in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1662,8 +1714,9 @@
           <Value>PACELogo</Value>
           <Sizing>FitProportional</Sizing>
           <Top>0.20833in</Top>
-          <Height>0.58333in</Height>
-          <Width>1.05209in</Width>
+          <Left>1.46875in</Left>
+          <Height>0.42708in</Height>
+          <Width>0.68818in</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1680,7 +1733,7 @@
                   <Value>Venue Utilization Report</Value>
                   <Style>
                     <FontStyle>Normal</FontStyle>
-                    <FontSize>20pt</FontSize>
+                    <FontSize>15pt</FontSize>
                     <FontWeight>Medium</FontWeight>
                   </Style>
                 </TextRun>
@@ -1689,10 +1742,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.37375in</Top>
-          <Left>8.00917in</Left>
-          <Height>0.38542in</Height>
-          <Width>3.54167in</Width>
+          <Top>0.24999in</Top>
+          <Left>5.02995in</Left>
+          <Height>0.28125in</Height>
+          <Width>2.51042in</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
@@ -1711,123 +1764,12 @@
         </Border>
       </Style>
     </PageHeader>
-    <PageFooter>
-      <Height>1in</Height>
-      <PrintOnFirstPage>true</PrintOnFirstPage>
-      <PrintOnLastPage>true</PrintOnLastPage>
-      <ReportItems>
-        <Textbox Name="Textbox69">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value />
-                  <Style>
-                    <FontStyle>Normal</FontStyle>
-                    <FontSize>8pt</FontSize>
-                    <FontWeight>Bold</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                    <Color>#000000</Color>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox69</rd:DefaultName>
-          <Top>0.40104in</Top>
-          <Left>0.88899in</Left>
-          <Height>0.19792in</Height>
-          <Width>18.76422in</Width>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-            <Direction>LTR</Direction>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox70">
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>="Page " &amp; Globals!PageNumber &amp; " of " &amp; Globals!TotalPages</Value>
-                  <Style>
-                    <FontSize>8pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Left</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox70</rd:DefaultName>
-          <Top>0.40104in</Top>
-          <Left>0.02054in</Left>
-          <Height>0.19792in</Height>
-          <Width>15.42462in</Width>
-          <ZIndex>1</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <Direction>RTL</Direction>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox6">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>=DateString()</Value>
-                  <Style>
-                    <FontSize>8pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Right</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox4</rd:DefaultName>
-          <Top>0.40104in</Top>
-          <Left>5.01238in</Left>
-          <Height>0.19792in</Height>
-          <Width>15.77464in</Width>
-          <ZIndex>2</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-      </ReportItems>
-      <Style>
-        <Border>
-          <Style>None</Style>
-        </Border>
-      </Style>
-    </PageFooter>
-    <PageWidth>26in</PageWidth>
-    <LeftMargin>1in</LeftMargin>
-    <RightMargin>1in</RightMargin>
-    <TopMargin>1in</TopMargin>
-    <BottomMargin>1in</BottomMargin>
+    <PageHeight>8.27in</PageHeight>
+    <PageWidth>11.69in</PageWidth>
+    <LeftMargin>0.25in</LeftMargin>
+    <RightMargin>0.25in</RightMargin>
+    <TopMargin>0.25in</TopMargin>
+    <BottomMargin>0.25in</BottomMargin>
     <Style />
   </Page>
   <AutoRefresh>0</AutoRefresh>
