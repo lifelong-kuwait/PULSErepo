@@ -38,10 +38,17 @@ namespace TMS.DataObjects.Common
         /// <returns>IList&lt;TMS_Attachments&gt;.</returns>
         public IList<TMS_Attachments> TMS_Attachment_GetByIdAndTypeDAL(long OpenId, int OpenType)
         {
-            List<TMS_Attachments> localList = new List<TMS_Attachments>
+            List<TMS_Attachments> localList = new List<TMS_Attachments>();
+
+            var x= ProfileAndLogoFromDatabase(OpenId, OpenType);
+            if(x==null)
             {
-                ProfileAndLogoFromDatabase(OpenId, OpenType)
-            };
+
+            }else
+            {
+                localList.Add(x);
+            }
+            
             localList.AddRange(ExecuteListSp<TMS_Attachments>("TMS_Attachments_GetbyIdandType", ParamBuilder.Par("OpenId", OpenId), ParamBuilder.Par("OpenType", OpenType)));
             return localList;
         }
@@ -57,9 +64,13 @@ namespace TMS.DataObjects.Common
             var model = ExecuteSinglewithSP<TMS_Attachments>("TMS_Attachments_GetProfileLogobyIdandType", ParamBuilder.Par("OpenId", OpenId), ParamBuilder.Par("OpenType", OpenType));
             if(model==null){
               TMS_Attachments LocalModel= new TMS_Attachments(){
-              ID=-1,FileType=AttachmentsFileType.AttachmentsFileType_ProfilePicture,FileName="people.png",FilePath="~/images/i/"
+              ID=-1,FileType=AttachmentsFileType.AttachmentsFileType_ProfilePicture,FileName="people.png",FilePath="~/images/i/",Description="This is default image and this will hide when you add new profile picture"
               };
                 model= LocalModel;
+            }
+            else
+            {
+                model = null;
             }
             return model;
         }

@@ -224,12 +224,19 @@ namespace TMS.Web.Controllers
                         {
                             _Organization.FullName = _Organization.ShortName;
                         }
+                       // var _profilePict = HandleOrganizationIndexLogo(filename, _Organization.ID, aid);
+
                         _Organization.UpdatedBy = CurrentUser.NameIdentifierInt64;
                         _Organization.UpdatedDate = DateTime.Now;
-                        string _profilePict = string.Empty;
+                         
                         this.OrganizationBAL.Organizations_UpdateBAL(_Organization);
                         if (!string.IsNullOrEmpty(filename))
                             _Organization.LogoPicture = HandleOrganizationLogo(filename, _Organization.ID, aid);
+                        if(_Organization.LogoPicture!=null)
+                        {
+                            _Organization.Logo = _Organization.LogoPicture;
+                        }
+                        this.OrganizationBAL.Organizations_UpdateBAL(_Organization);
                     }
                 }
             }

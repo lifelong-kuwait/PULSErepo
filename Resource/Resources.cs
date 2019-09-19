@@ -2368,7 +2368,7 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("GridAddedBy", CultureInfo.CurrentUICulture.Name);
                }
             }
-        /// <summary>Added by</summary>
+        /// <summary>Added by</summary>PrimaryMaterial
         public static string Language
         {
             get
@@ -2523,6 +2523,13 @@ namespace Resources {
             get
             {
                 return (string)resourceProvider.GetResource("PersonAssignedToDiffentClasses", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string DefaultPicture
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("DefaultPicture", CultureInfo.CurrentUICulture.Name);
             }
         }
         public static string SessionAttandanceMarked
