@@ -115,6 +115,7 @@ namespace TMS.Library.Entities.Common.Configuration
         /// Gets or sets the class identifier.
         /// </summary>
         /// <value>The class identifier.</value>
+        [Display(Name = "MaterialsPrimary", ResourceType = typeof(lr))]
         public long CourseMaterialID { get; set; }
 
         /// <summary>

@@ -58,7 +58,7 @@ namespace TMS.Web.Controllers
                 var data = _PersonBAL.Person_GetAllByIdBAL(pid);
                 if (data == null)
                 {
-                    ViewData["model"] = Url.Content("~/People/Person");
+                    ViewData["model"] = Url.Content("~/People/PersonActive?pT=0");
                     return View("Static/NotFound");
                 }
                 else
@@ -196,7 +196,7 @@ namespace TMS.Web.Controllers
 
                 if (_UserBAL.LoginPerson_DuplicationCheckBAL(new Person { Email = _person.Email, CreatedBy = CurrentUser.CompanyID }) > 0)
                 {
-                    ModelState.AddModelError(lr.PersonContactEmailDuplicationCheck, lr.PersonContactEmailDuplicationCheck);
+                    ModelState.AddModelError(lr.DubliocationHappen, lr.PersonContactEmailDuplicationCheck);
                     // return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
                 }
                 else

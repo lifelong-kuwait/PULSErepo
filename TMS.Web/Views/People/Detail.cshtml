@@ -25,7 +25,7 @@
               .Create(read => read.Action("Person_Create", "People").Data("PersonProfilePictureData"))
               .Destroy(read => read.Action("Person_Destroy", "People"))
                   .Update(read => read.Action("Person_Update", "People").Data("PersonProfilePictureData"))
-                            .Events(e => e.Error("GeneralErrorHandler(\"PersonDetailGrid\")")))
+                            .Events(e => e.Error("GeneralErrorHandler(\"PersonDetailGrid1\")")))
               .NoRecords(lr.GridNoRecordFoundMessage)
 )
 @helper RenderAddTemplate()
@@ -102,7 +102,7 @@
                            type: "success"
                        },
                     function(){
-                        window.location="@Url.Content("~/People/Person")";
+                        window.location="@Url.Content("~/People/Person?pT=0")";
                     });
                    }
                });

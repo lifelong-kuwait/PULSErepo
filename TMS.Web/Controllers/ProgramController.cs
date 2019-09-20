@@ -807,7 +807,7 @@ namespace TMS.Web.Controllers
                 }
                 if (flage == false)
                 {
-                    ModelState.AddModelError(lr.OrganizationNameDublicaton, lr.OrganizationNameDublicaton);
+                    ModelState.AddModelError(lr.DubliocationHappen, lr.LogisticDublication);
                 }
                 else
                 {

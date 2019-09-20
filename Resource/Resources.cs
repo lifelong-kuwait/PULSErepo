@@ -2611,7 +2611,23 @@ namespace Resources {
                 return (string)resourceProvider.GetResource("OrganizationNameDublicaton", CultureInfo.CurrentUICulture.Name);
             }
         }
-
+        /// <summary>FullName</summary>
+        public static string LogisticDublication
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("LogisticDublication", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>FullName</summary>
+        public static string MaterialDublication
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("MaterialDublication", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        
         /// <summary>Short Name</summary>
         public static string OrganizationShortName {
                get {
@@ -5439,7 +5455,15 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("CourseMaterialsPrimaryMaterialRequired", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Please enter Primary Material</summary>
+        public static string MaterialsPrimary
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("MaterialsPrimary", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        
         /// <summary>Primary Material already exists!</summary>
         public static string CourseMaterialsPrimaryMaterialDuplicate {
                get {
