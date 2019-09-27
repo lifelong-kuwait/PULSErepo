@@ -141,6 +141,10 @@ namespace TMS.Business.TMS.Program
         {
              return _SessionBAL.GetSessionVenueOccupancyDetailDAL(Sessions); 
         }
+        public int GetSessionVenueOccupancyDetailUPBAL(Sessions Sessions)
+        {
+            return _SessionBAL.GetSessionVenueOccupancyDetailUPDAL(Sessions);
+        }
         public int User_EmailCheckBAL(long CompanyID, string Email)
         {
             return _SessionBAL.User_EmailCheckDAL(CompanyID,Email);

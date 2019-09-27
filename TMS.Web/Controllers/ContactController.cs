@@ -604,10 +604,10 @@ namespace TMS.Web.Controllers
                 _objPersonAvailibility.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _objPersonAvailibility.UpdatedDate = DateTime.Now;
                 var result = _objPersonContactBAL.PersonAvailability_DeleteBAL(_objPersonAvailibility);
-                if (result == -1)
-                {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
-                }
+                //if (result == -1)
+                //{
+                //    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                //}
             }
             var resultData = new[] { _objPersonAvailibility };
             return Json(resultData.AsQueryable().ToDataSourceResult(request, ModelState));

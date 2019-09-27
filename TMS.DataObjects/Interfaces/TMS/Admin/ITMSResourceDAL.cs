@@ -28,7 +28,7 @@ namespace TMS.DataObjects.Interfaces.TMS.Admin
         /// <param name="PageSize">Size of the page.</param>
         /// <param name="Total">The total.</param>
         /// <returns>IList&lt;TMSResource&gt;.</returns>
-        IList<TMSResource> GetTMSResourceDAL(int Page, int PageSize, ref int Total, string SearchText);
+        IList<TMSResource> GetTMSResourceDAL(int Page, int PageSize, ref int Total, string SearchText,string Oids);
       //  int ResourceExistCountDAL(string Name);
         int LanguageExistCountDAL(long CompnayID);
 

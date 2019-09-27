@@ -63,9 +63,9 @@ namespace TMS.Business.TMS.SkillsInterestLevel
         /// </summary>
         /// <param name="PersonId">The person identifier.</param>
         /// <returns>IList&lt;PersonSkill&gt;.</returns>
-        public IList<FocusAreas> PersonFocusAreaSkill_GetbyPersonIdBAL()
+        public IList<FocusAreas> PersonFocusAreaSkill_GetbyPersonIdBAL(string CompanyId)
         {
-            return DAL.PersonFocusAreaSkill_GetbyPersonId();
+            return DAL.PersonFocusAreaSkill_GetbyPersonId( CompanyId);
         }
 
         /// <summary>

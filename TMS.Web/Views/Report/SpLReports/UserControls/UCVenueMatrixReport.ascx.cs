@@ -122,7 +122,7 @@ namespace TMS.Web.Views.Report.SpLReports.UserControls
             {
                 if (e.Row.RowType == DataControlRowType.DataRow)
                 {
-                    e.Row.Cells[0].Width = 100;
+                    e.Row.Cells[0].Width = 50;
                     e.Row.Cells[0].HorizontalAlign = HorizontalAlign.Center;
                 }
                 else if (e.Row.RowType == DataControlRowType.Header)
@@ -182,7 +182,7 @@ namespace TMS.Web.Views.Report.SpLReports.UserControls
                 DataSource.Columns.Add("Time");
 
                 var start = DateTime.Today;
-                var clockQuery = from offset in Enumerable.Range(15, 34)
+                var clockQuery = from offset in Enumerable.Range(15, 30)
                                  select start.AddMinutes(30 * offset);
                 //adding times in the ist column
                 foreach (var time in clockQuery)
@@ -412,7 +412,18 @@ namespace TMS.Web.Views.Report.SpLReports.UserControls
         {
             try
             {
-                GridViewRow row = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Normal);
+                GridViewRow rows = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Normal);
+                rows = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Normal);
+                TableCell cells = new TableCell
+                {
+                    HorizontalAlign = HorizontalAlign.Center,
+                    ColumnSpan = 31,
+                    Text = "<b>Venue Matrix Report</b>"
+                };
+                rows.Cells.Add(cells);
+                e.Row.Parent.Controls.AddAt(0, rows);
+                GridViewRow row = new GridViewRow(1, 1, DataControlRowType.Header, DataControlRowState.Normal);
+                row = new GridViewRow(1, 1, DataControlRowType.Header, DataControlRowState.Normal);
 
                 string VenueCode = string.Empty;
 
@@ -422,7 +433,7 @@ namespace TMS.Web.Views.Report.SpLReports.UserControls
                  //   AppContext.CurrentVenueID = UtilityFunctions.MapValue<long>(ddlVenues.SelectedValue, typeof(long));
                  //   VenueCode = AppContext.CurrentVenue.VenueCodeID;
                 }
-
+                
                 TableCell cell = new TableCell
                 {
                     ColumnSpan = 1,
@@ -448,19 +459,20 @@ namespace TMS.Web.Views.Report.SpLReports.UserControls
                     };
                     row.Cells.Add(cell);
                 }
-                e.Row.Parent.Controls.AddAt(0, row);
+                e.Row.Parent.Controls.AddAt(2, row);
 
                 //*****************
 
-                row = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Normal);
-
+                row = new GridViewRow(2, 1, DataControlRowType.Header, DataControlRowState.Normal);
+                
+                
+                
                 cell = new TableCell
                 {
                     ColumnSpan = 1,
                     HorizontalAlign = HorizontalAlign.Center
                 };
                 row.Cells.Add(cell);
-
                 cell = new TableCell
                 {
                     HorizontalAlign = HorizontalAlign.Center,
@@ -493,7 +505,7 @@ namespace TMS.Web.Views.Report.SpLReports.UserControls
                 };
                 row.Cells.Add(cell);
 
-                e.Row.Parent.Controls.AddAt(0, row);
+                e.Row.Parent.Controls.AddAt(1, row);
             }
             catch (Exception ex)
             {

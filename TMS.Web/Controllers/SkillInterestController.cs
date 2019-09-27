@@ -43,7 +43,7 @@ namespace TMS.Web.Controllers
         public ActionResult ManageTraineePerson_Read([DataSourceRequest] DataSourceRequest request)
         {
 
-            var _Phone = _objISkillsInterestLevelBAL.PersonFocusAreaSkill_GetbyPersonIdBAL();
+            var _Phone = _objISkillsInterestLevelBAL.PersonFocusAreaSkill_GetbyPersonIdBAL(CurrentUser.CompanyID.ToString());
             return Json(_Phone.ToDataSourceResult(request, ModelState));
         }
 
@@ -68,7 +68,7 @@ namespace TMS.Web.Controllers
             DateTime date = DateTime.Now;
             long OrganizationID = CurrentUser.CompanyID;
             List<long> list= new List<long>();
-            var _Phone = _objISkillsInterestLevelBAL.PersonFocusAreaSkill_GetbyPersonIdBAL();
+            var _Phone = _objISkillsInterestLevelBAL.PersonFocusAreaSkill_GetbyPersonIdBAL(CurrentUser.CompanyID.ToString());
             var _Phone22 = _objISkillsInterestLevelBAL.PersonSkill_GetbyPersonIdBAL(Convert.ToInt64(cid), CurrentUser.CompanyID);
 
             foreach (long value in termsList)

@@ -1604,7 +1604,7 @@ namespace TMS.Web.Controllers
                     // checking 
                     if (value < 0)
                     {
-                        if (_SessionBAL.GetSessionVenueOccupancyDetailBAL(_Sessions) > 0)
+                        if (_SessionBAL.GetSessionVenueOccupancyDetailUPBAL(_Sessions) > 0)
                         {
                             ModelState.AddModelError(lr.VenueOcupaidByOther, lr.VenueOcupaidByOther);
                         }

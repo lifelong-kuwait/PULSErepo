@@ -5,43 +5,43 @@
 }
 <div class="ChildGrid">
     @(Html.Kendo().Grid<TMS.Library.Common.Address.PhoneNumbers>()
-    .Name("PersonContactPhoneGrid" + Model)
-      .Columns(columns =>
-     {
+            .Name("PersonContactPhoneGrid")
+              .Columns(columns =>
+             {
 
-         columns.Bound(e => e.ContactNumber);
-         columns.Bound(e => e.Extension).MinScreenWidth(550);
-         columns.ForeignKey(c => c.PhoneTypeID, data, "Value", "Text").MinScreenWidth(550);
-         columns.Bound(p => p.IsPrimary).ClientTemplate(
-    "<input type='checkbox' disabled='true' value='#= IsPrimary #' " +
-        "# if (IsPrimary) { #" +
-            "checked='checked'" +
-        "# } #" +
-    " />"
-).Title(lr.GridIsPrimary).MinScreenWidth(550);
-        
-     }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_PhoneTemplate").DisplayDeleteConfirmation(false))
-                    .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate() </text>))
-    .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
-    .Pageable(pager => pager
-    .Refresh(true))
-    .Scrollable().Filterable()
-                                                    .Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
-    .HtmlAttributes(new { style = "height:350px;" })
-    .DataSource(dataSource => dataSource.Ajax()
-                        .Model(model =>
-                        {
-                            model.Id(m => m.ID);
-                            model.Field("PhoneTypeID", typeof(string));
-                        })
+                 columns.Bound(e => e.ContactNumber);
+                 columns.Bound(e => e.Extension).MinScreenWidth(550);
+                 columns.ForeignKey(c => c.PhoneTypeID, data, "Value", "Text").MinScreenWidth(550);
+                 columns.Bound(p => p.IsPrimary).ClientTemplate(
+            "<input type='checkbox' disabled='true' value='#= IsPrimary #' " +
+                "# if (IsPrimary) { #" +
+                    "checked='checked'" +
+                "# } #" +
+            " />"
+        ).Title(lr.GridIsPrimary).MinScreenWidth(550);
 
-        .PageSize(8)
-.Read(read => read.Action("PersonPhone_Read", "Contact", new { PersonID = Model }))
-.Create(read => read.Action("PersonPhone_Create", "Contact", new { pid = Model }))
-.Update(read => read.Action("PersonPhone_Update", "Contact", new { pid = Model }))
-.Destroy(read => read.Action("PersonPhone_Destroy", "Contact", new { pid = Model }))
-                                                    .Events(e => e.Error("GeneralErrorHandler(\"PersonContactPhoneGrid" + Model + "\")").RequestEnd("GridRequestEndUpdate"))
-).NoRecords(lr.GridNoRecordFoundMessage)
+             }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_PhoneTemplate").DisplayDeleteConfirmation(false))
+                            .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate() </text>))
+                    .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+                    .Pageable(pager => pager
+                    .Refresh(true))
+                    .Scrollable().Filterable()
+                                                                    .Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
+                    .HtmlAttributes(new { style = "height:350px;" })
+                    .DataSource(dataSource => dataSource.Ajax()
+                                        .Model(model =>
+                                        {
+                                            model.Id(m => m.ID);
+                                            model.Field("PhoneTypeID", typeof(string));
+                                        })
+
+                        .PageSize(8)
+                .Read(read => read.Action("PersonPhone_Read", "Contact", new { PersonID = Model }))
+                .Create(read => read.Action("PersonPhone_Create", "Contact", new { pid = Model }))
+                .Update(read => read.Action("PersonPhone_Update", "Contact", new { pid = Model }))
+                .Destroy(read => read.Action("PersonPhone_Destroy", "Contact", new { pid = Model }))
+                                                                    .Events(e => e.Error("GeneralErrorHandler(\"PersonContactPhoneGrid\")").RequestEnd("GridRequestEndUpdate"))
+                ).NoRecords(lr.GridNoRecordFoundMessage)
     )
 </div>
 @helper RenderAddTemplate()
@@ -49,7 +49,7 @@
     <div class="toolbar">
         @if (User.IsInRole("CanAddEditPersonPhone"))
         {<a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
-            <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>            }
+            <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>}
 
         @if (User.IsInRole("CanDeletePersonPhone"))
         {
@@ -61,3 +61,24 @@
 
 }
 
+<script type="text/javascript">
+
+     jQuery(function () {
+         jQuery("#PersonContactPhoneGrid .tms-grid-destroy").live("mousedown", function (event) {
+             var selectedRows = jQuery("#PersonContactPhoneGrid tr.k-state-selected");
+             var checkedLength = selectedRows.length;
+             var grid = jQuery("#PersonContactPhoneGrid").data("kendoGrid");
+             var dataItem = grid.dataItem(grid.select());
+
+             if (dataItem.IsPrimary) {
+                  swal({
+                                             title: '@lr.Oops',
+                                             text: 'Primary Email Can not be deleted',
+                                             type: "error"
+                                         });
+                                             window.location.reload;
+             }
+
+         });
+     });
+</script>

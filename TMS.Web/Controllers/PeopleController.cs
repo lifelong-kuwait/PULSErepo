@@ -769,7 +769,7 @@ namespace TMS.Web.Controllers
                         ModelState.AddModelError(lr.UsersTitle, lr.UserEmailAlreadyExist);
                         if (_PersonBAL.TMS_PersonRolesMapping_DuplicationCheckBAL(_objPersonRoles) > 0)
                         {
-                            ModelState.AddModelError(lr.VenueName, lr.VenueDuplicationCheck);
+                            ModelState.AddModelError(lr.DubliocationHappen, lr.RoleName);
                         }
                         else
                         {
@@ -788,7 +788,7 @@ namespace TMS.Web.Controllers
                         _PersonBAL.TMS_PersonintoUser_CreateBAL(_objPersonRoles);
                         if (_PersonBAL.TMS_PersonRolesMapping_DuplicationCheckBAL(_objPersonRoles) > 0)
                         {
-                            ModelState.AddModelError(lr.VenueName, lr.VenueDuplicationCheck);
+                            ModelState.AddModelError(lr.DubliocationHappen, lr.RoleName);
                         }
                         else
                         {
@@ -801,7 +801,7 @@ namespace TMS.Web.Controllers
                 {
                     if (_PersonBAL.TMS_PersonRolesMapping_DuplicationCheckBAL(_objPersonRoles) > 0)
                     {
-                        ModelState.AddModelError(lr.VenueName, lr.VenueDuplicationCheck);
+                        ModelState.AddModelError(lr.DubliocationHappen, lr.RoleName);
                     }
                     else
                     {

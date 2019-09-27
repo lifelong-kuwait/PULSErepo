@@ -46,7 +46,7 @@ namespace Resources.Concrete
             if (!File.Exists(filePath)) throw new FileNotFoundException(string.Format("XML Resource file {0} was not found", filePath));
         }
 
-        protected override IList<ResourceEntry> ReadResources()
+        protected override IList<ResourceEntry> ReadResources(string culture)
         {
             // Parse the XML file
             return XDocument.Parse(File.ReadAllText(filePath))

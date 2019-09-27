@@ -25,11 +25,8 @@
             .Name("CourseDetailGrid")
     .Columns(columns =>
     {
-
-
-
         columns.Bound(e => e.PrimaryName).ClientTemplate("#=CourseTemplate(data)#").HeaderHtmlAttributes(new { @style = "display: none" });
-        columns.Bound(e => e.AddedByAlias).ClientTemplate("#=modifiedtemplate(data)#").Width(220).MinScreenWidth(550).Title(lr.GridAddedBy).HeaderHtmlAttributes(new { @style = "display: none" });
+        columns.Bound(e => e.AddedByAlias).ClientTemplate("#=modifiedtemplate(data)#").Width(240).MinScreenWidth(550).Title(lr.GridAddedBy).HeaderHtmlAttributes(new { @style = "display: none" });
     }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_CourseTemplate").DisplayDeleteConfirmation(false))
      .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>))
 .Events(e => e.Edit("CourseGrid_onEdit").Save("General_onSave"))

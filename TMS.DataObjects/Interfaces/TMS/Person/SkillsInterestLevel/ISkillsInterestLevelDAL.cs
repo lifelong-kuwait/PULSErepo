@@ -45,7 +45,7 @@ namespace TMS.DataObjects.Interfaces.TMS.SkillsInterestLevel
         /// </summary>
         /// <param name="PersonId">The PersonId.</param>
         /// <returns>IList&lt;PersonSkill&gt;.</returns>
-        IList<FocusAreas> PersonFocusAreaSkill_GetbyPersonId();
+        IList<FocusAreas> PersonFocusAreaSkill_GetbyPersonId(string CompanyId);
 
         /// <summary>
         /// Persons the interest getby person identifier.

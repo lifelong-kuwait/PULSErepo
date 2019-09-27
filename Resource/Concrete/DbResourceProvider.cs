@@ -56,7 +56,7 @@ namespace Resources.Concrete
         Resources rss = new Resources();
 
         //  Session["CompnayID"]=connectionString;
-        protected override IList<ResourceEntry> ReadResources()
+        protected override IList<ResourceEntry> ReadResources(string culture)
         {
           //  ClearCache();
             //Response.Cache.SetExpires(DateTime.Now.AddSeconds(-1));
@@ -83,9 +83,9 @@ namespace Resources.Concrete
 
             string sql = "";
             if (MaxNo > 0)
-                sql = "select Culture, Name, Value from dbo.Resources where OrganizationID=" + CompnayID + "; ";
+                sql = "select Culture, Name, Value from dbo.Resources where OrganizationID=" + CompnayID + "and Culture='" + culture + "'; ";
             else
-                sql = "select Culture, Name, Value from dbo.Resources where OrganizationID=-2; ";
+                sql = "select Culture, Name, Value from dbo.Resources where OrganizationID=-2 and Culture='" + culture + "'; ";
             
             using (var con = new SqlConnection(connectionString))
             {

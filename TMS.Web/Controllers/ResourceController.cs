@@ -161,7 +161,7 @@ namespace TMS.Web.Controllers
             var startRowIndex = (request.Page - 1) * request.PageSize;
             var value = GridHelper.GetSortExpression(request, "P_Resourceid");
             int Total = 0;
-            var resources = _objeResources.GetTMSResourceBAL(request.Page, request.PageSize, ref Total, SearchText).ToList();
+            var resources = _objeResources.GetTMSResourceBAL(request.Page, request.PageSize, ref Total, SearchText,Convert.ToString(CurrentUser.CompanyID)).ToList();
             //if (CurrentUser.CompanyID > 0)
             //{
             //    resources = _objeResources.GetTMSResourceBALbyOrganization(request.Page, request.PageSize, ref Total, Convert.ToString(-2), SearchText).ToList();

@@ -56,9 +56,12 @@ namespace TMS.DataObjects.TMS.SkillsInterestLevel
         /// </summary>
         /// <param name="PersonId">The person identifier.</param>
         /// <returns>IList&lt;PersonSkill&gt;.</returns>
-        public IList<FocusAreas> PersonFocusAreaSkill_GetbyPersonId()
+        public IList<FocusAreas> PersonFocusAreaSkill_GetbyPersonId(string CompanyId)
         {
-            return ExecuteListSp<FocusAreas>("FocusAreas_GetAllbyID", ParamBuilder.Par("Type", PersonSKillInterest.PersonSKillInterest_Person_Skills));
+            var parameters = new[] { ParamBuilder.Par("Type", PersonSKillInterest.PersonSKillInterest_Person_Skills),
+                ParamBuilder.Par("CompanyId", CompanyId)
+            };
+            return ExecuteListSp<FocusAreas>("FocusAreas_GetAllbyID", parameters);
         }
 
         /// <summary>
