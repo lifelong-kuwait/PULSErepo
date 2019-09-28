@@ -6,9 +6,19 @@ namespace TMS.Web.Core
     public class ExceptionHandlerAttribute : FilterAttribute, IExceptionFilter
     {
         public void OnException(ExceptionContext filterContext)
+
         {
             if (filterContext.Exception != null)
             {
+                filterContext.Result = new JsonResult
+                {
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                    Data = new
+                    {
+                        error = true,
+                        message = filterContext.Exception.Message
+                    }
+                };
                 // BLL.ErrorLogManager.AddErrorByException(filterContext.Exception, BO.ErrorLog.OriginType.EFB);
             }
             //if (filterContext.ExceptionHandled || !filterContext.HttpContext.IsCustomErrorEnabled)
@@ -34,8 +44,8 @@ namespace TMS.Web.Core
             }
             else
             {
-                // filterContext.ExceptionHandled = true;
-                //filterContext.HttpContext.Response.Redirect("~/Home/Maintenance");
+                 filterContext.ExceptionHandled = true;
+                filterContext.HttpContext.Response.Redirect("~/Home/PageNotFound");
             }
         }
     }

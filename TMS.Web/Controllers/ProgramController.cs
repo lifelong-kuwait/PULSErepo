@@ -1493,6 +1493,7 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public ActionResult Sessions_Read([DataSourceRequest] DataSourceRequest request)
         {
+            
 
             var startRowIndex = (request.Page - 1) * request.PageSize;
             int Total = 0;

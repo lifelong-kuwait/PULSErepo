@@ -148,7 +148,14 @@ namespace TMS.Web.Controllers
 
         [Authorize]
         public ActionResult Index()
-        {
+        { if(User.IsInRole("CanAddEditResource"))
+                {
+                ViewBag.IsAdmin = true;
+            }else
+            {
+                ViewBag.IsAdmin = false;
+            }
+            
             return View();
         }
 

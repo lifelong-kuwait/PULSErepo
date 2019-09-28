@@ -157,13 +157,12 @@
         });
     });
     function UsersLoginGrid_onEdit(e) {
-        debugger;
+        //debugger;
 
         //if current model is not new then remove the Name editor
         var title = jQuery(e.container).parent().find(".k-window-title");
         var update = jQuery(e.container).parent().find(".k-grid-update");
         var cancel = jQuery(e.container).parent().find(".k-grid-cancel");
-        alert('hello world');
         //jQuery('<a class="k-button k-button-icontext k-grid-update custom" href="\\#"><span class="k-icon k-i-check"></span>Save & New</a>').insertBefore(".k-grid-update");
         @*jQuery(cancel).html('<span class="k-icon k-i-cancel"></span>' + lr.CencelRecordGeneralButton);
         if (e.model.isNew()) {

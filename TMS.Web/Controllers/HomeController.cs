@@ -274,7 +274,10 @@ namespace TMS.Web.Controllers
         {
             return Content("403");
         }
-
+        public ActionResult PageNotFound()
+        {
+            return View();
+        }
         public ActionResult Test()
         {
             List<string> ff = new List<string>();

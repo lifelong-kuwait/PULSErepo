@@ -1564,6 +1564,7 @@
     <Content Include="Content\Shamcey\css\prettyPhoto.css" />
     <Content Include="Content\Shamcey\css\responsive-tables.css" />
     <Content Include="Content\Shamcey\css\roboto.css" />
+    <Content Include="Content\Shamcey\css\shamcey.css" />
     <Content Include="Content\Shamcey\css\style.pink.css" />
     <Content Include="Content\Shamcey\css\style.default.css" />
     <Content Include="Content\Shamcey\css\style.green.css" />
@@ -2534,6 +2535,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile35.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile36.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile37.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile38.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile4.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile5.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile6.pubxml" />
@@ -4710,6 +4712,7 @@
       <DependentUpon>WeeklyAttendanceReportData.xsd</DependentUpon>
     </Content>
     <Content Include="Views\SPl_Test_Reports\WeeklyUtilizationReport2.cshtml" />
+    <Content Include="Views\Home\PageNotFound.cshtml" />
     <None Include="WeeklyAttendanceReportData.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
