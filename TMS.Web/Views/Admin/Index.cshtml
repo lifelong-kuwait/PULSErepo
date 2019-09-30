@@ -5,22 +5,29 @@
 }
 
 <h2>@lr.AdminPageTitle</h2>
+@if (User.IsInRole("CanViewPreRequiest"))
+{
 
 <div id="dashboard-left" class="col-md-8">
     <ul class="shortcuts">
-        <li class="events">
-            <a href="@Url.Content("~/Resource/Index")">
-                <span class="mdi mdi-web tms-tile-icon"></span>
-                <span class="shortcuts-label">@lr.ResourcesPageTitle</span>
-            </a>
-        </li>
-        <li>
-            <a href="@Url.Content("~/Resource/Lookup")">
-                <span class="fa fa-list-alt tms-tile-icon"></span>
-                <span class="shortcuts-label">@lr.LookupPageTitle</span>
-            </a>
-        </li>
-        
+        @if (User.IsInRole("CanViewResource"))
+        {
+            <li class="events">
+                <a href="@Url.Content("~/Resource/Index")">
+                    <span class="mdi mdi-web tms-tile-icon"></span>
+                    <span class="shortcuts-label">@lr.ResourcesPageTitle</span>
+                </a>
+            </li>
+        }
+        @if (User.IsInRole("CanViewLookup"))
+        {
+            <li>
+                <a href="@Url.Content("~/Resource/Lookup")">
+                    <span class="fa fa-list-alt tms-tile-icon"></span>
+                    <span class="shortcuts-label">@lr.LookupPageTitle</span>
+                </a>
+            </li>
+        }
         @if (User.IsInRole("CanViewOrganization"))
         {
             <li>
@@ -52,8 +59,8 @@
                 <span class="shortcuts-label">@lr.Office365Title</span>
             </a>
         </li>
-        
-        
+
+
 
         @if (User.IsInAnyRoles("CanViewFlags", "CanViewVenue", "CanViewRoles", "CanViewVendor", "CanViewCategory", "CanViewFocusAreas", "CanViewCourseMaterials", "CanViewDegreeCertificates", "CanViewCourseLogisticRequirements"))
         {
@@ -78,8 +85,10 @@
     .shortcuts li.tms-tile-2x a {
         width: 120px;
     }
+
     .shortcuts li.tms-tile-2x .tms-tile-icon {
         padding: 5px 0px 3px 7px;
         display: inline-block;
     }
 </style>
+}

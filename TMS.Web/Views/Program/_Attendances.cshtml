@@ -26,6 +26,8 @@
                     <th>
                         @lr.TraineeName
                     </th>
+                    @if (User.IsInRole("CanAddEditAttendance"))
+                    {
                     <th>
                         @lr.AttendanceType
                     </th>
@@ -39,7 +41,7 @@
                         </p>
 
                     </th>
-
+                    }
                 </tr>
             </thead>
     
@@ -60,20 +62,22 @@
                     @Html.DisplayFor(m => m[i].TraineeName)
 
                 </td>
-                <td>
-                    @(Html.Kendo().DropDownListFor(m => m[i].AttendanceType).DataTextField("Text").DataValueField("Value")
+                @if (User.IsInRole("CanAddEditAttendance"))
+                {
+                    <td>
+                        @(Html.Kendo().DropDownListFor(m => m[i].AttendanceType).DataTextField("Text").DataValueField("Value")
 
-      .HtmlAttributes(new { @class = "form-control", style = "width:200px" })
-      .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.AttendanceType>(typeof(TMS.Library.AttendanceType))))
+                  .HtmlAttributes(new { @class = "form-control", style = "width:200px" })
+                  .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.AttendanceType>(typeof(TMS.Library.AttendanceType))))
 
-                </td>
-                <td>
-                    @Html.HiddenFor(m => m[i].ID)
+                    </td>
+                    <td>
+                        @Html.HiddenFor(m => m[i].ID)
 
-                </td>
+                    </td>
+                }
 
-
-            </tr>
+                </tr>
             }
             <tr>
                 <td></td>
@@ -81,10 +85,10 @@
                 <td></td>
 
                 <td>
-@*@if (User.IsInRole("CanAddEditAttendance"))
-{*@
+@if (User.IsInRole("CanAddEditAttendance"))
+{
                     <input type="submit" id="btnsave" class="btn btn-primary" value="Save" />
-@*}*@
+}
                 </td>
             </tr>
         </tbody>
