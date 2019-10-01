@@ -34,9 +34,21 @@
                     .HtmlAttributes(new { style = "width:100%" })
                     .DataTextField("Text")
                     .DataValueField("Value")
+                     .Filter("contains")
                     .OptionLabel(lr.ClassCourseOptionalLabel).Events(x => x.Change("onChangeCourseId"))
                     // .OptionLabel(new { Text = lr.CourseCategoryOptionalLabel, Value = 0 })
-                    .DataSource(dataSource => { dataSource.Read(read => read.Action("Course", "DDL")); }))
+                    .DataSource(dataSource =>
+                    {
+                        dataSource.Read(
+
+                            read =>
+                            {
+                                read.Action("Course", "DDL");
+                            })
+                            .ServerFiltering(false); 
+
+                    })
+                    )
             @Html.ValidationMessageFor(model => model.CourseID)
         </div>
     </div>
@@ -54,9 +66,11 @@
                     .HtmlAttributes(new { style = "width:100%" })
                     .DataTextField("Text")
                     .DataValueField("Value")
+                     .Filter("contains")
                     .OptionLabel(lr.ClassLanguageOptionalLabel)
                     // .OptionLabel(new { Text = lr.CourseCategoryOptionalLabel, Value = 0 })
-                    .DataSource(dataSource => { dataSource.Read(read => read.Action("LanguageDDL", "DDL").Data("filteSessionrrelateditems"))
+                    .DataSource(dataSource => {
+                        dataSource.Read(read => read.Action("LanguageDDL", "DDL").Data("filteSessionrrelateditems"))
                         .ServerFiltering(true);
                     }).CascadeFrom("CourseID"))
             @Html.ValidationMessageFor(model => model.LanguageID)
@@ -218,9 +232,17 @@
                     .HtmlAttributes(new { style = "width:100%" })
                     .DataTextField("Text")
                     .DataValueField("Value")
+                    .Filter("contains")
                     //.OptionLabel(lr.ClassTranslationRequiredOptionalLabel)
                     .OptionLabel(new { Text = lr.ClassTranslationRequiredOptionalLabel, Value = 0 })
-                    .DataSource(dataSource => { dataSource.Read(read => read.Action("Lang", "DDL")); }))
+                    .DataSource(dataSource => {
+                        dataSource.Read(
+
+                            read =>
+                            {
+                                read.Action("Lang", "DDL");
+                            }).ServerFiltering(false);
+                    }))
             @Html.ValidationMessageFor(model => model.TranslationRequiredID)
         </div>
     </div>

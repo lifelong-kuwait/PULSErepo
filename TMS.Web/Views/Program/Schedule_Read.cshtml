@@ -64,13 +64,14 @@
                                                                                                                    .Name("Course")
                                                                                                                    .DataTextField("Text")
                                                                                                                    .DataValueField("Value")
+                                                                                                                   .Filter("contains")
                                                                                                                    .OptionLabel("---Select Course---")
                                                                                                                    .DataSource(source =>
                                                                                                                    {
                                                                                                                        source.Read(read =>
                                                                                                                        {
                                                                                                                            read.Action("Course", "DDL");
-                                                                                                                       });
+                                                                                                                       }).ServerFiltering(false); 
                                                                                                                    })
                                                                                                                   .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
                 )
@@ -88,6 +89,7 @@
                                                                                                                     .DataTextField("Text")
                                                                                                                     .DataValueField("Value")
                                                                                                                     .OptionLabel("---Select Class---")
+                                                                                                                    
                                                                                                                     //.DataSource(source =>
                                                                                                                     //{
                                                                                                                     //    source.Read(read =>

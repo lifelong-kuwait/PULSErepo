@@ -68,9 +68,16 @@
             .HtmlAttributes(new { style = "width:100%" })
             .DataTextField("Text")
             .DataValueField("Value")
+            .Filter("contains")
            // .OptionLabel(lr.OrganizationTypeOptionalLabel)
            .OptionLabel(new { Text = lr.OrganizationTypeOptionalLabel, Value = 0 })
-            .DataSource(dataSource => { dataSource.Read(read => read.Action("OrganizationTypes", "DDL")); }))
+            .DataSource(dataSource => {
+                dataSource.Read(
+                    read =>
+                    {
+                        read.Action("OrganizationTypes", "DDL");
+                    }).ServerFiltering(false);
+            }))
             @Html.ValidationMessageFor(model => model.Type)
         </div>
     </div>

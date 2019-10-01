@@ -148,13 +148,14 @@
                                                                                                                                             .Name("Venue")
                                                                                                                                             .DataTextField("Text")
                                                                                                                                             .DataValueField("Value")
+                                                                                                                                            .Filter("contains")
                                                                                                                                             .OptionLabel("--Please select Venue--")
                                                                                                                                             .DataSource(source =>
                                                                                                                                             {
                                                                                                                                                 source.Read(read =>
                                                                                                                                                 {
                                                                                                                                                     read.Action("DDLVenue", "DDL");
-                                                                                                                                                });
+                                                                                                                                                }).ServerFiltering(false);
                                                                                                                                             })
                                                                                                                                             .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
                 )
@@ -203,8 +204,8 @@
 </div>
 <div id="loader"></div>
 <div class="row">
-    <div class="col-lg-10">
-        <iframe id="ifrmReportViewer"onload='showPage();' frameborder="0" EnableEventValidation="false" src="" width="1000" height="730" style="overflow:hidden;" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
+    <div class="col-lg-12">
+        <iframe id="ifrmReportViewer"onload='showPage();' frameborder="0" EnableEventValidation="false" src="" height="730" style="overflow:hidden;" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
     </div>
 </div>
 
@@ -235,6 +236,8 @@
                 }
             }
             jQuery("#H2").attr("disabled", false);
+            jQuery("#ifrmReportViewer").css({ "width": "100%", "border": "2px solid #009aee", "border - radius": "5px", "margin-top": "5px" });
+
             return false;
         });
 

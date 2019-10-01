@@ -157,10 +157,14 @@
             .HtmlAttributes(new { style = "width:100%" })
             .DataTextField("Text")
             .DataValueField("Value")
+            .Filter("contains")
             .OptionLabel(new { Text = lr.NationalityOptionalLabel, Value = 0 })
             .DataSource(dataSource =>
             {
-                dataSource.Read(read => read.Action("NationalityCode", "DDL"));
+                dataSource.Read(read =>
+                {
+                    read.Action("NationalityCode", "DDL");
+                }).ServerFiltering(false);
 
             })
             )
@@ -249,14 +253,19 @@
             .HtmlAttributes(new { style = "width:100%" })
             .DataTextField("Text")
             .DataValueField("Value")
+            .Filter("contains")
              //  .AutoBind(true).SelectedIndex(134)
              .OptionLabel(lr.PersonPhoneCountryCodeOptionalLabel)
             //   .OptionLabel(new { Text = lr.PersonPhoneCountryCodeOptionalLabel, Value = 0 })
             .DataSource(dataSource =>
             {
-                dataSource.Read(read => read.Action("CountryCode", "DDL"));
+                dataSource.Read(
+                         read =>
+                         {
+                             read.Action("CountryCode", "DDL");
+                         }
+                         ).ServerFiltering(false);
             })
-            .Value("134")
             )
         </div>
     </div>

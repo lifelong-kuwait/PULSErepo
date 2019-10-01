@@ -27,9 +27,17 @@
             .HtmlAttributes(new { style = "width:100%" })
             .DataTextField("Text")
             .DataValueField("Value")
+            .Filter("contains")
             .OptionLabel(lr.CourseCategoryOptionalLabel).Events(x => x.Change("onChangeCourseCategoryId"))
-                    // .OptionLabel(new { Text = lr.CourseCategoryOptionalLabel, Value = 0 })
-                            .DataSource(dataSource => { dataSource.Read(read => read.Action("CourseCategories", "DDL", new { id = 2 })); }))
+                            // .OptionLabel(new { Text = lr.CourseCategoryOptionalLabel, Value = 0 })
+                            .DataSource(
+            dataSource => {
+                dataSource.Read(
+                    read =>
+                    {
+                        read.Action("CourseCategories", "DDL", new { id = 2 });
+                    }).ServerFiltering(false);
+            }))
             @Html.ValidationMessageFor(model => model.CourseCategoryId)
         </div>
     </div>

@@ -155,13 +155,14 @@
                                                                                                                                                                 .Name("Course")
                      .DataTextField("Text")
                      .DataValueField("Value")
+                     .Filter("contains")
                     .OptionLabel("--Please select Course--")
                      .DataSource(source =>
                       {
                           source.Read(read =>
                           {
                               read.Action("Course", "DDL");
-                          });
+                          }).ServerFiltering(false);
                       })
                     .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
                 )
@@ -244,8 +245,8 @@
 </div>
 <div id="loader"></div>
 <div class="row">
-    <div class="col-lg-10">
-        <iframe id="ifrmReportViewer" frameborder="0" EnableEventValidation="false" src="" width="1000" height="700" style="overflow:hidden;" allowtransparency="true"onload="showPage();" allowfullscreen></iframe>
+    <div class="col-lg-12">
+        <iframe id="ifrmReportViewer" frameborder="0" EnableEventValidation="false" src="" height="700" style="overflow:hidden;" allowtransparency="true"onload="showPage();" allowfullscreen></iframe>
     </div>
 </div>
 
@@ -277,6 +278,7 @@
                 }
             }
             jQuery("#H2").attr("disabled", false);
+            jQuery("#ifrmReportViewer").css({ "width": "100%", "border": "2px solid #009aee", "border - radius": "5px", "margin-top": "5px" });
             return false;
         });
 

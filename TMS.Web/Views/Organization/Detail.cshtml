@@ -124,10 +124,19 @@
     .ExpandMode(PanelBarExpandMode.Multiple)
     .Items(i =>
     {
-        i.Add().Text(lr.PointofContactTabTitle).LoadContentFrom("PointOfContact", "Organization", new { oid = Model.ID });
-        //i.Add().Text(lr.ClassLanguage).LoadContentFrom("OrganizationLanguage", "Organization", new { oid = Model.ID });
-        i.Add().Text(lr.ResourcePageTitle).LoadContentFrom("Resources", "Organization", new { oid = Model.ID });
+        if (User.IsInRole("CanViewPointofContact"))
+        {
+            i.Add().Text(lr.PointofContactTabTitle).LoadContentFrom("PointOfContact", "Organization", new { oid = Model.ID });
+
+        }//i.Add().Text(lr.ClassLanguage).LoadContentFrom("OrganizationLanguage", "Organization", new { oid = Model.ID });
+        if(User.IsInRole("CanViewResource"))
+        {
+            i.Add().Text(lr.ResourcePageTitle).LoadContentFrom("Resources", "Organization", new { oid = Model.ID });
+        }
+
         i.Add().Text(lr.AddressTabTitle).LoadContentFrom("OrganizationAddress", "Contact", new { oid = Model.ID });
+
+
         i.Add().Text(lr.LinkTabTitle).LoadContentFrom("OrganizationLinks", "Contact", new { oid = Model.ID });
         if (User.IsInAnyRoles("CanViewOrganizationAttachments", "CanViewOrganizationNotes"))
         {
