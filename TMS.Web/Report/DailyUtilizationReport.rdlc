@@ -1554,7 +1554,7 @@
         <DataSetName>DailyUtilizationReport</DataSetName>
         <Top>0.06958in</Top>
         <Height>0.5in</Height>
-        <Width>12.44456in</Width>
+        <Width>12.44455in</Width>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -1568,7 +1568,7 @@
   <Width>12.45754in</Width>
   <Page>
     <PageHeader>
-      <Height>0.61458in</Height>
+      <Height>0.66666in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1576,7 +1576,7 @@
           <Source>Embedded</Source>
           <Value>PACELogo</Value>
           <Sizing>FitProportional</Sizing>
-          <Top>0.13889in</Top>
+          <Top>0.19444in</Top>
           <Left>0.41667in</Left>
           <Height>0.43403in</Height>
           <Width>0.79167in</Width>
@@ -1603,11 +1603,41 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.20833in</Top>
+          <Top>0.26388in</Top>
           <Left>2.38791in</Left>
           <Height>0.36458in</Height>
           <Width>3.86084in</Width>
           <ZIndex>1</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox4">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>="Page "&amp;Globals!PageNumber &amp;" of "&amp;Globals!OverallTotalPages</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox3</rd:DefaultName>
+          <Top>0.19444in</Top>
+          <Left>7.51741in</Left>
+          <Height>0.19792in</Height>
+          <Width>1in</Width>
+          <ZIndex>2</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1625,6 +1655,49 @@
         </Border>
       </Style>
     </PageHeader>
+    <PageFooter>
+      <Height>0.34375in</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="ExecutionTime">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=Globals!ExecutionTime</Value>
+                  <Style>
+                    <Format>D</Format>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>ExecutionTime</rd:DefaultName>
+          <Top>0.06944in</Top>
+          <Left>6.8172in</Left>
+          <Height>0.1875in</Height>
+          <Width>1.88642in</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageFooter>
     <PageHeight>8.27in</PageHeight>
     <PageWidth>11.69in</PageWidth>
     <LeftMargin>0.25in</LeftMargin>

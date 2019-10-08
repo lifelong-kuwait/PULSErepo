@@ -520,6 +520,13 @@
     <Compile Include="Views\Report\SpLReports\VenueDetailUtilizationReport.aspx.designer.cs">
       <DependentUpon>VenueDetailUtilizationReport.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Report\SpLReports\VenueMatrixReportCustomRDLC.aspx.cs">
+      <DependentUpon>VenueMatrixReportCustomRDLC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\VenueMatrixReportCustomRDLC.aspx.designer.cs">
+      <DependentUpon>VenueMatrixReportCustomRDLC.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Report\SpLReports\VenueOccupancyReport.aspx.cs">
       <DependentUpon>VenueOccupancyReport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -554,6 +561,13 @@
     </Compile>
     <Compile Include="Views\Report\SpLReports\ViewTraineePeriodicReport.aspx.designer.cs">
       <DependentUpon>ViewTraineePeriodicReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\WeeklyUtilizatinDynamicColumns.aspx.cs">
+      <DependentUpon>WeeklyUtilizatinDynamicColumns.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\WeeklyUtilizatinDynamicColumns.aspx.designer.cs">
+      <DependentUpon>WeeklyUtilizatinDynamicColumns.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Report\SpLReports\WeeklyUtilizationReport.aspx.cs">
       <DependentUpon>WeeklyUtilizationReport.aspx</DependentUpon>
@@ -2538,6 +2552,8 @@
     <None Include="Properties\PublishProfiles\FolderProfile38.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile39.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile4.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile40.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile41.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile5.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile6.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile7.pubxml" />
@@ -4509,11 +4525,13 @@
     <Content Include="Views\Report\SpLReports\VenueDailyUtilizationReport.aspx" />
     <Content Include="Views\Report\SpLReports\VenueDetailReport.aspx" />
     <Content Include="Views\Report\SpLReports\VenueDetailUtilizationReport.aspx" />
+    <Content Include="Views\Report\SpLReports\VenueMatrixReportCustomRDLC.aspx" />
     <Content Include="Views\Report\SpLReports\VenueOccupancyReport.aspx" />
     <Content Include="Views\Report\SpLReports\Venue_Matrix_Report.aspx" />
     <Content Include="Views\Report\SpLReports\ViewAttendanceReport.aspx" />
     <Content Include="Views\Report\SpLReports\ClassCurrentReport.aspx" />
     <Content Include="Views\Report\SpLReports\ViewTraineePeriodicReport.aspx" />
+    <Content Include="Views\Report\SpLReports\WeeklyUtilizatinDynamicColumns.aspx" />
     <Content Include="Views\Report\SpLReports\WeeklyUtilizationReport.aspx" />
     <Content Include="Views\Report\SpLReports\WeeklyUtilizationReport2.aspx" />
     <Content Include="Views\Report\UserControls\UCClassReport.ascx" />
@@ -4714,6 +4732,8 @@
     </Content>
     <Content Include="Views\SPl_Test_Reports\WeeklyUtilizationReport2.cshtml" />
     <Content Include="Views\Home\PageNotFound.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\WeeklyUtilizationReportModified.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\VenueMatrixRDLCReport.cshtml" />
     <None Include="WeeklyAttendanceReportData.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -5397,7 +5417,9 @@
     <Content Include="Report\Tran_ViewTraineePeriodicReport.rdlc" />
     <Content Include="Report\WeeklyUtilizationReport.rdlc" />
     <EmbeddedResource Include="Report\Report1.rdlc" />
-    <EmbeddedResource Include="Report\WeeklyUtilizationReport2.rdlc" />
+    <Content Include="Report\Venue_Matrix_ReportCustomized.rdlc" />
+    <Content Include="Report\WeeklyUtilizatinDynamicColumns.rdlc" />
+    <Content Include="Report\WeeklyUtilizationReport2.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

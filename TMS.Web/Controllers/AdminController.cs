@@ -154,11 +154,11 @@ namespace TMS.Web.Controllers
         /// <returns>ActionResult.</returns>
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
-      //  [ActivityAuthorize]
+        //  [ActivityAuthorize]
         [ClaimsAuthorize("CanDeleteGroups")]
         public ActionResult Groups_Destroy([DataSourceRequest] DataSourceRequest request, SecurityGroups _objGroups)
         {
-          
+
             if (_Groups.IsDeletedAllow(_objGroups) > 0)
             {
                 return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
@@ -185,6 +185,33 @@ namespace TMS.Web.Controllers
 
                 var resultData = new[] { _objGroups };
                 return Json(resultData.AsQueryable().ToDataSourceResult(request, ModelState));
+            }
+        }
+        /// <summary>
+        /// Groups the destroy.
+        /// </summary>
+        /// <param name="request">The request.</param>
+        /// <param name="_objGroups">The object groups.</param>
+        /// <returns>ActionResult.</returns>
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        //  [ActivityAuthorize]
+
+        public JsonResult Groups_Destroy_Verify(long _objGroupsID)
+        {
+            SecurityGroups _objGroups = new SecurityGroups();
+            _objGroups.GroupId = _objGroupsID;
+            if (_objGroupsID == 1 || _objGroupsID == 20008)
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+            else if (_Groups.IsDeletedAllow(_objGroups) > 0)
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -221,9 +248,9 @@ namespace TMS.Web.Controllers
             //        //    PermissionData = this._Groups.SecurityGroupsPermission_GetAllByGroupIdBALbyOrg(CurrentCulture, GroupId, Convert.ToString(CurrentUser.CompanyID));
             //        //}
             //        // ViewData["model"] = PermissionData;
-                   Session["GroupId"] = GroupId;
-                    ViewData["GroupId"] = GetGroupName(GroupId);
-                    return View();
+            Session["GroupId"] = GroupId;
+            ViewData["GroupId"] = GetGroupName(GroupId);
+            return View();
             //    }
             //}
         }
@@ -262,7 +289,7 @@ namespace TMS.Web.Controllers
                     //    PermissionData = this._Groups.SecurityGroupsPermission_GetAllByGroupIdBALbyOrg(CurrentCulture, GroupId, Convert.ToString(CurrentUser.CompanyID));
                     //}
                     // ViewData["model"] = PermissionData;
-                    ViewData["GroupId"] =GetGroupName(GroupId);
+                    ViewData["GroupId"] = GetGroupName(GroupId);
                     return PartialView(PermissionData);
                 }
             }
@@ -298,13 +325,13 @@ namespace TMS.Web.Controllers
                 }
                 else
                 {
-                    var PermissionData = this._Groups.SecurityGroupsPermission_GetAllByGroupIdBAL(CurrentCulture, GroupId);
+                    var PermissionData = this._Groups.SecurityGroupsPermission_GetAllByGroupIdBAL(CurrentCulture, GroupId,CurrentUser.CompanyID,CurrentUser.NameIdentifierInt64);
                     //if (CurrentUser.CompanyID > 0)
                     //{
                     //    PermissionData = this._Groups.SecurityGroupsPermission_GetAllByGroupIdBALbyOrg(CurrentCulture, GroupId, Convert.ToString(CurrentUser.CompanyID));
                     //}
-                    // ViewData["model"] = PermissionData;
-                    ViewData["GroupId"] =GetGroupName(GroupId);
+                    //ViewData["model"] = PermissionData;
+                    ViewData["GroupId"] = GetGroupName(GroupId);
                     return PartialView(PermissionData);
                 }
             }
@@ -377,13 +404,12 @@ namespace TMS.Web.Controllers
         public ActionResult TMSGroupDetail(List<SecurityGroupsPermission> permissionsList)
         {
             long GroupId = Convert.ToInt64(Session["GroupId"]);
-            var ChangesFromDb = permissionsList.Where(x => x.IsChecked != x.NewChecked);//all those whose values are changed this needs to be updated for the database
-            var NotPresentInDatabase = ChangesFromDb.Where(x => x.GroupPermissionId == int.MinValue);
-            var PresentInDatabase = ChangesFromDb.Where(x => x.GroupPermissionId != int.MinValue);
-
-            if (NotPresentInDatabase.Count() > 0)
-            {
-                foreach (var data in NotPresentInDatabase)
+            //var ChangesFromDb = permissionsList.Where(x => x.IsChecked != x.NewChecked);//all those whose values are changed this needs to be updated for the database
+            //var NotPresentInDatabase = ChangesFromDb.Where(x => x.GroupPermissionId == int.MinValue);
+            //var PresentInDatabase = ChangesFromDb.Where(x => x.GroupPermissionId != int.MinValue);
+            //if (NotPresentInDatabase.Count() <= 0)
+            //{
+                foreach (var data in permissionsList)
                 {
                     data.GroupId = GroupId;
                     data.IsChecked = data.NewChecked;
@@ -391,18 +417,31 @@ namespace TMS.Web.Controllers
                     data.CreatedDate = DateTime.UtcNow;
                     data.GroupPermissionId = this._Groups.TMS_GroupPermissions_CreateDAL(data);
                 }
-            }
-            if (PresentInDatabase.Count() > 0)
-            {
-                foreach (var data in PresentInDatabase)
-                {
-                    data.IsChecked = data.NewChecked;
-                    data.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                    data.UpdatedDate = DateTime.UtcNow;
-                    var Result = this._Groups.TMS_GroupPermissions_UpdateBAL(data);
-                }
-            }
-
+            //}
+            //else
+            //{
+            //    if (NotPresentInDatabase.Count() > 0)
+            //    {
+            //        foreach (var data in NotPresentInDatabase)
+            //        {
+            //            data.GroupId = GroupId;
+            //            data.IsChecked = data.NewChecked;
+            //            data.CreatedBy = CurrentUser.NameIdentifierInt64;
+            //            data.CreatedDate = DateTime.UtcNow;
+            //            data.GroupPermissionId = this._Groups.TMS_GroupPermissions_CreateDAL(data);
+            //        }
+            //    }
+            //    if (PresentInDatabase.Count() > 0)
+            //    {
+            //        foreach (var data in PresentInDatabase)
+            //        {
+            //            data.IsChecked = data.NewChecked;
+            //            data.UpdatedBy = CurrentUser.NameIdentifierInt64;
+            //            data.UpdatedDate = DateTime.UtcNow;
+            //            var Result = this._Groups.TMS_GroupPermissions_UpdateBAL(data);
+            //        }
+            //    }
+            //}
             // ViewData["model"] = permissionsList;
             TempData["Success"] = "Success";
             ViewData["GroupName"] = GetGroupName(GroupId);

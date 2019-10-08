@@ -33,7 +33,7 @@ namespace TMS.DataObjects.Common.Groups
 
         public int IsDeletedAllowDAL(SecurityGroups _ObjTMS_Groups)
         {
-            return ExecuteScalarInt32Sp("TMS_Groups_IsDeleteAllow",
+            return ExecuteScalarSPInt32("TMS_Groups_IsDeleteAllow",
                     ParamBuilder.Par("GroupId", _ObjTMS_Groups.GroupId));
         }
         /// <summary>
@@ -239,9 +239,9 @@ namespace TMS.DataObjects.Common.Groups
         /// <param name="Culture">The culture.</param>
         /// <param name="GroupId">The group identifier.</param>
         /// <returns>IList&lt;SecurityGroupsPermission&gt;.</returns>
-        public IList<SecurityGroupsPermission> SecurityGroupsPermission_GetAllByGroupId(string Culture, long GroupId)
+        public IList<SecurityGroupsPermission> SecurityGroupsPermission_GetAllByGroupId(string Culture, long GroupId,long organizationID, long UserID)
         {
-            return ExecuteListSp<SecurityGroupsPermission>("TMS_GroupPermissions_GetAllByGroupId", ParamBuilder.Par("Culture", Culture), ParamBuilder.Par("GroupId", GroupId));
+            return ExecuteListSp<SecurityGroupsPermission>("TMS_GroupPermissions_GetAllByGroupId", ParamBuilder.Par("counter", 0) , ParamBuilder.Par("OrganizationID", organizationID),ParamBuilder.Par("Culture", Culture), ParamBuilder.Par("GroupId", GroupId), ParamBuilder.Par("userID", UserID));
         }
 
         /// <summary>

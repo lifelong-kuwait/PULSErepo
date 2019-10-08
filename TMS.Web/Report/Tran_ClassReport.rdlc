@@ -504,7 +504,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DS_ClassReportByCourseCategoryID</DataSetName>
-        <Top>0.77083in</Top>
+        <Top>0.06944in</Top>
         <Left>0.00003in</Left>
         <Height>0.5in</Height>
         <Width>7.46872in</Width>
@@ -514,27 +514,27 @@
           </Border>
         </Style>
       </Tablix>
-      <Textbox Name="Textbox10">
+      <Textbox Name="ExecutionTime">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Class  Report</Value>
+                <Value>=Globals!ExecutionTime</Value>
                 <Style>
-                  <FontSize>15pt</FontSize>
+                  <Format>D</Format>
                 </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
-        <rd:DefaultName>Textbox10</rd:DefaultName>
-        <Top>0.28472in</Top>
-        <Left>3.08522in</Left>
-        <Height>0.3125in</Height>
-        <Width>1.3569in</Width>
+        <rd:DefaultName>ExecutionTime</rd:DefaultName>
+        <Top>0.63889in</Top>
+        <Left>5.33483in</Left>
+        <Height>0.1875in</Height>
+        <Width>1.88642in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -546,27 +546,100 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Image Name="Image1">
-        <Source>Embedded</Source>
-        <Value>pace</Value>
-        <Sizing>FitProportional</Sizing>
-        <Top>0.13195in</Top>
-        <Left>0.1933in</Left>
-        <Height>0.56944in</Height>
-        <Width>1.19667in</Width>
-        <ZIndex>2</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Image>
     </ReportItems>
-    <Height>1.30209in</Height>
+    <Height>0.90626in</Height>
     <Style />
   </Body>
   <Width>7.46875in</Width>
   <Page>
+    <PageHeader>
+      <Height>0.82292in</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox10">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Class  Report</Value>
+                  <Style>
+                    <FontSize>15pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox10</rd:DefaultName>
+          <Top>0.25347in</Top>
+          <Left>3.08522in</Left>
+          <Height>0.3125in</Height>
+          <Width>1.3569in</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Image Name="Image1">
+          <Source>Embedded</Source>
+          <Value>pace</Value>
+          <Sizing>FitProportional</Sizing>
+          <Top>0.1007in</Top>
+          <Left>0.1933in</Left>
+          <Height>0.56944in</Height>
+          <Width>1.19667in</Width>
+          <ZIndex>1</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </Image>
+        <Textbox Name="Textbox3">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>="Page "&amp;Globals!PageNumber &amp;" of "&amp;Globals!OverallTotalPages</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox3</rd:DefaultName>
+          <Top>0.1007in</Top>
+          <Left>6.1255in</Left>
+          <Height>0.19792in</Height>
+          <Width>1in</Width>
+          <ZIndex>2</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageHeader>
     <LeftMargin>0.5in</LeftMargin>
     <RightMargin>0.5in</RightMargin>
     <TopMargin>0.5in</TopMargin>

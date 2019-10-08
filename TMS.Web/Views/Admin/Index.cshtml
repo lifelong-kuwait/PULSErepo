@@ -5,7 +5,7 @@
 }
 
 <h2>@lr.AdminPageTitle</h2>
-@if (User.IsInRole("CanViewPreRequiest"))
+@if (User.IsInRole("CanViewTMSAdmin"))
 {
 
 <div id="dashboard-left" class="col-md-8">
@@ -60,17 +60,18 @@
             </a>
         </li>
 
-
-
-        @if (User.IsInAnyRoles("CanViewFlags", "CanViewVenue", "CanViewRoles", "CanViewVendor", "CanViewCategory", "CanViewFocusAreas", "CanViewCourseMaterials", "CanViewDegreeCertificates", "CanViewCourseLogisticRequirements"))
+        @if(User.IsInRole("CanViewPreRequiest"))
+        { 
+        if (User.IsInAnyRoles("CanViewFlags", "CanViewVenue", "CanViewRoles", "CanViewVendor", "CanViewCategory", "CanViewFocusAreas", "CanViewCourseMaterials", "CanViewDegreeCertificates", "CanViewCourseLogisticRequirements"))
         {
-            <li class="tms-tile-2x">
-                <a href="@Url.Content("~/Admin/Prerequisite")">
-                    <span class="mdi mdi-flag-triangle tms-tile-icon"></span>
-                    <span class="mdi mdi-home-map-marker tms-tile-icon"></span>
-                    <span class="shortcuts-label">@lr.PreRequisitesTitle</span>
-                </a>
-            </li>
+                     <li class="tms-tile-2x">
+                         <a href="@Url.Content("~/Admin/Prerequisite")">
+                             <span class="mdi mdi-flag-triangle tms-tile-icon"></span>
+                             <span class="mdi mdi-home-map-marker tms-tile-icon"></span>
+                             <span class="shortcuts-label">@lr.PreRequisitesTitle</span>
+                         </a>
+                     </li>
+                 }
         }
     </ul>
 

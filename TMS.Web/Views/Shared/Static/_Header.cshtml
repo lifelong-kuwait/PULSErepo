@@ -58,7 +58,7 @@
                     {
                         if (User.IsInRole("CanViewVenueMatrixReport"))
                         {
-                            <li><a href="@Url.Content("~/SPl_Test_Reports/VenueMatrixReport")"><span class="fa fa-bar-chart"></span> <strong>Venue Matrix Report</strong> </a></li>
+                            <li><a href="@Url.Content("~/SPl_Test_Reports/VenueMatrixRDLCReport")"><span class="fa fa-bar-chart"></span> <strong>Venue Matrix Report</strong> </a></li>
                         }
                         if (User.IsInRole("CanViewTrainerDetailReport"))
                         {
@@ -96,13 +96,13 @@
                         {
                             <li><a href="@Url.Content("~/SPl_Test_Reports/Class_Current_Report")"><span class="fa fa-bar-chart"></span> <strong>Class Schedule List Current</strong> </a></li>
                         }
-                        if (User.IsInRole("CanViewVenueDetailyUtilizationReport"))
+                        @*if (User.IsInRole("CanViewVenueDetailyUtilizationReport"))
                         {
                             <li><a href="@Url.Content("~/SPl_Test_Reports/VenueDetailUtilizationReport")"><span class="fa fa-bar-chart"></span> <strong>Venue Detail Utilization Report</strong> </a></li>
-                        }
+                        }*@
                         if (User.IsInRole("CanViewVenueWeeklyUtilizationReport"))
                         {
-                            <li><a href="@Url.Content("~/SPl_Test_Reports/WeeklyUtilizationReport")"><span class="fa fa-bar-chart"></span> <strong>Weekly Utilization Report</strong> </a></li>
+                            <li><a href="@Url.Content("~/SPl_Test_Reports/WeeklyUtilizationReportModified")"><span class="fa fa-bar-chart"></span> <strong>Venue Utilization By Dates Report</strong> </a></li>
                         }
                         if (User.IsInRole("CanViewVenueDailyUtilizationReport"))
                         {

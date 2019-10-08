@@ -30,7 +30,7 @@
         <div class="pageTitle">@GroupName</div>
         <form method="post" action="@Url.Content("~/Admin/GroupDetail?GroupId=" +Request.QueryString["GroupId"])">
             @Html.AntiForgeryToken()
-            <input id="GroupId" value="@Request.QueryString["GroupId"]" type="hidden" />
+            <input id="GroupId" value="@Request.QueryString["GroupId"]" type="hidden"/>
             @foreach (var codeGroup in Model.GroupBy(x => x.CategoryLabelResource))
             {
                 <fieldset class="scheduler-border">

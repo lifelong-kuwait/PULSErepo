@@ -15,12 +15,21 @@
 </div>");
                  })
             .ToolBar(toolbar => toolbar.Template(@<text>
-                <div class="toolbar">
-                    <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
-                    <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
-                    <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
-                    <a class="k-button tms-grid-detail"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>
-                </div>
+<div class="toolbar">
+    @if (User.IsInRole("CanAddEditGroups"))
+                {
+        <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+        <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+                }
+    @if (User.IsInRole("CanDeleteGroups"))
+    {
+                <a class="k-button tms-grid-destroyGroup"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+    }
+    @if (User.IsInRole("CanViewGroupsDetail"))
+    {
+    <a class="k-button tms-grid-detail"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>
+    }
+</div>
             </text>))
                 .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_SecurityGroupTemplate").DisplayDeleteConfirmation(false))
                 .Sortable().Scrollable().Filterable().Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
@@ -36,13 +45,15 @@
                 )
 )
 <script id="toolTipTemplate" type="text/x-kendo-template">
-
-    <span class="grid-tooltip-icon groupdetail" dat-id="#=GroupId#" title="See the detail of #=PrimaryGroupName#"><i class="mdi mdi-open-in-new"></i></span>
-
-   
-    <span class="grid-tooltip-icon delete" dat-id="#=GroupId#" title="Delete"><i class="mdi mdi-delete"></i></span>
-
-</script>
+    @if (User.IsInRole("CanViewGroupsDetail"))
+    {
+        <span class="grid-tooltip-icon groupdetail" dat-id="#=GroupId#" title="See the detail of #=PrimaryGroupName#"><i class="mdi mdi-open-in-new"></i></span>
+    }
+    @if (User.IsInRole("CanDeleteGroups"))
+    {
+        <span class="grid-tooltip-icon delete" dat-id="#=GroupId#" title="Delete"><i class="mdi mdi-delete"></i></span>
+    }
+    </script>
 
 <script>
   jQuery(function () {
@@ -95,6 +106,7 @@
             grid = jQuery("#SecurityGroups").data("kendoGrid");
             var selectedRows = jQuery("#SecurityGroups tr.k-state-selected");
             var checkedLength = selectedRows.length;
+            var dataItem = grid.dataItem(selectedRows);
             var checkedLength = selectedRows.length;
             if (checkedLength == 1) {
                 var grid = jQuery("#SecurityGroups").data("kendoGrid");
@@ -111,19 +123,38 @@
                     closeOnCancel: true,
                     customClass: "tmsconfirm"
                 },
-                function (isConfirm) {
-                    if (isConfirm) {
-                        grid.removeRow(selectedRows);
-                        swal({
-                           title: '@lr.confirmDeleted',
-                           text:  '@lr.confirmDeletedMessage',
-                           type: "success"
-                       },
-                    function(){
-                                      window.location="@Url.Content("~/Admin/Groups")";
-                        });
-                   }
-                });
+               function (isConfirm) {
+                         if (isConfirm) {
+                             jQuery.ajax({
+                                 method: "post",
+                                 url: "/Admin/Groups_Destroy_Verify",
+                                 dataType: "JSON",
+                                 contentType: "application/json; charset=utf-8",
+                                 data: JSON.stringify({ _objGroupsID: dataItem.GroupId }),
+                                 success: function (msg) {
+                                     if (!msg) {
+                                         swal({
+                                             title: '@lr.Oops',
+                                             text: 'Group is not allowed to delete',
+                                             type: "error"
+                                         });
+                                         window.location.reload;
+                                     }
+                                     else {
+                                         grid.removeRow(selectedRows);
+                                         swal({
+                                             title: '@lr.confirmDeleted',
+                                             text: '@lr.confirmDeletedMessage',
+                                             type: "success"
+                                         },
+                                             function () {
+                                                 window.location = "@Url.Content("~/Admin/Groups")";
+                                             });
+                                     }
+                                 }
+                             });
+                         }
+                     });
             } else if (checkedLength > 1) {
                 var grid = jQuery("#SecurityGroups").data("kendoGrid");
                 swal({
@@ -155,7 +186,115 @@
             } else {
             }
         });
+        jQuery(".tms-grid-destroyGroup").live("mousedown", function (event) {
+            var  grid = jQuery("#SecurityGroups").data("kendoGrid");
+            var selectedRows = jQuery("#SecurityGroups tr.k-state-selected");
+            var checkedLength = selectedRows.length;
+            var dataItem = grid.dataItem(selectedRows);
+            var checkedLength = selectedRows.length;
+            if (checkedLength == 1) {
+                var grid = jQuery("#SecurityGroups").data("kendoGrid");
+                var data = grid.dataItem(jQuery("[data-id='" + jQuery(this).attr("dat-id") + "']"));  //get the row data so it can be referred later
+                swal({
+                    title: '@lr.Areyousureyouwanttodeletethisrecord',
+                    text: '@lr.Youwillnotbeabletorecover',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "@lr.confirmDelete",
+                    cancelButtonText: "@lr.confirmNo",
+                    closeOnConfirm: false,
+                    closeOnCancel: true,
+                    customClass: "tmsconfirm"
+                },
+               function (isConfirm) {
+                         if (isConfirm) {
+                             jQuery.ajax({
+                                 method: "post",
+                                 url: "/Admin/Groups_Destroy_Verify",
+                                 dataType: "JSON",
+                                 contentType: "application/json; charset=utf-8",
+                                 data: JSON.stringify({ _objGroupsID: dataItem.GroupId }),
+                                 success: function (msg) {
+                                     console.log(msg);
+                                     if (!msg) {
+                                         
+                                         swal({
+                                             title: '@lr.Oops',
+                                             text: 'Group is not allowed to delete',
+                                             type: "error"
+                                         });
+                                         window.location.reload;
+                                     }
+                                     else {
+                                         grid.removeRow(selectedRows);
+                                         swal({
+                                             title: '@lr.confirmDeleted',
+                                             text: '@lr.confirmDeletedMessage',
+                                             type: "success"
+                                         },
+                                             function () {
+                                                 window.location = "@Url.Content("~/Admin/Groups")";
+                                             });
+                                     }
+                                 }
+                             });
+                         }
+                     });
+            } else if (checkedLength > 1) {
+                var grid = jQuery("#SecurityGroups").data("kendoGrid");
+                 swal({
+                    title: '@lr.Areyousureyouwanttodeletetheserecord',
+                    text: '@lr.Youwillnotbeabletorecover' + ' <strong style="font-weight:bold">' + checkedLength + ' ' + '@lr.confirmRecords' + '</strong> ?',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "@lr.confirmDelete",
+                    cancelButtonText: "@lr.confirmNo",
+                    closeOnConfirm: false,
+                    closeOnCancel: true,
+                    html: true,
+                    customClass: "tmsconfirm"
+                },
+            function (isConfirm) {
+                         if (isConfirm) {
+                             jQuery.ajax({
+                                 method: "post",
+                                 url: "/Admin/Groups_Destroy_Verify",
+                                 dataType: "JSON",
+                                 contentType: "application/json; charset=utf-8",
+                                 data: JSON.stringify({ _objGroupsID: dataItem.GroupId }),
+                                 success: function (msg) {
+                                     if (!msg) {
+                                         swal({
+                                             title: '@lr.Oops',
+                                             text: 'Group is not allowed to delete',
+                                             type: "error"
+                                         });
+                                         window.location.reload;
+                                     }
+                                     else {
+                                         grid.removeRow(selectedRows);
+                                         swal({
+                                             title: '@lr.confirmDeleted',
+                                             text: '@lr.confirmDeletedMessage',
+                                             type: "success"
+                                         },
+                                             function () {
+                                                 window.location = "@Url.Content("~/Admin/Groups")";
+                                             });
+                                     }
+                                 }
+                             });
+                         }
+                     });
+                   
+            } else {
+            }
+        });
     });
+    
+    
     function UsersLoginGrid_onEdit(e) {
         //debugger;
 

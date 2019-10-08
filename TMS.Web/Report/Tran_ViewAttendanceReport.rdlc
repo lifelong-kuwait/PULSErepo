@@ -1789,8 +1789,8 @@ format(cdate(Fields!StartDate.Value).AddDays(6), "dddd") = "Friday", "LightGrey"
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>VewTraineeAttendanceReportDataSet</DataSetName>
-        <Top>1.73625in</Top>
-        <Left>0.46868in</Left>
+        <Top>0.85069in</Top>
+        <Left>0.549in</Left>
         <Height>1in</Height>
         <Width>7.27698in</Width>
         <Style>
@@ -1816,8 +1816,8 @@ format(cdate(Fields!StartDate.Value).AddDays(6), "dddd") = "Friday", "LightGrey"
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>0.955in</Top>
-        <Left>0.46868in</Left>
+        <Top>0.06944in</Top>
+        <Left>0.549in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>1</ZIndex>
@@ -1848,8 +1848,8 @@ format(cdate(Fields!StartDate.Value).AddDays(6), "dddd") = "Friday", "LightGrey"
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>1.32021in</Top>
-        <Left>0.46868in</Left>
+        <Top>0.43465in</Top>
+        <Left>0.549in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>2</ZIndex>
@@ -1880,8 +1880,8 @@ format(cdate(Fields!StartDate.Value).AddDays(6), "dddd") = "Friday", "LightGrey"
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>0.955in</Top>
-        <Left>3.51163in</Left>
+        <Top>0.06944in</Top>
+        <Left>3.59195in</Left>
         <Height>0.25in</Height>
         <Width>1.11458in</Width>
         <ZIndex>3</ZIndex>
@@ -1912,8 +1912,8 @@ format(cdate(Fields!StartDate.Value).AddDays(6), "dddd") = "Friday", "LightGrey"
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>1.32021in</Top>
-        <Left>3.51163in</Left>
+        <Top>0.43465in</Top>
+        <Left>3.59195in</Left>
         <Height>0.25in</Height>
         <Width>1.11458in</Width>
         <ZIndex>4</ZIndex>
@@ -1944,8 +1944,8 @@ format(cdate(Fields!StartDate.Value).AddDays(6), "dddd") = "Friday", "LightGrey"
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox5</rd:DefaultName>
-        <Top>0.955in</Top>
-        <Left>1.45666in</Left>
+        <Top>0.06944in</Top>
+        <Left>1.53698in</Left>
         <Height>0.25in</Height>
         <Width>1.90625in</Width>
         <ZIndex>5</ZIndex>
@@ -1976,8 +1976,8 @@ format(cdate(Fields!StartDate.Value).AddDays(6), "dddd") = "Friday", "LightGrey"
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox5</rd:DefaultName>
-        <Top>1.32021in</Top>
-        <Left>1.45666in</Left>
+        <Top>0.43465in</Top>
+        <Left>1.53698in</Left>
         <Height>0.25in</Height>
         <Width>1.90625in</Width>
         <ZIndex>6</ZIndex>
@@ -2008,8 +2008,8 @@ format(cdate(Fields!StartDate.Value).AddDays(6), "dddd") = "Friday", "LightGrey"
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox5</rd:DefaultName>
-        <Top>0.955in</Top>
-        <Left>4.60191in</Left>
+        <Top>0.06944in</Top>
+        <Left>4.68223in</Left>
         <Height>0.25in</Height>
         <Width>2.04051in</Width>
         <ZIndex>7</ZIndex>
@@ -2040,8 +2040,8 @@ format(cdate(Fields!StartDate.Value).AddDays(6), "dddd") = "Friday", "LightGrey"
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox5</rd:DefaultName>
-        <Top>1.32021in</Top>
-        <Left>4.60191in</Left>
+        <Top>0.43465in</Top>
+        <Left>4.68223in</Left>
         <Height>0.25in</Height>
         <Width>2.04051in</Width>
         <ZIndex>8</ZIndex>
@@ -2055,59 +2055,143 @@ format(cdate(Fields!StartDate.Value).AddDays(6), "dddd") = "Friday", "LightGrey"
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="Textbox10">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Weekly Attendance Report</Value>
-                <Style>
-                  <FontSize>15pt</FontSize>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox10</rd:DefaultName>
-        <Top>0.4675in</Top>
-        <Left>2.35018in</Left>
-        <Height>0.3125in</Height>
-        <Width>2.63815in</Width>
-        <ZIndex>9</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Image Name="Image1">
-        <Source>Embedded</Source>
-        <Value>pace</Value>
-        <Sizing>FitProportional</Sizing>
-        <Top>0.21056in</Top>
-        <Left>0.46868in</Left>
-        <Height>0.56944in</Height>
-        <Width>1.19667in</Width>
-        <ZIndex>10</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Image>
     </ReportItems>
-    <Height>2.82213in</Height>
+    <Height>1.93671in</Height>
     <Style />
   </Body>
-  <Width>8.38108in</Width>
+  <Width>8.204in</Width>
   <Page>
+    <PageHeader>
+      <Height>0.83333in</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox10">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Weekly Attendance Report</Value>
+                  <Style>
+                    <FontSize>15pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox10</rd:DefaultName>
+          <Top>0.47222in</Top>
+          <Left>2.34501in</Left>
+          <Height>0.3125in</Height>
+          <Width>2.63815in</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Image Name="Image1">
+          <Source>Embedded</Source>
+          <Value>pace</Value>
+          <Sizing>FitProportional</Sizing>
+          <Top>0.21528in</Top>
+          <Left>0.46351in</Left>
+          <Height>0.56944in</Height>
+          <Width>1.19667in</Width>
+          <ZIndex>1</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </Image>
+        <Textbox Name="Textbox23">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>="Page "&amp;Globals!PageNumber &amp;" of "&amp;Globals!OverallTotalPages</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox23</rd:DefaultName>
+          <Top>0.21528in</Top>
+          <Left>6.74049in</Left>
+          <Height>0.25in</Height>
+          <Width>1in</Width>
+          <ZIndex>2</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageHeader>
+    <PageFooter>
+      <Height>0.34375in</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox20">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=Globals!ExecutionTime</Value>
+                  <Style>
+                    <Format>D</Format>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox16</rd:DefaultName>
+          <Top>0.06944in</Top>
+          <Left>6.12822in</Left>
+          <Height>0.1875in</Height>
+          <Width>1.69776in</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageFooter>
     <PageHeight>11.69in</PageHeight>
     <PageWidth>8.27in</PageWidth>
     <RightMargin>0.25in</RightMargin>

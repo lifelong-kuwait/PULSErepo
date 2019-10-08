@@ -136,9 +136,9 @@ namespace TMS.Business.Common.Groups
         /// <param name="Culture">The culture.</param>
         /// <param name="GroupId">The group identifier.</param>
         /// <returns>IList&lt;SecurityGroupsPermission&gt;.</returns>
-        public IList<SecurityGroupsPermission> SecurityGroupsPermission_GetAllByGroupIdBAL(string Culture, long GroupId)
+        public IList<SecurityGroupsPermission> SecurityGroupsPermission_GetAllByGroupIdBAL(string Culture, long GroupId, long organizationID, long userid)
         {
-            return _DAL.SecurityGroupsPermission_GetAllByGroupId(Culture, GroupId);
+            return _DAL.SecurityGroupsPermission_GetAllByGroupId(Culture, GroupId, organizationID, userid);
         }
 
         /// <summary>

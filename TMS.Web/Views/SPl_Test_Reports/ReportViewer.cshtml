@@ -136,6 +136,9 @@
     .col-md-12.col-lg-offset-2 {
         margin-bottom: 26px;
     }
+    .control-label {
+        padding-left: 12%;
+    }
     /*li {
         display: none;
     }*/
@@ -143,7 +146,7 @@
 @*<div class="col-md-offset-2">*@
 <div class="row" style="margin-left:40%;">
     <div class="form-group">
-        <h2>Course Attandence Report</h2>
+        <h2>Course Attandence</h2>
     </div>
 </div>
 <div class="row" style="margin-left:10%;">
@@ -152,19 +155,19 @@
             @Html.Label("Course", new { @class = "col-md-3 col-lg-3 control-label" })
             <div class="col-md-7 col-lg-7 col-sm-11">
                 @(Html.Kendo().DropDownList()
-                                                                                                                                           .Name("Course")
-                                                                                                                                           .DataTextField("Text")
-                                                                                                                                           .DataValueField("Value")
-                                                                                                                                           .OptionLabel("---Select Course---")
-                                                                                                                                           .Filter("contains")
-                                                                                                                                           .DataSource(source =>
-                                                                                                                                           {
-                                                                                                                                               source.Read(read =>
-                                                                                                                                               {
-                                                                                                                                                   read.Action("Course", "DDL");
-                                                                                                                                               }).ServerFiltering(false);
-                                                                                                                                           })
-                                                                                                                                          .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
+                  .Name("Course")
+                  .DataTextField("Text")
+                  .DataValueField("Value")
+                  .OptionLabel("---Select Course---")
+                  .Filter("contains")
+                  .DataSource(source =>
+                  {
+                      source.Read(read =>
+                      {
+                          read.Action("Course", "DDL");
+                      }).ServerFiltering(false);
+                  })
+                 .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
                 )
 
             </div>
@@ -175,25 +178,23 @@
             @Html.Label("Class", new { @class = "col-md-3 col-lg-3 control-label" })
             <div class="col-md-7 col-lg-7 col-sm-11">
                 @(Html.Kendo().DropDownList()
-                                                                                                                                            .Name("Class")
-                                                                                                                                            .DataTextField("Text")
-                                                                                                                                            .DataValueField("Value")
-                                                                                                                                            .OptionLabel("---Select Class---")
-                                                                                                                                            .Filter("contains")
-                                                                                                                                            //.DataSource(source =>
-                                                                                                                                            //{
-                                                                                                                                            //    source.Read(read =>
-                                                                                                                                            //    {
-                                                                                                                                            //        read.Action("Classes", "DDL");
-                                                                                                                                            //    });
-                                                                                                                                            //})
-                                                                                                                                            .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
-                                                                                                                                                                                                                                .HtmlAttributes(new { style = "width: 100%" })
+                 .Name("Class")
+                 .DataTextField("Text")
+                 .DataValueField("Value")
+                 .OptionLabel("---Select Class---")
+                 .Filter("contains")
+                 //.DataSource(source =>
+                 //{
+                 //    source.Read(read =>
+                 //    {
+                 //        read.Action("Classes", "DDL");
+                 //    });
+                 //})
+                 .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
                 )
             </div>
         </div>
     </div>
-
     <div class="form-group col-md-2 col-lg-2 col-sm-2" style="margin-left:65%;margin-top:1%;">
         @(Html.Kendo().Button()
                                                                                                                                        .Name("H2")
@@ -256,6 +257,7 @@
                             dataTextField: "Text",
                             dataValueField: "Value",
                             dataSource: msg,
+                            filter: "contains",
                             height: 100
                         })
                     }

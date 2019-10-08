@@ -1,17 +1,20 @@
 ﻿
 @{
-    ViewBag.Title = "VenueDetailUtilizationReport";
+    ViewBag.Title = "WeeklyUtilizationReportModified";
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
 }
 @using lr = Resources.Resources;
 <style>
     div#calender {
         width: 1082px;
     }
-    .control-label {
-        padding-left: 12%;
-    }
+
     .fc-content {
         color: #000;
+    }
+
+    .control-label {
+        padding-left: 12%;
     }
 
     td.fc-day.fc-widget-content.fc-sun.fc-today.fc-state-highlight {
@@ -136,7 +139,7 @@
 @*<div class="col-md-offset-2">*@
 <div class="row" style="margin-left:40%;">
     <div class="form-group">
-        <h2>Venue Detail Utilization Report</h2>
+        <h2>Weekly Detail Utilization Report</h2>
     </div>
 </div>
 <div class="form-group" style="margin-left:10%;">
@@ -145,19 +148,19 @@
             @Html.Label("Venue", new { @class = "col-md-3 col-lg-3 control-label" })
             <div class="col-md-7 col-lg-7 col-sm-11">
                 @(Html.Kendo().DropDownList()
-                                                                                                                                    .Name("Venue")
-                                                                                                                                    .DataTextField("Text")
-                                                                                                                                    .DataValueField("Value")
-                                                                                                                                    .Filter("contains")
-                                                                                                                                    .OptionLabel("--Please select Venue--")
-                                                                                                                                    .DataSource(source =>
-                                                                                                                                    {
-                                                                                                                                        source.Read(read =>
-                                                                                                                                        {
-                                                                                                                                            read.Action("DDLVenue", "DDL");
-                                                                                                                                        }).ServerFiltering(false);
-                                                                                                                                    })
-                                                                                                                                    .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
+                                                                                                                                                            .Name("Venue")
+                                                                                                                                                            .DataTextField("Text")
+                                                                                                                                                            .DataValueField("Value")
+                                                                                                                                                            .Filter("contains")
+                                                                                                                                                            .OptionLabel("--Please select Venue--")
+                                                                                                                                                            .DataSource(source =>
+                                                                                                                                                            {
+                                                                                                                                                                source.Read(read =>
+                                                                                                                                                                {
+                                                                                                                                                                    read.Action("DDLVenue", "DDL");
+                                                                                                                                                                }).ServerFiltering(false);
+                                                                                                                                                            })
+                                                                                                                                                            .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
                 )
 
             </div>
@@ -168,11 +171,11 @@
             @Html.Label("Date From", new { @class = "col-md-3 col-lg-3 control-label" })
             <div class="col-md-7 col-lg-7 col-sm-11">
                 @(Html.Kendo().DatePicker()
-                                                                                                                                                         .Name("Start_Date")
-                                                                                                                                                         .Value(DateTime.Now.Date)
-                                                                                                                                                         .Format("{0:MM/dd/yyyy}")
-                                                                                                                                                         .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
-                                                                                                                                                         .DateInput()
+                                                                                                                                                                                 .Name("Start_Date")
+                                                                                                                                                                                 .Value(DateTime.Now.Date)
+                                                                                                                                                                                 .Format("{0:MM/dd/yyyy}")
+                                                                                                                                                                                 .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
+                                                                                                                                                                                 .DateInput()
                 )
             </div>
         </div>
@@ -183,11 +186,11 @@
             @Html.Label("Date To", new { @class = "col-md-3 col-lg-3 control-label" })
             <div class="col-md-7 col-lg-7 col-sm-11">
                 @(Html.Kendo().DatePicker()
-                                                                                                                                                         .Name("To_Date")
-                                                                                                                                                         .Value(DateTime.Now.Date)
-                                                                                                                                                         .Format("{0:MM/dd/yyyy}")
-                                                                                                                                                         .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
-                                                                                                                                                         .DateInput()
+                                                                                                                                                                                 .Name("To_Date")
+                                                                                                                                                                                 .Value(DateTime.Now.Date)
+                                                                                                                                                                                 .Format("{0:MM/dd/yyyy}")
+                                                                                                                                                                                 .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
+                                                                                                                                                                                 .DateInput()
                 )
             </div>
         </div>
@@ -196,16 +199,16 @@
 
     <div class="form-group col-md-2 col-lg-2 col-sm-2" style="margin-left:65%;margin-top:1%;">
         @(Html.Kendo().Button()
-                                                                                                                          .Name("H2")
-                                                                                                                          .HtmlAttributes(new { type = "button", @class = "btn btn-primary k-primary" })
-                                                                                                                          .Content("" + @lr.ActivitySummaryReport + "")
+                                                                                                                                                  .Name("H2")
+                                                                                                                                                  .HtmlAttributes(new { type = "button", @class = "btn btn-primary k-primary" })
+                                                                                                                                                  .Content("" + @lr.ActivitySummaryReport + "")
         )
     </div>
 </div>
 <div id="loader"></div>
 <div class="row">
     <div class="col-lg-12">
-        <iframe id="ifrmReportViewer" frameborder="0"onload='showPage();' EnableEventValidation="false" src="" height="750" scrolling="no" style="overflow:hidden;" allowtransparency="true" allowfullscreen></iframe>
+        <iframe id="ifrmReportViewer" onload='showPage();' frameborder="0" EnableEventValidation="false" src="" height="730" style="overflow:hidden;" scrolling="no" allowtransparency="true" allowfullscreen></iframe>
     </div>
 </div>
 
@@ -223,12 +226,11 @@
                 || startDateTo.toString().trim().length <= 0) {
                 console.log('null value');
             } else {
-                url = "../Views/Report/SpLReports/VenueDetailUtilizationReport.aspx?rptmode=local&reportname=WeeklyUtilizationReport&Venue=" + jQuery("#Venue").data("kendoDropDownList").value() + "&StartDate=" + startDateFrom + "&startDateTo=" + startDateTo + "";
+                url = "../Views/Report/SpLReports/WeeklyUtilizatinDynamicColumns.aspx?rptmode=local&reportname=WeeklyUtilizatinDynamicColumns&Venue=" + jQuery("#Venue").data("kendoDropDownList").value() + "&StartDate=" + startDateFrom + "&startDateTo=" + startDateTo + "";
                 var myframe = document.getElementById("ifrmReportViewer");
                 if (myframe !== null) {
                     if (myframe.src) {
-                        myframe.src = url;
-                        document.getElementById("loader").style.display = "block";
+                        myframe.src = url; document.getElementById("loader").style.display = "block";
                     }
                     else if (myframe.contentWindow !== null && myframe.contentWindow.location !== null) {
                         myframe.contentWindow.location = url;
@@ -238,6 +240,7 @@
             }
             jQuery("#H2").attr("disabled", false);
             jQuery("#ifrmReportViewer").css({ "width": "100%", "border": "2px solid #009aee", "border - radius": "5px", "margin-top": "5px" });
+
             return false;
         });
 
@@ -292,9 +295,10 @@
         });
     });
 </script>
-
 <script>
     function showPage() {
         document.getElementById("loader").style.display = "none";
     }
 </script>
+
+

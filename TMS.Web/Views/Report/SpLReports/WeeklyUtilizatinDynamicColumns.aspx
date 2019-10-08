@@ -1,6 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="VenueDetailReport.aspx.cs" Inherits="TMS.Web.Views.Report.SpLReports.VenueDetailReport" %>
-
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WeeklyUtilizatinDynamicColumns.aspx.cs" Inherits="TMS.Web.Views.Report.SpLReports.WeeklyUtilizatinDynamicColumns" %>
 <%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
+
 
 <!DOCTYPE html>
 
@@ -9,10 +9,10 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server">
+      <form id="form1" runat="server">
        <div class="col-md-5" style="height: 700px;width: 100%;">
               <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-              <rsweb:ReportViewer ID="ReportViewerRSFReports" runat="server"  IsReadyForRendering="false" AsyncRendering="false" ProcessingMode="Remote" Width="797px" ><LocalReport ReportPath="../../../Report/Tran_VenueDetailReport.rdlc"></LocalReport></rsweb:ReportViewer>
+              <rsweb:ReportViewer ID="ReportViewerRSFReports" runat="server"  IsReadyForRendering="false" AsyncRendering="false" ProcessingMode="Remote" Width="797px" ></rsweb:ReportViewer>
          </div>
     </form>
 </body>

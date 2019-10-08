@@ -38,6 +38,9 @@
     span.fc-time {
         display: none;
     }
+    .control-label {
+        padding-left: 12%;
+    }
 </style>
 <style>
 #loader {
@@ -141,19 +144,20 @@ keyframes animatebottom {
             @Html.Label("Class", new { @class = "col-md-3 col-lg-3 control-label" })
             <div class="col-md-7 col-lg-7 col-sm-11">
                 @(Html.Kendo().DropDownList()
-                                                                                                                                                            .Name("Class")
-                                                                                                                                                            .DataTextField("Text")
-                                                                                                                                                            .DataValueField("Value")
-                                                                                                                                                            .OptionLabel("--Please select Class--")
-                                                                                                                                                            //.DataSource(source =>
-                                                                                                                                                            //{
-                                                                                                                                                            //    source.Read(read =>
-                                                                                                                                                            //    {
-                                                                                                                                                            //        read.Action("Classes", "DDL");
-                                                                                                                                                            //    });
-                                                                                                                                                            //})
-                                                                                                                                                            .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
-                                                                                                                                                                                                                                                .HtmlAttributes(new { style = "width: 100%" })
+                  .Name("Class")
+                  .DataTextField("Text")
+                  .DataValueField("Value")
+                  .Filter("contains")
+                  .OptionLabel("--Please select Class--")
+                  //.DataSource(source =>
+                  //{
+                  //    source.Read(read =>
+                  //    {
+                  //        read.Action("Classes", "DDL");
+                  //    });
+                  //})
+                  .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
+                                                                                                      .HtmlAttributes(new { style = "width: 100%" })
                 )
             </div>
         </div>
@@ -163,11 +167,11 @@ keyframes animatebottom {
             @Html.Label("Trainer", new { @class = "col-md-3 col-lg-3 control-label" })
             <div class="col-md-7 col-lg-7 col-sm-11">
                 @(Html.Kendo().DropDownList()
-                                                                                                                                                           .Name("Trainer")
-                                                                                                                                                           .DataTextField("Text")
-                                                                                                                                                           .DataValueField("Value")
-                                                                                                                                                           .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
-                                                                                                                                                           .OptionLabel( "--Please select Trainer--")
+                  .Name("Trainer")
+                  .DataTextField("Text")
+                  .DataValueField("Value")
+                  .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
+                  .OptionLabel( "--Please select Trainer--")
                 )
 
             </div>
@@ -228,6 +232,7 @@ keyframes animatebottom {
                         OptionLabel: "--Please select Trainer--",
                         dataTextField: "Text",
                         dataValueField: "Value",
+                        filter:"contains",
                         dataSource: msg,
                         height: 100
                     })
@@ -248,6 +253,7 @@ keyframes animatebottom {
                         dataTextField: "Text",
                         dataValueField: "Value",
                         dataSource: msg,
+                        filter: "contains",
                         height: 100
                     })
                     var classId = jQuery("#Class").data("kendoDropDownList").value();
@@ -264,6 +270,7 @@ keyframes animatebottom {
                                 dataTextField: "Text",
                                 dataValueField: "Value",
                                 dataSource: msg,
+                                filter: "contains",
                                 height: 100
                             })
                         }

@@ -15,7 +15,9 @@
     .fc-content {
         color: #000;
     }
-
+    .control-label {
+        padding-left: 12%;
+    }
     td.fc-day.fc-widget-content.fc-sun.fc-today.fc-state-highlight {
         background-color: #80BFC8;
     }
@@ -54,7 +56,11 @@
     }*/
 </style>
 @*<div class="col-md-offset-2">*@
-
+<div class="row" style="margin-left:50%;">
+    <div class="form-group">
+        <h2>Schedule</h2>
+    </div>
+</div>
 <div class="row" style="margin-left:10%;">
     <div class="form-group">
         <div class="row" style="margin-top:1%;">
@@ -89,7 +95,7 @@
                                                                                                                     .DataTextField("Text")
                                                                                                                     .DataValueField("Value")
                                                                                                                     .OptionLabel("---Select Class---")
-                                                                                                                    
+                                                                                                                    .Filter("contains")
                                                                                                                     //.DataSource(source =>
                                                                                                                     //{
                                                                                                                     //    source.Read(read =>
@@ -208,7 +214,8 @@
                                 dataTextField: "Text",
                                 dataValueField: "Value",
                                 dataSource: msg1.Data,
-                                height: 100
+                                height: 100,
+                                filter:"contains"
                             })
                                 .closest(".k-widget")
                                 .attr("id", "products_wrapper");

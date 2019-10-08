@@ -582,17 +582,19 @@
             <TextRuns>
               <TextRun>
                 <Value>=Globals!ExecutionTime</Value>
-                <Style />
+                <Style>
+                  <Format>D</Format>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>ExecutionTime</rd:DefaultName>
-        <Top>0.68056in</Top>
-        <Left>5.86698in</Left>
+        <Top>0.66667in</Top>
+        <Left>5.82531in</Left>
         <Height>0.1875in</Height>
-        <Width>1.84475in</Width>
+        <Width>1.88642in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -613,7 +615,7 @@
       </BackgroundImage>
     </Style>
   </Body>
-  <Width>7.77423in</Width>
+  <Width>7.9675in</Width>
   <Page>
     <PageHeader>
       <Height>0.76042in</Height>
@@ -668,6 +670,36 @@
             </Border>
           </Style>
         </Image>
+        <Textbox Name="Textbox3">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>="Page "&amp;Globals!PageNumber &amp;" of "&amp;Globals!OverallTotalPages</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox3</rd:DefaultName>
+          <Top>0.11806in</Top>
+          <Left>6.77423in</Left>
+          <Height>0.19792in</Height>
+          <Width>1in</Width>
+          <ZIndex>2</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
       </ReportItems>
       <Style>
         <Border>

@@ -19,8 +19,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>0.9411in</Top>
-        <Left>0.02776in</Left>
+        <Top>0.06944in</Top>
+        <Left>0.0868in</Left>
         <Height>0.25in</Height>
         <Width>2.08163in</Width>
         <Style>
@@ -50,8 +50,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>1.53832in</Top>
-        <Left>0.02776in</Left>
+        <Top>0.66666in</Top>
+        <Left>0.0868in</Left>
         <Height>0.25in</Height>
         <Width>2.08163in</Width>
         <ZIndex>1</ZIndex>
@@ -82,8 +82,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>1.26054in</Top>
-        <Left>0.02776in</Left>
+        <Top>0.38888in</Top>
+        <Left>0.0868in</Left>
         <Height>0.25in</Height>
         <Width>2.08163in</Width>
         <ZIndex>2</ZIndex>
@@ -114,8 +114,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>1.26054in</Top>
-        <Left>3.63119in</Left>
+        <Top>0.38888in</Top>
+        <Left>3.69023in</Left>
         <Height>0.25in</Height>
         <Width>2.08163in</Width>
         <ZIndex>3</ZIndex>
@@ -144,8 +144,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>0.9411in</Top>
-        <Left>2.17884in</Left>
+        <Top>0.06944in</Top>
+        <Left>2.23788in</Left>
         <Height>0.25in</Height>
         <Width>3.53398in</Width>
         <ZIndex>4</ZIndex>
@@ -174,8 +174,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>1.53832in</Top>
-        <Left>2.17884in</Left>
+        <Top>0.66666in</Top>
+        <Left>2.23788in</Left>
         <Height>0.25in</Height>
         <Width>1.32196in</Width>
         <ZIndex>5</ZIndex>
@@ -204,8 +204,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>1.26054in</Top>
-        <Left>2.17884in</Left>
+        <Top>0.38888in</Top>
+        <Left>2.23788in</Left>
         <Height>0.25in</Height>
         <Width>1.33584in</Width>
         <ZIndex>6</ZIndex>
@@ -234,8 +234,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>1.26054in</Top>
-        <Left>5.78227in</Left>
+        <Top>0.38888in</Top>
+        <Left>5.84131in</Left>
         <Height>0.25in</Height>
         <Width>1.32196in</Width>
         <ZIndex>7</ZIndex>
@@ -266,8 +266,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>1.53832in</Top>
-        <Left>3.63119in</Left>
+        <Top>0.66666in</Top>
+        <Left>3.69023in</Left>
         <Height>0.25in</Height>
         <Width>2.08163in</Width>
         <ZIndex>8</ZIndex>
@@ -296,8 +296,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>1.53832in</Top>
-        <Left>5.78227in</Left>
+        <Top>0.66666in</Top>
+        <Left>5.84131in</Left>
         <Height>0.25in</Height>
         <Width>1.32196in</Width>
         <ZIndex>9</ZIndex>
@@ -485,8 +485,8 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>ConductedCoursesReport</DataSetName>
-        <Top>1.98277in</Top>
-        <Left>0.01388in</Left>
+        <Top>1.11111in</Top>
+        <Left>0.07292in</Left>
         <Height>0.5in</Height>
         <Width>7.09035in</Width>
         <ZIndex>10</ZIndex>
@@ -496,27 +496,27 @@
           </Border>
         </Style>
       </Tablix>
-      <Textbox Name="Textbox16">
+      <Textbox Name="ExecutionTime">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Course Periodic Report</Value>
+                <Value>=Globals!ExecutionTime</Value>
                 <Style>
-                  <FontSize>15pt</FontSize>
+                  <Format>D</Format>
                 </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
-        <rd:DefaultName>Textbox10</rd:DefaultName>
-        <Top>0.38367in</Top>
-        <Left>2.65644in</Left>
-        <Height>0.3125in</Height>
-        <Width>3.19023in</Width>
+        <rd:DefaultName>ExecutionTime</rd:DefaultName>
+        <Top>1.68056in</Top>
+        <Left>5.09064in</Left>
+        <Height>0.1875in</Height>
+        <Width>1.88642in</Width>
         <ZIndex>11</ZIndex>
         <Style>
           <Border>
@@ -528,27 +528,100 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Image Name="Image1">
-        <Source>Embedded</Source>
-        <Value>pace</Value>
-        <Sizing>FitProportional</Sizing>
-        <Top>0.2309in</Top>
-        <Left>0.54577in</Left>
-        <Height>0.56944in</Height>
-        <Width>1.19667in</Width>
-        <ZIndex>12</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Image>
     </ReportItems>
-    <Height>2.53125in</Height>
+    <Height>1.91667in</Height>
     <Style />
   </Body>
   <Width>7.16327in</Width>
   <Page>
+    <PageHeader>
+      <Height>0.80208in</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox16">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Course Periodic Report</Value>
+                  <Style>
+                    <FontSize>15pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox10</rd:DefaultName>
+          <Top>0.2795in</Top>
+          <Left>2.65644in</Left>
+          <Height>0.3125in</Height>
+          <Width>3.19023in</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Image Name="Image1">
+          <Source>Embedded</Source>
+          <Value>pace</Value>
+          <Sizing>FitProportional</Sizing>
+          <Top>0.12673in</Top>
+          <Left>0.54577in</Left>
+          <Height>0.56944in</Height>
+          <Width>1.19667in</Width>
+          <ZIndex>1</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </Image>
+        <Textbox Name="Textbox13">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>="Page "&amp;Globals!PageNumber &amp;" of "&amp;Globals!OverallTotalPages</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox3</rd:DefaultName>
+          <Top>0.18923in</Top>
+          <Left>5.97706in</Left>
+          <Height>0.19792in</Height>
+          <Width>1in</Width>
+          <ZIndex>2</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageHeader>
     <LeftMargin>0.5in</LeftMargin>
     <RightMargin>0.5in</RightMargin>
     <TopMargin>0.5in</TopMargin>

@@ -140,6 +140,14 @@ namespace TMS.Web.Controllers
             ViewData["reportUrl"] = "~/Report/Tran_ConductedCoursesReport/";
 
             return View();
+        }
+        [ClaimsAuthorize("CanViewReports")]
+        [DontWrapResult]
+        public ActionResult WeeklyUtilizationReportModified()
+        {
+            ViewData["reportUrl"] = "~/Report/WeeklyUtilizatinDynamicColumns/";
+
+            return View();
         }//Schedules
         [ClaimsAuthorize("CanViewReports")]
         [DontWrapResult]
@@ -152,6 +160,14 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorize("CanViewReports")]
         [DontWrapResult]
         public ActionResult VenueMatrixReport()
+        {
+            ViewData["reportUrl"] = "~/Report/Tran_ConductedCoursesReport/";
+
+            return View();
+        }
+        [ClaimsAuthorize("CanViewReports")]
+        [DontWrapResult]
+        public ActionResult VenueMatrixRDLCReport()
         {
             ViewData["reportUrl"] = "~/Report/Tran_ConductedCoursesReport/";
 
