@@ -21,10 +21,10 @@
         <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
         <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
                 }
-    @if (User.IsInRole("CanDeleteGroups"))
+    @*@if (User.IsInRole("CanDeleteGroups"))
     {
                 <a class="k-button tms-grid-destroyGroup"><span class="tms-grid-icon mdi mdi-delete "></span></a>
-    }
+    }*@
     @if (User.IsInRole("CanViewGroupsDetail"))
     {
     <a class="k-button tms-grid-detail"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>
@@ -40,7 +40,7 @@
                 .Create(update => update.Action("Groups_Create", "Admin"))
                 .Read(read => read.Action("Groups_Read", "Admin").Data("withSearch"))
                 .Update(update => update.Action("Groups_Update", "Admin"))
-                .Destroy(update => update.Action("Groups_Destroy", "Admin"))
+                //.Destroy(update => update.Action("Groups_Destroy", "Admin"))
                 .Events(events => events.Error("GeneralErrorHandler(\"SecurityGroups\")"))
                 )
 )
@@ -49,10 +49,10 @@
     {
         <span class="grid-tooltip-icon groupdetail" dat-id="#=GroupId#" title="See the detail of #=PrimaryGroupName#"><i class="mdi mdi-open-in-new"></i></span>
     }
-    @if (User.IsInRole("CanDeleteGroups"))
+    @*@if (User.IsInRole("CanDeleteGroups"))
     {
         <span class="grid-tooltip-icon delete" dat-id="#=GroupId#" title="Delete"><i class="mdi mdi-delete"></i></span>
-    }
+    }*@
     </script>
 
 <script>
@@ -101,7 +101,7 @@
             debugger;
             jQuery("#SecurityGroups").data("kendoGrid").editRow(jQuery("[data-id=" + jQuery(this).attr("dat-id") + "]"));
         });
-        jQuery(".delete").live("mousedown", function (event) {
+        @*jQuery(".delete").live("mousedown", function (event) {
            // debugger;
             grid = jQuery("#SecurityGroups").data("kendoGrid");
             var selectedRows = jQuery("#SecurityGroups tr.k-state-selected");
@@ -292,8 +292,8 @@
             } else {
             }
         });
+    });*@
     });
-    
     
     function UsersLoginGrid_onEdit(e) {
         //debugger;
