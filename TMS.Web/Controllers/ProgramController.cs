@@ -87,7 +87,7 @@ namespace TMS.Web.Controllers
 
             if (CurrentUser.CompanyID > 0)
             {
-                Courses = this._CourseBAL.TMS_CoursesByOrganization_GetAllBAL(startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
+                Courses = this._CourseBAL.TMS_CoursesByOrganization_GetAllBAL(request.Page,startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
             }
             var result = new DataSourceResult()
             {
@@ -1513,7 +1513,7 @@ namespace TMS.Web.Controllers
             {
                 if (ClassID <= 0)
                 {
-                    Sessions = this._SessionBAL.TMS_SessionsbyOrganization_GetALLSessionsByCultureBAL(ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
+                    Sessions = this._SessionBAL.TMS_SessionsbyOrganization_GetALLSessionsByCultureBAL(ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID),request.Page);
                 }
                 else
                 {
@@ -1524,9 +1524,9 @@ namespace TMS.Web.Controllers
             var result = new DataSourceResult()
             {
                 Data = Sessions, // Process data (paging and sorting applied)
-                //Total = Total // Total number of records
+                Total = Total // Total number of records
             };
-            return Json(Sessions.ToDataSourceResult(request, ModelState));
+            return Json(result);
         }
 
         [ClaimsAuthorize("CanAddEditSession")]

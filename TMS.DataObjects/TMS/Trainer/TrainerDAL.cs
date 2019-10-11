@@ -109,11 +109,29 @@ namespace TMS.DataObjects.TMS
 
             }
         
-        public IList<Trainer> TrainerOrganization_GetAllDAL(string culture, long RoleID, string ID,  string SearchText)
+        public IList<Trainer> TrainerOrganization_GetAllDAL(ref int Total,string culture, long RoleID, string ID,  string SearchText,string SortExpression,int StartRowIndex,int page,int PageSize)
         {
-            List<Trainer> Person = new List<Trainer>();
+            List<Trainer> _PersonData = new List<Trainer>();
             var date = DateTime.Now.ToString("yyyy-MM-dd") + " " + CommonUtility.PersonFlagsClearingTime();
-            var _PersonData = ExecuteListSp<Trainer>("TMS_TrainerOrganization_GetByCulture", ParamBuilder.Par("@culture", culture), ParamBuilder.Par("@RoleID", RoleID), ParamBuilder.Par("@ID", ID),  ParamBuilder.Par("SearchText", SearchText), ParamBuilder.Par("FlagDateTime", date));
+            using (var conn = new SqlConnection(DBHelper.ConnectionString))
+            {
+                conn.Open();
+                DynamicParameters dbParam = new DynamicParameters();
+                dbParam.AddDynamicParams(new { ID = ID, SearchText = SearchText, culture = culture, RoleID = RoleID, FlagDateTime=date, SortExpression=SortExpression, StartRowIndex= StartRowIndex,page=page,PageSize=PageSize });
+                using (var multi = conn.QueryMultiple("TMS_TrainerOrganization_GetByCulture", dbParam, commandType: System.Data.CommandType.StoredProcedure))
+                {
+                    _PersonData = multi.Read<Trainer>().AsList<Trainer>();
+                    Total = multi.Read<int>().FirstOrDefault<int>();
+                }
+
+                conn.Close();
+            }
+
+
+
+
+            //var _PersonData = ExecuteListSp<Trainer>("TMS_TrainerOrganization_GetByCulture", ParamBuilder.Par("@culture", culture), ParamBuilder.Par("@RoleID", RoleID),
+            //    ParamBuilder.Par("@ID", ID),  ParamBuilder.Par("SearchText", SearchText), ParamBuilder.Par("FlagDateTime", date), ParamBuilder.Par("SortExpression", SortExpression), ParamBuilder.Par("StartRowIndex", StartRowIndex), ParamBuilder.Par("Page", page), ParamBuilder.Par("PageSize", PageSize));
             foreach (var single in _PersonData)
             {
                 if (single.FlagCount > 0)
@@ -122,8 +140,8 @@ namespace TMS.DataObjects.TMS
                 }
               //  Person = _PersonData.Read<Trainer>().AsList<Trainer>();
             }
-            //    Total = _PersonData.Read<int>().FirstOrDefault<int>();
-            return _PersonData;
+            //int   Total = _PersonData.Read<int>().FirstOrDefault<int>();
+            return _PersonData.ToList();
 
             //List<Trainer> trainer = new List<Trainer>();
             //using (var conn = new SqlConnection(DBHelper.ConnectionString))

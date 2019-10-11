@@ -31,7 +31,7 @@ namespace TMS.DataObjects.TMS.Trainers
         /// <param name="culture">The culture.</param>
         /// <param name="culture">OrganizationID.</param>
         /// <returns>IList&lt;Trainer&gt;.</returns>
-        IList<Trainer> TrainerOrganization_GetAllDAL(string culture, long RoleID, string ID,  string SearchText);
+        IList<Trainer> TrainerOrganization_GetAllDAL(ref int Total,string  culture, long RoleID, string ID,  string SearchText, string SortExpression, int StartRowIndex, int page, int PageSize);
 
 
         IList<Trainer> DeletedPerson_GetAllDAL(string culture, long ID, string SearchText);

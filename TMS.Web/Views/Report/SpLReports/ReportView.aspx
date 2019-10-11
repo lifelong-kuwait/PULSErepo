@@ -9,7 +9,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-       <div class="col-md-5" style="height: 700px;width: 1000px;">
+       <div class="col-md-5" style="height: 700px;width: 100%;">
               <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
               <rsweb:ReportViewer ID="ReportViewerRSFReports" runat="server"  IsReadyForRendering="false" AsyncRendering="false" ProcessingMode="Remote" Width="797px" ><LocalReport ReportPath="../../../Report/Tran_ViewCourseAttendanceReport.rdlc"></LocalReport></rsweb:ReportViewer>
          </div>

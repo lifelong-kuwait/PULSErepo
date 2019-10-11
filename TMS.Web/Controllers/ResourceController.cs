@@ -173,8 +173,6 @@ namespace TMS.Web.Controllers
             //{
             //    resources = _objeResources.GetTMSResourceBALbyOrganization(request.Page, request.PageSize, ref Total, Convert.ToString(-2), SearchText).ToList();
             //}
-
-
             // var startRowIndex = (request.Page - 1) * request.PageSize;
             //var value = GridHelper.GetSortExpression(request, "P_Resourceid");
             //int Total = 0;

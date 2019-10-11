@@ -113,14 +113,14 @@ namespace TMS.Web.Controllers
         public ActionResult Person_Read([DataSourceRequest] DataSourceRequest request, long RoleID)
         {
             //var startRowIndex = (request.Page - 1) * request.PageSize;
-            int Total = 0;
+            //int Total = 0;
             //var SearchText = Request.Form["SearchText"];
             //if (request.PageSize == 0)
             //{
             //    request.PageSize = 10;
             //}
             var startRowIndex = (request.Page - 1) * request.PageSize;
-            //   int Total = 0;
+               int Total = 0;
             var SearchText = Request.Form["SearchText"];
             var DeletedPerson = Request.Form["DeletedPerson"];
             if (request.PageSize == 0)
@@ -136,9 +136,14 @@ namespace TMS.Web.Controllers
             {
                 if (CurrentUser.CompanyID > 0)
                 {
-                    //var _person = _PersonBAL.PersonOrganization_GetALLBAL(Convert.ToString(CurrentUser.CompanyID));
-                    var _person = this._TrainerBAL.TrainerOrganization_GetAllBAL(CurrentCulture, RoleID, Convert.ToString(CurrentUser.CompanyID), SearchText);
-                    return Json(_person.ToDataSourceResult(request, ModelState));
+                    //var _person = _PersonBAL.PersonOrganization_GetALLBAL(Convert.ToString(CurrentUser.CompanyID));,string SortExpression,int StartRowIndex,int page,int PageSize
+                    var _person = this._TrainerBAL.TrainerOrganization_GetAllBAL(ref Total,CurrentCulture, RoleID, Convert.ToString(CurrentUser.CompanyID), SearchText,request.Sorts.ToString(),startRowIndex,request.Page,request.PageSize);
+                    var result = new DataSourceResult()
+                    {
+                        Data = _person, // Process data (paging and sorting applied)
+                        Total = Total // Total number of records
+                    };
+                    return Json(result);
                 }
                 else
                 {
@@ -146,11 +151,7 @@ namespace TMS.Web.Controllers
 
                     return Json(_person.ToDataSourceResult(request, ModelState));
                 }
-                //var result = new DataSourceResult()
-                //{
-                //    Data = _person, // Process data (paging and sorting applied)
-                //    Total = Total // Total number of records
-                //};
+                
                 // return Json(result);
                 //else { 
                 ////var _person = _PersonBAL.Person_GetALLBAL();

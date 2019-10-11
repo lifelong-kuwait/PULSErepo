@@ -70,14 +70,14 @@ namespace TMS.DataObjects.TMS
         /// <param name="SortExpression">The sort expression.</param>
         /// <param name="SearchText">The search text.</param>
         /// <returns>List&lt;Course&gt;.</returns>
-        public List<Course> TMS_CoursesByOrganization_GetAllDAL(int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid)
+        public List<Course> TMS_CoursesByOrganization_GetAllDAL(int page,int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid)
         {
             List<Course> Course = new List<Course>();
             using (var conn = new SqlConnection(DBHelper.ConnectionString))
             {
                 conn.Open();
                 DynamicParameters dbParams = new DynamicParameters();
-                dbParams.AddDynamicParams(new { StartRowIndex = StartRowIndex, PageSize = PageSize, SortExpression = SortExpression, SearchText = SearchText, Oid = Oid });
+                dbParams.AddDynamicParams(new { StartRowIndex = StartRowIndex, PageSize = PageSize, SortExpression = SortExpression, SearchText = SearchText, Oid = Oid,Page= page });
                 using (var multi = conn.QueryMultiple("TMS_CoursesByOrganization_GetAll", dbParams, commandType: System.Data.CommandType.StoredProcedure))
                 {
                     Course = multi.Read<Course>().AsList<Course>();

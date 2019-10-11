@@ -45,7 +45,7 @@ namespace TMS.DataObjects.Interfaces.TMS
         /// <param name="SortExpression">The sort expression.</param>
         /// <param name="SearchText">The search text.</param>
         /// <returns>List&lt;Course&gt;.</returns>
-        List<Course> TMS_CoursesByOrganization_GetAllDAL(int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid);
+        List<Course> TMS_CoursesByOrganization_GetAllDAL(int page, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid);
         /// <summary>
         /// TMSs the courses get all dal.
         /// </summary>

@@ -47,7 +47,7 @@ namespace TMS.Business.Interfaces.TMS
         /// <param name="SortExpression">The sort expression.</param>
         /// <param name="SearchText">The search text.</param>
         /// <returns>List&lt;Course&gt;.</returns>
-        List<Course> TMS_CoursesByOrganization_GetAllBAL(int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid);
+        List<Course> TMS_CoursesByOrganization_GetAllBAL(int page, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid);
         /// </summary>
         /// <param name="StartRowIndex">Start index of the row.</param>
         /// <param name="PageSize">Size of the page.</param>

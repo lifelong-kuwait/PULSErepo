@@ -125,20 +125,19 @@ namespace TMS.DataObjects.TMS.Program
         /// <param name="SortExpression">The sort expression.</param>
         /// <param name="SearchText">The search text.</param>
         /// <returns>List&lt;Sessions&gt;.</returns>
-        public List<Sessions> TMS_SessionsbyOrganization_GetALLSessionsByCultureDAL(long ClassID, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText, string Oid)
+        public List<Sessions> TMS_SessionsbyOrganization_GetALLSessionsByCultureDAL(long ClassID, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText, string Oid,int page)
         {
             List<Sessions> Sessions = new List<Sessions>();
             using (var conn = new SqlConnection(DBHelper.ConnectionString))
             {
                 conn.Open();
                 DynamicParameters dbParam = new DynamicParameters();
-                dbParam.AddDynamicParams(new { ClassID = ClassID, StartRowIndex = StartRowIndex, PageSize = PageSize, SortExpression = SortExpression, SearchText = SearchText, Oid = Oid });
+                dbParam.AddDynamicParams(new { ClassID = ClassID, StartRowIndex = StartRowIndex, PageSize = PageSize, SortExpression = SortExpression, SearchText = SearchText, Oid = Oid,Page=page });
                 using (var multi = conn.QueryMultiple("TMS_Sessions_GetALLSessionsByCultureandOrganization", dbParam, commandType: System.Data.CommandType.StoredProcedure))
                 {
                     Sessions = multi.Read<Sessions>().AsList<Sessions>();
-                    //Total = multi.Read<int>().FirstOrDefault<int>();
+                    Total = multi.Read<int>().FirstOrDefault<int>();
                 }
-
                 conn.Close();
             }
             return Sessions.ToList();
