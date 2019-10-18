@@ -542,7 +542,7 @@ namespace TMS.Web.Controllers
             if (CurrentUser.CompanyID > 0)
             {
                 var Classs = this._ClassBAL.ClassTrainee_GetAllByClassIDForCreatingBALOrganization(CurrentCulture, CurrentUser.CompanyID, ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
-
+                
                 var result = new DataSourceResult()
                 {
                     Data = Classs, // Process data (paging and sorting applied)
@@ -2018,7 +2018,11 @@ namespace TMS.Web.Controllers
         {
             long? CourseID = Convert.ToInt64(courseId);
             long? ClassID = Convert.ToInt64(classId);
-            return new JsonResult { Data = _AttendanceBAL.ManageScheduleBAL(CurrentUser.CompanyID, CourseID, ClassID), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            DateTime date = DateTime.Today;
+            int year = date.Year;
+            var firstDayOfMonth = new DateTime(year, date.Month, 1);
+            var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+            return new JsonResult { Data = _AttendanceBAL.ManageScheduleBAL(CurrentUser.CompanyID, CourseID, ClassID, firstDayOfMonth,lastDayOfMonth), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
 
             // return Json(_AttendanceBAL.ManageScheduleBAL(CurrentUser.CompanyID,CourseID,ClassID).ToDataSourceResult());
         }

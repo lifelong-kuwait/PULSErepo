@@ -11,12 +11,14 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using System;
 using System.Collections.Generic;
 using System.Data;
 using TMS.Business.Interfaces.TMS;
 using TMS.DataObjects.Interfaces.TMS;
 using TMS.Library.Entities.Common.Configuration;
 using TMS.Library.Entities.Coordinator;
+using TMS.Library.Entities.TMS.Course;
 using TMS.Library.Entities.TMS.Program;
 using TMS.Library.TMS;
 
@@ -92,12 +94,16 @@ namespace TMS.Business.TMS
         {
             return _CourseDAL.TMS_Courses_GetByIdDAL(ID);
         }
-        /// <summary>
-        /// Courses the category code by course identifier bal.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns>System.String.</returns>
-        public string CourseCategoryCodeByCourseIdBAL(long id)
+       public List<CourseDataBar> CourseDataBarBAL(DateTime startdate, DateTime lastdate, long CompanyId)
+        {
+            return _CourseDAL.CourseDataBarDAL(startdate,lastdate,CompanyId);
+        }
+    /// <summary>
+    /// Courses the category code by course identifier bal.
+    /// </summary>
+    /// <param name="id">The identifier.</param>
+    /// <returns>System.String.</returns>
+    public string CourseCategoryCodeByCourseIdBAL(long id)
         {
             return _CourseDAL.CourseCategoryCodeByCourseIdDAL(id);
         }

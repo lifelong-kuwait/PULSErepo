@@ -11,10 +11,12 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using System;
 using System.Collections.Generic;
 using System.Data;
 using TMS.Library.Entities.Common.Configuration;
 using TMS.Library.Entities.Coordinator;
+using TMS.Library.Entities.TMS.Course;
 using TMS.Library.Entities.TMS.Program;
 using TMS.Library.TMS;
 
@@ -62,7 +64,12 @@ namespace TMS.DataObjects.Interfaces.TMS
         /// <param name="ID">The identifier.</param>
         /// <returns>Course.</returns>
         Course TMS_Courses_GetByIdDAL(string ID);
-
+        /// <summary>
+        /// TMSs the courses get by identifier dal.
+        /// </summary>
+        /// <param name="ID">The identifier.</param>
+        /// <returns>Course.</returns>
+        List<CourseDataBar> CourseDataBarDAL(DateTime startdate, DateTime lastdate, long CompanyId);
         /// <summary>
         /// Courses the category code by course identifier dal.
         /// </summary>

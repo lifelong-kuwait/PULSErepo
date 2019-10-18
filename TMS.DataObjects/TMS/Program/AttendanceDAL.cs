@@ -17,14 +17,14 @@ namespace TMS.DataObjects.TMS.Program
     {
        
 
-        public List<Schedule> ManageScheduleDAL(long companyID, long? CourseID,long? ClassID)
+        public List<Schedule> ManageScheduleDAL(long companyID, long? CourseID,long? ClassID, DateTime firstdate, DateTime LastDate)
         {
             List<Schedule> sch = new List<Schedule>();
             using (var conn = new SqlConnection(DBHelper.ConnectionString))
             {
                 conn.Open();
                 DynamicParameters dbParams = new DynamicParameters();
-                dbParams.AddDynamicParams(new { OrganizationID = companyID, CourseID= CourseID, ClassID= ClassID });
+                dbParams.AddDynamicParams(new { OrganizationID = companyID, CourseID= CourseID, ClassID= ClassID, MonthstartDate=firstdate, MonthLastDate=LastDate });
                 sch = conn.Query<Schedule>("TMS_Session_GetByCourseAndClassID", dbParams, commandType: System.Data.CommandType.StoredProcedure).ToList<Schedule>();
                 conn.Close();
             }

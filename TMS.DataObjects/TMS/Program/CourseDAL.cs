@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 using Dapper;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -20,6 +21,7 @@ using TMS.DataObjects.Generics;
 using TMS.DataObjects.Interfaces.TMS;
 using TMS.Library.Entities.Common.Configuration;
 using TMS.Library.Entities.Coordinator;
+using TMS.Library.Entities.TMS.Course;
 using TMS.Library.Entities.TMS.Program;
 using TMS.Library.TMS;
 using TMS.Library.TMS.Persons;
@@ -124,6 +126,16 @@ namespace TMS.DataObjects.TMS
                 conn.Close();
             }
             return Course;
+        }
+        /// <summary>
+        /// TMSs the courses get by identifier dal.
+        /// </summary>
+        /// <param name="ID">The identifier.</param>
+        /// <returns>Course.</returns>
+        public List<CourseDataBar> CourseDataBarDAL(DateTime startdate, DateTime lastdate, long CompanyId)
+        {
+            var _PersonData = ExecuteListSp<CourseDataBar>("CourseBarData", ParamBuilder.Par("monthstart", startdate), ParamBuilder.Par("monthEndDate", lastdate), ParamBuilder.Par("CompanyId", CompanyId));
+            return _PersonData.ToList();
         }
         /// <summary>
         /// Courses the category code by course identifier dal.

@@ -103,6 +103,9 @@
     <Reference Include="Castle.Windsor">
       <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Dapper">
       <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Dapper.dll</HintPath>
     </Reference>
@@ -286,6 +289,7 @@
     <Compile Include="Controllers\SalesAdministrationController.cs" />
     <Compile Include="Controllers\SPl_Test_ReportsController.cs" />
     <Compile Include="Controllers\TestWaqasControllerController.cs" />
+    <Compile Include="Core\getweek.cs" />
     <Compile Include="Core\SessionTimeoutAttribute.cs" />
     <Compile Include="CourseAttendanceDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -304,6 +308,12 @@
       <DependentUpon>DailyUtilizationReport.xsd</DependentUpon>
     </Compile>
     <Compile Include="DS_CompanyInfo.Designer.cs" />
+    <Compile Include="Reports\WeeklyAttendanceReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WeeklyAttendanceReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="TMS_Class_WeeklyUtilizationReport2DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2554,6 +2564,8 @@
     <None Include="Properties\PublishProfiles\FolderProfile4.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile40.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile41.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile42.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile43.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile5.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile6.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile7.pubxml" />
@@ -4734,6 +4746,7 @@
     <Content Include="Views\Home\PageNotFound.cshtml" />
     <Content Include="Views\SPl_Test_Reports\WeeklyUtilizationReportModified.cshtml" />
     <Content Include="Views\SPl_Test_Reports\VenueMatrixRDLCReport.cshtml" />
+    <Content Include="Views\Admin\Schedule_Read.cshtml" />
     <None Include="WeeklyAttendanceReportData.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -5394,6 +5407,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />
@@ -5416,6 +5430,10 @@
     <Content Include="Report\Tran_ViewCourseAttendanceReport.rdlc" />
     <Content Include="Report\Tran_ViewTraineePeriodicReport.rdlc" />
     <Content Include="Report\WeeklyUtilizationReport.rdlc" />
+    <EmbeddedResource Include="Reports\WeeklyAttendanceReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WeeklyAttendanceReport.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\Report1.rdlc" />
     <Content Include="Report\Venue_Matrix_ReportCustomized.rdlc" />
     <Content Include="Report\WeeklyUtilizatinDynamicColumns.rdlc" />

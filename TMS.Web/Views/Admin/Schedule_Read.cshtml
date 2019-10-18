@@ -1,0 +1,90 @@
+﻿@using lr = Resources.Resources;
+
+
+<style>
+    div#calender {
+        width: 1082px;
+    }
+
+    .fc-content {
+        color: #000;
+    }
+    .control-label {
+        padding-left: 12%;
+    }
+    td.fc-day.fc-widget-content.fc-sun.fc-today.fc-state-highlight {
+        background-color: #80BFC8;
+    }
+
+    .right-inner-addon {
+        display: none;
+    }
+
+    .fc button .fc-icon {
+        position: relative;
+        top: -.05em;
+        margin: 0 .2em;
+        /* vertical-align: middle; */
+    }
+
+    span.fc-time {
+        display: none;
+    }
+</style>
+
+
+<style>
+    .form-group {
+        display: grid;
+    }
+
+    .input-group {
+        display: none;
+    }
+
+    .col-md-12.col-lg-offset-2 {
+        margin-bottom: 26px;
+    }
+    /*li {
+        display: none;
+    }*/
+</style>
+@*<div class="col-md-offset-2">*@
+<div class="row" style="margin-left:10%;">
+    
+    
+
+    
+
+
+
+</div>
+
+
+
+
+<div id="calender" style="margin-top:2%; margin-left:4%" class="col-lg-10 col-md-8"></div><div class="row">
+    <div class="col-lg-8 col-md-8">
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog" style="margin-top: 70px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        @*<h4 class="modal-title"><span id="eventTitle"></span></h4>*@
+                    </div>
+                    <div class="modal-body">
+                        <p id="pDetails"></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+

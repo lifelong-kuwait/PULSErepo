@@ -27,6 +27,7 @@ using System.Data.Common;
 using TMS.Library.Entities.TMS.Program;
 using TMS.Library.Entities.CRM;
 using TMS.Library.ModelMapper;
+using TMS.Library.Entities.TMS.Persons;
 
 namespace TMS.DataObjects.TMS
 {
@@ -256,7 +257,34 @@ namespace TMS.DataObjects.TMS
             CustomGenerics.CustomGenerics _obj = new CustomGenerics.CustomGenerics();
             return _obj.InsertRecordPersonReturnObject(_objPerson, clientType, RoleID);
         }
+        /// <summary>
+        /// Persons the insert new person dal.
+        /// </summary>
+        /// <param name="_objPerson">The object person.</param>
+        /// <param name="clientType">Type of the client.</param>
+        /// <returns>PersonResponse.</returns>
+        public List<PersonBarData> PersonBarBALDAL(DateTime startdate, DateTime lastdate,long CompanyId)
+        {
+            var _PersonData = ExecuteListSp<PersonBarData>("PersonTrainerTraineeData", ParamBuilder.Par("monthstart", startdate), ParamBuilder.Par("monthEndDate", lastdate), ParamBuilder.Par("CompanyId", CompanyId));
+            return _PersonData.ToList();
+            //List<PersonBarData> _PersonData = new List<PersonBarData>();
+            //var date = DateTime.Now.ToString("yyyy-MM-dd") + " " + CommonUtility.PersonFlagsClearingTime();
+            //using (var conn = new SqlConnection(DBHelper.ConnectionString))
+            //{
+            //    conn.Open();
+            //    DynamicParameters dbParam = new DynamicParameters();
+            //    dbParam.AddDynamicParams(new { monthstart = startdate, monthEndDate = lastdate, });
+            //    using (var multi = conn.QueryMultiple("PersonTrainerTraineeData", dbParam, commandType: System.Data.CommandType.StoredProcedure))
+            //    {
+            //        _PersonData = multi.Read<PersonBarData>().AsList<PersonBarData>();
 
+            //    }
+
+            //    conn.Close();
+            //}
+            //return _PersonData.ToList();
+        }
+       
 
         public PersonResponse ProspectInsertNewPersonDAL(Person _objPerson, string clientType, long RoleID)
         {

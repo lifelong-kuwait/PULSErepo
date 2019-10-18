@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using TMS.Library.Entities.CRM;
+using TMS.Library.Entities.TMS.Persons;
 using TMS.Library.Entities.TMS.Program;
 using TMS.Library.TMS.Persons;
 using TMS.Library.TMS.Persons.Others;
@@ -32,7 +33,12 @@ namespace TMS.Business.Interfaces.TMS
         /// <param name="_objPerson">The object person.</param>
         /// <returns>PersonResponse.</returns>
         PersonResponse PersonInsertNewPersonBAL(Person _objPerson,long RoeID);
-
+        /// <summary>
+        /// Persons the insert new person bal.
+        /// </summary>
+        /// <param name="_objPerson">The object person.</param>
+        /// <returns>PersonResponse.</returns>
+        List<PersonBarData> PersonBarBAL(DateTime startdate, DateTime lastdate,long CompanyId);
         PersonResponse ProspectInsertNewPersonBAL(Person _objPerson, long RoeID = 3);
 
         int Loginperson_DuplicationCheckBAL(Person _objPerson);

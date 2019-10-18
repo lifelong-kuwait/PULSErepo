@@ -58,6 +58,21 @@ namespace TMS.DataObjects.TMS.Program
             return Sessions.ToList();
         }
 
+        /// <summary>
+        /// TMSs the sessions get all by culture dal.
+        /// </summary>
+        /// <param name="ClassID">The class identifier.</param>
+        /// <param name="StartRowIndex">Start index of the row.</param>
+        /// <param name="PageSize">Size of the page.</param>
+        /// <param name="Total">The total.</param>
+        /// <param name="SortExpression">The sort expression.</param>
+        /// <param name="SearchText">The search text.</param>
+        /// <returns>List&lt;Sessions&gt;.</returns>
+        public List<SessionWeekBarData> TMS_Sessions_BarDAL(string FirstDate, string lastDate, long companyID)
+        {
+            var _PersonData = ExecuteListSp<SessionWeekBarData>("SessionsBarData", ParamBuilder.Par("monthstart", FirstDate), ParamBuilder.Par("monthEndDate", lastDate), ParamBuilder.Par("CompanyId", companyID));
+            return _PersonData.ToList();
+        }
 
 
 

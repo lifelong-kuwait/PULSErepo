@@ -22,6 +22,7 @@ using TMS.DataObjects.Interfaces.TMS;
 using TMS.DataObjects.TMS;
 using TMS.Library;
 using TMS.Library.Entities.CRM;
+using TMS.Library.Entities.TMS.Persons;
 using TMS.Library.Entities.TMS.Program;
 using TMS.Library.TMS.Persons;
 using TMS.Library.TMS.Persons.Others;
@@ -80,9 +81,17 @@ namespace TMS.Business.TMS
             return result;
         }
 
+        /// <summary>
+        /// Persons the insert new person bal.
+        /// </summary>
+        /// <param name="_objPerson">The object person.</param>
+        /// <returns>PersonResponse.</returns>
+        public List<PersonBarData> PersonBarBAL(DateTime startdate, DateTime lastdate,long CompanyId)
+        {
+            return DAL.PersonBarBALDAL(startdate, lastdate, CompanyId);
+        }
 
-
-        public PersonResponse ProspectInsertNewPersonBAL(Person _objPerson, long RoleID)
+            public PersonResponse ProspectInsertNewPersonBAL(Person _objPerson, long RoleID)
         {
             string clientType = string.Empty;
             if (_objPerson.ClientType == ClientType.ClientType_Internal)

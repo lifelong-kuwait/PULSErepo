@@ -19,6 +19,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TMS.Library.Entities.Common.Configuration;
 using TMS.Library.Entities.Coordinator;
+using TMS.Library.Entities.TMS.Course;
 using TMS.Library.Entities.TMS.Program;
 using TMS.Library.TMS;
 
@@ -63,6 +64,12 @@ namespace TMS.Business.Interfaces.TMS
         /// <param name="ID">The identifier.</param>
         /// <returns>Course.</returns>
         Course TMS_Courses_GetByIdBAL(string ID);
+        /// <summary>
+        /// Persons the insert new person bal.
+        /// </summary>
+        /// <param name="_objPerson">The object person.</param>
+        /// <returns>PersonResponse.</returns>
+        List<CourseDataBar> CourseDataBarBAL(DateTime startdate, DateTime lastdate, long CompanyId);
         /// <summary>
         /// Courses the category code by course identifier bal.
         /// </summary>

@@ -14,7 +14,7 @@ namespace TMS.Business.Interfaces.TMS.Program
 
         List<Attendance> ManageSessionAttendanceBAL(long companyID,long SessionID);
 
-        List<Schedule> ManageScheduleBAL(long companyID, long? CourseID, long? ClassID);
+        List<Schedule> ManageScheduleBAL(long companyID, long? CourseID, long? ClassID,DateTime firstdate,DateTime LastDate);
 
         List<Course> CourseGetAllBAL(string Culture, long CompanyID);
         long MarkTraineesAttendanceBAL(Attendance _Attendance, int Atttype);

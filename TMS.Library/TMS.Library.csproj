@@ -88,14 +88,17 @@
     <Compile Include="Entities\CRM\CRM_UserEnrolment.cs" />
     <Compile Include="Entities\CRM\CRM_UserMapping.cs" />
     <Compile Include="Entities\CRM\CRM_VisitHistory.cs" />
+    <Compile Include="Entities\TMS\Course\CourseDataBar.cs" />
     <Compile Include="Entities\TMS\Course\CourseRelatedExamModel.cs" />
     <Compile Include="Entities\TMS\Language\LanguageModel.cs" />
     <Compile Include="Entities\TMS\Persons\MinimumAgeAttribute.cs" />
+    <Compile Include="Entities\TMS\Persons\PersonBarData.cs" />
     <Compile Include="Entities\TMS\Persons\Prospect.cs" />
     <Compile Include="Entities\TMS\Program\Attendance.cs" />
     <Compile Include="Entities\TMS\Program\Classes.cs" />
     <Compile Include="Entities\TMS\Program\Schedule.cs" />
     <Compile Include="Entities\TMS\Program\Sessions.cs" />
+    <Compile Include="Entities\TMS\Program\SessionWeekBarData.cs" />
     <Compile Include="Entities\TMS\Program\TRainerDetail.cs" />
     <Compile Include="Entities\TMS\Task\Sls_Task.cs" />
     <Compile Include="Entities\TMS\Trainer\Trainer.cs" />

@@ -29,7 +29,7 @@ namespace TMS.Business.TMS.Program
         //{
         //    throw new NotImplementedException();
         //}
-        public List<Schedule> ManageScheduleBAL(long companyID, long? CourseID,long? ClassID) => _AttendanceDAL.ManageScheduleDAL(companyID,CourseID,ClassID);
+        public List<Schedule> ManageScheduleBAL(long companyID, long? CourseID,long? ClassID, DateTime firstdate, DateTime LastDate) => _AttendanceDAL.ManageScheduleDAL(companyID,CourseID,ClassID,firstdate,LastDate);
 
         public List<Course> CourseGetAllBAL(string Culture, long CompanyID) => _AttendanceDAL.CourseGetAllDAL(Culture,CompanyID);
         public long MarkTraineesAttendanceBAL(Attendance _Attendance, int Atttype) => _AttendanceDAL.MarkTraineesAttendanceDAL(_Attendance,Atttype);

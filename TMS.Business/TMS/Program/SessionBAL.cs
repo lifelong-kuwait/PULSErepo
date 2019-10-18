@@ -63,7 +63,20 @@ namespace TMS.Business.TMS.Program
         {
             return _SessionBAL.TMS_Sessions_GetALLByCultureDAL(ClassID, StartRowIndex, PageSize, ref Total, SortExpression, SearchText);
         }
-
+        /// <summary>
+        /// TMSs the sessions get all by culture bal.
+        /// </summary>
+        /// <param name="ClassID">The class identifier.</param>
+        /// <param name="StartRowIndex">Start index of the row.</param>
+        /// <param name="PageSize">Size of the page.</param>
+        /// <param name="Total">The total.</param>
+        /// <param name="SortExpression">The sort expression.</param>
+        /// <param name="SearchText">The search text.</param>
+        /// <returns>List&lt;Sessions&gt;.</returns>
+        public List<SessionWeekBarData> TMS_Sessions_BarBAL(string FirstDate, string lastDate, long companyID)
+        {
+            return _SessionBAL.TMS_Sessions_BarDAL(FirstDate, lastDate, companyID);
+        }
         /// <summary>
         /// TMSs the sessions get all by culture bal.
         /// </summary>

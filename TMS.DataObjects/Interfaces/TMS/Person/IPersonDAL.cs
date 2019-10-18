@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using TMS.Library.Entities.CRM;
+using TMS.Library.Entities.TMS.Persons;
 using TMS.Library.Entities.TMS.Program;
 using TMS.Library.TMS.Persons;
 using TMS.Library.TMS.Persons.Others;
@@ -33,6 +34,13 @@ namespace TMS.DataObjects.Interfaces.TMS
         /// <param name="clientType">Type of the client.</param>
         /// <returns>PersonResponse.</returns>
         PersonResponse PersonInsertNewPersonDAL(Person _objPerson, string clientType,long RoleID);
+        /// <summary>
+        /// Persons the insert new person dal.
+        /// </summary>
+        /// <param name="_objPerson">The object person.</param>
+        /// <param name="clientType">Type of the client.</param>
+        /// <returns>PersonResponse.</returns>
+        List<PersonBarData> PersonBarBALDAL(DateTime startdate, DateTime lastdate,long CompanyId);
 
 
         PersonResponse ProspectInsertNewPersonDAL(Person _objPerson, string clientType, long RoleID);

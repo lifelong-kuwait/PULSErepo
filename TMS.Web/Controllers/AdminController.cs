@@ -24,6 +24,12 @@ using TMS.Library.Common.Groups;
 using TMS.Library.Entities.Common.Roles;
 using lr = Resources.Resources;
 using TMS.Web.Core;
+using TMS.Business.Interfaces.TMS;
+using TMS.Library.Entities.TMS.Persons;
+using TMS.Library.Entities.TMS.Course;
+using System.Drawing;
+using TMS.Library.Entities.TMS.Program;
+using TMS.Business.Interfaces.TMS.Program;
 
 namespace TMS.Web.Controllers
 {
@@ -31,15 +37,20 @@ namespace TMS.Web.Controllers
     public class AdminController : TMSControllerBase
     {
         private readonly IGroupsBAL _Groups;
-
+        private readonly IPersonBAL _PersonBAL;
         private readonly IRolesBAL _Roles;
+        private readonly ICourseBAL _CourseBAL;
+        private readonly ISessionBAL _SessionBAL;
         /// <summary>
         /// Initializes a new instance of the <see cref="AdminController" /> class.
         /// </summary>
         /// <param name="__RolesBAL">The roles bal.</param>
         /// <param name="GroupBAL">The group bal.</param>
-        public AdminController(IRolesBAL __RolesBAL, IGroupsBAL GroupBAL)
+        public AdminController(ICourseBAL ICourseBAL, ISessionBAL _ISessionBAL, IRolesBAL __RolesBAL, IGroupsBAL GroupBAL, IPersonBAL objIPersonBAL)
         {
+            _SessionBAL = _ISessionBAL;
+            _CourseBAL = ICourseBAL;
+            _PersonBAL = objIPersonBAL;
             _Groups = GroupBAL;
             _Roles = __RolesBAL;
         }
@@ -586,5 +597,89 @@ namespace TMS.Web.Controllers
         }
 
         #endregion "Roles"
-    }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ActivityAuthorize]
+        [ClaimsAuthorize("CanViewTMSAdmin")]
+        public ActionResult PersonTrainerTraineeData()
+        {
+            List<PersonBarData> list = new List<PersonBarData>();
+            DateTime date = DateTime.Today;
+            int year = date.Year;
+            for(int i=1;i<=12;i++)
+            {
+                
+                var firstDayOfMonth = new DateTime(year, i, 1);
+                var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+                var result = _PersonBAL.PersonBarBAL(firstDayOfMonth, lastDayOfMonth,CurrentUser.CompanyID);
+                PersonBarData obj = new PersonBarData();
+                obj.month = firstDayOfMonth.ToString("MMMM");
+                obj.person = result.First().person;
+                obj.trainer = result.First().trainer;
+                obj.trainee= result.First().trainee;
+                list.Add(obj);
+            }
+            return Json(list);
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ActivityAuthorize]
+        [ClaimsAuthorize("CanViewTMSAdmin")]
+        public ActionResult CourseData()
+        {
+
+            List<CourseDataBar> list = new List<CourseDataBar>();
+            DateTime date = DateTime.Today;
+            int year = date.Year;
+            for (int i = 1; i <= 12; i++)
+            {
+               
+                var firstDayOfMonth = new DateTime(year, i, 1);
+                var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+                var result = _CourseBAL.CourseDataBarBAL(firstDayOfMonth, lastDayOfMonth, CurrentUser.CompanyID);
+                CourseDataBar obj = new CourseDataBar();
+                obj.month = firstDayOfMonth.ToString("MMMM");
+                obj.CourseCount = result.First().CourseCount;
+                var random = new Random();
+                var color = String.Format("#{0:X6}", random.Next(0x1000000));
+                obj.customColor = color.ToString();
+                list.Add(obj);
+            }
+            return Json(list);
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ActivityAuthorize]
+        [ClaimsAuthorize("CanViewTMSAdmin")]
+        public ActionResult SessionsData()
+        {
+
+            List<SessionWeekBarData> list = new List<SessionWeekBarData>();
+            DateTime date = DateTime.Today;
+            int year = date.Year;
+            var firstDayOfMonth = new DateTime(year, date.Month, 1);
+            var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+            getweek getweek = new getweek();
+            foreach (WeekRange wr in getweek.GetWeekRange(firstDayOfMonth, lastDayOfMonth))
+            {
+                var result = _SessionBAL.TMS_Sessions_BarBAL(wr.Start.Date.ToString(), wr.End.ToShortDateString(), CurrentUser.CompanyID);
+                SessionWeekBarData obj = new SessionWeekBarData();
+                obj.week = "Week"+wr.WeekNo;
+                obj.sessionsCount = result.First().sessionsCount;
+                var random = new Random();
+                var color = String.Format("#{0:X6}", random.Next(0x1000000));
+                obj.customColor = color.ToString();
+                list.Add(obj);
+            }
+            return Json(list);
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ActivityAuthorize]
+        [ClaimsAuthorize("CanViewTMSAdmin")]
+        public ActionResult SchedulePartial()
+        {
+            return PartialView("Schedule_Read");
+        }
+        }
 }

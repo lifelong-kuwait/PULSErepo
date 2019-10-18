@@ -156,12 +156,12 @@
                                 .PersistSelection(true)
                                 //.Events(ev => ev.Change("onChange"))
                                 .Events(e => e.Edit("Grid_onEdit").Save("General_onSave").Change("onTraineePersonsChange"))
-                                //.Pageable(pager => pager.Refresh(false))
+                                .Pageable(pager => pager.Refresh(false))
                                 .Scrollable()
                                 
-                                //.Pageable(pager => pager
-                                //.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true)
-                                // )
+                                .Pageable(pager => pager
+                                .Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true)
+                                 )
 
                                 .HtmlAttributes(new { style = "height:550px;" }).DataSource(dataSource =>
                                 dataSource.Ajax()
@@ -171,7 +171,7 @@
                                 //model.Field(p => p.ID).Editable(false);
                                 }
                                 )
-                                .PageSize(10000)
+                                .PageSize(10)
                                 .Read(read => read.Action("ManageTraineePerson_Read", "Program", new { ClassID = Convert.ToInt64(ViewData["ClassID"]) }).Data("withSearch"))
                                 .Events(e => e.Error("GeneralErrorHandler(\"TraineePersons\")").RequestEnd("GridRequestEndUpdate"))
                                 ).NoRecords(lr.GridNoRecordFoundMessage)
