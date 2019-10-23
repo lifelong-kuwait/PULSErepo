@@ -19,6 +19,8 @@ using TMS.Business.Interfaces.Common.Configuration;
 using TMS.Library.Entities.CRM;
 using Abp.Runtime.Validation;
 using TMS.Web.Core;
+using System.Collections.Generic;
+
 namespace TMS.Web.Controllers
 {
     [SessionTimeout]
@@ -110,15 +112,23 @@ namespace TMS.Web.Controllers
 
         [ClaimsAuthorizeAttribute("CanViewPerson")]
         [DontWrapResult]
-        public ActionResult Person_Read([DataSourceRequest] DataSourceRequest request, long RoleID)
-        {
+        public ActionResult Person_Read([DataSourceRequest]DataSourceRequest request, long RoleID)
+         {
             //var startRowIndex = (request.Page - 1) * request.PageSize;
             //int Total = 0;
             //var SearchText = Request.Form["SearchText"];
             //if (request.PageSize == 0)
             //{
-            //    request.PageSize = 10;
+            //    request.PageSize = 10; 
             //}
+            var kendoRequest = new Kendo.Mvc.UI.DataSourceRequest
+            {
+                
+                Filters = request.Filters,
+                Sorts = request.Sorts,
+                Groups = request.Groups,
+                Aggregates = request.Aggregates
+            };
             var startRowIndex = (request.Page - 1) * request.PageSize;
                int Total = 0;
             var SearchText = Request.Form["SearchText"];
@@ -136,13 +146,34 @@ namespace TMS.Web.Controllers
             {
                 if (CurrentUser.CompanyID > 0)
                 {
+                    IList<TMS.Library.TMS.Trainer.Trainer> _person;
+                    if (kendoRequest.Filters.Count>0)
+                    {
+                         _person = this._TrainerBAL.TrainerOrganization_GetAllBAL(ref Total, CurrentCulture, RoleID, Convert.ToString(CurrentUser.CompanyID), SearchText, GridHelper.GetSortExpression(request, "ID").ToString(), startRowIndex, request.Page, 10000);
+
+                    }
+                    else
+                    {
+                        _person = this._TrainerBAL.TrainerOrganization_GetAllBAL(ref Total, CurrentCulture, RoleID, Convert.ToString(CurrentUser.CompanyID), SearchText, GridHelper.GetSortExpression(request, "ID").ToString(), startRowIndex, request.Page, request.PageSize);
+
+                    }
                     //var _person = _PersonBAL.PersonOrganization_GetALLBAL(Convert.ToString(CurrentUser.CompanyID));,string SortExpression,int StartRowIndex,int page,int PageSize
-                    var _person = this._TrainerBAL.TrainerOrganization_GetAllBAL(ref Total,CurrentCulture, RoleID, Convert.ToString(CurrentUser.CompanyID), SearchText,request.Sorts.ToString(),startRowIndex,request.Page,request.PageSize);
+                    _person = _person.Distinct().ToList();
+                    var data = _person.ToDataSourceResult(kendoRequest);
+
                     var result = new DataSourceResult()
                     {
-                        Data = _person, // Process data (paging and sorting applied)
-                        Total = Total // Total number of records
+                        AggregateResults = data.AggregateResults,
+                        Data = data.Data,
+                        Errors = data.Errors,
+                        Total = Total
                     };
+
+                    //var result = new DataSourceResult()
+                    //{
+                    //    Data = _person, // Process data (paging and sorting applied)
+                    //    Total = Total // Total number of records
+                    //};
                     return Json(result);
                 }
                 else

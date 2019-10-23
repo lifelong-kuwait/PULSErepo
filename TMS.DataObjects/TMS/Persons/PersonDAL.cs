@@ -1089,7 +1089,7 @@ namespace TMS.DataObjects.TMS
             }
         }
 
-        public DataTable SessionsByCourseAndClassIDDAL(long? CourseID, long? ClassID, long CompanyID)
+        public DataTable SessionsByCourseAndClassIDDAL(long? CourseID, long? ClassID, long CompanyID,DateTime startDate,DateTime EndDate)
         {
             DataTable dt = new DataTable();
             var conString = DBHelper.ConnectionString;
@@ -1099,7 +1099,8 @@ namespace TMS.DataObjects.TMS
             cmd.Parameters.AddWithValue("@ClassID", ClassID);
             cmd.Parameters.AddWithValue("@CourseID", CourseID);
             cmd.Parameters.AddWithValue("@OrganizationID", CompanyID);
-
+            cmd.Parameters.AddWithValue("@MonthstartDate", startDate);
+            cmd.Parameters.AddWithValue("@MonthLastDate", EndDate);
 
 
             using (SqlConnection con = new SqlConnection(conString))

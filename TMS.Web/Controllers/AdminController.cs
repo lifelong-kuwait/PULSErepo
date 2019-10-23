@@ -613,7 +613,7 @@ namespace TMS.Web.Controllers
                 var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
                 var result = _PersonBAL.PersonBarBAL(firstDayOfMonth, lastDayOfMonth,CurrentUser.CompanyID);
                 PersonBarData obj = new PersonBarData();
-                obj.month = firstDayOfMonth.ToString("MMMM");
+                obj.month = firstDayOfMonth.ToString("MMM");
                 obj.person = result.First().person;
                 obj.trainer = result.First().trainer;
                 obj.trainee= result.First().trainee;
@@ -638,7 +638,7 @@ namespace TMS.Web.Controllers
                 var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
                 var result = _CourseBAL.CourseDataBarBAL(firstDayOfMonth, lastDayOfMonth, CurrentUser.CompanyID);
                 CourseDataBar obj = new CourseDataBar();
-                obj.month = firstDayOfMonth.ToString("MMMM");
+                obj.month = firstDayOfMonth.ToString("MMM");
                 obj.CourseCount = result.First().CourseCount;
                 var random = new Random();
                 var color = String.Format("#{0:X6}", random.Next(0x1000000));

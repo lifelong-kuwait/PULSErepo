@@ -205,7 +205,7 @@ namespace TMS.DataObjects.Interfaces.TMS
         DataTable GetClassDetailReportDataDAL(long ClassID, long CourseID);
         DataTable GetDataForVenueMatrix(long VenueID);
 
-        DataTable SessionsByCourseAndClassIDDAL(long? CourseID, long? ClassID,long CompanyID);
+        DataTable SessionsByCourseAndClassIDDAL(long? CourseID, long? ClassID,long CompanyID,DateTime startdate,DateTime EndDate);
 
      
 

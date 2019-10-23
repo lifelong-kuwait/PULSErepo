@@ -217,8 +217,10 @@ namespace TMS.Web.Views.Report.SpLReports.UserControls
                     CourseID = Convert.ToInt64(CourseIDCall);
                 }
 
-
-                DataTable list = _PersonBAL.SessionsByCourseAndClassID( CourseID, ClassID, CompanyID);
+                DateTime now = Convert.ToDateTime( startDate);
+                var startDate1 = new DateTime(now.Year, now.Month, 1);
+                var endDate1 = startDate1.AddMonths(1).AddDays(-1);
+                DataTable list = _PersonBAL.SessionsByCourseAndClassID( CourseID, ClassID, CompanyID, startDate1, endDate1);
                 Table tb = new Table();
 
 

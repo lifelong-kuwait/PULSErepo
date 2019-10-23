@@ -461,9 +461,9 @@ namespace TMS.Business.TMS
             return DAL.GetDataForVenueMatrix(VenueID);
         }
       
-        public DataTable SessionsByCourseAndClassID(long? CourseID, long? ClassID,long CompanyID)
+        public DataTable SessionsByCourseAndClassID(long? CourseID, long? ClassID,long CompanyID, DateTime startdate, DateTime EndDate)
         {
-            return DAL.SessionsByCourseAndClassIDDAL(CourseID,ClassID, CompanyID);
+            return DAL.SessionsByCourseAndClassIDDAL(CourseID,ClassID, CompanyID,startdate,EndDate);
         }
 
         

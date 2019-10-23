@@ -33,6 +33,8 @@
                .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
                .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
                .Scrollable()
+               .Groupable()
+               .Filterable()
                .Events(e => e.Edit("CourseGrid_onEdit").Save("General_onSave"))
                .HtmlAttributes(new { style = "height:700px !important;" })
                .DataSource(dataSource => dataSource.Ajax().ServerOperation(true).Model(model => { model.Id(m => m.ID); })

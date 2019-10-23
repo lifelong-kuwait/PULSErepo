@@ -61,7 +61,7 @@ namespace TMS.Business.Interfaces.TMS.Program
         /// <param name="SortExpression">The sort expression.</param>
         /// <param name="SearchText">The search text.</param>
         /// <returns>List&lt;Sessions&gt;.</returns>
-        List<Sessions> TMS_SessionsbyOrganization_GetALLByCultureBAL(long ClassID, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid);
+        IList<Sessions> TMS_SessionsbyOrganization_GetALLByCultureBAL(long ClassID, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid);
         /// <summary>
         /// TMSs the sessions get all by culture bal.
         /// </summary>

@@ -112,9 +112,9 @@ namespace TMS.DataObjects.TMS.Program
         /// <param name="SortExpression">The sort expression.</param>
         /// <param name="SearchText">The search text.</param>
         /// <returns>List&lt;Sessions&gt;.</returns>
-        public List<Sessions> TMS_SessionsbyOrganization_GetALLByCultureDAL(long ClassID, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid)
+        public IList<Sessions> TMS_SessionsbyOrganization_GetALLByCultureDAL(long ClassID, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid)
         {
-            List<Sessions> Sessions = new List<Sessions>();
+            IList<Sessions> Sessions = new List<Sessions>();
             using (var conn = new SqlConnection(DBHelper.ConnectionString))
             {
                 conn.Open();

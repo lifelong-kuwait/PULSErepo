@@ -178,7 +178,7 @@
             </div>
         </div>
     </div>
-    <div class="form-group">
+    @*<div class="form-group">
         <div class="row" style="margin-top:1%;">
             @Html.Label("Class Category", new { @class = "col-md-3 col-lg-3 control-label" })
             <div class="col-md-7 col-lg-7 col-sm-11">
@@ -200,7 +200,7 @@
                 )
             </div>
         </div>
-    </div>
+    </div>*@
     <div class="form-group col-md-2 col-lg-2 col-sm-2" style="margin-left:65%;margin-top:1%;">
         @(Html.Kendo().Button()
                                                                   .Name("H2")
@@ -212,7 +212,7 @@
 <div id="loader"></div>
 <div class="row">
     <div class="col-lg-12">
-        <iframe id="ifrmReportViewer" frameborder="0" onload='showPage();' EnableEventValidation="false" src=""  height="700" style="overflow:hidden;" allowtransparency="true" allowfullscreen></iframe>
+        <iframe id="ifrmReportViewer" frameborder="0" onload='showPage();' scrolling="no" EnableEventValidation="false" src=""  height="700" style="overflow:hidden;" allowtransparency="true" allowfullscreen></iframe>
     </div>
 </div>
 
@@ -222,10 +222,10 @@
             var datepicker = jQuery("#Start_Date").data("kendoDatePicker");
             startDate = new Date(datepicker.value());
             startDate = kendo.toString(startDate, "dd/MM/yyyy");
-            if (jQuery("#Class_Category").data("kendoDropDownList").value().trim().length <= 0 || jQuery("#Course").data("kendoDropDownList").value().trim().length <= 0 || startDate.toString().trim().length <= 0) {
+            if (jQuery("#Course").data("kendoDropDownList").value().trim().length <= 0 || startDate.toString().trim().length <= 0) {
                 console.log('null value');
             } else {
-                url = "../Views/Report/SpLReports/ClassFutureReport.aspx?rptmode=local&reportname=Tran_ClassReport&ClassID=" + jQuery("#Class_Category").data("kendoDropDownList").value() + "&CourseID=" + jQuery("#Course").data("kendoDropDownList").value() + "&StartDate=" + startDate + "";
+                url = "../Views/Report/SpLReports/ClassFutureReport.aspx?rptmode=local&reportname=Tran_ClassReport&ClassID=" + 0 + "&CourseID=" + jQuery("#Course").data("kendoDropDownList").value() + "&StartDate=" + startDate + "";
                 var myframe = document.getElementById("ifrmReportViewer");
                 if (myframe !== null) {
                     if (myframe.src) {

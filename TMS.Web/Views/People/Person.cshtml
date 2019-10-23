@@ -54,6 +54,7 @@
     .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>)).Groupable()
     .Sortable().Selectable(selectable => selectable
     .Mode(GridSelectionMode.Single))
+    .Groupable()
     .Pageable(pager => pager
     .Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
     .Scrollable()
@@ -62,6 +63,7 @@
     .HtmlAttributes(new { style = "height:700px !important;" })
     .DataSource(dataSource => dataSource
         .Ajax()
+        //.ServerOperation(false)
         .Model(model =>
         {
             model.Id(m => m.ID);

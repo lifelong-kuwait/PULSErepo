@@ -76,6 +76,14 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public ActionResult Course_Read([DataSourceRequest] DataSourceRequest request)
         {
+            var kendoRequest = new Kendo.Mvc.UI.DataSourceRequest
+            {
+
+                Filters = request.Filters,
+                Sorts = request.Sorts,
+                Groups = request.Groups,
+                Aggregates = request.Aggregates
+            };
             var startRowIndex = (request.Page - 1) * request.PageSize;
             int Total = 0;
             var SearchText = Request.Form["SearchText"];
@@ -87,12 +95,29 @@ namespace TMS.Web.Controllers
 
             if (CurrentUser.CompanyID > 0)
             {
-                Courses = this._CourseBAL.TMS_CoursesByOrganization_GetAllBAL(request.Page,startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
+                if (kendoRequest.Filters.Count > 0)
+                {
+                    Courses = this._CourseBAL.TMS_CoursesByOrganization_GetAllBAL(request.Page, startRowIndex, 10000, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
+                }
+                else
+                {
+                    Courses = this._CourseBAL.TMS_CoursesByOrganization_GetAllBAL(request.Page, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
+
+                }
             }
+            //var result = new DataSourceResult()
+            //{
+            //    Data = Courses, // Process data (paging and sorting applied)
+            //    Total = Total // Total number of records
+            //};
+            var data = Courses.ToDataSourceResult(kendoRequest);
+
             var result = new DataSourceResult()
             {
-                Data = Courses, // Process data (paging and sorting applied)
-                Total = Total // Total number of records
+                AggregateResults = data.AggregateResults,
+                Data = data.Data,
+                Errors = data.Errors,
+                Total = Total
             };
             return Json(result);
         }
@@ -244,6 +269,14 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public ActionResult Class_Read([DataSourceRequest] DataSourceRequest request)
         {
+            var kendoRequest = new Kendo.Mvc.UI.DataSourceRequest
+            {
+
+                Filters = request.Filters,
+                Sorts = request.Sorts,
+                Groups = request.Groups,
+                Aggregates = request.Aggregates
+            };
             var startRowIndex = (request.Page - 1) * request.PageSize;
             int Total = 0;
             var SearchText = Request.Form["SearchText"];
@@ -1493,8 +1526,15 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public ActionResult Sessions_Read([DataSourceRequest] DataSourceRequest request)
         {
-            
 
+            var kendoRequest = new Kendo.Mvc.UI.DataSourceRequest
+            {
+
+                Filters = request.Filters,
+                Sorts = request.Sorts,
+                Groups = request.Groups,
+                Aggregates = request.Aggregates
+            };
             var startRowIndex = (request.Page - 1) * request.PageSize;
             int Total = 0;
             var SearchText = Request.Form["SearchText"];
@@ -1504,7 +1544,7 @@ namespace TMS.Web.Controllers
             {
                 request.PageSize = 10;
             }
-            List<Sessions> Sessions = new List<Sessions>();
+            IList<Sessions> Sessions=null;
             if (CurrentUser.CompanyID <= 0)
             {
                 Sessions = this._SessionBAL.TMS_Sessions_GetALLByCultureBAL(ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
@@ -1513,19 +1553,35 @@ namespace TMS.Web.Controllers
             {
                 if (ClassID <= 0)
                 {
-                    Sessions = this._SessionBAL.TMS_SessionsbyOrganization_GetALLSessionsByCultureBAL(ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID),request.Page);
+                    if (kendoRequest.Filters.Count > 0)
+                    {
+                        Sessions = this._SessionBAL.TMS_SessionsbyOrganization_GetALLSessionsByCultureBAL(ClassID, startRowIndex, 10000, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID), request.Page);
+                    }
+                    else
+                    {
+                        Sessions = this._SessionBAL.TMS_SessionsbyOrganization_GetALLSessionsByCultureBAL(ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID), request.Page);
+
+                    }
                 }
                 else
                 {
                     Sessions = this._SessionBAL.TMS_SessionsbyOrganization_GetALLByCultureBAL(ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
                 }
             }
-
+            
+            var data = Sessions.ToDataSourceResult(kendoRequest);
             var result = new DataSourceResult()
             {
-                Data = Sessions, // Process data (paging and sorting applied)
-                Total = Total // Total number of records
+                AggregateResults = data.AggregateResults,
+                Data = data.Data,
+                Errors = data.Errors,
+                Total = Total
             };
+            //var result = new DataSourceResult()
+            //{
+            //    Data = Sessions, // Process data (paging and sorting applied)
+            //    Total = Total // Total number of records
+            //};
             return Json(result);
         }
 

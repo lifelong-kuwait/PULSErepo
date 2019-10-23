@@ -87,7 +87,7 @@ namespace TMS.Business.TMS.Program
         /// <param name="SortExpression">The sort expression.</param>
         /// <param name="SearchText">The search text.</param>
         /// <returns>List&lt;Sessions&gt;.</returns>
-        public List<Sessions> TMS_SessionsbyOrganization_GetALLByCultureBAL(long ClassID, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid)
+        public IList<Sessions> TMS_SessionsbyOrganization_GetALLByCultureBAL(long ClassID, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid)
         {
             return _SessionBAL.TMS_SessionsbyOrganization_GetALLByCultureDAL(ClassID, StartRowIndex, PageSize, ref Total, SortExpression, SearchText,Oid);
         }
