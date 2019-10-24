@@ -71,6 +71,19 @@ namespace TMS.DataObjects.Interfaces.TMS
         /// <returns>Course.</returns>
         List<CourseDataBar> CourseDataBarDAL(DateTime startdate, DateTime lastdate, long CompanyId);
         /// <summary>
+        /// TMSs the courses get by identifier dal.
+        /// </summary>
+        /// <param name="ID">The identifier.</param>
+        /// <returns>Course.</returns>
+        List<CourseDataBar> CourseFutureDataBarDAL(DateTime startdate, DateTime lastdate, long CompanyId);
+        /// <summary>
+        /// TMSs the courses get by identifier dal.
+        /// </summary>
+        /// <param name="ID">The identifier.</param>
+        /// <returns>Course.</returns>
+        List<CourseDataBar> ClassFutureDataBarDAL(DateTime startdate, DateTime lastdate, long CompanyId);
+
+        /// <summary>
         /// Courses the category code by course identifier dal.
         /// </summary>
         /// <param name="id">The identifier.</param>

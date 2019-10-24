@@ -11,7 +11,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
+     <div class="col-md-5" style="height: 700px;width: 120%;">
            
             <uc1:UCViewClassTimeTable runat="server" ID="UCViewClassTimeTable" />
         </div>

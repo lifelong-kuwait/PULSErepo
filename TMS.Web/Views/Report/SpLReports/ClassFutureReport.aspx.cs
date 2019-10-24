@@ -20,6 +20,7 @@ namespace TMS.Web.Views.Report.SpLReports
         private static DataSet _GetTrainerDetailsForReports;
         DDLBAL ddl = new DDLBAL();
         PersonBAL _PersonBAL = new PersonBAL();
+        ReportData reportDataG = new ReportData();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -30,9 +31,32 @@ namespace TMS.Web.Views.Report.SpLReports
                 RenderReportModels(this.ReportDataObj, courseid, classid, startDate);
             }
         }
+        //protected void JpegPng(object sender, EventArgs e)
+        //{
+        //    ReportViewerRSFReports.ProcessingMode = ProcessingMode.Local;
+        //    ReportViewerRSFReports.LocalReport.ReportPath = Server.MapPath(@"../../../Report/Tran_ClassReport.rdlc");
+        //    string reportType = "Image";
+        //    string outputFormat = (sender as Button).Text.ToLower();
+        //    byte[] renderedBytes;
+        //    if (outputFormat == "jpg")
+        //    {
+        //        renderedBytes = ReportViewerRSFReports.LocalReport.Render(reportType, "<DeviceInfo><OutputFormat>JPG</OutputFormat></DeviceInfo>");
+        //    }
+        //    else
+        //    {
+        //        renderedBytes = ReportViewerRSFReports.LocalReport.Render(reportType, "<DeviceInfo><OutputFormat>PNG</OutputFormat></DeviceInfo>");
+        //    }
 
+        //    Response.Buffer = true;
+        //    Response.Clear();
+        //    Response.ContentType = "image/jpeg";
+        //    Response.AddHeader("content-disposition", "attachment; filename=" + DateTime.Now.ToString("ddMMyyyyhhmmss") + "." + outputFormat);
+        //    Response.BinaryWrite(renderedBytes);
+        //    Response.Flush();
+        //}
         private void RenderReportModels(ReportData reportData, string courseid, string classid,string startDate)
         {
+            reportDataG = reportData;
             long CompanyId = Convert.ToInt64(HttpContext.Current.Session["CompanyID"]);
 
             int ClassID = Convert.ToInt32(classid);

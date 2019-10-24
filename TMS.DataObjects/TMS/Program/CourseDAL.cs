@@ -138,6 +138,26 @@ namespace TMS.DataObjects.TMS
             return _PersonData.ToList();
         }
         /// <summary>
+        /// TMSs the courses get by identifier dal.
+        /// </summary>
+        /// <param name="ID">The identifier.</param>
+        /// <returns>Course.</returns>
+        public List<CourseDataBar> CourseFutureDataBarDAL(DateTime startdate, DateTime lastdate, long CompanyId)
+        {
+            var _PersonData = ExecuteListSp<CourseDataBar>("CourseFutureBarData", ParamBuilder.Par("monthstart", startdate), ParamBuilder.Par("monthEndDate", lastdate), ParamBuilder.Par("CompanyId", CompanyId));
+            return _PersonData.ToList();
+        }
+        /// <summary>
+        /// TMSs the courses get by identifier dal.
+        /// </summary>
+        /// <param name="ID">The identifier.</param>
+        /// <returns>Course.</returns>
+        public List<CourseDataBar> ClassFutureDataBarDAL(DateTime startdate, DateTime lastdate, long CompanyId)
+        {
+            var _PersonData = ExecuteListSp<CourseDataBar>("ClasseFutureBarData", ParamBuilder.Par("monthstart", startdate), ParamBuilder.Par("monthEndDate", lastdate), ParamBuilder.Par("CompanyId", CompanyId));
+            return _PersonData.ToList();
+        }
+        /// <summary>
         /// Courses the category code by course identifier dal.
         /// </summary>
         /// <param name="id">The identifier.</param>

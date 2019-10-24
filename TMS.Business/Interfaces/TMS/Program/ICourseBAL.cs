@@ -71,6 +71,19 @@ namespace TMS.Business.Interfaces.TMS
         /// <returns>PersonResponse.</returns>
         List<CourseDataBar> CourseDataBarBAL(DateTime startdate, DateTime lastdate, long CompanyId);
         /// <summary>
+        /// Persons the insert new person bal.
+        /// </summary>
+        /// <param name="_objPerson">The object person.</param>
+        /// <returns>PersonResponse.</returns>
+        List<CourseDataBar> CourseFutureDataBarBAL(DateTime startdate, DateTime lastdate, long CompanyId);
+        /// <summary>
+        /// Persons the insert new person bal.
+        /// </summary>
+        /// <param name="_objPerson">The object person.</param>
+        /// <returns>PersonResponse.</returns>
+        List<CourseDataBar> CLassFutureDataBarBAL(DateTime startdate, DateTime lastdate, long CompanyId);
+
+        /// <summary>
         /// Courses the category code by course identifier bal.
         /// </summary>
         /// <param name="id">The identifier.</param>

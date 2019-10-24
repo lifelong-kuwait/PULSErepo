@@ -651,6 +651,60 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         [ActivityAuthorize]
         [ClaimsAuthorize("CanViewTMSAdmin")]
+        public ActionResult CourseFutureData()
+        {
+
+            List<CourseDataBar> list = new List<CourseDataBar>();
+            DateTime date = DateTime.Today;
+            int year = date.Year;
+            int c = date.Month;
+            for (int i = 1; i <= 12; i++)
+            {
+                DateTime future = date.AddMonths(i-1);
+                var firstDayOfMonth = new DateTime(future.Year, future.Month, 1);
+                var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+                var result = _CourseBAL.CourseFutureDataBarBAL(firstDayOfMonth, lastDayOfMonth, CurrentUser.CompanyID);
+                CourseDataBar obj = new CourseDataBar();
+                obj.month = firstDayOfMonth.ToString("MMM-yyyy");
+                obj.CourseCount = result.First().CourseCount;
+                var random = new Random();
+                var color = String.Format("#{0:X6}", random.Next(0x1000000));
+                obj.customColor = color.ToString();
+                list.Add(obj);
+            }
+            return Json(list);
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ActivityAuthorize]
+        [ClaimsAuthorize("CanViewTMSAdmin")]
+        public ActionResult ClassFutureData()
+        {
+
+            List<CourseDataBar> list = new List<CourseDataBar>();
+            DateTime date = DateTime.Today;
+            int year = date.Year;
+            int c = date.Month;
+            for (int i = 1; i <= 12; i++)
+            {
+                DateTime future = date.AddMonths(i - 1);
+                var firstDayOfMonth = new DateTime(future.Year, future.Month, 1);
+                var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+                var result = _CourseBAL.CLassFutureDataBarBAL(firstDayOfMonth, lastDayOfMonth, CurrentUser.CompanyID);
+                CourseDataBar obj = new CourseDataBar();
+                obj.month = firstDayOfMonth.ToString("MMM-yyyy");
+                obj.CourseCount = result.First().CourseCount;
+                var random = new Random();
+                var color = String.Format("#{0:X6}", random.Next(0x1000000));
+                obj.customColor = color.ToString();
+                list.Add(obj);
+            }
+            return Json(list);
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ActivityAuthorize]
+        [ClaimsAuthorize("CanViewTMSAdmin")]
         public ActionResult SessionsData()
         {
 

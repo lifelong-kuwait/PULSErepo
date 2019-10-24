@@ -8,259 +8,337 @@
 @if (User.IsInRole("CanViewTMSAdmin"))
 {
 
-<div id="dashboard-left" class="col-lg-12">
-    @*<ul class="shortcuts">
-            @if (User.IsInRole("CanViewResource"))
-            {
-                <li class="events">
-                    <a href="@Url.Content("~/Resource/Index")">
-                        <span class="mdi mdi-web tms-tile-icon"></span>
-                        <span class="shortcuts-label">@lr.ResourcesPageTitle</span>
-                    </a>
-                </li>
-            }
-            @if (User.IsInRole("CanViewLookup"))
-            {
-                <li>
-                    <a href="@Url.Content("~/Resource/Lookup")">
-                        <span class="fa fa-list-alt tms-tile-icon"></span>
-                        <span class="shortcuts-label">@lr.LookupPageTitle</span>
-                    </a>
-                </li>
-            }
-            @if (User.IsInRole("CanViewOrganization"))
-            {
-                <li>
-                    <a href="@Url.Content("~/Organization/Index")">
-                        <span class="mdi mdi-folder-star tms-tile-icon"></span>
-                        <span class="shortcuts-label">@lr.OrganizationTitle</span>
-                    </a>
-                </li>}
-            @if (User.IsInRole("CanViewGroups"))
-            {
-                <li>
-                    <a href="@Url.Content("~/Admin/Groups")">
-                        <span class="mdi mdi-security-network tms-tile-icon"></span>
-                        <span class="shortcuts-label">@lr.GroupsTitle</span>
-                    </a>
-                </li>}
-            @if (User.IsInRole("CanViewUsers"))
-            {
-                <li>
-                    <a href="@Url.Content("~/User/Index")">
-                        <span class="mdi mdi-account-multiple tms-tile-icon"></span>
-                        <span class="shortcuts-label">@lr.UsersTitle</span>
-                    </a>
-                </li>}
-
-            <li>
-                <a href="@Url.Content("~/Home/Office365Enabled")">
-                    <span class="mdi mdi-login-variant tms-tile-icon"></span>
-                    <span class="shortcuts-label">@lr.Office365Title</span>
-                </a>
-            </li>
-
-            @if (User.IsInRole("CanViewPreRequiest"))
-            {
-                if (User.IsInAnyRoles("CanViewFlags", "CanViewVenue", "CanViewRoles", "CanViewVendor", "CanViewCategory", "CanViewFocusAreas", "CanViewCourseMaterials", "CanViewDegreeCertificates", "CanViewCourseLogisticRequirements"))
+    <div id="dashboard-left" class="col-lg-12">
+        @*<ul class="shortcuts">
+                @if (User.IsInRole("CanViewResource"))
                 {
-                    <li class="tms-tile-2x">
-                        <a href="@Url.Content("~/Admin/Prerequisite")">
-                            <span class="mdi mdi-flag-triangle tms-tile-icon"></span>
-                            <span class="mdi mdi-home-map-marker tms-tile-icon"></span>
-                            <span class="shortcuts-label">@lr.PreRequisitesTitle</span>
+                    <li class="events">
+                        <a href="@Url.Content("~/Resource/Index")">
+                            <span class="mdi mdi-web tms-tile-icon"></span>
+                            <span class="shortcuts-label">@lr.ResourcesPageTitle</span>
                         </a>
                     </li>
                 }
-            }
-        </ul>*@
-    <div class="row">
-        <div id="chartplace2" class="col-lg-5" style="height:40%; width:45%;">
-            @(Html.Kendo().Chart<TMS.Library.Entities.TMS.Persons.PersonBarData>()
-                                                                        .Name("chart")
-                                                                        .Title("Person (Per Month)")
-                                                                        .Legend(legend => legend
-                                                                            .Position(ChartLegendPosition.Top)
-                                                                        )
-                                                                        .DataSource(ds => ds.Read(read => read.Action("PersonTrainerTraineeData", "Admin")))
-                                                                        .Series(series =>
-                                                                        {
-                                                                            series.Line(model => model.person).Name("Total Persons").CategoryField("month").Color("yellowgreen");
-                                                                    //series.Line(model => model.trainer).Name("Total Trainer").CategoryField("month").Color("lightblue");
-                                                                    //series.Line(model => model.trainee).Name("Total Trainee").CategoryField("month");
-                                                                })
-                                                                        .CategoryAxis(axis => axis
-                                                            .Categories("Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec")
-                                                            .MajorGridLines(lines => lines.Visible(false))
-                                                        )
-                                                                        .ValueAxis(axis => axis.Numeric()
-                                                                            .Labels(labels => labels.Format("{0:N0}"))
-                                                                            .MajorUnit(10)
-                                                                        )
-                                                                        .Tooltip(tooltip => tooltip
-                                                                            .Visible(true)
-                                                                            .Shared(true)
-                                                                            .Format("{0:N0}")
-                                                                        )
-            )
-        </div>
-        <div id="chartplace3" class="col-lg-5" style="height:40%; width:45%;margin-left:10%;">
-            <div class="demo-section k-content wide">
+                @if (User.IsInRole("CanViewLookup"))
+                {
+                    <li>
+                        <a href="@Url.Content("~/Resource/Lookup")">
+                            <span class="fa fa-list-alt tms-tile-icon"></span>
+                            <span class="shortcuts-label">@lr.LookupPageTitle</span>
+                        </a>
+                    </li>
+                }
+                @if (User.IsInRole("CanViewOrganization"))
+                {
+                    <li>
+                        <a href="@Url.Content("~/Organization/Index")">
+                            <span class="mdi mdi-folder-star tms-tile-icon"></span>
+                            <span class="shortcuts-label">@lr.OrganizationTitle</span>
+                        </a>
+                    </li>}
+                @if (User.IsInRole("CanViewGroups"))
+                {
+                    <li>
+                        <a href="@Url.Content("~/Admin/Groups")">
+                            <span class="mdi mdi-security-network tms-tile-icon"></span>
+                            <span class="shortcuts-label">@lr.GroupsTitle</span>
+                        </a>
+                    </li>}
+                @if (User.IsInRole("CanViewUsers"))
+                {
+                    <li>
+                        <a href="@Url.Content("~/User/Index")">
+                            <span class="mdi mdi-account-multiple tms-tile-icon"></span>
+                            <span class="shortcuts-label">@lr.UsersTitle</span>
+                        </a>
+                    </li>}
+
+                <li>
+                    <a href="@Url.Content("~/Home/Office365Enabled")">
+                        <span class="mdi mdi-login-variant tms-tile-icon"></span>
+                        <span class="shortcuts-label">@lr.Office365Title</span>
+                    </a>
+                </li>
+
+                @if (User.IsInRole("CanViewPreRequiest"))
+                {
+                    if (User.IsInAnyRoles("CanViewFlags", "CanViewVenue", "CanViewRoles", "CanViewVendor", "CanViewCategory", "CanViewFocusAreas", "CanViewCourseMaterials", "CanViewDegreeCertificates", "CanViewCourseLogisticRequirements"))
+                    {
+                        <li class="tms-tile-2x">
+                            <a href="@Url.Content("~/Admin/Prerequisite")">
+                                <span class="mdi mdi-flag-triangle tms-tile-icon"></span>
+                                <span class="mdi mdi-home-map-marker tms-tile-icon"></span>
+                                <span class="shortcuts-label">@lr.PreRequisitesTitle</span>
+                            </a>
+                        </li>
+                    }
+                }
+            </ul>*@
+        <div class="row">
+            <div id="chartplace2" class="col-lg-5" style="height:40%; width:45%;">
                 @(Html.Kendo().Chart<TMS.Library.Entities.TMS.Persons.PersonBarData>()
-                                                                               .Name("chart1")
-                                                                               .Title("Trainer Trainee (Per Month)")
-                                                                               .Legend(legend => legend
-                                                                                   .Position(ChartLegendPosition.Top)
-                                                                               )
-                                                                               .DataSource(ds => ds.Read(read => read.Action("PersonTrainerTraineeData", "Admin")))
-                                                                               .Series(series =>
-                                                                               {
-                                                                                  // series.Line(model => model.person).Name("Total Persons").CategoryField("month").Color("yellowgreen");
-                                                                                series.Line(model => model.trainer).Name("Total Trainer").CategoryField("month").Color("lightblue");
-                                                                                series.Line(model => model.trainee).Name("Total Trainee").CategoryField("month");
-                                                                            })
-                                                                               .CategoryAxis(axis => axis
-                                                                   .Categories("Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec")
-                                                                   .MajorGridLines(lines => lines.Visible(false))
-                                                               )
-                                                                               .ValueAxis(axis => axis.Numeric()
-                                                                                   .Labels(labels => labels.Format("{0:N0}"))
-                                                                                   .MajorUnit(10)
-                                                                               )
-                                                                               .Tooltip(tooltip => tooltip
-                                                                                   .Visible(true)
-                                                                                   .Shared(true)
-                                                                                   .Format("{0:N0}")
-                                                                               )
+                                                                                            .Name("chart")
+                                                                                            .Title("Person (Per Month)")
+                                                                                            .Legend(legend => legend
+                                                                                                .Position(ChartLegendPosition.Top)
+                                                                                            )
+                                                                                            .DataSource(ds => ds.Read(read => read.Action("PersonTrainerTraineeData", "Admin")))
+                                                                                            .Series(series =>
+                                                                                            {
+                                                                                                series.Line(model => model.person).Name("Total Persons").CategoryField("month").Color("yellowgreen");
+                                                                                        //series.Line(model => model.trainer).Name("Total Trainer").CategoryField("month").Color("lightblue");
+                                                                                        //series.Line(model => model.trainee).Name("Total Trainee").CategoryField("month");
+                                                                                    })
+                                                                                            .CategoryAxis(axis => axis
+                                                                                .Categories("Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec")
+                                                                                .MajorGridLines(lines => lines.Visible(false))
+                                                                            )
+                                                                                            .ValueAxis(axis => axis.Numeric()
+                                                                                                .Labels(labels => labels.Format("{0:N0}"))
+                                                                                                .MajorUnit(10)
+                                                                                            )
+                                                                                            .Tooltip(tooltip => tooltip
+                                                                                                .Visible(true)
+                                                                                                .Shared(true)
+                                                                                                .Format("{0:N0}")
+                                                                                            )
                 )
             </div>
-            </div>
-            </div>
-            <br />
-            <div class="row">
-                <div id="chartplace2" class="col-lg-5" style="height:40%; width:45%;">
-                    <div class="demo-section k-content wide">
-                        @(Html.Kendo().Chart<TMS.Library.Entities.TMS.Course.CourseDataBar>()
-                                                                                    .Name("chartCourse")
-                                                                                    .Title("Active Courses")
-                                                                                    .Legend(legend => legend
-                                                                                        .Position(ChartLegendPosition.Top)
-                                                                                    )
-                                                                                    .DataSource(ds => ds.Read(read => read.Action("CourseData", "Admin")))
-                                                                                    .Series(series =>
-                                                                                    {
-                                                                                        series.Column(model => model.CourseCount,
-                                                                                        model => model.customColor).Name("").CategoryField("month");
-
-                                                                                    })
-                                                                                    .CategoryAxis(axis => axis
-                                                                                     .Categories("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec")
-                                                                                        .Labels(labels => labels.Rotation(-90))
-                                                                                        .MajorGridLines(lines => lines.Visible(false))
-                                                                                    )
-                                                                                    .ValueAxis(axis => axis.Numeric()
-                                                                                        .Labels(labels => labels.Format("{0:N0}"))
-                                                                                        .MajorUnit(1)
-                                                                                        .Line(line => line.Visible(false))
-                                                                                    )
-                                                                                    .Tooltip(tooltip => tooltip
-                                                                                        .Visible(true)
-                                                                                        .Format("{0:N0}")
-                                                                                    )
-                        )
-                    </div>
-
-                </div>
-                <div id="chartplace3" class="col-lg-5" style="height:40%; width:45%;margin-left:10%;">
-                    <div class="demo-section k-content wide">
-                        @(Html.Kendo().Chart<TMS.Library.Entities.TMS.Program.SessionWeekBarData>()
-                                                                                    .Name("chartCourse2")
-                                                                                    .Title("Active Sessions (Current Month)")
-                                                                                    .Legend(legend => legend
-                                                                                        .Position(ChartLegendPosition.Top)
-                                                                                    )
-                                                                                    .DataSource(ds => ds.Read(read => read.Action("SessionsData", "Admin")))
-                                                                                    .Series(series =>
-                                                                                    {
-                                                                                        series.Column(model => model.sessionsCount,
-                                                                                        model => model.customColor).Name("").CategoryField("week");
-
-                                                                                    })
-                                                                                    .CategoryAxis(axis => axis
-                                                                                     .Categories("Week1", "Week2", "Week3", "Week4", "Week5")
-                                                                                        .Labels(labels => labels.Rotation(-90))
-                                                                                        .MajorGridLines(lines => lines.Visible(false))
-                                                                                    )
-                                                                                    .ValueAxis(axis => axis.Numeric()
-                                                                                        .Labels(labels => labels.Format("{0:N0}"))
-                                                                                        .MajorUnit(1)
-                                                                                        .Line(line => line.Visible(false))
-                                                                                    )
-                                                                                    .Tooltip(tooltip => tooltip
-                                                                                        .Visible(true)
-                                                                                        .Format("{0:N0}")
-                                                                                    )
-                        )
-                    </div>
+            <div id="chartplace3" class="col-lg-5" style="height:40%; width:45%;margin-left:10%;">
+                <div class="demo-section k-content wide">
+                    @(Html.Kendo().Chart<TMS.Library.Entities.TMS.Persons.PersonBarData>()
+                                                                                                   .Name("chart1")
+                                                                                                   .Title("Trainer Trainee (Per Month)")
+                                                                                                   .Legend(legend => legend
+                                                                                                       .Position(ChartLegendPosition.Top)
+                                                                                                   )
+                                                                                                   .DataSource(ds => ds.Read(read => read.Action("PersonTrainerTraineeData", "Admin")))
+                                                                                                   .Series(series =>
+                                                                                                   {
+                                                                                                   // series.Line(model => model.person).Name("Total Persons").CategoryField("month").Color("yellowgreen");
+                                                                                                   series.Line(model => model.trainer).Name("Total Trainer").CategoryField("month").Color("lightblue");
+                                                                                                       series.Line(model => model.trainee).Name("Total Trainee").CategoryField("month");
+                                                                                                   })
+                                                                                                   .CategoryAxis(axis => axis
+                                                                                       .Categories("Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec")
+                                                                                       .MajorGridLines(lines => lines.Visible(false))
+                                                                                   )
+                                                                                                   .ValueAxis(axis => axis.Numeric()
+                                                                                                       .Labels(labels => labels.Format("{0:N0}"))
+                                                                                                       .MajorUnit(10)
+                                                                                                   )
+                                                                                                   .Tooltip(tooltip => tooltip
+                                                                                                       .Visible(true)
+                                                                                                       .Shared(true)
+                                                                                                       .Format("{0:N0}")
+                                                                                                   )
+                    )
                 </div>
             </div>
+        </div>
+        <br />
+        <div class="row">
+            <div id="chartplace2" class="col-lg-5" style="height:40%; width:45%;">
+                <div class="demo-section k-content wide">
+                    @(Html.Kendo().Chart<TMS.Library.Entities.TMS.Course.CourseDataBar>()
+                                                                                                .Name("chartCourse")
+                                                                                                .Title("Active Courses")
+                                                                                                .Legend(legend => legend
+                                                                                                    .Position(ChartLegendPosition.Top)
+                                                                                                )
+                                                                                                .DataSource(ds => ds.Read(read => read.Action("CourseData", "Admin")))
+                                                                                                .Series(series =>
+                                                                                                {
+                                                                                                    series.Column(model => model.CourseCount,
+                                                                                                    model => model.customColor).Name("").CategoryField("month");
 
-            <br />
-
-            @if (User.IsInRole("CanViewSchedule"))
-            {
-                <div class="row" style="width:100%;height:1000px; margin-top:5%;">
-                    <div class="col-lg-12">
-                        @{
-                            Html.RenderPartial("Schedule_Read");
-                        }
-                    </div>
+                                                                                                })
+                                                                                                .CategoryAxis(axis => axis
+                                                                                                 .Categories("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec")
+                                                                                                    .Labels(labels => labels.Rotation(-90))
+                                                                                                    .MajorGridLines(lines => lines.Visible(false))
+                                                                                                )
+                                                                                                .ValueAxis(axis => axis.Numeric()
+                                                                                                    .Labels(labels => labels.Format("{0:N0}"))
+                                                                                                    .MajorUnit(1)
+                                                                                                    .Line(line => line.Visible(false))
+                                                                                                )
+                                                                                                .Tooltip(tooltip => tooltip
+                                                                                                    .Visible(true)
+                                                                                                    .Format("{0:N0}")
+                                                                                                )
+                    )
                 </div>
-            }
-            <div class="divider30"></div>
-        </div><!--col-md-8-->
 
-        <style>
-            .shortcuts li.tms-tile-2x a {
-                width: 120px;
-            }
+            </div>
+            <div id="chartplace3" class="col-lg-5" style="height:40%; width:45%;margin-left:10%;">
+                <div class="demo-section k-content wide">
+                    @(Html.Kendo().Chart<TMS.Library.Entities.TMS.Program.SessionWeekBarData>()
+                                                                                                .Name("chartCourse2")
+                                                                                                .Title("Active Sessions (Current Month)")
+                                                                                                .Legend(legend => legend
+                                                                                                    .Position(ChartLegendPosition.Top)
+                                                                                                )
+                                                                                                .DataSource(ds => ds.Read(read => read.Action("SessionsData", "Admin")))
+                                                                                                .Series(series =>
+                                                                                                {
+                                                                                                    series.Column(model => model.sessionsCount,
+                                                                                                    model => model.customColor).Name("").CategoryField("week");
 
-            .shortcuts li.tms-tile-2x .tms-tile-icon {
-                padding: 5px 0px 3px 7px;
-                display: inline-block;
-            }
+                                                                                                })
+                                                                                                .CategoryAxis(axis => axis
+                                                                                                 .Categories("Week1", "Week2", "Week3", "Week4", "Week5")
+                                                                                                    .Labels(labels => labels.Rotation(-90))
+                                                                                                    .MajorGridLines(lines => lines.Visible(false))
+                                                                                                )
+                                                                                                .ValueAxis(axis => axis.Numeric()
+                                                                                                    .Labels(labels => labels.Format("{0:N0}"))
+                                                                                                    .MajorUnit(1)
+                                                                                                    .Line(line => line.Visible(false))
+                                                                                                )
+                                                                                                .Tooltip(tooltip => tooltip
+                                                                                                    .Visible(true)
+                                                                                                    .Format("{0:N0}")
+                                                                                                )
+                    )
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div id="chartplace5" class="col-lg-5" style="height:40%; width:45%;">
+                <div class="demo-section k-content wide">
+                    @(Html.Kendo().Chart<TMS.Library.Entities.TMS.Course.CourseDataBar>()
+                                                                                                                                .Name("chartCourseFuture")
+                                                                                                                                .Title("Future Courses")
+                                                                                                                                .Legend(legend => legend
+                                                                                                                                    .Position(ChartLegendPosition.Top)
+                                                                                                                                )
+                                                                                                                               .DataSource(ds => ds.Read(read => read.Action("CourseFutureData", "Admin")))
+                                                                                                                                .Series(series =>
+                                                                                                                                {
+                                                                                                                                    series.Column(model => model.CourseCount,
+                                                                                                                                    model => model.customColor).Name("").CategoryField("month");
 
-            #chartplace3, #chartplace3 {
-                display: inline-block;
-            }
+                                                                                                                                })
+                                                                                                                                .CategoryAxis(axis => axis
+                                                                                                                                 .Categories("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec")
+                                                                                                                                    .Labels(labels => labels.Rotation(-90))
+                                                                                                                                    .MajorGridLines(lines => lines.Visible(false))
+                                                                                                                                )
+                                                                                                                                .ValueAxis(axis => axis.Numeric()
+                                                                                                                                    .Labels(labels => labels.Format("{0:N0}"))
+                                                                                                                                    .MajorUnit(1)
+                                                                                                                                    .Line(line => line.Visible(false))
+                                                                                                                                )
+                                                                                                                                .Tooltip(tooltip => tooltip
+                                                                                                                                    .Visible(true)
+                                                                                                                                    .Format("{0:N0}")
+                                                                                                                                )
+                    )
+                </div>
 
-            #chart.k-chart {
-                height: 300px;
-                width: 100%;
-            }
-            #chart1.k-chart {
-                height: 300px;
-                width: 100%;
-            }
-            #chartCourse.k-chart {
-                height: 300px;
-                width: 100%;
-            }
+            </div>
+            <div id="chartplace6" class="col-lg-5" style="height:40%; width:45%;margin-left:10%;">
+                <div class="demo-section k-content wide">
+                    @(Html.Kendo().Chart<TMS.Library.Entities.TMS.Course.CourseDataBar>()
+                                                                                                                                .Name("chartClassFuture")
+                                                                                                                                .Title("Future Classes")
+                                                                                                                                .Legend(legend => legend
+                                                                                                                                    .Position(ChartLegendPosition.Top)
+                                                                                                                                )
+                                                                                                                               .DataSource(ds => ds.Read(read => read.Action("ClassFutureData", "Admin")))
+                                                                                                                                .Series(series =>
+                                                                                                                                {
+                                                                                                                                    series.Column(model => model.CourseCount,
+                                                                                                                                    model => model.customColor).Name("").CategoryField("month");
 
-            #chartCourse2.k-chart {
-                height: 300px;
-                width: 100%;
-            }
-        </style>
+                                                                                                                                })
+                                                                                                                                .CategoryAxis(axis => axis
+                                                                                                                                 .Categories("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec")
+                                                                                                                                    .Labels(labels => labels.Rotation(-90))
+                                                                                                                                    .MajorGridLines(lines => lines.Visible(false))
+                                                                                                                                )
+                                                                                                                                .ValueAxis(axis => axis.Numeric()
+                                                                                                                                    .Labels(labels => labels.Format("{0:N0}"))
+                                                                                                                                    .MajorUnit(1)
+                                                                                                                                    .Line(line => line.Visible(false))
+                                                                                                                                )
+                                                                                                                                .Tooltip(tooltip => tooltip
+                                                                                                                                    .Visible(true)
+                                                                                                                                    .Format("{0:N0}")
+                                                                                                                                )
+                    )
+                </div>
+
+            </div>
+        </div>
+        <br />
+
+        @if (User.IsInRole("CanViewSchedule"))
+        {
+            <div class="row" style="width:100%;height:1000px; margin-top:5%;">
+                <div class="col-lg-12">
+                    @{
+                        Html.RenderPartial("Schedule_Read");
+                    }
+                </div>
+            </div>
         }
-        <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
-        <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
+        <div class="divider30"></div>
+    </div><!--col-md-8-->
 
-        @section Scripts{
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-            <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+    <style>
+        .shortcuts li.tms-tile-2x a {
+            width: 120px;
+        }
 
-            <script>
+        .shortcuts li.tms-tile-2x .tms-tile-icon {
+            padding: 5px 0px 3px 7px;
+            display: inline-block;
+        }
+
+        #chartplace3, #chartplace3 {
+            display: inline-block;
+        }
+
+        #chart.k-chart {
+            height: 300px;
+            width: 100%;
+        }
+
+        #chart1.k-chart {
+            height: 300px;
+            width: 100%;
+        }
+
+        #chartCourse.k-chart {
+            height: 300px;
+            width: 100%;
+        }
+
+        #chartCourse2.k-chart {
+            height: 300px;
+            width: 100%;
+        }
+        #chartClassFuture.k-chart {
+            height: 300px;
+            width: 100%;
+        }
+        #chartCourseFuture.k-chart {
+            height: 300px;
+            width: 100%;
+        }
+    </style>
+}
+<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+
+    <script>
         jQuery(function () {
             jQuery(document).ready(function () {
                 var events = [];
@@ -365,8 +443,8 @@
                 })
             };
         })
-            </script>
+    </script>
 
 
-        }
-        @*.format("DD-MMM-YYYY HH:mm a")*@
+}
+@*.format("DD-MMM-YYYY HH:mm a")*@

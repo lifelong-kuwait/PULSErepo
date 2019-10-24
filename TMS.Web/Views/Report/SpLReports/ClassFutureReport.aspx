@@ -11,6 +11,10 @@
     <form id="form1" runat="server">
        <div class="col-md-5" style="height: 700px;width: 100%;">
               <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+            <%--<asp:Button Text="Jpeg" runat="server" OnClick="JpegPng" />
+           <asp:Button Text="Png" runat="server" OnClick="JpegPng" />
+             <br />
+             <br />--%>
               <rsweb:ReportViewer ID="ReportViewerRSFReports" runat="server"  IsReadyForRendering="false" AsyncRendering="false"  ProcessingMode="Remote" Width="797px" ><LocalReport ReportPath="../../../Report/Tran_ClassReport.rdlc"></LocalReport></rsweb:ReportViewer>
          </div>
     </form>

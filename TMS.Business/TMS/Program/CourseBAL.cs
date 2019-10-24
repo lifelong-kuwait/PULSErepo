@@ -98,12 +98,20 @@ namespace TMS.Business.TMS
         {
             return _CourseDAL.CourseDataBarDAL(startdate,lastdate,CompanyId);
         }
-    /// <summary>
-    /// Courses the category code by course identifier bal.
-    /// </summary>
-    /// <param name="id">The identifier.</param>
-    /// <returns>System.String.</returns>
-    public string CourseCategoryCodeByCourseIdBAL(long id)
+        public List<CourseDataBar> CourseFutureDataBarBAL(DateTime startdate, DateTime lastdate, long CompanyId)
+        {
+            return _CourseDAL.CourseFutureDataBarDAL(startdate, lastdate, CompanyId);
+        }
+        public List<CourseDataBar> CLassFutureDataBarBAL(DateTime startdate, DateTime lastdate, long CompanyId)
+        {
+            return _CourseDAL.ClassFutureDataBarDAL(startdate, lastdate, CompanyId);
+        }
+        /// <summary>
+        /// Courses the category code by course identifier bal.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>System.String.</returns>
+        public string CourseCategoryCodeByCourseIdBAL(long id)
         {
             return _CourseDAL.CourseCategoryCodeByCourseIdDAL(id);
         }
