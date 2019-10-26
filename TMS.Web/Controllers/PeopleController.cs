@@ -123,7 +123,7 @@ namespace TMS.Web.Controllers
             //}
             var kendoRequest = new Kendo.Mvc.UI.DataSourceRequest
             {
-                
+               
                 Filters = request.Filters,
                 Sorts = request.Sorts,
                 Groups = request.Groups,
@@ -218,7 +218,7 @@ namespace TMS.Web.Controllers
 
 
         [ClaimsAuthorizeAttribute("CanAddEditPerson")]
-
+        [DisableValidation]
         [DontWrapResult]
         public ActionResult Person_Create([DataSourceRequest] DataSourceRequest request, Person _person, long RoleID)
         {
@@ -266,8 +266,12 @@ namespace TMS.Web.Controllers
                         _person.CreatedDate = DateTime.Now;
                         _person.OrganizationID = CurrentUser.CompanyID;
                         string _profilePict = string.Empty;
+                        if (_person.DateOfBirth == null)
+                            _person.DateOfBirth = DateTime.Now.AddYears(-10);
                         if (_person.ClientType == 0)
                             _person.ClientType = ClientType.ClientType_Internal;
+                        if(_person.ClientType==null)
+                            _person.ClientType = ClientType.Not_Specified;
                         var Resp = SavePersonData(_person, ref _profilePict, RoleID);
                         string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
                         if (string.IsNullOrEmpty(ip))
@@ -359,7 +363,10 @@ namespace TMS.Web.Controllers
                 }
                 if (_valid)
                 {
-
+                    if (_person.DateOfBirth == null)
+                        _person.DateOfBirth = DateTime.Now.AddYears(-10);
+                    if (_person.ClientType == null)
+                        _person.ClientType = ClientType.Not_Specified;
                     var result = _PersonBAL.Person_UpdateBAL(_person);
                     _person.ProfilePicture = HandlePersonProfilePicture(filename, _person.ID, aid);
                     if (result != -1)
@@ -483,7 +490,7 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorizeAttribute("CanDeletePerson")]
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
-        [DisableValidation]
+       // [DisableValidation]
         public ActionResult Person_Destroy([DataSourceRequest] DataSourceRequest request, Person _person)
         {
 

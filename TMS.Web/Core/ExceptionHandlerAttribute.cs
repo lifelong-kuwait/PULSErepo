@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using log4net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace TMS.Web.Core
@@ -8,6 +9,8 @@ namespace TMS.Web.Core
         public void OnException(ExceptionContext filterContext)
 
         {
+            ILog log = log4net.LogManager.GetLogger(filterContext.ToString());
+
             if (filterContext.Exception != null)
             {
                 filterContext.Result = new JsonResult
@@ -47,6 +50,7 @@ namespace TMS.Web.Core
                  filterContext.ExceptionHandled = true;
                 filterContext.HttpContext.Response.Redirect("~/Home/PageNotFound");
             }
+            log.Error(filterContext.Exception.Message.ToString());
         }
     }
 }

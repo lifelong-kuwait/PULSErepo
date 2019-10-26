@@ -138,7 +138,13 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public JsonResult CountryCode()
         {
-            return Json(_objIDDLBAL.CountryCode_GetAllByCultureBAL(CurrentCulture), JsonRequestBehavior.AllowGet);
+            DDlList obj = new DDlList();
+            obj.Text = "Not Selected";
+            obj.Value = -1;
+            obj.Selected = true;
+            var value = _objIDDLBAL.CountryCode_GetAllByCultureBAL(CurrentCulture);
+            value.Insert(0,obj);
+            return Json(value, JsonRequestBehavior.AllowGet);
         }
 
         [DontWrapResult]

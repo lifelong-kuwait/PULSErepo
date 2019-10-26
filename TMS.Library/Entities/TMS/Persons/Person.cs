@@ -291,7 +291,7 @@ namespace TMS.Library.TMS.Persons
         //    public DateTime? Dates { get { return DateTime.Now; }   }
         [Display(Name = "DateOfBirth", ResourceType = typeof(lr))]
         // [DOB(EarlierDateField = "Dates", ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "EndDateShouldBeGreaterThanStartDate")]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         /// <summary>
         /// Gets or sets the availability from.
@@ -502,7 +502,7 @@ namespace TMS.Library.TMS.Persons
         /// <value>The name of the nick.</value>
         [Display(Name = "PersonNickName", ResourceType = typeof(lr))]
         // [Display(Name = "UserNickName", ResourceType = typeof(lr))]
-        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "UserNickNameRequired")]
+        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "UserNickNameRequired")]
         public string NickName { get; set; }
 
         /// <summary>
@@ -510,7 +510,7 @@ namespace TMS.Library.TMS.Persons
         /// </summary>
         /// <value>The alias.</value>
         [Display(Name = "PersonAlias", ResourceType = typeof(lr))]
-        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "UserNickNameRequired")]
+        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "UserNickNameRequired")]
 
         public string Alias { get; set; }
 
@@ -612,7 +612,7 @@ namespace TMS.Library.TMS.Persons
         public CRMClientType? clientstatus { get; set; }
 
         [Display(Name = "PersonClientType", ResourceType = typeof(lr))]
-        public ClientType ClientType { get; set; }
+        public ClientType? ClientType { get; set; }
 
         [Display(Name = "PersonClientType", ResourceType = typeof(lr))]
         public CRMClientType CrmClientType { get; set; }

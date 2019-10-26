@@ -1,0 +1,12 @@
+ERROR 2019-10-26 13:06:51,908 75958ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter 'pT' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult Person(Int64)' in 'TMS.Web.Controllers.PeopleController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2019-10-26 13:18:43,944 787994ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter 'pT' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult Person(Int64)' in 'TMS.Web.Controllers.PeopleController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2019-10-26 13:49:01,195  7543ms ExceptionContext       OnException        - Login failed for user 'localuser'.
+ERROR 2019-10-26 13:55:00,866 293327ms ExceptionContext       OnException        - Method arguments are not valid! See ValidationErrors for details.
+ERROR 2019-10-26 13:55:36,653 329114ms ExceptionContext       OnException        - Method arguments are not valid! See ValidationErrors for details.
+ERROR 2019-10-26 13:55:39,949 332410ms ExceptionContext       OnException        - Method arguments are not valid! See ValidationErrors for details.
+ERROR 2019-10-26 14:16:56,244 1608706ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter 'pT' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult Person(Int64)' in 'TMS.Web.Controllers.PeopleController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2019-10-26 15:58:23,445 124340ms ExceptionContext       OnException        - Procedure or function 'TMS_Trainer_Create' expects parameter '@ClientType', which was not supplied.
+ERROR 2019-10-26 16:30:59,924 468749ms ExceptionContext       OnException        - Procedure or function TMS_TrainerOrganization_GetByCulture has too many arguments specified.
