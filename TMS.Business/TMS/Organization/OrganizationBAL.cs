@@ -45,7 +45,15 @@ namespace TMS.Business.TMS.Organization
         {
             return DAL.OrganizationAllbyCultureDAL(culture);
         }
-
+        /// <summary>
+        /// Organizations the allby culture bal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
+        public IList<DDlList> CertificatesByOiDBAL(long Oid)
+        {
+            return DAL.CertificatesByOiDDAL(Oid);
+        }
         /// <summary>
         /// Gets all organization bal.
         /// </summary>

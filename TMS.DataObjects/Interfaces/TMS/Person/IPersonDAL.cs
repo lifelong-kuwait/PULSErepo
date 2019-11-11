@@ -17,6 +17,7 @@ using System.Data;
 using TMS.Library.Entities.CRM;
 using TMS.Library.Entities.TMS.Persons;
 using TMS.Library.Entities.TMS.Program;
+using TMS.Library.TMS.Organization;
 using TMS.Library.TMS.Persons;
 using TMS.Library.TMS.Persons.Others;
 
@@ -184,6 +185,7 @@ namespace TMS.DataObjects.Interfaces.TMS
         IList<Person> TMS_Coordinate_GetAllByCultureDAL(string culture);
         IList<DDlList> GetCourseFromTimeSpanDALDDL(DateTime StartTime, DateTime EndTime,long userid);
         //GetCourseFromTimeSpanDAL
+        List<OrganizationModel> GetOrganizationLogoDAL(long OrgID);
         DataTable GetTrainerDetailsForReportsDAL(long ClssID, long TrainerID);
 
         DataTable GetTraineeDetailsForReportsDAL(long ClssID, long TrainerID);
@@ -197,6 +199,7 @@ namespace TMS.DataObjects.Interfaces.TMS
         DataTable ClassFutureReportDAL(long CurrentCourseCategoryID, DateTime ClassReportStartDateFrom, DateTime ClassReportStartDateTo, int ClassTypeID, bool ShowFutureClasses,long CompanyId);
         DataTable AttendanceReportsDAL(long CourseID, long ClassID, DateTime startdate, DateTime enddate);
         DataTable GetOccVenueDetailsForReportsDAL(long ClassID, long VenueID, DateTime StartTime, DateTime EndTime);
+        DataTable GetCertificateReportsDAL(string PersonId, long ClassID, long companyID, string Culture,long currentUser);
         DataTable GetCourseReportDataDAL(long ClassID, long CourseID);
 
         DataTable DailyVenueUtalizationReportsDAL(DateTime Startday, DateTime Endday, long venueid);

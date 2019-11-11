@@ -46,14 +46,14 @@ namespace TMS.DataObjects.Interfaces.Common.Groups
         /// </summary>
         /// <param name="Culture">The culture.</param>
         /// <returns>IList&lt;SecurityGroups&gt;.</returns>
-        IList<SecurityGroups> TMS_Groups_GetAllDAL(string Culture, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText);
+        IList<SecurityGroups> TMS_Groups_GetAllDAL(int page,string Culture, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText);
 
         /// <summary>
         /// TMSs the groups get all dal.
         /// </summary>
         /// <param name="Culture">The culture.</param>
         /// <returns>IList&lt;SecurityGroups&gt;.</returns>
-        IList<SecurityGroups> TMS_GroupsByOrganization_GetAllDAL(string Culture, string Oid, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText);
+        IList<SecurityGroups> TMS_GroupsByOrganization_GetAllDAL(int page,string Culture, string Oid, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText);
 
         /// <summary>
         /// TMSs the groups create dal.

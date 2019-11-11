@@ -28,6 +28,7 @@ using TMS.Library.Entities.TMS.Program;
 using TMS.Library.Entities.CRM;
 using TMS.Library.ModelMapper;
 using TMS.Library.Entities.TMS.Persons;
+using TMS.Library.TMS.Organization;
 
 namespace TMS.DataObjects.TMS
 {
@@ -604,7 +605,22 @@ namespace TMS.DataObjects.TMS
             }
             return LoginUserAddGroups;// ExecuteListSp<LoginUserAddGroups>("TMS_Groups_GetAllByCulture", ParamBuilder.ParNVarChar("Culture", culture, 5));
         }
-
+        public List<OrganizationModel> GetOrganizationLogoDAL(long OrgID)
+        {
+            List<OrganizationModel> LoginUserAddGroups = new List<OrganizationModel>();
+            var conString = DBHelper.ConnectionString;
+            using (var conn = new SqlConnection(conString))
+            {
+                conn.Open();
+                string qry = @"TMS_Organizations_ProfilePicture";
+                DynamicParameters param = new DynamicParameters();
+                param.Add("@ID", OrgID);
+                LoginUserAddGroups = conn.Query<OrganizationModel>(qry.ToString(), param, commandType: System.Data.CommandType.StoredProcedure).AsList< OrganizationModel>();
+                conn.Close();
+            }
+            return LoginUserAddGroups;// ExecuteListSp<LoginUserAddGroups>("TMS_Groups_GetAllByCulture", ParamBuilder.ParNVarChar("Culture", culture, 5));
+        }
+        
         public DataTable GetTrainerDetailsForReportsDAL(long ClassID, long TrainerID)
         {
             DataTable dt = new DataTable();
@@ -794,7 +810,42 @@ namespace TMS.DataObjects.TMS
             //   return ExecuteDataSet("Tran_Venue_GetVenueOccupancyReports", ParamBuilder.Par("ClassID", ClassID), ParamBuilder.Par("VenueID", VenueID), ParamBuilder.Par("StartDate", StartDate), ParamBuilder.Par("EndDate", EndDate));
 
         }
+        public DataTable GetCertificateReportsDAL(string PersonId, long ClassID, long companyID, string Culture,long currentUser)
+        {
+            DataTable dt = new DataTable();
+            var conString = DBHelper.ConnectionString;
 
+            SqlCommand cmd = new SqlCommand("TMS_OrganizationForCertificatePrintData");
+            cmd.Parameters.AddWithValue("@ClassID", ClassID);
+            cmd.Parameters.AddWithValue("@personID", PersonId);
+            cmd.Parameters.AddWithValue("@OrganizationID", companyID);
+            cmd.Parameters.AddWithValue("@Culture", Culture);
+            cmd.Parameters.AddWithValue("@currentUser", currentUser);
+            using (SqlConnection con = new SqlConnection(conString))
+            {
+                using (SqlDataAdapter sda = new SqlDataAdapter())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    sda.SelectCommand = cmd;
+                    using (DataSet dsCustomers = new DataSet())
+                    {
+                        sda.Fill(dsCustomers, "Customers");
+                        return dsCustomers.Tables[0];
+                    }
+                }
+
+
+
+                //    return ExecuteDataSet("GetDataForVenueMatrix", ParamBuilder.Par("VenueID", VenueID)).Tables[0];
+
+            }
+
+
+
+            //   return ExecuteDataSet("Tran_Venue_GetVenueOccupancyReports", ParamBuilder.Par("ClassID", ClassID), ParamBuilder.Par("VenueID", VenueID), ParamBuilder.Par("StartDate", StartDate), ParamBuilder.Par("EndDate", EndDate));
+
+        }
         public DataTable GetDataForVenueMatrix(long VenueID)
         {
 

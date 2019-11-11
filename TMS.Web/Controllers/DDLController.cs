@@ -67,7 +67,12 @@ namespace TMS.Web.Controllers
             _SessionList = Utility.FillDropDownRecentYears(ConfiguredYear);
             return Json(_SessionList, JsonRequestBehavior.AllowGet);
         }
-
+        [DontWrapResult]
+        public JsonResult CertificateDDL()
+        {
+           var _SessionList = _objeobjIOrganizationBAL.CertificatesByOiDBAL(Convert.ToInt64(CurrentUser.CompanyID));
+            return Json(_SessionList, JsonRequestBehavior.AllowGet);
+        }
         #endregion "Course"
 
         #region Course Language

@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using TMS.DataObjects.Common.EmailTemplates;
 using TMS.DataObjects.Interfaces.Common.EmailTemplates;
 using TMS.Library.Common;
@@ -39,7 +40,7 @@ namespace TMS.Common.Utilities
         public string GetBody(Int64 _UserID,string Displayname, bool isPrimary,ref string Subject)
        {
             //UtilityFunctions.GetConfigurationValue("SITEURL")
-           string _URL = UtilityFunctions.AddQuerystringVar("http://13.88.187.74:9080/" + ("User/Reset"), "uid", _UserID.ToString());
+           string _URL = UtilityFunctions.AddQuerystringVar("http://" + HttpContext.Current.Request.Url.Authority.ToString() + ("/User/Reset"), "uid", _UserID.ToString());
            _URL = UtilityFunctions.AddQuerystringVar(_URL, "vc", "4");
            _URL = UtilityFunctions.AddQuerystringVar(_URL, "ts",  DateTime.Now.ToString("yyyyMMddHHmmssfff"));
            string fullname = Displayname;

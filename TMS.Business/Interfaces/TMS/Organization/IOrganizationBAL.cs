@@ -29,7 +29,12 @@ namespace TMS.Business.Interfaces.TMS.Organization
         /// <param name="culture">The culture.</param>
         /// <returns>IList&lt;DDlList&gt;.</returns>
         IList<DDlList> OrganizationAllbyCultureBAL(string culture);
-
+        /// <summary>
+        /// Organizations the allby culture bal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
+        IList<DDlList> CertificatesByOiDBAL(long Oid);
         /// <summary>
         /// Gets all organization bal.
         /// </summary>

@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 using TMS.Business.Common.DDL;
 using TMS.Business.Interfaces.Common.DDL;
 using TMS.Business.TMS;
+using TMS.Library.TMS.Organization;
 
 namespace TMS.Web.Views.Report.SpLReports
 {
@@ -75,6 +76,13 @@ namespace TMS.Web.Views.Report.SpLReports
            DataTable dt = _PersonBAL.ClassFutureReport(CourseID, startdatet, Toyear, ShowFutureClasses, ClassID, CompanyId);
             ReportViewerRSFReports.ProcessingMode = ProcessingMode.Local;
             ReportViewerRSFReports.LocalReport.DataSources.Clear();
+            ReportViewerRSFReports.LocalReport.EnableExternalImages = true;
+            List<OrganizationModel> logoPath = _PersonBAL.GetOrganizationLogo(Convert.ToInt64(HttpContext.Current.Session["CompanyID"]));
+            ReportParameter paramLogo = new ReportParameter();
+            paramLogo.Name = "Path";
+            string imagePath = new Uri(Server.MapPath(@"~/" + logoPath.FirstOrDefault().Logo)).AbsoluteUri;
+            paramLogo.Values.Add(imagePath);
+            ReportViewerRSFReports.LocalReport.SetParameters(paramLogo);
             ReportViewerRSFReports.LocalReport.DataSources.Add(new ReportDataSource("DS_ClassReportByCourseCategoryID", dt));
             ReportViewerRSFReports.LocalReport.Refresh();
             //ReportViewerRSFReports.RefreshReport();

@@ -96,13 +96,25 @@ namespace TMS.Web.Controllers
             }
             if (CurrentUser.CompanyID > 0)
             {
-                var _Phone = _Groups.TMS_GroupsByOrganization_GetAllBAL(CurrentCulture, Convert.ToString(CurrentUser.CompanyID), startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
-                return Json(_Phone.ToDataSourceResult(request, ModelState));
+                var _Phone = _Groups.TMS_GroupsByOrganization_GetAllBAL(request.Page,CurrentCulture, Convert.ToString(CurrentUser.CompanyID), startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
+                var result = new DataSourceResult()
+                {
+
+                    Data = _Phone,
+                    Total = Total
+                };
+                return Json(result);
             }
             else
             {
-                var _Phone = _Groups.TMS_Groups_GetAllBAL(CurrentCulture, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
-                return Json(_Phone.ToDataSourceResult(request, ModelState));
+                var _Phone = _Groups.TMS_Groups_GetAllBAL(request.Page, CurrentCulture, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
+                var result = new DataSourceResult()
+                {
+                    
+                    Data = _Phone,
+                    Total = Total
+                };
+                return Json(result);
             }
         }
 

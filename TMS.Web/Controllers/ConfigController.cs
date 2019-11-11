@@ -228,6 +228,26 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (_objVenues.SecondaryName == null)
+                    _objVenues.SecondaryName = "";
+                if (_objVenues.VenueStatusID == null)
+                    _objVenues.VenueStatusID = 0;
+                if (_objVenues.VenueCodeID == null)
+                    _objVenues.VenueCodeID = "";
+                if (_objVenues.RateType == null)
+                    _objVenues.RateType = 0;
+                if (_objVenues.Cost == null)
+                    _objVenues.Cost = 0;
+                if (_objVenues.Currency == null)
+                    _objVenues.Currency =0;
+                if (_objVenues.Capacity == null)
+                    _objVenues.Capacity = "";
+                if (_objVenues.IsCommon == null)
+                    _objVenues.IsCommon = false;
+                if (_objVenues.CountryID == null)
+                    _objVenues.CountryID = 145;
+                if (_objVenues.StateID == null)
+                    _objVenues.StateID = 0;
                 _objVenues.CreatedBy = CurrentUser.NameIdentifierInt64;
                 _objVenues.CreatedDate = DateTime.Now;
                 _objVenues.OrganizationID = CurrentUser.CompanyID;
@@ -252,6 +272,26 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (_objVenues.SecondaryName == null)
+                    _objVenues.SecondaryName = "";
+                if (_objVenues.VenueStatusID == null)
+                    _objVenues.VenueStatusID = 0;
+                if (_objVenues.VenueCodeID == null)
+                    _objVenues.VenueCodeID = "";
+                if (_objVenues.RateType == null)
+                    _objVenues.RateType = 0;
+                if (_objVenues.Cost == null)
+                    _objVenues.Cost = 0;
+                if (_objVenues.Currency == null)
+                    _objVenues.Currency = 0;
+                if (_objVenues.Capacity == null)
+                    _objVenues.Capacity = "";
+                if (_objVenues.IsCommon == null)
+                    _objVenues.IsCommon = false;
+                if (_objVenues.CountryID == null)
+                    _objVenues.CountryID = 145;
+                if (_objVenues.StateID == null)
+                    _objVenues.StateID = 0;
                 _objVenues.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _objVenues.UpdatedDate = DateTime.Now;
                 _objVenues.AvailableFrom = UtilityFunctions.MapValue<DateTime>(_objVenues.AvailableFromString, typeof(DateTime));

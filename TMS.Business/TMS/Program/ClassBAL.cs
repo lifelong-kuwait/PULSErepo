@@ -187,6 +187,10 @@ namespace TMS.Business.TMS.Program
         {
             return _ClassDAL.ClassTraineeMapping_GetAllDALOrganization(Culture, ClassID,CompnayID);
         }
+        public IList<ClassTraineeMappingCertificatePrint> ClassTraineeMappingCertificate_GetAllBALOrganization(string Culture, long ClassID, long CompnayID)
+        {
+            return _ClassDAL.ClassTraineeMappingCertificate_GetAllBALOrganizationDAL(Culture, ClassID, CompnayID);
+        }
         /// <summary>
         /// Trainers the get all except class trainer bal.
         /// </summary>

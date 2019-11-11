@@ -419,6 +419,8 @@ namespace TMS.Web.Controllers
                         {
                             _Class.FollowUp = "";
                         }
+                        if (_Class.SecondaryClassTitle == null)
+                            _Class.SecondaryClassTitle = "";
                         _ClassBAL.TMS_Classes_UpdateBAL(_Class);
                         string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
                         if (string.IsNullOrEmpty(ip))

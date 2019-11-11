@@ -191,6 +191,8 @@ namespace TMS.Library.TMS
         /// <value>The added by alias.</value>
         public string AddedByAlias { get; set; }
         public string UpdatedByAlias { get; set; }
+        
+        public string PrimaryCategoryName { get; set; }
 
 
     }

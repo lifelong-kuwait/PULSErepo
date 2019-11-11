@@ -962,7 +962,83 @@ namespace TMS.Library.Entities.TMS.Program
         /// <value>The person.</value>
         public Person Person { get; set; }
     }
+    /// <summary>
+    /// Class ClassTraineeMapping.
+    /// </summary>
+    public class ClassTraineeMappingCertificatePrint
+    {
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>The identifier.</value>
+        public long ID { get; set; }
 
+        /// <summary>
+        /// Gets or sets the person identifier.
+        /// </summary>
+        /// <value>The person identifier.</value>
+        public long PersonID { get; set; }
+
+        /// <summary>
+        /// Gets or sets the class identifier.
+        /// </summary>
+        /// <value>The class identifier.</value>
+        public long ClassID { get; set; }
+
+        /// <summary>
+        /// Gets or sets the created by.
+        /// </summary>
+        /// <value>The created by.</value>
+        public long CreatedBy { get; set; }
+
+        /// <summary>
+        /// Gets or sets the created date.
+        /// </summary>
+        /// <value>The created date.</value>
+        public DateTime CreatedDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the updated date.
+        /// </summary>
+        /// <value>The updated date.</value>
+        public DateTime UpdatedDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the updated by.
+        /// </summary>
+        /// <value>The updated by.</value>
+        public long? UpdatedBy { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is deleted.
+        /// </summary>
+        /// <value><c>true</c> if this instance is deleted; otherwise, <c>false</c>.</value>
+        public bool IsDeleted { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is active.
+        /// </summary>
+        /// <value><c>true</c> if this instance is active; otherwise, <c>false</c>.</value>
+        public bool IsActive { get; set; }
+        /// <summary>
+        /// Gets or sets the added by alias.
+        /// </summary>
+        /// <value>The added by alias.</value>
+        public string AddedByAlias { get; set; }
+        public string UpdatedByAlias { get; set; }
+        public string SessionStatistic { get; set; }
+        public long SessionAttended { get; set; }
+        public long TotalSessions { get; set; }
+        public long AttendancePercentage { get; set; }
+        public bool EligibleFor { get; set; }
+        public bool ClassCompleted { get; set; }
+        public Int32 PrintedTimeCount { get; set; }
+        /// <summary>
+        /// Gets or sets the person.
+        /// </summary>
+        /// <value>The person.</value>
+        public Person Person { get; set; }
+    }
 
     /// <summary>
     /// Class ClassTrainerMapping.

@@ -46,14 +46,14 @@ namespace TMS.Business.Interfaces.Common.Groups
         /// </summary>
         /// <param name="Culture">The culture.</param>
         /// <returns>IList&lt;SecurityGroups&gt;.</returns>
-        IList<SecurityGroups> TMS_Groups_GetAllBAL(string Culture, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText);
+        IList<SecurityGroups> TMS_Groups_GetAllBAL(int page,string Culture, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText);
 
         /// <summary>
         /// TMSs the groups get all bal.
         /// </summary>
         /// <param name="Culture">The culture.</param>
         /// <returns>IList&lt;SecurityGroups&gt;.</returns>
-        IList<SecurityGroups> TMS_GroupsByOrganization_GetAllBAL(string Culture,string Oid, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText);
+        IList<SecurityGroups> TMS_GroupsByOrganization_GetAllBAL(int page,string Culture,string Oid, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText);
 
         /// <summary>
         /// TMSs the groups create bal.

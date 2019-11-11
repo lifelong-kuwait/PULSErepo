@@ -256,6 +256,23 @@
                                                 </a>
                                             </div>
                                         </div>
+                                    }
+                                    @if (User.IsInAnyRoles("CanDeleteProgramTrainee"))
+                                    {
+                                        <div class="o365cs-nav-appItem">
+                                            <div>
+                                                <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="@Url.Content("~/Certificate/Index")"
+                                                   target="_blank" aria-disabled="false" id="O365_AppTile_ShellPowerPointOnline" aria-label="PowerPoint"
+                                                   title="">
+                                                    <div class="o365cs-nav-appTileBackground">
+                                                        <span class="o365cs-nav-appTileIcon owaimg ms-Icon--powerpoint ms-icon-font-size-55 ms-fcl-w fa fa-certificate"></span>
+                                                        <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>@lr.MenuCertificate</span> </span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    }
+                                        @*}*@
                                         @*<li class="events">
                 <a href="@Url.Content("~/Resource/Index")">
                     <span class="mdi mdi-web tms-tile-icon"></span>
@@ -264,97 +281,97 @@
             </li>*@
                                     }
                                     @*<div class="o365cs-nav-appItem">
-                                        <div>
-                                            <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="@Url.Content("~/Home/Office365Enabled")"
-                                               target="_blank" aria-disabled="false" id="O365_AppTile_ShellPowerPointOnline" aria-label="PowerPoint"
-                                               title="">
-                                                <div class="o365cs-nav-appTileBackground">
-                                                    <span class="o365cs-nav-appTileIcon owaimg ms-Icon--powerpoint ms-icon-font-size-55 ms-fcl-w fa fa-level-up"></span>
-                                                    <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>@lr.Office365Title</span> </span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>*@
+            <div>
+                <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="@Url.Content("~/Home/Office365Enabled")"
+                   target="_blank" aria-disabled="false" id="O365_AppTile_ShellPowerPointOnline" aria-label="PowerPoint"
+                   title="">
+                    <div class="o365cs-nav-appTileBackground">
+                        <span class="o365cs-nav-appTileIcon owaimg ms-Icon--powerpoint ms-icon-font-size-55 ms-fcl-w fa fa-level-up"></span>
+                        <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>@lr.Office365Title</span> </span>
+                    </div>
+                </a>
+            </div>
+        </div>*@
                                     @*<li>
-                                        <a href="@Url.Content("~/Home/Office365Enabled")">
-                                            <span class="mdi mdi-login-variant tms-tile-icon"></span>
-                                            <span class="shortcuts-label">@lr.Office365Title</span>
-                                        </a>
-                                    </li>*@
+            <a href="@Url.Content("~/Home/Office365Enabled")">
+                <span class="mdi mdi-login-variant tms-tile-icon"></span>
+                <span class="shortcuts-label">@lr.Office365Title</span>
+            </a>
+        </li>*@
                                     @*<div class="o365cs-nav-appItem">
-                                        <div>
-                                            <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="#"
-                                               target="_blank" aria-disabled="false" id="O365_AppTile_ShellOneNoteOnline" aria-label="OneNote"
-                                               title="">
-                                                <div class="o365cs-nav-appTileBackground">
-                                                    <span class="o365cs-nav-appTileIcon owaimg ms-Icon--onenote ms-icon-font-size-55 ms-fcl-w fa fa-rss"> </span>
-                                                    <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>@lr.MenuFeadBack</span> </span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="o365cs-nav-appItem">
-                                        <div>
-                                            <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="#"
-                                               target="_blank" aria-disabled="false" id="O365_AppTile_ShellSway" aria-label="Sway" title="">
-                                                <div class="o365cs-nav-appTileBackground">
-                                                    <span class="o365cs-nav-appTileIcon owaimg ms-Icon--sway ms-icon-font-size-55 ms-fcl-w fa fa-certificate"> </span>
-                                                    <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>@lr.MenuCertificate</span> </span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>*@
+            <div>
+                <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="#"
+                   target="_blank" aria-disabled="false" id="O365_AppTile_ShellOneNoteOnline" aria-label="OneNote"
+                   title="">
+                    <div class="o365cs-nav-appTileBackground">
+                        <span class="o365cs-nav-appTileIcon owaimg ms-Icon--onenote ms-icon-font-size-55 ms-fcl-w fa fa-rss"> </span>
+                        <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>@lr.MenuFeadBack</span> </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="o365cs-nav-appItem">
+            <div>
+                <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="#"
+                   target="_blank" aria-disabled="false" id="O365_AppTile_ShellSway" aria-label="Sway" title="">
+                    <div class="o365cs-nav-appTileBackground">
+                        <span class="o365cs-nav-appTileIcon owaimg ms-Icon--sway ms-icon-font-size-55 ms-fcl-w fa fa-certificate"> </span>
+                        <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>@lr.MenuCertificate</span> </span>
+                    </div>
+                </a>
+            </div>
+        </div>*@
                                     @*@if (User.IsInRole("CanViewReports"))
-                                    {
-                                        <div class="o365cs-nav-appItem">
-                                            <div>
-                                                <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="#"
-                                                   target="_blank" aria-disabled="false" id="O365_AppTile_ShellDocsCom" aria-label="Docs.com"
-                                                   title="">
-                                                    <div class="o365cs-nav-appTileBackground">
-                                                        <span class="o365cs-nav-appTileIcon owaimg ms-Icon--docs ms-icon-font-size-55 ms-fcl-w fa fa-file-o"> </span>
-                                                        <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>@lr.MenuReports</span> </span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="o365cs-nav-appItem">
-                                            <div>
-                                                <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="#"
-                                                   target="_blank" aria-disabled="false" id="O365_AppTile_ShellDocsCom" aria-label="Docs.com"
-                                                   title="">
-                                                    <div class="o365cs-nav-appTileBackground">
-                                                        <span class="o365cs-nav-appTileIcon owaimg ms-Icon--docs ms-icon-font-size-55 ms-fcl-w fa fa-file-o"> </span>
-                                                        <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>@lr.MenuReports</span> </span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    }*@@*<div class="o365cs-nav-appItem">
-                                        <div>
-                                            <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="#"
-                                               aria-disabled="false" id="O365_AppTile_ShellOffice" aria-label="Office" title="">
-                                                <div class="o365cs-nav-appTileBackground">
-                                                    <span class="o365cs-nav-appTileIcon owaimg ms-Icon--officeThreshold ms-icon-font-size-55 ms-fcl-w fa fa-money"> </span>
-                                                    <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>@lr.MenuPaymentAccount </span> </span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>*@
-                                    @*<div class="o365cs-nav-appItem">
-                                        <div>
-                                            <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="#"
-                                               target="_blank" aria-disabled="false" id="O365_AppTile_ShellBing" aria-label="Bing" title="">
-                                                <div class="o365cs-nav-appTileBackground">
-                                                    <span class="o365cs-nav-appTileIcon owaimg ms-Icon--bing ms-icon-font-size-55 ms-fcl-w fa fa-commenting-o"> </span>
-                                                    <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>@lr.MenuManageSMS </span> </span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>*@
+        {
+            <div class="o365cs-nav-appItem">
+                <div>
+                    <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="#"
+                       target="_blank" aria-disabled="false" id="O365_AppTile_ShellDocsCom" aria-label="Docs.com"
+                       title="">
+                        <div class="o365cs-nav-appTileBackground">
+                            <span class="o365cs-nav-appTileIcon owaimg ms-Icon--docs ms-icon-font-size-55 ms-fcl-w fa fa-file-o"> </span>
+                            <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>@lr.MenuReports</span> </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="o365cs-nav-appItem">
+                <div>
+                    <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="#"
+                       target="_blank" aria-disabled="false" id="O365_AppTile_ShellDocsCom" aria-label="Docs.com"
+                       title="">
+                        <div class="o365cs-nav-appTileBackground">
+                            <span class="o365cs-nav-appTileIcon owaimg ms-Icon--docs ms-icon-font-size-55 ms-fcl-w fa fa-file-o"> </span>
+                            <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>@lr.MenuReports</span> </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        }*@@*<div class="o365cs-nav-appItem">
+            <div>
+                <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="#"
+                   aria-disabled="false" id="O365_AppTile_ShellOffice" aria-label="Office" title="">
+                    <div class="o365cs-nav-appTileBackground">
+                        <span class="o365cs-nav-appTileIcon owaimg ms-Icon--officeThreshold ms-icon-font-size-55 ms-fcl-w fa fa-money"> </span>
+                        <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>@lr.MenuPaymentAccount </span> </span>
+                    </div>
+                </a>
+            </div>
+        </div>*@
+                                @*<div class="o365cs-nav-appItem">
+        <div>
+            <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="#"
+               target="_blank" aria-disabled="false" id="O365_AppTile_ShellBing" aria-label="Bing" title="">
+                <div class="o365cs-nav-appTileBackground">
+                    <span class="o365cs-nav-appTileIcon owaimg ms-Icon--bing ms-icon-font-size-55 ms-fcl-w fa fa-commenting-o"> </span>
+                    <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>@lr.MenuManageSMS </span> </span>
+                </div>
+            </a>
+        </div>
+    </div>*@
                                     @if (User.IsInRole("CanViewTMSAdmin"))
                                     {
                                         <div class="o365cs-nav-appItem">
@@ -420,16 +437,16 @@
 
 
                                     @*<div class="o365cs-nav-appItem">
-                                        <div>
-                                            <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="@Url.Content("~/Config/AuditLog")"
-                                               aria-disabled="false" id="O365_AppTile_ShellTasks" aria-label="Tasks" title="">
-                                                <div class="o365cs-nav-appTileBackground ms-bgc-tp" style="">
-                                                    <span class="o365cs-nav-appTileIcon owaimg ms-Icon--tasks ms-icon-font-size-55 ms-fcl-w fa fa-history "> </span>
-                                                    <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>Audit Log</span> </span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>*@
+            <div>
+                <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="@Url.Content("~/Config/AuditLog")"
+                   aria-disabled="false" id="O365_AppTile_ShellTasks" aria-label="Tasks" title="">
+                    <div class="o365cs-nav-appTileBackground ms-bgc-tp" style="">
+                        <span class="o365cs-nav-appTileIcon owaimg ms-Icon--tasks ms-icon-font-size-55 ms-fcl-w fa fa-history "> </span>
+                        <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>Audit Log</span> </span>
+                    </div>
+                </a>
+            </div>
+        </div>*@
 
 
 

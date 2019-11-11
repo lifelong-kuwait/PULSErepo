@@ -286,6 +286,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CertificateController.cs" />
     <Compile Include="Controllers\SalesAdministrationController.cs" />
     <Compile Include="Controllers\SPl_Test_ReportsController.cs" />
     <Compile Include="Controllers\TestWaqasControllerController.cs" />
@@ -306,6 +307,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DailyUtilizationReport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="DS_CompanyInfo.Designer.cs" />
     <Compile Include="Reports\WeeklyAttendanceReport.cs">
@@ -434,6 +445,13 @@
     </Compile>
     <Compile Include="Views\Report\Pages\WeeklySummeryReport.aspx.designer.cs">
       <DependentUpon>WeeklySummeryReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\CertificatePrinting.aspx.cs">
+      <DependentUpon>CertificatePrinting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\CertificatePrinting.aspx.designer.cs">
+      <DependentUpon>CertificatePrinting.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Report\SpLReports\ClassDetailReport.aspx.cs">
       <DependentUpon>ClassDetailReport.aspx</DependentUpon>
@@ -2515,6 +2533,28 @@
     <Content Include="DailyUtilizationReport.xss">
       <DependentUpon>DailyUtilizationReport.xsd</DependentUpon>
     </Content>
+    <Content Include="DataSet.xsc">
+      <DependentUpon>DataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSet.xss">
+      <DependentUpon>DataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Content>
     <None Include="DS_ClassReportByCourseCategoryID.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>DS_ClassReportByCourseCategoryID.Designer.cs</LastGenOutput>
@@ -2570,7 +2610,11 @@
     <None Include="Properties\PublishProfiles\FolderProfile45.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile46.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile47.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile48.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile49.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile5.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile50.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile51.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile6.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile7.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile8.pubxml" />
@@ -4528,6 +4572,7 @@
     <Content Include="Views\Report\Pages\VenueMatrixReport.aspx" />
     <Content Include="Views\Report\Pages\ViewClassTimeTable.aspx" />
     <Content Include="Views\Report\Pages\WeeklySummeryReport.aspx" />
+    <Content Include="Views\Report\SpLReports\CertificatePrinting.aspx" />
     <Content Include="Views\Report\SpLReports\ClassDetailReport.aspx" />
     <Content Include="Views\Report\SpLReports\ClassFutureReport.aspx" />
     <Content Include="Views\Report\SpLReports\CoursePeriodicReport.aspx" />
@@ -4751,6 +4796,8 @@
     <Content Include="Views\SPl_Test_Reports\WeeklyUtilizationReportModified.cshtml" />
     <Content Include="Views\SPl_Test_Reports\VenueMatrixRDLCReport.cshtml" />
     <Content Include="Views\Admin\Schedule_Read.cshtml" />
+    <Content Include="Views\Certificate\Index.cshtml" />
+    <Content Include="Views\Certificate\_ManageTrainee.cshtml" />
     <None Include="WeeklyAttendanceReportData.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -5443,6 +5490,7 @@
     <Content Include="Report\Venue_Matrix_ReportCustomized.rdlc" />
     <Content Include="Report\WeeklyUtilizatinDynamicColumns.rdlc" />
     <Content Include="Report\WeeklyUtilizationReport2.rdlc" />
+    <EmbeddedResource Include="Report\Tran_CertificatePrinting.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

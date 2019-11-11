@@ -444,7 +444,7 @@ namespace TMS.DataObjects.TMS.Program
             // ExecuteListSp<LoginUsers>("TMS_Users_GetAll");
         }
 
-
+        
         public IList<ClassTraineeMapping> ClassTraineeMapping_GetAllDALOrganization(string Culture, long ClassID,long OrganizationID)
         {
             List<ClassTraineeMapping> LoginUserList = new List<ClassTraineeMapping>();
@@ -477,7 +477,38 @@ namespace TMS.DataObjects.TMS.Program
             return LoginUserList;
             // ExecuteListSp<LoginUsers>("TMS_Users_GetAll");
         }
-
+        public IList<ClassTraineeMappingCertificatePrint> ClassTraineeMappingCertificate_GetAllBALOrganizationDAL(string Culture, long ClassID, long OrganizationID)
+        {
+            List<ClassTraineeMappingCertificatePrint> LoginUserList = new List<ClassTraineeMappingCertificatePrint>();
+            var conString = DBHelper.ConnectionString;
+            using (var conn = new SqlConnection(conString))
+            {
+                conn.Open();
+                string qry = @"TMS_ClassTraineeMapping_GetAllOrganizationForCertificatePrint";
+                DynamicParameters param = new DynamicParameters(new { Culture = Culture, ClassID = ClassID, OrganizationID = OrganizationID });
+                var ClassTraineeMappingDictionary = new Dictionary<long, ClassTraineeMappingCertificatePrint>();
+                LoginUserList = conn.Query<ClassTraineeMappingCertificatePrint, Person, ClassTraineeMappingCertificatePrint>(
+                       qry, (loginUsers, person) =>
+                       {
+                           ClassTraineeMappingCertificatePrint ClassTraineeMappingEntry;
+                           if (!ClassTraineeMappingDictionary.TryGetValue(loginUsers.ID, out ClassTraineeMappingEntry))
+                           {
+                               ClassTraineeMappingEntry = loginUsers;
+                               ClassTraineeMappingEntry.Person = new Person();
+                               ClassTraineeMappingDictionary.Add(ClassTraineeMappingEntry.ID, ClassTraineeMappingEntry);
+                           }
+                           if (person != null)
+                               ClassTraineeMappingEntry.Person = person;
+                           return ClassTraineeMappingEntry;
+                       }, param, commandType: System.Data.CommandType.StoredProcedure,
+                       splitOn: "PersonID")
+                   .Distinct()
+                   .ToList();
+                conn.Close();
+            }
+            return LoginUserList;
+            // ExecuteListSp<LoginUsers>("TMS_Users_GetAll");
+        }
 
         /// <summary>
         /// Classes the trainee get all by class identifier for creating dal.

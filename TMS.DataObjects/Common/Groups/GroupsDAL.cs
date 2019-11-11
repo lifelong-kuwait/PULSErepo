@@ -61,7 +61,7 @@ namespace TMS.DataObjects.Common.Groups
         /// </summary>
         /// <param name="Culture">The culture.</param>
         /// <returns>IList&lt;SecurityGroups&gt;.</returns>
-        public IList<SecurityGroups> TMS_Groups_GetAllDAL(string Culture, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText)
+        public IList<SecurityGroups> TMS_Groups_GetAllDAL(int page,string Culture, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText)
         {
 
 
@@ -71,7 +71,7 @@ namespace TMS.DataObjects.Common.Groups
             {
                 conn.Open();
                 DynamicParameters dbParam = new DynamicParameters();
-                dbParam.AddDynamicParams(new { Culture = Culture, StartRowIndex = StartRowIndex, PageSize = PageSize, SortExpression = SortExpression, SearchText = SearchText });
+                dbParam.AddDynamicParams(new { Culture = Culture, StartRowIndex = StartRowIndex, PageSize = PageSize, SortExpression = SortExpression, SearchText = SearchText, page=page });
                 using (var multi = conn.QueryMultiple("TMS_Groups_GetAll", dbParam, commandType: System.Data.CommandType.StoredProcedure))
                 {
                     groups = multi.Read<SecurityGroups>().AsList<SecurityGroups>();
@@ -91,14 +91,14 @@ namespace TMS.DataObjects.Common.Groups
         /// </summary>
         /// <param name="Culture">The culture.</param>
         /// <returns>IList&lt;SecurityGroups&gt;.</returns>
-        public IList<SecurityGroups> TMS_GroupsByOrganization_GetAllDAL(string Culture, string Oid, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText)
+        public IList<SecurityGroups> TMS_GroupsByOrganization_GetAllDAL(int page,string Culture, string Oid, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText)
         {
             List<SecurityGroups> groups = new List<SecurityGroups>();
             using (var conn = new SqlConnection(DBHelper.ConnectionString))
             {
                 conn.Open();
                 DynamicParameters dbParam = new DynamicParameters();
-                dbParam.AddDynamicParams(new { Culture = Culture,Oid=Oid, StartRowIndex = StartRowIndex, PageSize = PageSize, SortExpression = SortExpression, SearchText = SearchText });
+                dbParam.AddDynamicParams(new { Culture = Culture,Oid=Oid, StartRowIndex = StartRowIndex, PageSize = PageSize, SortExpression = SortExpression, SearchText = SearchText,page=page});
                 using (var multi = conn.QueryMultiple("TMS_Groups_GetAllByOrganization", dbParam, commandType: System.Data.CommandType.StoredProcedure))
                 {
                     groups = multi.Read<SecurityGroups>().AsList<SecurityGroups>();

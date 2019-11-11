@@ -117,6 +117,8 @@ namespace TMS.DataObjects.Interfaces.TMS
         /// <returns>IList&lt;ClassTraineeMapping&gt;.</returns>
         IList<ClassTraineeMapping> ClassTraineeMapping_GetAllDAL(string Culture, long ClassID);
         IList<ClassTraineeMapping> ClassTraineeMapping_GetAllDALOrganization(string Culture, long ClassID, long CompnayID);
+        IList<ClassTraineeMappingCertificatePrint> ClassTraineeMappingCertificate_GetAllBALOrganizationDAL(string Culture, long ClassID, long CompnayID);
+
         /// <summary>
         /// Classes the trainee get all by class identifier for creating dal.
         /// </summary>

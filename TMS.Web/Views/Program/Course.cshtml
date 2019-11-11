@@ -20,8 +20,10 @@
         .Name("CourseGrid")
         .Columns(columns =>
         {
+            
             columns.Bound(e => e.PrimaryName).ClientTemplate("#=CourseTemplate(data)#");
-            columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(210).MinScreenWidth(560).Title(lr.GridAddedBy);
+            columns.Bound(e => e.PrimaryCategoryName).Width(220).Title(lr.CourseCategory);
+           columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(210).MinScreenWidth(560).Title(lr.GridAddedBy);
             columns.Bound(e => e.UpdatedByAlias).Width(190).Title(lr.ModifiedBy).
      ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"<span class='Addedby'>#=UpdatedByAlias# </span>
 <span class='date' >#=kendo.toString(UpdatedDate,'" + DateFormatScript + @"')#</span>

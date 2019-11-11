@@ -24,6 +24,7 @@ using TMS.Library;
 using TMS.Library.Entities.CRM;
 using TMS.Library.Entities.TMS.Persons;
 using TMS.Library.Entities.TMS.Program;
+using TMS.Library.TMS.Organization;
 using TMS.Library.TMS.Persons;
 using TMS.Library.TMS.Persons.Others;
 
@@ -388,7 +389,10 @@ namespace TMS.Business.TMS
         {
             return DAL.TMS_Coordinate_GetAllByCultureDAL(culture);
         }
-
+        public List<OrganizationModel> GetOrganizationLogo(long OrgId)
+        {
+            return DAL.GetOrganizationLogoDAL(OrgId);
+        }
         public DataTable GetTrainerDetailsForReports(long ClassID, long TrainerID)
         {
             return DAL.GetTrainerDetailsForReportsDAL(ClassID, TrainerID);
@@ -422,6 +426,10 @@ namespace TMS.Business.TMS
         public DataTable GetOccVenueDetailsForReports(long ClassID, long VenueID,DateTime StartTime,DateTime EndTime)
         {
             return DAL.GetOccVenueDetailsForReportsDAL(ClassID, VenueID, StartTime,EndTime);
+        }
+        public DataTable GetCertificateReports(string PersonId, long ClassID,long companyID,string Culture,long currentUser)
+        {
+            return DAL.GetCertificateReportsDAL(PersonId,ClassID, companyID,Culture,currentUser);
         }
         public DataTable GetCourseReportData(long ClassID, long CourseID)
         {
