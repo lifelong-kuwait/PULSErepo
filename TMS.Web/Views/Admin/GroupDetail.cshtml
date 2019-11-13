@@ -128,9 +128,9 @@
                 //i.Add().Text("TMS").LoadContentFrom("TMSGroupDetail", "Admin");
                 i.Add().Text("TMS").LoadContentFrom("TMSGroupDetail", "Admin", new {GroupId = ViewData["GroupId"] });
                 // }
-                // if (User.IsInRole("CanViewCRMGroups"))
+                 //if (User.IsInRole("CanViewCRMGroups"))
                 // {
-                //i.Add().Text("CRM").LoadContentFrom("CRMGroupDetail", "Admin", new { GroupId = ViewData["GroupId"] });
+                i.Add().Text("CRM").LoadContentFrom("CRMGroupDetail", "Admin", new { GroupId = ViewData["GroupId"] });
                 ////i.Add().Text("CRM").LoadContentFrom("CRMGroupDetail", "Admin");
                 //// }
             }).Events(e => e.Expand("onExpand")))

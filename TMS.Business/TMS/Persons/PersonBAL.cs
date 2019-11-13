@@ -663,6 +663,10 @@ namespace TMS.Business.TMS
         {
             return DAL.ManageCourse_DuplicationCheckDAL(_mapping);
         }
+        public int ManageCourseCategory_DuplicationCheckBAL(CRM_CourseCategoryMapping _mapping)
+        {
+            return DAL.ManageCourseCategory_DuplicationCheckDAL(_mapping);
+        }
         public int ManageCourse_Assigned(long PID)
         {
             return DAL.ManageCourse_Assigned(PID);

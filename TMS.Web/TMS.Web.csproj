@@ -2615,6 +2615,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile5.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile50.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile51.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile52.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile6.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile7.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile8.pubxml" />
@@ -5490,7 +5491,9 @@
     <Content Include="Report\Venue_Matrix_ReportCustomized.rdlc" />
     <Content Include="Report\WeeklyUtilizatinDynamicColumns.rdlc" />
     <Content Include="Report\WeeklyUtilizationReport2.rdlc" />
-    <EmbeddedResource Include="Report\Tran_CertificatePrinting.rdlc" />
+    <Content Include="Report\Tran_CertificatePrinting.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

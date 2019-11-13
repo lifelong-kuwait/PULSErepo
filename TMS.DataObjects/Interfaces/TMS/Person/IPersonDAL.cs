@@ -301,7 +301,9 @@ namespace TMS.DataObjects.Interfaces.TMS
         int ManageRecordVisit_DeleteDAL(CRM_VisitHistory _mapping);
 
         int ManageCourse_DuplicationCheckDAL(CRM_CourseMapping _mapping);
+        int ManageCourseCategory_DuplicationCheckDAL(CRM_CourseCategoryMapping _mapping);
 
+        
              int ManageScheduleCourse_DuplicationCheckDAL(CRM_classPersonMapping _mapping);
 
         #endregion Record Visit    

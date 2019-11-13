@@ -1377,8 +1377,9 @@ namespace TMS.DataObjects.TMS
         {
             return ExecuteScalarSPInt32("CRM_ClassMapping_Dublication",
                         ParamBuilder.Par("ClassID", _mapping.ClassID),
-                        ParamBuilder.Par("UpdatedBy", _mapping.UpdatedBy),
-                        ParamBuilder.Par("UpdatedOn", _mapping.UpdatedOn)); 
+                        ParamBuilder.Par("PersonID", _mapping.PersonID),
+                        ParamBuilder.Par("CreatedBy", _mapping.CreatedBy));
+                        //ParamBuilder.Par("UpdatedOn", _mapping.UpdatedOn)); 
         }
         public int ManageScheduledClasses_DeleteDAL(CRM_classPersonMapping _mapping)
         {
@@ -1595,6 +1596,13 @@ namespace TMS.DataObjects.TMS
             return ExecuteScalarSPInt32("CRMCourse_DuplicationCheck",
                       ParamBuilder.Par("PersonID", _mapping.PersonID),
                                   ParamBuilder.Par("CourseID", _mapping.CourseID));
+
+        }
+        public int ManageCourseCategory_DuplicationCheckDAL(CRM_CourseCategoryMapping _mapping)
+        {
+            return ExecuteScalarSPInt32("CRMCourseCategory_DuplicationCheck",
+                      ParamBuilder.Par("PersonID", _mapping.PersonID),
+                                  ParamBuilder.Par("CategoryID", _mapping.CategoryID));
 
         }
         public int ManageCourse_Assigned(long PID)

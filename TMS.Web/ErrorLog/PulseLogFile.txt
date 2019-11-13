@@ -82,3 +82,27 @@ ERROR 2019-11-11 15:51:24,045 1960621ms ExceptionContext       OnException      
 ERROR 2019-11-11 15:51:33,951 1970528ms ExceptionContext       OnException        - Subquery returned more than 1 value. This is not permitted when the subquery follows =, !=, <, <= , >, >= or when the subquery is used as an expression.
 ERROR 2019-11-11 15:56:20,566 2257143ms ExceptionContext       OnException        - Invalid object name '#PersonID'.
 ERROR 2019-11-11 15:56:35,958 2272535ms ExceptionContext       OnException        - Invalid object name '#PersonID'.
+ERROR 2019-11-12 13:55:20,985 2534641ms ExceptionContext       OnException        - The if block is missing a closing "}" character.  Make sure you have a matching "}" character for all the "{" characters within this block, and that none of the "}" characters are being interpreted as markup.
+
+ERROR 2019-11-12 13:56:12,421 41011ms ExceptionContext       OnException        - The if block is missing a closing "}" character.  Make sure you have a matching "}" character for all the "{" characters within this block, and that none of the "}" characters are being interpreted as markup.
+
+ERROR 2019-11-12 17:01:38,526 406491ms ExceptionContext       OnException        - Procedure or function 'TMS_Trainer_Create' expects parameter '@DateOfBirth', which was not supplied.
+ERROR 2019-11-13 11:04:19,156 794520ms ExceptionContext       OnException        - Procedure or function 'TMS_Trainer_Create' expects parameter '@DateOfBirth', which was not supplied.
+ERROR 2019-11-13 11:14:15,371 1390735ms ExceptionContext       OnException        - Procedure or function 'TMS_Trainer_Create' expects parameter '@DateOfBirth', which was not supplied.
+ERROR 2019-11-13 11:14:53,828 1429192ms ExceptionContext       OnException        - Procedure or function 'TMS_Trainer_Create' expects parameter '@ClientType', which was not supplied.
+ERROR 2019-11-13 11:17:04,792 1560156ms ExceptionContext       OnException        - Procedure or function 'TMS_Trainer_Create' expects parameter '@ClientType', which was not supplied.
+ERROR 2019-11-13 11:37:50,743 2806108ms ExceptionContext       OnException        - Procedure or function 'TMS_Person_DuplicationCheck' expects parameter '@createdBy', which was not supplied.
+ERROR 2019-11-13 11:39:26,448 2901812ms ExceptionContext       OnException        - Procedure or function 'TMS_Person_DuplicationCheck' expects parameter '@createdBy', which was not supplied.
+ERROR 2019-11-13 11:39:58,173 2933538ms ExceptionContext       OnException        - Procedure or function 'TMS_Person_DuplicationCheck' expects parameter '@createdBy', which was not supplied.
+ERROR 2019-11-13 11:40:10,922 2946287ms ExceptionContext       OnException        - Procedure or function 'TMS_Person_DuplicationCheck' expects parameter '@createdBy', which was not supplied.
+ERROR 2019-11-13 11:40:51,504 2986868ms ExceptionContext       OnException        - Procedure or function 'TMS_Person_DuplicationCheck' expects parameter '@createdBy', which was not supplied.
+ERROR 2019-11-13 12:02:54,306 1145012ms ExceptionContext       OnException        - SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM.
+ERROR 2019-11-13 13:13:00,383 25219ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter 'PersonID' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult ScheduledClasses(Int64)' in 'TMS.Web.Controllers.ProspectController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2019-11-13 13:45:09,260 1149115ms ExceptionContext       OnException        - SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM.
+ERROR 2019-11-13 13:45:59,794 1199650ms ExceptionContext       OnException        - SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM.
+ERROR 2019-11-13 13:46:29,028 1228884ms ExceptionContext       OnException        - Procedure or function 'CRM_ClassMapping_Dublication' expects parameter '@PersonID', which was not supplied.
+ERROR 2019-11-13 13:47:13,268 1273124ms ExceptionContext       OnException        - Procedure or function 'CRM_ClassMapping_Dublication' expects parameter '@PersonID', which was not supplied.
+ERROR 2019-11-13 13:48:21,732 1341588ms ExceptionContext       OnException        - Procedure or function CRM_ClassMapping_Dublication has too many arguments specified.
+ERROR 2019-11-13 13:48:49,760 1369616ms ExceptionContext       OnException        - Procedure or function 'CRM_ClassMapping_Dublication' expects parameter '@CreatedBy', which was not supplied.
+ERROR 2019-11-13 16:46:49,137 7639432ms ExceptionContext       OnException        - Procedure or function 'TMS_Task_Create' expects parameter '@Description', which was not supplied.

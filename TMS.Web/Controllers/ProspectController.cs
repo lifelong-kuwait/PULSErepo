@@ -142,6 +142,7 @@ namespace TMS.Web.Controllers
                         _person.CreatedDate = DateTime.Now;
                         _person.OrganizationID = CurrentUser.CompanyID;
                         string _profilePict = string.Empty;
+                        _person.DateOfBirth = DateTime.Now;
                         var Resp = SavePersonData(_person, ref _profilePict);
                         _person.AddedByAlias = CurrentUser.Name;
                         _person.ID = Resp.ID;
@@ -198,7 +199,7 @@ namespace TMS.Web.Controllers
             _person.UpdatedDate = DateTime.Now;
 
             bool _valid = false;
-            if (_UserBAL.LoginPerson_DuplicationCheckBAL(new Person { Email = _person.Email }) > 0)
+            if (_UserBAL.LoginPerson_DuplicationCheckBAL(new Person { Email = _person.Email,CreatedBy=_person.CreatedBy }) > 0)
             {
                 ModelState.AddModelError(lr.UserEmailAlreadyExist, lr.UserEmailAlreadyExist);
                 // return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
@@ -228,6 +229,7 @@ namespace TMS.Web.Controllers
                 }
                 if (_valid)
                 {
+                    _person.UpdatedBy = CurrentUser.NameIdentifierInt64;
                     var result = _PersonBAL.Person_UpdateBAL(_person);
                     _person.ProfilePicture = HandlePersonProfilePicture(filename, _person.ID, aid);
                     if (result != -1)
@@ -419,6 +421,7 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                _objPhoneNumbers.UpdatedOn = DateTime.Now;
                 if (_PersonBAL.ManageScheduledClasses_DublicationBAL(_objPhoneNumbers) > 0)
                 {
                     ModelState.AddModelError(lr.PersonPhoneNumber, lr.PersonPhoneDuplication);
@@ -449,7 +452,7 @@ namespace TMS.Web.Controllers
                 _objPhoneNumbers.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _objPhoneNumbers.UpdatedOn = DateTime.Now;
                 var results = _PersonBAL.ManageScheduledClasses_DeleteBAL(_objPhoneNumbers);
-                if (results != -1)
+                if (results == -1)
                 {
                     ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
                 }
@@ -544,7 +547,7 @@ namespace TMS.Web.Controllers
                 _objPhoneNumbers.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _objPhoneNumbers.UpdatedOn = DateTime.Now;
                 var results = _PersonBAL.ManageProposedCourses_DeleteBAL(_objPhoneNumbers);
-                if (results != -1)
+                if (results == -1)
                 {
                     ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
                 }
@@ -583,17 +586,17 @@ namespace TMS.Web.Controllers
             if (ModelState.IsValid)
             {
                 _mapping.PersonID = oid;
-                //if (_PersonBAL.ManageCourse_DuplicationCheckBAL(_mapping) > 0)
-                //{
-                //    ModelState.AddModelError(lr.PersonPhoneNumber, lr.PersonPhoneDuplication);
-                //}
-                //else
-                //{
+                if (_PersonBAL.ManageCourseCategory_DuplicationCheckBAL(_mapping) > 0)
+                {
+                    ModelState.AddModelError(lr.PersonPhoneNumber, lr.PersonPhoneDuplication);
+                }
+                else
+                {
                 _mapping.CreatedBy = CurrentUser.NameIdentifierInt64;
                 _mapping.CreatedOn = DateTime.Now;
 
                 _mapping.ID = _PersonBAL.ManageCategory_CreateBAL(_mapping);
-                //  }
+                  }
             }
             var resultData = new[] { _mapping };
             return Json(resultData.ToDataSourceResult(request, ModelState));
@@ -607,12 +610,12 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                //if (_objPersonContactBAL.PersonPhoneNumbers_DuplicationCheckBAL(_objPhoneNumbers, Convert.ToInt64(pid)) > 0)
+                //if (_objPersonContactBAL.ManageCourseCategory_DuplicationCheckBAL(_objPhoneNumbers, Convert.ToInt64(pid)) > 0)
                 //{
-                //    ModelState.AddModelError(lr.PersonPhoneNumber, lr.PersonPhoneDuplication);
+                //   ModelState.AddModelError(lr.PersonPhoneNumber, lr.PersonPhoneDuplication);
                 //}
                 //   else
-                //  {
+                // {
                 _objPhoneNumbers.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _objPhoneNumbers.UpdatedOn = DateTime.Now;
                 var result = _PersonBAL.ManageCategory_UpdateBAL(_objPhoneNumbers);
@@ -620,7 +623,7 @@ namespace TMS.Web.Controllers
                 {
                     ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
                 }
-                //  }
+                 //}
             }
             var resultData = new[] { _objPhoneNumbers };
             return Json(resultData.AsQueryable().ToDataSourceResult(request, ModelState));
@@ -637,7 +640,7 @@ namespace TMS.Web.Controllers
                 _objPhoneNumbers.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _objPhoneNumbers.UpdatedOn = DateTime.Now;
                 var results = _PersonBAL.ManageCategory_DeleteBAL(_objPhoneNumbers);
-                if (results != -1)
+                if (results == -1)
                 {
                     ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
                 }
@@ -782,7 +785,7 @@ namespace TMS.Web.Controllers
                 _objPhoneNumbers.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _objPhoneNumbers.UpdatedOn = DateTime.Now;
                 var results = _PersonBAL.ManageHowHeard_DeleteBAL(_objPhoneNumbers);
-                if (results != -1)
+                if (results == -1)
                 {
                     ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
                 }
@@ -901,7 +904,7 @@ namespace TMS.Web.Controllers
                 _objPhoneNumbers.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _objPhoneNumbers.UpdatedOn = DateTime.Now;
                 var results = _PersonBAL.ManageRecordCall_DeleteBAL(_objPhoneNumbers);
-                if (results != -1)
+                if (results == -1)
                 {
                     ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
                 }

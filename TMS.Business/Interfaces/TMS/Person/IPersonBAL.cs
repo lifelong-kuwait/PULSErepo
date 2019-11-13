@@ -287,6 +287,7 @@ namespace TMS.Business.Interfaces.TMS
 
         IList<DDlList> GetCourseFromTimeSpanDALBAL(DateTime startDate, DateTime endDate,long userID);
         int ManageCourse_DuplicationCheckBAL(CRM_CourseMapping _mapping);
+        int ManageCourseCategory_DuplicationCheckBAL(CRM_CourseCategoryMapping _mapping);
         int ManageScheduleCourse_DuplicationCheckBAL(CRM_classPersonMapping _mapping);
         
     }

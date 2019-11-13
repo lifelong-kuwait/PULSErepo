@@ -143,7 +143,7 @@ namespace TMS.DataObjects.CustomGenerics
                 cmd.Parameters.AddWithValue("Type", _objPerson.Type);
                 cmd.Parameters.AddWithValue("IsCoordinator", _objPerson.IsCoordinator);
                 cmd.Parameters.AddWithValue("Rating", _objPerson.Rating);
-                cmd.Parameters.AddWithValue("ClientType", _objPerson.ClientType);
+                cmd.Parameters.AddWithValue("ClientType", _objPerson.CrmClientType);
                 cmd.Parameters.AddWithValue("CreatedBy", _objPerson.CreatedBy);
                 cmd.Parameters.AddWithValue("CreatedDate", _objPerson.CreatedDate);
                 cmd.Parameters.AddWithValue("UserID", _objPerson.UserID);

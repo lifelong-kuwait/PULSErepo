@@ -284,7 +284,7 @@ namespace TMS.Web.Controllers
         /// <param name="GroupId">The group identifier.</param>
         /// <returns>ActionResult.</returns>
         [HttpGet]
-        [ClaimsAuthorize("CanViewGroupsDetail")]
+        //[ClaimsAuthorize("CanViewGroupsDetail")]
         public ActionResult CRMGroupDetail()
         {
             long GroupId = Convert.ToInt64(Session["GroupId"]);
