@@ -37,12 +37,12 @@ ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"
 @helper RenderAddTemplate()
 {
     <div class="toolbar">
-        @if (User.IsInRole("CanAddEditCategory"))
+        @if (User.IsInRole("CanAddEditCRMCategory"))
         {
             <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
             <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>}
 
-        @if (User.IsInRole("CanDeleteCategory"))
+        @if (User.IsInRole("CanDeleteCourseCategory"))
         {
             <a class="k-button tms-grid-destroy "><span class="tms-grid-icon mdi mdi-delete "></span></a>
         }

@@ -106,3 +106,13 @@ ERROR 2019-11-13 13:47:13,268 1273124ms ExceptionContext       OnException      
 ERROR 2019-11-13 13:48:21,732 1341588ms ExceptionContext       OnException        - Procedure or function CRM_ClassMapping_Dublication has too many arguments specified.
 ERROR 2019-11-13 13:48:49,760 1369616ms ExceptionContext       OnException        - Procedure or function 'CRM_ClassMapping_Dublication' expects parameter '@CreatedBy', which was not supplied.
 ERROR 2019-11-13 16:46:49,137 7639432ms ExceptionContext       OnException        - Procedure or function 'TMS_Task_Create' expects parameter '@Description', which was not supplied.
+ERROR 2019-11-14 10:45:37,549 1574700ms ExceptionContext       OnException        - "class" is a reserved word and cannot be used in implicit expressions.  An explicit expression ("@()") must be used.
+
+ERROR 2019-11-14 13:15:22,654 345420ms ExceptionContext       OnException        - Unexpected "if" keyword after "@" character.  Once inside code, you do not need to prefix constructs like "if" with "@".
+
+ERROR 2019-11-14 13:19:07,451 570217ms ExceptionContext       OnException        - Unexpected "if" keyword after "@" character.  Once inside code, you do not need to prefix constructs like "if" with "@".
+
+ERROR 2019-11-14 13:19:10,114 572879ms ExceptionContext       OnException        - Unexpected "if" keyword after "@" character.  Once inside code, you do not need to prefix constructs like "if" with "@".
+
+ERROR 2019-11-14 13:19:10,998 573764ms ExceptionContext       OnException        - Unexpected "if" keyword after "@" character.  Once inside code, you do not need to prefix constructs like "if" with "@".
+

@@ -555,7 +555,7 @@ namespace TMS.Web.Controllers
                 bool flage = false;
                 foreach (var x in _salesObj)
                 {
-                    if (x.PrimaryCourseName == _course.PrimaryCourseName)
+                    if (x.PrimaryCourseName == _course.PrimaryCourseName && x.ID!=_course.ID)
                     {
                         flage = true;
                         break;
@@ -631,15 +631,16 @@ namespace TMS.Web.Controllers
             return Json(_objSaleBAL.ManageConfiguration_GetAllBAL(CurrentUser.CompanyID, SearchText).ToDataSourceResult(request, ModelState));
         }
 
-        [ClaimsAuthorize("CanViewSession")]
+        [ClaimsAuthorize("CanViewReassignProspect")]
         [DontWrapResult]
         public ActionResult ReassignProspect()
         {
 
             return PartialView("ReassignProspect");
         }
-
-
+        
+ [ClaimsAuthorize("CanAddEditReassignProspect")]
+        [DontWrapResult]
         public ActionResult ReassignProspects(FormCollection form)
         {
             var success = true;
