@@ -247,7 +247,14 @@ namespace TMS.Web.Controllers
         [HttpPost]
         public JsonResult Class_Trainee(string classId)
         {
-            return Json(ddl.Class_TraineeDDLBAL(CurrentCulture, CurrentUser.CompanyID, Convert.ToInt64(classId)), JsonRequestBehavior.AllowGet);
+            IList<DDlList> list = ddl.Class_TraineeDDLBAL(CurrentCulture, CurrentUser.CompanyID, Convert.ToInt64(classId));
+            DDlList obj = new DDlList();
+            obj.Text = "Select All";
+            obj.Value = -1;
+            obj.Selected = true;
+            list.Insert(0, obj);
+
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
         [DontWrapResult]
         [HttpPost]

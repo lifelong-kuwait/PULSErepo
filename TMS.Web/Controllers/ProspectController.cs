@@ -147,7 +147,10 @@ namespace TMS.Web.Controllers
                         _person.AddedByAlias = CurrentUser.Name;
                         _person.ID = Resp.ID;
                         long val = Convert.ToInt64(_person.AssignedToString);
-                        _person.AssignedTo = val;
+                        if(val==0 ||val<0)
+                            _person.AssignedTo = CurrentUser.NameIdentifierInt64;
+                        else
+                            _person.AssignedTo = val;
                         _person.PersonRegCode = Resp.PersonRegCode;
                         _person.ProfilePicture = _profilePict;
                         long crmval = (long)_person.CrmClientType;
