@@ -2080,7 +2080,7 @@ namespace TMS.Web.Controllers
             int year = date.Year;
             var firstDayOfMonth = new DateTime(year, date.Month, 1);
             var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
-            return new JsonResult { Data = _AttendanceBAL.ManageScheduleBAL(CurrentUser.CompanyID, CourseID, ClassID, firstDayOfMonth,lastDayOfMonth), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            return new JsonResult { Data = _AttendanceBAL.ManageScheduleBAL(CurrentUser.CompanyID, CourseID, ClassID, firstDayOfMonth,lastDayOfMonth), MaxJsonLength = Int32.MaxValue, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
 
             // return Json(_AttendanceBAL.ManageScheduleBAL(CurrentUser.CompanyID,CourseID,ClassID).ToDataSourceResult());
         }

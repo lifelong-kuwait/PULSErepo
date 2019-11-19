@@ -402,7 +402,7 @@ namespace TMS.Web.Controllers
                 _mapping.PersonID = oid;
                 if (_PersonBAL.ManageScheduleCourse_DuplicationCheckBAL(_mapping) > 0)
                 {
-                    ModelState.AddModelError(lr.PersonPhoneNumber, lr.PersonPhoneDuplication);
+                    ModelState.AddModelError(lr.DubliocationHappen, lr.DubliocationHappen);
                 }
                 else
                 {
@@ -427,7 +427,7 @@ namespace TMS.Web.Controllers
                 _objPhoneNumbers.UpdatedOn = DateTime.Now;
                 if (_PersonBAL.ManageScheduledClasses_DublicationBAL(_objPhoneNumbers) > 0)
                 {
-                    ModelState.AddModelError(lr.PersonPhoneNumber, lr.PersonPhoneDuplication);
+                    ModelState.AddModelError(lr.DubliocationHappen, lr.DubliocationHappen);
                 }
                 else
                 {
@@ -498,7 +498,7 @@ namespace TMS.Web.Controllers
                 _mapping.PersonID = oid;
                 if (_PersonBAL.ManageCourse_DuplicationCheckBAL(_mapping) > 0)
                 {
-                    ModelState.AddModelError(lr.PersonPhoneNumber, lr.PersonPhoneDuplication);
+                    ModelState.AddModelError(lr.DubliocationHappen, lr.DubliocationHappen);
                 }
                 else
                 {
@@ -591,7 +591,7 @@ namespace TMS.Web.Controllers
                 _mapping.PersonID = oid;
                 if (_PersonBAL.ManageCourseCategory_DuplicationCheckBAL(_mapping) > 0)
                 {
-                    ModelState.AddModelError(lr.PersonPhoneNumber, lr.PersonPhoneDuplication);
+                    ModelState.AddModelError(lr.DubliocationHappen, lr.DubliocationHappen);
                 }
                 else
                 {

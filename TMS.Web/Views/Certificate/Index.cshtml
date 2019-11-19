@@ -72,23 +72,26 @@
             <div class="col-md-4">
                 @Html.Label(lr.MenuCertificate)
                 @(Html.Kendo().DropDownList()
-                                    .Name("Certificate")
-                                    .DataTextField("Text")
-                                    .DataValueField("Value")
-                                    .OptionLabel("--Please select Certificate--")
-                                    .Filter("contains")
-                                    .DataSource(source =>
-                                    {
-                                        source.Read(read =>
-                                        {
-                                            read.Action("CertificateDDL", "DDL");
-                                        }).ServerFiltering(false);
-                                    })
-     //.HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
-     .HtmlAttributes(new { style = "width: 100%" })
+                                            .Name("Certificate")
+                                            .DataTextField("Text")
+                                            .DataValueField("Value")
+                                            .OptionLabel("--Please select Certificate--")
+                                            .Filter("contains")
+                                            .DataSource(source =>
+                                            {
+                                                source.Read(read =>
+                                                {
+                                                    read.Action("CertificateDDL", "DDL");
+                                                }).ServerFiltering(false);
+                                            })
+             //.HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
+             .HtmlAttributes(new { style = "width: 100%" })
                 )
+                <a id="PreviewCertificate">Preview Certificate</a>
             </div>
-
+           
+               
+                
         </div>
     </div>
     <div style="margin-top:3%;">
@@ -224,15 +227,25 @@
                     <p>
                         #if(data.Person.ContactNumber!=null){#<label> #:data.Person.ContactNumber#</label> #}#
                     </p>
-                    <p> #if(data.Person.Gender!=0){#<label>#:data.Person.GenderValue#</label> #}#</p>
+                   
                     <p>Printed Count: <label>#:data.PrintedTimeCount#</label></p>
+                    <p> Digital Printing:<label><a>Print Digital</a></label></p>
+
                 </div>
             </div>
         </script>
     </div>
 
     <script type="text/javascript">
-    jQuery(function () {
+        jQuery(function () {
+            jQuery("#PreviewCertificate").live("mousedown", function (event) {
+         //   debugger;
+                if (jQuery("#Certificate").data("kendoDropDownList").value() > 0) {
+                    var url = '@Url.Content("~/Config/Preview_Certificate?pid=")' + jQuery("#Certificate").data("kendoDropDownList").value();
+                    window.open(url, '_blank');
+                }
+             
+        });
         jQuery("#Course").live("change", function (event) {
             var classId = jQuery("#Course").data("kendoDropDownList").value();
             jQuery.ajax({

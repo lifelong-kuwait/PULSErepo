@@ -4,47 +4,49 @@
     Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
 }
 <h2>@lr.DegreeCertificatesTitle</h2>
+@Html.AntiForgeryToken()
 @(Html.Kendo().Grid<TMS.Library.Entities.Common.Configuration.DegreeCertificates>()
-                .Name("DegreeCertificatesGrid")
-                .Columns(columns =>
-                {
-                    columns.Bound(e => e.PrimaryName).ClientTemplate("#=DegreeCertificatesTemplate(data)#");
-                    columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy);
-                    columns.Bound(e => e.UpdatedByAlias).Width(170).Title(lr.ModifiedBy).
-ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"<span class='Addedby'>#=UpdatedByAlias# </span>
-    <span class='date' >#=kendo.toString(UpdatedDate,'" + DateFormatScript + @"')#</span>
+                        .Name("DegreeCertificatesGrid")
+                        .Columns(columns =>
+                        {
+                            columns.Bound(e => e.PrimaryName).ClientTemplate("#=DegreeCertificatesTemplate(data)#");
+                            columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy);
+                            columns.Bound(e => e.UpdatedByAlias).Width(170).Title(lr.ModifiedBy).
+        ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"<span class='Addedby'>#=UpdatedByAlias# </span>
+<span class='date' >#=kendo.toString(UpdatedDate,'" + DateFormatScript + @"')#</span>
 <span class='time' >#=kendo.toString(UpdatedDate,'" + TimeFormatScript + @"')#</span>
 " + @"#} else {#<div>Not Modified</div> </div>#}#");
-                })
-                 .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>)).Selectable(e => e.Mode(GridSelectionMode.Multiple))
-                 .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_DegreeCertificatesTemplate").DisplayDeleteConfirmation(false))
-                             .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
-                           .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
-                           .Scrollable()
-                                  .Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
-                                 .HtmlAttributes(new { style = "height:700px !important;" })
-                              .DataSource(dataSource => dataSource.Ajax().PageSize(10).Model(model => { model.Id(p => p.ID); })
-                              .Read(read => read.Action("DegreeCertificates_Read", "Config").Data("withSearch"))
-                              .Create(update => update.Action("DegreeCertificates_Create", "Config"))
-                              .Update(update => update.Action("DegreeCertificates_Update", "Config"))
-                              .Destroy(update => update.Action("DegreeCertificates_Destroy", "Config"))
-                              .Events(events => events.Error("GeneralErrorHandler(\"DegreeCertificatesGrid\")").RequestEnd("GridRequestEndUpdate")))
-                              .NoRecords(lr.GridNoRecordFoundMessage)
+                        })
+                         .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>)).Selectable(e => e.Mode(GridSelectionMode.Multiple))
+                                       .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_DegreeCertificatesTemplate").DisplayDeleteConfirmation(false))
+                                                   .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+                                                 .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
+                                                 .Scrollable()
+                                                        .Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
+                                                       .HtmlAttributes(new { style = "height:700px !important;" })
+                                                    .DataSource(dataSource => dataSource.Ajax().PageSize(10).Model(model => { model.Id(p => p.ID); })
+                                                    .Read(read => read.Action("DegreeCertificates_Read", "Config").Data("withSearch"))
+                                                    .Create(update => update.Action("DegreeCertificates_Create", "Config").Data("OrganizationIndexGetLogo"))
+                                                    .Update(update => update.Action("DegreeCertificates_Update", "Config").Data("OrganizationIndexGetLogo"))
+                                                    .Destroy(update => update.Action("DegreeCertificates_Destroy", "Config"))
+                                                    .Events(events => events.Error("GeneralErrorHandler(\"DegreeCertificatesGrid\")").RequestEnd("GridRequestEndUpdate")))
+                                                    .NoRecords(lr.GridNoRecordFoundMessage)
 )
 @helper RenderAddTemplate()
+{
+<div class="toolbar">
+    @if (User.IsInRole("CanAddEditDegreeCertificates"))
     {
-        <div class="toolbar">
-            @if (User.IsInRole("CanAddEditDegreeCertificates"))
-            {
-                <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
-                <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>}
+        <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+        <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>}
 
-            @if (User.IsInRole("CanDeleteDegreeCertificates"))
-            {
-                <a class="k-button tms-grid-destroy "><span class="tms-grid-icon mdi mdi-delete "></span></a>
-            }
-        </div>
-        @*@Html.Partial("Static/_gridSearchWidget", lr.CategoryTitle)*@
+    @if (User.IsInRole("CanDeleteDegreeCertificates"))
+    {
+        <a class="k-button tms-grid-destroy "><span class="tms-grid-icon mdi mdi-delete "></span></a>
+    }
+    <a class="k-button tms-grid-Persondetail"><span class="tms-grid-icon mdi mdi-presentation "></span></a>
+</div>
+    @*@Html.Partial("Static/_gridSearchWidget", lr.CategoryTitle)*@
 
 }
 
@@ -62,19 +64,215 @@ ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"
 <script id="DegreeCertificatesTemplate" type="text/kendo">
     <div class=''>
         <div class=''>
-            <p>
-                <span class="heading">
-                    <b>
-                        #:data.PrimaryName#
-                    </b>
-                </span>
-            </p>
+            <div class='person'>
+                <img src='../#:replaceString(data.Logo)#' class='paddig' alt=''>
 
-            <p>
-                <span>
-                    #if (data.PrimaryDescription!=null){ # #:data.PrimaryDescription#  #}# 
-                </span>
-            </p>
+                <p>
+                    <span class="heading">
+                        <b>
+                            #:data.PrimaryName#
+                        </b>
+                    </span>
+                </p>
+
+                <p>
+                    <span>
+                        #if (data.PrimaryDescription!=null){ # #:data.PrimaryDescription#  #}#
+                    </span>
+                </p>
+            </div>
+            </div>
         </div>
-    </div>
 </script>
+<script type="text/javascript">
+    function replaceString(value) {
+      //  debugger
+        if (value == null || value == "") { return "@TMS.TMSHelper.DefaultPicture()"; } else {
+            return value.replace("~/", "");
+        }
+    }
+</script>
+<script type="text/javascript">
+    function replaceString(value) {
+      //  debugger
+        if (value == null || value == "") { return "@TMS.TMSHelper.DefaultPicture()"; } else {
+            return value.replace("~/", "");
+        }
+    }
+</script>
+<script>
+
+    jQuery(function () {
+        jQuery(".tms-grid-detail").live("mousedown", function (event) {
+            var selectedRows = jQuery("#" + jQuery(this).parents('.k-grid')[0].id + " tr.k-state-selected");
+            if (selectedRows.length == 1) {
+                var grid = jQuery(this).parents('.k-grid').data("kendoGrid");
+                var data = grid.dataItem(grid.select());
+                var url = '@Url.Content("~/Organization/Detail?oid=")' + data.ID;
+                window.open(url, '_blank');
+            }
+        });
+         jQuery(".tms-grid-Persondetail").live("mousedown", function (event) {
+         //   debugger;
+             var checkedLength = jQuery("#DegreeCertificatesGrid tr.k-state-selected").length;
+            if (checkedLength == 1) {
+                grid = jQuery("#DegreeCertificatesGrid").data("kendoGrid");
+                var data = grid.dataItem(jQuery("#DegreeCertificatesGrid tr.k-state-selected"));
+                var url = '@Url.Content("~/Config/Preview_Certificate?pid=")' + data.ID;
+                window.open(url, '_blank');
+            } else {
+
+            }
+        });
+    });
+    var tms = tms || {};
+    var currentRowId = null;
+   
+
+    var OrganizationIndexLogo = null;
+    var OrganizationIndex_aid = 0; var OrganizationIndexattachmentname = null;
+    function OrganizationIndexLogoSuccess(e) {
+        console.log(e);
+        OrganizationIndexLogo = e.response.parentFoldername;
+        OrganizationIndex_aid = e.response.aid;
+    }
+    function OrganizationIndexGetLogo() {
+        if (OrganizationIndexLogo == undefined) { OrganizationIndexLogo = null; }
+        if (OrganizationIndex_aid == undefined) { OrganizationIndex_aid = 0; }
+
+        return {
+            filename: OrganizationIndexLogo,
+            aid: OrganizationIndex_aid
+        }
+    }
+    function OrganizationIndexOnRemove(e) {
+        e.data = {
+            aid: OrganizationIndex_aid
+        }
+    }
+    function OrganizationIndexAttachmentSelect(e) {
+        var filename = e.files[0].name;
+        var dropvalue = checkfiletypeOrganizationlogo(e.files[0].extension.toLowerCase());
+        if (dropvalue == "-1") {
+            e.preventDefault();
+        } else {
+           // OrganizationIndexattachmentname = filename;
+        }
+    }
+    function checkfiletypeOrganizationlogo(filetype) {
+        switch (filetype) {
+            case ".jpg": case ".jpeg": case ".bmp": case ".png":
+                return "1";
+            default:
+                return "-1";
+                break;
+        }
+    }
+    function OrganizationIndexGrid_onEdit(e) {
+        //if current model is not new then remove the Name editor
+
+        var title = jQuery(e.container).parent().find(".k-window-title");
+        var update = jQuery(e.container).parent().find(".k-grid-update");
+        var cancel = jQuery(e.container).parent().find(".k-grid-cancel");
+        //jQuery('<a class="k-button k-button-icontext k-grid-update custom" href="\\#"><span class="k-icon k-i-check"></span>Save & New</a>').insertBefore(".k-grid-update");
+        jQuery(cancel).html('<span class="k-icon k-i-cancel"></span>' + lr.CencelRecordGeneralButton);
+        if (e.model.isNew()) {
+            // add
+
+
+
+            jQuery("#fileupload").kendoUpload({
+                multiple: false,
+                async: {
+                    saveUrl: '@Url.Content("~/Attachment/SaveOrganizationLogo")',
+                    removeUrl: '@Url.Content("~/Attachment/RemoveOrganizationLogo")',
+                    @*saveUrl: '@Url.Content("~/Attachment/SavePictureAndLogo")',
+                    removeUrl: '@Url.Content("~/Attachment/RemovePictureAndLogo")',*@
+                    autoUpload: true
+                },
+
+             //   select: LoginUserProfilePictureSelect,
+
+                remove: OrganizationIndexOnRemove,
+                success: OrganizationIndexLogoSuccess,
+                select: OrganizationIndexAttachmentSelect,
+
+            });
+            jQuery(title).text(lr.AddRecordGeneralTitle);
+            jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.SaveRecordGeneralButton);
+        } else {
+            // edit
+            Organization_parentFoldername = null; OrganizationProfile_aid = 0;
+            CurrentOrganizationId = e.model.ID;
+            jQuery("#fileupload").kendoUpload({
+                // files:files,
+                multiple: false,
+                async: {
+                    saveUrl: '@Url.Content("~/Attachment/SaveOrganizationLogo")',
+                    removeUrl: '@Url.Content("~/Attachment/RemoveOrganizationLogo")',
+                    @*saveUrl: '@Url.Content("~/Attachment/SavePictureAndLogo")',
+                    removeUrl: '@Url.Content("~/Attachment/RemovePictureAndLogo")',*@
+                    autoUpload: true
+                },
+                remove: OrganizationPictureOnRemove,
+                success: OrganizationLogoOnSuccess,
+                select: OrganizationIndexAttachmentSelect
+
+              //  upload: Organization_UploadAttachmentData,
+                //select: function (e) {
+                //    var fileInfo = e.files[0];
+                //    var wrapper = this.wrapper;
+
+                //    setTimeout(function () {
+                //        addPreview(fileInfo, wrapper);
+                //    });
+                //}
+            });
+            jQuery(title).text(lr.EditRecordGeneralTitle);
+            jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.UpdateRecordGeneralButton);
+        }
+        //
+    }
+
+    var OrganizationLogo;
+    var OrganizationProfile_aid; var Organizationattachmentname = null;
+    var Organization_parentFoldername = null; var CurrentOrganizationId;
+    function OrganizationLogoOnSuccess(e) {
+        console.log(e.response);
+        console.log(e.response.parentFoldername);
+        console.log(e.response.aid);
+        OrganizationIndexLogo = e.response.parentFoldername;
+        OrganizationIndex_aid = e.response.aid;
+        if (currentRowId != null) {
+            var item = jQuery("#DegreeCertificatesGrid").data("kendoGrid").dataItem(jQuery("[data-uid='" + currentRowId + "']"));
+            //  var item = jQuery("#OrganizationGrid").data("kendoGrid").dataItem(jQuery("[data-uid='" + jQuery(".k-window-titlebar.k-header:visible +div").attr("data-uid") + "']"));
+            currentRowId = null;
+            item.dirty = true;
+        }
+    }
+
+    function OrganizationPictureOnRemove(e) {
+        e.data = {
+            parentFoldername: Organization_parentFoldername,
+           // oid: CurrentOrganizationId,
+           // Opentype: 2,
+            aid: OrganizationProfile_aid
+        }
+    }
+
+    function OrganizationGetLogo() {
+        if (Organization_parentFoldername == undefined) { Organization_parentFoldername = null; }
+        if (OrganizationProfile_aid == undefined) { OrganizationProfile_aid = 0; }
+
+        return {
+            filename: Organization_parentFoldername,
+            aid: OrganizationProfile_aid
+        }
+    }
+</script>
+
+<style>
+    .k-grid tr {
+        cursor: pointer;
+    }
+</style>

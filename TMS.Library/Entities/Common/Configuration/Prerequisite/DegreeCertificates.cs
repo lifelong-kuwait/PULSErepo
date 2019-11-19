@@ -42,7 +42,12 @@ namespace TMS.Library.Entities.Common.Configuration
         /// <value>The name of the secondary.</value>
         [Display(Name = "DegreeCertificatesSecondaryName", ResourceType = typeof(lr))]
         public string SecondaryName { get; set; }
-
+        /// <summary>
+        /// Gets or sets the logo.
+        /// </summary>
+        /// <value>The logo.</value>
+       // [Display(Name = "OrganizationLogo", ResourceType = typeof(lr))]
+        public string Logo { get; set; }
         /// <summary>
         /// Gets or sets the primary description.
         /// </summary>

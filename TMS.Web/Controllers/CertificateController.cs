@@ -96,7 +96,7 @@ namespace TMS.Web.Controllers
                                                                                                        //{
                                                                                                        //    fs.Write(mybytes, 0, mybytes.Length);
                                                                                                        //}
-            
+
             //byte[] bytes = System.IO.File.ReadAllBytes(System.IO.File.WriteAllBytes("Certificate.pdf", mybytes));
             //Response.ClearHeaders();
             //Response.ClearContent();
@@ -108,7 +108,12 @@ namespace TMS.Web.Controllers
             //Response.Flush();
             //Response.Close();
             //Response.End();
-            return Json(mybytes, JsonRequestBehavior.AllowGet);
+            return new JsonResult()
+            {
+                Data = mybytes,
+                MaxJsonLength = Int32.MaxValue
+            };
+           // return Json(mybytes, JsonRequestBehavior.AllowGet,max);
             //byte[] fileBytes = System.IO.File.ReadAllBytes(@"C:\Users\SynergicProfessional\Desktop\VenueMatrixReport.pdf");
             //string fileName = "VenueMatrixReport.pdf";
             //return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);

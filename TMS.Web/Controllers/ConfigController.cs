@@ -3,11 +3,14 @@ using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web.Mvc;
+using TMS.Business.Interfaces.Common;
 using TMS.Business.Interfaces.Common.Configuration;
 using TMS.Business.Interfaces.TMS.Program;
 using TMS.Library;
+using TMS.Library.Common.Attachment;
 using TMS.Library.Entities.Common.Configuration;
 using TMS.Library.Entities.Common.Configuration.Categories;
 using TMS.Library.Entities.Common.Configuration.Vendor;
@@ -25,9 +28,10 @@ namespace TMS.Web.Controllers
     {
         private readonly IConfigurationBAL _objConfigurationBAL;
         private readonly IClassBAL _ClassBAL;
-        public ConfigController(IConfigurationBAL _objIConfigurationBAL, IClassBAL _ClassIBAL)
+        private readonly IAttachmentBAL _AttachmentBAL;
+        public ConfigController(IConfigurationBAL _objIConfigurationBAL, IClassBAL _ClassIBAL, IAttachmentBAL _AttachmentBAL)
         {
-            _objConfigurationBAL = _objIConfigurationBAL; _ClassBAL = _ClassIBAL;
+            _objConfigurationBAL = _objIConfigurationBAL; _ClassBAL = _ClassIBAL; this._AttachmentBAL = _AttachmentBAL;
         }
 
         #region Flags
@@ -1419,7 +1423,7 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         
         [ClaimsAuthorize("CanAddEditDegreeCertificates")]
-        public ActionResult DegreeCertificates_Create([DataSourceRequest] DataSourceRequest request, DegreeCertificates _objDegreeCertificates)
+        public ActionResult DegreeCertificates_Create([DataSourceRequest] DataSourceRequest request, DegreeCertificates _objDegreeCertificates, string filename, long aid)
         {
             if (ModelState.IsValid)
             {
@@ -1433,6 +1437,7 @@ namespace TMS.Web.Controllers
                 else
                 {
                     _objDegreeCertificates.ID = _objConfigurationBAL.DegreeCertificates_CreateBAL(_objDegreeCertificates);
+                    string path=HandleCertificate(filename, _objDegreeCertificates.ID, aid);
                     string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
                     if (string.IsNullOrEmpty(ip))
                         ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
@@ -1443,11 +1448,42 @@ namespace TMS.Web.Controllers
             var resultData = new[] { _objDegreeCertificates };
             return Json(resultData.ToDataSourceResult(request, ModelState));
         }
+        [NonAction]
+        public string HandleCertificate(string picturename, long OrganizationId, long aid)//handle in case of new is created
+        {
+            if (!string.IsNullOrEmpty(picturename))
+            {
+                var _aatchedFromDB = _AttachmentBAL.TMS_Attachment_GetSingleByIdAndTypeBAL(aid);
 
+                var newparentroot = DateTime.Now.Ticks.ToString();
+                var physicalPath = Path.Combine(Server.MapPath("~/UploadTempFolder"));
+                string strSource = physicalPath + "/" + _aatchedFromDB.FileParentRootFolder + "/" + _aatchedFromDB.FileName;
+                string targetString = "~/Attachment/TMS/Organization/" + CurrentUser.CompanyID + "/Certificates/" + newparentroot + "/";
+                string targetSource = Utility.CreateDirectory(Path.Combine(Server.MapPath(targetString))) + _aatchedFromDB.FileName;
+                Utility.MoveAttachment(strSource, targetSource, false);
+                System.IO.DirectoryInfo di = new DirectoryInfo(physicalPath + "/" + _aatchedFromDB.FileParentRootFolder);
+                di.Delete();
+                _AttachmentBAL.TMS_Attachment_CompletedOrganizationLogoBAL(new TMS_Attachments { CompletedDate = DateTime.Now, ID = aid, OpenID = OrganizationId, OpenType = 4, FileParentRootFolder = newparentroot, FilePath = targetString });
+                var model = _AttachmentBAL.TMS_Attachment_GetSingleByIdAndTypeBAL(aid);
+                return model.FilePath.Replace("~/", "") + model.FileName;
+            }
+            return "/images/i/people.png";
+        }
+        //[AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanViewDegreeCertificates")]
+        public ActionResult Preview_Certificate(string pid)
+        {
+            int Total = 0;
+            List<DegreeCertificates> degree = new List<DegreeCertificates>();
+           degree= _objConfigurationBAL.DegreeCertificates_GetAllBALbyOrg(0, 1000, ref Total, null, "", Convert.ToString(CurrentUser.CompanyID));
+            var Newdegree = degree.FirstOrDefault(i => i.ID == Convert.ToInt64(pid));
+            return View(Newdegree);
+        }
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
         [ClaimsAuthorize("CanAddEditDegreeCertificates")]
-        public ActionResult DegreeCertificates_Update([DataSourceRequest] DataSourceRequest request, DegreeCertificates _objDegreeCertificates)
+        public ActionResult DegreeCertificates_Update([DataSourceRequest] DataSourceRequest request, DegreeCertificates _objDegreeCertificates, string filename, long aid)
         {
             if (ModelState.IsValid)
             {
@@ -1460,6 +1496,7 @@ namespace TMS.Web.Controllers
                 }
                 else
                 {
+                    string path = HandleCertificate(filename, _objDegreeCertificates.ID, aid);
                     var result = _objConfigurationBAL.DegreeCertificates_UpdateBAL(_objDegreeCertificates);
                     string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
                     if (string.IsNullOrEmpty(ip))

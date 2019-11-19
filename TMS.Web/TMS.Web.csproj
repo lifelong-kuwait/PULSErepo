@@ -4800,6 +4800,7 @@
     <Content Include="Views\Admin\Schedule_Read.cshtml" />
     <Content Include="Views\Certificate\Index.cshtml" />
     <Content Include="Views\Certificate\_ManageTrainee.cshtml" />
+    <Content Include="Views\Config\Preview_Certificate.cshtml" />
     <None Include="WeeklyAttendanceReportData.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
