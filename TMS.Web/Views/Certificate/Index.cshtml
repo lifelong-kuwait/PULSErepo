@@ -19,9 +19,10 @@
 <script type="text/javascript">
     function onData(e) {
         var ddl = jQuery("#Class").getKendoDropDownList();
-
+        var certificateId = jQuery("#Certificate").getKendoDropDownList();
         return {
-            ClassId: ddl.value()
+            ClassId: ddl.value(),
+            CertificateID: certificateId.value()
         }
     }
 
@@ -229,7 +230,7 @@
                     </p>
                    
                     <p>Printed Count: <label>#:data.PrintedTimeCount#</label></p>
-                    <p> Digital Printing:<label><a>Print Digital</a></label></p>
+                    <p> Digital Certificate:<label><a class="DigitalCertificate" data-id="#:data.PersonID#">Digital Certificate</a></label></p>
 
                 </div>
             </div>
@@ -243,6 +244,25 @@
                 if (jQuery("#Certificate").data("kendoDropDownList").value() > 0) {
                     var url = '@Url.Content("~/Config/Preview_Certificate?pid=")' + jQuery("#Certificate").data("kendoDropDownList").value();
                     window.open(url, '_blank');
+                }
+             
+            });
+            jQuery(".DigitalCertificate").live("mousedown", function (event) {
+         //   debugger;
+                
+                if (jQuery(".DigitalCertificate").attr("data-id") > 0 && jQuery("#Certificate").data("kendoDropDownList").value() > 0 && jQuery("#Class").data("kendoDropDownList").value() > 0 && jQuery("#Course").data("kendoDropDownList").value()>0) {
+                    jQuery.ajax({
+
+                        url: '/Certificate/Print_Read',
+                        method: "post",
+                        dataType: "JSON",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: jQuery(".DigitalCertificate").attr("data-id"), IsDigital: 1, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
+                        success: function (data) {
+                            var byteArray = new Uint8Array(data);
+                            saveTextAsFile("Certificate.pdf", byteArray);
+                        }
+                    });
                 }
              
         });
@@ -263,14 +283,20 @@
                         dataSource: msg,
                         height: 100
                     })
-                    jQuery('#ManageTrainee').data('kendoGrid').dataSource.read();
-                    jQuery('#ManageTrainee').data('kendoGrid').refresh();
+                   
                 }
             });
             jQuery("#Class").live("change", function (event) {
+                if (jQuery("#Certificate").data("kendoDropDownList").value() > 0) {
+                jQuery('#ManageTrainee').data('kendoGrid').dataSource.read();
+                    jQuery('#ManageTrainee').data('kendoGrid').refresh();
+                }
+            });
+            jQuery("#Certificate").live("change", function (event) {
                 jQuery('#ManageTrainee').data('kendoGrid').dataSource.read();
                 jQuery('#ManageTrainee').data('kendoGrid').refresh();
             });
+
         });
         jQuery(".tms-grid-destroyperson").live("mousedown", function (event) {
             var selectedRows = jQuery("#ManageTrainee tr.k-state-selected");
@@ -306,7 +332,7 @@
                                         method: "post",
                                         dataType: "JSON",
                                         contentType: "application/json; charset=utf-8",
-                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: dataGrid.PersonID }),
+                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: dataGrid.PersonID, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value()}),
                                         success: function (data) {
                                             var byteArray = new Uint8Array(data);
                                             saveTextAsFile("Certificate.pdf", byteArray);
@@ -338,7 +364,7 @@
                                         method: "post",
                                         dataType: "JSON",
                                         contentType: "application/json; charset=utf-8",
-                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: dataGrid.PersonID }),
+                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: dataGrid.PersonID ,IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value()}),
                                         success: function (data) {
                                             var byteArray = new Uint8Array(data);
                                             saveTextAsFile("Certificate.pdf", byteArray);
@@ -411,7 +437,7 @@
                                     method: "post",
                                     dataType: "JSON",
                                     contentType: "application/json; charset=utf-8",
-                                    data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: res }),
+                                    data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: res, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value()}),
                                     success: function (data) {
                                         var byteArray = new Uint8Array(data);
                                         saveTextAsFile("Certificate.pdf", byteArray);
@@ -455,7 +481,7 @@
                                         method: "post",
                                         dataType: "JSON",
                                         contentType: "application/json; charset=utf-8",
-                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: res }),
+                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: res, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
                                         success: function (data) {
                                             var byteArray = new Uint8Array(data);
                                             saveTextAsFile("Certificate.pdf", byteArray);
@@ -500,7 +526,7 @@
                                         method: "post",
                                         dataType: "JSON",
                                         contentType: "application/json; charset=utf-8",
-                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: dataGrid.PersonID }),
+                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: dataGrid.PersonID, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value()}),
                                         success: function (data) {
                                             var byteArray = new Uint8Array(data);
                                             saveTextAsFileDownload("Certificate.pdf", byteArray);
@@ -531,7 +557,7 @@
                                         method: "post",
                                         dataType: "JSON",
                                         contentType: "application/json; charset=utf-8",
-                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: dataGrid.PersonID }),
+                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: dataGrid.PersonID, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
                                         success: function (data) {
                                             var byteArray = new Uint8Array(data);
                                             saveTextAsFileDownload("Certificate.pdf", byteArray);
@@ -586,7 +612,7 @@
                                     method: "post",
                                     dataType: "JSON",
                                     contentType: "application/json; charset=utf-8",
-                                    data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: res }),
+                                    data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: res, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value()}),
                                     success: function (data) {
                                         var byteArray = new Uint8Array(data);
                                         saveTextAsFileDownload("Certificate.pdf", byteArray);
@@ -626,7 +652,7 @@
                                         method: "post",
                                         dataType: "JSON",
                                         contentType: "application/json; charset=utf-8",
-                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: res }),
+                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: res, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
                                         success: function (data) {
                                             var byteArray = new Uint8Array(data);
                                             saveTextAsFileDownload("Certificate.pdf", byteArray);

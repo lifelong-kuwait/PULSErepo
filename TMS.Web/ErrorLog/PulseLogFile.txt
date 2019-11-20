@@ -127,3 +127,4 @@ ERROR 2019-11-19 14:12:56,135 3025331ms ExceptionContext       OnException      
 ERROR 2019-11-19 14:13:25,280 3054476ms ExceptionContext       OnException        - Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.
 ERROR 2019-11-19 14:14:11,511 3100708ms ExceptionContext       OnException        - Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.
 ERROR 2019-11-19 14:18:10,079 3339276ms ExceptionContext       OnException        - Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.
+ERROR 2019-11-20 14:29:47,790 279971ms ExceptionContext       OnException        - Input string was not in a correct format.

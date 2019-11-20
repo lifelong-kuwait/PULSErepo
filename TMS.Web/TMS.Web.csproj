@@ -2617,6 +2617,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile51.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile52.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile53.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile54.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile6.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile7.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile8.pubxml" />
@@ -5494,6 +5495,9 @@
     <Content Include="Report\WeeklyUtilizatinDynamicColumns.rdlc" />
     <Content Include="Report\WeeklyUtilizationReport2.rdlc" />
     <Content Include="Report\Tran_CertificatePrinting.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\Tran_CertificateSimplePrint.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -42,7 +42,7 @@ namespace TMS.Web.Controllers
 
         [ClaimsAuthorize("CanViewProgramTrainee")]
         [DontWrapResult]
-        public ActionResult ManageTrainee_Read([DataSourceRequest] DataSourceRequest request, long? ClassID)
+        public ActionResult ManageTrainee_Read([DataSourceRequest] DataSourceRequest request, long? ClassID,long? certificateId)
         {
             ViewData["ClassTraineeClassIdCreating"] = ClassID;
             long val = 0;
@@ -69,8 +69,10 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorize("CanPrintCertificates")]
         [DontWrapResult]
         [HttpPost]
-        public ActionResult Print_Read(string _classID,string _personID)
+        public ActionResult Print_Read(string _classID,string _personID,int IsDigital,long certificateID)
         {
+            if(IsDigital==1)
+            { 
             ReportViewer ReportViewerRSFReports = new ReportViewer();
             ReportViewerRSFReports.Height = Unit.Parse("100%");
             ReportViewerRSFReports.Width = Unit.Parse("100%");
@@ -81,39 +83,38 @@ namespace TMS.Web.Controllers
             DataTable dt = _CourseBAL.GetCertificateReports(_personID, Convert.ToInt64(_classID), cID, "en-us",Convert.ToInt64(CurrentUser.NameIdentifierInt64));
             ReportViewerRSFReports.ProcessingMode = ProcessingMode.Local;
             ReportViewerRSFReports.LocalReport.DataSources.Clear();
-            //ReportViewerRSFReports.LocalReport.EnableExternalImages = true;
-            //List<OrganizationModel> logoPath = _PersonBAL.GetOrganizationLogo(Convert.ToInt64(HttpContext.Current.Session["CompanyID"]));
-            //ReportParameter paramLogo = new ReportParameter();
-            //paramLogo.Name = "Path";
-            //string imagePath = new Uri(Server.MapPath(@"~/" + logoPath.FirstOrDefault().Logo)).AbsoluteUri;
-            //paramLogo.Values.Add(imagePath);
-            //ReportViewerRSFReports.LocalReport.SetParameters(paramLogo);
             ReportViewerRSFReports.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt));
             ReportViewerRSFReports.LocalReport.Refresh();
-            // SavePDF(ReportViewerRSFReports, "../ErrorLog");
             Byte[] mybytes = ReportViewerRSFReports.LocalReport.Render(format: "PDF", deviceInfo: ""); //for exporting to PDF  
-                                                                                                       //using (FileStream fs = System.IO.File.Create(Server.MapPath("../Attachment/") + "Certificate.pdf"))
-                                                                                                       //{
-                                                                                                       //    fs.Write(mybytes, 0, mybytes.Length);
-                                                                                                       //}
-
-            //byte[] bytes = System.IO.File.ReadAllBytes(System.IO.File.WriteAllBytes("Certificate.pdf", mybytes));
-            //Response.ClearHeaders();
-            //Response.ClearContent();
-            //Response.Buffer = true;
-            //Response.Clear();
-            //Response.ContentType = "";
-            //Response.AddHeader("Content-Disposition", "attachment; filename=" + "Certificate.pdf");
-            //Response.WriteFile(Server.MapPath(Server.MapPath("../Attachment/") + "Certificate.pdf"));
-            //Response.Flush();
-            //Response.Close();
-            //Response.End();
+             
             return new JsonResult()
             {
                 Data = mybytes,
                 MaxJsonLength = Int32.MaxValue
             };
-           // return Json(mybytes, JsonRequestBehavior.AllowGet,max);
+            }else
+            {
+                ReportViewer ReportViewerRSFReports = new ReportViewer();
+                ReportViewerRSFReports.Height = Unit.Parse("100%");
+                ReportViewerRSFReports.Width = Unit.Parse("100%");
+                ReportViewerRSFReports.CssClass = "table";
+                var rptPath = Server.MapPath(@"../Report/Tran_CertificateSimplePrint.rdlc");
+                ReportViewerRSFReports.LocalReport.ReportPath = rptPath;
+                long cID = Convert.ToInt64(CurrentUser.CompanyID);
+                DataTable dt = _CourseBAL.GetCertificateReports(_personID, Convert.ToInt64(_classID), cID, "en-us", Convert.ToInt64(CurrentUser.NameIdentifierInt64));
+                ReportViewerRSFReports.ProcessingMode = ProcessingMode.Local;
+                ReportViewerRSFReports.LocalReport.DataSources.Clear();
+                ReportViewerRSFReports.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt));
+                ReportViewerRSFReports.LocalReport.Refresh();
+                Byte[] mybytes = ReportViewerRSFReports.LocalReport.Render(format: "PDF", deviceInfo: ""); //for exporting to PDF  
+
+                return new JsonResult()
+                {
+                    Data = mybytes,
+                    MaxJsonLength = Int32.MaxValue
+                };
+            }
+            // return Json(mybytes, JsonRequestBehavior.AllowGet,max);
             //byte[] fileBytes = System.IO.File.ReadAllBytes(@"C:\Users\SynergicProfessional\Desktop\VenueMatrixReport.pdf");
             //string fileName = "VenueMatrixReport.pdf";
             //return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
