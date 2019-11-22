@@ -286,6 +286,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CertificateDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CertificateDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\CertificateController.cs" />
     <Compile Include="Controllers\SalesAdministrationController.cs" />
     <Compile Include="Controllers\SPl_Test_ReportsController.cs" />
@@ -2395,6 +2400,17 @@
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <None Include="bundleconfig.json" />
+    <Content Include="CertificateDataSet.xsc">
+      <DependentUpon>CertificateDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="CertificateDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CertificateDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="CertificateDataSet.xss">
+      <DependentUpon>CertificateDataSet.xsd</DependentUpon>
+    </Content>
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
@@ -2618,6 +2634,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile52.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile53.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile54.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile55.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile6.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile7.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile8.pubxml" />
@@ -4802,6 +4819,8 @@
     <Content Include="Views\Certificate\Index.cshtml" />
     <Content Include="Views\Certificate\_ManageTrainee.cshtml" />
     <Content Include="Views\Config\Preview_Certificate.cshtml" />
+    <Content Include="Views\Task\ManageCourseCRM.cshtml" />
+    <Content Include="Views\Config\_CategoriesCRM.cshtml" />
     <None Include="WeeklyAttendanceReportData.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -5420,6 +5439,7 @@
     <Folder Include="Attachment\TMS\Organization\" />
     <Folder Include="Attachment\TMS\Person\" />
     <Folder Include="ErrorLog\" />
+    <Folder Include="TempReports\" />
     <Folder Include="UploadTempFolder\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\Exams\" />

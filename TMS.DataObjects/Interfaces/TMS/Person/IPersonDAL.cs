@@ -199,7 +199,7 @@ namespace TMS.DataObjects.Interfaces.TMS
         DataTable ClassFutureReportDAL(long CurrentCourseCategoryID, DateTime ClassReportStartDateFrom, DateTime ClassReportStartDateTo, int ClassTypeID, bool ShowFutureClasses,long CompanyId);
         DataTable AttendanceReportsDAL(long CourseID, long ClassID, DateTime startdate, DateTime enddate);
         DataTable GetOccVenueDetailsForReportsDAL(long ClassID, long VenueID, DateTime StartTime, DateTime EndTime);
-        DataTable GetCertificateReportsDAL(string PersonId, long ClassID, long companyID, string Culture,long currentUser);
+        DataTable GetCertificateReportsDAL(string PersonId, long ClassID, long companyID, string Culture,long currentUser,long certificateID);
         DataTable GetCourseReportDataDAL(long ClassID, long CourseID);
 
         DataTable DailyVenueUtalizationReportsDAL(DateTime Startday, DateTime Endday, long venueid);

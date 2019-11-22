@@ -477,7 +477,7 @@ namespace TMS.DataObjects.TMS.Program
             return LoginUserList;
             // ExecuteListSp<LoginUsers>("TMS_Users_GetAll");
         }
-        public IList<ClassTraineeMappingCertificatePrint> ClassTraineeMappingCertificate_GetAllBALOrganizationDAL(string Culture, long ClassID, long OrganizationID)
+        public IList<ClassTraineeMappingCertificatePrint> ClassTraineeMappingCertificate_GetAllBALOrganizationDAL(string Culture, long ClassID, long OrganizationID,long CertificateID)
         {
             List<ClassTraineeMappingCertificatePrint> LoginUserList = new List<ClassTraineeMappingCertificatePrint>();
             var conString = DBHelper.ConnectionString;
@@ -485,7 +485,7 @@ namespace TMS.DataObjects.TMS.Program
             {
                 conn.Open();
                 string qry = @"TMS_ClassTraineeMapping_GetAllOrganizationForCertificatePrint";
-                DynamicParameters param = new DynamicParameters(new { Culture = Culture, ClassID = ClassID, OrganizationID = OrganizationID });
+                DynamicParameters param = new DynamicParameters(new { Culture = Culture, ClassID = ClassID, OrganizationID = OrganizationID, CertificateID= CertificateID });
                 var ClassTraineeMappingDictionary = new Dictionary<long, ClassTraineeMappingCertificatePrint>();
                 LoginUserList = conn.Query<ClassTraineeMappingCertificatePrint, Person, ClassTraineeMappingCertificatePrint>(
                        qry, (loginUsers, person) =>

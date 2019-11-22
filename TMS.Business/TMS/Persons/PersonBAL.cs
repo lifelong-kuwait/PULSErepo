@@ -427,9 +427,9 @@ namespace TMS.Business.TMS
         {
             return DAL.GetOccVenueDetailsForReportsDAL(ClassID, VenueID, StartTime,EndTime);
         }
-        public DataTable GetCertificateReports(string PersonId, long ClassID,long companyID,string Culture,long currentUser)
+        public DataTable GetCertificateReports(string PersonId, long ClassID,long companyID,string Culture,long currentUser,long certificateID)
         {
-            return DAL.GetCertificateReportsDAL(PersonId,ClassID, companyID,Culture,currentUser);
+            return DAL.GetCertificateReportsDAL(PersonId,ClassID, companyID,Culture,currentUser, certificateID);
         }
         public DataTable GetCourseReportData(long ClassID, long CourseID)
         {

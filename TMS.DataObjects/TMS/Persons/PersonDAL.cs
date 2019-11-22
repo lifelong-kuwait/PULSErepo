@@ -810,17 +810,18 @@ namespace TMS.DataObjects.TMS
             //   return ExecuteDataSet("Tran_Venue_GetVenueOccupancyReports", ParamBuilder.Par("ClassID", ClassID), ParamBuilder.Par("VenueID", VenueID), ParamBuilder.Par("StartDate", StartDate), ParamBuilder.Par("EndDate", EndDate));
 
         }
-        public DataTable GetCertificateReportsDAL(string PersonId, long ClassID, long companyID, string Culture,long currentUser)
+        public DataTable GetCertificateReportsDAL(string PersonId, long ClassID, long companyID, string Culture,long currentUser,long CertificateID)
         {
             DataTable dt = new DataTable();
             var conString = DBHelper.ConnectionString;
 
             SqlCommand cmd = new SqlCommand("TMS_OrganizationForCertificatePrintData");
             cmd.Parameters.AddWithValue("@ClassID", ClassID);
-            cmd.Parameters.AddWithValue("@personID", PersonId);
+            cmd.Parameters.AddWithValue("@PersonID", PersonId);
             cmd.Parameters.AddWithValue("@OrganizationID", companyID);
             cmd.Parameters.AddWithValue("@Culture", Culture);
-            cmd.Parameters.AddWithValue("@currentUser", currentUser);
+            cmd.Parameters.AddWithValue("@CurrentUser", currentUser);
+            cmd.Parameters.AddWithValue("@CertificateID", CertificateID);
             using (SqlConnection con = new SqlConnection(conString))
             {
                 using (SqlDataAdapter sda = new SqlDataAdapter())

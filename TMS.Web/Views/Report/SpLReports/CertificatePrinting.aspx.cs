@@ -41,7 +41,7 @@ namespace TMS.Web.Views.Report.SpLReports
             var rptPath = Server.MapPath(@"../../../Report/" + reportData.ReportName + ".rdlc");
             this.ReportViewerRSFReports.LocalReport.ReportPath = rptPath;
             long cID = Convert.ToInt64(HttpContext.Current.Session["CompanyID"]);
-            DataTable dt = _PersonBAL.GetCertificateReports(PersonID, Convert.ToInt64(classid),cID , "en-us", Convert.ToInt64(HttpContext.Current.Session["NameIdentifierInt64"]));
+            DataTable dt = _PersonBAL.GetCertificateReports(PersonID, Convert.ToInt64(classid),cID , "en-us", Convert.ToInt64(HttpContext.Current.Session["NameIdentifierInt64"]),1);
             ReportViewerRSFReports.ProcessingMode = ProcessingMode.Local;
             ReportViewerRSFReports.LocalReport.DataSources.Clear();
             //ReportViewerRSFReports.LocalReport.EnableExternalImages = true;

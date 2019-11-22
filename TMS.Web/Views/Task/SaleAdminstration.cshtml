@@ -11,13 +11,13 @@
     .ExpandMode(PanelBarExpandMode.Multiple)
     .Items(i =>
     {
-        if (User.IsInRole("CanViewCRMCourse"))
+        if (User.IsInRole("CanViewProposedClassess"))
         {
-            i.Add().Text(lr.CRMCourseTabTitle).LoadContentFrom("ManageCourse", "Task");
+            i.Add().Text(lr.CRMCourseTabTitle).LoadContentFrom("ManageCourseCRM", "Task");
         }
-        if (User.IsInRole("CanViewCategory"))
+        if (User.IsInRole("CanViewCourseCategory"))
         {
-            i.Add().Text(lr.CRMCourseCategoryTabTitle).LoadContentFrom("CourseCategories", "Config");
+            i.Add().Text(lr.CRMCourseCategoryTabTitle).LoadContentFrom("CourseCategoriesCRM", "Config");
         }
         if (User.IsInRole("CanViewManageConfiguration"))
         {

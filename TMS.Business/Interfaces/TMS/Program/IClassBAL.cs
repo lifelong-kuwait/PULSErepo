@@ -114,7 +114,7 @@ namespace TMS.Business.Interfaces.TMS.Program
         IList<ClassTraineeMapping> ClassTraineeMapping_GetAllBAL(string Culture, long ClassID);
 
         IList<ClassTraineeMapping> ClassTraineeMapping_GetAllBALOrganization(string Culture, long ClassID,long CompnayID);
-        IList<ClassTraineeMappingCertificatePrint> ClassTraineeMappingCertificate_GetAllBALOrganization(string Culture, long ClassID, long CompnayID);
+        IList<ClassTraineeMappingCertificatePrint> ClassTraineeMappingCertificate_GetAllBALOrganization(string Culture, long ClassID, long CompnayID, long CertificateID);
 
         /// <summary>
         /// Trainers the get all except class trainer bal.

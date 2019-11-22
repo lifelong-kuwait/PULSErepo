@@ -27,6 +27,89 @@
     }
 
 </script>
+<style>
+    #loader {
+        position: relative;
+        left: 50%;
+        top: 50%;
+        z-index: 1;
+        width: 150px;
+        height: 150px;
+        margin: -75px 0 0 -75px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 120px;
+        height: 120px;
+        display: none;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+
+    -webkit-keyframes spin {
+        0%
+
+    {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+
+    }
+
+    keyframes spin {
+        0%
+
+    {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+
+    }
+
+
+    .animate-bottom {
+        position: relative;
+        -webkit-animation-name: animatebottom;
+        -webkit-animation-duration: 1s;
+        animation-name: animatebottom;
+        animation-duration: 1s
+    }
+
+    -webkit-keyframes animatebottom {
+        from
+
+    {
+        bottom: -100px;
+        opacity: 0
+    }
+
+    to {
+        bottom: 0px;
+        opacity: 1
+    }
+
+    }
+
+    keyframes animatebottom {
+        from
+
+    {
+        bottom: -100px;
+        opacity: 0
+    }
+
+    to {
+        bottom: 0;
+        opacity: 1
+    }
+    }
+</style>
 @if (User.IsInAnyRoles("CanViewCertificates"))
 {
     <div class="form-group">
@@ -139,39 +222,40 @@
 
 
         </script>
-
+       
         <div class="ChildGrid">
+            <div id="loader"></div>
             @(Html.Kendo().Grid<TMS.Library.Entities.TMS.Program.ClassTraineeMappingCertificatePrint>()
-                                                                            .Name("ManageTrainee")
-                                                                      .Columns(columns =>
-                                                                      {
-                                                                          columns.Select().Width(50);
-                                                                          columns.Bound(e => e.Person.P_DisplayName).Title(lr.Trainee).ClientTemplate("#=PersonTemplate(data)#");
-                                                                          //columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy);
-                                                                          columns.Bound(e => e.ClassCompleted).ClientTemplate("#=IsCompletedTemplate(data)#").Title("Last Session Mark").Width(160);
-                                                                          columns.Bound(e => e.EligibleFor).ClientTemplate("#=EligibleForTemplate(data)#").Title("Eligible For").Width(120);
-                                                                          columns.Bound(e => e.SessionStatistic).Title("Attendance Statics").Width(160);
-                                                                          columns.Bound(e => e.AttendancePercentage).Title("Current Percentage").Width(160);
-                                                                      }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_ClassTraineeTemplate").DisplayDeleteConfirmation(false).AdditionalViewData(new { ClassID = Model }))
-                                                                                    .ToolBar(toolbar => toolbar.Template(@<text> @RenderAddTemplate()</text>))
-                                                                                                                         .Sortable()
+                                                                                            .Name("ManageTrainee")
+                                                                                      .Columns(columns =>
+                                                                                      {
+                                                                                          columns.Select().Width(50);
+                                                                                          columns.Bound(e => e.Person.P_DisplayName).Title(lr.Trainee).ClientTemplate("#=PersonTemplate(data)#");
+                                                                                  //columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy);
+                                                                                  columns.Bound(e => e.ClassCompleted).ClientTemplate("#=IsCompletedTemplate(data)#").Title("Last Session Mark").Width(160);
+                                                                                          columns.Bound(e => e.EligibleFor).ClientTemplate("#=EligibleForTemplate(data)#").Title("Eligible For").Width(120);
+                                                                                          columns.Bound(e => e.SessionStatistic).Title("Attendance Statics").Width(160);
+                                                                                          columns.Bound(e => e.AttendancePercentage).Title("Current Percentage").Width(160);
+                                                                                      }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_ClassTraineeTemplate").DisplayDeleteConfirmation(false).AdditionalViewData(new { ClassID = Model }))
+                                                                                                    .ToolBar(toolbar => toolbar.Template(@<text> @RenderAddTemplate()</text>))
+                                                                                                                                                 .Sortable()
 
-                                                                                                                            .Selectable(selection =>
-                                                                                                                            {
-                                                                                                                                selection.Enabled(false);
+                                                                                                                                                    .Selectable(selection =>
+                                                                                                                                                    {
+                                                                                                                                                        selection.Enabled(false);
 
-                                                                                                                            })
-                                                                                                                            .PersistSelection(true)
+                                                                                                                                                    })
+                                                                                                                                                    .PersistSelection(true)
 
-                                                                                                                            .Pageable(pager => pager.Refresh(true)).Scrollable()
-                                                                                                                            .Filterable().Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
-                                                                                                                            .HtmlAttributes(new { style = "height:350px;" }).DataSource(dataSource =>
-                                                                                                                            dataSource.Ajax().Model(model => { model.Id(m => m.ID); model.Field(p => p.Person).DefaultValue(new TMS.Library.TMS.Persons.Person()); })
-                                                                                                                            .PageSize(70)
-                                                                                                                            .ServerOperation(false)
-                                                                                                                            .Read(read => read.Action("ManageTrainee_Read", "Certificate").Data("onData"))
-                                                                                                                            .Events(e => e.Error("GeneralErrorHandler(\"ManageTrainee\")").RequestEnd("GridRequestEndUpdate"))
-                                                                                                                                            ).NoRecords(lr.GridNoRecordFoundMessage)
+                                                                                                                                                    .Pageable(pager => pager.Refresh(true)).Scrollable()
+                                                                                                                                                    .Filterable().Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
+                                                                                                                                                    .HtmlAttributes(new { style = "height:350px;" }).DataSource(dataSource =>
+                                                                                                                                                    dataSource.Ajax().Model(model => { model.Id(m => m.ID); model.Field(p => p.Person).DefaultValue(new TMS.Library.TMS.Persons.Person()); })
+                                                                                                                                                    .PageSize(70)
+                                                                                                                                                    .ServerOperation(false)
+                                                                                                                                                    .Read(read => read.Action("ManageTrainee_Read", "Certificate").Data("onData"))
+                                                                                                                                                    .Events(e => e.Error("GeneralErrorHandler(\"ManageTrainee\")").RequestEnd("GridRequestEndUpdate"))
+                                                                                                                                                                    ).NoRecords(lr.GridNoRecordFoundMessage)
             )
             @helper RenderAddTemplate()
             {
@@ -228,9 +312,9 @@
                     <p>
                         #if(data.Person.ContactNumber!=null){#<label> #:data.Person.ContactNumber#</label> #}#
                     </p>
-                   
+
                     <p>Printed Count: <label>#:data.PrintedTimeCount#</label></p>
-                    <p> Digital Certificate:<label><a class="DigitalCertificate" data-id="#:data.PersonID#">Digital Certificate</a></label></p>
+                    <p><label><a class="DigitalCertificate" data-id="#:data.PersonID#">Digital Certificate</a></label></p>
 
                 </div>
             </div>
@@ -245,26 +329,38 @@
                     var url = '@Url.Content("~/Config/Preview_Certificate?pid=")' + jQuery("#Certificate").data("kendoDropDownList").value();
                     window.open(url, '_blank');
                 }
-             
+
             });
             jQuery(".DigitalCertificate").live("mousedown", function (event) {
          //   debugger;
-                
-                if (jQuery(".DigitalCertificate").attr("data-id") > 0 && jQuery("#Certificate").data("kendoDropDownList").value() > 0 && jQuery("#Class").data("kendoDropDownList").value() > 0 && jQuery("#Course").data("kendoDropDownList").value()>0) {
-                    jQuery.ajax({
 
-                        url: '/Certificate/Print_Read',
-                        method: "post",
-                        dataType: "JSON",
-                        contentType: "application/json; charset=utf-8",
-                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: jQuery(".DigitalCertificate").attr("data-id"), IsDigital: 1, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
-                        success: function (data) {
-                            var byteArray = new Uint8Array(data);
-                            saveTextAsFile("Certificate.pdf", byteArray);
-                        }
-                    });
+                if (jQuery(".DigitalCertificate").attr("data-id") > 0 && jQuery("#Certificate").data("kendoDropDownList").value() > 0 && jQuery("#Class").data("kendoDropDownList").value() > 0 && jQuery("#Course").data("kendoDropDownList").value() > 0) {
+                    swal({
+                        title: 'Do You Want To Print Digital Certificate?',
+                        text: 'Do you want to print Digital Certificate @lr.confirmRecords',
+                        type: "success",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "@lr.confirmYes",
+                        cancelButtonText: "@lr.confirmNo",
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    },
+                        function (isConfirm) {
+                            if (isConfirm) {
+                               jQuery.ajax({
+                                    url: '/Certificate/SetSessionValues',
+                                    method: "post",
+                                    dataType: "JSON",
+                                    contentType: "application/json; charset=utf-8",
+                                    data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: jQuery(".DigitalCertificate").attr("data-id"), IsDigital: 1, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
+                                    success: function (data) {
+                                        window.open("/Certificate/Print_Read", "_blank");
+                                    }
+                                });
+                            }
+                        })
                 }
-             
         });
         jQuery("#Course").live("change", function (event) {
             var classId = jQuery("#Course").data("kendoDropDownList").value();
@@ -283,7 +379,7 @@
                         dataSource: msg,
                         height: 100
                     })
-                   
+
                 }
             });
             jQuery("#Class").live("change", function (event) {
@@ -324,18 +420,19 @@
                             function (isConfirm) {
                                 if (isConfirm) {
                                     // debugger
+                                    document.getElementById("loader").style.display = "block";
                                     grid = jQuery("#ManageTrainee").data("kendoGrid");
                                     var dataGrid = grid.dataItem(jQuery("#ManageTrainee tr.k-state-selected"));
-                                    jQuery.ajax({
+                                   // window.open("/Certificate/Print_Read?_classID=" + jQuery("#Class").data("kendoDropDownList").value() + "&_personID=" + jQuery(".DigitalCertificate").attr("data-id") + "&IsDigital=0&certificateID=" + jQuery("#Certificate").data("kendoDropDownList").value(), "_blank");
 
-                                        url: '/Certificate/Print_Read',
+                                    jQuery.ajax({
+                                        url: '/Certificate/SetSessionValues',
                                         method: "post",
                                         dataType: "JSON",
                                         contentType: "application/json; charset=utf-8",
-                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: dataGrid.PersonID, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value()}),
+                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: jQuery(".DigitalCertificate").attr("data-id"), IsDigital: 1, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
                                         success: function (data) {
-                                            var byteArray = new Uint8Array(data);
-                                            saveTextAsFile("Certificate.pdf", byteArray);
+                                            window.open("/Certificate/Print_Read", "_blank");
                                         }
                                     });
                                 }
@@ -356,18 +453,17 @@
                             function (isConfirm) {
                                 if (isConfirm) {
                                     // debugger
+                                   // document.getElementById("loader").style.display = "block";
                                     grid = jQuery("#ManageTrainee").data("kendoGrid");
                                     var dataGrid = grid.dataItem(jQuery("#ManageTrainee tr.k-state-selected"));
                                     jQuery.ajax({
-
-                                        url: '/Certificate/Print_Read',
+                                        url: '/Certificate/SetSessionValues',
                                         method: "post",
                                         dataType: "JSON",
                                         contentType: "application/json; charset=utf-8",
-                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: dataGrid.PersonID ,IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value()}),
+                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: jQuery(".DigitalCertificate").attr("data-id"), IsDigital: 1, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
                                         success: function (data) {
-                                            var byteArray = new Uint8Array(data);
-                                            saveTextAsFile("Certificate.pdf", byteArray);
+                                            window.open("/Certificate/Print_Read", "_blank");
                                         }
                                     });
                                 }
@@ -388,7 +484,7 @@
                 rows2.each(function (index, row2) {
                     var selectedItem2 = grid2.dataItem(row2);
                      str22 = selectedItem2.EligibleFor.toString();
-                   
+
                 });
                 if (str22 === 'false') {
                     swal({
@@ -418,7 +514,8 @@
                             },
                                 function (isConfirm2) {
                                     if (isConfirm2) {*@
-                            console.log("Confirmed");
+                            //console.log("Confirmed");
+                            document.getElementById("loader").style.display = "block";
                             var grid = jQuery("#ManageTrainee").data("kendoGrid");
                             var checkedLength = jQuery("#ManageTrainee tr.k-state-selected").length;
                             if (checkedLength > 1) {
@@ -462,7 +559,8 @@
                     },
                         function (isConfirm2) {
                             if (isConfirm2) {
-                                console.log("Confirmed");
+                                //console.log("Confirmed");
+                                document.getElementById("loader").style.display = "block";
                                 var grid = jQuery("#ManageTrainee").data("kendoGrid");
                                 var checkedLength = jQuery("#ManageTrainee tr.k-state-selected").length;
                                 if (checkedLength > 1) {
@@ -519,6 +617,7 @@
                             function (isConfirm) {
                                 if (isConfirm) {
                                     // debugger
+                                    document.getElementById("loader").style.display = "block";
                                     grid = jQuery("#ManageTrainee").data("kendoGrid");
                                     var dataGrid = grid.dataItem(jQuery("#ManageTrainee tr.k-state-selected"));
                                     jQuery.ajax({
@@ -550,6 +649,7 @@
                             function (isConfirm23) {
                                 if (isConfirm23) {
                                     // debugger
+                                    document.getElementById("loader").style.display = "block";
                                     grid = jQuery("#ManageTrainee").data("kendoGrid");
                                     var dataGrid = grid.dataItem(jQuery("#ManageTrainee tr.k-state-selected"));
                                     jQuery.ajax({
@@ -581,7 +681,7 @@
                 rows2.each(function (index, row2) {
                     var selectedItem2 = grid2.dataItem(row2);
                      str22 = selectedItem2.EligibleFor.toString();
-                   
+
                 });
                 if (str22 === 'false') {
                     swal({
@@ -596,6 +696,7 @@
                         closeOnCancel: true
                     },
                         function (isConfirm22) {
+                            document.getElementById("loader").style.display = "block";
                             var grid = jQuery("#ManageTrainee").data("kendoGrid");
                             var checkedLength = jQuery("#ManageTrainee tr.k-state-selected").length;
                             if (checkedLength > 1) {
@@ -634,7 +735,8 @@
                     },
                         function (isConfirm2) {
                             if (isConfirm2) {
-                                console.log("Confirmed");
+                                //console.log("Confirmed");
+                                document.getElementById("loader").style.display = "block";
                                 var grid = jQuery("#ManageTrainee").data("kendoGrid");
                                 var checkedLength = jQuery("#ManageTrainee tr.k-state-selected").length;
                                 if (checkedLength > 1) {
@@ -684,7 +786,8 @@
 
         } else {
             var fileURL = URL.createObjectURL(textFileAsBlob);
-            window.open(fileURL);
+            window.open(fileURL,"_blank");
+            showPage();
             //var downloadLink = document.createElement("a");
             //downloadLink.download = fileNameToSaveAs;
             //downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
@@ -721,8 +824,15 @@
             downloadLink.style.display = "none";
             document.body.appendChild(downloadLink);
             downloadLink.click();
+            showPage();
         }
+        }
+        
+        function showPage() {
+           
+        document.getElementById("loader").style.display = "none";
     }
+    
     </script>
 }
     @section Scripts

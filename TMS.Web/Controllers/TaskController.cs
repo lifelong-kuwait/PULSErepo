@@ -38,7 +38,7 @@ namespace TMS.Web.Controllers
 
 
         // GET: Task
-        [ClaimsAuthorize("CanViewUsers")]
+        [ClaimsAuthorize("CanViewTask")]
         public ActionResult Index()
         {
             return View();
@@ -49,7 +49,7 @@ namespace TMS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
         [ActivityAuthorize]
-        [ClaimsAuthorize("CanAddEditUsers")]
+        [ClaimsAuthorize("CanAddEditDone")]
         public JsonResult EditStatusDone([DataSourceRequest]DataSourceRequest request, Sls_Task _objTask, string ID)
         {
             long _viewID = long.Parse(ID);
@@ -67,7 +67,7 @@ namespace TMS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
         [ActivityAuthorize]
-        [ClaimsAuthorize("CanAddEditUsers")]
+        [ClaimsAuthorize("CanAddEditUnderWay")]
         public JsonResult EditStatusUnderway([DataSourceRequest]DataSourceRequest request, Sls_Task _objTask, string ID)
         {
             long _viewID = long.Parse(ID);
@@ -83,7 +83,7 @@ namespace TMS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
-        [ClaimsAuthorize("CanViewUsers")]
+        [ClaimsAuthorize("CanAddEditRescheduled")]
         public ActionResult EditStatusRescheduled(string ID, string DueDate)
         {
             Sls_Task objtask = new Sls_Task();
@@ -96,7 +96,7 @@ namespace TMS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
         [ActivityAuthorize]
-        [ClaimsAuthorize("CanAddEditUsers")]
+        [ClaimsAuthorize("CanAddEditRescheduled")]
         public ActionResult EditStatusRescheduled(Sls_Task _objTask)
         {
 
@@ -115,7 +115,7 @@ namespace TMS.Web.Controllers
 
         #region CURD
         [DontWrapResult]
-        [ClaimsAuthorize("CanViewUsers")]
+        [ClaimsAuthorize("CanViewAllTasks")]
         public ActionResult Sls_Tasks_Read([DataSourceRequest] DataSourceRequest request)
         {
             if (CurrentUser.CompanyID > 0)
@@ -132,7 +132,7 @@ namespace TMS.Web.Controllers
         }
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
-        [ClaimsAuthorize("CanViewUsers")]
+        [ClaimsAuthorize("CanAddEditTask")]
         public ActionResult Sls_Tasks_Update([DataSourceRequest] DataSourceRequest request, Sls_Task _objTasks)
         {
             if (ModelState.IsValid)
@@ -152,7 +152,7 @@ namespace TMS.Web.Controllers
         }
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
-        [ClaimsAuthorize("CanViewUsers")]
+        [ClaimsAuthorize("CanDeleteTask")]
         public ActionResult Sls_Tasks_Destroy([DataSourceRequest] DataSourceRequest request, Sls_Task _objTasks)
         {
             if (ModelState.IsValid)
@@ -172,7 +172,7 @@ namespace TMS.Web.Controllers
             return Json(resultData.ToDataSourceResult(request, ModelState));
         }
 
-        [ClaimsAuthorizeAttribute("CanAddEditPerson")]
+        [ClaimsAuthorizeAttribute("CanAddEditTask")]
         [DontWrapResult]
         public ActionResult Task_Create([DataSourceRequest] DataSourceRequest request, Sls_Task _objTasks)
         {
@@ -473,7 +473,7 @@ namespace TMS.Web.Controllers
 
 
 
-        [ClaimsAuthorize("CanViewSession")]
+        [ClaimsAuthorize("CanViewSaleAdminstration")]
         public ActionResult SaleAdminstration()
         {
             return View();
@@ -489,6 +489,7 @@ namespace TMS.Web.Controllers
 
             return PartialView("ManageCourse");
         }
+        
 
         [DontWrapResult]
         [ClaimsAuthorize("CanViewProgramTrainer")]
@@ -603,12 +604,125 @@ namespace TMS.Web.Controllers
 
         #endregion Courses
 
+        #region CourseCrm
+        [ClaimsAuthorize("CanViewProposedClassess")]
+        [DontWrapResult]
+        public ActionResult ManageCourseCRM()
+        {
 
+            return PartialView("ManageCourseCRM");
+        }
+
+        [DontWrapResult]
+        [ClaimsAuthorize("CanAddEditProposedClassess")]
+        public ActionResult ManageCourse_ReadCRM([DataSourceRequest] DataSourceRequest request)
+        {
+            var startRowIndex = (request.Page - 1) * request.PageSize;
+            int Total = 0;
+            var SearchText = Request.Form["SearchText"];
+            if (request.PageSize == 0)
+            {
+                request.PageSize = 10;
+            }
+
+            return Json(_objSaleBAL.ManageCourse_GetAllBAL(CurrentUser.CompanyID, SearchText).ToDataSourceResult(request, ModelState));
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanAddEditProposedClassess")]
+        public ActionResult ManageCourse_CreateCRM([DataSourceRequest] DataSourceRequest request, CRMCourses _objlogmap)
+        {
+            if (ModelState.IsValid)
+            {
+                var _salesObj = _objSaleBAL.ManageCourse_GetAllBAL(CurrentUser.CompanyID, "");
+                bool flage = false;
+                foreach (var x in _salesObj)
+                {
+                    if (x.PrimaryCourseName == _objlogmap.PrimaryCourseName)
+                    {
+                        flage = true;
+                        break;
+                    }
+                }
+                if (flage)
+                {
+                    ModelState.AddModelError(lr.ErrorServerError, lr.OrganizationNameDublicaton);
+                }
+                else
+                {
+
+                    _objlogmap.CreatedBy = CurrentUser.NameIdentifierInt64;
+                    _objlogmap.CreatedDate = DateTime.Now;
+                    _objlogmap.OrganizationID = CurrentUser.CompanyID;
+
+
+                    _objlogmap.ID = _objSaleBAL.ManageCourse_CreateBAL(_objlogmap);
+                }
+            }
+            var resultData = new[] { _objlogmap };
+            return Json(resultData.ToDataSourceResult(request, ModelState));
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanAddEditProposedClassess")]
+        public ActionResult CourseUpdateCRM([DataSourceRequest] DataSourceRequest request, CRMCourses _course)
+        {
+            if (ModelState.IsValid)
+            {
+                var _salesObj = _objSaleBAL.ManageCourse_GetAllBAL(CurrentUser.CompanyID, "");
+                bool flage = false;
+                foreach (var x in _salesObj)
+                {
+                    if (x.PrimaryCourseName == _course.PrimaryCourseName && x.ID != _course.ID)
+                    {
+                        flage = true;
+                        break;
+                    }
+                }
+                if (flage)
+                {
+                    ModelState.AddModelError(lr.ErrorServerError, lr.OrganizationNameDublicaton);
+                }
+                else
+                {
+                    _course.ModifiedBy = CurrentUser.NameIdentifierInt64;
+                    _course.ModifiedOn = DateTime.Now;
+                    var result = _objSaleBAL.CourseUpdateBAL(_course);
+                    if (result == -1)
+                    {
+                        ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    }
+                }
+            }
+            var resultData = new[] { _course };
+            return Json(resultData.ToDataSourceResult(request, ModelState));
+        }
+
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanDeleteProposedClassess")]
+        public ActionResult Course_DestroyCRM([DataSourceRequest] DataSourceRequest request, CRMCourses _courses)
+        {
+            if (ModelState.IsValid)
+            {
+                _courses.ModifiedBy = CurrentUser.NameIdentifierInt64;
+                _courses.ModifiedOn = DateTime.Now;
+                var result = _objSaleBAL.Course_DeleteBAL(_courses);
+                if (result == -1)
+                {
+                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                }
+            }
+            var resultData = new[] { _courses };
+            return Json(resultData.AsQueryable().ToDataSourceResult(request, ModelState));
+        }
+        #endregion
 
 
         #region Configuration
 
-        [ClaimsAuthorize("CanViewSession")]
+        [ClaimsAuthorize("CanViewManageConfiguration")]
         [DontWrapResult]
         public ActionResult ManageConfiguration()
         {
@@ -617,7 +731,7 @@ namespace TMS.Web.Controllers
         }
 
         [DontWrapResult]
-        [ClaimsAuthorize("CanViewProgramTrainer")]
+        [ClaimsAuthorize("CanViewManageConfiguration")]
         public ActionResult ManageConfiguration_Read([DataSourceRequest] DataSourceRequest request)
         {
             var startRowIndex = (request.Page - 1) * request.PageSize;
@@ -692,7 +806,7 @@ namespace TMS.Web.Controllers
 
 
         [DontWrapResult]
-        [ClaimsAuthorize("CanViewProgramTrainer")]
+        [ClaimsAuthorize("CanViewProspects")]
         public ActionResult Prospects()
         {
             //var startRowIndex = (request.Page - 1) * request.PageSize;
@@ -708,7 +822,7 @@ namespace TMS.Web.Controllers
 
 
         [DontWrapResult]
-        [ClaimsAuthorize("CanViewProgramTrainer")]
+        [ClaimsAuthorize("CanViewProspects")]
         public ActionResult Users()
         {
             //var startRowIndex = (request.Page - 1) * request.PageSize;
@@ -726,7 +840,7 @@ namespace TMS.Web.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
-        [ClaimsAuthorize("CanAddEditProgramTrainer")]
+        [ClaimsAuthorize("CanAddEditManageConfiguration")]
         public ActionResult ManageConfiguration_Create([DataSourceRequest] DataSourceRequest request, CRMHowHeard _objlogmap)
         {
             if (ModelState.IsValid)
@@ -763,7 +877,7 @@ namespace TMS.Web.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
-        [ClaimsAuthorize("CanAddEditProgramTrainer")]
+        [ClaimsAuthorize("CanAddEditManageConfiguration")]
         public ActionResult ConfigurationUpdate([DataSourceRequest] DataSourceRequest request, CRMHowHeard _course)
         {
             if (ModelState.IsValid)
@@ -801,7 +915,7 @@ namespace TMS.Web.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
-        [ClaimsAuthorize("CanDeleteProgramTrainer")]
+        [ClaimsAuthorize("canDeleteManageConfiguration")]
         public ActionResult Configuration_Destroy([DataSourceRequest] DataSourceRequest request, CRMHowHeard _courses)
         {
             if (ModelState.IsValid)
@@ -819,14 +933,14 @@ namespace TMS.Web.Controllers
         }
 
 
-        [ClaimsAuthorizeAttribute("CanViewPersonDetail")]
+        [ClaimsAuthorizeAttribute("CanViewTaskDetail")]
         public ActionResult Detail(long pid)
         {
             return PartialView("Detail", pid);
         }
 
         [DontWrapResult]
-        [ClaimsAuthorize("CanViewProgramTrainer")]
+        [ClaimsAuthorize("CanViewTaskDetail")]
         public ActionResult ManageDetail_Read([DataSourceRequest] DataSourceRequest request, long TaskID)
         {
             var startRowIndex = (request.Page - 1) * request.PageSize;
@@ -841,5 +955,6 @@ namespace TMS.Web.Controllers
         }
 
         #endregion Configuration
+
     }
 }

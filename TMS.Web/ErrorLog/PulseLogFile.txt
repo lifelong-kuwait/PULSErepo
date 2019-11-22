@@ -128,3 +128,8 @@ ERROR 2019-11-19 14:13:25,280 3054476ms ExceptionContext       OnException      
 ERROR 2019-11-19 14:14:11,511 3100708ms ExceptionContext       OnException        - Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.
 ERROR 2019-11-19 14:18:10,079 3339276ms ExceptionContext       OnException        - Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.
 ERROR 2019-11-20 14:29:47,790 279971ms ExceptionContext       OnException        - Input string was not in a correct format.
+ERROR 2019-11-21 11:26:13,453 352386ms ExceptionContext       OnException        - An error occurred during local report processing.
+ERROR 2019-11-21 11:28:27,869 486803ms ExceptionContext       OnException        - An error occurred during local report processing.
+ERROR 2019-11-22 14:50:02,999 69339ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter 'IsDigital' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.FileResult Print_Read(System.String, System.String, Int32, Int64)' in 'TMS.Web.Controllers.CertificateController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2019-11-22 15:15:05,029 135311ms ExceptionContext       OnException        - Input string was not in a correct format.

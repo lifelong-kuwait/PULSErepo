@@ -6,18 +6,18 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.66279in</Width>
+              <Width>2.12153in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>5.62111in</Width>
+              <Width>5.60987in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.36069in</Width>
+              <Width>2.77778in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>4.79514in</Height>
+              <Height>4.80209in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -60,9 +60,9 @@
                             <TextRun>
                               <Value />
                               <Style>
-                                <FontSize>15pt</FontSize>
+                                <FontSize>20pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Color>SeaGreen</Color>
+                                <Color>Green</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -75,9 +75,9 @@
                             <TextRun>
                               <Value />
                               <Style>
-                                <FontSize>15pt</FontSize>
+                                <FontSize>20pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Color>SeaGreen</Color>
+                                <Color>Green</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -90,9 +90,9 @@
                             <TextRun>
                               <Value />
                               <Style>
-                                <FontSize>15pt</FontSize>
+                                <FontSize>20pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Color>SeaGreen</Color>
+                                <Color>Green</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -105,9 +105,9 @@
                             <TextRun>
                               <Value />
                               <Style>
-                                <FontSize>15pt</FontSize>
+                                <FontSize>20pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Color>SeaGreen</Color>
+                                <Color>Green</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -120,9 +120,9 @@
                             <TextRun>
                               <Value />
                               <Style>
-                                <FontSize>15pt</FontSize>
+                                <FontSize>20pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Color>SeaGreen</Color>
+                                <Color>Green</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -135,9 +135,9 @@
                             <TextRun>
                               <Value />
                               <Style>
-                                <FontSize>15pt</FontSize>
+                                <FontSize>20pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Color>SeaGreen</Color>
+                                <Color>Green</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -150,9 +150,9 @@
                             <TextRun>
                               <Value />
                               <Style>
-                                <FontSize>15pt</FontSize>
+                                <FontSize>20pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Color>SeaGreen</Color>
+                                <Color>Green</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -165,9 +165,9 @@
                             <TextRun>
                               <Value />
                               <Style>
-                                <FontSize>15pt</FontSize>
+                                <FontSize>20pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Color>SeaGreen</Color>
+                                <Color>Green</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -180,9 +180,9 @@
                             <TextRun>
                               <Value />
                               <Style>
-                                <FontSize>15pt</FontSize>
+                                <FontSize>20pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Color>SeaGreen</Color>
+                                <Color>Green</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -195,9 +195,9 @@
                             <TextRun>
                               <Value />
                               <Style>
-                                <FontSize>15pt</FontSize>
+                                <FontSize>20pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Color>SeaGreen</Color>
+                                <Color>Green</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -208,69 +208,17 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value xml:space="preserve">      </Value>
                               <Style>
-                                <FontSize>15pt</FontSize>
+                                <FontSize>20pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Color>SeaGreen</Color>
+                                <Color>Green</Color>
                               </Style>
                             </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style>
-                                <FontSize>15pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>SeaGreen</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style>
-                                <FontSize>15pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>SeaGreen</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style>
-                                <FontSize>15pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>SeaGreen</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                        <Paragraph>
-                          <TextRuns>
                             <TextRun>
                               <Value>=Fields!DisplayName.Value</Value>
                               <Style>
-                                <FontSize>15pt</FontSize>
+                                <FontSize>20pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>Green</Color>
                               </Style>
@@ -328,7 +276,114 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>1.33681in</Height>
+              <Height>0.4375in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox20">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox20</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>White</Color>
+                          <Style>None</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="courseName">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value xml:space="preserve">   </Value>
+                              <Style>
+                                <FontSize>20pt</FontSize>
+                                <Color>Green</Color>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Fields!courseName.Value</Value>
+                              <Style>
+                                <FontSize>20pt</FontSize>
+                                <Color>Green</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>courseName</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>White</Color>
+                          <Style>None</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox26">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox26</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>White</Color>
+                          <Style>None</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.54167in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -369,24 +424,17 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value xml:space="preserve">    </Value>
                               <Style>
-                                <FontSize>17pt</FontSize>
+                                <FontSize>18pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Color>SeaGreen</Color>
+                                <Color>DarkGreen</Color>
                               </Style>
                             </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                        <Paragraph>
-                          <TextRuns>
                             <TextRun>
                               <Value>=Fields!StringDate.Value</Value>
                               <Style>
-                                <FontSize>17pt</FontSize>
+                                <FontSize>18pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>DarkGreen</Color>
                               </Style>
@@ -444,7 +492,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>1.28472in</Height>
+              <Height>1.3125in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -574,7 +622,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                         <Paragraph>
                           <TextRuns>
@@ -587,7 +637,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                         <Paragraph>
                           <TextRuns>
@@ -600,7 +652,24 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontSize>15pt</FontSize>
+                                <Format>MMMM d, yyyy</Format>
+                                <Color>Green</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                         <Paragraph>
                           <TextRuns>
@@ -613,7 +682,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox23</rd:DefaultName>
@@ -639,24 +710,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value xml:space="preserve"> </Value>
                               <Style>
                                 <FontSize>15pt</FontSize>
-                                <Color>SeaGreen</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Left</TextAlign>
-                          </Style>
-                        </Paragraph>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style>
-                                <FontSize>15pt</FontSize>
-                                <Color>SeaGreen</Color>
+                                <Color>Green</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -681,12 +738,33 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value xml:space="preserve">   </Value>
+                              <Value />
                               <Style>
                                 <FontSize>15pt</FontSize>
-                                <Color>SeaGreen</Color>
+                                <Color>Green</Color>
                               </Style>
                             </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontSize>15pt</FontSize>
+                                <Color>Green</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                        <Paragraph>
+                          <TextRuns>
                             <TextRun>
                               <Value>=Fields!Trainer.Value</Value>
                               <Style>
@@ -737,13 +815,16 @@
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>DataSet1</DataSetName>
-        <Height>7.41667in</Height>
-        <Width>10.64459in</Width>
+        <DataSetName>DataSet2</DataSetName>
+        <Top>0.16146in</Top>
+        <Left>0.06771in</Left>
+        <Height>7.09376in</Height>
+        <Width>10.50918in</Width>
         <Style>
           <Border>
             <Color>White</Color>
@@ -787,7 +868,7 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="DataSet1">
+    <DataSet Name="DataSet2">
       <Query>
         <DataSourceName>DataSet1</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
@@ -795,6 +876,10 @@
       <Fields>
         <Field Name="DisplayName">
           <DataField>DisplayName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="courseName">
+          <DataField>courseName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="StringDate">
@@ -807,8 +892,8 @@
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>DataSet1</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\SynergicProfessional\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\DataSet1.xsd</rd:SchemaPath>
+        <rd:DataSetName>CertificateDataSet</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\SynergicProfessional\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\CertificateDataSet.xsd</rd:SchemaPath>
         <rd:TableName>TMS_OrganizationForCertificatePrintData</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>

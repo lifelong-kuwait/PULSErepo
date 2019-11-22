@@ -859,6 +859,123 @@ namespace TMS.Web.Controllers
         }
 
         #endregion Categories
+        #region CategoriesCRM
+        [ClaimsAuthorize("CanViewCourseCategory")]
+        [DontWrapResult]
+        public ActionResult CourseCategoriesCRM()
+        {
+            return PartialView("_CategoriesCRM");
+        }
+
+        [DontWrapResult]
+        [ClaimsAuthorize("CanViewCourseCategory")]
+        public ActionResult Categories_ReadCRM([DataSourceRequest] DataSourceRequest request)
+        {
+            var startRowIndex = (request.Page - 1) * request.PageSize;
+            int Total = 0;
+            var SearchText = Request.Form["SearchText"];
+            if (request.PageSize == 0)
+            {
+                request.PageSize = 10;
+            }
+
+            var Classs = _objConfigurationBAL.TMSCategories_GetAllBAL(startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
+            if (CurrentUser.CompanyID > 0)
+            {
+                Classs = _objConfigurationBAL.TMSCategoriesbyOrganization_GetAllBAL(startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
+            }
+            var result = new DataSourceResult()
+            {
+                Data = Classs, // Process data (paging and sorting applied)
+                Total = Total // Total number of records
+            };
+            return Json(result);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanAddEditCourseCategory")]
+        public ActionResult Categories_CreateCRM([DataSourceRequest] DataSourceRequest request, TMSCategories _Categories)
+        {
+            if (ModelState.IsValid)
+            {
+                _Categories.CreatedBy = CurrentUser.NameIdentifierInt64;
+                _Categories.CreatedDate = DateTime.Now;
+                _Categories.OrganizationID = CurrentUser.CompanyID;
+                if (_objConfigurationBAL.TMSCategories_DuplicationCheckBAL(_Categories) > 0)
+                {
+                    ModelState.AddModelError(lr.CategoryCode, lr.CategoryCodeDuplicate);
+                }
+                else
+                {
+                    _Categories.ID = _objConfigurationBAL.TMSCategories_CreateBAL(_Categories);
+                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                    if (string.IsNullOrEmpty(ip))
+                        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+
+                }
+            }
+            var resultData = new[] { _Categories };
+            return Json(resultData.ToDataSourceResult(request, ModelState));
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanAddEditCourseCategory")]
+        public ActionResult Categories_UpdateCRM([DataSourceRequest] DataSourceRequest request, TMSCategories _Categories)
+        {
+            if (ModelState.IsValid)
+            {
+                _Categories.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                _Categories.UpdatedDate = DateTime.Now;
+
+                if (_objConfigurationBAL.TMSCategories_DuplicationCheckBAL(_Categories) > 0)
+                {
+                    ModelState.AddModelError(lr.CategoryCode, lr.CategoryCodeDuplicate);
+                }
+                else
+                {
+                    var result = _objConfigurationBAL.TMSCategories_UpdateBAL(_Categories);
+                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                    if (string.IsNullOrEmpty(ip))
+                        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Update, System.Web.HttpContext.Current.Request.Browser.Browser);
+
+                    if (result == -1)
+                    {
+                        ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    }
+                }
+            }
+            var resultData = new[] { _Categories };
+            return Json(resultData.AsQueryable().ToDataSourceResult(request, ModelState));
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanDeleteCourseCategory")]
+        public ActionResult Categories_DestroyCRM([DataSourceRequest] DataSourceRequest request, TMSCategories _Categories)
+        {
+            if (ModelState.IsValid)
+            {
+                _Categories.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                _Categories.UpdatedDate = DateTime.Now;
+                var result = _objConfigurationBAL.TMSCategories_DeleteBAL(_Categories);
+                string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                if (string.IsNullOrEmpty(ip))
+                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Delete, System.Web.HttpContext.Current.Request.Browser.Browser);
+
+                if (result == -1)
+                {
+                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                }
+            }
+            var resultData = new[] { _Categories };
+            return Json(resultData.AsQueryable().ToDataSourceResult(request, ModelState));
+        }
+        #endregion
 
         #region FocusAreas
 
@@ -1312,7 +1429,7 @@ namespace TMS.Web.Controllers
             return Json(_objConfigurationBAL.ManageSessionMeterialMap_GetAllBAL(CurrentUser.CompanyID).ToDataSourceResult(request, ModelState));
         }
 
-        [ClaimsAuthorize("CanViewProgramTrainer")]
+        [ClaimsAuthorize("CanViewSaleAdminstration")]
         [DontWrapResult]
         public ActionResult AuditLog()
         {
@@ -1321,7 +1438,7 @@ namespace TMS.Web.Controllers
         }
 
         [DontWrapResult]
-        [ClaimsAuthorize("CanViewProgramTrainer")]
+        [ClaimsAuthorize("CanViewSaleAdminstration")]
         public ActionResult AuditLog_Read([DataSourceRequest] DataSourceRequest request)
         {
             return Json(_objConfigurationBAL.AuditLog_GetAllBAL(CurrentUser.CompanyID).ToDataSourceResult(request, ModelState));
