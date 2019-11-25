@@ -91,8 +91,12 @@ namespace TMS.Web.Controllers
             string _personID= System.Web.HttpContext.Current.Session["PersonId"].ToString();
             string IsDigital= System.Web.HttpContext.Current.Session["IsDigital"].ToString();
             string certificateID = System.Web.HttpContext.Current.Session["certificateID"].ToString();
-            if (_classID.Equals(-1) || _personID.Equals(-1) || IsDigital.Equals(-1) || certificateID.Equals(-1))
+            if (_classID.Equals("-1") || _personID.Equals("-1") || IsDigital.Equals("-1") || certificateID.Equals("-1"))
             {
+                Session["ClassId"] = -1;
+                Session["PersonId"] = -1;
+                Session["IsDigital"] = -1;
+                Session["certificateID"] = -1;
                 return null;
             }
             else
@@ -114,21 +118,25 @@ namespace TMS.Web.Controllers
             ReportViewerRSFReports.LocalReport.DataSources.Add(new ReportDataSource("DataSet2", dt));
             ReportViewerRSFReports.LocalReport.Refresh();
             byte[] mybytes = ReportViewerRSFReports.LocalReport.Render(format: "PDF", deviceInfo: ""); //for exporting to PDF  
-                //Response.Clear();
-                //Response.Buffer = true;
-                //Response.Charset = "";
-                //Response.Cache.SetCacheability(HttpCacheability.NoCache);
-                //Response.ContentType = "application/pdf";
-                //Response.AppendHeader("Content-Disposition", "attachment; filename=RDLC.pdf");
-                //Response.BinaryWrite(mybytes);
-                //string pdfPath = @"~\TempReports\Certificate.pdf";       // Path to export Report.
+                                                                                                       //Response.Clear();
+                                                                                                       //Response.Buffer = true;
+                                                                                                       //Response.Charset = "";
+                                                                                                       //Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                                                                                                       //Response.ContentType = "application/pdf";
+                                                                                                       //Response.AppendHeader("Content-Disposition", "attachment; filename=RDLC.pdf");
+                                                                                                       //Response.BinaryWrite(mybytes);
+                                                                                                       //string pdfPath = @"~\TempReports\Certificate.pdf";       // Path to export Report.
 
-                //System.IO.FileStream pdfFile = new System.IO.FileStream(pdfPath, System.IO.FileMode.Create);
-                //pdfFile.Write(mybytes, 0, mybytes.Length);
-                //pdfFile.Close();
-                //Response.Flush();
-                //Response.End();
-                return File(mybytes, System.Net.Mime.MediaTypeNames.Application.Octet, "Certificate.pdf");
+                    //System.IO.FileStream pdfFile = new System.IO.FileStream(pdfPath, System.IO.FileMode.Create);
+                    //pdfFile.Write(mybytes, 0, mybytes.Length);
+                    //pdfFile.Close();
+                    //Response.Flush();
+                    //Response.End();
+                    Session["ClassId"] = -1;
+                    Session["PersonId"] = -1;
+                    Session["IsDigital"] = -1;
+                    Session["certificateID"] = -1;
+                    return File(mybytes, System.Net.Mime.MediaTypeNames.Application.Octet, "Certificate.pdf");
                 //return new JsonResult()
                 //{
                 //    Data = mybytes,

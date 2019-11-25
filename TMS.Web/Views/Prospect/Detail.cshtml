@@ -184,9 +184,9 @@
         }
 
 
-        if (User.IsInRole("CanViewPersonRoles"))
+        if (User.IsInRole("CanViewPersonRolesCRM"))
         {
-            i.Add().Text(lr.RolesTabTitile).LoadContentFrom("ManageRoles", "People", new { PersonID = Model.ID });
+            i.Add().Text(lr.RolesTabTitile).LoadContentFrom("ManageRolesCRM", "People", new { PersonID = Model.ID });
         }
         //if (User.IsInAnyRoles("CanViewPersonAchievement", "CanViewPersonSuggestedTraining", "CanViewPersonRelation", "CanViewPersonAttachments", "CanViewPersonNotes"))
         //{

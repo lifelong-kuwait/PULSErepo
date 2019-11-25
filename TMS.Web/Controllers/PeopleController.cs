@@ -977,5 +977,229 @@ namespace TMS.Web.Controllers
         }
 
         #endregion Venues
+        #region CRM Roles
+        [ClaimsAuthorize("CanViewPersonRolesCRM")]
+        [DontWrapResult]
+        public ActionResult ManageRolesCRM(long PersonId)
+        {
+            return PartialView("_PersonRolesCRM", PersonId);
+        }
+
+        [DontWrapResult]
+        [ClaimsAuthorize("CanViewPersonRolesCRM")]
+        public ActionResult ManageRoles_ReadCRM([DataSourceRequest] DataSourceRequest request, long PersonId)
+        {
+
+            var startRowIndex = (request.Page - 1) * request.PageSize;
+            int Total = 0;
+            var SearchText = Request.Form["SearchText"];
+            if (request.PageSize == 0)
+            {
+                request.PageSize = 10;
+            }
+            var Classs = _PersonBAL.TMS_PersonRolesMapping_GetbyPersonIDBAL(PersonId, CurrentUser.CompanyID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
+            var result = new DataSourceResult()
+            {
+                Data = Classs, // Process data (paging and sorting applied)
+                Total = Total // Total number of records
+            };
+            return Json(result);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanAddEditPersonRoles")]
+        public ActionResult ManageRoles_CreateCRM([DataSourceRequest] DataSourceRequest request, PersonRolesMapping _objPersonRoles)
+        {
+            if (ModelState.IsValid)
+            {
+                _objPersonRoles.CreatedBy = CurrentUser.NameIdentifierInt64;
+                _objPersonRoles.CreatedDate = DateTime.Now;
+                _objPersonRoles.PersonID = Convert.ToInt64(Request.QueryString["PersonID"]);
+                CRM_EnrolmentHistory EnrolmentHistory = new CRM_EnrolmentHistory();
+                EnrolmentHistory.CreatedBy = CurrentUser.NameIdentifierInt64;
+                EnrolmentHistory.CreatedOn = DateTime.Now;
+                EnrolmentHistory.PersonID = Convert.ToInt64(Request.QueryString["PersonID"]);
+                EnrolmentHistory.RoleName = "Trainee";
+                _objPersonRoles.ClientType = ClientType.ClientType_Internal;
+                if (_objPersonRoles.IsLogin == true && _objPersonRoles.Password != null)
+                {
+
+                    var person = _PersonBAL.Person_GetAllByIdBAL(Convert.ToString(_objPersonRoles.PersonID));
+
+                    if (_UserBAL.LoginUsers_DuplicationCheckBAL(new LoginUsers { Email = person.Email }) > 0)
+                    {
+                        ModelState.AddModelError(lr.UsersTitle, lr.UserEmailAlreadyExist);
+                        if (_PersonBAL.TMS_PersonRolesMapping_DuplicationCheckBAL(_objPersonRoles) > 0)
+                        {
+                            ModelState.AddModelError(lr.DubliocationHappen, lr.RoleName);
+                        }
+                        else
+                        {
+                            _objPersonRoles.ID = _PersonBAL.TMS_PersonRolesMapping_CreateBAL(_objPersonRoles);
+                            _PersonBAL.Enrolment_CreateBAL(EnrolmentHistory);
+                            string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                            if (string.IsNullOrEmpty(ip))
+                                ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                            _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+
+                        }
+                    }
+                    else
+                    {
+                        _objPersonRoles.Password = Crypto.CreatePasswordHash(_objPersonRoles.Password);
+                        _PersonBAL.TMS_PersonintoUser_CreateBAL(_objPersonRoles);
+                        if (_PersonBAL.TMS_PersonRolesMapping_DuplicationCheckBAL(_objPersonRoles) > 0)
+                        {
+                            ModelState.AddModelError(lr.DubliocationHappen, lr.RoleName);
+                        }
+                        else
+                        {
+                            _objPersonRoles.ID = _PersonBAL.TMS_PersonRolesMapping_CreateBAL(_objPersonRoles);
+                            _PersonBAL.Enrolment_CreateBAL(EnrolmentHistory);
+                        }
+                    }
+                }
+                else
+                {
+                    if (_PersonBAL.TMS_PersonRolesMapping_DuplicationCheckBAL(_objPersonRoles) > 0)
+                    {
+                        ModelState.AddModelError(lr.DubliocationHappen, lr.RoleName);
+                    }
+                    else
+                    {
+                        _objPersonRoles.ID = _PersonBAL.TMS_PersonRolesMapping_CreateBAL(_objPersonRoles);
+                        _PersonBAL.Enrolment_CreateBAL(EnrolmentHistory);
+                        string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                        if (string.IsNullOrEmpty(ip))
+                            ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                        _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+
+                    }
+                }
+            }
+            var resultData = new[] { _objPersonRoles };
+            return Json(resultData.ToDataSourceResult(request, ModelState));
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanAddEditPersonRoles")]
+        public ActionResult ManageRoles_UpdateCRM([DataSourceRequest] DataSourceRequest request, PersonRolesMapping _objPersonRoles)
+        {
+            if (ModelState.IsValid)
+            {
+                _objPersonRoles.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                _objPersonRoles.UpdatedDate = DateTime.Now;
+                var person = _PersonBAL.Person_GetAllByIdBAL(Convert.ToString(_objPersonRoles.PersonID));
+
+                if (_objPersonRoles.IsLogin == true && _objPersonRoles.Password != null)
+                {
+                    if (_UserBAL.LoginUsers_DuplicationCheckBAL(new LoginUsers { Email = person.Email }) > 0)
+                    {
+                        ModelState.AddModelError(lr.UsersTitle, lr.UserEmailAlreadyExist);
+                        if (_PersonBAL.TMS_PersonRolesMapping_DuplicationCheckBAL(_objPersonRoles) > 0)
+                        {
+                            ModelState.AddModelError(lr.VenueName, lr.VenueDuplicationCheck);
+                        }
+                        else
+                        {
+                            var result = _PersonBAL.TMS_PersonRolesMapping_UpdateBAL(_objPersonRoles);
+                            string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                            if (string.IsNullOrEmpty(ip))
+                                ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                            _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Update, System.Web.HttpContext.Current.Request.Browser.Browser);
+
+                            if (result == -1)
+                            {
+                                ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        _objPersonRoles.Password = Crypto.CreatePasswordHash(_objPersonRoles.Password);
+                        _PersonBAL.TMS_PersonintoUser_CreateBAL(_objPersonRoles);
+                        string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                        if (string.IsNullOrEmpty(ip))
+                            ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                        _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+
+                        if (_PersonBAL.TMS_PersonRolesMapping_DuplicationCheckBAL(_objPersonRoles) > 0)
+                        {
+                            ModelState.AddModelError(lr.VenueName, lr.VenueDuplicationCheck);
+                        }
+                        else
+                        {
+                            var result = _PersonBAL.TMS_PersonRolesMapping_UpdateBAL(_objPersonRoles);
+                            if (result == -1)
+                            {
+                                ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (_PersonBAL.TMS_PersonRolesMapping_DuplicationCheckBAL(_objPersonRoles) > 0)
+                    {
+                        ModelState.AddModelError(lr.VenueName, lr.VenueDuplicationCheck);
+                    }
+                    else
+                    {
+                        var result = _PersonBAL.TMS_PersonRolesMapping_UpdateBAL(_objPersonRoles);
+                        if (result == -1)
+                        {
+                            ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                        }
+                    }
+                }
+                //
+                //if (_PersonBAL.TMS_PersonRolesMapping_DuplicationCheckBAL(_objPersonRoles) > 0)
+                //{
+                //    ModelState.AddModelError(lr.VenueName, lr.VenueDuplicationCheck);
+                //}
+                //else
+                //{
+                //    var result = _PersonBAL.TMS_PersonRolesMapping_UpdateBAL(_objPersonRoles);
+                //    if (result == -1)
+                //    {
+                //        ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                //    }
+                //}
+            }
+            var resultData = new[] { _objPersonRoles };
+            return Json(resultData.AsQueryable().ToDataSourceResult(request, ModelState));
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanDeletePersonRoles")]
+        public ActionResult ManageRoles_DestroyCRM([DataSourceRequest] DataSourceRequest request, PersonRolesMapping _objPersonRoles)
+        {
+            if (ModelState.IsValid)
+            {
+                _objPersonRoles.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                _objPersonRoles.UpdatedDate = DateTime.Now;
+                //if (_objPersonRoles.RoleID == 2)
+                //{
+
+                //}
+                var result = _PersonBAL.TMS_PersonRolesMapping_DeleteBAL(_objPersonRoles);
+                string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                if (string.IsNullOrEmpty(ip))
+                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Delete, System.Web.HttpContext.Current.Request.Browser.Browser);
+
+                if (result == -1)
+                {
+                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                }
+            }
+            var resultData = new[] { _objPersonRoles };
+            return Json(resultData.AsQueryable().ToDataSourceResult(request, ModelState));
+        }
+
+        #endregion
     }
 }

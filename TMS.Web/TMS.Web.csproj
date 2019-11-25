@@ -2635,6 +2635,8 @@
     <None Include="Properties\PublishProfiles\FolderProfile53.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile54.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile55.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile56.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile57.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile6.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile7.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile8.pubxml" />
@@ -4821,6 +4823,7 @@
     <Content Include="Views\Config\Preview_Certificate.cshtml" />
     <Content Include="Views\Task\ManageCourseCRM.cshtml" />
     <Content Include="Views\Config\_CategoriesCRM.cshtml" />
+    <Content Include="Views\People\_PersonRolesCRM.cshtml" />
     <None Include="WeeklyAttendanceReportData.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>

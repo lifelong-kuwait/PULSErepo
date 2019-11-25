@@ -261,10 +261,10 @@
             {
                 <div class="toolbar">
 
-                    @if (User.IsInAnyRoles("CanPrintCertificates"))
+                    @*@if (User.IsInAnyRoles("CanPrintCertificates"))
                     {
                         <a class="k-button tms-grid-destroyperson"><span class="tms-grid-icon mdi mdi-printer "></span></a>
-                    }
+                    }*@
                     @if (User.IsInAnyRoles("CanPrintCertificates"))
                     {
                         <a class="k-button tms-grid-Download"><span class="tms-grid-icon mdi mdi-download "></span></a>
@@ -314,7 +314,7 @@
                     </p>
 
                     <p>Printed Count: <label>#:data.PrintedTimeCount#</label></p>
-                    <p><label><a class="DigitalCertificate" data-id="#:data.PersonID#">Digital Certificate</a></label></p>
+                    <p><label><a class="DigitalCertificate" ID="#:data.PersonID#"  data-id="#:data.PersonID#">Digital Certificate</a></label></p>
 
                 </div>
             </div>
@@ -333,8 +333,8 @@
             });
             jQuery(".DigitalCertificate").live("mousedown", function (event) {
          //   debugger;
-
-                if (jQuery(".DigitalCertificate").attr("data-id") > 0 && jQuery("#Certificate").data("kendoDropDownList").value() > 0 && jQuery("#Class").data("kendoDropDownList").value() > 0 && jQuery("#Course").data("kendoDropDownList").value() > 0) {
+                var Pid =jQuery(this).attr("ID");
+                if (jQuery(this).attr("ID") > 0 && jQuery("#Certificate").data("kendoDropDownList").value() > 0 && jQuery("#Class").data("kendoDropDownList").value() > 0 && jQuery("#Course").data("kendoDropDownList").value() > 0) {
                     swal({
                         title: 'Do You Want To Print Digital Certificate?',
                         text: 'Do you want to print Digital Certificate @lr.confirmRecords',
@@ -348,12 +348,13 @@
                     },
                         function (isConfirm) {
                             if (isConfirm) {
+                                console.log(Pid);
                                jQuery.ajax({
                                     url: '/Certificate/SetSessionValues',
                                     method: "post",
                                     dataType: "JSON",
                                     contentType: "application/json; charset=utf-8",
-                                    data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: jQuery(".DigitalCertificate").attr("data-id"), IsDigital: 1, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
+                                   data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: Pid, IsDigital: 1, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
                                     success: function (data) {
                                         window.open("/Certificate/Print_Read", "_blank");
                                     }
@@ -420,7 +421,7 @@
                             function (isConfirm) {
                                 if (isConfirm) {
                                     // debugger
-                                    document.getElementById("loader").style.display = "block";
+                                      
                                     grid = jQuery("#ManageTrainee").data("kendoGrid");
                                     var dataGrid = grid.dataItem(jQuery("#ManageTrainee tr.k-state-selected"));
                                    // window.open("/Certificate/Print_Read?_classID=" + jQuery("#Class").data("kendoDropDownList").value() + "&_personID=" + jQuery(".DigitalCertificate").attr("data-id") + "&IsDigital=0&certificateID=" + jQuery("#Certificate").data("kendoDropDownList").value(), "_blank");
@@ -430,7 +431,7 @@
                                         method: "post",
                                         dataType: "JSON",
                                         contentType: "application/json; charset=utf-8",
-                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: jQuery(".DigitalCertificate").attr("data-id"), IsDigital: 1, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
+                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: data.PersonID, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
                                         success: function (data) {
                                             window.open("/Certificate/Print_Read", "_blank");
                                         }
@@ -453,7 +454,7 @@
                             function (isConfirm) {
                                 if (isConfirm) {
                                     // debugger
-                                   // document.getElementById("loader").style.display = "block";
+                                   //   
                                     grid = jQuery("#ManageTrainee").data("kendoGrid");
                                     var dataGrid = grid.dataItem(jQuery("#ManageTrainee tr.k-state-selected"));
                                     jQuery.ajax({
@@ -461,7 +462,7 @@
                                         method: "post",
                                         dataType: "JSON",
                                         contentType: "application/json; charset=utf-8",
-                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: jQuery(".DigitalCertificate").attr("data-id"), IsDigital: 1, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
+                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: dataGrid.PersonID, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
                                         success: function (data) {
                                             window.open("/Certificate/Print_Read", "_blank");
                                         }
@@ -515,7 +516,7 @@
                                 function (isConfirm2) {
                                     if (isConfirm2) {*@
                             //console.log("Confirmed");
-                            document.getElementById("loader").style.display = "block";
+                            //document.getElementById("loader").style.display = "block";
                             var grid = jQuery("#ManageTrainee").data("kendoGrid");
                             var checkedLength = jQuery("#ManageTrainee tr.k-state-selected").length;
                             if (checkedLength > 1) {
@@ -529,15 +530,13 @@
                                     res = res.concat(str2);
                                 });
                                 jQuery.ajax({
-
-                                    url: '/Certificate/Print_Read',
+                                    url: '/Certificate/SetSessionValues',
                                     method: "post",
                                     dataType: "JSON",
                                     contentType: "application/json; charset=utf-8",
-                                    data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: res, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value()}),
+                                    data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: res, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
                                     success: function (data) {
-                                        var byteArray = new Uint8Array(data);
-                                        saveTextAsFile("Certificate.pdf", byteArray);
+                                        window.open("/Certificate/Print_Read", "_blank");
                                     }
                                 });
                             }
@@ -560,7 +559,7 @@
                         function (isConfirm2) {
                             if (isConfirm2) {
                                 //console.log("Confirmed");
-                                document.getElementById("loader").style.display = "block";
+                                  
                                 var grid = jQuery("#ManageTrainee").data("kendoGrid");
                                 var checkedLength = jQuery("#ManageTrainee tr.k-state-selected").length;
                                 if (checkedLength > 1) {
@@ -574,15 +573,13 @@
                                         res = res.concat(str2);
                                     });
                                     jQuery.ajax({
-
-                                        url: '/Certificate/Print_Read',
+                                        url: '/Certificate/SetSessionValues',
                                         method: "post",
                                         dataType: "JSON",
                                         contentType: "application/json; charset=utf-8",
                                         data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: res, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
                                         success: function (data) {
-                                            var byteArray = new Uint8Array(data);
-                                            saveTextAsFile("Certificate.pdf", byteArray);
+                                            window.open("/Certificate/Print_Read", "_blank");
                                         }
                                     });
                                 }
@@ -617,18 +614,17 @@
                             function (isConfirm) {
                                 if (isConfirm) {
                                     // debugger
-                                    document.getElementById("loader").style.display = "block";
+                                      
                                     grid = jQuery("#ManageTrainee").data("kendoGrid");
                                     var dataGrid = grid.dataItem(jQuery("#ManageTrainee tr.k-state-selected"));
                                     jQuery.ajax({
-                                        url: '/Certificate/Print_Read',
+                                        url: '/Certificate/SetSessionValues',
                                         method: "post",
                                         dataType: "JSON",
                                         contentType: "application/json; charset=utf-8",
-                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: dataGrid.PersonID, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value()}),
+                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: dataGrid.PersonID, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
                                         success: function (data) {
-                                            var byteArray = new Uint8Array(data);
-                                            saveTextAsFileDownload("Certificate.pdf", byteArray);
+                                            window.open("/Certificate/Print_Read", "_blank");
                                         }
                                     });
                                 }
@@ -649,18 +645,17 @@
                             function (isConfirm23) {
                                 if (isConfirm23) {
                                     // debugger
-                                    document.getElementById("loader").style.display = "block";
+                                      
                                     grid = jQuery("#ManageTrainee").data("kendoGrid");
                                     var dataGrid = grid.dataItem(jQuery("#ManageTrainee tr.k-state-selected"));
                                     jQuery.ajax({
-                                        url: '/Certificate/Print_Read',
+                                        url: '/Certificate/SetSessionValues',
                                         method: "post",
                                         dataType: "JSON",
                                         contentType: "application/json; charset=utf-8",
                                         data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: dataGrid.PersonID, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
                                         success: function (data) {
-                                            var byteArray = new Uint8Array(data);
-                                            saveTextAsFileDownload("Certificate.pdf", byteArray);
+                                            window.open("/Certificate/Print_Read", "_blank");
                                         }
                                     });
                                 }
@@ -696,7 +691,7 @@
                         closeOnCancel: true
                     },
                         function (isConfirm22) {
-                            document.getElementById("loader").style.display = "block";
+                              
                             var grid = jQuery("#ManageTrainee").data("kendoGrid");
                             var checkedLength = jQuery("#ManageTrainee tr.k-state-selected").length;
                             if (checkedLength > 1) {
@@ -709,14 +704,13 @@
                                     res = res.concat(str2);
                                 });
                                 jQuery.ajax({
-                                    url: '/Certificate/Print_Read',
+                                    url: '/Certificate/SetSessionValues',
                                     method: "post",
                                     dataType: "JSON",
                                     contentType: "application/json; charset=utf-8",
-                                    data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: res, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value()}),
+                                    data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: res, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
                                     success: function (data) {
-                                        var byteArray = new Uint8Array(data);
-                                        saveTextAsFileDownload("Certificate.pdf", byteArray);
+                                        window.open("/Certificate/Print_Read", "_blank");
                                     }
                                 });
                             }
@@ -736,7 +730,7 @@
                         function (isConfirm2) {
                             if (isConfirm2) {
                                 //console.log("Confirmed");
-                                document.getElementById("loader").style.display = "block";
+                                  
                                 var grid = jQuery("#ManageTrainee").data("kendoGrid");
                                 var checkedLength = jQuery("#ManageTrainee tr.k-state-selected").length;
                                 if (checkedLength > 1) {
@@ -749,15 +743,13 @@
                                         res = res.concat(str2);
                                     });
                                     jQuery.ajax({
-
-                                        url: '/Certificate/Print_Read',
+                                        url: '/Certificate/SetSessionValues',
                                         method: "post",
                                         dataType: "JSON",
                                         contentType: "application/json; charset=utf-8",
                                         data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: res, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
                                         success: function (data) {
-                                            var byteArray = new Uint8Array(data);
-                                            saveTextAsFileDownload("Certificate.pdf", byteArray);
+                                            window.open("/Certificate/Print_Read", "_blank");
                                         }
                                     });
                                 }

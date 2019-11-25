@@ -133,3 +133,16 @@ ERROR 2019-11-21 11:28:27,869 486803ms ExceptionContext       OnException       
 ERROR 2019-11-22 14:50:02,999 69339ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter 'IsDigital' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.FileResult Print_Read(System.String, System.String, Int32, Int64)' in 'TMS.Web.Controllers.CertificateController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
 Parameter name: parameters
 ERROR 2019-11-22 15:15:05,029 135311ms ExceptionContext       OnException        - Input string was not in a correct format.
+ERROR 2019-11-25 11:14:58,328 294020ms ExceptionContext       OnException        - The given key was not present in the dictionary.
+ERROR 2019-11-25 11:15:37,069 332761ms ExceptionContext       OnException        - The given key was not present in the dictionary.
+ERROR 2019-11-25 11:15:41,697 337389ms ExceptionContext       OnException        - The given key was not present in the dictionary.
+ERROR 2019-11-25 11:16:46,340 402032ms ExceptionContext       OnException        - The given key was not present in the dictionary.
+ERROR 2019-11-25 11:17:05,158 420850ms ExceptionContext       OnException        - The given key was not present in the dictionary.
+ERROR 2019-11-25 11:20:04,758 600450ms ExceptionContext       OnException        - The given key was not present in the dictionary.
+ERROR 2019-11-25 11:20:16,208 611900ms ExceptionContext       OnException        - The given key was not present in the dictionary.
+ERROR 2019-11-25 14:11:16,414 733849ms ExceptionContext       OnException        - Object reference not set to an instance of an object.
+ERROR 2019-11-25 14:12:16,402 793837ms ExceptionContext       OnException        - Object reference not set to an instance of an object.
+ERROR 2019-11-25 14:13:56,003 893438ms ExceptionContext       OnException        - Object reference not set to an instance of an object.
+ERROR 2019-11-25 14:16:10,498 121715ms ExceptionContext       OnException        - Object reference not set to an instance of an object.
+ERROR 2019-11-25 16:01:16,149 139784ms ExceptionContext       OnException        - Error parsing column 10 (SessionAttended= - String)
+ERROR 2019-11-25 16:03:47,458 291094ms ExceptionContext       OnException        - Error parsing column 10 (SessionAttended= - String)
