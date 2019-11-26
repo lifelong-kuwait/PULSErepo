@@ -68,9 +68,9 @@ namespace TMS.Business.TMS
         /// <param name="SortExpression">The sort expression.</param>
         /// <param name="SearchText">The search text.</param>
         /// <returns>List&lt;Course&gt;.</returns>
-        public List<Course> TMS_CoursesByOrganization_GetAllBAL(int page, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid)
+        public List<Course> TMS_CoursesByOrganization_GetAllBAL(int page, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid,long PersonID)
         {
-            return _CourseDAL.TMS_CoursesByOrganization_GetAllDAL( page, StartRowIndex, PageSize, ref Total, SortExpression, SearchText,Oid);
+            return _CourseDAL.TMS_CoursesByOrganization_GetAllDAL( page, StartRowIndex, PageSize, ref Total, SortExpression, SearchText,Oid,PersonID);
         }
         /// <summary>
         /// TMSs the courses get all bal.

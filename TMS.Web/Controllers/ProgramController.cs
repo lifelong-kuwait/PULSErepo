@@ -76,6 +76,12 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public ActionResult Course_Read([DataSourceRequest] DataSourceRequest request)
         {
+            var list = this._ClassBAL.personRoleGroups(CurrentUser.NameIdentifierInt64);
+            long PersonID = 0;
+            if (list.Count == 1 && list[0].PrimaryGroupName == "Trainer")
+            {
+                PersonID = CurrentUser.NameIdentifierInt64;
+            }
             var kendoRequest = new Kendo.Mvc.UI.DataSourceRequest
             {
 
@@ -97,11 +103,11 @@ namespace TMS.Web.Controllers
             {
                 if (kendoRequest.Filters.Count > 0)
                 {
-                    Courses = this._CourseBAL.TMS_CoursesByOrganization_GetAllBAL(request.Page, startRowIndex, 10000, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
+                    Courses = this._CourseBAL.TMS_CoursesByOrganization_GetAllBAL(request.Page, startRowIndex, 10000, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID),PersonID);
                 }
                 else
                 {
-                    Courses = this._CourseBAL.TMS_CoursesByOrganization_GetAllBAL(request.Page, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
+                    Courses = this._CourseBAL.TMS_CoursesByOrganization_GetAllBAL(request.Page, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID), PersonID);
 
                 }
             }
@@ -269,6 +275,7 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public ActionResult Class_Read([DataSourceRequest] DataSourceRequest request)
         {
+            var list=this._ClassBAL.personRoleGroups(CurrentUser.NameIdentifierInt64);
             var kendoRequest = new Kendo.Mvc.UI.DataSourceRequest
             {
 
@@ -296,9 +303,14 @@ namespace TMS.Web.Controllers
 
             else if (CurrentUser.CompanyID > 0)
             {
+                long PersonId = 0;
+                if(list.Count==1 && list[0].PrimaryGroupName=="Trainer")
+                {
+                    PersonId = CurrentUser.NameIdentifierInt64;
+                }
                 if (CourseId <= 0)
                 {
-                    Classs = this._ClassBAL.TMS_ClassesAllByOrganization_GetAllBAL(CourseId, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
+                    Classs = this._ClassBAL.TMS_ClassesAllByOrganization_GetAllBAL(CourseId, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID),PersonId);
                 }
                 else
                 {
@@ -1528,7 +1540,12 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public ActionResult Sessions_Read([DataSourceRequest] DataSourceRequest request)
         {
-
+            var list = this._ClassBAL.personRoleGroups(CurrentUser.NameIdentifierInt64);
+            long PersonID = 0;
+            if(list.Count==1 && list[0].PrimaryGroupName=="Trainer")
+            {
+                PersonID = CurrentUser.NameIdentifierInt64;
+            }
             var kendoRequest = new Kendo.Mvc.UI.DataSourceRequest
             {
 
@@ -1557,11 +1574,11 @@ namespace TMS.Web.Controllers
                 {
                     if (kendoRequest.Filters.Count > 0)
                     {
-                        Sessions = this._SessionBAL.TMS_SessionsbyOrganization_GetALLSessionsByCultureBAL(ClassID, startRowIndex, 10000, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID), request.Page);
+                        Sessions = this._SessionBAL.TMS_SessionsbyOrganization_GetALLSessionsByCultureBAL(ClassID, startRowIndex, 10000, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID), request.Page, PersonID);
                     }
                     else
                     {
-                        Sessions = this._SessionBAL.TMS_SessionsbyOrganization_GetALLSessionsByCultureBAL(ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID), request.Page);
+                        Sessions = this._SessionBAL.TMS_SessionsbyOrganization_GetALLSessionsByCultureBAL(ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID), request.Page, PersonID);
 
                     }
                 }

@@ -816,7 +816,10 @@ namespace TMS.Library.Entities.TMS.Program
         public string UpdatedByAlias { get; set; }
         
     }
-
+    public class PersonRoleGroup
+    {
+        public string PrimaryGroupName { get; set; }
+    }
     /// <summary>
     /// Class SessionCreationRules.
     /// </summary>

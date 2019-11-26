@@ -146,3 +146,13 @@ ERROR 2019-11-25 14:13:56,003 893438ms ExceptionContext       OnException       
 ERROR 2019-11-25 14:16:10,498 121715ms ExceptionContext       OnException        - Object reference not set to an instance of an object.
 ERROR 2019-11-25 16:01:16,149 139784ms ExceptionContext       OnException        - Error parsing column 10 (SessionAttended= - String)
 ERROR 2019-11-25 16:03:47,458 291094ms ExceptionContext       OnException        - Error parsing column 10 (SessionAttended= - String)
+ERROR 2019-11-26 10:35:28,610 1881170ms ExceptionContext       OnException        - Cannot insert the value NULL into column 'NickName', table 'TMS_SPL_PULSE.dbo.Users'; column does not allow nulls. INSERT fails.
+Cannot insert the value NULL into column 'UserID', table 'TMS_SPL_PULSE.dbo.Users_TMS_GroupsMapping'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+The statement has been terminated.
+ERROR 2019-11-26 10:36:58,409 1970969ms ExceptionContext       OnException        - Cannot insert the value NULL into column 'NickName', table 'TMS_SPL_PULSE.dbo.Users'; column does not allow nulls. INSERT fails.
+Cannot insert the value NULL into column 'UserID', table 'TMS_SPL_PULSE.dbo.Users_TMS_GroupsMapping'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+The statement has been terminated.
+ERROR 2019-11-26 11:45:16,480 6069039ms ExceptionContext       OnException        - The given key was not present in the dictionary.
+ERROR 2019-11-26 16:02:50,138 10028766ms ExceptionContext       OnException        - Procedure or function 'TMS_Sessions_GetALLSessionsByCultureandOrganization' expects parameter '@PersonId', which was not supplied.

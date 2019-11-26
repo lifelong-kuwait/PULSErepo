@@ -78,9 +78,14 @@ namespace TMS.Business.TMS.Program
             return _ClassDAL.TMS_ClassesByOrganization_GetAllDAL(CourseId, StartRowIndex, PageSize, ref Total, SortExpression, SearchText,Oid);
         }
         
-        public List<Classes> TMS_ClassesAllByOrganization_GetAllBAL(long CourseId, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText, string Oid)
+        public List<Classes> TMS_ClassesAllByOrganization_GetAllBAL(long CourseId, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText, string Oid, long PersonId)
         {
-            return _ClassDAL.TMS_ClassesAllByOrganization_GetAllDAL(CourseId, StartRowIndex, PageSize, ref Total, SortExpression, SearchText, Oid);
+            return _ClassDAL.TMS_ClassesAllByOrganization_GetAllDAL(CourseId, StartRowIndex, PageSize, ref Total, SortExpression, SearchText, Oid,PersonId);
+        }
+        public List<PersonRoleGroup> personRoleGroups(long UserID)
+        {
+            return _ClassDAL.personRoleGroupsDAL(UserID);
+
         }
         public List<Classes> TMS_TrainerClasses_GetByIdBAL(long id, ref int Total)
         {

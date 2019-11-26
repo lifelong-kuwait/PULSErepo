@@ -112,14 +112,14 @@ namespace TMS.DataObjects.TMS.Program
         /// <param name="SortExpression">The sort expression.</param>
         /// <param name="SearchText">The search text.</param>
         /// <returns>List&lt;Classes&gt;.</returns>
-        public List<Classes> TMS_ClassesAllByOrganization_GetAllDAL(long CourseId, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText, string Oid)
+        public List<Classes> TMS_ClassesAllByOrganization_GetAllDAL(long CourseId, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText, string Oid, long PersonId)
         {
             List<Classes> Course = new List<Classes>();
             using (var conn = new SqlConnection(DBHelper.ConnectionString))
             {
                 conn.Open();
                 DynamicParameters dbParam = new DynamicParameters();
-                dbParam.AddDynamicParams(new { CourseID = CourseId, StartRowIndex = StartRowIndex, PageSize = PageSize, SortExpression = SortExpression, SearchText = SearchText, Oid = Oid });
+                dbParam.AddDynamicParams(new { CourseID = CourseId, StartRowIndex = StartRowIndex, PageSize = PageSize, SortExpression = SortExpression, SearchText = SearchText, Oid = Oid , PersonId = PersonId });
                 using (var multi = conn.QueryMultiple("TMS_Classes_GetAllClassesByOrganization", dbParam, commandType: System.Data.CommandType.StoredProcedure))
                 {
                     Course = multi.Read<Classes>().AsList<Classes>();
@@ -131,7 +131,25 @@ namespace TMS.DataObjects.TMS.Program
             }
             return Course.ToList();
         }
-        
+        public List<PersonRoleGroup> personRoleGroupsDAL(long UserID)
+        {
+            List<PersonRoleGroup> Course = new List<PersonRoleGroup>();
+            using (var conn = new SqlConnection(DBHelper.ConnectionString))
+            {
+                conn.Open();
+                DynamicParameters dbParam = new DynamicParameters();
+                dbParam.AddDynamicParams(new { PersonID = UserID });
+                using (var multi = conn.QueryMultiple("TMS_PersonRolesAll", dbParam, commandType: System.Data.CommandType.StoredProcedure))
+                {
+                    Course = multi.Read<PersonRoleGroup>().AsList<PersonRoleGroup>();
+                    //if (!multi.IsConsumed)
+                    //    Total = multi.Read<int>().FirstOrDefault<int>();
+                }
+
+                conn.Close();
+            }
+            return Course.ToList();
+        }
 
         public IList<CourseLogisticRequirements> CourseLogistic_GetAllByOrgDAL(string Culture, long OrganizationID, long ClassID, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText)
         {

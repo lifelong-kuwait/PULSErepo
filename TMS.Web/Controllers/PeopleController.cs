@@ -797,6 +797,7 @@ namespace TMS.Web.Controllers
                 EnrolmentHistory.CreatedOn = DateTime.Now;
                 EnrolmentHistory.PersonID = Convert.ToInt64(Request.QueryString["PersonID"]);
                 EnrolmentHistory.RoleName = "Trainee";
+                _objPersonRoles.IsActive = true;
                 _objPersonRoles.ClientType = ClientType.ClientType_Internal;
                 if (_objPersonRoles.IsLogin == true && _objPersonRoles.Password != null)
                 {
@@ -824,6 +825,7 @@ namespace TMS.Web.Controllers
                     else
                     {
                         _objPersonRoles.Password = Crypto.CreatePasswordHash(_objPersonRoles.Password);
+                        _objPersonRoles.IsActive = true;
                         _PersonBAL.TMS_PersonintoUser_CreateBAL(_objPersonRoles);
                         if (_PersonBAL.TMS_PersonRolesMapping_DuplicationCheckBAL(_objPersonRoles) > 0)
                         {

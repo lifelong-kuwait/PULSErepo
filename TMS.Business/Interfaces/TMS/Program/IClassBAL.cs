@@ -54,8 +54,8 @@ namespace TMS.Business.Interfaces.TMS.Program
         /// <param name="SearchText">The search text.</param>
         /// <returns>List&lt;Classes&gt;.</returns>
         List<Classes> TMS_ClassesByOrganization_GetAllBAL(long CourseId, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid);
-        List<Classes> TMS_ClassesAllByOrganization_GetAllBAL(long CourseId, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText, string Oid);
-
+        List<Classes> TMS_ClassesAllByOrganization_GetAllBAL(long CourseId, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText, string Oid,long PersonId);
+        List<PersonRoleGroup> personRoleGroups(long UserID);
         List<Classes> TMS_TrainerClasses_GetByIdBAL(long id, ref int Total);
         
         /// <summary>

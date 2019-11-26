@@ -53,9 +53,9 @@ namespace TMS.DataObjects.Interfaces.TMS
         /// <param name="SearchText">The search text.</param>
         /// <returns>List&lt;Classes&gt;.</returns>
         List<Classes> TMS_ClassesByOrganization_GetAllDAL(long CourseId, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid);
-        List<Classes> TMS_ClassesAllByOrganization_GetAllDAL(long CourseId, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText, string Oid);
+        List<Classes> TMS_ClassesAllByOrganization_GetAllDAL(long CourseId, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText, string Oid, long PersonId);
 
-        
+        List<PersonRoleGroup> personRoleGroupsDAL(long UserID);
         List<Classes> TMS_TrainerClasses_GetAllDAL(long id, ref int Total);
 
         List<Classes> TMS_TrainerClasses_GetByOrganizationIdDAL(long id, long CompnayID, ref int Total);
