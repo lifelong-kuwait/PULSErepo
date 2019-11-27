@@ -291,9 +291,9 @@ namespace TMS.Business.Common.DDL
         /// </summary>
         /// <param name="culture">The culture.</param>
         /// <returns>IList&lt;DDlList&gt;.</returns>
-        public IList<DDlList> Courses_GetAllByCultureBAL(string culture,long CompanyID)
+        public IList<DDlList> Courses_GetAllByCultureBAL(string culture,long CompanyID,long perosnId)
         {
-            return DAL.Courses_GetAllByCultureDAL(culture, CompanyID);
+            return DAL.Courses_GetAllByCultureDAL(culture, CompanyID, perosnId);
         }
 
         /// <summary>
@@ -339,9 +339,9 @@ namespace TMS.Business.Common.DDL
             return DAL.CourseDDLDAL(culture, CompnayID);
         }
 
-        public IList<DDlList> Course_ClassDDLBAL(string culture, long CompnayID, long CourseID)
+        public IList<DDlList> Course_ClassDDLBAL(string culture, long CompnayID, long CourseID, long personId)
         {
-            return DAL.Course_ClassDDLDAL(culture, CompnayID,CourseID);
+            return DAL.Course_ClassDDLDAL(culture, CompnayID,CourseID,personId);
         }
 
         public IList<DDlList> Class_TrainerDDLBAL(string culture, long CompnayID, long ClassID)

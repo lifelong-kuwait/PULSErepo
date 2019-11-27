@@ -24,7 +24,7 @@ namespace TMS.Business.Interfaces.TMS
         /// </summary>
         /// <param name="culture">The culture.</param>
         /// <returns>IList&lt;Trainer&gt;.</returns>
-        IList<Trainer> TrainerOrganization_GetAllBAL(ref int Total, string culture, long RoleID, string ID,string SearchText, string SortExpression, int StartRowIndex, int page, int PageSize);
+        IList<Trainer> TrainerOrganization_GetAllBAL(ref int Total, string culture, long RoleID, string ID,string SearchText, string SortExpression, int StartRowIndex, int page, int PageSize, long personID);
 
         IList<Trainer> DeletedPerson_GetAllBAL(string culture, long ID, string SearchText);
 

@@ -156,3 +156,4 @@ The statement has been terminated.
 The statement has been terminated.
 ERROR 2019-11-26 11:45:16,480 6069039ms ExceptionContext       OnException        - The given key was not present in the dictionary.
 ERROR 2019-11-26 16:02:50,138 10028766ms ExceptionContext       OnException        - Procedure or function 'TMS_Sessions_GetALLSessionsByCultureandOrganization' expects parameter '@PersonId', which was not supplied.
+ERROR 2019-11-27 12:33:33,909 1136622ms ExceptionContext       OnException        - Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.

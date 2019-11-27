@@ -20,6 +20,7 @@ using TMS.Library.Entities.CRM;
 using Abp.Runtime.Validation;
 using TMS.Web.Core;
 using System.Collections.Generic;
+using TMS.Business.Interfaces.TMS.Program;
 
 namespace TMS.Web.Controllers
 {
@@ -32,15 +33,16 @@ namespace TMS.Web.Controllers
         private readonly ITrainerBAL _TrainerBAL;
         private readonly IPersonContactBAL _objPersonContactBAL;
         private readonly IConfigurationBAL _objConfigurationBAL;
+        private readonly IClassBAL _ClassBAL;
 
-        public PeopleController(IAttachmentBAL objIAttachmentBAL, IConfigurationBAL _objIConfigurationBAL, ITrainerBAL objITrainerBAL, IPersonBAL objIPersonBAL, IBALUsers objUserBAL, IPersonContactBAL _objePersonContact)
+        public PeopleController(IAttachmentBAL objIAttachmentBAL, IClassBAL IClassBAL,IConfigurationBAL _objIConfigurationBAL, ITrainerBAL objITrainerBAL, IPersonBAL objIPersonBAL, IBALUsers objUserBAL, IPersonContactBAL _objePersonContact)
         {
-            _objConfigurationBAL = _objIConfigurationBAL; _AttachmentBAL = objIAttachmentBAL; _TrainerBAL = objITrainerBAL; _PersonBAL = objIPersonBAL; _UserBAL = objUserBAL; _objPersonContactBAL = _objePersonContact;
+            _objConfigurationBAL = _objIConfigurationBAL; _ClassBAL = IClassBAL; _AttachmentBAL = objIAttachmentBAL; _TrainerBAL = objITrainerBAL; _PersonBAL = objIPersonBAL; _UserBAL = objUserBAL; _objPersonContactBAL = _objePersonContact;
         }
 
         #region Person
 
-        [ClaimsAuthorizeAttribute("CanViewPerson")]
+        //[ClaimsAuthorizeAttribute("CanViewPerson")]
         public ActionResult Person(long pT)
         {
             ViewData["RoleID"] = pT;
@@ -110,10 +112,16 @@ namespace TMS.Web.Controllers
         }
         //CanViewPersonByOrganization
 
-        [ClaimsAuthorizeAttribute("CanViewPerson")]
+        //[ClaimsAuthorizeAttribute("CanViewPerson")]
         [DontWrapResult]
         public ActionResult Person_Read([DataSourceRequest]DataSourceRequest request, long RoleID)
          {
+            var list = this._ClassBAL.personRoleGroups(CurrentUser.NameIdentifierInt64);
+            long PersonId = 0;
+            if (list.Count == 1 && list[0].PrimaryGroupName == "Trainer")
+            {
+                PersonId = CurrentUser.NameIdentifierInt64;
+            }
             //var startRowIndex = (request.Page - 1) * request.PageSize;
             //int Total = 0;
             //var SearchText = Request.Form["SearchText"];
@@ -149,12 +157,12 @@ namespace TMS.Web.Controllers
                     IList<TMS.Library.TMS.Trainer.Trainer> _person;
                     if (kendoRequest.Filters.Count>0)
                     {
-                         _person = this._TrainerBAL.TrainerOrganization_GetAllBAL(ref Total, CurrentCulture, RoleID, Convert.ToString(CurrentUser.CompanyID), SearchText, GridHelper.GetSortExpression(request, "ID").ToString(), startRowIndex, request.Page, 10000);
+                         _person = this._TrainerBAL.TrainerOrganization_GetAllBAL(ref Total, CurrentCulture, RoleID, Convert.ToString(CurrentUser.CompanyID), SearchText, GridHelper.GetSortExpression(request, "ID").ToString(), startRowIndex, request.Page, 10000, PersonId);
 
                     }
                     else
                     {
-                        _person = this._TrainerBAL.TrainerOrganization_GetAllBAL(ref Total, CurrentCulture, RoleID, Convert.ToString(CurrentUser.CompanyID), SearchText, GridHelper.GetSortExpression(request, "ID").ToString(), startRowIndex, request.Page, request.PageSize);
+                        _person = this._TrainerBAL.TrainerOrganization_GetAllBAL(ref Total, CurrentCulture, RoleID, Convert.ToString(CurrentUser.CompanyID), SearchText, GridHelper.GetSortExpression(request, "ID").ToString(), startRowIndex, request.Page, request.PageSize, PersonId);
 
                     }
                     //var _person = _PersonBAL.PersonOrganization_GetALLBAL(Convert.ToString(CurrentUser.CompanyID));,string SortExpression,int StartRowIndex,int page,int PageSize

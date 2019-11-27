@@ -49,9 +49,9 @@ namespace TMS.Business.TMS
         /// </summary>
         /// <param name="culture">The culture.</param>
         /// <returns>IList&lt;Trainer&gt;.</returns>
-        public IList<Trainer> TrainerOrganization_GetAllBAL(ref int Total, string culture, long RoleID, string ID,  string SearchText, string SortExpression, int StartRowIndex, int page, int PageSize)
+        public IList<Trainer> TrainerOrganization_GetAllBAL(ref int Total, string culture, long RoleID, string ID,  string SearchText, string SortExpression, int StartRowIndex, int page, int PageSize, long personID)
         {
-            return DAL.TrainerOrganization_GetAllDAL(ref Total, culture, RoleID, ID,  SearchText, SortExpression, StartRowIndex,  page,  PageSize);
+            return DAL.TrainerOrganization_GetAllDAL(ref Total, culture, RoleID, ID,  SearchText, SortExpression, StartRowIndex,  page,  PageSize,personID);
         }
        public IList<Trainer> DeletedPerson_GetAllBAL(string culture, long ID, string SearchText)
         {

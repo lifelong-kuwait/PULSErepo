@@ -11,6 +11,7 @@ using TMS.Business.TMS;
 using TMS.Library.Entities.TMS.Program;
 using System.Globalization;
 using TMS.Web.Core;
+using TMS.Business.Interfaces.TMS.Program;
 
 namespace TMS.Web.Controllers
 {
@@ -20,6 +21,11 @@ namespace TMS.Web.Controllers
         DDLBAL ddl = new DDLBAL();
         private Classes CurrentClass;
         PersonBAL _PersonBAL = new PersonBAL();
+        private readonly IClassBAL _ClassBAL;
+        public SPl_Test_ReportsController(IClassBAL IClassBAL)
+        {
+            _ClassBAL = IClassBAL;
+        }
         // GET: SPl_Test_Reports
         [ClaimsAuthorize("CanViewAttendance")]
         [DontWrapResult]
@@ -178,8 +184,14 @@ namespace TMS.Web.Controllers
         [HttpPost]
         public ActionResult ClassTrainer(string ClassID)
         {
+            var list = this._ClassBAL.personRoleGroups(CurrentUser.NameIdentifierInt64);
+            long PersonId = 0;
+            if (list.Count == 1 && list[0].PrimaryGroupName == "Trainer")
+            {
+                PersonId = CurrentUser.NameIdentifierInt64;
+            }
             long ClassId = Convert.ToInt64(ClassID);
-          var result= Json(ddl.Course_ClassDDLBAL(CurrentCulture, CurrentUser.CompanyID, ClassId), JsonRequestBehavior.AllowGet);
+          var result= Json(ddl.Course_ClassDDLBAL(CurrentCulture, CurrentUser.CompanyID, ClassId, PersonId), JsonRequestBehavior.AllowGet);
             return Json(result);
         }
 
@@ -260,7 +272,13 @@ namespace TMS.Web.Controllers
         [HttpPost]
         public JsonResult Course_Class(string course)
         {
-            return Json(ddl.Course_ClassDDLBAL(CurrentCulture, CurrentUser.CompanyID, Convert.ToInt64(course)), JsonRequestBehavior.AllowGet);
+            var list = this._ClassBAL.personRoleGroups(CurrentUser.NameIdentifierInt64);
+            long PersonId = 0;
+            if (list.Count == 1 && list[0].PrimaryGroupName == "Trainer")
+            {
+                PersonId = CurrentUser.NameIdentifierInt64;
+            }
+            return Json(ddl.Course_ClassDDLBAL(CurrentCulture, CurrentUser.CompanyID, Convert.ToInt64(course), PersonId), JsonRequestBehavior.AllowGet);
         }
         // ddl.Course_ClassDDLBAL(CurrentCulture, CompanyID, Convert.ToInt64(DdlCourse.SelectedValue))
     }

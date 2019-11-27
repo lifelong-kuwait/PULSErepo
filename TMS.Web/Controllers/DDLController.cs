@@ -6,6 +6,7 @@ using TMS.Business.Common.DDL;
 using TMS.Business.Interfaces.Common.Configuration;
 using TMS.Business.Interfaces.Common.DDL;
 using TMS.Business.Interfaces.TMS.Organization;
+using TMS.Business.Interfaces.TMS.Program;
 using TMS.Library;
 using TMS.Web.Core;
 using static TMS.UtilityFunctions;
@@ -20,11 +21,13 @@ namespace TMS.Web.Controllers
         public readonly IDDLBAL _objIDDLBAL = null;//For the Resorces Table Interface
         public readonly IConfigurationBAL _objIConfigBAL = null;//For the Resorces Table Interface
         DDLBAL ddl = new DDLBAL();
-        public DDLController(IOrganizationBAL objIOrganizationBAL, IDDLBAL ObjDDLBAL, IConfigurationBAL ObjConfigBAL)
+        private readonly IClassBAL _ClassBAL;
+        public DDLController(IOrganizationBAL objIOrganizationBAL, IClassBAL IClassBAL, IDDLBAL ObjDDLBAL, IConfigurationBAL ObjConfigBAL)
         {
             _objeobjIOrganizationBAL = objIOrganizationBAL;
             _objIDDLBAL = ObjDDLBAL;
             _objIConfigBAL = ObjConfigBAL;
+            _ClassBAL = IClassBAL;
         }
 
         [DontWrapResult]
@@ -312,7 +315,13 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public JsonResult Course()
         {
-            return Json(_objIDDLBAL.Courses_GetAllByCultureBAL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
+            var list = this._ClassBAL.personRoleGroups(CurrentUser.NameIdentifierInt64);
+            long PersonId = 0;
+            if (list.Count == 1 && list[0].PrimaryGroupName == "Trainer")
+            {
+                PersonId = CurrentUser.NameIdentifierInt64;
+            }
+            return Json(_objIDDLBAL.Courses_GetAllByCultureBAL(CurrentCulture, CurrentUser.CompanyID, PersonId), JsonRequestBehavior.AllowGet);
         }
         [DontWrapResult]
         public JsonResult Classes()
