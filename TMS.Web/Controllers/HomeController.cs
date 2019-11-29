@@ -82,8 +82,15 @@ namespace TMS.Web.Controllers
 
                 if (_objUser != null)//check if the email is found
                 {
-                  
-                   
+                    DateTime startTime =Convert.ToDateTime(_objUser.LockedOutDate);
+                    DateTime endTime = DateTime.Now;
+
+                    TimeSpan span = endTime.Subtract(startTime);
+                    if (_objUser.IsLockedOut && span.TotalMinutes<=10)
+                    {
+                        ModelState.AddModelError("", "User Locked Please try after "+Convert.ToInt32( span.TotalMinutes) + " minutes");
+                        return View(infoOfData);
+                    }
                   
                     if (_objUser.IsLockedOut)
                     {

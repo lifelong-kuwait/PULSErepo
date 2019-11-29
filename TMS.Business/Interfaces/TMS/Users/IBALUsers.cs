@@ -63,7 +63,11 @@ namespace TMS.Business.Interfaces.TMS
 
 
         IList<LoginUsers> LoginUsers_GetAllBAL(string culture,string SearchText);
-        IList<LoginUsers> LoginUsersOrganization_GetAllBAL(string culture, string ID, string SearchText);
+        IList<LoginUsers> LoginLockedUsers_GetAllBAL(string culture, string SearchText); 
+         IList<LoginUsers> LoginUsersOrganization_GetAllBAL(string culture, string ID, string SearchText);
+        IList<LoginUsers> LoginLockedUsersOrganization_GetAllBAL(string culture, string ID, string SearchText);
+
+        
         /// <summary>
         /// Logins the users get all bal.
         /// </summary>
@@ -99,6 +103,12 @@ namespace TMS.Business.Interfaces.TMS
         /// <param name="_objUsers">The object users.</param>
         /// <returns>System.Int32.</returns>
         int LoginUsers_DeleteBAL(LoginUsers _objUsers);
+        /// <summary>
+        /// Logins the users delete bal.
+        /// </summary>
+        /// <param name="_objUsers">The object users.</param>
+        /// <returns>System.Int32.</returns>
+        int LoginUsers_UnlockBAL(LoginUsers _objUsers);
         /// <summary>
         /// Logins the users update password bal.
         /// </summary>

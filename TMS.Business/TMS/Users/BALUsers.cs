@@ -114,9 +114,18 @@ namespace TMS.Business.TMS
         {
             return _DAL.LoginUsers_GetAllDAL(culture,SearchText);
         }
+        // With Search
+        public IList<LoginUsers> LoginLockedUsers_GetAllBAL(string culture, string SearchText)
+        {
+            return _DAL.LoginLockedUsers_GetAllDAL(culture, SearchText);
+        }
         public IList<LoginUsers> LoginUsersOrganization_GetAllBAL(string culture, string ID, string SearchText)
         {
             return _DAL.LoginUsersOrganization_GetAllDAL(culture, ID, SearchText);
+        }
+        public IList<LoginUsers> LoginLockedUsersOrganization_GetAllBAL(string culture, string ID, string SearchText)
+        {
+            return _DAL.LoginLockedUsersOrganization_GetAllDAL(culture, ID, SearchText);
         }
         /// <summary>
         /// Logins the users get all bal.
@@ -298,7 +307,15 @@ namespace TMS.Business.TMS
         {
             return _DAL.LoginUsers_DeleteDAL(_objUsers);
         }
-
+        /// <summary>
+        /// Logins the users delete bal.
+        /// </summary>
+        /// <param name="_objUsers">The object users.</param>
+        /// <returns>System.Int32.</returns>
+        public int LoginUsers_UnlockBAL(LoginUsers _objUsers)
+        {
+            return _DAL.LoginUsers_UnlockDAL(_objUsers);
+        }
         /// <summary>
         /// Logins the users update password bal.
         /// </summary>

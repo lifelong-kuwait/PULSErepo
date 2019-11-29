@@ -186,6 +186,55 @@ namespace TMS.Web.Controllers
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        [ClaimsAuthorize("CanViewLockedUser")]
+        public ActionResult UnlockUser()
+        {
+            return View();
+        }
+       [DontWrapResult]
+        [ClaimsAuthorizeAttribute("CanViewLockedUser")]
+        public ActionResult LockedUser_Read([DataSourceRequest] DataSourceRequest request)
+        {
+            var startRowIndex = (request.Page - 1) * request.PageSize;
+            //   int Total = 0;
+            var SearchText = Request.Form["SearchText"];
+            if (request.PageSize == 0)
+            {
+                request.PageSize = 10;
+            }
+
+            if (CurrentUser.CompanyID > 0)
+            {
+                var _userdata = this._UserBAL.LoginLockedUsersOrganization_GetAllBAL(CurrentCulture, Convert.ToString(CurrentUser.NameIdentifierInt64), SearchText);
+                return Json(_userdata.ToDataSourceResult(request, ModelState));
+               
+            }
+            else
+            {
+                var _userdata = this._UserBAL.LoginLockedUsers_GetAllBAL(CurrentCulture, SearchText);
+                return Json(_userdata.ToDataSourceResult(request, ModelState));
+             
+            }
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ActivityAuthorize]
+        [ClaimsAuthorize("CanDeleteUsers")]
+        public ActionResult LoginLockedUser_Unlock([DataSourceRequest] DataSourceRequest request, LoginUsers _objUsers)
+        {
+            if (ModelState.IsValid)
+            {
+                _objUsers.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                _objUsers.UpdatedDate = DateTime.Now;
+                var result = this._UserBAL.LoginUsers_UnlockBAL(_objUsers);
+                if (result == -1)
+                {
+                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                }
+            }
+            var resultData = new[] { _objUsers };
+            return Json(resultData.AsQueryable().ToDataSourceResult(request, ModelState));
+        }
         [ClaimsAuthorize("CanViewUsers")]
         public ActionResult Index()
         {

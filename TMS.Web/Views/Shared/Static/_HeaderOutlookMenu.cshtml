@@ -448,42 +448,56 @@
                         @if (User.IsInRole("CanViewSaleAdminstration"))
                         {
 
-                                    <div class="o365cs-nav-appItem">
-                                        <div>
-                                            <a autoid = "_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="@Url.Content("~/Config/AuditLog")"
-                                               aria-disabled="false" id="O365_AppTile_ShellTasks" aria-label="Tasks" title="">
-                                                <div class="o365cs-nav-appTileBackground ms-bgc-tp" style="">
-                                                    <span class="o365cs-nav-appTileIcon owaimg ms-Icon--tasks ms-icon-font-size-55 ms-fcl-w fa fa-history "> </span>
-                                                    <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>Audit Log</span> </span>
-                                                </div>
-                                            </a>
+                            <div class="o365cs-nav-appItem">
+                                <div>
+                                    <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="@Url.Content("~/Config/AuditLog")"
+                                       aria-disabled="false" id="O365_AppTile_ShellTasks" aria-label="Tasks" title="">
+                                        <div class="o365cs-nav-appTileBackground ms-bgc-tp" style="">
+                                            <span class="o365cs-nav-appTileIcon owaimg ms-Icon--tasks ms-icon-font-size-55 ms-fcl-w fa fa-history "> </span>
+                                            <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>Audit Log</span> </span>
                                         </div>
-                                    </div>
+                                    </a>
+                                </div>
+                            </div>
 
                         }
-                    @*@if (User.IsInRole("CanViewProspects"))
-    {
-        <div class="o365cs-nav-appItem">
-            <div>
-                <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="@Url.Content("~/Task/OrphanProspect")"
-                   aria-disabled="false" id="O365_AppTile_ShellTasks" aria-label="Tasks" title="">
-                    <div class="o365cs-nav-appTileBackground ms-bgc-tp" style="">
-                        <span class="o365cs-nav-appTileIcon owaimg ms-Icon--tasks ms-icon-font-size-55 ms-fcl-w fa fa-user-plus "> </span>
-                        <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>Prospects</span> </span>
-                    </div>
-                </a>
+                        @if (User.IsInRole("CanViewLockedUser"))
+                        { 
+                        <div class="o365cs-nav-appItem">
+                            <div>
+                                <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="@Url.Content("~/User/UnlockUser")"
+                                   aria-disabled="false" id="O365_AppTile_ShellTasks" aria-label="Tasks" title="">
+                                    <div class="o365cs-nav-appTileBackground ms-bgc-tp" style="">
+                                        <span class="o365cs-nav-appTileIcon owaimg ms-Icon--tasks ms-icon-font-size-55 ms-fcl-w fa fa-lock "> </span>
+                                        <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>User Log</span> </span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        }
+                        @*@if (User.IsInRole("CanViewProspects"))
+        {
+            <div class="o365cs-nav-appItem">
+                <div>
+                    <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="@Url.Content("~/Task/OrphanProspect")"
+                       aria-disabled="false" id="O365_AppTile_ShellTasks" aria-label="Tasks" title="">
+                        <div class="o365cs-nav-appTileBackground ms-bgc-tp" style="">
+                            <span class="o365cs-nav-appTileIcon owaimg ms-Icon--tasks ms-icon-font-size-55 ms-fcl-w fa fa-user-plus "> </span>
+                            <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>Prospects</span> </span>
+                        </div>
+                    </a>
+                </div>
             </div>
+        }*@
+
+
+
+                        @*<div>
+            <div></div>
         </div>
-    }*@
-
-
-
-                    @*<div>
-        <div></div>
-    </div>
-    <div class="o365cs-nav-navMenuMyApps" style="display: none;"></div>
-    <div class="ms-fcl-tp ms-fcl-ts-h o365cs-nav-navMenuError o365cs-clear" style="display: none;"></div>*@
-                                        </div>
+        <div class="o365cs-nav-navMenuMyApps" style="display: none;"></div>
+        <div class="ms-fcl-tp ms-fcl-ts-h o365cs-nav-navMenuError o365cs-clear" style="display: none;"></div>*@
+                    </div>
                         
 
                     @*<div style="display: none;"></div>

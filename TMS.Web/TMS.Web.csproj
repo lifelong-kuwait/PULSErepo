@@ -4825,6 +4825,7 @@
     <Content Include="Views\Task\ManageCourseCRM.cshtml" />
     <Content Include="Views\Config\_CategoriesCRM.cshtml" />
     <Content Include="Views\People\_PersonRolesCRM.cshtml" />
+    <Content Include="Views\User\UnlockUser.cshtml" />
     <None Include="WeeklyAttendanceReportData.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>

@@ -60,7 +60,9 @@ namespace TMS.DataObjects.Interfaces
 
         // With Search
         IList<LoginUsers> LoginUsers_GetAllDAL(string culture,string SearchText);
-        IList<LoginUsers> LoginUsersOrganization_GetAllDAL(string culture, string ID, string SearchText);
+        IList<LoginUsers> LoginLockedUsers_GetAllDAL(string culture, string SearchText); 
+         IList<LoginUsers> LoginUsersOrganization_GetAllDAL(string culture, string ID, string SearchText); 
+       IList<LoginUsers> LoginLockedUsersOrganization_GetAllDAL(string culture, string ID, string SearchText);
         /// <summary>
         /// Logins the users get all dal.
         /// </summary>
@@ -96,7 +98,12 @@ namespace TMS.DataObjects.Interfaces
         /// <param name="_objUsers">The object users.</param>
         /// <returns>System.Int32.</returns>
         int LoginUsers_DeleteDAL(LoginUsers _objUsers);
-
+        /// <summary>
+        /// Logins the users delete dal.
+        /// </summary>
+        /// <param name="_objUsers">The object users.</param>
+        /// <returns>System.Int32.</returns>
+        int LoginUsers_UnlockDAL(LoginUsers _objUsers);
         /// <summary>
         /// Logins the users update password dal.
         /// </summary>

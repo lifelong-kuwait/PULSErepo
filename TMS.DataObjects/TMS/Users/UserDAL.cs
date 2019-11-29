@@ -62,7 +62,7 @@ namespace TMS.DataObjects
                 ParamBuilder.Par("Email", Email),
                 ParamBuilder.Par("LockedOutAttempt", LockedOutAttempt),
                 ParamBuilder.Par("IsLockedOut", IsLockedOut),
-                ParamBuilder.Par("LockedOutDate", System.DateTime.UtcNow)
+                ParamBuilder.Par("LockedOutDate", System.DateTime.Now)
                 );
         }
 
@@ -254,6 +254,40 @@ namespace TMS.DataObjects
             // ExecuteListSp<LoginUsers>("TMS_Users_GetAll");
 
         }
+        public IList<LoginUsers> LoginLockedUsers_GetAllDAL(string Culture, string SearchText)
+        {
+            List<LoginUsers> LoginUserList = new List<LoginUsers>();
+            var conString = DBHelper.ConnectionString;
+            using (var conn = new SqlConnection(conString))
+            {
+                conn.Open();
+                string qry = @"TMS_Users_GetAllLocked_WithGroups";
+                DynamicParameters param = new DynamicParameters();
+                param.Add("@Culture", Culture);
+                param.Add("@SearchText", SearchText);
+                var LoginUsersDictionary = new Dictionary<long, LoginUsers>();
+                LoginUserList = conn.Query<LoginUsers, LoginUserGroups, LoginUsers>(
+                       qry, (loginUsers, Groups) =>
+                       {
+                           LoginUsers loginUsersEntry;
+                           if (!LoginUsersDictionary.TryGetValue(loginUsers.UserID, out loginUsersEntry))
+                           {
+                               loginUsersEntry = loginUsers;
+                               loginUsersEntry.UserGroups = new List<LoginUserGroups>();
+                               LoginUsersDictionary.Add(loginUsersEntry.UserID, loginUsersEntry);
+                           }
+                           if (Groups != null)
+                               loginUsersEntry.UserGroups.Add(Groups);
+                           return loginUsersEntry;
+                       }, param, commandType: System.Data.CommandType.StoredProcedure,
+                       splitOn: "GroupId")
+                   .Distinct()
+                   .ToList();
+                conn.Close();
+            }
+            return LoginUserList;
+
+        }
         public IList<LoginUsers> LoginUsersOrganization_GetAllDAL(string Culture, string ID,string SearchText)
         {
             List<LoginUsers> LoginUserList = new List<LoginUsers>();
@@ -289,7 +323,41 @@ namespace TMS.DataObjects
             return LoginUserList;
             // ExecuteListSp<LoginUsers>("TMS_Users_GetAll");
         }
-
+        public IList<LoginUsers> LoginLockedUsersOrganization_GetAllDAL(string Culture, string ID, string SearchText)
+        {
+            List<LoginUsers> LoginUserList = new List<LoginUsers>();
+            var conString = DBHelper.ConnectionString;
+            using (var conn = new SqlConnection(conString))
+            {
+                conn.Open();
+                string qry = @"TMS_UsersLockedUserByOrganization_GetAll_WithGroups";
+                DynamicParameters param = new DynamicParameters();
+                param.Add("@Culture", Culture);
+                param.Add("@ID", ID);
+                param.Add("@SearchText", SearchText);
+                var LoginUsersDictionary = new Dictionary<long, LoginUsers>();
+                LoginUserList = conn.Query<LoginUsers, LoginUserGroups, LoginUsers>(
+                       qry, (loginUsers, Groups) =>
+                       {
+                           LoginUsers loginUsersEntry;
+                           if (!LoginUsersDictionary.TryGetValue(loginUsers.UserID, out loginUsersEntry))
+                           {
+                               loginUsersEntry = loginUsers;
+                               loginUsersEntry.UserGroups = new List<LoginUserGroups>();
+                               LoginUsersDictionary.Add(loginUsersEntry.UserID, loginUsersEntry);
+                           }
+                           if (Groups != null)
+                               loginUsersEntry.UserGroups.Add(Groups);
+                           return loginUsersEntry;
+                       }, param, commandType: System.Data.CommandType.StoredProcedure,
+                       splitOn: "GroupId")
+                   .Distinct()
+                   .ToList();
+                conn.Close();
+            }
+            return LoginUserList;
+            // ExecuteListSp<LoginUsers>("TMS_Users_GetAll");
+        }
         /// <summary>
         /// Logins the users get all dal.
         /// </summary>
@@ -580,7 +648,18 @@ namespace TMS.DataObjects
                        ParamBuilder.Par("UpdatedBy", _objUsers.UpdatedBy),
                        ParamBuilder.Par("UpdatedDate", _objUsers.UpdatedDate));
         }
-
+        /// <summary>
+        /// Logins the users delete dal.
+        /// </summary>
+        /// <param name="_objUsers">The object users.</param>
+        /// <returns>System.Int32.</returns>
+        public int LoginUsers_UnlockDAL(LoginUsers _objUsers)
+        {
+            return ExecuteScalarInt32Sp("TMS_Users_Unlock",
+                ParamBuilder.Par("UserID", _objUsers.UserID),
+                       ParamBuilder.Par("UpdatedBy", _objUsers.UpdatedBy),
+                       ParamBuilder.Par("UpdatedDate", _objUsers.UpdatedDate));
+        }
         /// <summary>
         /// Logins the users duplication check dal.
         /// </summary>

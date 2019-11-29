@@ -75,7 +75,7 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorize("CanViewCourse")]
         [DontWrapResult]
         public ActionResult Course_Read([DataSourceRequest] DataSourceRequest request)
-        {
+         {
             var list = this._ClassBAL.personRoleGroups(CurrentUser.NameIdentifierInt64);
             long PersonID = 0;
             if (list.Count == 1 && list[0].PrimaryGroupName == "Trainer")

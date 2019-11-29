@@ -65,9 +65,9 @@ namespace TMS.Web.Core
 
             List<WeekRange> ranges = new List<WeekRange>();
 
-            if (weekRange.Start.Month != weekRange.End.Month)
+            if (weekRange.Start.Month > weekRange.End.Month)
             {
-                DateTime lastDayOfMonth = new DateTime(weekRange.Start.Year, weekRange.Start.Month, 1).AddMonths(1).AddDays(-1);
+                DateTime lastDayOfMonth = new DateTime(weekRange.Start.Year, weekRange.Start.Month, 1).AddMonths(0).AddDays(-1);
                 ranges.Add(new WeekRange(weekRange.Start, lastDayOfMonth, weekRange.Start.Month, weekRange.WeekNo));
                 ranges.Add(new WeekRange(lastDayOfMonth.AddDays(1), weekRange.End, weekRange.End.Month, weekRange.WeekNo + 1));
 
@@ -76,9 +76,10 @@ namespace TMS.Web.Core
             {
                 ranges.Add(weekRange);
             }
+           
 
-            return ranges;
-
+                return ranges;
+            
         }
 
     }

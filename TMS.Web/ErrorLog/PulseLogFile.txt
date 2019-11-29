@@ -157,3 +157,16 @@ The statement has been terminated.
 ERROR 2019-11-26 11:45:16,480 6069039ms ExceptionContext       OnException        - The given key was not present in the dictionary.
 ERROR 2019-11-26 16:02:50,138 10028766ms ExceptionContext       OnException        - Procedure or function 'TMS_Sessions_GetALLSessionsByCultureandOrganization' expects parameter '@PersonId', which was not supplied.
 ERROR 2019-11-27 12:33:33,909 1136622ms ExceptionContext       OnException        - Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.
+ERROR 2019-11-28 13:26:30,631 11446139ms ExceptionContext       OnException        - Object reference not set to an instance of an object.
+ERROR 2019-11-28 13:27:13,924 11489432ms ExceptionContext       OnException        - Object reference not set to an instance of an object.
+ERROR 2019-11-28 13:32:01,211 11776719ms ExceptionContext       OnException        - Object reference not set to an instance of an object.
+ERROR 2019-11-28 15:00:08,697 17064204ms ExceptionContext       OnException        - The given key was not present in the dictionary.
+ERROR 2019-11-28 15:36:22,313 19237821ms ExceptionContext       OnException        - The given key was not present in the dictionary.
+ERROR 2019-11-28 15:39:52,751 19448259ms ExceptionContext       OnException        - The given key was not present in the dictionary.
+ERROR 2019-11-28 15:40:06,467 19461975ms ExceptionContext       OnException        - The given key was not present in the dictionary.
+ERROR 2019-11-28 15:40:25,565 19481073ms ExceptionContext       OnException        - The given key was not present in the dictionary.
+ERROR 2019-11-29 10:49:13,582 168633ms ExceptionContext       OnException        - The explicit expression block is missing a closing ")" character.  Make sure you have a matching ")" character for all the "(" characters within this block, and that none of the ")" characters are being interpreted as markup.
+
+ERROR 2019-11-29 10:49:53,226 208277ms ExceptionContext       OnException        - The explicit expression block is missing a closing ")" character.  Make sure you have a matching ")" character for all the "(" characters within this block, and that none of the ")" characters are being interpreted as markup.
+
+ERROR 2019-11-29 11:38:49,819 868869ms ExceptionContext       OnException        - Name cannot contain spaces.
