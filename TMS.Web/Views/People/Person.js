@@ -1,6 +1,6 @@
 ﻿function PersonGrid_onEdit(e) {
     //if current model is not new then remove the Name editor
-
+   
     var title = jQuery(e.container).parent().find(".k-window-title");
     var update = jQuery(e.container).parent().find(".k-grid-update");
     var cancel = jQuery(e.container).parent().find(".k-grid-cancel");
@@ -8,13 +8,22 @@
     jQuery(cancel).html('<span class="k-icon k-i-cancel"></span>' + lr.CencelRecordGeneralButton);
     if (e.model.isNew()) {
         // add
+        jQuery(".islogin").hide();
         jQuery("#personeditdiv").hide();
+        if (e.model.RoleName='Trainer') {
+            jQuery(".islogin").show();
+        }
+
         //jQuery("#country_Code").hide();
         jQuery(title).text(lr.AddRecordGeneralTitle);
         jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.SaveRecordGeneralButton);
 
     } else {
         // edit
+        if (e.model.RoleName = 'Trainer') {
+            jQuery(".islogin").hide();
+        }
+        jQuery(".islogin").hide();
         jQuery("#personeditdiv").show();
         jQuery(title).text(lr.EditRecordGeneralTitle);
         jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.UpdateRecordGeneralButton);

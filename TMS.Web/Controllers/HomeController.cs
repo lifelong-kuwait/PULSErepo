@@ -11,18 +11,24 @@ using System.Web.Mvc;
 using TMS.Business.Interfaces.TMS;
 using TMS.Library.Users;
 using TMS.Web.Core;
+using log4net;
 using lr = Resources.Resources;
+using System.Configuration;
+using System.Web.Script.Serialization;
 
 namespace TMS.Web.Controllers
 {
     
     public class HomeController : TMSControllerBase
     {
+       
         private readonly IBALUsers BALUsers;
         private  ICurrentUserClaims Claims { get; set; }
         private IOffice365UsersBAL _Office365UsersBAL { get; set; }
+        private new static readonly ILog Logger = LogManager.GetLogger(System.Environment.MachineName);
         public HomeController(IBALUsers _BALUsers, ICurrentUserClaims CurrentUserClaims, IOffice365UsersBAL __Office365UsersBAL)
         {
+            
             this.BALUsers = _BALUsers; this.Claims = CurrentUserClaims; this._Office365UsersBAL = __Office365UsersBAL;
         }
         UserHistory userlogin = new UserHistory();
@@ -84,17 +90,19 @@ namespace TMS.Web.Controllers
                 {
                     DateTime startTime =Convert.ToDateTime(_objUser.LockedOutDate);
                     DateTime endTime = DateTime.Now;
-
+                    Logger.Info("User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow);
                     TimeSpan span = endTime.Subtract(startTime);
+                    var json = new JavaScriptSerializer().Serialize(infoOfData);
                     if (_objUser.IsLockedOut && span.TotalMinutes<=10)
                     {
-                        ModelState.AddModelError("", "User Locked Please try after "+Convert.ToInt32( span.TotalMinutes) + " minutes");
+                        BALUsers.LogInsert(DateTime.Now.ToString(), "10","Login", System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(),CurrentUser.CompanyID);
+                        ModelState.AddModelError("", "User Locked Please try after " + ConfigurationManager.AppSettings["LockedTime"].ToString() + " minutes");
                         return View(infoOfData);
                     }
-                  
                     if (_objUser.IsLockedOut)
                     {
-                        ModelState.AddModelError("", lr.UserLockedOutMessage);
+                        BALUsers.LogInsert(DateTime.Now.ToString(), "10", "Login", System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(), CurrentUser.CompanyID);
+                        ModelState.AddModelError("", "User Locked Please try after "+ ConfigurationManager.AppSettings["LockedTime"].ToString()+" minutes");
                         return View(infoOfData);
                     }
                     //then verify the password
@@ -115,6 +123,7 @@ namespace TMS.Web.Controllers
                         //}
                         if (Crypto.VerifyPassword(infoOfData.Password, _objUser.Password))
                         {
+                            Logger.Info("User login with email " + infoOfData.Email + " at " + DateTime.UtcNow);
                             Session["CompanyID"] = _objUser.CompanyID;
                             Session["UserID"] = _objUser.UserID;
                             userlogin.UserID = _objUser.UserID;

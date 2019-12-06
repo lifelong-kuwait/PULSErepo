@@ -306,7 +306,7 @@ namespace TMS.Web.Controllers
                 }
                 else
                 {
-                    var PermissionData = this._Groups.SecurityGroupsPermissions_GetAllByGroupIdBAL(CurrentCulture, GroupId);
+                    var PermissionData = this._Groups.SecurityGroupsPermissions_GetAllByGroupIdBAL(CurrentCulture, GroupId,CurrentUser.NameIdentifierInt64,CurrentUser.CompanyID.ToString());
                     //if (CurrentUser.CompanyID > 0)
                     //{
                     //    PermissionData = this._Groups.SecurityGroupsPermission_GetAllByGroupIdBALbyOrg(CurrentCulture, GroupId, Convert.ToString(CurrentUser.CompanyID));
@@ -328,6 +328,7 @@ namespace TMS.Web.Controllers
         [HttpGet]
         [ClaimsAuthorize("CanViewGroupsDetail")]
         public ActionResult TMSGroupDetail()
+
         {
             long GroupId = Convert.ToInt64(Session["GroupId"]);
             if (string.IsNullOrEmpty(GroupId.ToString()))

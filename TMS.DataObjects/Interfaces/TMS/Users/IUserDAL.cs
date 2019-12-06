@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 using System.Collections.Generic;
+using TMS.Library.Entities.CRM;
 using TMS.Library.Entities.TMS.Program;
 using TMS.Library.Users;
 
@@ -48,6 +49,15 @@ namespace TMS.DataObjects.Interfaces
         /// <returns>System.Int32.</returns>
         int UpdateUserLockedOut(string Email, long UserID, int LockedOutAttempt, bool IsLockedOut);
         /// <summary>
+        /// Updates the user locked out.
+        /// </summary>
+        /// <param name="Email">The email.</param>
+        /// <param name="UserID">The user identifier.</param>
+        /// <param name="LockedOutAttempt">The locked out attempt.</param>
+        /// <param name="IsLockedOut">if set to <c>true</c> [is locked out].</param>
+        /// <returns>System.Int32.</returns>
+        int LogInsert(string Dates, string Threads, string Levels, string Loggers, string Messages, string Exceptions, long UserID, string Controllers, string Action, string Prarams, long companyID);
+        /// <summary>
         /// TMSs the users get all assigned security groups dal.
         /// </summary>
         /// <param name="UserID">The user identifier.</param>
@@ -63,6 +73,9 @@ namespace TMS.DataObjects.Interfaces
         IList<LoginUsers> LoginLockedUsers_GetAllDAL(string culture, string SearchText); 
          IList<LoginUsers> LoginUsersOrganization_GetAllDAL(string culture, string ID, string SearchText); 
        IList<LoginUsers> LoginLockedUsersOrganization_GetAllDAL(string culture, string ID, string SearchText);
+        IList<CRM_UserLog> LogOrganization_GetAllDAL(ref int Total, string OrgID, string SearchText, string SortExpression, int StartRowIndex, int page, int PageSize);
+        IList<CRM_UserLog> ErrorLogOrganization_GetAllDAL(ref int Total, string OrgID, string SearchText, string SortExpression, int StartRowIndex, int page, int PageSize);
+        int ErrorLogOrganization_GetAllBAL(CRM_UserLog objLog, long companyID, long ID);
         /// <summary>
         /// Logins the users get all dal.
         /// </summary>

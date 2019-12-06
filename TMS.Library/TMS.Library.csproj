@@ -86,6 +86,7 @@
     <Compile Include="Entities\CRM\CRM_Request Enrolment.cs" />
     <Compile Include="Entities\CRM\CRM_TaskHistory.cs" />
     <Compile Include="Entities\CRM\CRM_UserEnrolment.cs" />
+    <Compile Include="Entities\CRM\CRM_UserLog.cs" />
     <Compile Include="Entities\CRM\CRM_UserMapping.cs" />
     <Compile Include="Entities\CRM\CRM_VisitHistory.cs" />
     <Compile Include="Entities\TMS\Course\CourseDataBar.cs" />

@@ -1,0 +1,80 @@
+﻿@model TMS.Library.Entities.CRM.CRM_UserLog
+
+    @using lr = Resources.Resources
+    @{
+
+        var PrimaryLanguageName = TMS.TMSHelper.PrimaryLangName();
+        var PrimaryLanguageFlag = TMS.TMSHelper.PrimaryLangFlag();
+        var SecondaryLanguageName = TMS.TMSHelper.SecondaryLangName();
+        var SecondaryLanguageFlag = TMS.TMSHelper.SecondaryLangFlag();
+    }
+
+  
+   
+    <div class="Alertbox alert alert-danger" style="display:none">
+        <ul class="errors"></ul>
+    </div>
+    <div class="form-horizontal form-person-popup">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Levels, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11 mymail">
+                @Html.Kendo().TextBoxFor(model => model.Levels).HtmlAttributes(new { @class = "form-control txtrequired", @placeholder = lr.PersonContactEmail, @style = " width: 100%;", @disbled = "true" })
+                @Html.ValidationMessageFor(model => model.Levels)
+               
+            </div>
+
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Message, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11 mymail">
+                @Html.Kendo().EditorFor(model => model.Message).HtmlAttributes(new { @class = "form-control txtrequired", @placeholder = lr.PersonContactEmail, @style = " width: 100%;", @disbled = "true" })
+                @Html.ValidationMessageFor(model => model.Message)
+              
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Parameter, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.Kendo().EditorFor(model => model.Parameter).HtmlAttributes(new { @class = "form-control txtrequired", @placeholder = lr.PersonContactEmail, @style = " width: 100%;", @disabled = "true" }))
+                @Html.ValidationMessageFor(model => model.Parameter)
+            </div>
+        </div>
+    </div>
+
+       
+
+
+
+ 
+
+  
+
+    <style>
+        .item-value {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 5px;
+            border-radius: 50%;
+            font-size: 17px;
+        }
+
+        .textspan {
+            vertical-align: middle;
+            font-size: 16px;
+        }
+    </style>
+    <script type="text/javascript">
+        jQuery(function () {
+            jQuery(jQuery('#Message').data().kendoEditor.body).attr('contenteditable', false)
+        })
+    </script>
+    <script>
+
+        jQuery(document).ready(function (e) {
+            jQuery(".k-grid-update").hide();
+            jQuery(".k-editor-toolbar-wrap").hide();
+
+        }) 
+      </script>

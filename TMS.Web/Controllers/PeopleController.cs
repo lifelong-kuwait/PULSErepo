@@ -265,7 +265,14 @@ namespace TMS.Web.Controllers
                         ModelState.AddModelError(lr.PersonContactEmail, lr.PersonEmailorPhoneRequired);
                     }
 
-
+                    if (_person.IsLogin == true && _person.Password != null)
+                    {
+                        if (_UserBAL.LoginUsers_DuplicationCheckBAL(new LoginUsers { Email = _person.Email }) > 0)
+                        {
+                            ModelState.AddModelError(lr.UsersTitle, lr.UserEmailAlreadyExist);
+                            _valid = false;
+                        }
+                    }
 
                     if (_valid)
                     {
@@ -285,14 +292,12 @@ namespace TMS.Web.Controllers
                         if (string.IsNullOrEmpty(ip))
                             ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
                         _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
-
                         _person.AddedByAlias = CurrentUser.Name;
                         _person.ID = Resp.ID;
                         _person.PersonRegCode = Resp.PersonRegCode;
                         _person.ProfilePicture = _profilePict;
                         if (_person.ID != long.MinValue)
                         {
-                            //   _PersonBAL.ManageAssigned_CreateBAL(_person);
                             if (_person.ContactNumber != null)//when ContactNumber is Provided
                             {
                                 PhoneNumbers _objPhoneNumbers = new PhoneNumbers
@@ -321,6 +326,31 @@ namespace TMS.Web.Controllers
                                     OrganizationID = _person.OrganizationID
                                 };
                                 _person.EmailID = _objPersonContactBAL.PersonEmailAddress_CreateBAL(_objEmailAddresses, _person.ID);
+                            }
+                            if (_person.IsLogin == true && _person.Password != null)
+                            {
+
+                                var person = _PersonBAL.Person_GetAllByIdBAL(Convert.ToString(Resp.ID));
+
+                                if (_UserBAL.LoginUsers_DuplicationCheckBAL(new LoginUsers { Email = person.Email }) > 0)
+                                {
+                                    ModelState.AddModelError(lr.UsersTitle, lr.UserEmailAlreadyExist);
+
+                                }
+                                else
+                                {
+                                    _person.Password = Crypto.CreatePasswordHash(_person.Password);
+                                    _person.IsActive = true;
+                                    PersonRolesMapping obj = new PersonRolesMapping();
+                                    obj.PersonID = Convert.ToInt64(Resp.ID);
+                                    obj.Password = _person.Password;
+                                    obj.RoleID = 2;
+                                    obj.CreatedBy = CurrentUser.NameIdentifierInt64;
+                                    obj.CreatedDate = DateTime.Now;
+                                    _PersonBAL.TMS_PersonintoUser_CreateBAL(obj);
+
+                                }
+
                             }
                         }
                     }

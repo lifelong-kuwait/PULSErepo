@@ -112,7 +112,7 @@ namespace TMS.DataObjects.Interfaces.Common.Groups
         /// <param name="Culture">The culture.</param>
         /// <param name="GroupId">The group identifier.</param>
         /// <returns>IList&lt;SecurityGroupsPermission&gt;.</returns>
-        IList<SecurityGroupsPermission> SecurityGroupsPermissions_GetAllByGroupId(string Culture, long GroupId);
+        IList<SecurityGroupsPermission> SecurityGroupsPermissions_GetAllByGroupId(string Culture, long GroupId, long userid, string companyID);
         IList<LoginUserAddGroups> TMS_Groups_GetAllByOrganizationCultureDAL(string culture, long CompnayID);
 
         /// <summary>

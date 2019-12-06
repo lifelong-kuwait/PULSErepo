@@ -1,172 +1,82 @@
-ERROR 2019-10-26 13:06:51,908 75958ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter 'pT' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult Person(Int64)' in 'TMS.Web.Controllers.PeopleController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
-Parameter name: parameters
-ERROR 2019-10-26 13:18:43,944 787994ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter 'pT' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult Person(Int64)' in 'TMS.Web.Controllers.PeopleController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
-Parameter name: parameters
-ERROR 2019-10-26 13:49:01,195  7543ms ExceptionContext       OnException        - Login failed for user 'localuser'.
-ERROR 2019-10-26 13:55:00,866 293327ms ExceptionContext       OnException        - Method arguments are not valid! See ValidationErrors for details.
-ERROR 2019-10-26 13:55:36,653 329114ms ExceptionContext       OnException        - Method arguments are not valid! See ValidationErrors for details.
-ERROR 2019-10-26 13:55:39,949 332410ms ExceptionContext       OnException        - Method arguments are not valid! See ValidationErrors for details.
-ERROR 2019-10-26 14:16:56,244 1608706ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter 'pT' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult Person(Int64)' in 'TMS.Web.Controllers.PeopleController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
-Parameter name: parameters
-ERROR 2019-10-26 15:58:23,445 124340ms ExceptionContext       OnException        - Procedure or function 'TMS_Trainer_Create' expects parameter '@ClientType', which was not supplied.
-ERROR 2019-10-26 16:30:59,924 468749ms ExceptionContext       OnException        - Procedure or function TMS_TrainerOrganization_GetByCulture has too many arguments specified.
-ERROR 2019-10-29 12:14:25,401 3331230ms ExceptionContext       OnException        - Error converting data type nvarchar to datetime.
-ERROR 2019-10-29 17:46:41,500 136549ms ExceptionContext       OnException        - Procedure or function 'Venues_Create' expects parameter '@SecondaryName', which was not supplied.
-ERROR 2019-10-29 17:52:04,670 459719ms ExceptionContext       OnException        - Procedure or function 'Venues_Create' expects parameter '@VenueStatusID', which was not supplied.
-ERROR 2019-10-29 17:52:45,332 500381ms ExceptionContext       OnException        - Procedure or function 'Venues_Create' expects parameter '@VenueCodeID', which was not supplied.
-ERROR 2019-10-29 17:53:37,670 552719ms ExceptionContext       OnException        - Procedure or function 'Venues_Create' expects parameter '@RateType', which was not supplied.
-ERROR 2019-10-29 17:54:18,328 593377ms ExceptionContext       OnException        - Procedure or function 'Venues_Create' expects parameter '@RateType', which was not supplied.
-ERROR 2019-10-29 17:54:50,736 625785ms ExceptionContext       OnException        - Procedure or function 'Venues_Create' expects parameter '@Cost', which was not supplied.
-ERROR 2019-10-29 17:55:25,057 660106ms ExceptionContext       OnException        - Procedure or function 'Venues_Create' expects parameter '@Currency', which was not supplied.
-ERROR 2019-10-29 17:56:12,277 707326ms ExceptionContext       OnException        - Procedure or function 'Venues_Create' expects parameter '@Capacity', which was not supplied.
-ERROR 2019-10-29 17:56:54,438 749487ms ExceptionContext       OnException        - Procedure or function 'Venues_Create' expects parameter '@IsCommon', which was not supplied.
-ERROR 2019-10-29 17:57:50,548 805597ms ExceptionContext       OnException        - Procedure or function 'Venues_Create' expects parameter '@CountryID', which was not supplied.
-ERROR 2019-10-29 17:59:33,672 908721ms ExceptionContext       OnException        - Procedure or function 'Venues_Create' expects parameter '@StateID', which was not supplied.
-ERROR 2019-10-29 18:00:20,581 955630ms ExceptionContext       OnException        - Procedure or function 'Venues_Create' expects parameter '@StateID', which was not supplied.
-ERROR 2019-10-30 12:22:45,905 728191ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter 'RoleID' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult Person_Read(Kendo.Mvc.UI.DataSourceRequest, Int64)' in 'TMS.Web.Controllers.PeopleController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
-Parameter name: parameters
-ERROR 2019-10-30 12:52:19,680 672191ms ExceptionContext       OnException        - Login failed for user 'localuser'.  Reason: The password of the account has expired.
-ERROR 2019-10-30 12:53:05,649 718161ms ExceptionContext       OnException        - Login failed for user 'localuser'.
-ERROR 2019-10-30 13:14:33,131 2005642ms ExceptionContext       OnException        - The partial view 'ManageTrainee' was not found or no view engine supports the searched locations. The following locations were searched:
-~/Views/Certificate/ManageTrainee.aspx
-~/Views/Certificate/ManageTrainee.ascx
-~/Views/Shared/ManageTrainee.aspx
-~/Views/Shared/ManageTrainee.ascx
-~/Views/Certificate/ManageTrainee.cshtml
-~/Views/Certificate/ManageTrainee.vbhtml
-~/Views/Shared/ManageTrainee.cshtml
-~/Views/Shared/ManageTrainee.vbhtml
-~/__MVCSITEMAPPROVIDER/ManageTrainee.ascx
-ERROR 2019-10-30 14:53:01,017 1777144ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter 'ClassID' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult ManageTrainee_Read(Kendo.Mvc.UI.DataSourceRequest, Int64)' in 'TMS.Web.Controllers.CertificateController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
-Parameter name: parameters
-ERROR 2019-10-30 14:53:25,404 1801531ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter 'ClassID' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult ManageTrainee_Read(Kendo.Mvc.UI.DataSourceRequest, Int64)' in 'TMS.Web.Controllers.CertificateController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
-Parameter name: parameters
-ERROR 2019-10-30 14:54:34,801 1870928ms ExceptionContext       OnException        - The model item passed into the dictionary is null, but this dictionary requires a non-null model item of type 'System.Int64'.
-ERROR 2019-10-30 14:54:42,865 1878992ms ExceptionContext       OnException        - The model item passed into the dictionary is null, but this dictionary requires a non-null model item of type 'System.Int64'.
-ERROR 2019-10-30 14:55:24,371 1920498ms ExceptionContext       OnException        - The model item passed into the dictionary is null, but this dictionary requires a non-null model item of type 'System.Int64'.
-ERROR 2019-10-30 14:56:09,226 1965354ms ExceptionContext       OnException        - The model item passed into the dictionary is null, but this dictionary requires a non-null model item of type 'System.Int64'.
-ERROR 2019-10-30 14:58:51,476 66260ms ExceptionContext       OnException        - The model item passed into the dictionary is null, but this dictionary requires a non-null model item of type 'System.Int64'.
-ERROR 2019-10-30 14:59:54,755 129539ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter 'ClassID' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult ManageTrainee_Read(Kendo.Mvc.UI.DataSourceRequest, Int64)' in 'TMS.Web.Controllers.CertificateController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
-Parameter name: parameters
-ERROR 2019-10-30 15:03:43,683 358467ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter 'ClassID' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult ManageTrainee_Read(Kendo.Mvc.UI.DataSourceRequest, Int64)' in 'TMS.Web.Controllers.CertificateController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
-Parameter name: parameters
-ERROR 2019-10-30 16:12:12,134 292210ms ExceptionContext       OnException        - Selected
-ERROR 2019-10-31 17:07:51,171 162159ms ExceptionContext       OnException        - An error occurred during local report processing.
-ERROR 2019-10-31 17:09:29,304 260292ms ExceptionContext       OnException        - An error occurred during local report processing.
-ERROR 2019-11-01 12:51:03,987 128740ms ExceptionContext       OnException        - Could not find a part of the path 'C:\Program Files (x86)\IIS Express\~\ErrorLog'.
-ERROR 2019-11-01 15:53:18,121 377297ms ExceptionContext       OnException        - 'C:/Users/SynergicProfessional/Source/Repos/lifelong-kuwait/PULSErepo/TMS.Web/Attachment/Certificate.pdf' is a physical path, but a virtual path was expected.
-ERROR 2019-11-01 15:57:01,246 60870ms ExceptionContext       OnException        - This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.
-ERROR 2019-11-01 15:58:54,562 174186ms ExceptionContext       OnException        - This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.
-ERROR 2019-11-01 16:39:32,225 137213ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter '_classID' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult Print_Read(Int64, Int64)' in 'TMS.Web.Controllers.CertificateController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
-Parameter name: parameters
-ERROR 2019-11-01 16:42:19,199 304187ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter '_classID' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult Print_Read(Int64, Int64)' in 'TMS.Web.Controllers.CertificateController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
-Parameter name: parameters
-ERROR 2019-11-01 16:42:32,168 317156ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter '_classID' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult Print_Read(Int64, Int64)' in 'TMS.Web.Controllers.CertificateController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
-Parameter name: parameters
-ERROR 2019-11-01 16:43:30,113 375101ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter '_classID' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult Print_Read(Int64, Int64)' in 'TMS.Web.Controllers.CertificateController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
-Parameter name: parameters
-ERROR 2019-11-01 16:44:32,478 437465ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter '_classID' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult Print_Read(Int64, Int64)' in 'TMS.Web.Controllers.CertificateController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
-Parameter name: parameters
-ERROR 2019-11-01 16:45:08,779 473767ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter '_classID' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult Print_Read(Int64, Int64)' in 'TMS.Web.Controllers.CertificateController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
-Parameter name: parameters
-ERROR 2019-11-01 16:45:17,937 482925ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter '_classID' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult Print_Read(Int64, Int64)' in 'TMS.Web.Controllers.CertificateController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
-Parameter name: parameters
-ERROR 2019-11-01 16:46:03,866 528854ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter '_classID' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult Print_Read(Int64, Int64)' in 'TMS.Web.Controllers.CertificateController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
-Parameter name: parameters
-ERROR 2019-11-02 12:31:53,751 92592ms ExceptionContext       OnException        - Input string was not in a correct format.
-ERROR 2019-11-02 13:32:09,981 3429074ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter 'pT' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult Person(Int64)' in 'TMS.Web.Controllers.PeopleController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
-Parameter name: parameters
-ERROR 2019-11-02 13:33:55,204 3534297ms ExceptionContext       OnException        - Input string was not in a correct format.
-ERROR 2019-11-02 16:20:57,464 251347ms ExceptionContext       OnException        - Execution Timeout Expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
-ERROR 2019-11-11 15:51:24,045 1960621ms ExceptionContext       OnException        - Subquery returned more than 1 value. This is not permitted when the subquery follows =, !=, <, <= , >, >= or when the subquery is used as an expression.
-ERROR 2019-11-11 15:51:33,951 1970528ms ExceptionContext       OnException        - Subquery returned more than 1 value. This is not permitted when the subquery follows =, !=, <, <= , >, >= or when the subquery is used as an expression.
-ERROR 2019-11-11 15:56:20,566 2257143ms ExceptionContext       OnException        - Invalid object name '#PersonID'.
-ERROR 2019-11-11 15:56:35,958 2272535ms ExceptionContext       OnException        - Invalid object name '#PersonID'.
-ERROR 2019-11-12 13:55:20,985 2534641ms ExceptionContext       OnException        - The if block is missing a closing "}" character.  Make sure you have a matching "}" character for all the "{" characters within this block, and that none of the "}" characters are being interpreted as markup.
-
-ERROR 2019-11-12 13:56:12,421 41011ms ExceptionContext       OnException        - The if block is missing a closing "}" character.  Make sure you have a matching "}" character for all the "{" characters within this block, and that none of the "}" characters are being interpreted as markup.
-
-ERROR 2019-11-12 17:01:38,526 406491ms ExceptionContext       OnException        - Procedure or function 'TMS_Trainer_Create' expects parameter '@DateOfBirth', which was not supplied.
-ERROR 2019-11-13 11:04:19,156 794520ms ExceptionContext       OnException        - Procedure or function 'TMS_Trainer_Create' expects parameter '@DateOfBirth', which was not supplied.
-ERROR 2019-11-13 11:14:15,371 1390735ms ExceptionContext       OnException        - Procedure or function 'TMS_Trainer_Create' expects parameter '@DateOfBirth', which was not supplied.
-ERROR 2019-11-13 11:14:53,828 1429192ms ExceptionContext       OnException        - Procedure or function 'TMS_Trainer_Create' expects parameter '@ClientType', which was not supplied.
-ERROR 2019-11-13 11:17:04,792 1560156ms ExceptionContext       OnException        - Procedure or function 'TMS_Trainer_Create' expects parameter '@ClientType', which was not supplied.
-ERROR 2019-11-13 11:37:50,743 2806108ms ExceptionContext       OnException        - Procedure or function 'TMS_Person_DuplicationCheck' expects parameter '@createdBy', which was not supplied.
-ERROR 2019-11-13 11:39:26,448 2901812ms ExceptionContext       OnException        - Procedure or function 'TMS_Person_DuplicationCheck' expects parameter '@createdBy', which was not supplied.
-ERROR 2019-11-13 11:39:58,173 2933538ms ExceptionContext       OnException        - Procedure or function 'TMS_Person_DuplicationCheck' expects parameter '@createdBy', which was not supplied.
-ERROR 2019-11-13 11:40:10,922 2946287ms ExceptionContext       OnException        - Procedure or function 'TMS_Person_DuplicationCheck' expects parameter '@createdBy', which was not supplied.
-ERROR 2019-11-13 11:40:51,504 2986868ms ExceptionContext       OnException        - Procedure or function 'TMS_Person_DuplicationCheck' expects parameter '@createdBy', which was not supplied.
-ERROR 2019-11-13 12:02:54,306 1145012ms ExceptionContext       OnException        - SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM.
-ERROR 2019-11-13 13:13:00,383 25219ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter 'PersonID' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult ScheduledClasses(Int64)' in 'TMS.Web.Controllers.ProspectController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
-Parameter name: parameters
-ERROR 2019-11-13 13:45:09,260 1149115ms ExceptionContext       OnException        - SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM.
-ERROR 2019-11-13 13:45:59,794 1199650ms ExceptionContext       OnException        - SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM.
-ERROR 2019-11-13 13:46:29,028 1228884ms ExceptionContext       OnException        - Procedure or function 'CRM_ClassMapping_Dublication' expects parameter '@PersonID', which was not supplied.
-ERROR 2019-11-13 13:47:13,268 1273124ms ExceptionContext       OnException        - Procedure or function 'CRM_ClassMapping_Dublication' expects parameter '@PersonID', which was not supplied.
-ERROR 2019-11-13 13:48:21,732 1341588ms ExceptionContext       OnException        - Procedure or function CRM_ClassMapping_Dublication has too many arguments specified.
-ERROR 2019-11-13 13:48:49,760 1369616ms ExceptionContext       OnException        - Procedure or function 'CRM_ClassMapping_Dublication' expects parameter '@CreatedBy', which was not supplied.
-ERROR 2019-11-13 16:46:49,137 7639432ms ExceptionContext       OnException        - Procedure or function 'TMS_Task_Create' expects parameter '@Description', which was not supplied.
-ERROR 2019-11-14 10:45:37,549 1574700ms ExceptionContext       OnException        - "class" is a reserved word and cannot be used in implicit expressions.  An explicit expression ("@()") must be used.
-
-ERROR 2019-11-14 13:15:22,654 345420ms ExceptionContext       OnException        - Unexpected "if" keyword after "@" character.  Once inside code, you do not need to prefix constructs like "if" with "@".
-
-ERROR 2019-11-14 13:19:07,451 570217ms ExceptionContext       OnException        - Unexpected "if" keyword after "@" character.  Once inside code, you do not need to prefix constructs like "if" with "@".
-
-ERROR 2019-11-14 13:19:10,114 572879ms ExceptionContext       OnException        - Unexpected "if" keyword after "@" character.  Once inside code, you do not need to prefix constructs like "if" with "@".
-
-ERROR 2019-11-14 13:19:10,998 573764ms ExceptionContext       OnException        - Unexpected "if" keyword after "@" character.  Once inside code, you do not need to prefix constructs like "if" with "@".
-
-ERROR 2019-11-15 16:41:59,681 182761ms ExceptionContext       OnException        - Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.
-ERROR 2019-11-15 16:42:52,720 235800ms ExceptionContext       OnException        - Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.
-ERROR 2019-11-19 10:15:59,794 755269ms ExceptionContext       OnException        - c:\Users\SynergicProfessional\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\Views\Config\EditorTemplates\_DegreeCertificatesTemplate.cshtml(7): error CS1002: ; expected
-ERROR 2019-11-19 10:31:20,615 109012ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter 'aid' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult DegreeCertificates_Create(Kendo.Mvc.UI.DataSourceRequest, TMS.Library.Entities.Common.Configuration.DegreeCertificates, System.String, Int64)' in 'TMS.Web.Controllers.ConfigController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
-Parameter name: parameters
-ERROR 2019-11-19 14:10:37,436 2886632ms ExceptionContext       OnException        - Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.
-ERROR 2019-11-19 14:11:45,260 2954457ms ExceptionContext       OnException        - Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.
-ERROR 2019-11-19 14:12:56,135 3025331ms ExceptionContext       OnException        - Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.
-ERROR 2019-11-19 14:13:25,280 3054476ms ExceptionContext       OnException        - Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.
-ERROR 2019-11-19 14:14:11,511 3100708ms ExceptionContext       OnException        - Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.
-ERROR 2019-11-19 14:18:10,079 3339276ms ExceptionContext       OnException        - Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.
-ERROR 2019-11-20 14:29:47,790 279971ms ExceptionContext       OnException        - Input string was not in a correct format.
-ERROR 2019-11-21 11:26:13,453 352386ms ExceptionContext       OnException        - An error occurred during local report processing.
-ERROR 2019-11-21 11:28:27,869 486803ms ExceptionContext       OnException        - An error occurred during local report processing.
-ERROR 2019-11-22 14:50:02,999 69339ms ExceptionContext       OnException        - The parameters dictionary contains a null entry for parameter 'IsDigital' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.FileResult Print_Read(System.String, System.String, Int32, Int64)' in 'TMS.Web.Controllers.CertificateController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
-Parameter name: parameters
-ERROR 2019-11-22 15:15:05,029 135311ms ExceptionContext       OnException        - Input string was not in a correct format.
-ERROR 2019-11-25 11:14:58,328 294020ms ExceptionContext       OnException        - The given key was not present in the dictionary.
-ERROR 2019-11-25 11:15:37,069 332761ms ExceptionContext       OnException        - The given key was not present in the dictionary.
-ERROR 2019-11-25 11:15:41,697 337389ms ExceptionContext       OnException        - The given key was not present in the dictionary.
-ERROR 2019-11-25 11:16:46,340 402032ms ExceptionContext       OnException        - The given key was not present in the dictionary.
-ERROR 2019-11-25 11:17:05,158 420850ms ExceptionContext       OnException        - The given key was not present in the dictionary.
-ERROR 2019-11-25 11:20:04,758 600450ms ExceptionContext       OnException        - The given key was not present in the dictionary.
-ERROR 2019-11-25 11:20:16,208 611900ms ExceptionContext       OnException        - The given key was not present in the dictionary.
-ERROR 2019-11-25 14:11:16,414 733849ms ExceptionContext       OnException        - Object reference not set to an instance of an object.
-ERROR 2019-11-25 14:12:16,402 793837ms ExceptionContext       OnException        - Object reference not set to an instance of an object.
-ERROR 2019-11-25 14:13:56,003 893438ms ExceptionContext       OnException        - Object reference not set to an instance of an object.
-ERROR 2019-11-25 14:16:10,498 121715ms ExceptionContext       OnException        - Object reference not set to an instance of an object.
-ERROR 2019-11-25 16:01:16,149 139784ms ExceptionContext       OnException        - Error parsing column 10 (SessionAttended= - String)
-ERROR 2019-11-25 16:03:47,458 291094ms ExceptionContext       OnException        - Error parsing column 10 (SessionAttended= - String)
-ERROR 2019-11-26 10:35:28,610 1881170ms ExceptionContext       OnException        - Cannot insert the value NULL into column 'NickName', table 'TMS_SPL_PULSE.dbo.Users'; column does not allow nulls. INSERT fails.
+INFO  2019-12-04 18:27:54,423 37016ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/4/2019 1:27:54 PM
+INFO  2019-12-04 18:27:54,841 37435ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/4/2019 1:27:54 PM
+INFO  2019-12-05 11:02:46,579 29128ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/5/2019 6:02:46 AM
+INFO  2019-12-05 11:02:47,072 29622ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/5/2019 6:02:47 AM
+ERROR 2019-12-05 11:03:42,347 84896ms DESKTOP-LSN82VI        OnException        - Cannot insert the value NULL into column 'NickName', table 'TMS_SPL_PULSE.dbo.Users'; column does not allow nulls. INSERT fails.
 Cannot insert the value NULL into column 'UserID', table 'TMS_SPL_PULSE.dbo.Users_TMS_GroupsMapping'; column does not allow nulls. INSERT fails.
 The statement has been terminated.
 The statement has been terminated.
-ERROR 2019-11-26 10:36:58,409 1970969ms ExceptionContext       OnException        - Cannot insert the value NULL into column 'NickName', table 'TMS_SPL_PULSE.dbo.Users'; column does not allow nulls. INSERT fails.
-Cannot insert the value NULL into column 'UserID', table 'TMS_SPL_PULSE.dbo.Users_TMS_GroupsMapping'; column does not allow nulls. INSERT fails.
-The statement has been terminated.
-The statement has been terminated.
-ERROR 2019-11-26 11:45:16,480 6069039ms ExceptionContext       OnException        - The given key was not present in the dictionary.
-ERROR 2019-11-26 16:02:50,138 10028766ms ExceptionContext       OnException        - Procedure or function 'TMS_Sessions_GetALLSessionsByCultureandOrganization' expects parameter '@PersonId', which was not supplied.
-ERROR 2019-11-27 12:33:33,909 1136622ms ExceptionContext       OnException        - Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property.
-ERROR 2019-11-28 13:26:30,631 11446139ms ExceptionContext       OnException        - Object reference not set to an instance of an object.
-ERROR 2019-11-28 13:27:13,924 11489432ms ExceptionContext       OnException        - Object reference not set to an instance of an object.
-ERROR 2019-11-28 13:32:01,211 11776719ms ExceptionContext       OnException        - Object reference not set to an instance of an object.
-ERROR 2019-11-28 15:00:08,697 17064204ms ExceptionContext       OnException        - The given key was not present in the dictionary.
-ERROR 2019-11-28 15:36:22,313 19237821ms ExceptionContext       OnException        - The given key was not present in the dictionary.
-ERROR 2019-11-28 15:39:52,751 19448259ms ExceptionContext       OnException        - The given key was not present in the dictionary.
-ERROR 2019-11-28 15:40:06,467 19461975ms ExceptionContext       OnException        - The given key was not present in the dictionary.
-ERROR 2019-11-28 15:40:25,565 19481073ms ExceptionContext       OnException        - The given key was not present in the dictionary.
-ERROR 2019-11-29 10:49:13,582 168633ms ExceptionContext       OnException        - The explicit expression block is missing a closing ")" character.  Make sure you have a matching ")" character for all the "(" characters within this block, and that none of the ")" characters are being interpreted as markup.
-
-ERROR 2019-11-29 10:49:53,226 208277ms ExceptionContext       OnException        - The explicit expression block is missing a closing ")" character.  Make sure you have a matching ")" character for all the "(" characters within this block, and that none of the ")" characters are being interpreted as markup.
-
-ERROR 2019-11-29 11:38:49,819 868869ms ExceptionContext       OnException        - Name cannot contain spaces.
+INFO  2019-12-05 11:05:31,140 193690ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/5/2019 6:05:31 AM
+INFO  2019-12-05 11:05:31,541 194090ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/5/2019 6:05:31 AM
+INFO  2019-12-05 11:36:03,029 25629ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/5/2019 6:36:03 AM
+INFO  2019-12-05 11:36:03,452 26052ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/5/2019 6:36:03 AM
+ERROR 2019-12-05 11:37:49,568 132168ms DESKTOP-LSN82VI        OnException        - The given key was not present in the dictionary.
+ERROR 2019-12-05 11:40:13,473 276073ms DESKTOP-LSN82VI        OnException        - The given key was not present in the dictionary.
+INFO  2019-12-05 11:41:59,828 13697ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/5/2019 6:41:59 AM
+INFO  2019-12-05 11:42:00,255 14125ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/5/2019 6:42:00 AM
+ERROR 2019-12-05 11:44:57,079 190949ms DESKTOP-LSN82VI        OnException        - The given key was not present in the dictionary.
+ERROR 2019-12-05 11:45:43,147 237017ms DESKTOP-LSN82VI        OnException        - The given key was not present in the dictionary.
+ERROR 2019-12-05 11:52:26,936 640806ms DESKTOP-LSN82VI        OnException        - The given key was not present in the dictionary.
+ERROR 2019-12-05 11:55:05,319 799188ms DESKTOP-LSN82VI        OnException        - The given key was not present in the dictionary.
+INFO  2019-12-05 11:56:14,133 868003ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/5/2019 6:56:14 AM
+INFO  2019-12-05 11:56:14,549 868419ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/5/2019 6:56:14 AM
+INFO  2019-12-05 14:20:39,702 160433ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/5/2019 9:20:39 AM
+INFO  2019-12-05 14:20:40,174 160906ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/5/2019 9:20:40 AM
+INFO  2019-12-05 18:04:23,260 37295ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/5/2019 1:04:23 PM
+INFO  2019-12-05 18:04:23,648 37682ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/5/2019 1:04:23 PM
+INFO  2019-12-05 18:08:30,554 32351ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/5/2019 1:08:30 PM
+INFO  2019-12-05 18:08:31,004 32801ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/5/2019 1:08:31 PM
+INFO  2019-12-06 10:37:07,292 40810ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/6/2019 5:37:07 AM
+INFO  2019-12-06 10:37:07,754 41272ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/6/2019 5:37:07 AM
+INFO  2019-12-06 10:52:04,051 24937ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/6/2019 5:52:04 AM
+INFO  2019-12-06 10:52:04,469 25354ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/6/2019 5:52:04 AM
+ERROR 2019-12-06 11:13:56,588 1337473ms DESKTOP-LSN82VI        OnException        - Name cannot contain spaces.
+ERROR 2019-12-06 11:14:39,391 1380276ms DESKTOP-LSN82VI        OnException        - Name cannot contain spaces.
+INFO  2019-12-06 11:17:47,692 82096ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/6/2019 6:17:47 AM
+INFO  2019-12-06 11:17:48,085 82489ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/6/2019 6:17:48 AM
+INFO  2019-12-06 11:38:22,128 20407ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/6/2019 6:38:22 AM
+INFO  2019-12-06 11:38:22,549 20827ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/6/2019 6:38:22 AM
+INFO  2019-12-06 11:39:20,845 79124ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/6/2019 6:39:20 AM
+INFO  2019-12-06 11:39:21,228 79507ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/6/2019 6:39:21 AM
+INFO  2019-12-06 11:49:51,416 54825ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/6/2019 6:49:51 AM
+INFO  2019-12-06 11:49:51,823 55232ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/6/2019 6:49:51 AM
+INFO  2019-12-06 11:53:36,810 280219ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/6/2019 6:53:36 AM
+INFO  2019-12-06 11:53:37,187 280596ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/6/2019 6:53:37 AM
+INFO  2019-12-06 12:02:28,484 20101ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/6/2019 7:02:28 AM
+INFO  2019-12-06 12:02:28,886 20503ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/6/2019 7:02:28 AM
+ERROR 2019-12-06 12:03:10,712 62328ms DESKTOP-LSN82VI        OnException        - Cannot retrieve property 'Name' because localization failed.  Type 'Resources.Resources' is not public or does not contain a public static string property with the name 'Login_Susscess'.
+ERROR 2019-12-06 12:04:37,036 148652ms DESKTOP-LSN82VI        OnException        - Cannot retrieve property 'Name' because localization failed.  Type 'Resources.Resources' is not public or does not contain a public static string property with the name 'Login_Susscess'.
+ERROR 2019-12-06 12:05:25,025 196642ms DESKTOP-LSN82VI        OnException        - Cannot retrieve property 'Name' because localization failed.  Type 'Resources.Resources' is not public or does not contain a public static string property with the name 'Login_Susscess'.
+ERROR 2019-12-06 12:08:58,513 410130ms DESKTOP-LSN82VI        OnException        - Cannot retrieve property 'Name' because localization failed.  Type 'Resources.Resources' is not public or does not contain a public static string property with the name 'Login_Susscess'.
+ERROR 2019-12-06 12:10:56,690 528306ms DESKTOP-LSN82VI        OnException        - Bound columns require a field or property access expression.
+ERROR 2019-12-06 12:11:09,238 540855ms DESKTOP-LSN82VI        OnException        - Bound columns require a field or property access expression.
+ERROR 2019-12-06 12:13:26,165 677781ms DESKTOP-LSN82VI        OnException        - Bound columns require a field or property access expression.
+ERROR 2019-12-06 12:13:27,781 679397ms DESKTOP-LSN82VI        OnException        - Bound columns require a field or property access expression.
+ERROR 2019-12-06 12:18:09,348 960964ms DESKTOP-LSN82VI        OnException        - c:\Users\SynergicProfessional\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\Views\UserLog\UserLog.cshtml(26): error CS1660: Cannot convert lambda expression to type 'string' because it is not a delegate type
+ERROR 2019-12-06 12:18:14,185 965801ms DESKTOP-LSN82VI        OnException        - c:\Users\SynergicProfessional\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\Views\UserLog\UserLog.cshtml(26): error CS1660: Cannot convert lambda expression to type 'string' because it is not a delegate type
+INFO  2019-12-06 12:21:05,337 19120ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/6/2019 7:21:05 AM
+INFO  2019-12-06 12:21:05,726 19509ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/6/2019 7:21:05 AM
+INFO  2019-12-06 12:25:31,799 19763ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/6/2019 7:25:31 AM
+INFO  2019-12-06 12:25:32,191 20155ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/6/2019 7:25:32 AM
+INFO  2019-12-06 12:38:06,034 115425ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/6/2019 7:38:06 AM
+INFO  2019-12-06 12:38:06,442 115833ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/6/2019 7:38:06 AM
+ERROR 2019-12-06 12:38:54,958 164349ms DESKTOP-LSN82VI        OnException        - Cannot retrieve property 'Name' because localization failed.  Type 'Resources.Resources' is not public or does not contain a public static string property with the name 'Login_Susscess'.
+INFO  2019-12-06 12:48:41,151 28384ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/6/2019 7:48:41 AM
+INFO  2019-12-06 12:48:41,559 28793ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/6/2019 7:48:41 AM
+INFO  2019-12-06 13:54:34,608 27746ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/6/2019 8:54:34 AM
+INFO  2019-12-06 13:54:35,021 28160ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/6/2019 8:54:35 AM
+INFO  2019-12-06 14:12:23,842 26015ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/6/2019 9:12:23 AM
+INFO  2019-12-06 14:12:24,234 26408ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/6/2019 9:12:24 AM
+ERROR 2019-12-06 14:15:50,755 232929ms DESKTOP-LSN82VI        OnException        - c:\Users\SynergicProfessional\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\Views\UserLog\EditorTemplates\_UserLog.cshtml(31): error CS1003: Syntax error, ',' expected
+INFO  2019-12-06 14:42:40,192 32235ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/6/2019 9:42:40 AM
+INFO  2019-12-06 14:42:40,586 32629ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/6/2019 9:42:40 AM
+INFO  2019-12-06 15:09:50,685 11383ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/6/2019 10:09:50 AM
+INFO  2019-12-06 15:09:51,070 11769ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/6/2019 10:09:51 AM
+INFO  2019-12-06 15:22:58,806 17676ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/6/2019 10:22:58 AM
+INFO  2019-12-06 15:22:59,208 18079ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/6/2019 10:22:59 AM
+INFO  2019-12-06 16:02:20,138 20314ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/6/2019 11:02:20 AM
+INFO  2019-12-06 16:02:20,548 20723ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/6/2019 11:02:20 AM
+INFO  2019-12-06 16:13:25,328 65642ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/6/2019 11:13:25 AM
+INFO  2019-12-06 16:13:25,737 66051ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/6/2019 11:13:25 AM
+INFO  2019-12-06 16:44:19,212 77191ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/6/2019 11:44:19 AM
+INFO  2019-12-06 16:44:19,608 77587ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/6/2019 11:44:19 AM

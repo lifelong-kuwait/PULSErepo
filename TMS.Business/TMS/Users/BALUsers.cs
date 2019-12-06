@@ -21,6 +21,7 @@ using System.Linq;
 using TMS.Common.Utilities;
 using TMS.Library.TMS.Persons;
 using TMS.Library.Entities.TMS.Program;
+using TMS.Library.Entities.CRM;
 
 namespace TMS.Business.TMS
 {
@@ -68,7 +69,18 @@ namespace TMS.Business.TMS
         {
             return _DAL.UpdateUserLockedOut(Email, UserID, LockedOutAttempt, IsLockedOut);
         }
-
+        /// <summary>
+        /// Updates the user locked out bal.
+        /// </summary>
+        /// <param name="Email">The email.</param>
+        /// <param name="UserID">The user identifier.</param>
+        /// <param name="LockedOutAttempt">The locked out attempt.</param>
+        /// <param name="IsLockedOut">if set to <c>true</c> [is locked out].</param>
+        /// <returns>System.Int32.</returns>
+        public int LogInsert(string Dates, string Threads, string Levels, string Loggers, string Messages, string Exceptions, long UserID, string Controllers, string Action, string Prarams, long companyID)
+        {
+            return _DAL.LogInsert( Dates,  Threads,  Levels,  Loggers,  Messages,  Exceptions,  UserID,  Controllers,  Action, Prarams,companyID);
+        }
         /// <summary>
         /// Updates the login user themes dal.
         /// </summary>
@@ -126,6 +138,18 @@ namespace TMS.Business.TMS
         public IList<LoginUsers> LoginLockedUsersOrganization_GetAllBAL(string culture, string ID, string SearchText)
         {
             return _DAL.LoginLockedUsersOrganization_GetAllDAL(culture, ID, SearchText);
+        }
+        public IList<CRM_UserLog> LogOrganization_GetAllBAL(ref int Total, string OrgID, string SearchText, string SortExpression, int StartRowIndex, int page, int PageSize)
+        {
+            return _DAL.LogOrganization_GetAllDAL(ref Total,  OrgID,  SearchText,  SortExpression,  StartRowIndex,  page,  PageSize);
+        }
+        public IList<CRM_UserLog> ErrorLogOrganization_GetAllBAL(ref int Total, string OrgID, string SearchText, string SortExpression, int StartRowIndex, int page, int PageSize)
+        {
+            return _DAL.ErrorLogOrganization_GetAllDAL(ref Total, OrgID, SearchText, SortExpression, StartRowIndex, page, PageSize);
+        }
+        public int ErrorLogOrganization_GetAllBAL(CRM_UserLog objLog, long companyID, long ID)
+        {
+            return _DAL.ErrorLogOrganization_GetAllBAL( objLog,  companyID,  ID);
         }
         /// <summary>
         /// Logins the users get all bal.

@@ -295,6 +295,7 @@
     <Compile Include="Controllers\SalesAdministrationController.cs" />
     <Compile Include="Controllers\SPl_Test_ReportsController.cs" />
     <Compile Include="Controllers\TestWaqasControllerController.cs" />
+    <Compile Include="Controllers\UserLogController.cs" />
     <Compile Include="Core\getweek.cs" />
     <Compile Include="Core\SessionTimeoutAttribute.cs" />
     <Compile Include="CourseAttendanceDataSet.Designer.cs">
@@ -2638,7 +2639,9 @@
     <None Include="Properties\PublishProfiles\FolderProfile56.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile57.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile58.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile59.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile6.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile60.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile7.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile8.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile9.pubxml" />
@@ -4826,6 +4829,10 @@
     <Content Include="Views\Config\_CategoriesCRM.cshtml" />
     <Content Include="Views\People\_PersonRolesCRM.cshtml" />
     <Content Include="Views\User\UnlockUser.cshtml" />
+    <Content Include="Views\UserLog\UserLog.cshtml" />
+    <Content Include="Views\UserLog\EditorTemplates\_UserLog.cshtml" />
+    <Content Include="Views\UserLog\UserErrorLog.cshtml" />
+    <Content Include="Views\UserLog\EditorTemplates\_UserErrorLog.cshtml" />
     <None Include="WeeklyAttendanceReportData.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>

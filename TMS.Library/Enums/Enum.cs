@@ -578,7 +578,44 @@ namespace TMS.Library
 
 
     #endregion
+    #region Log4NET
 
+   
+
+    public enum Logs
+    {
+        [Display(Name = "Login_Susscess", ResourceType = typeof(lr))]
+        Login_Susscess = 0,
+
+        [Display(Name = "Login_Attempt", ResourceType = typeof(lr))]
+        Login_Attempt = 1,
+
+        [Display(Name = "Login_Locked", ResourceType = typeof(lr))]
+        Login_Locked = 2,
+        [Display(Name = "NotSpecified", ResourceType = typeof(lr))]
+        Error = 3,
+
+        [Display(Name = "Insert_Success", ResourceType = typeof(lr))]
+        Insert_Success = 4,
+
+        [Display(Name = "Delete_Success", ResourceType = typeof(lr))]
+        Delete_Success = 5,
+        [Display(Name = "Update_Success", ResourceType = typeof(lr))]
+        Update_Success = 6,
+
+        [Display(Name = "View_Success", ResourceType = typeof(lr))]
+        View_Success = 7,
+
+        [Display(Name = "Certificate_Success", ResourceType = typeof(lr))]
+        Certificate_Success = 8,
+
+        [Display(Name = "Report_View", ResourceType = typeof(lr))]
+        Report_View = 9,
+    }
+
+
+
+    #endregion
     #region Category
     public enum CategoryType
     {

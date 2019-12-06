@@ -183,7 +183,9 @@ namespace TMS.Library.TMS.Persons
         /// <value>The official identifier number.</value>
         [Display(Name = "PersonOfficialIDNumber", ResourceType = typeof(lr))]
         public string OfficialIDNumber { get; set; }
-
+        [NotMapped]
+        [Display(Name = "TrainerLogin", ResourceType = typeof(lr))]
+        public bool? IsLogin { get; set; }
 
         public class MinimumAgeAttribute : ValidationAttribute
         {

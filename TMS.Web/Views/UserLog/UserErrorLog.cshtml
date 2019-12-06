@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewBag.Title = "UserLog";
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+}
+
+@using lr = Resources.Resources
+@Html.AntiForgeryToken()
+@{
+    ViewBag.Title = "User Error Log";
+}
+<h2>User Error Log</h2>
+@(Html.Kendo().Grid<TMS.Library.Entities.CRM.CRM_UserLog>().Name("Users")
+                   .Columns(columns =>
+                   {
+                       columns.Bound(e => e.UserName).Title("Detail")
+                       .ClientTemplate(@"<div class='person-box'>
+           <div class='person'>
+                    " +
+                                    @"<h4> #if(UserName !=null){# <p><b>User Name : </b>#:UserName# </P>#}#</h4> " +
+                                   @"#if (Controller !=null) { #<p><b>Controller Name : </b>#:Controller#</p>#}#" +
+                                   @"#if (Action !=null) { #<p><b>Action Name : </b>#:Action#</p> #}#
+           </div>");
+                       columns.Bound(e => e.OrgName).Width(120).MinScreenWidth(600).Title("Organization Name");
+                       columns.Bound(e => e.Date).Width(120).MinScreenWidth(600).Title("Date");
+                       columns.Bound(p => p.Levels).Width(120);
+                       columns.Bound(p => p.isResolved).Width(120);
+                       columns.Bound(p => p.ResolvedBy).Width(120);
+                       columns.Bound(p => p.ResolvedData).Width(120);
+                   })
+                .ToolBar(toolbar => toolbar.Template(@<text>
+                    <div class="toolbar">
+
+                        @if (User.IsInRole("CanEdirUserErrorLog"))
+                        {<a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-view-list "></span></a>}
+
+                    </div>
+                </text>))
+                                       .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_UserErrorLog").DisplayDeleteConfirmation(false))
+                                       .Sortable()
+                                       .Scrollable()
+                                       .Groupable()
+                                       .Filterable()
+                                       .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+                                       .Pageable(pager => pager
+                .Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
+                .Scrollable()
+                                       .HtmlAttributes(new { style = "height:700px !important;" })
+
+                                       .DataSource(dataSource => dataSource.Ajax()
+                                       .Model(model =>
+                                       {
+                                           model.Id(p => p.UserID);
+
+                                       }).PageSize(5)
+
+                                       .Read(read => read.Action("UserErrorLog_Read", "UserLog").Data("withSearch"))
+                                       .Destroy(update => update.Action("LoginLockedUser_Unlock", "User"))
+                                       .Events(events => events.Error("GeneralErrorHandler(\"Users\")"))
+                                        ).NoRecords(lr.GridNoRecordFoundMessage)
+)
+
+
+
+
+<script id="toolTipTemplate" type="text/x-kendo-template">
+
+        @if (User.IsInRole("CanEdirUserErrorLog"))
+        {
+           <span class="grid-tooltip-icon tms-grid-done" title="Resolved Confirm"><i class="mdi mdi-check"></i></span>
+        }
+    </script>
+
+
+<script>
+
+     jQuery(function () {
+        var template = kendo.template(jQuery("#toolTipTemplate").html());
+        //initialize tooltip to grid tbody with filter cells with given CSS class
+        var tooltip = jQuery("#Users tbody").kendoTooltip({
+            position: "center",
+            autoHide: false,
+            filter: "td:nth-child(1)",
+            showOn: "click",
+            show: function (e) {
+                //get current target row
+                this.popup.element.addClass("tmstooltip");
+                var currentRow = this.target().closest("tr");
+                var grid = jQuery("#Users").data("kendoGrid");
+                //get current row dataItem
+                var dataItem = grid.dataItem(currentRow);
+
+                //pass the dataItem to the template
+                var generatedTemplate = template(dataItem);
+                //set the generated template to the content of the tooltip
+                this.content.html(generatedTemplate);
+            },
+        }).data("kendoTooltip");
+    });
+    jQuery(function () {
+        jQuery(".tms-grid-done").live("mousedown", function (event) {
+            var checkedLength = jQuery("#Users tr.k-state-selected").length;
+            if (checkedLength == 1) {
+                //jQuery("#Users").data("kendoGrid").editRow(jQuery("#Users tr.k-state-selected"));
+
+                grid = jQuery("#Users").data("kendoGrid");
+                var data = grid.dataItem(jQuery("#Users tr.k-state-selected"));
+                var ID = data.ID;
+
+                var response = jQuery.ajax({
+                    method: "post",
+                    url: "/UserLog/EditStatusDone",
+                    dataType: "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ ID: ID }),
+                    success: function (msg) {
+                        var grid = jQuery("#Users").data("kendoGrid");
+                        grid.dataSource.read();
+                    }
+
+                });
+
+            } else {
+
+            }
+
+        });
+    });
+    //jQuery(".edit").live("mousedown", function (event) {
+    //    var grid = jQuery("#Users").getKendoGrid(),
+    //        selectedRow = jQuery(e).closest("tr");
+
+    //    grid.editRow(selectedRow);
+    //});
+</script>

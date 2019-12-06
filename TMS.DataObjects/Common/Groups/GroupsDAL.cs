@@ -250,9 +250,9 @@ namespace TMS.DataObjects.Common.Groups
         /// <param name="Culture">The culture.</param>
         /// <param name="GroupId">The group identifier.</param>
         /// <returns>IList&lt;SecurityGroupsPermission&gt;.</returns>
-        public IList<SecurityGroupsPermission> SecurityGroupsPermissions_GetAllByGroupId(string Culture, long GroupId)
+        public IList<SecurityGroupsPermission> SecurityGroupsPermissions_GetAllByGroupId(string Culture, long GroupId, long userid, string companyID)
         {
-            return ExecuteListSp<SecurityGroupsPermission>("TMS_GroupPermission_GetAllByGroupId", ParamBuilder.Par("Culture", Culture), ParamBuilder.Par("GroupId", GroupId));
+            return ExecuteListSp<SecurityGroupsPermission>("TMS_GroupPermission_GetAllByGroupId", ParamBuilder.Par("counter", 0), ParamBuilder.Par("Culture", Culture), ParamBuilder.Par("GroupId", GroupId), ParamBuilder.Par("OrganizationID", companyID), ParamBuilder.Par("userID", userid));
         }
         /// <summary>
         /// Securities the groups permission get all by group identifier.

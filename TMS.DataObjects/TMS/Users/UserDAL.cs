@@ -20,6 +20,7 @@ using TMS.Library.Users;
 using System.Linq;
 using TMS.Library.TMS.Persons;
 using TMS.Library.Entities.TMS.Program;
+using TMS.Library.Entities.CRM;
 
 namespace TMS.DataObjects
 {
@@ -65,7 +66,29 @@ namespace TMS.DataObjects
                 ParamBuilder.Par("LockedOutDate", System.DateTime.Now)
                 );
         }
-
+        /// <summary>
+        /// Updates the user locked out.
+        /// </summary>
+        /// <param name="Email">The email.</param>
+        /// <param name="UserID">The user identifier.</param>
+        /// <param name="LockedOutAttempt">The locked out attempt.</param>
+        /// <param name="IsLockedOut">if set to <c>true</c> [is locked out].</param>
+        /// <returns>System.Int32.</returns>
+        public int LogInsert(string Dates, string Threads, string Levels, string Loggers, string Messages, string Exceptions, long UserID, string Controllers, string Action,string Prarams,long companyID)
+        {
+            return ExecuteScalarSP("UserLogInsert", System.Data.CommandType.StoredProcedure,
+                ParamBuilder.Par("Dates", Dates),
+                ParamBuilder.Par("Levels", Levels),
+                ParamBuilder.Par("Loggers", Loggers),
+                ParamBuilder.Par("Messages", Messages),
+                ParamBuilder.Par("Exceptions", Exceptions),
+                ParamBuilder.Par("UserIDs", UserID),
+                ParamBuilder.Par("Controllers", Controllers),
+                ParamBuilder.Par("Actions", Action)  ,              
+                ParamBuilder.Par("parameter", Prarams),
+                ParamBuilder.Par("organization", companyID)
+                );
+        }
         /// <summary>
         /// Updates the login user themes.
         /// </summary>
@@ -356,7 +379,60 @@ namespace TMS.DataObjects
                 conn.Close();
             }
             return LoginUserList;
-            // ExecuteListSp<LoginUsers>("TMS_Users_GetAll");
+            // ExecuteListSp<LoginUsers>("TMS_Users_GetAll"); 
+        }
+       public IList<CRM_UserLog> LogOrganization_GetAllDAL(ref int Total, string OrgID, string SearchText, string SortExpression, int StartRowIndex, int page, int PageSize)
+        {
+            List<CRM_UserLog> _PersonData = new List<CRM_UserLog>();
+            
+            using (var conn = new SqlConnection(DBHelper.ConnectionString))
+            {
+                conn.Open();
+                DynamicParameters dbParam = new DynamicParameters();
+                dbParam.AddDynamicParams(new { OrganizationID = OrgID, SearchText = SearchText,  SortExpression = SortExpression, StartRowIndex = StartRowIndex, page = page, PageSize = PageSize});
+                using (var multi = conn.QueryMultiple("CRM_UsersLog", dbParam, commandType: System.Data.CommandType.StoredProcedure))
+                {
+                    _PersonData = multi.Read<CRM_UserLog>().AsList<CRM_UserLog>();
+                    Total = multi.Read<int>().FirstOrDefault<int>();
+                }
+
+                conn.Close();
+            }
+            
+            return _PersonData.ToList();
+          
+        }
+       public int ErrorLogOrganization_GetAllBAL(CRM_UserLog objLog, long companyID, long ID)
+        {
+            return ExecuteScalarInt32Sp("CRM_UsersErrorLogIsResolved",
+                        ParamBuilder.Par("@id", objLog.ID),
+                        ParamBuilder.Par("@ResolvedBy", objLog.ResolvedBy),
+                        ParamBuilder.Par("@ResolvedDate", objLog.ResolvedData),
+                        ParamBuilder.Par("@OrganizationID", companyID)
+
+
+                    );
+        }
+        public IList<CRM_UserLog> ErrorLogOrganization_GetAllDAL(ref int Total, string OrgID, string SearchText, string SortExpression, int StartRowIndex, int page, int PageSize)
+        {
+            List<CRM_UserLog> _PersonData = new List<CRM_UserLog>();
+
+            using (var conn = new SqlConnection(DBHelper.ConnectionString))
+            {
+                conn.Open();
+                DynamicParameters dbParam = new DynamicParameters();
+                dbParam.AddDynamicParams(new { OrganizationID = OrgID, SearchText = SearchText, SortExpression = SortExpression, StartRowIndex = StartRowIndex, page = page, PageSize = PageSize });
+                using (var multi = conn.QueryMultiple("CRM_UsersErrorLog", dbParam, commandType: System.Data.CommandType.StoredProcedure))
+                {
+                    _PersonData = multi.Read<CRM_UserLog>().AsList<CRM_UserLog>();
+                    Total = multi.Read<int>().FirstOrDefault<int>();
+                }
+
+                conn.Close();
+            }
+
+            return _PersonData.ToList();
+
         }
         /// <summary>
         /// Logins the users get all dal.
