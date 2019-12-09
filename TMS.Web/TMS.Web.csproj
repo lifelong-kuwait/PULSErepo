@@ -2642,6 +2642,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile59.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile6.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile60.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile61.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile7.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile8.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile9.pubxml" />

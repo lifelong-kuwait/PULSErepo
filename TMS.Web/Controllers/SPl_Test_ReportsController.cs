@@ -12,6 +12,8 @@ using TMS.Library.Entities.TMS.Program;
 using System.Globalization;
 using TMS.Web.Core;
 using TMS.Business.Interfaces.TMS.Program;
+using System.Web.Script.Serialization;
+using TMS.Library;
 
 namespace TMS.Web.Controllers
 {
@@ -21,10 +23,12 @@ namespace TMS.Web.Controllers
         DDLBAL ddl = new DDLBAL();
         private Classes CurrentClass;
         PersonBAL _PersonBAL = new PersonBAL();
+        private readonly IBALUsers _UserBAL;
         private readonly IClassBAL _ClassBAL;
-        public SPl_Test_ReportsController(IClassBAL IClassBAL)
+        public SPl_Test_ReportsController(IBALUsers objUserBAL, IClassBAL IClassBAL)
         {
             _ClassBAL = IClassBAL;
+             this._UserBAL = objUserBAL;
         }
         // GET: SPl_Test_Reports
         [ClaimsAuthorize("CanViewAttendance")]
@@ -32,6 +36,8 @@ namespace TMS.Web.Controllers
         public ActionResult ReportViewer()
         {
             ViewData["reportUrl"] = "~/Report/Tran_ViewCourseAttendanceReport/";
+            var json = new JavaScriptSerializer().Serialize("Attendance Report");
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Report_View.ToString(), System.Environment.MachineName, "User tried to view Attendance Report at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
             return View();
         }
@@ -40,6 +46,8 @@ namespace TMS.Web.Controllers
         public ActionResult Trainer_Detail_Report()
         {
             ViewData["reportUrl"] = "~/Report/Tran_TrainerDetailReport/";
+            var json = new JavaScriptSerializer().Serialize("Trainer Detail Report");
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Report_View.ToString(), System.Environment.MachineName, "User tried to view Trainer Detail Report at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
             return View();
         }
@@ -48,6 +56,8 @@ namespace TMS.Web.Controllers
         public ActionResult Trainee_Detail_Report()
         {
             ViewData["reportUrl"] = "~/Report/Tran_TraineeDetailReport/";
+            var json = new JavaScriptSerializer().Serialize("Trainee Detail  Report");
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Report_View.ToString(), System.Environment.MachineName, "User tried to view Trainee Detail  Report at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
             return View();
         }
@@ -56,6 +66,8 @@ namespace TMS.Web.Controllers
         public ActionResult Class_Detail_Report()
         {
             ViewData["reportUrl"] = "~/Report/Tran_ClassDetailReport/";
+            var json = new JavaScriptSerializer().Serialize("Class Detail  Report");
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Report_View.ToString(), System.Environment.MachineName, "User tried to view Class Detail  Report at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
             return View();
         }
@@ -64,6 +76,8 @@ namespace TMS.Web.Controllers
         public ActionResult Venue_Detail_Report()
         {
             ViewData["reportUrl"] = "~/Report/Tran_VenueDetailReport/";
+            var json = new JavaScriptSerializer().Serialize("venue Detail  Report");
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Report_View.ToString(), System.Environment.MachineName, "User tried to view venue Detail  Report at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
             return View();
         }
@@ -72,6 +86,8 @@ namespace TMS.Web.Controllers
         public ActionResult Venue_Ocupancy_Detail_Report()
         {
             ViewData["reportUrl"] = "~/Report/Tran_VenueOccupancyReport/";
+            var json = new JavaScriptSerializer().Serialize("Venue Occupancy  Report");
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Report_View.ToString(), System.Environment.MachineName, "User tried to view Venue Occupancy Report at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
             return View();
         }
@@ -80,6 +96,8 @@ namespace TMS.Web.Controllers
         public ActionResult WeeklyUtilizationReport()
         {
             ViewData["reportUrl"] = "~/Report/WeeklyUtilizationReport/";
+            var json = new JavaScriptSerializer().Serialize("Weekly Utilization Report");
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Report_View.ToString(), System.Environment.MachineName, "User tried to view Weekly Utilization Report at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
             return View();
         }
@@ -88,7 +106,10 @@ namespace TMS.Web.Controllers
         public ActionResult WeeklyUtilizationReport2()
         {
             ViewData["reportUrl"] = "~/Report/WeeklyUtilizationReport2/";
+            var json = new JavaScriptSerializer().Serialize("Weekly Utilization Report");
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Report_View.ToString(), System.Environment.MachineName, "User tried to view Weekly Utilization Report at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
+           
             return View();
         }
         [ClaimsAuthorize("CanViewReports")]
@@ -96,6 +117,8 @@ namespace TMS.Web.Controllers
         public ActionResult Weekly_Attandence_Report()
         {
             ViewData["reportUrl"] = "~/Report/Tran_ViewAttendanceReport/";
+            var json = new JavaScriptSerializer().Serialize("View Attendance Report");
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Report_View.ToString(), System.Environment.MachineName, "User tried to View Attendance Report at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
             return View();
         }
@@ -104,6 +127,8 @@ namespace TMS.Web.Controllers
         public ActionResult Class_Future_Report()
         {
             ViewData["reportUrl"] = "~/Report/Tran_ClassReport/";
+            var json = new JavaScriptSerializer().Serialize("Class   Report");
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Report_View.ToString(), System.Environment.MachineName, "User tried to view Class  Report at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
             return View();
         }
@@ -112,6 +137,8 @@ namespace TMS.Web.Controllers
         public ActionResult Class_Current_Report()
         {
             ViewData["reportUrl"] = "~/Report/Tran_ClassReport/";
+            var json = new JavaScriptSerializer().Serialize("Class  Report");
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Report_View.ToString(), System.Environment.MachineName, "User tried to view Class  Report at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
             return View();
         }
@@ -120,6 +147,8 @@ namespace TMS.Web.Controllers
         public ActionResult VenueDetailUtilizationReport()
         {
             ViewData["reportUrl"] = "~/Report/WeeklyUtilizationReport/";
+            var json = new JavaScriptSerializer().Serialize("Weekly Utilization  Report");
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Report_View.ToString(), System.Environment.MachineName, "User tried to view Weekly Utilization  Report at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
             return View();
         }
@@ -129,6 +158,9 @@ namespace TMS.Web.Controllers
         {
             ViewData["reportUrl"] = "~/Report/WeeklyUtilizationReport/";
             ViewData["CompanyID"] = CurrentUser.CompanyID;
+            var json = new JavaScriptSerializer().Serialize("Weekly Utilization  Report");
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Report_View.ToString(), System.Environment.MachineName, "User tried to view Weekly Utilization  Report at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             return View();
         }
         [ClaimsAuthorize("CanViewReports")]
@@ -136,6 +168,8 @@ namespace TMS.Web.Controllers
         public ActionResult TraineePeriodicReport()
         {
             ViewData["reportUrl"] = "~/Report/Tran_ViewTraineePeriodicReport/";
+            var json = new JavaScriptSerializer().Serialize("Trainee Periodic Report");
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Report_View.ToString(), System.Environment.MachineName, "User tried to view Trainee Periodic Report at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
             return View();
         }
@@ -144,6 +178,8 @@ namespace TMS.Web.Controllers
         public ActionResult CoursePeriodicReport()
         {
             ViewData["reportUrl"] = "~/Report/Tran_ConductedCoursesReport/";
+            var json = new JavaScriptSerializer().Serialize("Conducted Courses Report");
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Report_View.ToString(), System.Environment.MachineName, "User tried to view Conducted Courses Report at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
             return View();
         }
@@ -152,6 +188,8 @@ namespace TMS.Web.Controllers
         public ActionResult WeeklyUtilizationReportModified()
         {
             ViewData["reportUrl"] = "~/Report/WeeklyUtilizatinDynamicColumns/";
+            var json = new JavaScriptSerializer().Serialize("Weekly Utilizatin Dynamic Columns Report");
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Report_View.ToString(), System.Environment.MachineName, "User tried to view Weekly Utilizatin Dynamic Columns Report at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
             return View();
         }//Schedules
@@ -168,6 +206,8 @@ namespace TMS.Web.Controllers
         public ActionResult VenueMatrixReport()
         {
             ViewData["reportUrl"] = "~/Report/Tran_ConductedCoursesReport/";
+            var json = new JavaScriptSerializer().Serialize("Conducted Courses Report");
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Report_View.ToString(), System.Environment.MachineName, "User tried to view Conducted Courses Report at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
             return View();
         }
@@ -176,6 +216,8 @@ namespace TMS.Web.Controllers
         public ActionResult VenueMatrixRDLCReport()
         {
             ViewData["reportUrl"] = "~/Report/Tran_ConductedCoursesReport/";
+            var json = new JavaScriptSerializer().Serialize("Class Detail  Report");
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Report_View.ToString(), System.Environment.MachineName, "User tried to view Class Detail  Report at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
             return View();
         }

@@ -80,3 +80,28 @@ INFO  2019-12-06 16:13:25,328 65642ms DESKTOP-LSN82VI        Login              
 INFO  2019-12-06 16:13:25,737 66051ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/6/2019 11:13:25 AM
 INFO  2019-12-06 16:44:19,212 77191ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/6/2019 11:44:19 AM
 INFO  2019-12-06 16:44:19,608 77587ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/6/2019 11:44:19 AM
+INFO  2019-12-09 11:01:24,811 34878ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/9/2019 6:01:24 AM
+INFO  2019-12-09 11:01:25,219 35287ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/9/2019 6:01:25 AM
+INFO  2019-12-09 11:01:59,698 69765ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/9/2019 6:01:59 AM
+INFO  2019-12-09 11:02:00,075 70142ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/9/2019 6:02:00 AM
+ERROR 2019-12-09 11:04:40,180 230247ms DESKTOP-LSN82VI        OnException        - The given key was not present in the dictionary.
+ERROR 2019-12-09 11:05:41,090 291157ms DESKTOP-LSN82VI        OnException        - The given key was not present in the dictionary.
+ERROR 2019-12-09 11:05:50,834 300902ms DESKTOP-LSN82VI        OnException        - The given key was not present in the dictionary.
+INFO  2019-12-09 11:06:42,418 352485ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/9/2019 6:06:42 AM
+INFO  2019-12-09 11:06:42,806 352873ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/9/2019 6:06:42 AM
+INFO  2019-12-09 11:09:17,211 507279ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/9/2019 6:09:17 AM
+INFO  2019-12-09 11:14:19,161 809228ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/9/2019 6:14:19 AM
+ERROR 2019-12-09 11:14:29,641 819708ms DESKTOP-LSN82VI        OnException        - Object reference not set to an instance of an object.
+INFO  2019-12-09 11:14:41,456 831524ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/9/2019 6:14:41 AM
+INFO  2019-12-09 11:14:53,555 843622ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/9/2019 6:14:53 AM
+INFO  2019-12-09 11:15:44,141 894208ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/9/2019 6:15:44 AM
+INFO  2019-12-09 11:15:46,587 896654ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/9/2019 6:15:46 AM
+INFO  2019-12-09 11:32:13,933 585971ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/9/2019 6:32:13 AM
+INFO  2019-12-09 11:32:21,251 593289ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/9/2019 6:32:21 AM
+INFO  2019-12-09 11:32:21,636 593674ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/9/2019 6:32:21 AM
+INFO  2019-12-09 12:25:29,214 34809ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/9/2019 7:25:29 AM
+INFO  2019-12-09 12:25:29,602 35197ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/9/2019 7:25:29 AM
+INFO  2019-12-09 12:51:28,492 42773ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/9/2019 7:51:28 AM
+INFO  2019-12-09 12:51:28,878 43159ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/9/2019 7:51:28 AM
+INFO  2019-12-09 14:50:16,930 1253536ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/9/2019 9:50:16 AM
+INFO  2019-12-09 14:50:17,330 1253936ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/9/2019 9:50:17 AM

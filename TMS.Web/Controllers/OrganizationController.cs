@@ -4,8 +4,11 @@ using Kendo.Mvc.UI;
 using System;
 using System.IO;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using TMS.Business.Interfaces.Common;
+using TMS.Business.Interfaces.TMS;
 using TMS.Business.Interfaces.TMS.Organization;
+using TMS.Library;
 using TMS.Library.Common.Attachment;
 using TMS.Library.TMS.Organization;
 using TMS.Library.TMS.Organization.POC;
@@ -19,10 +22,10 @@ namespace TMS.Web.Controllers
     {
         private readonly IOrganizationBAL OrganizationBAL;
         private readonly IAttachmentBAL _AttachmentBAL;
-
-        public OrganizationController(IOrganizationBAL IOrganizationBAL, IAttachmentBAL _AttachmentBAL)
+        private readonly IBALUsers _UserBAL;
+        public OrganizationController(IOrganizationBAL IOrganizationBAL, IAttachmentBAL _AttachmentBAL, IBALUsers objUserBAL)
         {
-            this.OrganizationBAL = IOrganizationBAL; this._AttachmentBAL = _AttachmentBAL;
+            this.OrganizationBAL = IOrganizationBAL; this._AttachmentBAL = _AttachmentBAL; this._UserBAL = objUserBAL;
         }
 
         [ClaimsAuthorizeAttribute("CanViewOrganization")]
@@ -30,6 +33,8 @@ namespace TMS.Web.Controllers
         {
             // var logopicture = this.OrganizationBAL.GetAllOrganizationbypicBAL(CurrentUser.CompanyID);
             //   Session["logo"] = logopicture;
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to view organizitions " + DateTime.UtcNow +" with user id "+CurrentUser.NameIdentifierInt64+" ", "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
             return View();
         }
@@ -45,6 +50,7 @@ namespace TMS.Web.Controllers
             }
             else
             {
+
                 var data = this.OrganizationBAL.GetOrganizationByIdBAL(oid);
                 if (data == null)
                 {
@@ -53,6 +59,9 @@ namespace TMS.Web.Controllers
                 }
                 else
                 {
+                    var json = new JavaScriptSerializer().Serialize(0);
+                    _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to view organizitions " + DateTime.UtcNow + " with user id " + CurrentUser.NameIdentifierInt64 + " ", "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                     ViewData["model"] = data;
                     return View();
                 }
@@ -63,6 +72,9 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public ActionResult Organization_Read([DataSourceRequest] DataSourceRequest request)
         {
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to view organizitions " + DateTime.UtcNow + " with user id " + CurrentUser.NameIdentifierInt64 + " ", "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             // TMS.Library.TMS.Organization.OrganizationModel mod = new OrganizationModel();
             //  Session["logo"] = mod.LogoPicture;
             var startRowIndex = (request.Page - 1) * request.PageSize;
@@ -91,6 +103,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(0);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to insert new organizitions " + DateTime.UtcNow + " with user id " + CurrentUser.NameIdentifierInt64 + " ", "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 var _OrganizationDub = OrganizationBAL.GetAllOrganizationbyIDBAL(Convert.ToString(CurrentUser.CompanyID), "");
                 bool flage = true;
                 foreach (var x in _OrganizationDub)
@@ -171,6 +186,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(0);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to update organizitions " + DateTime.UtcNow + " with user id " + CurrentUser.NameIdentifierInt64 + " ", "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 var _OrganizationDub = OrganizationBAL.GetAllOrganizationbyIDBAL(Convert.ToString(CurrentUser.CompanyID), "");
                 bool flage = true;
                 foreach (var x in _OrganizationDub)
@@ -252,6 +270,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(0);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to destroy organizitions " + DateTime.UtcNow + " with user id " + CurrentUser.NameIdentifierInt64 + " ", "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _Organization.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _Organization.UpdatedDate = DateTime.Now;
                 var result = this.OrganizationBAL.Organizations_DeleteBAL(_Organization);
@@ -311,6 +332,9 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorizeAttribute("CanViewPointofContact")]
         public ActionResult PointOfContact(string oid)
         {
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to view  point of caontact  " + DateTime.UtcNow + " with user id " + CurrentUser.NameIdentifierInt64 + " ", "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             return PartialView("_PointOfContact", oid);
         }
 
@@ -318,6 +342,9 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorizeAttribute("CanViewPointofContact")]
         public ActionResult PointOfContact_Read([DataSourceRequest] DataSourceRequest request, string oid)
         {
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to read  point of caontact  " + DateTime.UtcNow + " with user id " + CurrentUser.NameIdentifierInt64 + " ", "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             var _Organization = this.OrganizationBAL.GetPointOfContactByOrganizationIdBAL(Convert.ToInt64(oid));
             return Json(_Organization.ToDataSourceResult(request, ModelState));
         }
@@ -329,6 +356,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(0);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to create  point of caontact  " + DateTime.UtcNow + " with user id " + CurrentUser.NameIdentifierInt64 + " ", "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _PointsOfContact.OrganizationID = Convert.ToInt64(oid);
                 if (_PointsOfContact.PersonID == CurrentUser.NameIdentifierInt64)
                 {
@@ -360,6 +390,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(0);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to update  point of caontact  " + DateTime.UtcNow + " with user id " + CurrentUser.NameIdentifierInt64 + " ", "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 if (_PointsOfContact.PersonID == CurrentUser.NameIdentifierInt64)
                 {
                     ModelState.AddModelError(lr.PointOfContactAssignIssue, lr.CurrentUserPointOfContactAssignIssue);
@@ -387,6 +420,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(0);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to destroy point of contact  " + DateTime.UtcNow + " with user id " + CurrentUser.NameIdentifierInt64 + " ", "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _PointsOfContact.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _PointsOfContact.UpdatedDate = DateTime.Now;
                 var result = this.OrganizationBAL.PointOfContact_DeleteBAL(_PointsOfContact);
@@ -409,6 +445,9 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorizeAttribute("CanViewPointofContact")]
         public ActionResult Resources(string oid)
         {
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to view  resources  " + DateTime.UtcNow + " with user id " + CurrentUser.NameIdentifierInt64 + " ", "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             return PartialView("_Resources", oid);
         }
 

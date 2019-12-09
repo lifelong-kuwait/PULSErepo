@@ -21,6 +21,7 @@ using Abp.Runtime.Validation;
 using TMS.Web.Core;
 using System.Collections.Generic;
 using TMS.Business.Interfaces.TMS.Program;
+using System.Web.Script.Serialization;
 
 namespace TMS.Web.Controllers
 {
@@ -45,6 +46,7 @@ namespace TMS.Web.Controllers
         //[ClaimsAuthorizeAttribute("CanViewPerson")]
         public ActionResult Person(long pT)
         {
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to View Persons " + DateTime.UtcNow, "", 0, "People", "Person", pT.ToString(), CurrentUser.CompanyID);
             ViewData["RoleID"] = pT;
             return View(pT);
         }
@@ -67,6 +69,7 @@ namespace TMS.Web.Controllers
                 }
                 else
                 {
+                    _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to View Persons Detail " + DateTime.UtcNow, "", 0, "People", "Detail", pid.ToString(), CurrentUser.CompanyID);
                     ViewData["model"] = data;
                     return View();
                 }
@@ -76,6 +79,8 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorizeAttribute("CanViewPerson")]
         public ActionResult PersonActive(long pT)
         {
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to View Active Persons " + DateTime.UtcNow, "", 0, "People", "Person", pT.ToString(), CurrentUser.CompanyID);
+
             ViewData["RoleID"] = pT;
             return View(pT);
         }
@@ -108,6 +113,8 @@ namespace TMS.Web.Controllers
         [ContentAuthorize]
         public ActionResult Others(string pid)
         {
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to View others" + DateTime.UtcNow, "", 0, "People", "others", pid.ToString(), CurrentUser.CompanyID);
+
             return PartialView("_DetailOthers", pid);
         }
         //CanViewPersonByOrganization
@@ -117,7 +124,8 @@ namespace TMS.Web.Controllers
         public ActionResult Person_Read([DataSourceRequest]DataSourceRequest request, long RoleID)
          {
             var list = this._ClassBAL.personRoleGroups(CurrentUser.NameIdentifierInt64);
-            long PersonId = 0;
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to Read Persons " + DateTime.UtcNow, "", 0, "People", "Person_Read", RoleID.ToString(), CurrentUser.CompanyID);
+             long PersonId = 0;
             if (list.Count == 1 && list[0].PrimaryGroupName == "Trainer")
             {
                 PersonId = CurrentUser.NameIdentifierInt64;
@@ -233,6 +241,8 @@ namespace TMS.Web.Controllers
             if (ModelState.IsValid)
             {
                 bool _valid = false;
+                var json = new JavaScriptSerializer().Serialize(_person);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to insert Person " + DateTime.UtcNow, "", 0, "People", "Person_Create", json.ToString(), CurrentUser.CompanyID);
 
                 if (_UserBAL.LoginPerson_DuplicationCheckBAL(new Person { Email = _person.Email, CreatedBy = CurrentUser.CompanyID }) > 0)
                 {
@@ -371,6 +381,8 @@ namespace TMS.Web.Controllers
             _person.UpdatedBy = CurrentUser.NameIdentifierInt64;
             _person.UpdatedDate = DateTime.Now;
             _person.ClientType = ClientType.ClientType_Internal;
+            var json = new JavaScriptSerializer().Serialize(_person);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Update_Success.ToString(), System.Environment.MachineName, "User tried to Update Person " + DateTime.UtcNow, "", 0, "People", "Person_Update", json.ToString(), CurrentUser.CompanyID);
 
             bool _valid = false;
             if (_UserBAL.LoginPerson_DuplicationCheckUpdateBAL(new Person { Email = _person.Email, CreatedBy = CurrentUser.CompanyID,ID=_person.ID}) > 0)
@@ -531,7 +543,8 @@ namespace TMS.Web.Controllers
        // [DisableValidation]
         public ActionResult Person_Destroy([DataSourceRequest] DataSourceRequest request, Person _person)
         {
-
+            var json = new JavaScriptSerializer().Serialize(_person);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Delete_Success.ToString(), System.Environment.MachineName, "User tried to Delete Person " + DateTime.UtcNow, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
             if (_UserBAL.DeletePerson_CheckBAL(new ClassTrainerMapping { PersonID = _person.ID }) > 0)
             {
                 //ModelState.AddModelError(lr.UserEmailAlreadyExist, lr.UserEmailAlreadyExist);
@@ -697,6 +710,9 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public ActionResult Relation_read([DataSourceRequest] DataSourceRequest request, long pid)
         {
+            var json = new JavaScriptSerializer().Serialize(pid);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to Read Person Relations " + DateTime.UtcNow, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             var _Phone = _PersonBAL.PersonRelationGetAllbyPersonIDBAL(pid);
             return Json(_Phone.ToDataSourceResult(request, ModelState));
         }
@@ -709,6 +725,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(_objPersonRelation);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to create Person Relation " + DateTime.UtcNow, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _objPersonRelation.CreatedBy = CurrentUser.NameIdentifierInt64;
                 _objPersonRelation.CreatedDate = DateTime.Now;
                 _objPersonRelation.RelationFrom = pid;
@@ -738,6 +757,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(_objPersonRelation);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Update_Success.ToString(), System.Environment.MachineName, "User tried to update Person Relation " + DateTime.UtcNow, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _objPersonRelation.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _objPersonRelation.UpdatedDate = DateTime.Now;
 
@@ -771,6 +793,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(_objPersonRelation);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Delete_Success.ToString(), System.Environment.MachineName, "User tried to destroy Person Relation " + DateTime.UtcNow, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _objPersonRelation.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _objPersonRelation.UpdatedDate = DateTime.Now;
                 var result = _PersonBAL.PersonRelationToPerson_DeleteBAL(_objPersonRelation);
@@ -796,6 +821,9 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public ActionResult ManageRoles(long PersonId)
         {
+            var json = new JavaScriptSerializer().Serialize(PersonId);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to read Person Roles " + DateTime.UtcNow, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             return PartialView("_PersonRoles", PersonId);
         }
 
@@ -803,6 +831,8 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorize("CanViewPersonRoles")]
         public ActionResult ManageRoles_Read([DataSourceRequest] DataSourceRequest request, long PersonId)
         {
+            var json = new JavaScriptSerializer().Serialize(PersonId);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to read Person Roles " + DateTime.UtcNow, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
             var startRowIndex = (request.Page - 1) * request.PageSize;
             int Total = 0;
@@ -827,6 +857,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(_objPersonRoles);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to create Person Roles " + DateTime.UtcNow, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _objPersonRoles.CreatedBy = CurrentUser.NameIdentifierInt64;
                 _objPersonRoles.CreatedDate = DateTime.Now;
                 _objPersonRoles.PersonID = Convert.ToInt64(Request.QueryString["PersonID"]);
@@ -905,6 +938,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(_objPersonRoles);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Update_Success.ToString(), System.Environment.MachineName, "User tried to update Person Roles " + DateTime.UtcNow, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _objPersonRoles.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _objPersonRoles.UpdatedDate = DateTime.Now;
                 var person = _PersonBAL.Person_GetAllByIdBAL(Convert.ToString(_objPersonRoles.PersonID));
@@ -995,6 +1031,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(_objPersonRoles);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Delete_Success.ToString(), System.Environment.MachineName, "User tried to delete Person Roles " + DateTime.UtcNow, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _objPersonRoles.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _objPersonRoles.UpdatedDate = DateTime.Now;
                 //if (_objPersonRoles.RoleID == 2)
@@ -1022,6 +1061,8 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public ActionResult ManageRolesCRM(long PersonId)
         {
+            var json = new JavaScriptSerializer().Serialize(PersonId);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to read CRM Person Roles " + DateTime.UtcNow, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
             return PartialView("_PersonRolesCRM", PersonId);
         }
 
@@ -1029,7 +1070,8 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorize("CanViewPersonRolesCRM")]
         public ActionResult ManageRoles_ReadCRM([DataSourceRequest] DataSourceRequest request, long PersonId)
         {
-
+            var json = new JavaScriptSerializer().Serialize(PersonId);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to read CRM Person Roles " + DateTime.UtcNow, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
             var startRowIndex = (request.Page - 1) * request.PageSize;
             int Total = 0;
             var SearchText = Request.Form["SearchText"];
@@ -1053,6 +1095,8 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(_objPersonRoles);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to create CRM Person Roles " + DateTime.UtcNow, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
                 _objPersonRoles.CreatedBy = CurrentUser.NameIdentifierInt64;
                 _objPersonRoles.CreatedDate = DateTime.Now;
                 _objPersonRoles.PersonID = Convert.ToInt64(Request.QueryString["PersonID"]);
@@ -1129,6 +1173,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(_objPersonRoles);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Update_Success.ToString(), System.Environment.MachineName, "User tried to update CRM Person Roles " + DateTime.UtcNow, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _objPersonRoles.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _objPersonRoles.UpdatedDate = DateTime.Now;
                 var person = _PersonBAL.Person_GetAllByIdBAL(Convert.ToString(_objPersonRoles.PersonID));
@@ -1219,6 +1266,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(_objPersonRoles);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Delete_Success.ToString(), System.Environment.MachineName, "User tried to destroy CRM Person Roles " + DateTime.UtcNow, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _objPersonRoles.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _objPersonRoles.UpdatedDate = DateTime.Now;
                 //if (_objPersonRoles.RoleID == 2)

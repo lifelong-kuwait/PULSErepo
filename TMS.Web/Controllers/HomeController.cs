@@ -15,6 +15,7 @@ using log4net;
 using lr = Resources.Resources;
 using System.Configuration;
 using System.Web.Script.Serialization;
+using TMS.Library;
 
 namespace TMS.Web.Controllers
 {
@@ -74,8 +75,8 @@ namespace TMS.Web.Controllers
         public ActionResult Login(LoginModel infoOfData)
         {
             infoOfData.isOffice365Enabled = false;
-            
 
+            var json = new JavaScriptSerializer().Serialize(infoOfData);
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("", L("Invalidpassword"));
@@ -92,16 +93,16 @@ namespace TMS.Web.Controllers
                     DateTime endTime = DateTime.Now;
                     Logger.Info("User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow);
                     TimeSpan span = endTime.Subtract(startTime);
-                    var json = new JavaScriptSerializer().Serialize(infoOfData);
+                   
                     if (_objUser.IsLockedOut && span.TotalMinutes<=10)
                     {
-                        BALUsers.LogInsert(DateTime.Now.ToString(), "10","Login", System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(),CurrentUser.CompanyID);
+                        BALUsers.LogInsert(DateTime.Now.ToString(), "10", Logs.Login_Locked.ToString(), System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(),CurrentUser.CompanyID);
                         ModelState.AddModelError("", "User Locked Please try after " + ConfigurationManager.AppSettings["LockedTime"].ToString() + " minutes");
                         return View(infoOfData);
                     }
                     if (_objUser.IsLockedOut)
                     {
-                        BALUsers.LogInsert(DateTime.Now.ToString(), "10", "Login", System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(), CurrentUser.CompanyID);
+                        BALUsers.LogInsert(DateTime.Now.ToString(), "10", Logs.Login_Locked.ToString(), System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(), CurrentUser.CompanyID);
                         ModelState.AddModelError("", "User Locked Please try after "+ ConfigurationManager.AppSettings["LockedTime"].ToString()+" minutes");
                         return View(infoOfData);
                     }
@@ -130,6 +131,7 @@ namespace TMS.Web.Controllers
                             userlogin.LoginDateTime = DateTime.Now;
                             this.BALUsers.Create_UserHistoryBAL(userlogin);
                             IdentitySignin(_objUser, false);
+                            BALUsers.LogInsert(DateTime.Now.ToString(), "10", Logs.Login_Susscess.ToString(), System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(), 0);
                             return Redirect(GetRedirectUrl(infoOfData.ReturnUrl));
                            
                         }
@@ -137,12 +139,14 @@ namespace TMS.Web.Controllers
                         {
                             if (_objUser.LockedOutAttempt >= TMSHelper.FormAuthenticationLockedOutAttemptMax())
                             {
+                                BALUsers.LogInsert(DateTime.Now.ToString(), "10", Logs.Login_Attempt.ToString(), System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(), 0);
                                 this.BALUsers.UpdateUserLockedOutBAL(infoOfData.Email, _objUser.UserID, _objUser.LockedOutAttempt + 1, true);
                                 ModelState.AddModelError("", lr.UserLockedOutMessage);
                             }
                             else
                             {
                                 this.BALUsers.UpdateUserLockedOutBAL(infoOfData.Email, _objUser.UserID, _objUser.LockedOutAttempt + 1, false);
+                                BALUsers.LogInsert(DateTime.Now.ToString(), "10", Logs.Login_Attempt.ToString(), System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(), 0);
 
                                 if (_objUser.LockedOutAttempt >= TMSHelper.FormAuthenticationLockedOutAttemptNotifyUser())
                                 {
@@ -159,6 +163,8 @@ namespace TMS.Web.Controllers
                 }
                 else
                 {//user is not found with form authentication.
+                    BALUsers.LogInsert(DateTime.Now.ToString(), "10", Logs.Login_Attempt.ToString(), System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(), 0);
+
                     ModelState.AddModelError("", L("Invalidpassword"));
                 }
                 return View(infoOfData);

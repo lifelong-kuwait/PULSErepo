@@ -18,6 +18,7 @@ using TMS.Business.Interfaces.Common.Configuration;
 using Abp.Runtime.Validation;
 using TMS.Web.Core;
 using TMS.Library.Entities.Common.Roles;
+using System.Web.Script.Serialization;
 
 namespace TMS.Web.Controllers
 {
@@ -29,14 +30,15 @@ namespace TMS.Web.Controllers
         private readonly ISessionBAL _SessionBAL;
         private readonly IAttendanceBAL _AttendanceBAL;
         private readonly IConfigurationBAL _objConfigurationBAL;
+        private readonly IBALUsers _UserBAL;
 
-
-        public ProgramController(ICourseBAL ICourseBAL, IConfigurationBAL _objIConfigurationBAL, IClassBAL IClassBAL, ISessionBAL _ISessionBAL, IAttendanceBAL _IAttendanceBAL)
+        public ProgramController(ICourseBAL ICourseBAL, IConfigurationBAL _objIConfigurationBAL, IClassBAL IClassBAL, ISessionBAL _ISessionBAL, IAttendanceBAL _IAttendanceBAL,IBALUsers objUserBAL)
         {
             _objConfigurationBAL = _objIConfigurationBAL;
             _CourseBAL = ICourseBAL;
             _ClassBAL = IClassBAL;
             _SessionBAL = _ISessionBAL;
+            _UserBAL = objUserBAL;
             _AttendanceBAL = _IAttendanceBAL;
         }
 
@@ -45,6 +47,9 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorize("CanViewCourse")]
         public ActionResult Course()
         {
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to view Courses at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             return View();
         }
 
@@ -52,6 +57,9 @@ namespace TMS.Web.Controllers
         public ActionResult CourseDetail()
         {
             var id = Request.QueryString["id"];
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to view Courses detail at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             if (string.IsNullOrEmpty(id))
             {
                 return RedirectPermanent(Url.Content("~/Program/Course"));
@@ -76,6 +84,9 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public ActionResult Course_Read([DataSourceRequest] DataSourceRequest request)
          {
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to view Courses at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             var list = this._ClassBAL.personRoleGroups(CurrentUser.NameIdentifierInt64);
             long PersonID = 0;
             if (list.Count == 1 && list[0].PrimaryGroupName == "Trainer")
@@ -161,6 +172,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(_Course);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to create Courses at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _Course.CreatedBy = CurrentUser.NameIdentifierInt64;
                 _Course.CreatedDate = DateTime.Now;
                 _Course.OrganizationID = CurrentUser.CompanyID;
@@ -190,6 +204,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(_Course);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Update_Success.ToString(), System.Environment.MachineName, "User tried to update Courses at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _Course.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _Course.UpdatedDate = DateTime.Now;
                 var codeSuffix = Request.Form["codeSuffix"];
@@ -215,6 +232,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                var json = new JavaScriptSerializer().Serialize(_Course);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Delete_Success.ToString(), System.Environment.MachineName, "User tried to destroy Courses at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
                 bool result1 = false;
                 var _returnValue = this._CourseBAL.TMS_CoursesDeleteCheck(_Course.ID.ToString(), CurrentUser.CompanyID.ToString());
@@ -275,7 +295,10 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public ActionResult Class_Read([DataSourceRequest] DataSourceRequest request)
         {
-            var list=this._ClassBAL.personRoleGroups(CurrentUser.NameIdentifierInt64);
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to read Class at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
+            var list =this._ClassBAL.personRoleGroups(CurrentUser.NameIdentifierInt64);
             var kendoRequest = new Kendo.Mvc.UI.DataSourceRequest
             {
 
@@ -331,6 +354,9 @@ namespace TMS.Web.Controllers
         {
             int count = 0;
             var result = _ClassBAL.GetCourseDetailByIdForNewClassBAL(id, ref count);
+            var json = new JavaScriptSerializer().Serialize(id);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to detail Class at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             if (count > 0)
             {
                 result.CourseCode = result.CourseCode + "-" + DateTime.Now.Year.ToString().Substring(2, 2) + "-" + (count + 1).ToString("000");
@@ -348,6 +374,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(_Class);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to create Class at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 DateTime t1 = Convert.ToDateTime(_Class.StartTimeString);
                 DateTime t2 = Convert.ToDateTime(_Class.EndTimeString);
                 int value = DateTime.Compare(t1, t2);
@@ -401,6 +430,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(_Class);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Update_Success.ToString(), System.Environment.MachineName, "User tried to update Class at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 DateTime t1 = Convert.ToDateTime(_Class.StartTimeString);
                 DateTime t2 = Convert.ToDateTime(_Class.EndTimeString);
                 int value = DateTime.Compare(t1, t2);
@@ -459,6 +491,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(_Class);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Delete_Success.ToString(), System.Environment.MachineName, "User tried to destroy Class at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 int sessioncount = _ClassBAL.TMS_Classes_SessionCountBAL(_Class.ID);
                 if (sessioncount > 0)
                 {
@@ -563,6 +598,9 @@ namespace TMS.Web.Controllers
         public ActionResult ManageTrainee_Read([DataSourceRequest] DataSourceRequest request, long ClassID)
         {
             ViewData["ClassTraineeClassIdCreating"] = ClassID;
+            var json = new JavaScriptSerializer().Serialize(ClassID);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to read Class trainee at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             if (CurrentUser.CompanyID > 0)
             {
                 return Json(_ClassBAL.ClassTraineeMapping_GetAllBALOrganization(CurrentCulture, ClassID, CurrentUser.CompanyID).ToDataSourceResult(request, ModelState));
@@ -580,6 +618,8 @@ namespace TMS.Web.Controllers
 
             var startRowIndex = (request.Page - 1) * request.PageSize;
             int Total = 0;
+            var json = new JavaScriptSerializer().Serialize(ClassID);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to read Class trainee at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
             var SearchText = Request.Form["SearchText"];
             if (request.PageSize == 0)
@@ -624,6 +664,9 @@ namespace TMS.Web.Controllers
             List<TrainerOpenMapping> ManageTrainer = _objConfigurationBAL.ManageTrainer_GetAllBAL(Convert.ToInt32(cid), 2);
             bool flage = true;
             long trainerid = -1;
+            var json = new JavaScriptSerializer().Serialize(PersonIds);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to create Class trainee at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             foreach (var x in ManageTrainer)
             {
                 if (PersonIds.Contains(x.PersonID.ToString()))
@@ -671,6 +714,9 @@ namespace TMS.Web.Controllers
             ClassTraineeMapping _Class = new ClassTraineeMapping();
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(ID);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Delete_Success.ToString(), System.Environment.MachineName, "User tried to destroy Class trainee at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _Class.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _Class.UpdatedDate = DateTime.Now;
                 _Class.ID = ID;
@@ -698,6 +744,9 @@ namespace TMS.Web.Controllers
             var startRowIndex = (request.Page - 1) * request.PageSize;
             int Total = 0;
             var SearchText = Request.Form["SearchText"];
+            var json = new JavaScriptSerializer().Serialize(ClassID);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to read Class trainee at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             if (request.PageSize == 0)
             {
                 request.PageSize = 10;
@@ -733,6 +782,9 @@ namespace TMS.Web.Controllers
             ClassTrainerMapping _Classes = new ClassTrainerMapping();
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(PersonIds);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to create Class trainee at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _Classes.CreatedBy = CurrentUser.NameIdentifierInt64;
                 _Classes.CreatedDate = DateTime.Now;
                 _Classes.ClassID = cid;
@@ -770,6 +822,8 @@ namespace TMS.Web.Controllers
         {
             var pid = (string)Session["pid"];
             long id = Convert.ToInt64(pid);
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to read Class trainer at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
             int Total = 0;
             //  long id = 60066;
@@ -1351,6 +1405,9 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorize("CanViewSession")]
         public ActionResult Sessions()
         {
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to read sessions at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             return View();
         }
         [ClaimsAuthorize("CanViewReports")]
@@ -1530,6 +1587,9 @@ namespace TMS.Web.Controllers
                 }
                 else
                 {
+                    var json = new JavaScriptSerializer().Serialize(0);
+                    _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to read sessions detail at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                     ViewData["model"] = data;
                     return View();
                 }
@@ -1542,7 +1602,10 @@ namespace TMS.Web.Controllers
         {
             var list = this._ClassBAL.personRoleGroups(CurrentUser.NameIdentifierInt64);
             long PersonID = 0;
-            if(list.Count==1 && list[0].PrimaryGroupName=="Trainer")
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to read sessions detail at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
+            if (list.Count==1 && list[0].PrimaryGroupName=="Trainer")
             {
                 PersonID = CurrentUser.NameIdentifierInt64;
             }
@@ -1612,6 +1675,9 @@ namespace TMS.Web.Controllers
             {
                 if (VerifyBussinessRules(_Sessions))
                 {
+                    var json = new JavaScriptSerializer().Serialize(_Sessions);
+                    _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to create sessions detail at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                     DateTime t1 = Convert.ToDateTime(_Sessions.StartTimeString);
                     DateTime t2 = Convert.ToDateTime(_Sessions.EndTimeString);
                     int value = DateTime.Compare(t1, t2);
@@ -1667,6 +1733,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(_Sessions);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Update_Success.ToString(), System.Environment.MachineName, "User tried to update sessions detail at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _Sessions.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _Sessions.UpdatedDate = DateTime.Now;
                 if (VerifyBussinessRules(_Sessions))
@@ -1714,6 +1783,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(_Sessions);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Delete_Success.ToString(), System.Environment.MachineName, "User tried to destroy sessions detail at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _Sessions.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _Sessions.UpdatedDate = DateTime.Now;
                 var _returnValue = _CourseBAL.TMS_SessionAttendance_GetAllBAL(_Sessions);
@@ -2002,6 +2074,8 @@ namespace TMS.Web.Controllers
             int Atttype = 0;
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(Attendance);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to insert sessions attendance detail at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
                 // string att = frm["Present"].ToString();
                 if ("Mark All Present" == frm["Present"].ToString())
