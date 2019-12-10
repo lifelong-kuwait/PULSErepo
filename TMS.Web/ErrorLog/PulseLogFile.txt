@@ -105,3 +105,29 @@ INFO  2019-12-09 12:51:28,492 42773ms DESKTOP-LSN82VI        Login              
 INFO  2019-12-09 12:51:28,878 43159ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/9/2019 7:51:28 AM
 INFO  2019-12-09 14:50:16,930 1253536ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/9/2019 9:50:16 AM
 INFO  2019-12-09 14:50:17,330 1253936ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/9/2019 9:50:17 AM
+INFO  2019-12-10 10:10:34,992 43248ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/10/2019 5:10:34 AM
+INFO  2019-12-10 10:10:35,451 43706ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/10/2019 5:10:35 AM
+INFO  2019-12-10 10:27:48,356 1076611ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/10/2019 5:27:48 AM
+INFO  2019-12-10 10:27:48,735 1076990ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/10/2019 5:27:48 AM
+INFO  2019-12-10 11:25:20,050 21508ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/10/2019 6:25:20 AM
+INFO  2019-12-10 11:25:20,435 21893ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/10/2019 6:25:20 AM
+INFO  2019-12-10 11:36:07,332 668789ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/10/2019 6:36:07 AM
+INFO  2019-12-10 11:36:10,013 671471ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/10/2019 6:36:10 AM
+INFO  2019-12-10 11:36:35,263 696720ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/10/2019 6:36:35 AM
+INFO  2019-12-10 11:36:39,907 701365ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/10/2019 6:36:39 AM
+INFO  2019-12-10 11:46:51,078 1312535ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/10/2019 6:46:51 AM
+INFO  2019-12-10 11:46:53,533 1314990ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/10/2019 6:46:53 AM
+INFO  2019-12-10 12:04:33,504 243043ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/10/2019 7:04:33 AM
+INFO  2019-12-10 12:04:33,986 243524ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/10/2019 7:04:33 AM
+INFO  2019-12-10 14:22:26,310 36361ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/10/2019 9:22:26 AM
+INFO  2019-12-10 14:22:26,707 36757ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/10/2019 9:22:26 AM
+INFO  2019-12-10 14:22:27,322 37373ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/10/2019 9:22:27 AM
+INFO  2019-12-10 14:22:27,703 37753ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/10/2019 9:22:27 AM
+INFO  2019-12-10 18:18:43,744 45870ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/10/2019 1:18:43 PM
+INFO  2019-12-10 18:18:44,266 46392ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/10/2019 1:18:44 PM
+ERROR 2019-12-10 18:26:56,615 538740ms DESKTOP-LSN82VI        OnException        - Cannot insert the value NULL into column 'NickName', table 'TMS_SPL_PULSE.dbo.Users'; column does not allow nulls. INSERT fails.
+Cannot insert the value NULL into column 'UserID', table 'TMS_SPL_PULSE.dbo.Users_TMS_GroupsMapping'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+The statement has been terminated.
+INFO  2019-12-10 18:46:17,439 69928ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/10/2019 1:46:17 PM
+INFO  2019-12-10 18:46:17,840 70329ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/10/2019 1:46:17 PM

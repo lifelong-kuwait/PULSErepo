@@ -8,11 +8,13 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using TMS.Business.Interfaces.Common;
 using TMS.Business.Interfaces.Common.Groups;
 using TMS.Business.Interfaces.TMS;
 using TMS.Common;
 using TMS.Common.Utilities;
+using TMS.Library;
 using TMS.Library.Users;
 using TMS.Web.Core;
 using lr = Resources.Resources;
@@ -130,6 +132,8 @@ namespace TMS.Web.Controllers
             //long ChangePassword = Convert.ToInt32(UtilityFunctions.GetQueryString("vc"));
             //if ((UserID > 0 && ChangePassword > 0) || (CurrentPersonID > 0 && ChangePassword > 0))
             //{
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to RESET password at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
             return View();
             //}
@@ -144,6 +148,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(model);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to RESET password at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 LoginUsers _objUsers = new LoginUsers
                 {
                     Password = Crypto.CreatePasswordHash(model.Password),
@@ -189,12 +196,18 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorize("CanViewLockedUser")]
         public ActionResult UnlockUser()
         {
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to unlock user at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             return View();
         }
        [DontWrapResult]
         [ClaimsAuthorizeAttribute("CanViewLockedUser")]
         public ActionResult LockedUser_Read([DataSourceRequest] DataSourceRequest request)
         {
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to unlock user at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             var startRowIndex = (request.Page - 1) * request.PageSize;
             //   int Total = 0;
             var SearchText = Request.Form["SearchText"];
@@ -224,6 +237,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(_objUsers);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Update_Success.ToString(), System.Environment.MachineName, "User tried to unlock user at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _objUsers.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _objUsers.UpdatedDate = DateTime.Now;
                 var result = this._UserBAL.LoginUsers_UnlockBAL(_objUsers);
@@ -238,6 +254,9 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorize("CanViewUsers")]
         public ActionResult Index()
         {
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to view user at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             return View();
         }
 
@@ -246,7 +265,9 @@ namespace TMS.Web.Controllers
         public ActionResult LoginUser_Read([DataSourceRequest] DataSourceRequest request)
         {
             var startRowIndex = (request.Page - 1) * request.PageSize;
-            //   int Total = 0;
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to view user at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             var SearchText = Request.Form["SearchText"];
             if (request.PageSize == 0)
             {
@@ -299,6 +320,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(_objUsers);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to insert new user at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 if (this._UserBAL.LoginUsers_DuplicationCheckBAL(new LoginUsers { Email = _objUsers.Email }) > 0)
                 {
                     ModelState.AddModelError(lr.UserEmailAlreadyExist, lr.DubliocationHappen);
@@ -365,6 +389,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(_objUsers);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Update_Success.ToString(), System.Environment.MachineName, "User tried to update user at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 if (this._UserBAL.LoginUsers_DuplicationCheckUpdateBAL(new LoginUsers { Email = _objUsers.Email,UserID=_objUsers.UserID}) > 0)
                 {
                     //return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
@@ -437,6 +464,9 @@ namespace TMS.Web.Controllers
             //ModelState.Remove("ConfirmPassword");
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(_objUsers);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Delete_Success.ToString(), System.Environment.MachineName, "User tried to delete user at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _objUsers.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _objUsers.UpdatedDate = DateTime.Now;
                 var result = this._UserBAL.LoginUsers_DeleteBAL(_objUsers);

@@ -476,8 +476,11 @@ namespace TMS.DataObjects.TMS
         public long TMS_PersonintoUser_CreateDAL(PersonRolesMapping _objPersonRoles)
         {
             Person obj = Person_GetAllByIdDAL(Convert.ToString(_objPersonRoles.PersonID));
-
-            var parameters = new[] { ParamBuilder.Par("UserID", 0) };
+            if (obj.NickName==null)
+            {
+                obj.NickName = "";
+            }
+                var parameters = new[] { ParamBuilder.Par("UserID", 0) };
             return ExecuteInt64withOutPutparameterSp("TMS_PersontoUser_Create", parameters,
                 ParamBuilder.Par("P_FirstName", obj.P_FirstName),
                 ParamBuilder.Par("P_MiddleName", obj.P_MiddleName),
@@ -493,6 +496,7 @@ namespace TMS.DataObjects.TMS
                 ParamBuilder.Par("IsActive", 1),
                 ParamBuilder.Par("CompanyID", obj.OrganizationID),
                 ParamBuilder.Par("DateOfBirth", obj.DateOfBirth),
+               
                 ParamBuilder.Par("NickName", obj.NickName),
                 ParamBuilder.Par("Salutation", obj.SalutationID),
                 ParamBuilder.Par("Gender", obj.Gender),

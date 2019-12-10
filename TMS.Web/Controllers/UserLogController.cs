@@ -51,25 +51,64 @@ namespace TMS.Web.Controllers
             {
                 request.PageSize = 10;
             }
+            var kendoRequest = new Kendo.Mvc.UI.DataSourceRequest
+            {
 
+                Filters = request.Filters,
+                Sorts = request.Sorts,
+                Groups = request.Groups,
+                Aggregates = request.Aggregates
+            };
             if (CurrentUser.CompanyID > 0)
             {
+                IList<CRM_UserLog> _userdata;
+                if (kendoRequest.Filters.Count > 0)
+                {
+                    _userdata = this._UserBAL.LogOrganization_GetAllBAL(ref Total, CurrentUser.CompanyID.ToString(), SearchText, "ID", startRowIndex, request.Page, 20000);
+
+                }
+                else
+                {
+                     _userdata = this._UserBAL.LogOrganization_GetAllBAL(ref Total, CurrentUser.CompanyID.ToString(), SearchText, "ID", startRowIndex, request.Page, request.PageSize);
+
+                }
                 //LogOrganization_GetAllBAL(ref int Total, string OrgID, string SearchText, string SortExpression, int StartRowIndex, int page, int PageSize)
-                var _userdata = this._UserBAL.LogOrganization_GetAllBAL(ref Total, CurrentUser.CompanyID.ToString(), SearchText,"ID", startRowIndex, request.Page, request.PageSize);
+                _userdata = _userdata.Distinct().ToList();
+                var data = _userdata.ToDataSourceResult(kendoRequest);
+
                 var result = new DataSourceResult()
                 {
-                    Data = _userdata,
+                    AggregateResults = data.AggregateResults,
+                    Data = data.Data,
+                    Errors = data.Errors,
                     Total = Total
                 };
+
                 return Json(result);
 
             }
             else
             {
-                var _userdata = this._UserBAL.LogOrganization_GetAllBAL(ref Total, CurrentUser.CompanyID.ToString(), SearchText, "ID", startRowIndex, request.Page, request.PageSize);
+                IList<CRM_UserLog> _userdata;
+                if (kendoRequest.Filters.Count > 0)
+                {
+                     _userdata = this._UserBAL.LogOrganization_GetAllBAL(ref Total, CurrentUser.CompanyID.ToString(), SearchText, "ID", startRowIndex, request.Page, 20000);
+
+                }
+                else
+                {
+                     _userdata = this._UserBAL.LogOrganization_GetAllBAL(ref Total, CurrentUser.CompanyID.ToString(), SearchText, "ID", startRowIndex, request.Page, request.PageSize);
+
+                }
+                _userdata = _userdata.Distinct().ToList();
+
+                var data = _userdata.ToDataSourceResult(kendoRequest);
+
                 var result = new DataSourceResult()
                 {
-                    Data = _userdata,
+                    AggregateResults = data.AggregateResults,
+                    Data = data.Data,
+                    Errors = data.Errors,
                     Total = Total
                 };
                 return Json(result);
@@ -87,14 +126,36 @@ namespace TMS.Web.Controllers
             {
                 request.PageSize = 10;
             }
+            var kendoRequest = new Kendo.Mvc.UI.DataSourceRequest
+            {
 
+                Filters = request.Filters,
+                Sorts = request.Sorts,
+                Groups = request.Groups,
+                Aggregates = request.Aggregates
+            };
             if (CurrentUser.CompanyID > 0)
             {
+
                 //LogOrganization_GetAllBAL(ref int Total, string OrgID, string SearchText, string SortExpression, int StartRowIndex, int page, int PageSize)
-                var _userdata = this._UserBAL.ErrorLogOrganization_GetAllBAL(ref Total, CurrentUser.CompanyID.ToString(), SearchText, "ID", startRowIndex, request.Page, request.PageSize);
+                IList<CRM_UserLog> _userdata;
+                if (kendoRequest.Filters.Count > 0)
+                {
+                    _userdata = this._UserBAL.ErrorLogOrganization_GetAllBAL(ref Total, CurrentUser.CompanyID.ToString(), SearchText, "ID", startRowIndex, request.Page, 20000);
+                }
+                else
+                {
+                    _userdata = this._UserBAL.ErrorLogOrganization_GetAllBAL(ref Total, CurrentUser.CompanyID.ToString(), SearchText, "ID", startRowIndex, request.Page, request.PageSize);
+
+                }
+                _userdata = _userdata.Distinct().ToList();
+                var data = _userdata.ToDataSourceResult(kendoRequest);
+
                 var result = new DataSourceResult()
                 {
-                    Data = _userdata,
+                    AggregateResults = data.AggregateResults,
+                    Data = data.Data,
+                    Errors = data.Errors,
                     Total = Total
                 };
                 return Json(result);
@@ -102,10 +163,24 @@ namespace TMS.Web.Controllers
             }
             else
             {
-                var _userdata = this._UserBAL.ErrorLogOrganization_GetAllBAL(ref Total, CurrentUser.CompanyID.ToString(), SearchText, "ID", startRowIndex, request.Page, request.PageSize);
+                IList<CRM_UserLog> _userdata;
+                if (kendoRequest.Filters.Count > 0)
+                {
+                    _userdata = this._UserBAL.ErrorLogOrganization_GetAllBAL(ref Total, CurrentUser.CompanyID.ToString(), SearchText, "ID", startRowIndex, request.Page, 20000);
+                }
+                else
+                {
+                    _userdata = this._UserBAL.ErrorLogOrganization_GetAllBAL(ref Total, CurrentUser.CompanyID.ToString(), SearchText, "ID", startRowIndex, request.Page, request.PageSize);
+
+                }
+                _userdata = _userdata.Distinct().ToList();
+                var data = _userdata.ToDataSourceResult(kendoRequest);
+
                 var result = new DataSourceResult()
                 {
-                    Data = _userdata,
+                    AggregateResults = data.AggregateResults,
+                    Data = data.Data,
+                    Errors = data.Errors,
                     Total = Total
                 };
                 return Json(result);

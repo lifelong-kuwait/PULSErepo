@@ -36,25 +36,22 @@
                 </div>
             </text>))
                            .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_UserLog").DisplayDeleteConfirmation(false))
-                           .Sortable()
-                           .Scrollable()
                            .Groupable()
-                           .Filterable()
-                           .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+                           .Sortable().Selectable(selectable => selectable
+                           .Mode(GridSelectionMode.Single))
+                           .Groupable()
                            .Pageable(pager => pager
-    .Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
-    .Scrollable()
+                           .Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
+                           .Scrollable()
+                           .Filterable()
                            .HtmlAttributes(new { style = "height:700px !important;" })
-
                            .DataSource(dataSource => dataSource.Ajax()
                            .Model(model =>
                            {
                                model.Id(p => p.UserID);
 
                            }).PageSize(5)
-
                            .Read(read => read.Action("UserLog_Read", "UserLog").Data("withSearch"))
-                           .Destroy(update => update.Action("LoginLockedUser_Unlock", "User"))
                            .Events(events => events.Error("GeneralErrorHandler(\"Users\")"))
                             ).NoRecords(lr.GridNoRecordFoundMessage)
 )

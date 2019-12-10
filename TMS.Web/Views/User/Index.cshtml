@@ -23,6 +23,7 @@
     "# } #" +
 " />"
 ).Width(100);
+           columns.Bound(p => p.UserRoleName).Width(190).MinScreenWidth(550).Title("Login Type");
            columns.Bound(e => e.CreatedBy).Width(190).MinScreenWidth(550).Title(lr.GridAddedBy).ClientTemplate(@"<div class='gridaddedby'>
 #if(AddedByAlias!=null){#<span class='Addedby' >#:AddedByAlias#</span>#}#
 <span class='date' >#=kendo.toString(CreatedDate,'" + DateFormatScript + @"')#</span>
