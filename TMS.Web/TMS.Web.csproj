@@ -2643,6 +2643,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile6.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile60.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile61.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile62.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile7.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile8.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile9.pubxml" />
@@ -4834,6 +4835,8 @@
     <Content Include="Views\UserLog\EditorTemplates\_UserLog.cshtml" />
     <Content Include="Views\UserLog\UserErrorLog.cshtml" />
     <Content Include="Views\UserLog\EditorTemplates\_UserErrorLog.cshtml" />
+    <Content Include="Views\Home\LoginForTrainer.cshtml" />
+    <Content Include="Views\Home\_OrganizationForTrainerLogin.cshtml" />
     <None Include="WeeklyAttendanceReportData.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>

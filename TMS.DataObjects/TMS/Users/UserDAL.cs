@@ -36,18 +36,52 @@ namespace TMS.DataObjects
         /// </summary>
         /// <param name="Email">The email.</param>
         /// <returns>Users.</returns>
-        public Users LoginUserDAL(string Email)
+        public List<Users> LoginUserDAL(string Email)
+        {
+            //    DBGenerics db = new DBGenerics();
+
+            //    var parameters = new[]{
+            //    new SqlParameter(){ ParameterName="@Email", Value=Email }
+            //    //new SqlParameter(){ ParameterName="@Password", Value=Password }
+            //};
+
+            //    return ExecuteSinglewithSP<Users>("TMS_Users_LoginUser", parameters);
+            List<Users> LoginUserAddGroups = new List<Users>();
+            var conString = DBHelper.ConnectionString;
+            using (var conn = new SqlConnection(conString))
+            {
+                conn.Open();
+                string qry = @"TMS_Users_LoginUser";
+                DynamicParameters param = new DynamicParameters();
+                param.Add("@Email", Email);
+                LoginUserAddGroups = conn.Query<Users>(qry.ToString(), param, commandType: System.Data.CommandType.StoredProcedure).AsList<Users>();
+                conn.Close();
+            }
+            return LoginUserAddGroups;
+        }
+        public Users LoginUserDALForTrainer(string Email,long CompanyId)
         {
             DBGenerics db = new DBGenerics();
 
             var parameters = new[]{
-            new SqlParameter(){ ParameterName="@Email", Value=Email }
-            //new SqlParameter(){ ParameterName="@Password", Value=Password }
-        };
+                new SqlParameter(){ ParameterName="@Email", Value=Email },
+                new SqlParameter(){ ParameterName="@companyId", Value=CompanyId }
+            };
 
-            return ExecuteSinglewithSP<Users>("TMS_Users_LoginUser", parameters);
+            return ExecuteSinglewithSP<Users>("TMS_Users_LoginUserForTrainer", parameters);
+            //List<Users> LoginUserAddGroups = new List<Users>();
+            //var conString = DBHelper.ConnectionString;
+            //using (var conn = new SqlConnection(conString))
+            //{
+            //    conn.Open();
+            //    string qry = @"TMS_Users_LoginUser";
+            //    DynamicParameters param = new DynamicParameters();
+            //    param.Add("@Email", Email);
+            //    LoginUserAddGroups = conn.Query<Users>(qry.ToString(), param, commandType: System.Data.CommandType.StoredProcedure).AsList<Users>();
+            //    conn.Close();
+            //}
+            //return LoginUserAddGroups;
         }
-
         /// <summary>
         /// Updates the user locked out.
         /// </summary>
@@ -745,6 +779,18 @@ namespace TMS.DataObjects
         {
             return ExecuteScalarSPInt32("TMS_Users_DuplicationCheck",
              ParamBuilder.Par("Email", _objUsers.Email)
+                  );
+        }
+        /// <summary>
+        /// Logins the users duplication check dal.
+        /// </summary>
+        /// <param name="_objUsers">The object users.</param>
+        /// <returns>System.Int32.</returns>
+        public int LoginUsersAsTrainer_DuplicationCheckDAL(LoginUsers _objUsers)
+        {
+            return ExecuteScalarSPInt32("TMS_UsersAsTrainer_DuplicationCheckForOrganization",
+             ParamBuilder.Par("Email", _objUsers.Email),
+             ParamBuilder.Par("organizationId", _objUsers.CompanyID)
                   );
         }
         /// <summary>

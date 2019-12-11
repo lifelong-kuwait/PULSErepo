@@ -52,11 +52,19 @@ namespace TMS.Business.TMS
         /// </summary>
         /// <param name="Email">The email.</param>
         /// <returns>Users.</returns>
-        public Users LoginUserBAL(string Email)
+        public List<Users> LoginUserBAL(string Email)
         {
             return _DAL.LoginUserDAL(Email);
         }
-
+        /// <summary>
+        /// Logins the user bal.
+        /// </summary>
+        /// <param name="Email">The email.</param>
+        /// <returns>Users.</returns>
+        public Users LoginUserBALForTrainer(string Email,long companyId)
+        {
+            return _DAL.LoginUserDALForTrainer(Email,companyId);
+        }
         /// <summary>
         /// Updates the user locked out bal.
         /// </summary>
@@ -359,7 +367,15 @@ namespace TMS.Business.TMS
         {
             return _DAL.LoginUsers_DuplicationCheckDAL(_objUsers);
         }
-        
+        /// <summary>
+        /// Logins the users duplication check bal.
+        /// </summary>
+        /// <param name="_objUsers">The object users.</param>
+        /// <returns>System.Int32.</returns>
+        public int LoginUsersAsTrainer_DuplicationCheckBAL(LoginUsers _objUsers)
+        {
+            return _DAL.LoginUsersAsTrainer_DuplicationCheckDAL(_objUsers);
+        }
         public int LoginUsers_DuplicationCheckUpdateBAL(LoginUsers _objUsers)
         {
             return _DAL.LoginUsers_DuplicationCheckUpdateDAL(_objUsers);

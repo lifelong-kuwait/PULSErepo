@@ -50,6 +50,15 @@ namespace TMS.Business.TMS.Organization
         /// </summary>
         /// <param name="culture">The culture.</param>
         /// <returns>IList&lt;DDlList&gt;.</returns>
+        public IList<DDlList> OrganizationAllForTrainerbyCultureBAL(string culture, string email)
+        {
+            return DAL.OrganizationAllForTrainerbyCultureDAL(culture,email);
+        }
+        /// <summary>
+        /// Organizations the allby culture bal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
         public IList<DDlList> CertificatesByOiDBAL(long Oid)
         {
             return DAL.CertificatesByOiDDAL(Oid);

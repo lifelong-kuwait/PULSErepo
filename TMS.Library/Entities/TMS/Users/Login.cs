@@ -64,6 +64,9 @@ namespace TMS.Library.Users
         /// </summary>
         /// <value><c>true</c> if this instance is office365 enabled; otherwise, <c>false</c>.</value>
         public bool isOffice365Enabled { get; set; }
+        public List<DDlList> dDlList { get; set; }
+       
+        public int OrgnizationId { get; set; }
     }
 
     /// <summary>

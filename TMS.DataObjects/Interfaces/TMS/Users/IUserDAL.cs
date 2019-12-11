@@ -28,8 +28,13 @@ namespace TMS.DataObjects.Interfaces
         /// </summary>
         /// <param name="Email">The email.</param>
         /// <returns>Users.</returns>
-        Users LoginUserDAL(string Email);
-
+        List<Users> LoginUserDAL(string Email);
+        /// <summary>
+        /// Logins the user dal.
+        /// </summary>
+        /// <param name="Email">The email.</param>
+        /// <returns>Users.</returns>
+        Users LoginUserDALForTrainer(string Email,long companyID);
         /// <summary>
         /// Updates the login user themes.
         /// </summary>
@@ -129,7 +134,9 @@ namespace TMS.DataObjects.Interfaces
         /// </summary>
         /// <param name="_objUsers">The object users.</param>
         /// <returns>System.Int32.</returns>
-        int LoginUsers_DuplicationCheckDAL(LoginUsers _objUsers); 
+        int LoginUsers_DuplicationCheckDAL(LoginUsers _objUsers);
+        int LoginUsersAsTrainer_DuplicationCheckDAL(LoginUsers _objUsers);
+
         int LoginUsers_DuplicationCheckUpdateDAL(LoginUsers _objUsers);
         int LoginPerson_DuplicationCheckDAL(Library.TMS.Persons.Person objperson);
         int LoginPerson_DuplicationCheckUpdateDAL(Library.TMS.Persons.Person objperson);

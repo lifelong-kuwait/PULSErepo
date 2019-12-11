@@ -35,6 +35,11 @@ namespace TMS.Web.Controllers
         {
             return Json(_objeobjIOrganizationBAL.OrganizationAllbyCultureBAL(CurrentCulture), JsonRequestBehavior.AllowGet);
         }
+        [DontWrapResult]
+        public JsonResult OrganizationForTrainer(string email)
+        {
+            return Json(_objeobjIOrganizationBAL.OrganizationAllForTrainerbyCultureBAL(CurrentCulture,email), JsonRequestBehavior.AllowGet);
+        }
 
         [DontWrapResult]
         public JsonResult OrganizationForWork()

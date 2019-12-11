@@ -131,3 +131,104 @@ The statement has been terminated.
 The statement has been terminated.
 INFO  2019-12-10 18:46:17,439 69928ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/10/2019 1:46:17 PM
 INFO  2019-12-10 18:46:17,840 70329ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/10/2019 1:46:17 PM
+INFO  2019-12-11 10:27:06,448 32354ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/11/2019 5:27:06 AM
+INFO  2019-12-11 10:27:06,929 32836ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/11/2019 5:27:06 AM
+INFO  2019-12-11 10:31:41,457 86396ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/11/2019 5:31:41 AM
+INFO  2019-12-11 10:31:41,849 86787ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/11/2019 5:31:41 AM
+INFO  2019-12-11 10:50:33,010 23862ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/11/2019 5:50:33 AM
+INFO  2019-12-11 10:50:33,413 24264ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/11/2019 5:50:33 AM
+INFO  2019-12-11 10:58:49,023 27110ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/11/2019 5:58:49 AM
+INFO  2019-12-11 10:58:49,429 27515ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/11/2019 5:58:49 AM
+INFO  2019-12-11 11:04:53,156 73314ms DESKTOP-LSN82VI        Login              - User tried to login with email aliya@llk.com at 12/11/2019 6:04:53 AM
+INFO  2019-12-11 11:04:53,571 73728ms DESKTOP-LSN82VI        Login              - User login with email aliya@llk.com at 12/11/2019 6:04:53 AM
+INFO  2019-12-11 11:05:24,564 104721ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/11/2019 6:05:24 AM
+INFO  2019-12-11 11:05:24,952 105109ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/11/2019 6:05:24 AM
+INFO  2019-12-11 11:07:05,475 205632ms DESKTOP-LSN82VI        Login              - User tried to login with email abcdef@llk.com at 12/11/2019 6:07:05 AM
+INFO  2019-12-11 11:07:05,850 206007ms DESKTOP-LSN82VI        Login              - User login with email abcdef@llk.com at 12/11/2019 6:07:05 AM
+ERROR 2019-12-11 11:09:00,949 321106ms DESKTOP-LSN82VI        OnException        - Could not find stored procedure 'TMS_UsersAsTrainer_DuplicationCheckForOrganization'.
+ERROR 2019-12-11 11:09:25,042 345200ms DESKTOP-LSN82VI        OnException        - Error_User_Already_Exist
+ERROR 2019-12-11 11:15:56,927 737085ms DESKTOP-LSN82VI        OnException        - Error_User_Already_Exist
+INFO  2019-12-11 11:48:16,057 34234ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/11/2019 6:48:16 AM
+INFO  2019-12-11 11:48:16,462 34639ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/11/2019 6:48:16 AM
+ERROR 2019-12-11 12:54:38,736 97692ms DESKTOP-LSN82VI        OnException        - Login failed for user 'localuser'.  Reason: The password of the account has expired.
+ERROR 2019-12-11 13:16:13,347 15255ms DESKTOP-LSN82VI        OnException        - Procedure or function 'Organizations_GetAllByCultureForTrainer' expects parameter '@email', which was not supplied.
+ERROR 2019-12-11 14:21:51,269  5175ms DESKTOP-LSN82VI        OnException        - c:\Users\SynergicProfessional\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\Views\Home\LoginForTrainer.cshtml(85): error CS1525: Invalid expression term '}'
+ERROR 2019-12-11 14:21:56,971 10877ms DESKTOP-LSN82VI        OnException        - c:\Users\SynergicProfessional\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\Views\Home\LoginForTrainer.cshtml(85): error CS1525: Invalid expression term '}'
+ERROR 2019-12-11 14:22:26,031 39937ms DESKTOP-LSN82VI        OnException        - c:\Users\SynergicProfessional\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\Views\Home\LoginForTrainer.cshtml(85): error CS1525: Invalid expression term '}'
+INFO  2019-12-11 14:37:35,128 32689ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/11/2019 9:37:35 AM
+INFO  2019-12-11 14:37:35,539 33101ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/11/2019 9:37:35 AM
+ERROR 2019-12-11 14:38:19,472 77034ms DESKTOP-LSN82VI        OnException        - c:\Users\SynergicProfessional\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\Views\Home\LoginForTrainer.cshtml(82): error CS1928: 'System.Web.Mvc.HtmlHelper<TMS.Library.Users.LoginModel>' does not contain a definition for 'DropDownListFor' and the best extension method overload 'System.Web.Mvc.Html.SelectExtensions.DropDownListFor<TModel,TProperty>(System.Web.Mvc.HtmlHelper<TModel>, System.Linq.Expressions.Expression<System.Func<TModel,TProperty>>, System.Collections.Generic.IEnumerable<System.Web.Mvc.SelectListItem>)' has some invalid arguments
+INFO  2019-12-11 15:17:23,397 183119ms DESKTOP-LSN82VI        LoginForTrainer    - User tried to login with email aliya@llk.com at 12/11/2019 10:17:23 AM
+INFO  2019-12-11 15:17:23,808 183530ms DESKTOP-LSN82VI        LoginForTrainer    - User login with email aliya@llk.com at 12/11/2019 10:17:23 AM
+INFO  2019-12-11 15:18:19,361 239083ms DESKTOP-LSN82VI        LoginForTrainer    - User tried to login with email aliya@llk.com at 12/11/2019 10:18:19 AM
+INFO  2019-12-11 15:18:19,738 239460ms DESKTOP-LSN82VI        LoginForTrainer    - User login with email aliya@llk.com at 12/11/2019 10:18:19 AM
+INFO  2019-12-11 15:23:41,021 560743ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/11/2019 10:23:41 AM
+INFO  2019-12-11 15:23:41,396 561118ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/11/2019 10:23:41 AM
+INFO  2019-12-11 15:24:51,319 631041ms DESKTOP-LSN82VI        LoginForTrainer    - User tried to login with email aliya@llk.com at 12/11/2019 10:24:51 AM
+INFO  2019-12-11 15:24:51,698 631420ms DESKTOP-LSN82VI        LoginForTrainer    - User login with email aliya@llk.com at 12/11/2019 10:24:51 AM
+INFO  2019-12-11 15:28:54,080 873802ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/11/2019 10:28:54 AM
+INFO  2019-12-11 15:28:54,453 874175ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/11/2019 10:28:54 AM
+ERROR 2019-12-11 15:30:39,230 978952ms DESKTOP-LSN82VI        OnException        - Error_User_Already_Exist
+ERROR 2019-12-11 16:28:44,904 4464626ms DESKTOP-LSN82VI        OnException        - Value cannot be null.
+Parameter name: items
+ERROR 2019-12-11 16:30:20,585 4560308ms DESKTOP-LSN82VI        OnException        - Value cannot be null.
+Parameter name: items
+ERROR 2019-12-11 16:30:21,899 4561622ms DESKTOP-LSN82VI        OnException        - Value cannot be null.
+Parameter name: items
+ERROR 2019-12-11 16:32:39,157 50197ms DESKTOP-LSN82VI        OnException        - Value cannot be null.
+Parameter name: items
+INFO  2019-12-11 16:34:25,872 156911ms DESKTOP-LSN82VI        LoginForTrainer    - User tried to login with email aliya@llk.com at 12/11/2019 11:34:25 AM
+INFO  2019-12-11 16:34:26,247 157287ms DESKTOP-LSN82VI        LoginForTrainer    - User login with email aliya@llk.com at 12/11/2019 11:34:26 AM
+INFO  2019-12-11 16:34:26,872 157912ms DESKTOP-LSN82VI        LoginForTrainer    - User tried to login with email aliya@llk.com at 12/11/2019 11:34:26 AM
+INFO  2019-12-11 16:34:27,251 158290ms DESKTOP-LSN82VI        LoginForTrainer    - User login with email aliya@llk.com at 12/11/2019 11:34:27 AM
+INFO  2019-12-11 16:59:48,679 1679719ms DESKTOP-LSN82VI        LoginForTrainer    - User tried to login with email aliya@llk.com at 12/11/2019 11:59:48 AM
+ERROR 2019-12-11 16:59:52,556 1683596ms DESKTOP-LSN82VI        OnException        - Value cannot be null.
+Parameter name: items
+INFO  2019-12-11 17:00:02,645 1693685ms DESKTOP-LSN82VI        LoginForTrainer    - User tried to login with email aliya@llk.com at 12/11/2019 12:00:02 PM
+ERROR 2019-12-11 17:00:23,347 1714387ms DESKTOP-LSN82VI        OnException        - Value cannot be null.
+Parameter name: items
+INFO  2019-12-11 17:00:33,588 1724628ms DESKTOP-LSN82VI        LoginForTrainer    - User tried to login with email aliya@llk.com at 12/11/2019 12:00:33 PM
+ERROR 2019-12-11 17:00:53,715 1744755ms DESKTOP-LSN82VI        OnException        - Value cannot be null.
+Parameter name: items
+INFO  2019-12-11 17:01:21,764 1772804ms DESKTOP-LSN82VI        LoginForTrainer    - User tried to login with email aliya@llk.com at 12/11/2019 12:01:21 PM
+INFO  2019-12-11 17:19:50,346 52087ms DESKTOP-LSN82VI        LoginForTrainer    - User tried to login with email aliya@llk.com at 12/11/2019 12:19:50 PM
+ERROR 2019-12-11 17:20:14,916 76657ms DESKTOP-LSN82VI        OnException        - Object reference not set to an instance of an object.
+INFO  2019-12-11 17:21:16,396 138137ms DESKTOP-LSN82VI        LoginForTrainer    - User tried to login with email aliya@llk.com at 12/11/2019 12:21:16 PM
+ERROR 2019-12-11 17:21:32,893 154634ms DESKTOP-LSN82VI        OnException        - Object reference not set to an instance of an object.
+INFO  2019-12-11 17:21:54,528 176269ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/11/2019 12:21:54 PM
+INFO  2019-12-11 17:21:54,909 176650ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/11/2019 12:21:54 PM
+INFO  2019-12-11 17:22:41,257 222998ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/11/2019 12:22:41 PM
+INFO  2019-12-11 17:22:41,632 223374ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/11/2019 12:22:41 PM
+INFO  2019-12-11 17:23:51,203 292944ms DESKTOP-LSN82VI        LoginForTrainer    - User tried to login with email aliya@llk.com at 12/11/2019 12:23:51 PM
+ERROR 2019-12-11 17:24:09,258 311000ms DESKTOP-LSN82VI        OnException        - Object reference not set to an instance of an object.
+INFO  2019-12-11 17:26:52,274 474015ms DESKTOP-LSN82VI        LoginForTrainer    - User tried to login with email aliya@llk.com at 12/11/2019 12:26:52 PM
+INFO  2019-12-11 17:26:52,671 474412ms DESKTOP-LSN82VI        LoginForTrainer    - User login with email aliya@llk.com at 12/11/2019 12:26:52 PM
+INFO  2019-12-11 17:30:17,809 679550ms DESKTOP-LSN82VI        LoginForTrainer    - User tried to login with email aliya@llk.com at 12/11/2019 12:30:17 PM
+ERROR 2019-12-11 17:33:01,637 843378ms DESKTOP-LSN82VI        OnException        - Value cannot be null.
+Parameter name: items
+INFO  2019-12-11 17:33:22,591 864332ms DESKTOP-LSN82VI        LoginForTrainer    - User tried to login with email aliya@llk.com at 12/11/2019 12:33:22 PM
+INFO  2019-12-11 17:34:36,000 937741ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/11/2019 12:34:35 PM
+INFO  2019-12-11 17:37:11,716 1093457ms DESKTOP-LSN82VI        LoginForTrainer    - User tried to login with email aliya@llk.com at 12/11/2019 12:37:11 PM
+ERROR 2019-12-11 17:39:56,347 1258088ms DESKTOP-LSN82VI        OnException        - Value cannot be null.
+Parameter name: items
+ERROR 2019-12-11 17:40:22,545 1284286ms DESKTOP-LSN82VI        OnException        - Value cannot be null.
+Parameter name: items
+INFO  2019-12-11 17:40:42,649 1304390ms DESKTOP-LSN82VI        LoginForTrainer    - User tried to login with email aliya@llk.com at 12/11/2019 12:40:42 PM
+ERROR 2019-12-11 17:40:59,384 1321125ms DESKTOP-LSN82VI        OnException        - Value cannot be null.
+Parameter name: items
+ERROR 2019-12-11 17:42:38,783 52005ms DESKTOP-LSN82VI        OnException        - Value cannot be null.
+Parameter name: items
+INFO  2019-12-11 17:42:55,576 68799ms DESKTOP-LSN82VI        LoginForTrainer    - User tried to login with email aliya@llk.com at 12/11/2019 12:42:55 PM
+ERROR 2019-12-11 17:43:13,577 86799ms DESKTOP-LSN82VI        OnException        - Object reference not set to an instance of an object.
+INFO  2019-12-11 17:43:51,607 124829ms DESKTOP-LSN82VI        LoginForTrainer    - User tried to login with email aliya@llk.com at 12/11/2019 12:43:51 PM
+INFO  2019-12-11 17:46:20,497 75106ms DESKTOP-LSN82VI        LoginForTrainer    - User tried to login with email aliya@llk.com at 12/11/2019 12:46:20 PM
+ERROR 2019-12-11 17:47:07,702 122312ms DESKTOP-LSN82VI        OnException        - Value cannot be null.
+Parameter name: items
+INFO  2019-12-11 17:47:29,996 144605ms DESKTOP-LSN82VI        LoginForTrainer    - User tried to login with email aliya@llk.com at 12/11/2019 12:47:29 PM
+INFO  2019-12-11 17:51:29,124 383733ms DESKTOP-LSN82VI        LoginForTrainer    - User tried to login with email aliya@llk.com at 12/11/2019 12:51:29 PM
+ERROR 2019-12-11 17:51:32,894 387503ms DESKTOP-LSN82VI        OnException        - Object reference not set to an instance of an object.
+INFO  2019-12-11 17:52:05,388 419997ms DESKTOP-LSN82VI        LoginForTrainer    - User tried to login with email aliya@llk.com at 12/11/2019 12:52:05 PM
+INFO  2019-12-11 17:56:57,429 712038ms DESKTOP-LSN82VI        LoginForTrainer    - User tried to login with email aliya@llk.com at 12/11/2019 12:56:57 PM
+INFO  2019-12-11 17:56:57,820 712430ms DESKTOP-LSN82VI        LoginForTrainer    - User login with email aliya@llk.com at 12/11/2019 12:56:57 PM
+INFO  2019-12-11 17:59:57,711 892321ms DESKTOP-LSN82VI        LoginForTrainer    - User tried to login with email aliya@llk.com at 12/11/2019 12:59:57 PM
+INFO  2019-12-11 17:59:58,085 892694ms DESKTOP-LSN82VI        LoginForTrainer    - User login with email aliya@llk.com at 12/11/2019 12:59:58 PM

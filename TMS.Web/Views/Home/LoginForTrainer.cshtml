@@ -1,0 +1,155 @@
+﻿@using System.Threading
+@using System.Web.Optimization
+@using Abp.Timing
+@{
+    SetAntiForgeryCookie();
+}
+@model TMS.Library.Users.LoginModel
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Welcome to Pulse</title>
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/Shamcey/css/style.default.css")" type="text/css" />
+    <link href="@Url.Content("~/css/custom.css")" rel="stylesheet" />
+    @Styles.Render("~/Content/vendor")
+    @Styles.Render("~/Bundles/css")
+    <link href="@Url.Content("~/Content/flags/css/flag-icon.min.css")" rel="stylesheet" />
+    <script type="text/javascript">
+        //This is used to get the application's root path from javascript. It's useful if you're running application in a virtual directory under IIS.
+        var abp = abp || {}; abp.appPath = '@ApplicationPath';
+    </script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="@Url.Content("~/Scripts/others/html5shiv.js")"></script>
+        <script src="@Url.Content("~/Scripts/others/respond.min.js")"></script>
+    <![endif]-->
+    @Scripts.Render("~/Bundles/vendor/js/top")
+    <link href="@Url.Content("~/Content/kendo/2018.1.117/kendo.common-bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2018.1.117/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2018.1.117/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2018.1.117/kendo.fiori.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2018.1.117/kendo.dataviz.fiori.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2018.1.117/kendo.rtl.min.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/kendo/2018.1.117/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2018.1.117/jszip.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2018.1.117/kendo.all.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2018.1.117/kendo.aspnetmvc.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+    <link href="@Url.Content("~/css/materialdesignicons.min.css")" media="all" rel="stylesheet" type="text/css" />
+    @if (CurrentCulture == "ar-KW")
+    {
+        <link href="@Url.Content("~/Content/Shamcey/css/lang-AR.css")" rel="stylesheet" type="text/css" id="rtl_ltr_b1" />
+        <link href="@Url.Content("~/css/langRTL.css")" rel="stylesheet" />
+    }
+    else
+    {
+
+        <link href="@Url.Content("~/css/langLTR.css")" rel="stylesheet" />
+    }
+</head>
+<body class="loginpage">
+    <div class="loginpanel">
+        <div class="loginpanelinner">
+            <div class="logo animate0 bounceIn"><img src="@Url.Content("~/Content/Shamcey/images/logo.png")" alt="" /></div>
+            @if (Model.isOffice365Enabled)
+            {
+
+                <a class="btn btn-lg btn-success" href="@Url.Content("~/Home/SignIn")"><span class="mdi mdi-login-variant"></span> Sign in with office 365</a>
+            }
+            else
+            {
+                <form id="login" method="post" autocomplete="off">
+                    @Html.HiddenFor(x => x.ReturnUrl)
+                    @Html.HiddenFor(x => x.Email)
+                    @Html.AntiForgeryToken()
+                    <div class="inputwrapper login-alert">
+
+                        @if (ViewContext.ViewData.ModelState.Where(x => x.Key == "").Any())
+                        {
+                            @Html.ValidationSummary(true, null, new { @class = "alert alert-error" })
+                        }
+                    </div>
+                    <div class=" inputwrapper animate1 bounceIn">
+                        @Html.DropDownListFor(x => x.OrgnizationId,
+                       new SelectList(Model.dDlList,"Value","Text"), "Select Your Organization")
+                    </div>
+                    <div class="inputwrapper animate2 bounceIn">
+                        @Html.PasswordFor(x => x.Password, new { @placeholder = L("EnterPassword") })
+                    </div>
+                    <div class="inputwrapper animate3 bounceIn">
+                        <button id="submit" type="submit">@L("SignIn")</button>
+                    </div>
+                    <div class="inputwrapper animate4 bounceIn">
+                        @Html.CheckBoxFor(m => m.isPersistent, new { id = "isPersistent" })
+                        <label for="isPersistent">@L("KeepMeSignIn") </label>
+                    </div>
+
+
+                </form>
+            }
+        </div><!--loginpanelinner-->
+    </div><!--loginpanel-->
+    <div class="loginfooter">
+        <p>&copy; @L("FooterCompanyName") &copy;. @L("AllRightsReserved") .</p>
+    </div>
+
+    @*<script src="@Url.Content("~/Content/Shamcey/js/jquery-1.10.2.min.js")"></script>*@
+    <script src="@Url.Content("~/Content/Shamcey/js/jquery-migrate-1.2.1.min.js")"></script>
+    <script src="@Url.Content("~/Content/Shamcey/js/jquery-ui-1.10.3.min.js")"></script>
+    <script src="@Url.Content("~/Content/Shamcey/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Content/Shamcey/js/modernizr.min.js")"></script>
+    @Scripts.Render("~/Bundles/vendor/js/bottom")
+    @Scripts.Render("~/Bundles/js")
+    <script src="@Url.Content("~/Content/Shamcey/js/custom.js")"></script>
+    <script src="@Url.Content("~/Content/Shamcey/js/jquery.cookies.js")"></script>
+
+    <script>
+        abp.localization.defaultSourceName = '@LocalizationSourceName';
+        //moment.locale('@Thread.CurrentThread.CurrentUICulture.Name'); //Localizing momentjs
+    </script>
+    <script src="~/AbpScripts/GetScripts?v=@(Clock.Now.Ticks)" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        var source = abp.localization.getSource('TMS');
+        var s1 = source('Welcomenote');
+    </script>
+    <script type="text/javascript" src="@Url.Content("~/Content/Shamcey/js/jquery.validate.min.js")"></script>
+
+    @if (ViewContext.ViewData.ModelState.Where(x => x.Key == "").Any())
+    {
+        <script>
+            jQuery(document).ready(function () { jQuery('.login-alert').fadeIn(); });
+        </script>
+    }
+
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            jQuery("#login").validate({
+                rules: {
+                    Password: "required",
+                    OrgnizationId:"require"
+                },
+                messages: {
+                    Password: source('UserNamePassword')
+
+                }
+            });
+        });
+    </script>
+    <style>
+        .btn {
+            font-size: 20px;
+            height: auto
+        }
+    </style>
+</body>
+</html>

@@ -45,6 +45,15 @@ namespace TMS.DataObjects.TMS.Organization
         /// </summary>
         /// <param name="culture">The culture.</param>
         /// <returns>IList&lt;DDlList&gt;.</returns>
+        public IList<DDlList> OrganizationAllForTrainerbyCultureDAL(string culture, string email)
+        {
+            return ExecuteListSp<DDlList>("Organizations_GetAllByCultureForTrainer", ParamBuilder.ParNVarChar("Culture", culture, 5), ParamBuilder.ParNVarChar("email", email, 200));
+        }
+        /// <summary>
+        /// Organization the allby culture dal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
         public IList<DDlList> CertificatesByOiDDAL(long Oid)
         {
             return ExecuteListSp<DDlList>("TMS_Certificates_ForDDLbyOrg", ParamBuilder.Par("Oid", Oid));

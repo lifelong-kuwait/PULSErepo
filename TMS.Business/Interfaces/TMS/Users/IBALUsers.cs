@@ -28,8 +28,14 @@ namespace TMS.Business.Interfaces.TMS
         /// </summary>
         /// <param name="Email">The email.</param>
         /// <returns>Users.</returns>
-        Users LoginUserBAL(string Email);
-
+        List<Users> LoginUserBAL(string Email);
+        /// <summary>
+        /// Logins the user bal.
+        /// </summary>
+        /// <param name="Email">The email.</param>
+        /// <returns>Users.</returns>
+        Users LoginUserBALForTrainer(string Email,long CompanyId);
+        
         /// <summary>
         /// Updates the login user themes dal.
         /// </summary>
@@ -134,6 +140,8 @@ namespace TMS.Business.Interfaces.TMS
         /// <param name="_objUsers">The object users.</param>
         /// <returns>System.Int32.</returns>
         int LoginUsers_DuplicationCheckBAL(LoginUsers _objUsers);
+        int LoginUsersAsTrainer_DuplicationCheckBAL(LoginUsers _objUsers);
+
         int LoginUsers_DuplicationCheckUpdateBAL(LoginUsers _objUsers);
         int LoginPerson_DuplicationCheckBAL(Person person);
         int LoginPerson_DuplicationCheckUpdateBAL(Person person);

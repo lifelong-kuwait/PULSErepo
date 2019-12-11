@@ -277,7 +277,8 @@ namespace TMS.Web.Controllers
 
                     if (_person.IsLogin == true && _person.Password != null)
                     {
-                        if (_UserBAL.LoginUsers_DuplicationCheckBAL(new LoginUsers { Email = _person.Email }) > 0)
+                       
+                        if (_UserBAL.LoginUsersAsTrainer_DuplicationCheckBAL(new LoginUsers { Email = _person.Email, CompanyID = CurrentUser.CompanyID }) > 0)
                         {
                             ModelState.AddModelError(lr.UsersTitle, lr.UserEmailAlreadyExist);
                             _valid = false;
@@ -341,8 +342,7 @@ namespace TMS.Web.Controllers
                             {
 
                                 var person = _PersonBAL.Person_GetAllByIdBAL(Convert.ToString(Resp.ID));
-
-                                if (_UserBAL.LoginUsers_DuplicationCheckBAL(new LoginUsers { Email = person.Email }) > 0)
+                               if (_UserBAL.LoginUsersAsTrainer_DuplicationCheckBAL(new LoginUsers { Email = person.Email,CompanyID=CurrentUser.CompanyID }) > 0)
                                 {
                                     ModelState.AddModelError(lr.UsersTitle, lr.UserEmailAlreadyExist);
 
@@ -875,7 +875,7 @@ namespace TMS.Web.Controllers
 
                     var person = _PersonBAL.Person_GetAllByIdBAL(Convert.ToString(_objPersonRoles.PersonID));
 
-                    if (_UserBAL.LoginUsers_DuplicationCheckBAL(new LoginUsers { Email = person.Email }) > 0)
+                    if (_UserBAL.LoginUsersAsTrainer_DuplicationCheckBAL(new LoginUsers { Email = person.Email,CompanyID=CurrentUser.CompanyID }) > 0)
                     {
                         ModelState.AddModelError(lr.UsersTitle, lr.UserEmailAlreadyExist);
                         if (_PersonBAL.TMS_PersonRolesMapping_DuplicationCheckBAL(_objPersonRoles) > 0)
