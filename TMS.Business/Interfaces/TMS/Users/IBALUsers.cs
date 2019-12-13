@@ -28,7 +28,13 @@ namespace TMS.Business.Interfaces.TMS
         /// </summary>
         /// <param name="Email">The email.</param>
         /// <returns>Users.</returns>
-        List<Users> LoginUserBAL(string Email);
+        Users LoginUserBAL(string Email);
+        /// <summary>
+        /// Logins the user bal.
+        /// </summary>
+        /// <param name="Email">The email.</param>
+        /// <returns>Users.</returns>
+        List<Users> LoginUserListBAL(string Email);
         /// <summary>
         /// Logins the user bal.
         /// </summary>

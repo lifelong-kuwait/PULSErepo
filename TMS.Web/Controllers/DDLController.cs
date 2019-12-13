@@ -14,7 +14,7 @@ using lr = Resources.Resources;
 
 namespace TMS.Web.Controllers
 {
-    [SessionTimeout]
+    
     public class DDLController : TMSControllerBase
     {
         public readonly IOrganizationBAL _objeobjIOrganizationBAL = null;//For the Resorces Table Interface
@@ -38,7 +38,8 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public JsonResult OrganizationForTrainer(string email)
         {
-            return Json(_objeobjIOrganizationBAL.OrganizationAllForTrainerbyCultureBAL(CurrentCulture,email), JsonRequestBehavior.AllowGet);
+            var x = _objeobjIOrganizationBAL.OrganizationAllForTrainerbyCultureBAL(CurrentCulture, email);
+            return Json(x, JsonRequestBehavior.AllowGet);
         }
 
         [DontWrapResult]

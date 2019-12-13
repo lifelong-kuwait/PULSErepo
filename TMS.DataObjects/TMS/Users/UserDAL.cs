@@ -36,16 +36,39 @@ namespace TMS.DataObjects
         /// </summary>
         /// <param name="Email">The email.</param>
         /// <returns>Users.</returns>
-        public List<Users> LoginUserDAL(string Email)
+        public Users LoginUserDAL(string Email)
         {
-            //    DBGenerics db = new DBGenerics();
+            DBGenerics db = new DBGenerics();
 
-            //    var parameters = new[]{
+            var parameters = new[]{
+                new SqlParameter(){ ParameterName="@Email", Value=Email }
+                //new SqlParameter(){ ParameterName="@Password", Value=Password }
+            };
+
+            return ExecuteSinglewithSP<Users>("TMS_Users_LoginUser", parameters);
+            //List<Users> LoginUserAddGroups = new List<Users>();
+            //var conString = DBHelper.ConnectionString;
+            //using (var conn = new SqlConnection(conString))
+            //{
+            //    conn.Open();
+            //    string qry = @"TMS_Users_LoginUser";
+            //    DynamicParameters param = new DynamicParameters();
+            //    param.Add("@Email", Email);
+            //    LoginUserAddGroups = conn.Query<Users>(qry.ToString(), param, commandType: System.Data.CommandType.StoredProcedure).AsList<Users>();
+            //    conn.Close();
+            //}
+            //return LoginUserAddGroups;
+        }
+       public List<Users> LoginUserListDAL(string Email)
+        {
+            //DBGenerics db = new DBGenerics();
+
+            //var parameters = new[]{
             //    new SqlParameter(){ ParameterName="@Email", Value=Email }
             //    //new SqlParameter(){ ParameterName="@Password", Value=Password }
             //};
 
-            //    return ExecuteSinglewithSP<Users>("TMS_Users_LoginUser", parameters);
+            //return ExecuteSinglewithSP<Users>("TMS_Users_LoginUser", parameters);
             List<Users> LoginUserAddGroups = new List<Users>();
             var conString = DBHelper.ConnectionString;
             using (var conn = new SqlConnection(conString))

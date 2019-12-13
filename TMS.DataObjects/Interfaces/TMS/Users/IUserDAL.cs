@@ -28,7 +28,13 @@ namespace TMS.DataObjects.Interfaces
         /// </summary>
         /// <param name="Email">The email.</param>
         /// <returns>Users.</returns>
-        List<Users> LoginUserDAL(string Email);
+        Users LoginUserDAL(string Email);
+        /// <summary>
+        /// Logins the user dal.
+        /// </summary>
+        /// <param name="Email">The email.</param>
+        /// <returns>Users.</returns>
+        List<Users> LoginUserListDAL(string Email);
         /// <summary>
         /// Logins the user dal.
         /// </summary>

@@ -59,47 +59,70 @@
     <div class="loginpanel">
         <div class="loginpanelinner">
             <div class="logo animate0 bounceIn"><img src="@Url.Content("~/Content/Shamcey/images/logo.png")" alt="" /></div>
-        @if (Model.isOffice365Enabled)
-        {
-            
-    <a  class="btn btn-lg btn-success" href="@Url.Content("~/Home/SignIn")"><span class="mdi mdi-login-variant"></span> Sign in with office 365</a>
-        }
-        else
-        {
-            <form id="login" method="post" autocomplete="off">
-                @Html.HiddenFor(x => x.ReturnUrl)
-                @Html.AntiForgeryToken()
-                <div class="inputwrapper login-alert">
+            @if (Model.isOffice365Enabled)
+            {
 
-                    @if (ViewContext.ViewData.ModelState.Where(x => x.Key == "").Any())
-                    {
-                        @Html.ValidationSummary(true, null, new { @class = "alert alert-error" })
-                    }
-                </div>
-                <div class="inputwrapper animate1 bounceIn">
-                    @Html.TextBoxFor(x => x.Email, new { @placeholder = L("EnterUsername") })
-                </div>
-                <div class="inputwrapper animate2 bounceIn">
-                    @Html.PasswordFor(x => x.Password, new { @placeholder = L("EnterPassword") })
-                </div>
-                <div class=" inputwrapper">
-                    @Html.Action("LanguageForLogin", "Layout")
-                </div>
-                <div class="inputwrapper animate3 bounceIn">
-                    <button id="submit" type="submit">@L("SignIn")</button>
-                </div>
-                <div class="inputwrapper animate4 bounceIn">
-                    @Html.CheckBoxFor(m => m.isPersistent, new { id = "isPersistent" })
-                    <label for="isPersistent">@L("KeepMeSignIn") </label>
-                </div>
+                <a class="btn btn-lg btn-success" href="@Url.Content("~/Home/SignIn")"><span class="mdi mdi-login-variant"></span> Sign in with office 365</a>
+            }
+            else
+            {
+                <form id="login" method="post" autocomplete="off">
+                    @Html.HiddenFor(x => x.ReturnUrl)
+                    @Html.HiddenFor(x => x.OrgnizationId)
+                    @Html.AntiForgeryToken()
+                    <div class="inputwrapper login-alert">
 
-               
-            </form>
-        }
+                        @if (ViewContext.ViewData.ModelState.Where(x => x.Key == "").Any())
+                        {
+                            @Html.ValidationSummary(true, null, new { @class = "alert alert-error" })
+                        }
+                    </div>
+                    <div class="inputwrapper animate1 bounceIn">
+                        @Html.TextBoxFor(x => x.Email, new { @placeholder = L("EnterUsername") })
+                    </div>
+                    <div class="inputwrapper animate2 bounceIn">
+                        @Html.PasswordFor(x => x.Password, new { @placeholder = L("EnterPassword") })
+                    </div>
+                    <div class=" inputwrapper">
+                        @Html.Action("LanguageForLogin", "Layout")
+                    </div>
+                    <div class="inputwrapper animate3 bounceIn">
+                        <button id="submit101" >@L("SignIn")</button>
+                    </div>
+                    <div class="inputwrapper animate4 bounceIn">
+                        @Html.CheckBoxFor(m => m.isPersistent, new { id = "isPersistent" })
+                        <label for="isPersistent">@L("KeepMeSignIn") </label>
+                    </div>
+                </form>
+            }
+        <input type="text" style="display:none;" id="TesterValue" value="false"/>
+            <button type="button" id="modelButton" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="display:none;">Open Modal</button>
         </div><!--loginpanelinner-->
     </div><!--loginpanel-->
     <div class="loginfooter">
         <p>&copy; @L("FooterCompanyName") &copy;. @L("AllRightsReserved") .</p>
+    </div>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Select Your organization</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-lg-12 mg-t-20 mg-lg-t-0">
+                        <select class="form-control select2-show-search select2-hidden-accessible" id="slectList" data-placeholder="Choose one (with searchbox)" tabindex="-1" aria-hidden="true">
+                            <option label="Choose one"></option> 
+                        </select><span class="select2 select2-container select2-container--default select2-container--focus" dir="ltr" style="width: 316px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-sa4a-container"><span class="select2-selection__rendered" id="select2-sa4a-container"><span class="select2-selection__placeholder">Choose Your Login Organization</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="OrgLogin" class="btn btn-default" data-dismiss="modal">Login in this Organization</button>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     @*<script src="@Url.Content("~/Content/Shamcey/js/jquery-1.10.2.min.js")"></script>*@
@@ -130,12 +153,17 @@
             jQuery(document).ready(function () { jQuery('.login-alert').fadeIn(); });
         </script>
     }
+    
+
 
     <script type="text/javascript">
+
         jQuery(document).ready(function () {
+            jQuery("#OrgnizationId").val(0);
             jQuery("#login").validate({
                 rules: {
                     Password: "required",
+                   
                     Email: {
                         required: true,
                         email: true,
@@ -149,13 +177,81 @@
                     }
                 }
             });
-        });
+            jQuery('#login').submit(function (e) {
+                if (jQuery("#TesterValue").val()==='false') {
+                    e.preventDefault();
+                }
+                if (jQuery("#login").valid()) {
+                        var response = jQuery.ajax({
+                            method: "post",
+                            url: "/Home/LoginAjax?Email='" + jQuery("#Email").val() + "'",
+                            dataType: "JSON",
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify({ Email: jQuery("#Email").val() }),
+                            success: function (msg) {
+                                if (msg.result.query >= 2 && jQuery("#OrgnizationId").val() <= 0) {
+                                    e.preventDefault();
+                                    jQuery('#slectList').empty();
+                                    var c = msg.result.suggestions;
+                                    jQuery.each(c, function (i, item) {
+                                        jQuery('#slectList').append(jQuery('<option>', {
+                                            value: item.value,
+                                            text: item.text
+                                        }));
+                                    });
+
+                                    jQuery('#myModal').modal('toggle');
+                                    jQuery('#myModal').modal('show');
+
+                                } else {
+                                    jQuery('#login').unbind('submit').submit();
+                                }
+                            }
+                        });
+
+                    
+                }
+               
+            });
+          
+            jQuery("#OrgLogin").click(function () {
+                var str = jQuery('#slectList').find(":selected").val();
+                jQuery("#OrgnizationId").val(str);
+                jQuery("#TesterValue").val('True');
+                jQuery('#login').submit();
+            });
+            
+            jQuery("#Email").change(function () {
+                var response = jQuery.ajax({
+                    method: "post",
+                    url: "/Home/LoginAjax?Email='" + jQuery("#Email").val() + "'",
+                    dataType: "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ Email: jQuery("#Email").val() }),
+                    success: function (msg) {
+                        if (msg.result.query >= 2 && jQuery("#OrgnizationId").val() <= 0) {
+                            jQuery('#slectList').empty();
+                            var c = msg.result.suggestions;
+                            jQuery.each(c, function (i, item) {
+                                jQuery('#slectList').append(jQuery('<option>', {
+                                    value: item.value,
+                                    text: item.text
+                                }));
+                            });
+                        } else {
+                            jQuery("#TesterValue").val('True');
+                        }
+                    }
+                });
+            });
+            });
+      
     </script>
     <style>
-    .btn {
-        font-size: 20px;
-         height:auto
-    }
-</style>
+        .btn {
+            font-size: 20px;
+            height: auto
+        }
+    </style>
 </body>
 </html>

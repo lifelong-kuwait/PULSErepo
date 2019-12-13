@@ -52,9 +52,18 @@ namespace TMS.Business.TMS
         /// </summary>
         /// <param name="Email">The email.</param>
         /// <returns>Users.</returns>
-        public List<Users> LoginUserBAL(string Email)
+        public Users LoginUserBAL(string Email)
         {
             return _DAL.LoginUserDAL(Email);
+        }
+        /// <summary>
+        /// Logins the user bal.
+        /// </summary>
+        /// <param name="Email">The email.</param>
+        /// <returns>Users.</returns>
+        public List<Users> LoginUserListBAL(string Email)
+        {
+            return _DAL.LoginUserListDAL(Email);
         }
         /// <summary>
         /// Logins the user bal.

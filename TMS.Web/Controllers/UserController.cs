@@ -170,7 +170,7 @@ namespace TMS.Web.Controllers
             var _objUser = this._UserBAL.LoginUserBAL(CurrentUser.Email);
             if (_objUser != null)//check if the email is found
             {
-                if (Crypto.VerifyPassword(oldPassword, _objUser.First().Password))
+                if (Crypto.VerifyPassword(oldPassword, _objUser.Password))
                 {
                     result = true;
                 }
@@ -550,7 +550,7 @@ namespace TMS.Web.Controllers
             var _objUser = this._UserBAL.LoginUserBAL(CurrentUser.Email);
             if (_objUser != null)//check if the email is found
             {
-                if (Crypto.VerifyPassword(_password, _objUser.First().Password))
+                if (Crypto.VerifyPassword(_password, _objUser.Password))
                 {
                     result = true;
                 }

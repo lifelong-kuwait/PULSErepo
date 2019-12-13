@@ -20,13 +20,13 @@ using TMS.Business.Interfaces.TMS.Organization;
 
 namespace TMS.Web.Controllers
 {
-    
+
     public class HomeController : TMSControllerBase
     {
-       
+
         private readonly IBALUsers BALUsers;
         public readonly IOrganizationBAL _objeobjIOrganizationBAL = null;
-        private  ICurrentUserClaims Claims { get; set; }
+        private ICurrentUserClaims Claims { get; set; }
         private IOffice365UsersBAL _Office365UsersBAL { get; set; }
         private new static readonly ILog Logger = LogManager.GetLogger(System.Environment.MachineName);
         public HomeController(IOrganizationBAL objIOrganizationBAL, IBALUsers _BALUsers, ICurrentUserClaims CurrentUserClaims, IOffice365UsersBAL __Office365UsersBAL)
@@ -46,7 +46,7 @@ namespace TMS.Web.Controllers
         {
             return View();
         }
-          [HttpGet]
+        [HttpGet]
         public ActionResult Office365Enabled()
         {
             var value = this._Office365UsersBAL.TMS_Setting_GetOffice365BAL();
@@ -64,25 +64,25 @@ namespace TMS.Web.Controllers
 
         [HttpGet]
         public ActionResult Login(string returnUrl)
-        {            
-           // var dd = Crypto.CreatePasswordHash("almas");
+        {
+            // var dd = Crypto.CreatePasswordHash("almas");
             var value = this._Office365UsersBAL.TMS_Setting_GetOffice365BAL();
             var model = new LoginModel { ReturnUrl = returnUrl, isOffice365Enabled = value };
             return View(model);
         }
         [HttpGet]
-        public ActionResult LoginForTrainer(string returnUrl,string email)
+        public ActionResult LoginForTrainer(string returnUrl, string email)
         {
             // var dd = Crypto.CreatePasswordHash("almas");
             var value = this._Office365UsersBAL.TMS_Setting_GetOffice365BAL();
             var c = _objeobjIOrganizationBAL.OrganizationAllForTrainerbyCultureBAL(CurrentCulture, email);
-            List<DDlList> list= (List<DDlList>)c;
-            var model = new LoginModel { ReturnUrl = returnUrl, isOffice365Enabled = value ,Email=email,dDlList= list };
+            List<DDlList> list = (List<DDlList>)c;
+            var model = new LoginModel { ReturnUrl = returnUrl, isOffice365Enabled = value, Email = email, dDlList = list };
             return View(model);
         }
         public PartialViewResult OrganizationForTrainerLogin(string email)
         {
-            var model = _objeobjIOrganizationBAL.OrganizationAllForTrainerbyCultureBAL(CurrentCulture,email);
+            var model = _objeobjIOrganizationBAL.OrganizationAllForTrainerbyCultureBAL(CurrentCulture, email);
             return PartialView("_OrganizationForTrainerLogin", model);
         }
         [HttpPost]
@@ -102,9 +102,9 @@ namespace TMS.Web.Controllers
             }
             else
             {
-                Users _objUser = this.BALUsers.LoginUserBALForTrainer(infoOfData.Email,infoOfData.OrgnizationId);
-              
-                if (_objUser != null && _objUser.UserRole==2)//check if the email is found
+                Users _objUser = this.BALUsers.LoginUserBALForTrainer(infoOfData.Email, infoOfData.OrgnizationId);
+
+                if (_objUser != null && _objUser.UserRole == 2)//check if the email is found
                 {
                     DateTime startTime = Convert.ToDateTime(_objUser.LockedOutDate);
                     DateTime endTime = DateTime.Now;
@@ -115,7 +115,7 @@ namespace TMS.Web.Controllers
                     {
                         BALUsers.LogInsert(DateTime.Now.ToString(), "10", Logs.Login_Locked.ToString(), System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(), 0);
                         ModelState.AddModelError("", "User Locked Please try after " + ConfigurationManager.AppSettings["LockedTime"].ToString() + " minutes");
-                        
+
                         //var model = new LoginModel { ReturnUrl = returnUrl, isOffice365Enabled = value, Email = email, dDlList = list }
                         return View(infoOfData);
                     }
@@ -191,10 +191,33 @@ namespace TMS.Web.Controllers
                 //return RedirectToAction("LoginForTrainer", new { returnUrl = infoOfData.ReturnUrl, email = infoOfData.Email });
             }
         }
+        [HttpPost]
+
+        [DisableValidation]
+        public ActionResult LoginAjax(string Email)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", L("Invalidpassword"));
+                return Json("Error"); ;
+            }
+            else
+            {
+                List<Users> _objUsers = this.BALUsers.LoginUserListBAL(Email);
+                var x = _objeobjIOrganizationBAL.OrganizationAllForTrainerbyCultureBAL(CurrentCulture, Email);
+
+                var data = new
+                {
+                    query = _objUsers.Count,
+                    suggestions =x
+                };
+                return Json(data);
+            }
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [DisableValidation]
+        
         public ActionResult Login(LoginModel infoOfData)
         {
             infoOfData.isOffice365Enabled = false;
@@ -207,31 +230,33 @@ namespace TMS.Web.Controllers
             }
             else
             {
-                List<Users> _objUsers = this.BALUsers.LoginUserBAL(infoOfData.Email);
-                var _objUser = _objUsers[0];
-                var query = _objUsers.Find(x => x.UserRole == 2);
-                if (query!=null)
+                Users _objUser = new Users();
+                if (infoOfData.OrgnizationId > 0)
                 {
-                    return RedirectToAction("LoginForTrainer", new { returnUrl= infoOfData.ReturnUrl, email = infoOfData.Email });
-                   
+                    _objUser = this.BALUsers.LoginUserBALForTrainer(infoOfData.Email, infoOfData.OrgnizationId);
                 }
-               else if (_objUser != null)//check if the email is found
+                else
                 {
-                    DateTime startTime =Convert.ToDateTime(_objUser.LockedOutDate);
+                    _objUser = this.BALUsers.LoginUserBAL(infoOfData.Email);
+                }
+               
+                 if (_objUser != null)//check if the email is found
+                {
+                    DateTime startTime = Convert.ToDateTime(_objUser.LockedOutDate);
                     DateTime endTime = DateTime.Now;
                     Logger.Info("User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow);
                     TimeSpan span = endTime.Subtract(startTime);
-                   
-                    if (_objUser.IsLockedOut && span.TotalMinutes<=10)
+
+                    if (_objUser.IsLockedOut && span.TotalMinutes <= 10)
                     {
-                        BALUsers.LogInsert(DateTime.Now.ToString(), "10", Logs.Login_Locked.ToString(), System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(),CurrentUser.CompanyID);
+                        BALUsers.LogInsert(DateTime.Now.ToString(), "10", Logs.Login_Locked.ToString(), System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(), 0);
                         ModelState.AddModelError("", "User Locked Please try after " + ConfigurationManager.AppSettings["LockedTime"].ToString() + " minutes");
                         return View(infoOfData);
                     }
                     if (_objUser.IsLockedOut)
                     {
-                        BALUsers.LogInsert(DateTime.Now.ToString(), "10", Logs.Login_Locked.ToString(), System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(), CurrentUser.CompanyID);
-                        ModelState.AddModelError("", "User Locked Please try after "+ ConfigurationManager.AppSettings["LockedTime"].ToString()+" minutes");
+                        BALUsers.LogInsert(DateTime.Now.ToString(), "10", Logs.Login_Locked.ToString(), System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(), 0);
+                        ModelState.AddModelError("", "User Locked Please try after " + ConfigurationManager.AppSettings["LockedTime"].ToString() + " minutes");
                         return View(infoOfData);
                     }
                     //then verify the password
@@ -261,7 +286,7 @@ namespace TMS.Web.Controllers
                             IdentitySignin(_objUser, false);
                             BALUsers.LogInsert(DateTime.Now.ToString(), "10", Logs.Login_Susscess.ToString(), System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(), 0);
                             return Redirect(GetRedirectUrl(infoOfData.ReturnUrl));
-                           
+
                         }
                         else
                         {
@@ -298,7 +323,12 @@ namespace TMS.Web.Controllers
                 return View(infoOfData);
             }
         }
-
+        [HttpPost]
+        public JsonResult OrganizationForTrainer(string email)
+        {
+            var x = _objeobjIOrganizationBAL.OrganizationAllForTrainerbyCultureBAL(CurrentCulture, email);
+            return Json(x);
+        }
         public void IdentitySignin(Users _objUser, bool isPersistent = false)
         {
             ////var claims = new List<Claim>();
