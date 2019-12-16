@@ -712,6 +712,7 @@ namespace TMS.Library.TMS.Persons
             PClassTitle = dr.GetString("PClassTitle");
             FlagCount = dr.GetInt32("FlagCount");
             FlagIDs = dr.GetString("FlagIDs");
+           
         }
     }
 

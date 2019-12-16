@@ -356,3 +356,49 @@ INFO  2019-12-13 16:36:24,401 2014283ms DESKTOP-LSN82VI        Login            
 INFO  2019-12-13 16:36:24,751 2014634ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/13/2019 11:36:24 AM
 INFO  2019-12-13 16:36:28,376 2018258ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 12/13/2019 11:36:28 AM
 INFO  2019-12-13 16:36:28,786 2018668ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 12/13/2019 11:36:28 AM
+INFO  2019-12-13 17:27:09,829 23086ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/13/2019 12:27:09 PM
+INFO  2019-12-13 17:27:10,218 23474ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/13/2019 12:27:10 PM
+INFO  2019-12-13 17:27:14,328 27584ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/13/2019 12:27:14 PM
+INFO  2019-12-13 17:27:14,871 28127ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/13/2019 12:27:14 PM
+INFO  2019-12-16 10:58:50,284 35058ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/16/2019 5:58:50 AM
+INFO  2019-12-16 10:58:50,685 35459ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/16/2019 5:58:50 AM
+INFO  2019-12-16 10:59:01,781 46555ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/16/2019 5:59:01 AM
+INFO  2019-12-16 10:59:02,691 47465ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/16/2019 5:59:02 AM
+INFO  2019-12-16 12:13:48,432 37691ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/16/2019 7:13:48 AM
+INFO  2019-12-16 12:13:48,836 38095ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/16/2019 7:13:48 AM
+INFO  2019-12-16 12:13:58,564 47822ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/16/2019 7:13:58 AM
+INFO  2019-12-16 12:13:59,117 48376ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/16/2019 7:13:59 AM
+INFO  2019-12-16 12:35:14,845 32790ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/16/2019 7:35:14 AM
+INFO  2019-12-16 12:35:15,245 33189ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/16/2019 7:35:15 AM
+INFO  2019-12-16 12:35:24,943 42887ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/16/2019 7:35:24 AM
+INFO  2019-12-16 12:35:25,559 43504ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/16/2019 7:35:25 AM
+INFO  2019-12-16 13:17:04,077 23082ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/16/2019 8:17:04 AM
+INFO  2019-12-16 13:17:04,475 23480ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/16/2019 8:17:04 AM
+INFO  2019-12-16 13:17:15,140 34146ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/16/2019 8:17:15 AM
+INFO  2019-12-16 13:17:15,585 34591ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/16/2019 8:17:15 AM
+ERROR 2019-12-16 13:19:38,404 177409ms DESKTOP-LSN82VI        OnException        - IsLogin
+INFO  2019-12-16 13:25:09,815 50541ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/16/2019 8:25:09 AM
+INFO  2019-12-16 13:25:10,220 50946ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/16/2019 8:25:10 AM
+INFO  2019-12-16 13:25:20,328 61054ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/16/2019 8:25:20 AM
+INFO  2019-12-16 13:25:20,945 61671ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/16/2019 8:25:20 AM
+INFO  2019-12-16 13:49:32,938 191192ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/16/2019 8:49:32 AM
+INFO  2019-12-16 13:49:33,337 191590ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/16/2019 8:49:33 AM
+INFO  2019-12-16 13:49:42,912 201165ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/16/2019 8:49:42 AM
+INFO  2019-12-16 13:49:43,639 201893ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/16/2019 8:49:43 AM
+INFO  2019-12-16 13:52:36,589 374843ms DESKTOP-LSN82VI        Login              - User tried to login with email logintrainer@llk.com at 12/16/2019 8:52:36 AM
+INFO  2019-12-16 13:52:36,978 375231ms DESKTOP-LSN82VI        Login              - User login with email logintrainer@llk.com at 12/16/2019 8:52:36 AM
+INFO  2019-12-16 13:52:37,685 375939ms DESKTOP-LSN82VI        Login              - User tried to login with email logintrainer@llk.com at 12/16/2019 8:52:37 AM
+INFO  2019-12-16 13:52:38,220 376473ms DESKTOP-LSN82VI        Login              - User login with email logintrainer@llk.com at 12/16/2019 8:52:38 AM
+INFO  2019-12-16 14:05:58,967 1177221ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/16/2019 9:05:58 AM
+INFO  2019-12-16 14:05:59,350 1177603ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/16/2019 9:05:59 AM
+INFO  2019-12-16 14:06:02,512 1180765ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/16/2019 9:06:02 AM
+INFO  2019-12-16 14:06:03,147 1181401ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/16/2019 9:06:03 AM
+INFO  2019-12-16 15:09:27,313 47006ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/16/2019 10:09:27 AM
+INFO  2019-12-16 15:09:27,710 47403ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/16/2019 10:09:27 AM
+INFO  2019-12-16 15:09:37,367 57060ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/16/2019 10:09:37 AM
+INFO  2019-12-16 15:09:37,980 57672ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/16/2019 10:09:37 AM
+ERROR 2019-12-16 15:11:48,427 188119ms DESKTOP-LSN82VI        OnException        - Procedure or function TMS_TrainerUserDelete has too many arguments specified.
+INFO  2019-12-16 15:15:16,143 38312ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/16/2019 10:15:16 AM
+INFO  2019-12-16 15:15:16,542 38711ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/16/2019 10:15:16 AM
+INFO  2019-12-16 15:15:25,632 47801ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 12/16/2019 10:15:25 AM
+INFO  2019-12-16 15:15:26,218 48387ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 12/16/2019 10:15:26 AM

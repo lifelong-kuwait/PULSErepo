@@ -146,7 +146,12 @@ namespace TMS.DataObjects.Interfaces.TMS
         /// <param name="_objPersonRoles">The object person roles.</param>
         /// <returns>System.Int64.</returns>
         long TMS_PersonintoUser_CreateDAL(PersonRolesMapping _objPersonRoles);
-
+        /// <summary>
+        /// TMSs the person roles mapping create dal.
+        /// </summary>
+        /// <param name="_objPersonRoles">The object person roles.</param>
+        /// <returns>System.Int64.</returns>
+        int TMS_PersonintoUser_DestroyDAL(Person _objPersonRoles);
         /// <summary>
         /// TMSs the person roles mapping update dal.
         /// </summary>

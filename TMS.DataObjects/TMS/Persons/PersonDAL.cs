@@ -508,7 +508,20 @@ namespace TMS.DataObjects.TMS
                 ParamBuilder.Par("CreatedBy", _objPersonRoles.CreatedBy)
                     );
         }
+        /// <summary>
+        /// TMSs the person roles mapping create dal.
+        /// </summary>
+        /// <param name="_objPersonRoles">The object person roles.</param>
+        /// <returns>System.Int64.</returns>
+        public int TMS_PersonintoUser_DestroyDAL(Person obj)
+        {
 
+
+            return ExecuteScalarInt32Sp("TMS_TrainerUserDelete",
+                ParamBuilder.Par("UserID",obj.UserID),
+                ParamBuilder.Par("PersonID", obj.ID)              
+                    );
+        }
         /// <summary>
         /// TMSs the person roles mapping update dal.
         /// </summary>

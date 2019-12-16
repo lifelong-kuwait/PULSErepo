@@ -19,11 +19,15 @@
         jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.SaveRecordGeneralButton);
 
     } else {
-        // edit
         if (e.model.RoleName = 'Trainer') {
-            jQuery(".islogin").hide();
+            jQuery(".islogin").show();
         }
-        jQuery(".islogin").hide();
+        // edit
+        console.log(e.model.IsLogin);
+        if (e.model.IsLogin) {
+            jQuery(".pwd").show();
+        }
+        //jQuery(".islogin").hide();
         jQuery("#personeditdiv").show();
         jQuery(title).text(lr.EditRecordGeneralTitle);
         jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.UpdateRecordGeneralButton);

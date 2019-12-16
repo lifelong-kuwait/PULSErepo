@@ -367,6 +367,8 @@ namespace TMS.Web.Controllers
 
                 }
             }
+            _person.RoleName = null;
+            
             var resultData = new[] { _person };
             return Json(resultData.ToDataSourceResult(request, ModelState));
         }
@@ -506,6 +508,51 @@ namespace TMS.Web.Controllers
                                 _person.EmailID = _objPersonContactBAL.PersonEmailAddress_CreateBAL(_objEmailAddresses, _person.ID);
                             }
                         }
+                        if(_person.RoleName=="Trainer")
+                        { 
+                        if(_person.UserID>0)
+                        {
+                            if (_person.IsLogin == false)
+                            {
+                                    _PersonBAL.TMS_PersonintoUser_DestroyBAL(_person);
+                            }
+                        }
+                        else
+                        { bool flage = true;
+                            if (_person.IsLogin == true && _person.Password != null)
+                            {
+
+                                if (_UserBAL.LoginUsersAsTrainer_DuplicationCheckBAL(new LoginUsers { Email = _person.Email, CompanyID = CurrentUser.CompanyID }) > 0)
+                                {
+                                    ModelState.AddModelError(lr.UsersTitle, lr.UserEmailAlreadyExist);
+                                    flage = false;
+                                }
+                            }
+                            if(flage)
+                            {
+                                var person = _PersonBAL.Person_GetAllByIdBAL(Convert.ToString(_person.ID));
+                                if (_UserBAL.LoginUsersAsTrainer_DuplicationCheckBAL(new LoginUsers { Email = person.Email, CompanyID = CurrentUser.CompanyID }) > 0)
+                                {
+                                    ModelState.AddModelError(lr.UsersTitle, lr.UserEmailAlreadyExist);
+
+                                }
+                                else
+                                {
+                                    _person.Password = Crypto.CreatePasswordHash(_person.Password);
+                                    _person.IsActive = true;
+                                    PersonRolesMapping obj = new PersonRolesMapping();
+                                    obj.PersonID = Convert.ToInt64(_person.ID);
+                                    obj.Password = _person.Password;
+                                    obj.RoleID = 2;
+                                    obj.CreatedBy = CurrentUser.NameIdentifierInt64;
+                                    obj.CreatedDate = DateTime.Now;
+                                    _PersonBAL.TMS_PersonintoUser_CreateBAL(obj);
+
+                                }
+                            }
+                        }
+                        }
+
                     }
                 }
             }

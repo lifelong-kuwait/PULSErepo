@@ -138,7 +138,13 @@ namespace TMS.Business.Interfaces.TMS
         /// <param name="_objPersonRoles">The object person roles.</param>
         /// <returns>System.Int64.</returns>
         long TMS_PersonintoUser_CreateBAL(PersonRolesMapping _objPersonRoles);
-       // int LoginPerson_DuplicationCheckBAL(Person person);
+        /// <summary>
+        /// TMSs the person roles mapping create bal.
+        /// </summary>
+        /// <param name="_objPersonRoles">The object person roles.</param>
+        /// <returns>System.Int64.</returns>
+        int TMS_PersonintoUser_DestroyBAL(Person _objPersonRoles);
+        // int LoginPerson_DuplicationCheckBAL(Person person);
 
         /// <summary>
         /// TMSs the person roles mapping update bal.

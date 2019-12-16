@@ -344,6 +344,12 @@ namespace TMS.Business.TMS
         /// <param name="_objPersonRoles">The object person roles.</param>
         /// <returns>System.Int64.</returns>
         public long TMS_PersonintoUser_CreateBAL(PersonRolesMapping _objPersonRoles) => DAL.TMS_PersonintoUser_CreateDAL(_objPersonRoles);
+        /// <summary>
+        /// TMSs the person roles mapping create bal.
+        /// </summary>
+        /// <param name="_objPersonRoles">The object person roles.</param>
+        /// <returns>System.Int64.</returns>
+        public int TMS_PersonintoUser_DestroyBAL(Person _objPersonRoles) => DAL.TMS_PersonintoUser_DestroyDAL(_objPersonRoles);
 
         /// <summary>
         /// TMSs the person roles mapping update bal.

@@ -299,7 +299,13 @@ namespace TMS.Library.TMS.Trainer
         /// </summary>
         /// <value><c>true</c> if this instance is online; otherwise, <c>false</c>.</value>
         public bool IsOnline { get; set; }
-
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is online.
+        /// </summary>
+        /// <value><c>true</c> if this instance is online; otherwise, <c>false</c>.</value>
+        [NotMapped]
+        [Display(Name = "TrainerLogin", ResourceType = typeof(lr))]
+        public bool? IsLogin { get; set; }
         /// <summary>
         /// Gets or sets the marital status.
         /// </summary>
@@ -519,7 +525,7 @@ namespace TMS.Library.TMS.Trainer
             PClassTitle = dr.GetString("PClassTitle");
             FlagCount = dr.GetInt32("FlagCount");
             FlagIDs = dr.GetString("FlagIDs");
-
+            IsLogin = dr.GetBoolean("IsLogin");
         }
 
     }
