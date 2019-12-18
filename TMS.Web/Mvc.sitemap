@@ -71,7 +71,14 @@
     <mvcSiteMapNode title="Prospects" controller="Prospect" action="Index">
       <mvcSiteMapNode title="Detail" controller="Prospect" action="Detail"/>
     </mvcSiteMapNode>
-
+ <mvcSiteMapNode title="User Log" controller="UserLog" action="UserLog">
+      <mvcSiteMapNode title="User Log" controller="UserLog" action="UserLog"/>
+ 
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="User Error Log" controller="UserLog" action="UserErrorLog">
+      
+ <mvcSiteMapNode title="User Error Log" controller="UserLog" action="UserErrorLog"/>
+    </mvcSiteMapNode>
     <!--<mvcSiteMapNode title="Tasks" controller="Task" action="Index"/>
     <mvcSiteMapNode title="Task History" controller="Task" action="Detail"/>-->
     <!--<mvcSiteMapNode title="Prospects" controller="Prospect" action="Index"/>VenueMatrixReport-->
@@ -90,6 +97,7 @@
       <mvcSiteMapNode title="Venue Daily Utilization Report" controller="SPl_Test_Reports" action="VenueDailyUtilizationReport"/>
       <mvcSiteMapNode title="Trainee Periodic Report" controller="SPl_Test_Reports" action="TraineePeriodicReport"/>
       <mvcSiteMapNode title="Course Periodic Report" controller="SPl_Test_Reports" action="CoursePeriodicReport"/>
+      <mvcSiteMapNode title="Venue Utilization Report" controller="SPl_Test_Reports" action="WeeklyUtilizationReportModified"/>
      <mvcSiteMapNode title="Schedules Report" controller="SPl_Test_Reports" action="Schedules"/>
   </mvcSiteMapNode>
 

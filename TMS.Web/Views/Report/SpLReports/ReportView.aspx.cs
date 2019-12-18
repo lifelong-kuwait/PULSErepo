@@ -44,7 +44,7 @@ namespace TMS.Web.Views.Report.SpLReports
             var rptPath = Server.MapPath(@"../../../Report/" + reportData.ReportName + ".rdlc");
             this.ReportViewerRSFReports.LocalReport.ReportPath = rptPath;
             DataTable dt = _CourseBAL.GetCourseReportData(ClassID, CourseID);
-            ReportViewerRSFReports.ProcessingMode = ProcessingMode.Remote;
+            ReportViewerRSFReports.ProcessingMode = ProcessingMode.Local;
            ReportViewerRSFReports.LocalReport.DataSources.Clear();
             ReportViewerRSFReports.LocalReport.EnableExternalImages = true;
             List<OrganizationModel> logoPath = _CourseBAL.GetOrganizationLogo(Convert.ToInt64(HttpContext.Current.Session["CompanyID"]));

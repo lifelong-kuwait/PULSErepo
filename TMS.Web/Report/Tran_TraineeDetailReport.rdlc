@@ -829,9 +829,9 @@ Format(Fields!EndDate.Value,"dd MMM yyyy")</Value>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
             <Top>0.74099in</Top>
-            <Left>4.42211in</Left>
+            <Left>3.88044in</Left>
             <Height>0.14583in</Height>
-            <Width>1.8125in</Width>
+            <Width>2.35417in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
