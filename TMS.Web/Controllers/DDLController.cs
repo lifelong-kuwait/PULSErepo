@@ -408,6 +408,8 @@ namespace TMS.Web.Controllers
 
         [DontWrapResult]
         public JsonResult CourseMeterial() => Json(_objIConfigBAL.CourseMeterial_GetAllByCultureBAL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
+        [DontWrapResult]
+        public JsonResult PersonsForInvoice() => Json(_objIConfigBAL.PersonsForInvoice_GetAllByCultureBAL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
 
     }
 }

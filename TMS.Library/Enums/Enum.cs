@@ -626,6 +626,16 @@ namespace TMS.Library
         [Display(Name = "CategoryTypeCourseCategory", ResourceType = typeof(lr))]
         CategoryType_Course_Category = 2,
     }
+    public enum TaxType
+    {
+        //[Display(Name = "NotSpecified", ResourceType = typeof(lr))]
+        Tax_Exclusive = 1,
+        //[Display(Name = "CategoryTypeFeedbackCategory", ResourceType = typeof(lr))]
+        //CategoryType_Feedback_Category = 1,
+        // [Display(Name = "CategoryTypeCourseCategory", ResourceType = typeof(lr))]
+        Tax_Inclusive = 2,
+        NoTax=3,
+    }
     #endregion
 
     #region

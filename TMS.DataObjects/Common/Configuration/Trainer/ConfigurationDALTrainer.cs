@@ -187,6 +187,13 @@ namespace TMS.DataObjects.Common.Configuration
             return ExecuteListSp<DDlList>("CourseMeterial_ForCourseGetAllByCulture", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OrganizationID", CompnayID));
 
         }
+        public IList<DDlList> PersonsForInvoice_GetAllByCultureDAL(string culture, long CompnayID)
+        {
+
+            return ExecuteListSp<DDlList>("PersonsForInvoice_ForCourseGetAllByCulture", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OrganizationID", CompnayID));
+
+        }
+        
 
         public IList<DDlList> HowHeard_GetAllByCultureDAL(string culture, long CompnayID)
         {

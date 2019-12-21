@@ -1,0 +1,339 @@
+﻿<style>
+    .k-textbox {
+        border: none;
+    }
+
+    input {
+        border: none;
+    }
+    .k-input{
+        width:100%;
+    }
+</style>
+<div class="row" style="border:outset 2px;border-radius:5px; border-color:lightgrey">
+    <div class="col col-md-12">
+        <div class="col col-md-3">
+            <label>
+                To
+            </label>
+            @(Html.Kendo().DropDownList()
+                                                        .Name("Course")
+                                                        .DataTextField("Text")
+                                                        .DataValueField("Value")
+                                                        .OptionLabel("--Please select Person--")
+                                                        .Filter("contains")
+                                                        .DataSource(source =>
+                                                        {
+                                                            source.Read(read =>
+                                                            {
+                                                                read.Action("PersonsForInvoice", "DDL");
+                                                            }).ServerFiltering(false);
+                                                        })
+                         .HtmlAttributes(new { style = "width: 100%" })
+            )
+        </div>
+        <div class="col col-md-3">
+            <label>
+                Due Date
+            </label>
+            @(Html.Kendo().DatePicker()
+                                       .Name("Due_Date")
+                                       .Value(DateTime.Now.Date)
+                                       .Format("{0:MM/dd/yyyy}")
+                                       .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
+                                       .DateInput()
+            )
+        </div>
+        <div class="col col-md-3">
+            <label>
+                Invoice Number
+            </label>
+            @(Html.Kendo().TextBox()
+                                             .Name("Invoice_Number")
+                                             .Value("")
+                                             .HtmlAttributes(new { style = "width: 100%;border:1px solid;", title = "datetimepicker" })
+
+            )
+        </div>
+        <div class="col col-md-3">
+            <label>
+                Referance Number
+            </label>
+            @(Html.Kendo().TextBox()
+                                                     .Name("Referance_Number")
+                                                     .Value("")
+                                                     .HtmlAttributes(new { style = "width: 100%;border:1px solid;", title = "datetimepicker" })
+
+            )
+        </div>
+    </div>
+
+</div>
+<div class="row" style="border:outset 2px;border-radius:5px; border-color:lightgrey">
+    <div class="col col-md-12">
+        <div class="col col-md-3">
+            <label>
+                Currency
+            </label>
+            @(Html.Kendo().DropDownList()
+                                                              .Name("Currency")
+                                                              .DataTextField("Text")
+                                                              .DataValueField("Value")
+                                                              .OptionLabel("--Please select Currency--")
+                                                              .Filter("contains")
+                                                              .DataSource(source =>
+                                                              {
+                                                                  source.Read(read =>
+                                                                  {
+                                                                      read.Action("Currencies", "DDL");
+                                                                  }).ServerFiltering(false);
+                                                              })
+                               .HtmlAttributes(new { style = "width: 100%" })
+            )
+        </div>
+        <div class="col col-md-2" style="float:right">
+            <label>
+                Tax
+            </label>
+            @(Html.Kendo().DropDownList()
+                                                                              .Name("Currency2")
+                                                                              .DataTextField("Text")
+                                                                              .DataValueField("Value")
+                                                                              .OptionLabel("--Please select Tax--")
+                                                                              .Filter("contains")
+
+                                               .HtmlAttributes(new { style = "width: 100%" })
+                                               .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.TaxType>(typeof(TMS.Library.TaxType))))
+        </div>
+
+    </div>
+
+</div>
+<div class="row" style="border:outset 2px;border-radius:5px; border-color:lightgrey">
+    <div class="col col-md-12" style=" margin-top:2%;">
+        <table class="table table-bordered" id="InvoiceTable">
+            <thead class="thead-light">
+                <tr>
+                    <td>
+
+                        Item
+
+                    </td>
+                    <td>
+                        Description
+                    </td>
+                    <td>
+                        Qty
+                    </td>
+                    <td>
+                        Unit Price
+                    </td>
+
+                    <td>
+                        Sub Total
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="1">
+                    <td>
+                        @(Html.Kendo().TextBox()
+                                                                        .Name("item1")
+                                                                        .Value("")
+                                                                        .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
+
+                        )
+                    </td>
+                    <td>
+                        @(Html.Kendo().TextBox()
+                                                                        .Name("Description1")
+                                                                        .Value("")
+                                                                        .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
+
+                        )
+                    </td>
+                    <td>
+                        @(Html.Kendo().NumericTextBox<int>
+                                                                            ()
+                                                                            .Name("Qty1")
+                                                                            .Min(1)
+
+                                                                            .Value(30)
+                                                                            .HtmlAttributes(new { style = "width: 100%", title = "currency" })
+                        )
+                    </td>
+                    <td>
+                        @(Html.Kendo().NumericTextBox<decimal>
+                                                                            ()
+                                                                            .Name("currency1")
+                                                                            .Min(1)
+                                                                            .Value(30)
+                                                                            .HtmlAttributes(new { style = "width: 100%", title = "currency" })
+                        )
+                    </td>
+                    <td>
+                        @(Html.Kendo().TextBox()
+                                                                        .Name("Total1")
+                                                                        .Value("")
+                                                                        .HtmlAttributes(new { style = "width:70%;", title = "datetimepicker", disabled = true })
+                        )
+                        <label style="float:right;">
+                            <button type="button" class="RemoveRow" value="X"><span class="glyphicon glyphicon-trash"></span></button>
+                        </label>
+                    </td>
+                </tr>
+                <tr id="2">
+                    <td>
+                        @(Html.Kendo().TextBox()
+                                                                        .Name("item2")
+                                                                        .Value("")
+                                                                        .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
+
+                        )
+                    </td>
+                    <td>
+                        @(Html.Kendo().TextBox()
+                                                                        .Name("Description2")
+                                                                        .Value("")
+                                                                        .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
+
+                        )
+                    </td>
+                    <td>
+                        @(Html.Kendo().NumericTextBox<int>
+                                                                            ()
+                                                                            .Name("Qty2")
+                                                                            .Min(1)
+                                                                            .Decimals(0)
+                                                                            .Value(30)
+                                                                            .HtmlAttributes(new { style = "width: 100%", title = "currency" })
+                        )
+                    </td>
+                    <td>
+                        @(Html.Kendo().NumericTextBox<decimal>
+                                                                            ()
+                                                                            .Name("currency2")
+                                                                            .Min(1)
+                                                                            .Value(30)
+                                                                            .HtmlAttributes(new { style = "width: 100%", title = "currency" })
+                        )
+                    </td>
+                    <td>
+                        @(Html.Kendo().TextBox()
+                                                                        .Name("Total2")
+                                                                        .Value("")
+                                                                        .HtmlAttributes(new { style = "width:70%;", title = "datetimepicker", disabled = true })
+                        )
+                        <label style="float:right;">
+                            <button type="button" class="RemoveRow" value="X"><span class="glyphicon glyphicon-trash"></span></button>
+
+                        </label>
+                    </td>
+                </tr>
+                <tr id="3">
+                    <td>
+                        @(Html.Kendo().TextBox()
+                                                                        .Name("item3")
+                                                                        .Value("")
+                                                                        .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
+
+                        )
+                    </td>
+                    <td>
+                        @(Html.Kendo().TextBox()
+                                                                        .Name("Description3")
+                                                                        .Value("")
+                                                                        .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
+
+                        )
+                    </td>
+                    <td>
+                        @(Html.Kendo().NumericTextBox<int>
+                                                                            ()
+                                                                            .Name("Qty3")
+                                                                            .Min(1)
+                                                                            .Decimals(0)
+                                                                            .Value(30)
+                                                                            .HtmlAttributes(new { style = "width: 100%", title = "currency" })
+                        )
+                    </td>
+                    <td>
+                        @(Html.Kendo().NumericTextBox<decimal>
+                                                                            ()
+                                                                            .Name("currency3")
+                                                                            .Min(1)
+                                                                            .Value(30)
+                                                                            .HtmlAttributes(new { style = "width: 100%", title = "currency" })
+                        )
+                    </td>
+                    <td>
+                        @(Html.Kendo().TextBox()
+                                                                        .Name("Total3")
+                                                                        .Value("")
+                                                                        .HtmlAttributes(new { style = "width:70%;", title = "datetimepicker", disabled = true })
+                        )
+                        <label style="float:right;">
+                            <button type="button" class="RemoveRow" value="X"><span class="glyphicon glyphicon-trash"></span></button> 
+                        </label>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col col-md-3">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success addRow" value="1">Add a new Line</button>
+                </div>
+            </div>
+            <div class="col col-md-9" style=" margin-top:2%;">
+                <div class="grid-total">
+                    <div>
+                        <label width="50%;" style="margin-left:50%;">
+                            Subtotal
+                        </label>
+                        <span style="float:right"><input type="text" id="subTotal" readonly="" class="subTotalField" value="0.00"></span>
+                    </div>
+                    <div style="margin-top:2%;margin-bottom:2%;border-bottom:solid 1px;">
+                        <div style="height: 50px;">
+                            <label width="50%;" style="margin-left:50%">Tax</label>
+                            <span style="float:right"><input type="text" id="TAXTax" readonly="" class="subTotalField" value="0.00"></span>
+                        </div>
+                    </div>
+                    <div id="invoiceTotalSection" class="total" style="height:50px;margin-bottom:2%;border-bottom:double 3px;">
+                        <label id="InvoiceTotal" width="50%;" style="margin-left:50%">TOTAL</label>
+                        <span id="totalCredit" style="float:right"><em id="currency_exchangeTotal" style="display: none;"></em><input type="text" id="invoiceTotal" readonly="" class="totalField" value="0.00" style="color: rgb(0, 0, 0);"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery('#InvoiceTable').on('click', 'button', function () {
+       
+            console.log(jQuery('#InvoiceTable tbody tr').length);
+            if (jQuery('#InvoiceTable tbody tr').length > 1) {
+                jQuery(this).closest('tr').remove();
+
+            }
+        })
+        jQuery('.addRow').click(function () {
+            var leng = jQuery('#InvoiceTable tbody tr').length + 1;
+            var td1 = '<td><input class="k-textbox" id="item' + leng + '" name="item1" style="width: 100%" title="datetimepicker"></td>';
+            var td2 = '<td><input class="k-textbox" id="Description' + leng + '" name="Description2" style="width: 100%" title="datetimepicker"></td>';
+            var td3 = '<td><input id="Qty' + leng + '" min="1" style="wigth:100%" name="Qty' + leng + '" style="display: none;" title="currency" type="text" value="1" data-role="numerictextbox" role="spinbutton" aria-valuemin="1" class="k-input" aria-valuenow="1" aria-disabled="false"></td>';
+            var td4 = '<td><input id="currency' + leng + '" min="1" style="wigth:100%" name="currency' + leng + '" style="display: none;" title="currency" type="text" value="1" data-role="numerictextbox" role="spinbutton" aria-valuemin="1" class="k-input" aria-valuenow="1" aria-disabled="false"></td>';
+            var td5 = '<td><input class="k-textbox" disabled="True" id="Total' + leng +'" name="Total1" style="width:70%;" title="datetimepicker"><label class="rowRemo" style="float:right;"><button type = "button" class="RemoveRow" value = "X"><span class="glyphicon glyphicon-trash"></span></button></label></td>';
+            jQuery('#InvoiceTable tr:last').after('<tr id="' + leng + '">' + td1 + td2 + td3 + td4 +td5+ '</tr>');
+            kendo.syncReady(function () {
+                jQuery("#Qty" + leng +"").kendoNumericTextBox({ "decimals": 0 }); 
+            jQuery("#currency" + leng + "").kendoNumericTextBox({ "decimals": 2 });
+        });
+        })
+
+    });
+    
+
+</script>

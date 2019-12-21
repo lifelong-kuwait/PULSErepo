@@ -292,6 +292,7 @@
       <DependentUpon>CertificateDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Controllers\CertificateController.cs" />
+    <Compile Include="Controllers\InvoiceingController.cs" />
     <Compile Include="Controllers\SalesAdministrationController.cs" />
     <Compile Include="Controllers\SPl_Test_ReportsController.cs" />
     <Compile Include="Controllers\TestWaqasControllerController.cs" />
@@ -4840,6 +4841,7 @@
     <Content Include="Views\UserLog\EditorTemplates\_UserErrorLog.cshtml" />
     <Content Include="Views\Home\LoginForTrainer.cshtml" />
     <Content Include="Views\Home\_OrganizationForTrainerLogin.cshtml" />
+    <Content Include="Views\Invoiceing\Index.cshtml" />
     <None Include="WeeklyAttendanceReportData.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>

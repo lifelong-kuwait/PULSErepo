@@ -606,6 +606,7 @@ namespace TMS.Business.Interfaces.Common.Configuration
         IList<DDlList> CourseLogistic_GetAllByCultureBALL(string culture, long CompnayID);
 
         IList<DDlList> CourseMeterial_GetAllByCultureBAL(string culture, long CompnayID);
+        IList<DDlList> PersonsForInvoice_GetAllByCultureBAL(string culture, long CompnayID);
         IList<DDlList> HowHeard_GetAllByCultureBAL(string culture, long CompnayID);
 
         IList<DDlList> CRMUser_GetAllByCultureBAL(string culture, long CompnayID);

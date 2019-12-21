@@ -640,7 +640,8 @@ namespace TMS.DataObjects.Interfaces.Common.Configuration
 
 
         IList<DDlList> CourseMeterial_GetAllByCultureDAL(string culture, long CompnayID);
-
+        IList<DDlList> PersonsForInvoice_GetAllByCultureDAL(string culture, long CompnayID);
+        
         IList<DDlList> HowHeard_GetAllByCultureDAL(string culture, long CompnayID);
 
         IList<DDlList> CRMUser_GetAllByCultureDAL(string culture, long CompnayID);

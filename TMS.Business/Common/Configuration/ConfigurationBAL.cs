@@ -757,7 +757,9 @@ namespace TMS.Business.Common.Configuration
         public IList<DDlList> CourseLogistic_GetAllByCultureBALL(string culture, long CompnayID) => _ConfigurationDAL.CourseLogistic_GetAllByCultureDAL(culture, CompnayID);
 
         public IList<DDlList> CourseMeterial_GetAllByCultureBAL(string culture, long CompnayID) => _ConfigurationDAL.CourseMeterial_GetAllByCultureDAL(culture, CompnayID);
+        public IList<DDlList> PersonsForInvoice_GetAllByCultureBAL(string culture, long CompnayID) => _ConfigurationDAL.PersonsForInvoice_GetAllByCultureDAL(culture, CompnayID);
 
+        
         public IList<DDlList> HowHeard_GetAllByCultureBAL(string culture, long CompnayID) => _ConfigurationDAL.HowHeard_GetAllByCultureDAL(culture, CompnayID);
 
 
