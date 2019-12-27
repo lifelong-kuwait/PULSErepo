@@ -228,10 +228,11 @@ namespace TMS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
         [ClaimsAuthorize("CanDeleteCourse")]
+        [DisableValidation]
         public ActionResult Course_Destroy([DataSourceRequest] DataSourceRequest request, Course _Course)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
 
                 var json = new JavaScriptSerializer().Serialize(_Course);
                 _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Delete_Success.ToString(), System.Environment.MachineName, "User tried to destroy Courses at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
@@ -268,7 +269,7 @@ namespace TMS.Web.Controllers
                         }
                     }
                 }
-            }
+            //}
             var resultData = new[] { _Course };
             return Json(resultData.ToDataSourceResult(request, ModelState));
         }

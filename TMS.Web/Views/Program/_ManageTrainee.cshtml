@@ -72,10 +72,10 @@
     @helper RenderAddTemplate()
     {
         <div class="toolbar">
-            @*@if (User.IsInAnyRoles("CanAddEditProgramTrainee"))
-                {*@
+            @if (User.IsInAnyRoles("CanAddEditProgramTrainee"))
+                {
             <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
-            @*}*@
+            }
             @if (User.IsInAnyRoles("CanDeleteProgramTrainee"))
             {
                 <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
