@@ -87,8 +87,11 @@
         {
             i.Add().Text(lr.MenuSession).LoadContentFrom("SessionNested", "Program", new { ClassId = Model.ID });
         }
-        i.Add().Text(lr.ClassLogisticRequirementsTitle).LoadContentFrom("ClassLogistics", "Program", new { ClassId = Model.ID });
-        //i.Add().Text(lr.MenuSession +" "+ lr.CourseLogisticRequirementsTitle).LoadContentFrom("SessionLogistics", "Program", new { ClassId = Model.ID });
+        if (User.IsInRole("CanViewCourseLogisticRequirements"))
+        {
+
+            i.Add().Text(lr.ClassLogisticRequirementsTitle).LoadContentFrom("ClassLogistics", "Program", new { ClassId = Model.ID });
+        }  //i.Add().Text(lr.MenuSession +" "+ lr.CourseLogisticRequirementsTitle).LoadContentFrom("SessionLogistics", "Program", new { ClassId = Model.ID });
     }).Events(e => e.Expand("onExpand")))
 
 

@@ -610,7 +610,7 @@ namespace TMS.Web.Controllers
         }
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
-        [ClaimsAuthorize("CanDeleteSession")]
+        [ClaimsAuthorize("CanDeletePerson")]
 
         public JsonResult PersonDeleteChk(string _Sessions)
         {

@@ -2514,7 +2514,9 @@
     <Content Include="Content\kendo\2018.1.117\fonts\glyphs\WebComponentsIcons.woff" />
     <Content Include="Content\kendo\2018.1.117\images\kendoui.ttf" />
     <Content Include="Content\kendo\2018.1.117\images\kendoui.woff" />
-    <Content Include="Mvc.sitemap" />
+    <Content Include="Mvc.sitemap">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="DS_ClassReportByCourseCategoryID.xsc">
       <DependentUpon>DS_ClassReportByCourseCategoryID.xsd</DependentUpon>
     </Content>
@@ -2649,6 +2651,9 @@
     <None Include="Properties\PublishProfiles\FolderProfile64.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile65.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile66.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile67.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile68.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile69.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile7.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile8.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile9.pubxml" />

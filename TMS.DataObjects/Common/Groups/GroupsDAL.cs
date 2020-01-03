@@ -243,7 +243,17 @@ namespace TMS.DataObjects.Common.Groups
         {
             return ExecuteListSp<SecurityGroupsPermission>("TMS_GroupPermissions_GetAllByGroupId", ParamBuilder.Par("counter", 0) , ParamBuilder.Par("OrganizationID", organizationID),ParamBuilder.Par("Culture", Culture), ParamBuilder.Par("GroupId", GroupId), ParamBuilder.Par("userID", UserID));
         }
-
+        /// <summary>
+        /// Securities the groups permission get all by group identifier.
+        /// </summary>
+        /// <param name="Culture">The culture.</param>
+        /// <param name="GroupId">The group identifier.</param>
+        /// <returns>IList&lt;SecurityGroupsPermission&gt;.</returns>
+        public string PermissionPictureDAL(string ID)
+        {
+            var parameters = new[] { ParamBuilder.Par("ID", ID) };
+            return ExecuteScalarNvarchar("TMS_GroupPermissions_PermissionPictureName", parameters);
+        }
         /// <summary>
         /// Securities the groups permission get all by group identifier.
         /// </summary>

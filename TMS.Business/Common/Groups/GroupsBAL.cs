@@ -140,7 +140,17 @@ namespace TMS.Business.Common.Groups
         {
             return _DAL.SecurityGroupsPermission_GetAllByGroupId(Culture, GroupId, organizationID, userid);
         }
-
+        /// <summary>
+        /// Securities the groups permission get all by group identifier bal.
+        /// </summary>
+        /// <param name="Culture">The culture.</param>
+        /// <param name="GroupId">The group identifier.</param>
+        /// <returns>IList&lt;SecurityGroupsPermission&gt;.</returns>
+        public string PermissionPicture(string ID)
+        {
+            return _DAL.PermissionPictureDAL(ID);
+        }
+       
         /// <summary>
         /// Securities the groups permission get all by group identifier bal.
         /// </summary>

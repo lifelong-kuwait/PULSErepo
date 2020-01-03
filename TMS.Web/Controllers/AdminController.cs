@@ -360,7 +360,23 @@ namespace TMS.Web.Controllers
                 }
             }
         }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanViewGroupsDetail")]
 
+        public JsonResult GroupPermissionsPicture(string ID)
+        {
+            var url = "../Attachment/TMS/PermissionsPictures/";
+            var PermissionData = this._Groups.PermissionPicture(ID);
+            if(PermissionData=="-1")
+            {
+                url = "";
+            }else
+            {
+                url = url+PermissionData;
+            }
+            return Json(url, JsonRequestBehavior.AllowGet);
+        }
 
         /// <summary>
         /// Gets the name of the group.

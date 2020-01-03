@@ -92,7 +92,13 @@ namespace TMS.Business.Interfaces.Common.Groups
         /// <param name="GroupId">The group identifier.</param>
         /// <returns>IList&lt;SecurityGroupsPermission&gt;.</returns>
         IList<SecurityGroupsPermission> SecurityGroupsPermission_GetAllByGroupIdBAL(string Culture, long GroupId, long organizationID, long userid);
-
+        /// <summary>
+        /// Securities the groups permission get all by group identifier bal.
+        /// </summary>
+        /// <param name="Culture">The culture.</param>
+        /// <param name="GroupId">The group identifier.</param>
+        /// <returns>IList&lt;SecurityGroupsPermission&gt;.</returns>
+       string PermissionPicture(string ID);
         /// <summary>
         /// Securities the groups permission get all by group identifier bal.
         /// </summary>

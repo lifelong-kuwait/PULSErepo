@@ -79,6 +79,12 @@
       
  <mvcSiteMapNode title="User Error Log" controller="UserLog" action="UserErrorLog"/>
     </mvcSiteMapNode>
+    <mvcSiteMapNode title="Certificate" controller="Certificate" action="Index">
+      <mvcSiteMapNode title="Certificate" controller="Certificate" action="Index"/>
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="Locked Users" controller="User" action="UnlockUser">
+      <mvcSiteMapNode title="Locked Users" controller="User" action="UnlockUser"/>
+    </mvcSiteMapNode>
     <!--<mvcSiteMapNode title="Tasks" controller="Task" action="Index"/>
     <mvcSiteMapNode title="Task History" controller="Task" action="Detail"/>-->
     <!--<mvcSiteMapNode title="Prospects" controller="Prospect" action="Index"/>VenueMatrixReport-->
@@ -100,5 +106,5 @@
       <mvcSiteMapNode title="Venue Utilization Report" controller="SPl_Test_Reports" action="WeeklyUtilizationReportModified"/>
      <mvcSiteMapNode title="Schedules Report" controller="SPl_Test_Reports" action="Schedules"/>
   </mvcSiteMapNode>
-
+ 
 </mvcSiteMap>
