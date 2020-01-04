@@ -809,3 +809,7 @@ INFO  2020-01-03 16:52:44,545 25147ms DESKTOP-LSN82VI        Login              
 ERROR 2020-01-03 16:52:55,004 35607ms DESKTOP-LSN82VI        OnException        - An item with the same key has already been added.
 INFO  2020-01-03 16:52:55,521 36123ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 1/3/2020 1:52:55 PM
 INFO  2020-01-03 16:52:55,902 36505ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 1/3/2020 1:52:55 PM
+INFO  2020-01-04 09:00:02,246 696102ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 1/4/2020 6:00:02 AM
+INFO  2020-01-04 09:00:02,643 696500ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 1/4/2020 6:00:02 AM
+INFO  2020-01-04 09:00:16,218 710075ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 1/4/2020 6:00:16 AM
+INFO  2020-01-04 09:00:16,823 710680ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 1/4/2020 6:00:16 AM

@@ -21,9 +21,9 @@ namespace TMS.Web.Controllers
     public class InvoiceingController : Controller
     {
         // GET: Invoiceing
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
+        public ActionResult Index()
+        {
+            return View();
+        }
     }
 }
