@@ -1,0 +1,222 @@
+﻿@using lr = Resources.Resources;
+@using TMS.Library
+@{
+    ViewBag.Title = "InvoiceGrid";
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+}
+
+<h2>InvoiceGrid</h2>
+<script>
+    //Class
+    function SessionTemplate(data) {
+        if (data !== null) {
+            var SessionTemplate = kendo.template(jQuery("#SessionTemplate").html(), { useWithBlock: false });
+            return SessionTemplate(data);
+        }
+        return '';
+    }
+</script>
+@(Html.Kendo().Grid<TMS.Library.TMS.Invoice>()
+                .Name("PersonGrid")
+                .Columns(columns =>
+                {
+
+                columns.Bound(e => e.Invoice_Number).Filterable(true).ClientTemplate(@"<div  class='person-box'>
+                <div class='person'>
+                    " +
+                @"<h3> <b>Invoice Number</b>:#:Invoice_Number#</h3>" +
+                 @"# if (Referance_Number!=null) { #" +
+                @"<p> <b>Referance Number</b>: #:Referance_Number#</p> #} 
+                    if(customer.Customer_PName!=null){#<p><b>Customer</b> :#:customer.Customer_PName#</p> #}
+                    if(users.P_DisplayName!=null){#<p><b>Created By</b> :#:users.P_DisplayName#</p> #}
+                   if(Organization.P_Name!=null){#<p><b>Organization</b> :#:Organization.P_Name#</p> #}#
+                </div>"
+           );
+                columns.Bound(e => e.customer.Customer_PName).Filterable(true).ClientTemplate(@"<div  class='person-box'>
+                <div class='person'>
+                    " +
+                 @"<h3> <b>Invoice Sub Total</b>:#:Invoice_Amount#</h3>" +
+                  @"# if (Tax_Value!=null) { #" +
+                 @"<p> <b>Tax Value</b>: #:Tax_Value#</p> #} 
+                    if(Discount_Value!=null){#<p><b>Discount Value</b>:#:Discount_Value#</p> #}
+                    if(Invoice_Gross_Total!=null){#<h2><p><b>Gross Total</b> :#:Invoice_Gross_Total#</p></h2> #}#
+                   
+                </div>"
+            );
+                columns.Bound(e => e.Tax_Type).Filterable(true).ClientTemplate(@"<div  class='person-box'>
+                <div class='person'>
+                    " +
+                @"<h5> <b>Tax Percentage</b>:#:Tax_Percentage#</h5>" +
+                 @"# if (Discount!=null) { #" +
+                @"<p> <b>Discount %</b>: #:Discount#</p> #} 
+                    if(Tax_Type!=null){#<p><b>Tax Type</b>:#:Tax_Type#</p> #}#
+                   
+                </div>"
+           );
+                columns.Bound(e => e.Is_Re_schedule).Filterable(true).ClientTemplate("#=SessionTemplate(data)#");
+       
+
+    })
+                .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_PersonTemplate").DisplayDeleteConfirmation(false))
+                .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>)).Groupable()
+                                        .Sortable().Selectable(selectable => selectable
+                                        .Mode(GridSelectionMode.Single))
+                                        .Groupable()
+                                        .Pageable(pager => pager
+                                        .Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
+                                        .Scrollable()
+                                        //.ClientDetailTemplateId("PersonGridChildtemplate")
+                                        .Filterable().Events(e => e.Edit("PersonGrid_onEdit").Save("Person_onSave"))
+                                        .HtmlAttributes(new { style = "height:700px !important;" })
+                                        .ClientDetailTemplateId("LookupDetailGriTemplate")
+                                        .DataSource(dataSource => dataSource
+                                            .Ajax()
+                                            //.ServerOperation(false)
+                                            .Model(model =>
+                                            {
+                                                model.Id(m => m.ID);
+                                            })
+                                           .PageSize(5)
+                                            .Read(read => read.Action("Invoice_Read", "Invoiceing", new { RoleID = Model }).Data("withSearch"))
+                                            //.Create(read => read.Action("Person_Create", "People", new { RoleID = Model }).Data("PersonProfilePictureData"))
+                                            //.Destroy(read => read.Action("Invoice_Destroy", "Invoiceing"))
+                                            //.Update(read => read.Action("Person_Update", "People").Data("PersonProfilePictureData"))
+                                            .Events(e => e.Error("GeneralErrorHandler(\"PersonGrid\")"))
+                                            ).NoRecords(lr.GridNoRecordFoundMessage)
+)
+
+@helper RenderAddTemplate()
+{
+<div class="toolbar">
+
+    @if (User.IsInRole("CanDeletePerson"))
+    {
+        <a class="k-button tms-grid-added" title="" data-placement="left" data-toggle="tooltip" data-original-title="Tooltip on left">
+                <span class="tms-grid-icon mdi mdi-plus "></span>
+            </a>
+        <a class="k-button tms-grid-Download download"><span class="tms-grid-icon mdi mdi-download "></span></a>
+     }
+
+</div>
+}
+<script src="~/Views/People/Person.js"></script>
+<script id="LookupDetailGriTemplate" type="text/kendo-tmpl">
+    @(Html.Kendo().Grid<TMS.Library.TMS.InvoiceDetail>()
+                                            .Name("ResourceLookupDetailGridMian#=ID#") // template expression, to be evaluated in the master context
+                            .Columns(columns =>
+                            {
+                                columns.Bound(o => o.Item).Width(110);
+                                columns.Bound(o => o.Description).Width(110);
+                                columns.Bound(p => p.Qty).Title(lr.GridIsActiveColumnTitle).Width(50); ;
+                                columns.Bound(p => p.Price).Title(lr.GridIsSelected).Width(50); ;
+                                columns.Bound(p => p.Sub_Total).Width(100).Format(KendoDateFormat).Title(lr.GridCreatedDate); ;
+                                
+
+                            })
+                              .Events(e => e.Edit("PersonGrid_onEdit").Save("Person_onSave"))
+                            .DataSource(dataSource => dataSource
+                                .Ajax()
+                               .Model(model => model.Id(p => p.ID))
+                                      .Read(read => read.Action("InvoiceDetail_Read", "Invoiceing", new { InvoiceID = "#=ID#" }))
+                                     
+                                    )
+                                       
+                            
+                            .Sortable().NoRecords(lr.GridNoRecordFoundMessage)
+                            .ToClientTemplate()
+    )
+</script>
+<script type="text/javascript">
+    jQuery(function () {
+        var template = kendo.template(jQuery("#toolTipTemplate").html());
+        //initialize tooltip to grid tbody with filter cells with given CSS class
+        var tooltip = jQuery("#PersonGrid tbody").kendoTooltip({
+            position: "center",
+            autoHide: false,
+            filter: "td:nth-child(2)",
+            showOn: "click",
+            show: function (e) {
+                //get current target row
+                this.popup.element.addClass("tmstooltip");
+                var currentRow = this.target().closest("tr");
+                var grid = jQuery("#PersonGrid").data("kendoGrid");
+                //get current row dataItem
+                var dataItem = grid.dataItem(currentRow);
+                //pass the dataItem to the template
+                var generatedTemplate = template(dataItem);
+                //set the generated template to the content of the tooltip
+                this.content.html(generatedTemplate);
+
+            },
+        }).data("kendoTooltip");
+        jQuery(".detail").live("mousedown", function (event) {
+            var checkedLength = jQuery("#PersonGrid tr.k-state-selected").length;
+            if (checkedLength == 1) {
+                grid = jQuery("#PersonGrid").data("kendoGrid");
+                var data = grid.dataItem(jQuery("#PersonGrid tr.k-state-selected"));
+                var url = '@Url.Content("~/Invoiceing/InvoiceDetail?Inoid=")' + data.ID;
+                window.open(url, '_blank');
+            } else {
+
+            }});
+
+        jQuery(".download").live("mousedown", function (event) {
+            
+             var checkedLength = jQuery("#PersonGrid tr.k-state-selected").length;
+            if (checkedLength == 1) {
+                grid = jQuery("#PersonGrid").data("kendoGrid");
+                var data = grid.dataItem(jQuery("#PersonGrid tr.k-state-selected"));
+               jQuery.ajax({
+                                method: "post",
+                                url: "/Invoiceing/SetSessionValues",
+                                dataType: "JSON",
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify({ _InoID: data.ID }),
+                                success: function (data) {
+                                    window.open("/Invoiceing/PrintInvoice_Read", "_blank");
+                                }
+                            });
+            } else {
+
+            }
+        });
+        jQuery(".tms-grid-added").live("mousedown", function (event) {
+            window.open("/Invoiceing/index", "_blank");
+        });
+    })
+</script>
+<script id="SessionTemplate" type="text/kendo">
+    <div  class='person-box'>
+        <div class='person'>
+            <h5 style="color:red;">
+                <p>
+                    <label>
+                        Due Date
+                    </label>
+                    <span>
+                        #:data.Due_Date2#
+                    </span>
+                </p>
+            </h5>
+            <p>
+                <label>Is Deposit: </label>
+                <label>
+                    #if (data.Is_Deposit){ # <span class="mdi mdi-checkbox-blank-circle text-success"></span>    #}else{#  <span class="mdi mdi-checkbox-blank-circle text-danger"></span>  #}#
+
+                </label>
+            </p>
+            <p>
+                <label>Is ReIssued: </label>
+                <label>
+                    #if (data.Is_Re_schedule){ # <span class="mdi mdi-checkbox-blank-circle text-success"></span>    #}else{#  <span class="mdi mdi-checkbox-blank-circle text-danger"></span>  #}#
+
+                </label>
+            </p>
+        </div>
+     </div>
+</script>
+<script id="toolTipTemplate" type="text/x-kendo-template">
+            <span class="grid-tooltip-icon detail" dat-pid="#=ID#" title="See the detail of #=Invoice_Number#"><i class=" mdi mdi-open-in-new"></i></span>
+            <span class="grid-tooltip-icon download" dat-pid="#=ID#" title="View Detail Card of #=Invoice_Number#"><i class="mdi mdi-download"></i></span>
+            
+</script>

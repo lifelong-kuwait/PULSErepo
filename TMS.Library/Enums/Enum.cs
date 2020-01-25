@@ -628,14 +628,34 @@ namespace TMS.Library
     }
     public enum TaxType
     {
-        //[Display(Name = "NotSpecified", ResourceType = typeof(lr))]
+        [Display(Name = "TaxExclusive", ResourceType = typeof(lr))]
         Tax_Exclusive = 1,
-        //[Display(Name = "CategoryTypeFeedbackCategory", ResourceType = typeof(lr))]
-        //CategoryType_Feedback_Category = 1,
-        // [Display(Name = "CategoryTypeCourseCategory", ResourceType = typeof(lr))]
+        [Display(Name = "TaxInclusive", ResourceType = typeof(lr))]
         Tax_Inclusive = 2,
-        NoTax=3,
+        [Display(Name = "NoTax", ResourceType = typeof(lr))]
+        NoTax =3,
     }
+    public enum CustomerType
+    {
+        [Display(Name = "LoyalCustomer", ResourceType = typeof(lr))]
+        Loyal_customer = 1,
+         [Display(Name = "DiscountCustomer", ResourceType = typeof(lr))]
+        Discount_customer = 2,
+         [Display(Name = "NewCustomer", ResourceType = typeof(lr))]
+        New_customer = 3,
+    }
+    public enum InvoiceStatus
+    {
+        [Display(Name = "InvoiceCreate", ResourceType = typeof(lr))]
+        InvoiceCreate = 1,
+        [Display(Name = "InvoiceRescheduled", ResourceType = typeof(lr))]
+        InvoiceRescheduled = 2,
+        [Display(Name = "InvoiceDeposit", ResourceType = typeof(lr))]
+        InvoiceDeposit = 3,
+        [Display(Name = "InvoiceReIssued", ResourceType = typeof(lr))]
+        InvoiceReIssued = 4,
+    }
+    
     #endregion
 
     #region

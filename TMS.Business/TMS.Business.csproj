@@ -70,6 +70,7 @@
     <Compile Include="Interfaces\Common\ICommonBAL.cs" />
     <Compile Include="Interfaces\Common\Roles\IRolesBAL.cs" />
     <Compile Include="Interfaces\CRM\ISalesAdministrationBAL.cs" />
+    <Compile Include="Interfaces\Invoiceing\IInvoiceingBAL.cs" />
     <Compile Include="Interfaces\TMS\Exams\IExamsBAL.cs" />
     <Compile Include="Interfaces\TMS\Language\ILanguageBAL.cs" />
     <Compile Include="Interfaces\TMS\Program\IAttendanceBAL.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Interfaces\TMS\Users\IBALUsers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TMS\Exams\ExamsBAL.cs" />
+    <Compile Include="TMS\Invoice\InvoiceBAL.cs" />
     <Compile Include="TMS\Language\LanguageBAL.cs" />
     <Compile Include="TMS\Program\AttendanceBAL.cs" />
     <Compile Include="TMS\Program\ClassBAL.cs" />

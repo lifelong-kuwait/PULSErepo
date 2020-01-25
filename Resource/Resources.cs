@@ -582,7 +582,49 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("AdminPageTitle", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        public static string LoyalCustomer
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("LoyalCustomer", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string DiscountCustomer
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("DiscountCustomer", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string NewCustomer
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("NewCustomer", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string TaxExclusive
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("TaxExclusive", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string TaxInclusive
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("TaxInclusive", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string NoTax
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("NoTax", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>Lookup</summary>
         public static string LookupPageTitle {
                get {
@@ -2080,7 +2122,37 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("PersonPhoneNumber", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Number</summary>
+        public static string CustomerType
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CustomerType", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string CustomerTypeRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CustomerTypeRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string CustomerPrimaryNameRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CustomerPrimaryNameRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        
+
+             public static string CustomerSecondaryName
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CustomerSecondaryName", CultureInfo.CurrentUICulture.Name);
+            }
+        }
         /// <summary>Please Enter Number</summary>
         public static string PersonPhoneNumberRequired {
                get {

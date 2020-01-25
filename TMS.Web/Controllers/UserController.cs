@@ -389,6 +389,13 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(_objUsers.UserID==CurrentUser.NameIdentifierInt64)
+                {
+                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+
+                }
+                else
+                { 
                 var json = new JavaScriptSerializer().Serialize(_objUsers);
                 _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Update_Success.ToString(), System.Environment.MachineName, "User tried to update user at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
@@ -450,6 +457,7 @@ namespace TMS.Web.Controllers
                     }
                 }
             }
+            }
             var resultData = new[] { _objUsers };
             return Json(resultData.AsQueryable().ToDataSourceResult(request, ModelState));
         }
@@ -464,15 +472,23 @@ namespace TMS.Web.Controllers
             //ModelState.Remove("ConfirmPassword");
             if (ModelState.IsValid)
             {
-                var json = new JavaScriptSerializer().Serialize(_objUsers);
-                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Delete_Success.ToString(), System.Environment.MachineName, "User tried to delete user at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
-
-                _objUsers.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                _objUsers.UpdatedDate = DateTime.Now;
-                var result = this._UserBAL.LoginUsers_DeleteBAL(_objUsers);
-                if (result == -1)
+                if (_objUsers.UserID == CurrentUser.NameIdentifierInt64)
                 {
                     ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+
+                }
+                else
+                {
+                    var json = new JavaScriptSerializer().Serialize(_objUsers);
+                    _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Delete_Success.ToString(), System.Environment.MachineName, "User tried to delete user at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
+                    _objUsers.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                    _objUsers.UpdatedDate = DateTime.Now;
+                    var result = this._UserBAL.LoginUsers_DeleteBAL(_objUsers);
+                    if (result == -1)
+                    {
+                        ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    }
                 }
             }
             var resultData = new[] { _objUsers };

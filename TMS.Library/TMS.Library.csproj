@@ -89,7 +89,10 @@
     <Compile Include="Entities\CRM\CRM_UserLog.cs" />
     <Compile Include="Entities\CRM\CRM_UserMapping.cs" />
     <Compile Include="Entities\CRM\CRM_VisitHistory.cs" />
+    <Compile Include="Entities\Invoice\Customer.cs" />
     <Compile Include="Entities\Invoice\Invoice.cs" />
+    <Compile Include="Entities\Invoice\InvoiceHistory.cs" />
+    <Compile Include="Entities\Invoice\ReIssued.cs" />
     <Compile Include="Entities\TMS\Course\CourseDataBar.cs" />
     <Compile Include="Entities\TMS\Course\CourseRelatedExamModel.cs" />
     <Compile Include="Entities\TMS\Language\LanguageModel.cs" />

@@ -86,6 +86,7 @@
     <Compile Include="Interfaces\Common\ICommonDAL.cs" />
     <Compile Include="Interfaces\Common\Roles\IRolesDAL.cs" />
     <Compile Include="Interfaces\CRM\ISalesAdministrationDAL.cs" />
+    <Compile Include="Interfaces\Invoiceing\IInvoiceingDAL.cs" />
     <Compile Include="Interfaces\TMS\Admin\ILookupDAL.cs" />
     <Compile Include="Interfaces\TMS\Admin\ITMSResourceDAL.cs" />
     <Compile Include="Interfaces\TMS\Exams\IExamsDAL.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="TMS\Admin\LookupDAL.cs" />
     <Compile Include="TMS\Admin\TMSResourceDAL.cs" />
     <Compile Include="TMS\Exams\ExamsDAL.cs" />
+    <Compile Include="TMS\Invoice\InvoiceDAL.cs" />
     <Compile Include="TMS\Language\LanguageDAL.cs" />
     <Compile Include="TMS\Persons\SqlDatabase.cs" />
     <Compile Include="TMS\Program\AttendanceDAL.cs" />

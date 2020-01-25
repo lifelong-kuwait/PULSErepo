@@ -641,7 +641,6 @@ namespace TMS.Library.TMS.Persons
             Extension = dr.GetString("Extension");
             ContactNumber = dr.GetString("ContactNumber");
             ScheduleClasses = dr.GetString("ScheduleClasses");
-
             ID = dr.GetInt64("ID");
             SalutationID = (Salutation)dr.GetByte("SalutationID");
             P_FirstName = dr.GetString("P_FirstName");

@@ -292,6 +292,7 @@
       <DependentUpon>CertificateDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Controllers\CertificateController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\InvoiceingController.cs" />
     <Compile Include="Controllers\SalesAdministrationController.cs" />
     <Compile Include="Controllers\SPl_Test_ReportsController.cs" />
@@ -326,6 +327,11 @@
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="DS_CompanyInfo.Designer.cs" />
+    <Compile Include="InvoiceReciptDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceReciptDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\WeeklyAttendanceReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2582,6 +2588,17 @@
     </None>
     <Content Include="DS_ClassReportByCourseCategoryID.xss">
       <DependentUpon>DS_ClassReportByCourseCategoryID.xsd</DependentUpon>
+    </Content>
+    <Content Include="InvoiceReciptDataSet.xsc">
+      <DependentUpon>InvoiceReciptDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="InvoiceReciptDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>InvoiceReciptDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="InvoiceReciptDataSet.xss">
+      <DependentUpon>InvoiceReciptDataSet.xsd</DependentUpon>
     </Content>
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
@@ -4848,6 +4865,12 @@
     <Content Include="Views\Home\LoginForTrainer.cshtml" />
     <Content Include="Views\Home\_OrganizationForTrainerLogin.cshtml" />
     <Content Include="Views\Invoiceing\Index.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\EditorTemplates\_CustomerTemplete.cshtml" />
+    <Content Include="Views\Invoiceing\InvoiceGrid.cshtml" />
+    <Content Include="Views\Invoiceing\InvoiceDetail.cshtml" />
+    <Content Include="Views\Invoiceing\_InvoiceHistoryRead.cshtml" />
+    <Content Include="Views\Invoiceing\_InvoiceReIssued.cshtml" />
     <None Include="WeeklyAttendanceReportData.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -5537,6 +5560,9 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>WeeklyAttendanceReport.cs</LastGenOutput>
     </EmbeddedResource>
+    <Content Include="Report\INO_InvoiceRecipt.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <EmbeddedResource Include="Report\Report1.rdlc" />
     <Content Include="Report\Venue_Matrix_ReportCustomized.rdlc" />
     <Content Include="Report\WeeklyUtilizatinDynamicColumns.rdlc" />
