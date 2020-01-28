@@ -568,14 +568,66 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("GridDeleteRecordMessage", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+
         /// <summary>No Record Found </summary>
-        public static string GridNoRecordFoundMessage {
-               get {
-                   return (string) resourceProvider.GetResource("GridNoRecordFoundMessage", CultureInfo.CurrentUICulture.Name);
-               }
+        public static string GridNoRecordFoundMessage
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("GridNoRecordFoundMessage", CultureInfo.CurrentUICulture.Name);
             }
-            
+        }
+        public static string InvoiceCreate
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceCreate", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceIssued
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceIssued", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceReIssued
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceReIssued", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceDeposit
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceDeposit", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceInstallment
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceInstallment", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>No Record Found </summary>
+        public static string BankDeposit
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("BankDeposit", CultureInfo.CurrentUICulture.Name);
+            }
+        }  /// <summary>No Record Found </summary>
+        public static string CashDeposit
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CashDeposit", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>Admin Section </summary>
         public static string AdminPageTitle {
                get {

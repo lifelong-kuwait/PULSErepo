@@ -144,7 +144,8 @@ namespace TMS.DataObjects.Common.Configuration
         public int DegreeCertificates_DuplicationCheckDAL(DegreeCertificates _objDegreeCertificates)
         {
             return ExecuteScalarSPInt32("TMS_DegreeCertificates_DuplicationCheck",
-                   ParamBuilder.Par("ID", _objDegreeCertificates.ID),
+                   ParamBuilder.Par("ID", _objDegreeCertificates.ID), 
+                   ParamBuilder.Par("OrganizationId", _objDegreeCertificates.OrganizationID),
                    ParamBuilder.Par("PrimaryName", _objDegreeCertificates.PrimaryName));
         }
 

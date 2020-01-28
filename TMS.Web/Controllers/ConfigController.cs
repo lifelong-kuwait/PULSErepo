@@ -1606,7 +1606,7 @@ namespace TMS.Web.Controllers
             {
                 _objDegreeCertificates.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _objDegreeCertificates.UpdatedDate = DateTime.Now;
-
+                _objDegreeCertificates.OrganizationID = CurrentUser.CompanyID;
                 if (_objConfigurationBAL.DegreeCertificates_DuplicationCheckBAL(_objDegreeCertificates) > 0)
                 {
                     ModelState.AddModelError(lr.DegreeCertificatesPrimaryName, lr.DegreeCertificatesPrimaryNameDuplicate);

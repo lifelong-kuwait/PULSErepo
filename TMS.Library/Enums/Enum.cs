@@ -655,7 +655,29 @@ namespace TMS.Library
         [Display(Name = "InvoiceReIssued", ResourceType = typeof(lr))]
         InvoiceReIssued = 4,
     }
-    
+    public enum DepositType
+    {
+        [Display(Name = "BankDeposit", ResourceType = typeof(lr))]
+        BankDeposit = 1,
+        [Display(Name = "CashDeposit", ResourceType = typeof(lr))]
+        CashDeposit = 2,
+        
+    }
+    public enum HistoryType
+    {
+        [Display(Name = "InvoiceCreate", ResourceType = typeof(lr))]
+        InvoiceCreate = 1,
+        [Display(Name = "InvoiceIssued", ResourceType = typeof(lr))]
+        InvoiceIssued = 2,
+        [Display(Name = "InvoiceReIssued", ResourceType = typeof(lr))]
+        InvoiceReIssued = 3,
+        [Display(Name = "InvoiceDeposit", ResourceType = typeof(lr))]
+        InvoiceDeposit = 4,
+        [Display(Name = "InvoiceInstallment", ResourceType = typeof(lr))]
+        InvoiceInstallment = 5,
+
+    }
+
     #endregion
 
     #region

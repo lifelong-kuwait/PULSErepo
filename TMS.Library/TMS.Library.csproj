@@ -90,6 +90,7 @@
     <Compile Include="Entities\CRM\CRM_UserMapping.cs" />
     <Compile Include="Entities\CRM\CRM_VisitHistory.cs" />
     <Compile Include="Entities\Invoice\Customer.cs" />
+    <Compile Include="Entities\Invoice\DepositDetail.cs" />
     <Compile Include="Entities\Invoice\Invoice.cs" />
     <Compile Include="Entities\Invoice\InvoiceHistory.cs" />
     <Compile Include="Entities\Invoice\ReIssued.cs" />

@@ -16,12 +16,17 @@ namespace TMS.Business.Interfaces.Invoiceing
         long Destroy_CustomerBAL(Customer customer);
         List<Customer> CustomerRead_CustomerBAL(ref int Total, string culture, string SearchText, string SortExpression, int StartRowIndex, int page, int PageSize, long CompanyID);
         long create_InvoiceBAL(Invoice customer);
+        long Update_InvoiceBAL(Invoice customer);
         List<Invoice> Read_InvoiceBAL(ref int Total, string culture, string SearchText, string SortExpression, int StartRowIndex, int page, int PageSize, long CompanyID);
         List<InvoiceDetail> Read_InvoiceDetailBAL(long invoiceId);
         Invoice Read_InvoiceByIDBAL(string  invoiceId);
-        long create_InvoiceDetailBAL(InvoiceDetail invoiceDetail);
+        long create_InvoiceDetailBAL(InvoiceDetail invoiceDetail); 
+        long Update_InvoiceDetailBAL(InvoiceDetail invoiceDetail);
         DataTable GetInvoiceReportsBAL(long InoID, long companyID);
         List<InvoiceHistory> Read_InvoiceHistoryBAL(string invoiceId);
         List<ReIssued> Read_InvoiceReIssuedByBAL(string invoiceId);
+        List<DepositDetail> Read_InvoiceDepositBAL(string invoiceId);
+        long create_InvoiceReIssueBAL(ReIssued invoiceReIssue);
+        long create_InvoiceHistoryBAL(InvoiceHistory invoiceHistory);
     }
 }

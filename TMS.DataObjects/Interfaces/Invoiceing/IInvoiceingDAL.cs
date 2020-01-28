@@ -15,15 +15,19 @@ namespace TMS.DataObjects.Interfaces.Invoiceing
         long Update_CustomerDAL(Customer customer);
         long Destroy_CustomerDAL(Customer customer);
         List<Customer> CustomerRead_CustomerDAL(ref int Total, string culture, string SearchText, string SortExpression, int StartRowIndex, int page, int PageSize, long CompanyID);
-        long create_InvoiceDAL(Invoice invoice);
+        long create_InvoiceDAL(Invoice invoice); 
+        long Update_InvoiceDAL(Invoice invoice);
         List<Library.TMS.Invoice> Read_InvoiceDAL(ref int Total, string culture, string SearchText, string SortExpression, int StartRowIndex, int page, int PageSize, long CompanyID);
         List<Library.TMS.InvoiceDetail> Read_InvoiceDetailDAL(long invoiceId);
         Library.TMS.Invoice Read_InvoiceByIDDAL(string invoiceId);
         
         long create_InvoiceDetailDAL(InvoiceDetail invoiceDetail);
+        long Update_InvoiceDetailDAL(InvoiceDetail invoiceDetail);
         DataTable GetInvoiceReportsDAL(long InoID, long companyID);
         List<InvoiceHistory> Read_InvoiceHistoryDAL(string invoiceId); 
-        List<ReIssued> Read_InvoiceReIssuedByDAL(string invoiceId); 
-
+        List<ReIssued> Read_InvoiceReIssuedByDAL(string invoiceId);
+        List<DepositDetail> Read_InvoiceDepositDAL(string invoiceId); 
+        long create_InvoiceReIssueDAL(ReIssued invoiceDetail);
+        long create_InvoiceHistoryDAL(InvoiceHistory invoiceHistory);
     }
 }

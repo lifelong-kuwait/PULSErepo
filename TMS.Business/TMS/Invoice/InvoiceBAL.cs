@@ -41,6 +41,11 @@ namespace TMS.Business.TMS.Invoice
         {
             return DAL.create_InvoiceDAL(_invoice);
         }
+        public long Update_InvoiceBAL(Library.TMS.Invoice _invoice)
+        {
+            return DAL.Update_InvoiceDAL(_invoice);
+        }
+        
         public List<Library.TMS.Invoice> Read_InvoiceBAL(ref int Total, string culture, string SearchText, string SortExpression, int StartRowIndex, int page, int PageSize, long CompanyID)
         {
             return DAL.Read_InvoiceDAL(ref Total, culture, SearchText, SortExpression, StartRowIndex, page, PageSize, CompanyID);
@@ -58,6 +63,11 @@ namespace TMS.Business.TMS.Invoice
         {
             return DAL.create_InvoiceDetailDAL(_invoiceDetail);
         }
+        public long Update_InvoiceDetailBAL(Library.TMS.InvoiceDetail _invoiceDetail)
+        {
+            return DAL.Update_InvoiceDetailDAL(_invoiceDetail);
+        }
+        
        public DataTable GetInvoiceReportsBAL(long InoID, long companyID)
         {
             return DAL.GetInvoiceReportsDAL( InoID,  companyID);
@@ -69,6 +79,18 @@ namespace TMS.Business.TMS.Invoice
         public List<ReIssued> Read_InvoiceReIssuedByBAL(string invoiceId)
         {
             return DAL.Read_InvoiceReIssuedByDAL(invoiceId);
+        }
+       public List<DepositDetail> Read_InvoiceDepositBAL(string invoiceId)
+        {
+            return DAL.Read_InvoiceDepositDAL(invoiceId);
+        }
+        public long create_InvoiceReIssueBAL(ReIssued invoiceReIssue)
+        {
+            return DAL.create_InvoiceReIssueDAL(invoiceReIssue);
+        }
+       public long create_InvoiceHistoryBAL(InvoiceHistory invoiceHistory)
+        {
+            return DAL.create_InvoiceHistoryDAL(invoiceHistory);
         }
     }
 }

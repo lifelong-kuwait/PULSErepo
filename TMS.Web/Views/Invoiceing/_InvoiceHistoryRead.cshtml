@@ -4,7 +4,7 @@
 {
     <div class="ChildGrid">
         @(Html.Kendo().Grid<TMS.Library.Entities.Invoice.InvoiceHistory>()
-                                    .Name("PersonEmailAddressGrid")
+                                    .Name("InvoiceHistory")
                                       .Columns(columns =>
                                       {
 
@@ -19,7 +19,7 @@
                                                                   .HtmlAttributes(new { style = "height:350px;" }).DataSource(dataSource => dataSource.Ajax().Model(model => { model.Id(m => m.ID); }).PageSize(8)
                                                                   .Read(read => read.Action("InvoiceHistoryRead", "Invoiceing", new { PersonID = Model }))
                                                                  
-                                                                                                                  .Events(e => e.Error("GeneralErrorHandler(\"PersonEmailAddressGrid\")").RequestEnd("GridRequestEndUpdate"))
+                                                                                                                  .Events(e => e.Error("GeneralErrorHandler(\"InvoiceHistory\")").RequestEnd("GridRequestEndUpdate"))
                                                                   ).NoRecords(lr.GridNoRecordFoundMessage)
         )
     </div>

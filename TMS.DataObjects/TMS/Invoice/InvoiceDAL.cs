@@ -112,6 +112,35 @@ namespace TMS.DataObjects.TMS.Invoice
                 ParamBuilder.Par("@Notes", "")
                 );
         }
+        public long Update_InvoiceDAL(Library.TMS.Invoice customer)
+        {
+            var date = DateTime.Now.ToString("yyyy-MM-dd") + " " + CommonUtility.PersonFlagsClearingTime();
+            var parameters = new[] { ParamBuilder.Par("ID", customer.ID) };
+            return ExecuteScalarInt32Sp("INO_Invoice_Update", ParamBuilder.Par("ID", customer.ID),
+                ParamBuilder.Par("@Invoice_Number", customer.Invoice_Number),
+                ParamBuilder.Par("@Referance_Number", customer.Referance_Number),
+                ParamBuilder.Par("@Organization_ID", customer.Organization_ID),
+                ParamBuilder.Par("@Invoice_Type", customer.Invoice_Type),
+                ParamBuilder.Par("@Invoice_Amount", customer.Invoice_Amount),
+                ParamBuilder.Par("@Tax_Percentage", customer.Tax_Percentage),
+                ParamBuilder.Par("@Discount", customer.Discount),
+                ParamBuilder.Par("@Invoice_Amount_With_Tax", customer.Invoice_Amount_With_Tax),
+                ParamBuilder.Par("@Invoice_Gross_Total", customer.Invoice_Gross_Total),
+                ParamBuilder.Par("@Generated_By", customer.Generated_By),
+                ParamBuilder.Par("@Generated_To", customer.Generated_To),
+                ParamBuilder.Par("@Generated_Date", customer.Generated_Date),
+                ParamBuilder.Par("@Invoice_Status", customer.Invoice_Status),
+                ParamBuilder.Par("@Due_Datea", customer.Due_Date),
+                ParamBuilder.Par("@Tax_Value", customer.Tax_Value),
+                ParamBuilder.Par("@DiscountValue", customer.Discount_Value),
+                ParamBuilder.Par("@Tax_Type", customer.Tax_Type),
+                ParamBuilder.Par("@Is_Deposit", false),
+                ParamBuilder.Par("@Deposit_Type_ID", 0),
+                ParamBuilder.Par("@Is_Re_Issued", 0),
+                ParamBuilder.Par("@Notes", "")
+                );
+        }
+        
         public long create_InvoiceDetailDAL(Library.TMS.InvoiceDetail customer)
         {
             var date = DateTime.Now.ToString("yyyy-MM-dd") + " " + CommonUtility.PersonFlagsClearingTime();
@@ -123,6 +152,45 @@ namespace TMS.DataObjects.TMS.Invoice
                 ParamBuilder.Par("@Qty", customer.Qty),
                 ParamBuilder.Par("@Price", customer.Price),
                 ParamBuilder.Par("@Sub_Total", customer.Sub_Total)
+                );
+        }
+        public long Update_InvoiceDetailDAL(Library.TMS.InvoiceDetail customer)
+        {
+            var date = DateTime.Now.ToString("yyyy-MM-dd") + " " + CommonUtility.PersonFlagsClearingTime();
+            var parameters = new[] { ParamBuilder.Par("ID", customer.ID) };
+            return ExecuteScalarInt32Sp("INO_InvoiceDetail_Update", ParamBuilder.Par("ID", customer.ID),
+                ParamBuilder.Par("@Invoice_ID", customer.Invoice_ID),
+                ParamBuilder.Par("@Item", customer.Item),
+                ParamBuilder.Par("@Description", customer.Description),
+                ParamBuilder.Par("@Qty", customer.Qty),
+                ParamBuilder.Par("@Price", customer.Price),
+                ParamBuilder.Par("@Sub_Total", customer.Sub_Total)
+                );
+        }
+        public long create_InvoiceReIssueDAL(ReIssued invoiceDetail)
+        {
+            var date = DateTime.Now.ToString("yyyy-MM-dd") + " " + CommonUtility.PersonFlagsClearingTime();
+            var parameters = new[] { ParamBuilder.Par("ID", 0) };
+            return ExecuteInt64withOutPutparameterSp("INO_Create_InvoiceIssue", parameters,
+                ParamBuilder.Par("@InvoiceID", invoiceDetail.Invoice_ID),
+                ParamBuilder.Par("@ReIssuedBy", invoiceDetail.Re_Issued_By),
+                ParamBuilder.Par("@Date", invoiceDetail.Re_Issued_Date),
+                ParamBuilder.Par("@OrganizationID", invoiceDetail.Organization_ID)
+               
+                );
+        }
+        public long create_InvoiceHistoryDAL(InvoiceHistory invoiceHistory)
+        {
+            var date = DateTime.Now.ToString("yyyy-MM-dd") + " " + CommonUtility.PersonFlagsClearingTime();
+            var parameters = new[] { ParamBuilder.Par("ID", 0) };
+            return ExecuteInt64withOutPutparameterSp("INO_Create_Invoice_History", parameters,
+                ParamBuilder.Par("@InvoiceID", invoiceHistory.Invoice_Number),
+                ParamBuilder.Par("@Name", invoiceHistory.History_Name),
+                ParamBuilder.Par("@type", invoiceHistory.Type),
+                ParamBuilder.Par("@description", invoiceHistory.Description),
+                ParamBuilder.Par("@UserBy", invoiceHistory.User_ID),
+                ParamBuilder.Par("@Date", invoiceHistory.Date_TIME),
+                ParamBuilder.Par("@OrganizationID", invoiceHistory.Organization_ID)
                 );
         }
         public DataTable GetInvoiceReportsDAL(long InoID, long companyID)
@@ -262,6 +330,30 @@ namespace TMS.DataObjects.TMS.Invoice
                 }
             }
                 return _CustomerData.ToList();
+        }
+       public List<DepositDetail> Read_InvoiceDepositDAL(string invoiceId)
+        {
+            List<DepositDetail> _CustomerData = new List<DepositDetail>();
+            using (var conn = new SqlConnection(DBHelper.ConnectionString))
+            {
+                conn.Open();
+                DynamicParameters dbParam = new DynamicParameters();
+                dbParam.AddDynamicParams(new { InoID = invoiceId });
+                using (var multi = conn.QueryMultiple("INO_Get_InvoicePayment", dbParam, commandType: System.Data.CommandType.StoredProcedure))
+                {
+                    _CustomerData = multi.Read<DepositDetail>().AsList<DepositDetail>();
+                }
+                conn.Close();
+            }
+            foreach (var single in _CustomerData)
+            {
+                if (single.Created_By > 0)
+                {
+                    var x = ExecuteSinglewithSP<LoginUsers>(@"INO_Get_User", ParamBuilder.Par("UID", single.Created_By));
+                    single.users = x;
+                }
+            }
+            return _CustomerData.ToList();
         }
     }
 }

@@ -106,51 +106,13 @@
                 if (User.IsInRole("CanViewPersonPhone"))
                 {
                     i.Add().Text("Invoice ReIssued").LoadContentFrom("InvoiceReIssued", "Invoiceing", new { PersonID = Model.ID });
-
                 }
                 if (User.IsInRole("CanViewPersonAddresses"))
                 {
-                    i.Add().Text(lr.AddressTabTitle).LoadContentFrom("PrimaryAddress", "Contact", new { PersonID = Model.ID });
+                    i.Add().Text("Deposit").LoadContentFrom("InvoiceDeposit", "Invoiceing", new { PersonID = Model.ID });
                 }
-                if (User.IsInRole("CanViewPersonOnlinePresence"))
-                {
-                    i.Add().Text(lr.LinkTabTitle).LoadContentFrom("PersonLinks", "Contact", new { PersonID = Model.ID });
-                }
-                if (User.IsInRole("CanViewPersonEducation"))
-                {
-                    i.Add().Text(lr.PersonDegreeTabTitle).LoadContentFrom("Degree", "PersonEducation", new { PersonID = Model.ID });
-                }
-                if (User.IsInRole("CanViewPersonCertification"))
-                {
-                    i.Add().Text(lr.PersonCertificationTabTitle).LoadContentFrom("Certification", "PersonEducation", new { PersonID = Model.ID });
-                }
-                if (User.IsInRole("CanViewWorkExperience"))
-                {
-                    i.Add().Text(lr.PersonWorkExperienceTabTitle).LoadContentFrom("WorkExperience", "PersonEducation", new { PersonID = Model.ID });
-                }
-                if (User.IsInRole("CanViewPersonTrainingHistory"))
-                {
-                    i.Add().Text(lr.PersonTrainingDeliveredTabTitle).LoadContentFrom("TrainingDelivered", "PersonEducation", new { PersonID = Model.ID });
-                }
-                if (User.IsInRole("CanViewPersonSkillsAreasofFocus"))
-                {
-                    i.Add().Text(lr.PersonSkillAreasofFocusTabTitle).LoadContentFrom("PersonSkill", "SkillInterest", new { PersonID = Model.ID });
-                }
-
-                if (User.IsInRole("CanViewPersonAvailability"))
-                {
-                    i.Add().Text(lr.AvailabilityTabTitle).LoadContentFrom("PersonAvailability", "Contact", new { PersonID = Model.ID });
-                }
-                if (User.IsInRole("CanViewPersonRoles"))
-                {
-                    i.Add().Text(lr.RolesTabTitile).LoadContentFrom("ManageRoles", "People", new { PersonID = Model.ID });
-                }
-                if (User.IsInAnyRoles("CanViewPersonAchievement", "CanViewPersonSuggestedTraining", "CanViewPersonRelation", "CanViewPersonAttachments", "CanViewPersonNotes"))
-                {
-                    i.Add().Text(lr.OthersTabTitle).LoadContentFrom("Others", "People", new { pid = Model.ID });
-                }
-
-            }).Events(e => e.Expand("onExpand")))
+               
+            }))
 
  <script id="SessionTemplate" type="text/kendo">
         <div class='person-box'>

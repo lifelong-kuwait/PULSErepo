@@ -45,11 +45,49 @@ namespace TMS.Web.Controllers
             {
                 var json = new JavaScriptSerializer().Serialize(_invoice);
                 _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to insert Invoice " + DateTime.UtcNow, "", 0, "Invoice", "Invoice_Create", json.ToString(), CurrentUser.CompanyID);
-
                 _invoice.Generated_By = CurrentUser.NameIdentifierInt64;
                 _invoice.Generated_Date = DateTime.UtcNow;
                 _invoice.Organization_ID = CurrentUser.CompanyID;
                 _invoice.ID = _CustomerBAL.create_InvoiceBAL(_invoice);
+                InvoiceHistory invoiceHistory = new InvoiceHistory();
+                invoiceHistory.History_Name = "Invoice Create";
+                invoiceHistory.Type = HistoryType.InvoiceCreate;
+                invoiceHistory.Description = "";
+                invoiceHistory.Invoice_Number = _invoice.ID;
+                invoiceHistory.User_ID = CurrentUser.NameIdentifierInt64;
+                invoiceHistory.Organization_ID = CurrentUser.CompanyID;
+                invoiceHistory.Date_TIME = DateTime.Now;
+                var x=_CustomerBAL.create_InvoiceHistoryBAL(invoiceHistory);
+                var InvoiceIDd = _invoice.ID;
+                var resultData2 = new[] { InvoiceIDd };
+                return Json(new { success = true, responseText = InvoiceIDd }, JsonRequestBehavior.AllowGet);
+            }
+            var InvoiceID = _invoice.ID;
+            var resultData = new[] { InvoiceID };
+            return Json(new { success = false, responseText = InvoiceID }, JsonRequestBehavior.AllowGet);
+
+            //return Json(resultData.ToDataSourceResult(request, ModelState));
+        }
+        [DontWrapResult]
+        public ActionResult Invoice_Update([DataSourceRequest] DataSourceRequest request, Invoice _invoice)
+        {
+            if (ModelState.IsValid)
+            {
+                var json = new JavaScriptSerializer().Serialize(_invoice);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to insert Invoice " + DateTime.UtcNow, "", 0, "Invoice", "Invoice_Create", json.ToString(), CurrentUser.CompanyID);
+                _invoice.Generated_By = CurrentUser.NameIdentifierInt64;
+                _invoice.Generated_Date = DateTime.UtcNow;
+                _invoice.Organization_ID = CurrentUser.CompanyID;
+                var xx = _CustomerBAL.Update_InvoiceBAL(_invoice);
+                InvoiceHistory invoiceHistory = new InvoiceHistory();
+                invoiceHistory.History_Name = "Invoice Update";
+                invoiceHistory.Type = HistoryType.InvoiceCreate;
+                invoiceHistory.Description = "";
+                invoiceHistory.Invoice_Number = _invoice.ID;
+                invoiceHistory.User_ID = CurrentUser.NameIdentifierInt64;
+                invoiceHistory.Organization_ID = CurrentUser.CompanyID;
+                invoiceHistory.Date_TIME = DateTime.Now;
+                var x = _CustomerBAL.create_InvoiceHistoryBAL(invoiceHistory);
                 var InvoiceIDd = _invoice.ID;
                 var resultData2 = new[] { InvoiceIDd };
                 return Json(new { success = true, responseText = InvoiceIDd }, JsonRequestBehavior.AllowGet);
@@ -68,6 +106,24 @@ namespace TMS.Web.Controllers
                 var json = new JavaScriptSerializer().Serialize(_invoice);
                 _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to insert Invoice Detail at" + DateTime.UtcNow, "", 0, "Invoice", "InvoiceDetail_Create", json.ToString(), CurrentUser.CompanyID);
                 _invoice.ID = _CustomerBAL.create_InvoiceDetailBAL(_invoice);
+                var InvoiceIDd = _invoice.ID;
+                var resultData2 = new[] { InvoiceIDd };
+                return Json(new { success = true, responseText = InvoiceIDd }, JsonRequestBehavior.AllowGet);
+            }
+            var InvoiceID = _invoice.ID;
+            var resultData = new[] { InvoiceID };
+            return Json(new { success = false, responseText = InvoiceID }, JsonRequestBehavior.AllowGet);
+
+            //return Json(resultData.ToDataSourceResult(request, ModelState));
+        }
+        [DontWrapResult]
+        public ActionResult InvoiceDetail_Update([DataSourceRequest] DataSourceRequest request, InvoiceDetail _invoice)
+        {
+            if (ModelState.IsValid)
+            {
+                var json = new JavaScriptSerializer().Serialize(_invoice);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to insert Invoice Detail at" + DateTime.UtcNow, "", 0, "Invoice", "InvoiceDetail_Create", json.ToString(), CurrentUser.CompanyID);
+                var x = _CustomerBAL.Update_InvoiceDetailBAL(_invoice);
                 var InvoiceIDd = _invoice.ID;
                 var resultData2 = new[] { InvoiceIDd };
                 return Json(new { success = true, responseText = InvoiceIDd }, JsonRequestBehavior.AllowGet);
@@ -98,7 +154,12 @@ namespace TMS.Web.Controllers
             }
             else
             {
-
+                ReIssued reIssued = new ReIssued();
+                reIssued.Invoice_ID = Convert.ToInt64(_classID);
+                reIssued.Re_Issued_By = CurrentUser.NameIdentifierInt64;
+                reIssued.Re_Issued_Date = DateTime.Now;
+                reIssued.Organization_ID = CurrentUser.CompanyID;
+                reIssued.ID = _CustomerBAL.create_InvoiceReIssueBAL(reIssued);
                 ReportViewer ReportViewerRSFReports = new ReportViewer();
                 ReportViewerRSFReports.Height = Unit.Parse("100%");
                 ReportViewerRSFReports.Width = Unit.Parse("100%");
@@ -203,13 +264,41 @@ namespace TMS.Web.Controllers
                 }
                 else
                 {
+                    
                     _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to View Persons Detail " + DateTime.UtcNow, "", 0, "People", "Detail", Inoid.ToString(), CurrentUser.CompanyID);
                     ViewData["model"] = data;
                     return View();
                 }
             }
         }
-        [ContentAuthorize]
+        [DontWrapResult]
+        public ActionResult InvoiceEdit(string Inoid)
+        {
+            if (string.IsNullOrEmpty(Inoid))
+            {
+                return RedirectPermanent(Url.Content("~/Invoiceing/Index"));
+            }
+            else
+            {
+                var data = _CustomerBAL.Read_InvoiceByIDBAL(Inoid);
+                if (data.Referance_Number == null)
+                {
+                    ViewData["model"] = Url.Content("~/Invoiceing/Index");
+                    return View("Static/NotFound");
+                }
+                else
+                {
+                    IList<InvoiceDetail> _person = this._CustomerBAL.Read_InvoiceDetailBAL(Convert.ToInt64(Inoid));
+                    List<InvoiceDetail> subProducts = new List<InvoiceDetail>(_person);
+                    data.invoiceDetailslist = subProducts;
+                    _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to View Persons Detail " + DateTime.UtcNow, "", 0, "People", "Detail", Inoid.ToString(), CurrentUser.CompanyID);
+                    ViewData["model"] = data;
+                    return View();
+                }
+            }
+        }
+        
+       [ContentAuthorize]
         [DontWrapResult]
         [ClaimsAuthorize("CanViewPersonEmail")]
         public ActionResult InvoiceHistory(string PersonID)
@@ -237,6 +326,21 @@ namespace TMS.Web.Controllers
         public ActionResult InvoiceReIssuedRead([DataSourceRequest] DataSourceRequest request, string PersonID)
         {
             var _Phone = _CustomerBAL.Read_InvoiceReIssuedByBAL(PersonID);
+            return Json(_Phone.ToDataSourceResult(request, ModelState));
+        }
+        [ContentAuthorize]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanViewPersonEmail")]
+        public ActionResult InvoiceDeposit(string PersonID)
+        {
+            return PartialView("_InvoiceDeposit", PersonID);
+        }
+
+        [DontWrapResult]
+        [ClaimsAuthorize("CanViewPersonEmail")]
+        public ActionResult InvoiceDepositRead([DataSourceRequest] DataSourceRequest request, string PersonID)
+        {
+            var _Phone = _CustomerBAL.Read_InvoiceDepositBAL(PersonID);
             return Json(_Phone.ToDataSourceResult(request, ModelState));
         }
     }

@@ -1,4 +1,21 @@
-﻿<style>
+﻿
+@{
+    ViewBag.Title = "InvoiceEdit";
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+}
+@using lr = Resources.Resources;
+@{
+    var Model = (TMS.Library.TMS.Invoice)ViewData["model"];
+    ViewBag.Title = Model.Referance_Number;
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+    var phonenubner = lr.PersonPhoneNumber;
+    var personEmail = lr.PersonContactEmail;
+    var gender = lr.Gender;
+    TMS.Library.TMS.Invoice modellist = Model;
+}
+<h2>Invoice Edit</h2>
+
+<style>
     .k-textbox {
         border: none;
     }
@@ -14,26 +31,30 @@
 <h2>Invoice</h2>
 <form name="registration" id="registration" onsubmit="event.preventDefault();" method="post">
     <div class="row" style="border:outset 2px;border-radius:5px; border-color:lightgrey">
-
+        <input type="text" id="invoiceId" value="@modellist.ID" style="display:none"/>
         <div class="col col-md-12">
             <div class="col col-md-3">
                 <label>
                     To
                 </label>
                 @(Html.Kendo().DropDownList()
-                                                                                                    .Name("PersonsForInvoice")
-                                                                                                    .DataTextField("Text")
-                                                                                                    .DataValueField("Value")
-                                                                                                    .OptionLabel("--Please select Customer--")
-                                                                                                    .Filter("contains")
-                                                                                                    .DataSource(source =>
-                                                                                                    {
-                                                                                                        source.Read(read =>
-                                                                                                        {
-                                                                                                            read.Action("PersonsForInvoice", "DDL");
-                                                                                                        }).ServerFiltering(false);
-                                                                                                    })
-                                                                     .HtmlAttributes(new { style = "width: 100%" })
+                 .Name("PersonsForInvoice")
+                 .DataTextField("Text")
+                 .DataValueField("Value")
+                 .OptionLabel("--Please select Customer--")
+                 .Filter("contains")
+                 .DataSource(source =>
+                 {
+                     source.Read(read =>
+                     {
+                         read.Action("PersonsForInvoice", "DDL");
+                     }).ServerFiltering(false);
+                 })
+                 .Events(e =>
+                 {
+                     e.DataBound("onDataBound");
+                 })
+                 .HtmlAttributes(new { style = "width: 100%;", disabled = true })
                 )
             </div>
             <div class="col col-md-3">
@@ -41,11 +62,12 @@
                     Due Date
                 </label>
                 @(Html.Kendo().DatePicker()
-                                                                                   .Name("Due_Date")
-                                                                                   .Value(DateTime.Now.Date)
-                                                                                   .Format("{0:MM/dd/yyyy}")
-                                                                                   .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker", required = true })
-                                                                                   .DateInput()
+                    .Name("Due_Date")
+                    .Value(DateTime.Now.Date)
+                    .Format("{0:MM/dd/yyyy}")
+                    .HtmlAttributes(new { style = "width: 100%;disabled:true;", title = "datetimepicker", required = true })
+                    .DateInput()
+
                 )
             </div>
             <div class="col col-md-3">
@@ -53,10 +75,9 @@
                     Invoice Number
                 </label>
                 @(Html.Kendo().TextBox()
-                                                                                         .Name("Invoice_Number")
-                                                                                         .Value("")
-                                                                                         .HtmlAttributes(new { style = "width: 100%;border:1px solid;", title = "datetimepicker" })
-
+                     .Name("Invoice_Number")
+                     .Value(modellist.Invoice_Number)
+                     .HtmlAttributes(new { style = "width: 100%;border:1px solid; disabled:true;", title = "datetimepicker", disabled = true })
                 )
             </div>
             <div class="col col-md-3">
@@ -64,10 +85,9 @@
                     Referance Number
                 </label>
                 @(Html.Kendo().TextBox()
-                                                                                                 .Name("Referance_Number")
-                                                                                                 .Value("")
-                                                                                                 .HtmlAttributes(new { style = "width: 100%;border:1px solid;", title = "datetimepicker" })
-
+                        .Name("Referance_Number")
+                        .Value(modellist.Referance_Number)
+                        .HtmlAttributes(new { style = "disabled:true;width: 100%;border:1px solid;", title = "datetimepicker", disabled = true })
                 )
             </div>
         </div>
@@ -80,19 +100,19 @@
                     Currency
                 </label>
                 @(Html.Kendo().DropDownList()
-                                                                                                                  .Name("Currency")
-                                                                                                                  .DataTextField("Text")
-                                                                                                                  .DataValueField("Value")
-                                                                                                                  .OptionLabel("--Please select Currency--")
-                                                                                                                  .Filter("contains")
-                                                                                                                  .DataSource(source =>
-                                                                                                                  {
-                                                                                                                      source.Read(read =>
-                                                                                                                      {
-                                                                                                                          read.Action("Currencies", "DDL");
-                                                                                                                      }).ServerFiltering(false);
-                                                                                                                  })
-                                                                                   .HtmlAttributes(new { style = "width: 100%" })
+                     .Name("Currency")
+                     .DataTextField("Text")
+                     .DataValueField("Value")
+                     .OptionLabel("--Please select Currency--")
+                     .Filter("contains")
+                     .DataSource(source =>
+                     {
+                         source.Read(read =>
+                         {
+                             read.Action("Currencies", "DDL");
+                         }).ServerFiltering(false);
+                     })
+                     .HtmlAttributes(new { style = "width: 100%" })
                 )
             </div>
             <div class="col col-md-3">
@@ -100,26 +120,25 @@
                     Tax
                 </label>
                 @(Html.Kendo().DropDownList()
-                                                                                                                                  .Name("TaxType")
-                                                                                                                                  .DataTextField("Text")
-                                                                                                                                  .DataValueField("Value")
-                                                                                                                                  .OptionLabel("--Please select Tax--")
-                                                                                                                                  .Filter("contains")
-
-                                                                                                   .HtmlAttributes(new { style = "width: 100%" })
-                                                                                                   .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.TaxType>(typeof(TMS.Library.TaxType))))
+                      .Name("TaxType")
+                      .DataTextField("Text")
+                      .DataValueField("Value")
+                      .OptionLabel("--Please select Tax--")
+                      .Filter("contains")
+                    .HtmlAttributes(new { style = "width: 100%" })
+                    .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.TaxType>(typeof(TMS.Library.TaxType))))
             </div>
             <div class="col col-md-3 TaxPercentage" style="display:none">
                 <label>
                     Tax Percentage
                 </label>
                 @(Html.Kendo().NumericTextBox<decimal>
-                                                                                                                                ()
-                                                                                                                                .Name("TaxPercentage")
-                                                                                                                                .Min(0)
-                                                                                                                                .Max(100)
-                                                                                                                                .Value(1)
-                                                                                                                                .HtmlAttributes(new { visibility = false, style = "width: 100%", title = "currency" })
+                    ()
+                    .Name("TaxPercentage")
+                    .Min(0)
+                    .Max(100)
+                    .Value(1)
+                    .HtmlAttributes(new { visibility = false, style = "width: 100%", title = "currency" })
                 )
             </div>
             <div class="col col-md-3">
@@ -127,12 +146,12 @@
                     Discount %
                 </label>
                 @(Html.Kendo().NumericTextBox<decimal>
-                                                                                                                                ()
-                                                                                                                                .Name("DiscountPercentage")
-                                                                                                                                .Min(0)
-                                                                                                                                .Max(100)
-                                                                                                                                .Value(1)
-                                                                                                                                .HtmlAttributes(new { style = "width: 100%", title = "currency" })
+                     ()
+                     .Name("DiscountPercentage")
+                     .Min(0)
+                     .Max(100)
+                     .Value(1)
+                     .HtmlAttributes(new { style = "width: 100%", title = "currency" })
                 )
             </div>
         </div>
@@ -165,152 +184,69 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr id="0">
-                        <td>
-                            @(Html.Kendo().TextBox()
-                                                                                                            .Name("item0")
-                                                                                                            .Value("")
-                                                                                                            .HtmlAttributes(new { style = "width: 100%", title = "Item", required = "true" })
+                    @{int i = 0; }
+                    @foreach (var x in modellist.invoiceDetailslist)
+                    {
 
-                            )
-                        </td>
-                        <td>
-                            @(Html.Kendo().TextBox()
-                                                                                                            .Name("Description0")
-                                                                                                            .Value("")
-                                                                                                            .HtmlAttributes(new { style = "width: 100%", title = "Description", required = "true" })
+                        <tr id="@i">
+                            <td style="display:none" name="ItemId">
+                               <input type="text"/>
+                                   @x.ID
+                               
+                            </td>
+                            <td>
+                                @(Html.Kendo().TextBox()
+                            .Name("item"+i)
+                            .Value(x.Item)
+                            .HtmlAttributes(new { style = "width: 100%", title = "Item", required = "true" })
+                                )
+                            </td>
+                            <td>
+                                @(Html.Kendo().TextBox()
+                               .Name("Description" + i)
+                               .Value(x.Description)
+                               .HtmlAttributes(new { style = "width: 100%", title = "Description", required = "true" })
 
-                            )
-                        </td>
-                        <td>
-                            @(Html.Kendo().NumericTextBox<int>
-                                                                                                                ()
-                                                                                                                .Name("Qty0")
-                                                                                                                .Min(1)
+                                )
+                            </td>
+                            <td>
+                                @(Html.Kendo().NumericTextBox<int>
+                                     ()
+                                     .Name("Qty"+i)
+                                     .Min(1)
+                                     .Value(Convert.ToInt32(x.Qty))
+                                     .HtmlAttributes(new { style = "width: 100%", @class = "currency", title = "Quantity", required = "true" })
+                                )
+                            </td>
+                            <td>
+                                @(Html.Kendo().NumericTextBox<decimal>
+                                     ()
+                                     .Name("currency"+i)
+                                     .Min(1)
+                                     .Value((decimal)x.Price)
+                                     .Events(e => e
+                                           .Change("change")
+                                           .Spin("spin")
+                                       )
+                                     .HtmlAttributes(new { style = "width: 100%", @class = "currency", title = "currency", required = "true" })
+                                )
+                            </td>
+                            <td>
+                                @(Html.Kendo().TextBox()
+                                                                                                                    .Name("Total"+i)
+                                                                                                                    .Value(x.Sub_Total.ToString())
+                                                                                                                    .HtmlAttributes(new { style = "width:70%;", title = "Total", disabled = true, required = "true" })
+                                )
+                                <label style="float:right;">
+                                    <button type="button" class="RemoveRow" value="X"><span class="glyphicon glyphicon-trash"></span></button>
+                                </label>
+                            </td>
+                        </tr>
+                        i++;
+                        
+                    }
 
-                                                                                                                .Value(1)
-                                                                                                                .HtmlAttributes(new { style = "width: 100%", @class = "currency", title = "Quantity", required = "true" })
-                            )
-                        </td>
-                        <td>
-                            @(Html.Kendo().NumericTextBox<decimal>
-                                                                                                                ()
-                                                                                                                .Name("currency0")
-                                                                                                                .Min(1)
-                                                                                                                .Value(1)
-                                                                                                                .Events(e => e
-                                                                                                                      .Change("change")
-                                                                                                                      .Spin("spin")
-                                                                                                                  )
-                                                                                                                .HtmlAttributes(new { style = "width: 100%", @class = "currency", title = "currency", required = "true" })
-                            )
-                        </td>
-                        <td>
-                            @(Html.Kendo().TextBox()
-                                                                                                            .Name("Total0")
-                                                                                                            .Value("")
-                                                                                                            .HtmlAttributes(new { style = "width:70%;", title = "Total", disabled = true, required = "true" })
-                            )
-                            <label style="float:right;">
-                                <button type="button" class="RemoveRow" value="X"><span class="glyphicon glyphicon-trash"></span></button>
-                            </label>
-                        </td>
-                    </tr>
-                    <tr id="1">
-                        <td>
-                            @(Html.Kendo().TextBox()
-                                                                                                            .Name("item1")
-                                                                                                            .Value("")
-                                                                                                            .HtmlAttributes(new { style = "width: 100%", title = "Item", required = "true" })
 
-                            )
-                        </td>
-                        <td>
-                            @(Html.Kendo().TextBox()
-                                                                                                            .Name("Description1")
-                                                                                                            .Value("")
-                                                                                                            .HtmlAttributes(new { style = "width: 100%", title = "Description", required = "true" })
-
-                            )
-                        </td>
-                        <td>
-                            @(Html.Kendo().NumericTextBox<int>
-                                                                                                                ()
-                                                                                                                .Name("Qty1")
-                                                                                                                .Min(1)
-                                                                                                                .Decimals(0)
-                                                                                                                .Value(1)
-                                                                                                                .HtmlAttributes(new { style = "width: 100%", title = "Quantity", required = "true" })
-                            )
-                        </td>
-                        <td>
-                            @(Html.Kendo().NumericTextBox<decimal>
-                                                                                                                ()
-                                                                                                                .Name("currency1")
-                                                                                                                .Min(1)
-                                                                                                                .Value(1)
-                                                                                                                .HtmlAttributes(new { style = "width: 100%", title = "currency", required = "true" })
-                            )
-                        </td>
-                        <td>
-                            @(Html.Kendo().TextBox()
-                                                                                                            .Name("Total1")
-                                                                                                            .Value("")
-                                                                                                            .HtmlAttributes(new { style = "width:70%;", title = "Total", disabled = true, required = true })
-                            )
-                            <label style="float:right;">
-                                <button type="button" class="RemoveRow" value="X"><span class="glyphicon glyphicon-trash"></span></button>
-
-                            </label>
-                        </td>
-                    </tr>
-                    <tr id="2">
-                        <td>
-                            @(Html.Kendo().TextBox()
-                                                                                                            .Name("item2")
-                                                                                                            .Value("")
-                                                                                                            .HtmlAttributes(new { style = "width: 100%", title = "Item", required = "true" })
-
-                            )
-                        </td>
-                        <td>
-                            @(Html.Kendo().TextBox()
-                                                                                                            .Name("Description2")
-                                                                                                            .Value("")
-                                                                                                            .HtmlAttributes(new { style = "width: 100%", title = "Description", required = "true" })
-
-                            )
-                        </td>
-                        <td>
-                            @(Html.Kendo().NumericTextBox<int>
-                                                                                                                ()
-                                                                                                                .Name("Qty2")
-                                                                                                                .Min(1)
-                                                                                                                .Decimals(0)
-                                                                                                                .Value(1)
-                                                                                                                .HtmlAttributes(new { style = "width: 100%", title = "Quantity", required = "true" })
-                            )
-                        </td>
-                        <td>
-                            @(Html.Kendo().NumericTextBox<decimal>
-                                                                                                                ()
-                                                                                                                .Name("currency2")
-                                                                                                                .Min(1)
-                                                                                                                .Value(1)
-                                                                                                                .HtmlAttributes(new { style = "width: 100%", title = "currency", required = "true" })
-                            )
-                        </td>
-                        <td>
-                            @(Html.Kendo().TextBox()
-                                                                                                            .Name("Total2")
-                                                                                                            .Value("")
-                                                                                                            .HtmlAttributes(new { style = "width:70%;", title = "Total", required = true, disabled = true })
-                            )
-                            <label style="float:right;">
-                                <button type="button" class="RemoveRow" value="X"><span class="glyphicon glyphicon-trash"></span></button>
-                            </label>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
             <div class="row">
@@ -325,29 +261,29 @@
                             <label width="50%;" style="margin-left:50%;">
                                 Total
                             </label>
-                            <span style="float:right"><input type="text" id="subTotal" readonly="" class="subTotalField" value="0.00"></span>
+                            <span style="float:right"><input type="text" id="subTotal" readonly="" class="subTotalField" value="@modellist.Invoice_Amount"></span>
                         </div>
                         <div style="margin-top:2%;margin-bottom:2%;border-bottom:solid 1px;">
                             <div style="height: 50px;">
-                                <label width="50%;" style="margin-left:50%" id="taxlabel">Tax</label>
-                                <span style="float:right"><input type="text" id="TAXTax" readonly="" class="subTotalField" value="0.00"></span>
+                                <label width="50%;" style="margin-left:50%" id="taxlabel">Tax(@modellist.Tax_Type)</label>
+                                <span style="float:right"><input type="text" id="TAXTax" readonly="" class="subTotalField" value="@modellist.Tax_Value"></span>
                             </div>
                         </div>
                         <div style="margin-top:2%;margin-bottom:2%;">
                             <div style="height: 50px;">
                                 <label width="50%;" style="margin-left:50%">Toal After Tax</label>
-                                <span style="float:right"><input type="text" id="totalAfterTax" readonly="" class="subTotalField" value="0.00"></span>
+                                <span style="float:right"><input type="text" id="totalAfterTax" readonly="" class="subTotalField" value="@modellist.Invoice_Amount_With_Tax"></span>
                             </div>
                         </div>
                         <div style="margin-top:2%;margin-bottom:2%;border-bottom:solid 1px;">
                             <div style="height: 50px;">
                                 <label width="50%;" style="margin-left:50%">Discount %</label>
-                                <span style="float:right"><input type="text" id="Discount" readonly="" class="subTotalField" value="0.00"></span>
+                                <span style="float:right"><input type="text" id="Discount" readonly="" class="subTotalField" value="@modellist.Discount_Value"></span>
                             </div>
                         </div>
                         <div id="invoiceTotalSection" class="total" style="height:50px;margin-bottom:2%;border-bottom:double 3px;">
                             <label id="InvoiceTotal" width="50%;" style="margin-left:50%">TOTAL</label>
-                            <span id="totalCredit" style="float:right"><em id="currency_exchangeTotal" style="display: none;"></em><input type="text" id="invoiceTotal" readonly="" class="totalField" value="0.00" style="color: rgb(0, 0, 0);"></span>
+                            <span id="totalCredit" style="float:right"><em id="currency_exchangeTotal" style="display: none;"></em><input type="text" id="invoiceTotal" readonly="" class="totalField" value="@modellist.Invoice_Gross_Total" style="color: rgb(0, 0, 0);"></span>
                         </div>
                     </div>
                 </div>
@@ -355,13 +291,14 @@
         </div>
         <button type="submit" name="submit" class="btn btn-success FormSubmit" style="margin-left:80%; margin-top:1%;margin-bottom:1%;" value="submit" id="FormSubmit">Submit</button>
     </div>
-   
+
 </form>
 <script type="text/javascript">
     jQuery(document).ready(function () {
         jQuery(".TaxPercentage").hide();
         jQuery('.FormSubmit').click(function () {
-            if (jQuery("#registration").valid()) { 
+            if (jQuery("#registration").valid()) {
+                var ID = jQuery("#invoiceId").val()
                 var jsDate = jQuery("#Due_Date").val();
                 var a = jQuery('#Invoice_Number').val();
                 var aVal = a;
@@ -369,7 +306,7 @@
                 var bVal = b;
                 var c = jQuery('#TaxPercentage').data("kendoNumericTextBox");
                 var cVal = c.value();
-                var d= jQuery('#DiscountPercentage').data("kendoNumericTextBox");
+                var d = jQuery('#DiscountPercentage').data("kendoNumericTextBox");
                 var dVal = d.value();
                 var eVal = jQuery('#totalAfterTax').val();
                 var etVal = jQuery('#TAXTax').val();
@@ -381,6 +318,7 @@
                 var gh = jQuery('#TaxType').data("kendoDropDownList");
                 var ghVal = gh.value();
                 var model = {
+                    ID: ID,
                     Invoice_Number: aVal,
                     Referance_Number: bVal,
                     Tax_Type: ghVal,
@@ -395,18 +333,24 @@
                     Invoice_Gross_Total: fVal,
                     Generated_To: gVal,
                     Due_Date: jsDate,
-                    Invoice_Amount:gfVal,
+                    Invoice_Amount: gfVal,
                 };
                 var response = jQuery.ajax({
                     method: "post",
-                    url: "/Invoiceing/Invoice_Create",
+                    url: "/Invoiceing/Invoice_Update",
                     dataType: "JSON",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(model),
                     success: function (msg) {
                         if (msg.success === true && msg.responseText > 0) {
-                            jQuery('#InvoiceTable > tbody  > tr').each(function (index,tr) {
+                            jQuery('#InvoiceTable > tbody  > tr').each(function (index, tr) {
+                                var itemId = jQuery(this).children('td:first').text();
+                                var itemIdValue = -1;
+                                if (itemId > 0) {itemIdValue=itemId };
+                                
+                                    jQuery('#item' + jQuery(this).attr("id") + '').val()
                                 var model2 = {
+                                    ID:itemIdValue,
                                     Invoice_ID: msg.responseText,
                                     Item: jQuery('#item' + jQuery(this).attr("id") + '').val(),
                                     Description: jQuery('#Description' + jQuery(this).attr("id") + '').val(),
@@ -416,7 +360,7 @@
                                 };
                                 jQuery.ajax({
                                     method: "post",
-                                    url: "/Invoiceing/InvoiceDetail_Create",
+                                    url: "/Invoiceing/InvoiceDetail_Update",
                                     dataType: "JSON",
                                     contentType: "application/json; charset=utf-8",
                                     data: JSON.stringify(model2),
@@ -702,7 +646,7 @@
                 else if (qTax === '2') {
                     var numerictextboxTaxP = jQuery('#TaxPercentage').data("kendoNumericTextBox");
                     var qTaxP = numerictextboxTaxP.value();
-                    
+
                     if (qTaxP === '0') {
                         jQuery('#TAXTax:text').val(00);
                     } else {
@@ -769,17 +713,17 @@
                 Invoice_Number: "required",
                 Referance_Number: "required",
                 TaxType: "required",
-                Currency: "required",  
+                Currency: "required",
                 DiscountPercentage: "required",
-                Due_Date: function(e) {
+                Due_Date: function (e) {
                     console.log("e", e);
                     var currentDate = Date.parse(jQuery(e).val());
-                    //Check if Date parse is successful  
+                    //Check if Date parse is successful
                     if (!currentDate) {
                         return false;
                     }
                     return true;
-                } 
+                }
             },
             // Specify validation error messages
             messages: {
@@ -794,14 +738,14 @@
             },
             // Make sure the form is submitted to the destination defined
             // in the "action" attribute of the form when valid
-           
+
         });
         jQuery(".k-datepicker").kendoValidator({
             rules: {
-                //implement your custom date validation  
+                //implement your custom date validation
                 dateValidation: function (e) {
                     var currentDate = Date.parse(jQuery(e).val());
-                    //Check if Date parse is successful  
+                    //Check if Date parse is successful
                     if (!currentDate) {
                         return false;
                     }
@@ -811,7 +755,27 @@
             messages: {
                 dateValidation: "Invalid date format"
             }
-        });  
+        });
+        jQuery(document).ready(function () {
+            var todayDate = kendo.toString(kendo.parseDate(new Date('@modellist.Due_Date.ToString()')), 'MM/dd/yyyy');
+            jQuery("#Due_Date").data("kendoDatePicker").value(todayDate);
+            jQuery("#PersonsForInvoice").data('kendoDropDownList').value(@modellist.customer.ID);
+            jQuery("#Currency").data('kendoDropDownList').value(3);
+            jQuery("#TaxType").data('kendoDropDownList').value(@((int)modellist.Tax_Type));
+            if (@((int)modellist.Tax_Type)== '1' ||@((int)modellist.Tax_Type)== '2') {
+                jQuery(".TaxPercentage").show();
+            }
+            jQuery("#TaxPercentage").data('kendoNumericTextBox').value(@modellist.Tax_Percentage);
+            jQuery("#DiscountPercentage").data('kendoNumericTextBox').value(@modellist.Discount_Value);
+            
+        });
     });
-   
+
+</script>
+<script>
+    function onDataBound() {
+        
+       
+        
+    }
 </script>

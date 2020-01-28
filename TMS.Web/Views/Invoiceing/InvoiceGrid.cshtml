@@ -91,11 +91,10 @@
 
     @if (User.IsInRole("CanDeletePerson"))
     {
-        <a class="k-button tms-grid-added" title="" data-placement="left" data-toggle="tooltip" data-original-title="Tooltip on left">
-                <span class="tms-grid-icon mdi mdi-plus "></span>
-            </a>
+        <a class="k-button tms-grid-editGrid"><span class="tms-grid-icon mdi mdi-pencil "></span></a>}
+        <a class="k-button tms-grid-added" title="" data-placement="left" data-toggle="tooltip" data-original-title="Tooltip on left"><span class="tms-grid-icon mdi mdi-plus "></span></a>
         <a class="k-button tms-grid-Download download"><span class="tms-grid-icon mdi mdi-download "></span></a>
-     }
+    }
 
 </div>
 }
@@ -155,6 +154,16 @@
                 grid = jQuery("#PersonGrid").data("kendoGrid");
                 var data = grid.dataItem(jQuery("#PersonGrid tr.k-state-selected"));
                 var url = '@Url.Content("~/Invoiceing/InvoiceDetail?Inoid=")' + data.ID;
+                window.open(url, '_blank');
+            } else {
+
+            }});
+        jQuery(".tms-grid-editGrid").live("mousedown", function (event) {
+            var checkedLength = jQuery("#PersonGrid tr.k-state-selected").length;
+            if (checkedLength == 1) {
+                grid = jQuery("#PersonGrid").data("kendoGrid");
+                var data = grid.dataItem(jQuery("#PersonGrid tr.k-state-selected"));
+                var url = '@Url.Content("~/Invoiceing/InvoiceEdit?Inoid=")' + data.ID;
                 window.open(url, '_blank');
             } else {
 

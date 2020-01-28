@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Common;
 using System.Globalization;
@@ -194,6 +195,7 @@ namespace TMS.Library.TMS
         public Entities.Invoice.Customer customer { get; set; }
         public OrganizationModel Organization { get; set; }
         public LoginUsers users { get; set; }
+        public List<InvoiceDetail> invoiceDetailslist { get; set; }
         public void MapProperties(DbDataReader dr)
         {
             ID = dr.GetLong("ID");
