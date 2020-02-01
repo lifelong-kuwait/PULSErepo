@@ -93,6 +93,7 @@ namespace TMS.Library.TMS
         /// </summary>
         /// <value>The rating.</value>
         public TaxType Tax_Type { get; set; }
+
         /// <summary>
         /// Gets or sets the rating.
         /// </summary>
@@ -150,7 +151,12 @@ namespace TMS.Library.TMS
         /// </summary>
         /// <value>The fee currency.</value>
         public bool Is_Deposit { get; set; }
-
+        /// <summary>
+        /// Gets or sets the fee currency.
+        /// </summary>
+        /// <value>The fee currency.</value>
+        public bool Is_Partial_Deposit { get; set; }
+        
         /// <summary>
         /// Gets or sets the course code.
         /// </summary>
@@ -166,7 +172,7 @@ namespace TMS.Library.TMS
         //  [Display(Name = "CourseSalesCommission", ResourceType = typeof(lr))]
         //[Display(Name = "CourseSalesCommission", ResourceType = typeof(lr))]
         //[Range(1, 100, ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "OneToThousandDurationRange")]
-        public bool Is_Re_schedule { get; set; }
+        public bool Is_Re_Issued { get; set; }
 
         /// <summary>
         /// Gets or sets the PreRequisites.
@@ -216,10 +222,11 @@ namespace TMS.Library.TMS
             Generated_To = dr.GetLong("Generated_To");
             Invoice_Status = (InvoiceStatus)dr.GetInt32("Invoice_Status");
             Due_Date = dr.GetDateTime("Due_Date");
-            Due_Date2 = dr.GetString("Due_Date");
+            Due_Date2 = dr.GetString("Due_Date2");
             Is_Deposit = dr.GetBoolean("Is_Deposit");
+            Is_Partial_Deposit = dr.GetBoolean("Is_Partial_Deposit"); 
             Deposite_Type_ID = dr.GetLong("Deposit_Type_ID");
-            Is_Re_schedule = dr.GetBoolean("Is_Re_Issued");
+            Is_Re_Issued = dr.GetBoolean("Is_Re_Issued");
             Notes = dr.GetString("Notes");
             IsActive = dr.GetBoolean("IsActive");
             IsDelete = dr.GetBoolean("IsDelete");

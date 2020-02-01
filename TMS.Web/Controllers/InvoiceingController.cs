@@ -19,8 +19,9 @@ using TMS.Library;
 using TMS.Library.Entities.Invoice;
 using TMS.Library.Entities.TMS.Program;
 using TMS.Library.TMS;
+using TMS.Library.TMS.Organization;
 using TMS.Web.Core;
-
+using lr = Resources.Resources;
 namespace TMS.Web.Controllers
 {
     [SessionTimeout]
@@ -28,6 +29,7 @@ namespace TMS.Web.Controllers
     {
         private readonly IBALUsers _UserBAL;
         private readonly IInvoiceingBAL _CustomerBAL;
+       private PersonBAL _PersonBAL = new PersonBAL();
         public InvoiceingController(IBALUsers objUserBAL, IInvoiceingBAL customerBAL)
         {
             _UserBAL = objUserBAL; _CustomerBAL = customerBAL;
@@ -36,6 +38,8 @@ namespace TMS.Web.Controllers
         public ActionResult Index()
         {
             Session["InvoiceID"] = -1;
+            Session["InoID"] = -1;
+            Session["DepoID"] = -1;
             return View();
         }
         [DontWrapResult]
@@ -338,10 +342,117 @@ namespace TMS.Web.Controllers
 
         [DontWrapResult]
         [ClaimsAuthorize("CanViewPersonEmail")]
-        public ActionResult InvoiceDepositRead([DataSourceRequest] DataSourceRequest request, string PersonID)
+        public ActionResult InvoiceDeposit_Read([DataSourceRequest] DataSourceRequest request, string PersonID)
         {
             var _Phone = _CustomerBAL.Read_InvoiceDepositBAL(PersonID);
             return Json(_Phone.ToDataSourceResult(request, ModelState));
         }
+        [ClaimsAuthorize("CanAddEditCourse")]
+        [DontWrapResult]
+        public ActionResult InvoiceDeposit_Create([DataSourceRequest] DataSourceRequest request, DepositDetail _DepositDetail, string PersonID)
+        {
+            if (ModelState.IsValid)
+            {
+                var json = new JavaScriptSerializer().Serialize(_DepositDetail);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to create Courses at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+                
+                _DepositDetail.Invoice_ID = PersonID;
+                var x = this._CustomerBAL.InvoiceBalanceCheckBAL(_DepositDetail);
+                var xx = this._CustomerBAL.InvoiceGrossTotalCheckBAL(_DepositDetail);
+                double invoiceTotalPayment = Convert.ToDouble(x);
+                double invoiceGrossTotal = Convert.ToDouble(xx);
+                double balance = Math.Round(invoiceGrossTotal, 2)  - Math.Round(invoiceTotalPayment, 2);
+                balance = Math.Round(balance, 2);
+                if (balance == 0)
+                {
+                    ModelState.AddModelError(lr.PersonSkill, lr.FlagDuplicationCheck);
+                }
+                else if (balance >= _DepositDetail.Payment)
+                {
+                    _DepositDetail.Created_By = CurrentUser.NameIdentifierInt64;
+                    _DepositDetail.Created_Date = DateTime.Now;
+                    _DepositDetail.Organization_ID = CurrentUser.CompanyID;
+                    _DepositDetail.ID = this._CustomerBAL.InvoicePaymentDepositeCreateBAL(_DepositDetail);
+                }
+                else
+                {
+                    ModelState.AddModelError(lr.ErrorServerError, lr.FlagDuplicationCheck);
+                }
+                //if (this._CustomerBAL.InvoiceBalanceCheckBAL(_DepositDetail) > 0)
+                //{
+                //    ModelState.AddModelError(lr.PersonSkill, lr.FlagDuplicationCheck);
+                //}
+                //else
+                //{
+                //    //_Course.ID = this._CourseBAL.TMS_Courses_CreateBAL(_Course);
+                //    //string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                //    //if (string.IsNullOrEmpty(ip))
+                //    //    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                //    //_objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+                //}
+            }
+
+            var resultData = new[] { _DepositDetail };
+            return Json(resultData.ToDataSourceResult(request, ModelState));
+        }
+        [DontWrapResult]
+        [HttpPost]
+        public void SetSessionDepositValues(string _InoID,string _DepositID)
+        {
+            Session["InoID"] = _InoID;
+            Session["DepoID"] = _DepositID;
+        }
+        // [ClaimsAuthorize("CanPrintCertificates")]
+        [DontWrapResult]
+        //[HttpPost]
+        public FileResult PrintDepositSlip_Read()
+        {
+
+
+            string _InvoiceID = System.Web.HttpContext.Current.Session["InoID"].ToString();
+            string _DepositID = System.Web.HttpContext.Current.Session["DepoID"].ToString();
+            if (_InvoiceID.Equals("-1")|| _DepositID.Equals("-1"))
+            {
+                Session["InoID"] = -1;
+                Session["DepoID"] = -1;
+                return null;
+            }
+            else
+            {
+                //ReIssued reIssued = new ReIssued();
+                //reIssued.Invoice_ID = Convert.ToInt64(_classID);
+                //reIssued.Re_Issued_By = CurrentUser.NameIdentifierInt64;
+                //reIssued.Re_Issued_Date = DateTime.Now;
+                //reIssued.Organization_ID = CurrentUser.CompanyID;
+                //reIssued.ID = _CustomerBAL.create_InvoiceReIssueBAL(reIssued);
+                ReportViewer ReportViewerRSFReports = new ReportViewer();
+                ReportViewerRSFReports.Height = Unit.Parse("100%");
+                ReportViewerRSFReports.Width = Unit.Parse("100%");
+                ReportViewerRSFReports.CssClass = "table";
+                var rptPath = Server.MapPath(@"../Report/INO_Deposit_Slips_For_Invoices.rdlc");
+                ReportViewerRSFReports.LocalReport.ReportPath = rptPath;
+                long cID = Convert.ToInt64(CurrentUser.CompanyID);
+                DataTable dt = _CustomerBAL.GetInvoiceDepositReportsBAL(Convert.ToInt64(_InvoiceID), Convert.ToInt64(_DepositID), Convert.ToInt64(CurrentUser.CompanyID));
+                ReportViewerRSFReports.ProcessingMode = ProcessingMode.Local;
+                ReportViewerRSFReports.LocalReport.DataSources.Clear();
+                ReportViewerRSFReports.LocalReport.EnableExternalImages = true;
+                List<OrganizationModel> logoPath = _PersonBAL.GetOrganizationLogo(CurrentUser.CompanyID);
+                ReportParameter paramLogo = new ReportParameter();
+                paramLogo.Name = "Path";
+                string imagePath = new Uri(Server.MapPath(@"~/" + logoPath.FirstOrDefault().Logo)).AbsoluteUri;
+                paramLogo.Values.Add(imagePath);
+                ReportViewerRSFReports.LocalReport.SetParameters(paramLogo);
+                ReportViewerRSFReports.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt));
+                ReportViewerRSFReports.LocalReport.Refresh();
+                byte[] mybytes = ReportViewerRSFReports.LocalReport.Render(format: "PDF", deviceInfo: "");
+                Session["InoID"] = -1;
+                Session["DepoID"] = -1;
+                return File(mybytes, System.Net.Mime.MediaTypeNames.Application.Octet, "Invoice.pdf");
+
+
+            }
+
+        }
+
     }
 }

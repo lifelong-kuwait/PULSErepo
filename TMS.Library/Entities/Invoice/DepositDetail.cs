@@ -46,7 +46,17 @@ namespace TMS.Library.Entities.Invoice
         /// </summary>
         /// <value>The rating.</value>
         public double Payment { get; set; }
-
+        /// <summary>
+        /// Gets or sets the rating.
+        /// </summary>
+        /// <value>The rating.</value>
+        public double Total_Payment { get; set; }
+        /// <summary>
+        /// Gets or sets the rating.
+        /// </summary>
+        /// <value>The rating.</value>
+        public double Balance { get; set; }
+        
         /// <summary>
         /// Gets or sets the notes.
         /// </summary>
@@ -62,6 +72,18 @@ namespace TMS.Library.Entities.Invoice
         //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "CourseMinimumAttendanceRequirementRequired")]
         //[Range(1, 100, ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "OneToThousandDurationRange")]
         public DateTime Created_Date { get; set; }
+        /// <summary>
+        /// Gets or sets the rating.
+        /// </summary>
+        /// <value>The rating.</value>
+        public long Updated_By { get; set; }
+        /// Gets or sets the minimum attendance requirement.
+        /// </summary>
+        /// <value>The minimum attendance requirement.</value>
+        //[Display(Name = "CourseMinimumAttendanceRequirement", ResourceType = typeof(lr))]
+        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "CourseMinimumAttendanceRequirementRequired")]
+        //[Range(1, 100, ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "OneToThousandDurationRange")]
+        public DateTime Updated_Date { get; set; }
         /// <summary>
         /// Gets or sets the PreRequisites.
         /// </summary>
@@ -91,8 +113,12 @@ namespace TMS.Library.Entities.Invoice
             Payment_Type = (DepositType)dr.GetByte("Payment_Type");
             Detail = dr.GetString("Detail");
             Payment = dr.GetDouble("Payment");
+            Total_Payment = dr.GetDouble("Total_Payment");
+            Balance = dr.GetDouble("Balance");
             Created_By = dr.GetLong("Created_By");
-            Created_Date = dr.GetDateTime("Created_Date");
+            Updated_By = dr.GetLong("Updated_By"); 
+             Created_Date = dr.GetDateTime("Created_Date");
+            Updated_Date = dr.GetDateTime("Updated_Date");
             Organization_ID = dr.GetLong("Organization_ID");
             IsActive = dr.GetBoolean("IsActive");
             IsDeleted = dr.GetBoolean("IsDeleted");

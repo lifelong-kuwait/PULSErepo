@@ -73,7 +73,25 @@ namespace TMS.DataObjects.Generics
 
             return ExecuteScalarSP(query, CommandType.StoredProcedure, prms);
         }
+        /// <summary>
+        /// Executes the scalar int32 sp.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="prms">The PRMS.</param>
+        /// <returns>System.Int32.</returns>
+        public double ExecuteScalarDoubleSp(string query, params DbParameter[] prms)
+        {
 
+            double id = -1;
+
+            object o = ExecuteScalar(query, prms);
+
+            if (o != null && o != DBNull.Value)
+            {
+                id = double.Parse(o.ToString());
+            }
+            return id;
+        }
 
         /// <summary>
         /// Executes the scalar sp int32.

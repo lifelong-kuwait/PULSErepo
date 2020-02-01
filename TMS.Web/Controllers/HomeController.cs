@@ -87,7 +87,7 @@ namespace TMS.Web.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [DisableValidation]
+        //[DisableValidation]
         public ActionResult LoginForTrainer(LoginModel infoOfData)
         {
             infoOfData.isOffice365Enabled = false;
@@ -192,8 +192,8 @@ namespace TMS.Web.Controllers
             }
         }
         [HttpPost]
-
-        [DisableValidation]
+        //[DisableValidation]
+        //[ValidateAntiForgeryToken]
         public ActionResult LoginAjax(string Email)
         {
             if (!ModelState.IsValid)
@@ -217,7 +217,6 @@ namespace TMS.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        
         public ActionResult Login(LoginModel infoOfData)
         {
             infoOfData.isOffice365Enabled = false;

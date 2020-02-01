@@ -332,6 +332,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>InvoiceReciptDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="PULSE_With_InvoiceinDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PULSE_With_InvoiceinDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\WeeklyAttendanceReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2691,6 +2696,17 @@
     <Content Include="Reports\Product Tag Report.trdx" />
     <Content Include="Reports\Sales Order Details.trdx" />
     <Content Include="Reports\SalesByRegionDashboard.trdx" />
+    <Content Include="PULSE_With_InvoiceinDataSet.xsc">
+      <DependentUpon>PULSE_With_InvoiceinDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="PULSE_With_InvoiceinDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PULSE_With_InvoiceinDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="PULSE_With_InvoiceinDataSet.xss">
+      <DependentUpon>PULSE_With_InvoiceinDataSet.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="ReportViewer\js\telerikReportViewer-11.2.17.1025.js" />
     <Content Include="ReportViewer\js\telerikReportViewer-11.2.17.1025.min.js" />
@@ -5565,6 +5581,9 @@
       <LastGenOutput>WeeklyAttendanceReport.cs</LastGenOutput>
     </EmbeddedResource>
     <Content Include="Report\INO_InvoiceRecipt.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\INO_Deposit_Slips_For_Invoices.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="Report\Report1.rdlc" />

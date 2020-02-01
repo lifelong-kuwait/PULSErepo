@@ -72,6 +72,10 @@ namespace TMS.Business.TMS.Invoice
         {
             return DAL.GetInvoiceReportsDAL( InoID,  companyID);
         }
+        public DataTable GetInvoiceDepositReportsBAL(long InoID, long DepositId, long companyID)
+        {
+            return DAL.GetInvoiceDepositReportsDAL(InoID, DepositId, companyID);
+        }
         public List<InvoiceHistory> Read_InvoiceHistoryBAL(string invoiceId)
         {
             return DAL.Read_InvoiceHistoryDAL(invoiceId);
@@ -83,6 +87,18 @@ namespace TMS.Business.TMS.Invoice
        public List<DepositDetail> Read_InvoiceDepositBAL(string invoiceId)
         {
             return DAL.Read_InvoiceDepositDAL(invoiceId);
+        }
+        public object InvoiceBalanceCheckBAL(DepositDetail depositDetail)
+        {
+            return DAL.InvoiceBalanceCheckDAL(depositDetail);
+        }
+        public object InvoiceGrossTotalCheckBAL(DepositDetail depositDetail)
+        {
+            return DAL.InvoiceGrossTotalCheckDAL(depositDetail);
+        }
+        public long InvoicePaymentDepositeCreateBAL(DepositDetail depositDetail)
+        {
+            return DAL.InvoicePaymentDepositeCreateDAL(depositDetail);
         }
         public long create_InvoiceReIssueBAL(ReIssued invoiceReIssue)
         {

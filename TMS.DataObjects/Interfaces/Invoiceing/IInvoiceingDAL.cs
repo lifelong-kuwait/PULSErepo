@@ -24,9 +24,13 @@ namespace TMS.DataObjects.Interfaces.Invoiceing
         long create_InvoiceDetailDAL(InvoiceDetail invoiceDetail);
         long Update_InvoiceDetailDAL(InvoiceDetail invoiceDetail);
         DataTable GetInvoiceReportsDAL(long InoID, long companyID);
+        DataTable GetInvoiceDepositReportsDAL(long InoID, long DepositId, long companyID);
         List<InvoiceHistory> Read_InvoiceHistoryDAL(string invoiceId); 
         List<ReIssued> Read_InvoiceReIssuedByDAL(string invoiceId);
         List<DepositDetail> Read_InvoiceDepositDAL(string invoiceId); 
+        object InvoiceBalanceCheckDAL(DepositDetail depositDetail);
+        object InvoiceGrossTotalCheckDAL(DepositDetail depositDetail);
+        long InvoicePaymentDepositeCreateDAL(DepositDetail depositDetail);
         long create_InvoiceReIssueDAL(ReIssued invoiceDetail);
         long create_InvoiceHistoryDAL(InvoiceHistory invoiceHistory);
     }

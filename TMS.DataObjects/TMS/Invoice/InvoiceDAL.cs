@@ -74,7 +74,7 @@ namespace TMS.DataObjects.TMS.Invoice
                 conn.Open();
                 DynamicParameters dbParam = new DynamicParameters();
                 dbParam.AddDynamicParams(new {  SearchText = SearchText, culture = culture,  SortExpression = SortExpression, StartRowIndex = StartRowIndex, page = page, PageSize = PageSize, CompanyID = CompanyID });
-                using (var multi = conn.QueryMultiple("INO_Get_All_Invoice_Read", dbParam, commandType: System.Data.CommandType.StoredProcedure))
+                using (var multi = conn.QueryMultiple("INO_Get_All_CustomersList", dbParam, commandType: System.Data.CommandType.StoredProcedure))
                 {
                     _CustomerData = multi.Read<Customer>().AsList<Customer>();
                     Total = multi.Read<int>().FirstOrDefault<int>();
@@ -167,6 +167,21 @@ namespace TMS.DataObjects.TMS.Invoice
                 ParamBuilder.Par("@Sub_Total", customer.Sub_Total)
                 );
         }
+        
+        public long InvoicePaymentDepositeCreateDAL(DepositDetail invoiceDetail)
+        {
+            var date = DateTime.Now.ToString("yyyy-MM-dd") + " " + CommonUtility.PersonFlagsClearingTime();
+            var parameters = new[] { ParamBuilder.Par("ID", 0) };
+            return ExecuteInt64withOutPutparameterSp("INO_Get_InvoicePayment_Create", parameters,
+                ParamBuilder.Par("@InoID", invoiceDetail.Invoice_ID),
+                ParamBuilder.Par("@PaymentType", invoiceDetail.Payment_Type),
+                ParamBuilder.Par("@detail", invoiceDetail.Detail), 
+                ParamBuilder.Par("@payment", invoiceDetail.Payment), 
+                ParamBuilder.Par("@createdBy", invoiceDetail.Created_By), 
+                ParamBuilder.Par("@createdDate", invoiceDetail.Created_Date),
+                ParamBuilder.Par("@organizationId", invoiceDetail.Organization_ID)
+                );
+        }
         public long create_InvoiceReIssueDAL(ReIssued invoiceDetail)
         {
             var date = DateTime.Now.ToString("yyyy-MM-dd") + " " + CommonUtility.PersonFlagsClearingTime();
@@ -215,7 +230,31 @@ namespace TMS.DataObjects.TMS.Invoice
                 }
             }
         }
-        
+       public DataTable GetInvoiceDepositReportsDAL(long InoID, long DepositId, long companyID)
+        {
+            DataTable dt = new DataTable();
+            var conString = DBHelper.ConnectionString;
+            SqlCommand cmd = new SqlCommand("INO_InvoiceDeposit_Report");
+            cmd.Parameters.AddWithValue("@Invoice_ID", InoID);
+            cmd.Parameters.AddWithValue("@Deposit_ID", DepositId);
+            cmd.Parameters.AddWithValue("@OrganizationID", companyID);
+            using (SqlConnection con = new SqlConnection(conString))
+            {
+                using (SqlDataAdapter sda = new SqlDataAdapter())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    sda.SelectCommand = cmd;
+                    using (DataSet dsCustomers = new DataSet())
+                    {
+                        sda.Fill(dsCustomers, "Customers");
+                        return dsCustomers.Tables[0];
+                    }
+                }
+            }
+        }
+
+
        public List<Library.TMS.InvoiceDetail> Read_InvoiceDetailDAL(long invoiceId)
         {
             List<Library.TMS.InvoiceDetail> _CustomerData = new List<Library.TMS.InvoiceDetail>();
@@ -354,6 +393,20 @@ namespace TMS.DataObjects.TMS.Invoice
                 }
             }
             return _CustomerData.ToList();
+        }
+        public object InvoiceBalanceCheckDAL(DepositDetail depositDetail)
+        {
+            return ExecuteScalarwithSP("INO_Get_InvoicePaymentForInvoiceBalanceCheck",
+                ParamBuilder.Par("@InoID", depositDetail.Invoice_ID)
+                );
+            
+        }
+        public object InvoiceGrossTotalCheckDAL(DepositDetail depositDetail)
+        {
+            return ExecuteScalarwithSP("INO_Get_InvoicePaymentGrossTotalCheck",
+                ParamBuilder.Par("@InoID", depositDetail.Invoice_ID)
+                );
+
         }
     }
 }

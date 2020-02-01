@@ -4,16 +4,13 @@
     Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
 }
 
-<h2>InvoiceDetail_Read</h2>
+<h2>@lr.InvoiceDetail</h2>
 
 @using lr = Resources.Resources;
 @{
     var Model = (TMS.Library.TMS.Invoice)ViewData["model"];
     ViewBag.Title = Model.Referance_Number;
     Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
-    var phonenubner = lr.PersonPhoneNumber;
-    var personEmail = lr.PersonContactEmail;
-    var gender = lr.Gender;
     List<TMS.Library.TMS.Invoice> modellist = new List<TMS.Library.TMS.Invoice>() { Model };
 }
 <script>
@@ -26,45 +23,43 @@
         return '';
     }
 </script>
-@Html.AntiForgeryToken()
 <div id="inforecords"></div>
 @(Html.Kendo().Grid<TMS.Library.TMS.Invoice>(modellist)
                         .Name("PersonDetailGrid")
                         .Columns(columns =>
                         {
                             columns.Bound(e => e.Invoice_Number).Filterable(true).ClientTemplate(@"<div  class='person-box'>
-<div class='person'>
-    " +
-                        @"<h3> <b>Invoice Number</b>:#:Invoice_Number#</h3>" +
-                         @"# if (Referance_Number!=null) { #" +
-                        @"<p> <b>Referance Number</b>: #:Referance_Number#</p> #}
-    if(customer.Customer_PName!=null){#<p><b>Customer</b> :#:customer.Customer_PName#</p> #}
-    if(users.P_DisplayName!=null){#<p><b>Created By</b> :#:users.P_DisplayName#</p> #}
-   if(Organization.P_Name!=null){#<p><b>Organization</b> :#:Organization.P_Name#</p> #}#
-</div>"
-                   );
+                <div class='person'>
+                    " +
+                @"<h3> <b>Invoice Number</b>:#:Invoice_Number#</h3>" +
+                 @"# if (Referance_Number!=null) { #" +
+                @"<p> <b>Referance Number</b>: #:Referance_Number#</p> #} 
+                    if(customer.Customer_PName!=null){#<p><b>Customer</b> :#:customer.Customer_PName#</p> #}
+                    if(users.P_DisplayName!=null){#<p><b>Created By</b> :#:users.P_DisplayName#</p> #}
+                   if(Organization.P_Name!=null){#<p><b>Organization</b> :#:Organization.P_Name#</p> #}#
+                </div>"
+           ).Title(lr.InvoiceNumber);
                             columns.Bound(e => e.customer.Customer_PName).Filterable(true).ClientTemplate(@"<div  class='person-box'>
-<div class='person'>
-    " +
+                <div class='person'>
+                    " +
                              @"<h3> <b>Invoice Sub Total</b>:#:Invoice_Amount#</h3>" +
                               @"# if (Tax_Value!=null) { #" +
-                             @"<p> <b>Tax Value</b>: #:Tax_Value#</p> #}
-    if(Discount_Value!=null){#<p><b>Discount Value</b>:#:Discount_Value#</p> #}
-    if(Invoice_Gross_Total!=null){#<h2><p><b>Gross Total</b> :#:Invoice_Gross_Total#</p></h2> #}#
-
-</div>"
-                        );
+                             @"<p> <b>Tax Value</b>: #:Tax_Value#</p> #} 
+                    if(Discount_Value!=null){#<p><b>Discount Value</b>:#:Discount_Value#</p> #}
+                    if(Invoice_Gross_Total!=null){#<h2><p><b>Net Total</b> :#:Invoice_Gross_Total#</p></h2> #}#
+                   
+                </div>"
+                        ).Title(lr.InvoiceDetail);
                             columns.Bound(e => e.Tax_Type).Filterable(true).ClientTemplate(@"<div  class='person-box'>
-<div class='person'>
-    " +
+                <div class='person'>
+                    " +
                             @"<h5> <b>Tax Percentage</b>:#:Tax_Percentage#</h5>" +
                              @"# if (Discount!=null) { #" +
-                            @"<p> <b>Discount %</b>: #:Discount#</p> #}
-    if(Tax_Type!=null){#<p><b>Tax Type</b>:#:Tax_Type#</p> #}#
-
-</div>"
-                       );
-                            columns.Bound(e => e.Is_Re_schedule).Filterable(true).ClientTemplate("#=SessionTemplate(data)#");
+                            @"<p> <b>Discount %</b>: #:Discount#</p> #}#
+                </div>"
+                       ).Title(lr.TaxAndDiscountDetail);
+                        
+                            columns.Bound(e => e.Is_Re_Issued).Filterable(true).ClientTemplate("#=SessionTemplate(data)#").Title(lr.InvoiceStatus);
                         }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_PersonDetailTemplate").DisplayDeleteConfirmation(false))
                           .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate() </text>))
                                                                                           .DataSource(dataSource => dataSource
@@ -121,10 +116,10 @@
                     <p>
                         <label>
                             Due Date
-                    </label>
+                        </label>
                         <span>
                             #:data.Due_Date2#
-                    </span>
+                        </span>
                     </p>
                 </h5>
                 <p>
@@ -132,14 +127,21 @@
                     <label>
                         #if (data.Is_Deposit){# <span class="mdi mdi-checkbox-blank-circle text-success"></span>    #}else{#  <span class="mdi mdi-checkbox-blank-circle text-danger"></span>  #}#
 
-                </label>
+                    </label>
                 </p>
                 <p>
                     <label>Is Issued: </label>
                     <label>
-                        #if (data.Is_Re_schedule){# <span class="mdi mdi-checkbox-blank-circle text-success"></span>    #}else{#  <span class="mdi mdi-checkbox-blank-circle text-danger"></span>  #}#
+                        #if (data.Is_Re_Issued){# <span class="mdi mdi-checkbox-blank-circle text-success"></span>    #}else{#  <span class="mdi mdi-checkbox-blank-circle text-danger"></span>  #}#
 
-                </label>
+                    </label>
+                </p>
+                <p>
+                    <label>Is Partialy Deposite: </label>
+                    <label>
+                        #if (data.Is_Partial_Deposit){ # <span class="mdi mdi-checkbox-blank-circle text-success"></span>    #}else{#  <span class="mdi mdi-checkbox-blank-circle text-danger"></span>  #}#
+
+                    </label>
                 </p>
             </div>
         </div>

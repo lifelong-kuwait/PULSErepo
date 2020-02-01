@@ -23,9 +23,13 @@ namespace TMS.Business.Interfaces.Invoiceing
         long create_InvoiceDetailBAL(InvoiceDetail invoiceDetail); 
         long Update_InvoiceDetailBAL(InvoiceDetail invoiceDetail);
         DataTable GetInvoiceReportsBAL(long InoID, long companyID);
+        DataTable GetInvoiceDepositReportsBAL(long InoID, long DepositId,long companyID);
         List<InvoiceHistory> Read_InvoiceHistoryBAL(string invoiceId);
         List<ReIssued> Read_InvoiceReIssuedByBAL(string invoiceId);
-        List<DepositDetail> Read_InvoiceDepositBAL(string invoiceId);
+        List<DepositDetail> Read_InvoiceDepositBAL(string invoiceId); 
+        object InvoiceBalanceCheckBAL(DepositDetail depositDetail);
+        object InvoiceGrossTotalCheckBAL(DepositDetail depositDetail);
+        long InvoicePaymentDepositeCreateBAL(DepositDetail depositDetail);
         long create_InvoiceReIssueBAL(ReIssued invoiceReIssue);
         long create_InvoiceHistoryBAL(InvoiceHistory invoiceHistory);
     }

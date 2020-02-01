@@ -11,19 +11,23 @@
 
                                                                   columns.Bound(e => e.Invoice_ID);
                                                                   columns.Bound(e => e.Payment);
+                                                                  columns.Bound(e => e.Total_Payment);
+                                                                  columns.Bound(e => e.Balance);
+                                                                  columns.Bound(e => e.Created_By);
+                                                                  columns.Bound(e => e.Created_Date);
                                                                   columns.Bound(e => e.Detail);
                                                                   columns.Bound(p => p.Payment).Title(lr.GridIsPrimary).Width(80).MinScreenWidth(550);
 
                                                               }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_DepositTemplete").DisplayDeleteConfirmation(false))
-                                                                            .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate() </text>))
-                                                                                                                  .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
-                                                                                                                  .Pageable(pager => pager.Refresh(true))
-                                                                                                                                                                  .Scrollable().Filterable().Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
-                                                                                                                  .HtmlAttributes(new { style = "height:350px;" }).DataSource(dataSource => dataSource.Ajax().Model(model => { model.Id(m => m.ID); }).PageSize(8)
-                                                                                                                  .Read(read => read.Action("InvoiceDepositRead", "Invoiceing", new { PersonID = Model }))
-
-                                                                                                                                                                  .Events(e => e.Error("GeneralErrorHandler(\"DepositGrid\")").RequestEnd("GridRequestEndUpdate"))
-                                                                                                                  ).NoRecords(lr.GridNoRecordFoundMessage)
+                                                              .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate() </text>))
+                                                              .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+                                                              .Pageable(pager => pager.Refresh(true))
+                                                              .Scrollable().Filterable().Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
+                                                              .HtmlAttributes(new { style = "height:350px;" }).DataSource(dataSource => dataSource.Ajax().Model(model => { model.Id(m => m.ID); }).PageSize(8)
+                                                              .Read(read => read.Action("InvoiceDeposit_Read", "Invoiceing", new { PersonID = Model }))
+                                                              .Create(read => read.Action("InvoiceDeposit_Create", "Invoiceing", new { PersonID = Model }))
+                                                              .Events(e => e.Error("GeneralErrorHandler(\"DepositGrid\")").RequestEnd("GridRequestEndUpdate"))
+                                                              ).NoRecords(lr.GridNoRecordFoundMessage)
         )
     </div>
 
@@ -32,12 +36,37 @@
                         /**/
         <div class="toolbar">
             <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
-            <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
-            <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+            <a class="k-button tms-grid-edit download"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+           
         </div>
                         /**/
 
     }
+    <script type="text/javascript">
+        jQuery(function () {
+            jQuery(".download").live("mousedown", function (event) {
+
+                var checkedLength = jQuery("#DepositGrid tr.k-state-selected").length;
+                if (checkedLength == 1) {
+                    grid = jQuery("#DepositGrid").data("kendoGrid");
+                    var data = grid.dataItem(jQuery("#DepositGrid tr.k-state-selected"));
+                    console.log(data);
+                    jQuery.ajax({
+                        method: "post",
+                        url: "/Invoiceing/SetSessionDepositValues",
+                        dataType: "JSON",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({ _InoID: data.Invoice_ID, _DepositID: data.ID }),
+                        success: function (data) {
+                            window.open("/Invoiceing/PrintDepositSlip_Read", "_blank");
+                        }
+                    });
+                } else {
+
+                }
+            });
+        });
+    </script>
 
 
 

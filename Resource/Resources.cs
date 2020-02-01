@@ -6236,6 +6236,212 @@ namespace Resources {
                 return (string)resourceProvider.GetResource("PrimaryContents", CultureInfo.CurrentUICulture.Name);
             }
         }
+        public static string KNetDeposit
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("KNetDeposit", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string CheckBookDeposit
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CheckBookDeposit", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string item
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("item", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string quantity
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("quantity", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Price
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Price", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string SubTotal
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("SubTotal", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceNumber
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceNumber", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceDetail
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceDetail", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string invoiceing
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("invoiceing", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Customer
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Customer", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string CustomerTo
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CustomerTo", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string CustomerSelect
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CustomerSelect", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string SelectTaxType
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("SelectTaxType", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceNumberSelect
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceNumberSelect", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceRefNumberSelect
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceRefNumberSelect", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string DiscountSelect
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("DiscountSelect", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string TaxAndDiscountDetail
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("TaxAndDiscountDetail", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceStatus
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceStatus", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceEdit
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceEdit", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string DueDate
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("DueDate", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceRefNumber
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceRefNumber", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceTaxType
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceTaxType", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string taxPercentage
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("taxPercentage", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string AddNewRow
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("AddNewRow", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Total
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Total", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Tax
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Tax", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string TotalAfterTax
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("TotalAfterTax", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string NetTotal
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("NetTotal", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        
+
+
+
+
+
+
+
+
+
 
     }
 

@@ -661,7 +661,11 @@ namespace TMS.Library
         BankDeposit = 1,
         [Display(Name = "CashDeposit", ResourceType = typeof(lr))]
         CashDeposit = 2,
-        
+        [Display(Name = "KNetDeposit", ResourceType = typeof(lr))]
+        KNetDeposit = 3,
+        [Display(Name = "CheckBookDeposit", ResourceType = typeof(lr))]
+        CheckBookDeposit =4,
+
     }
     public enum HistoryType
     {
