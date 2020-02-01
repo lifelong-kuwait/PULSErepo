@@ -17,7 +17,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using lr = Resources.Resources;
 namespace TMS.Library.Users
 {
 
@@ -64,6 +64,9 @@ namespace TMS.Library.Users
         /// </summary>
         /// <value><c>true</c> if this instance is office365 enabled; otherwise, <c>false</c>.</value>
         public bool isOffice365Enabled { get; set; }
+        public List<DDlList> dDlList { get; set; }
+       [Required]
+        public int OrgnizationId { get; set; }
     }
 
     /// <summary>
@@ -94,6 +97,32 @@ namespace TMS.Library.Users
         /// </summary>
         /// <value>The ts.</value>
         public string ts { get; set; }
+    }
+    public class ChangeUserPasswordModel
+    {
+        /// <summary>
+        /// Gets or sets the password.
+        /// </summary>
+        /// <value>The password.</value>
+         [Required]
+        [Display(Name = "UserOldPassword", ResourceType = typeof(lr))]
+
+        public string OldPassword { get; set; }
+        /// <summary>
+        /// Gets or sets the confirm password.
+        /// </summary>
+        /// <value>The confirm password.</value>
+        [Required]
+        [Display(Name = "UserConfirmNewPassword", ResourceType = typeof(lr))]
+        public string NewPassword { get; set; }
+        /// <summary>
+        /// Gets or sets the uid.
+        /// </summary>
+        /// <value>The uid.</value>
+        [Required]
+        [Display(Name = "UserConfirmPassword", ResourceType = typeof(lr))]
+        public string ConfirmPassword { get; set; }
+       
     }
     /// <summary>
     /// Class UserGroupsList.

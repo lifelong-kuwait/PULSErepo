@@ -663,7 +663,7 @@ namespace TMS.Library.Entities.TMS.Program
         /// </summary>
         /// <value>The evaluation link.</value>
         [Display(Name = "ClassEvaluationLink", ResourceType = typeof(lr))]
-        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "ClassEvalutionlinkRequired")]
+        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "ClassEvalutionlinkRequired")]
         public string EvaluationLink { get; set; }
 
         /// <summary>
@@ -671,7 +671,7 @@ namespace TMS.Library.Entities.TMS.Program
         /// </summary>
         /// <value>The follow up.</value>
         [Display(Name = "ClassFollowUp", ResourceType = typeof(lr))]
-        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "ClassFollowUpRequired")]
+      //  [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "ClassFollowUpRequired")]
         public string FollowUp { get; set; }
 
         /// <summary>
@@ -739,7 +739,7 @@ namespace TMS.Library.Entities.TMS.Program
         /// <value>The discount.</value>
         [Display(Name = "ClassDiscount", ResourceType = typeof(lr))]
         [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "ClassDiscountRequired")]
-        [Range(0.01, 100, ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "GeneralGreaterThanZeroLessThanHundredRange")]
+        [Range(0.0, 100, ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "GeneralGreaterThanZeroLessThanHundredRange")]
         public float Discount { get; set; }
 
         /// <summary>
@@ -816,7 +816,10 @@ namespace TMS.Library.Entities.TMS.Program
         public string UpdatedByAlias { get; set; }
         
     }
-
+    public class PersonRoleGroup
+    {
+        public string PrimaryGroupName { get; set; }
+    }
     /// <summary>
     /// Class SessionCreationRules.
     /// </summary>
@@ -883,6 +886,11 @@ namespace TMS.Library.Entities.TMS.Program
         /// </summary>
         /// <value>The conflict names.</value>
         public string ConflictNames { get; set; }
+        /// <summary>
+        /// Gets or sets the conflict names.
+        /// </summary>
+        /// <value>The conflict names.</value>
+        public bool IsValidVenueAvailabilityTime { get; set; }
     }
 
     /// <summary>
@@ -957,7 +965,83 @@ namespace TMS.Library.Entities.TMS.Program
         /// <value>The person.</value>
         public Person Person { get; set; }
     }
+    /// <summary>
+    /// Class ClassTraineeMapping.
+    /// </summary>
+    public class ClassTraineeMappingCertificatePrint
+    {
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>The identifier.</value>
+        public long ID { get; set; }
 
+        /// <summary>
+        /// Gets or sets the person identifier.
+        /// </summary>
+        /// <value>The person identifier.</value>
+        public long PersonID { get; set; }
+
+        /// <summary>
+        /// Gets or sets the class identifier.
+        /// </summary>
+        /// <value>The class identifier.</value>
+        public long ClassID { get; set; }
+
+        /// <summary>
+        /// Gets or sets the created by.
+        /// </summary>
+        /// <value>The created by.</value>
+        public long CreatedBy { get; set; }
+
+        /// <summary>
+        /// Gets or sets the created date.
+        /// </summary>
+        /// <value>The created date.</value>
+        public DateTime CreatedDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the updated date.
+        /// </summary>
+        /// <value>The updated date.</value>
+        public DateTime UpdatedDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the updated by.
+        /// </summary>
+        /// <value>The updated by.</value>
+        public long? UpdatedBy { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is deleted.
+        /// </summary>
+        /// <value><c>true</c> if this instance is deleted; otherwise, <c>false</c>.</value>
+        public bool IsDeleted { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is active.
+        /// </summary>
+        /// <value><c>true</c> if this instance is active; otherwise, <c>false</c>.</value>
+        public bool IsActive { get; set; }
+        /// <summary>
+        /// Gets or sets the added by alias.
+        /// </summary>
+        /// <value>The added by alias.</value>
+        public string AddedByAlias { get; set; }
+        public string UpdatedByAlias { get; set; }
+        public string SessionStatistic { get; set; }
+        public long SessionAttended { get; set; }
+        public long TotalSessions { get; set; }
+        public long AttendancePercentage { get; set; }
+        public bool EligibleFor { get; set; }
+        public bool ClassCompleted { get; set; }
+        public Int32 PrintedTimeCount { get; set; }
+        /// <summary>
+        /// Gets or sets the person.
+        /// </summary>
+        /// <value>The person.</value>
+        public Person Person { get; set; }
+    }
 
     /// <summary>
     /// Class ClassTrainerMapping.

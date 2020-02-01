@@ -110,7 +110,7 @@ namespace TMS.DataObjects.Interfaces.Common.DDL
         /// User the get allfor DDL dal.
         /// </summary>
         /// <returns>IList&lt;DDlList&gt;.</returns>
-        IList<DDlList> UserGetAllforDDL_DAL();
+        IList<DDlList> UserGetAllforDDL_DAL(long companyId);
 
         /// <summary>
         /// User the get allfor DDL dal.
@@ -169,11 +169,23 @@ namespace TMS.DataObjects.Interfaces.Common.DDL
         /// <returns>IList&lt;DDlList&gt;.</returns>
         IList<DDlList> ProgramLanguages_GetAllByCultureDAL(string culture);
         /// <summary>
+        /// Programs the languages get all by culture dal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
+        IList<DDlList> ProgramLanguages_GetAllByCourseCultureDAL(string culture);
+        /// <summary>
+        /// Programs the languages get all by culture dal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
+        IList<DDlList> ProgramLanguages_GetAllByClassCultureDAL(string culture);
+        /// <summary>
         /// Courseses the get all by culture dal.
         /// </summary>
         /// <param name="culture">The culture.</param>
         /// <returns>IList&lt;DDlList&gt;.</returns>
-        IList<DDlList> Courses_GetAllByCultureDAL(string culture, long CompanyID);
+        IList<DDlList> Courses_GetAllByCultureDAL(string culture, long CompanyID,long personID);
         /// <summary>
         /// Classeses the by course identifier and culture dal.
         /// </summary>
@@ -198,7 +210,7 @@ namespace TMS.DataObjects.Interfaces.Common.DDL
 
         IList<DDlList> CourseDDLDAL(string culture, long CompnayID);
 
-        IList<DDlList> Course_ClassDDLDAL(string culture, long CompnayID, long CourseID);
+        IList<DDlList> Course_ClassDDLDAL(string culture, long CompnayID, long CourseID, long personId);
 
         
 

@@ -135,7 +135,8 @@ namespace TMS.DataObjects.TMS
                         ParamBuilder.Par("Email", _objEmailAddresses.Email),
                         ParamBuilder.Par("IsPrimary", _objEmailAddresses.IsPrimary),
                         ParamBuilder.Par("CreatedDate", _objEmailAddresses.CreatedDate),
-                        ParamBuilder.Par("CreatedBy", _objEmailAddresses.CreatedBy));
+                        ParamBuilder.Par("CreatedBy", _objEmailAddresses.CreatedBy),
+                        ParamBuilder.Par("OrganizationID",_objEmailAddresses.OrganizationID));
         }
 
         /// <summary>

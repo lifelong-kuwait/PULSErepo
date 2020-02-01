@@ -68,9 +68,16 @@
             .HtmlAttributes(new { style = "width:100%" })
             .DataTextField("Text")
             .DataValueField("Value")
+            .Filter("contains")
            // .OptionLabel(lr.OrganizationTypeOptionalLabel)
            .OptionLabel(new { Text = lr.OrganizationTypeOptionalLabel, Value = 0 })
-            .DataSource(dataSource => { dataSource.Read(read => read.Action("OrganizationTypes", "DDL")); }))
+            .DataSource(dataSource => {
+                dataSource.Read(
+                    read =>
+                    {
+                        read.Action("OrganizationTypes", "DDL");
+                    }).ServerFiltering(false);
+            }))
             @Html.ValidationMessageFor(model => model.Type)
         </div>
     </div>
@@ -79,7 +86,7 @@
         <div class="col-md-6 col-lg-6 col-sm-11">
             @*@(Html.Kendo().Upload().Name("fileupload").Multiple(false).Async(a => a.Save("SaveOrganizationLogo", "Attachment").Remove("RemoveOrganizationLogo", "Attachment").AutoUpload(true)).Events(
                 e => e.Success("OrganizationIndexLogoSuccess").Remove("OrganizationIndexOnRemove").Select("OrganizationIndexAttachmentSelect")))*@
-            <input id="fileupload" name="fileupload" type="file" />
+            <input id="fileupload" name="fileupload" type="file"  />
             @Html.ValidationMessageFor(model => model.Logo)
      
             @*<script>

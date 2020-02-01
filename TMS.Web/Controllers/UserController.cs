@@ -8,24 +8,29 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using TMS.Business.Interfaces.Common;
 using TMS.Business.Interfaces.Common.Groups;
 using TMS.Business.Interfaces.TMS;
 using TMS.Common;
 using TMS.Common.Utilities;
+using TMS.Library;
 using TMS.Library.Users;
+using TMS.Web.Core;
 using lr = Resources.Resources;
 
 namespace TMS.Web.Controllers
 {
+    [SessionTimeout]
     public class UserController : TMSControllerBase
     {
+
         private IBALUsers _UserBAL { get; set; }
         private readonly IAttachmentBAL _AttachmentBAL;
         private readonly IGroupsBAL _Groups;
         public UserController(IBALUsers balUser, IAttachmentBAL _AttachmentBAL, IGroupsBAL _Groups)
         {
-            _UserBAL = balUser; this._AttachmentBAL = _AttachmentBAL; this._Groups=_Groups;
+            _UserBAL = balUser; this._AttachmentBAL = _AttachmentBAL; this._Groups = _Groups;
         }
 
         public ActionResult Async_Save(IEnumerable<HttpPostedFileBase> files)
@@ -118,11 +123,34 @@ namespace TMS.Web.Controllers
                 return RedirectPermanent("~/Home/Login");
             }
         }
+        public ActionResult ResetUserPassword()
+        {
+            //need to update the logic check if the user belong to system then show him the change c password then also check on timestamp like only k=link is valid for thee 24 hours
+            //long UserID = Convert.ToInt64(UtilityFunctions.GetQueryString("uid"));
+            //string timestamp = UtilityFunctions.GetQueryString("ts");
+            //long CurrentPersonID = Convert.ToInt32(UtilityFunctions.GetQueryString("pid"));
+            //long ChangePassword = Convert.ToInt32(UtilityFunctions.GetQueryString("vc"));
+            //if ((UserID > 0 && ChangePassword > 0) || (CurrentPersonID > 0 && ChangePassword > 0))
+            //{
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to RESET password at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
+            return View();
+            //}
+            //else
+            //{
+            //    return RedirectPermanent("~/Home/Login");
+            //}
+        }
+
         [HttpPost]
         public ActionResult Reset(ChangePasswordModel model)
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(model);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to RESET password at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 LoginUsers _objUsers = new LoginUsers
                 {
                     Password = Crypto.CreatePasswordHash(model.Password),
@@ -135,9 +163,100 @@ namespace TMS.Web.Controllers
             }
             return View(model);
         }
+        [HttpPost]
+        public JsonResult ResetPassword(string oldPassword, string newPassword, string confirmPassword)
+        {
+            bool result = false;
+            var _objUser = this._UserBAL.LoginUserBAL(CurrentUser.Email);
+            if (_objUser != null)//check if the email is found
+            {
+                if (Crypto.VerifyPassword(oldPassword, _objUser.Password))
+                {
+                    result = true;
+                }
+                if (newPassword.Equals(confirmPassword))
+                {
+                    result = true;
+                }
+            }
+            if (result)
+            {
+                LoginUsers _objUsers = new LoginUsers
+                {
+                    Password = Crypto.CreatePasswordHash(newPassword),
+                    UserID = Convert.ToInt64(Session["UserId"]),
+                    UpdatedBy = Convert.ToInt64(Session["UserId"]),
+                    UpdatedDate = DateTime.UtcNow
+                };
+                var res = this._UserBAL.LoginUsers_UpdatePasswordBAL(_objUsers);
+
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        [ClaimsAuthorize("CanViewLockedUser")]
+        public ActionResult UnlockUser()
+        {
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to unlock user at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
+            return View();
+        }
+       [DontWrapResult]
+        [ClaimsAuthorizeAttribute("CanViewLockedUser")]
+        public ActionResult LockedUser_Read([DataSourceRequest] DataSourceRequest request)
+        {
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to unlock user at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
+            var startRowIndex = (request.Page - 1) * request.PageSize;
+            //   int Total = 0;
+            var SearchText = Request.Form["SearchText"];
+            if (request.PageSize == 0)
+            {
+                request.PageSize = 10;
+            }
+
+            if (CurrentUser.CompanyID > 0)
+            {
+                var _userdata = this._UserBAL.LoginLockedUsersOrganization_GetAllBAL(CurrentCulture, Convert.ToString(CurrentUser.NameIdentifierInt64), SearchText);
+                return Json(_userdata.ToDataSourceResult(request, ModelState));
+               
+            }
+            else
+            {
+                var _userdata = this._UserBAL.LoginLockedUsers_GetAllBAL(CurrentCulture, SearchText);
+                return Json(_userdata.ToDataSourceResult(request, ModelState));
+             
+            }
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ActivityAuthorize]
+        [ClaimsAuthorize("CanDeleteUsers")]
+        public ActionResult LoginLockedUser_Unlock([DataSourceRequest] DataSourceRequest request, LoginUsers _objUsers)
+        {
+            if (ModelState.IsValid)
+            {
+                var json = new JavaScriptSerializer().Serialize(_objUsers);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Update_Success.ToString(), System.Environment.MachineName, "User tried to unlock user at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
+                _objUsers.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                _objUsers.UpdatedDate = DateTime.Now;
+                var result = this._UserBAL.LoginUsers_UnlockBAL(_objUsers);
+                if (result == -1)
+                {
+                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                }
+            }
+            var resultData = new[] { _objUsers };
+            return Json(resultData.AsQueryable().ToDataSourceResult(request, ModelState));
+        }
         [ClaimsAuthorize("CanViewUsers")]
         public ActionResult Index()
         {
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to view user at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             return View();
         }
 
@@ -146,7 +265,9 @@ namespace TMS.Web.Controllers
         public ActionResult LoginUser_Read([DataSourceRequest] DataSourceRequest request)
         {
             var startRowIndex = (request.Page - 1) * request.PageSize;
-         //   int Total = 0;
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to view user at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             var SearchText = Request.Form["SearchText"];
             if (request.PageSize == 0)
             {
@@ -168,7 +289,7 @@ namespace TMS.Web.Controllers
             if (CurrentUser.CompanyID > 0)
             {
                 //var _userdata = this._UserBAL.LoginUsersOrganization_GetAllBAL(CurrentCulture, Convert.ToString(CurrentUser.CompanyID), startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
-                var _userdata = this._UserBAL.LoginUsersOrganization_GetAllBAL(CurrentCulture, Convert.ToString(CurrentUser.CompanyID), SearchText);
+                var _userdata = this._UserBAL.LoginUsersOrganization_GetAllBAL(CurrentCulture, Convert.ToString(CurrentUser.NameIdentifierInt64), SearchText);
                 return Json(_userdata.ToDataSourceResult(request, ModelState));
                 //var result = new DataSourceResult()
                 //{
@@ -199,9 +320,12 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(_objUsers);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to insert new user at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 if (this._UserBAL.LoginUsers_DuplicationCheckBAL(new LoginUsers { Email = _objUsers.Email }) > 0)
                 {
-                    return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
+                    ModelState.AddModelError(lr.UserEmailAlreadyExist, lr.DubliocationHappen);
                 }
                 else
                 {
@@ -227,7 +351,7 @@ namespace TMS.Web.Controllers
                         _objUsers.CreatedDate = DateTime.Now;
                         _objUsers.CompanyID = CurrentUser.CompanyID;
                         _objUsers.AddedByAlias = CurrentUser.Name;
-                        _objUsers.Password = "";                        
+                        _objUsers.Password = "";
                         _objUsers.UserID = this._UserBAL.LoginUsers_CreateBAL(ref _objUsers);//.PersonEmailAddress_CreateBAL(_objGroups);
                         if (_objUsers.IsSendCreatePasswordEmail)
                         {
@@ -256,64 +380,83 @@ namespace TMS.Web.Controllers
             return Json(resultData.ToDataSourceResult(request, ModelState));
         }
 
-       
+
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
         [ActivityAuthorize]
         [ClaimsAuthorize("CanAddEditUsers")]
-        public ActionResult LoginUser_Update([DataSourceRequest] DataSourceRequest request, LoginUsers _objUsers,string filename, long aid)
+        public ActionResult LoginUser_Update([DataSourceRequest] DataSourceRequest request, LoginUsers _objUsers, string filename, long aid)
         {
             if (ModelState.IsValid)
             {
-                if (_objUsers.ConfirmPassword != _objUsers.Password)
+                if(_objUsers.UserID==CurrentUser.NameIdentifierInt64)
                 {
+                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
 
-                    ModelState.AddModelError(lr.UserConfirmPassword, lr.UserConfirmPasswordNotMatch);
+                }
+                else
+                { 
+                var json = new JavaScriptSerializer().Serialize(_objUsers);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Update_Success.ToString(), System.Environment.MachineName, "User tried to update user at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
+                if (this._UserBAL.LoginUsers_DuplicationCheckUpdateBAL(new LoginUsers { Email = _objUsers.Email,UserID=_objUsers.UserID}) > 0)
+                {
+                    //return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
+                    ModelState.AddModelError(lr.UserEmailAlreadyExist, lr.DubliocationHappen);
                 }
                 else
                 {
-                    _objUsers.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                    _objUsers.UpdatedDate = DateTime.Now;
-                    if (String.IsNullOrEmpty(_objUsers.Password))
+                    if (_objUsers.ConfirmPassword != _objUsers.Password)
                     {
-                        //update with password otherwise
-                        var image = HandlProfilePicture(filename, _objUsers.UserID, aid);
-                        if (!string.IsNullOrEmpty(image))
-                        {
-                            _objUsers.ProfileImage = image;
-                            var res = this._UserBAL.LoginUsers_UpdateProfileImageBAL(_objUsers);
-                            _objUsers.ProfileImage = image.Replace("~/", "");
-                        }
-                        var result = this._UserBAL.LoginUsers_UpdateBAL(_objUsers);
-                        if (result == -1)
-                        {
-                            ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
-                        }
+
+                        ModelState.AddModelError(lr.UserConfirmPassword, lr.UserConfirmPasswordNotMatch);
                     }
                     else
                     {
-                        var image = HandlProfilePicture(filename, _objUsers.UserID, aid);
-                        if (!string.IsNullOrEmpty(image))
+                        _objUsers.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                        _objUsers.UpdatedDate = DateTime.Now;
+                        if (String.IsNullOrEmpty(_objUsers.Password))
                         {
-                            _objUsers.ProfileImage = image;
-                            var res = this._UserBAL.LoginUsers_UpdateProfileImageBAL(_objUsers);
-                            _objUsers.ProfileImage = image.Replace("~/", "");
-                        }
-                        var result = this._UserBAL.LoginUsers_UpdateBAL(_objUsers);
-                        if (result == -1)
-                        {
-                            ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                            //update with password otherwise
+                            var image = HandlProfilePicture(filename, _objUsers.UserID, aid);
+                            if (!string.IsNullOrEmpty(image))
+                            {
+                                _objUsers.ProfileImage = image;
+                                var res = this._UserBAL.LoginUsers_UpdateProfileImageBAL(_objUsers);
+                                _objUsers.ProfileImage = image.Replace("~/", "");
+                            }
+                            var result = this._UserBAL.LoginUsers_UpdateBAL(_objUsers);
+                            if (result == -1)
+                            {
+                                ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                            }
                         }
                         else
                         {
+                            var image = HandlProfilePicture(filename, _objUsers.UserID, aid);
+                            if (!string.IsNullOrEmpty(image))
+                            {
+                                _objUsers.ProfileImage = image;
+                                var res = this._UserBAL.LoginUsers_UpdateProfileImageBAL(_objUsers);
+                                _objUsers.ProfileImage = image.Replace("~/", "");
+                            }
+                            var result = this._UserBAL.LoginUsers_UpdateBAL(_objUsers);
+                            if (result == -1)
+                            {
+                                ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                            }
+                            else
+                            {
 
-                            _objUsers.Password = Crypto.CreatePasswordHash(_objUsers.Password);
-                            var res = this._UserBAL.LoginUsers_UpdatePasswordBAL(_objUsers);
-                            _objUsers.Password = null;
-                            _objUsers.ConfirmPassword = null;
+                                _objUsers.Password = Crypto.CreatePasswordHash(_objUsers.Password);
+                                var res = this._UserBAL.LoginUsers_UpdatePasswordBAL(_objUsers);
+                                _objUsers.Password = null;
+                                _objUsers.ConfirmPassword = null;
+                            }
                         }
                     }
                 }
+            }
             }
             var resultData = new[] { _objUsers };
             return Json(resultData.AsQueryable().ToDataSourceResult(request, ModelState));
@@ -329,12 +472,23 @@ namespace TMS.Web.Controllers
             //ModelState.Remove("ConfirmPassword");
             if (ModelState.IsValid)
             {
-                _objUsers.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                _objUsers.UpdatedDate = DateTime.Now;
-                var result = this._UserBAL.LoginUsers_DeleteBAL(_objUsers);
-                if (result == -1)
+                if (_objUsers.UserID == CurrentUser.NameIdentifierInt64)
                 {
                     ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+
+                }
+                else
+                {
+                    var json = new JavaScriptSerializer().Serialize(_objUsers);
+                    _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Delete_Success.ToString(), System.Environment.MachineName, "User tried to delete user at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
+                    _objUsers.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                    _objUsers.UpdatedDate = DateTime.Now;
+                    var result = this._UserBAL.LoginUsers_DeleteBAL(_objUsers);
+                    if (result == -1)
+                    {
+                        ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    }
                 }
             }
             var resultData = new[] { _objUsers };
@@ -398,11 +552,28 @@ namespace TMS.Web.Controllers
         {
             if (CurrentUser.CompanyID > 0)
             {
-                return Json(this._Groups.TMS_Groups_GetAllByOrganizationCultureBAL(CurrentCulture,CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
+                return Json(this._Groups.TMS_Groups_GetAllByOrganizationCultureBAL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
             }
-            else {
+            else
+            {
                 return Json(this._Groups.TMS_Groups_GetAllByCultureBAL(CurrentCulture), JsonRequestBehavior.AllowGet);
             }
+        }
+        [DontWrapResult]
+        public JsonResult UserPasswordVerify(string _password)
+        {
+            bool result = false;
+            var _objUser = this._UserBAL.LoginUserBAL(CurrentUser.Email);
+            if (_objUser != null)//check if the email is found
+            {
+                if (Crypto.VerifyPassword(_password, _objUser.Password))
+                {
+                    result = true;
+                }
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+
         }
         #endregion
     }

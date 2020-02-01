@@ -6,6 +6,7 @@
     var phonenubner = lr.PersonPhoneNumber;
     var personEmail = lr.PersonContactEmail;
     var gender = lr.Gender;
+    var clientstatus = lr.CRMClientType;
     List<TMS.Library.TMS.Persons.Person> modellist = new List<TMS.Library.TMS.Persons.Person>() { Model };
 }
 @Html.AntiForgeryToken()
@@ -31,12 +32,12 @@
 {
     <div class="toolbar">
         @*<a class="k-button tms-grid-add-main"><span class="tms-grid-icon mdi mdi-plus "></span></a>*@
-        <a class="k-button tms-grid-edit-main"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+        @*<a class="k-button tms-grid-edit-main"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
         <a class="k-button tms-grid-destroy-main "><span class="tms-grid-icon mdi mdi-delete "></span></a>
         <a class="k-button tms-grid-exitapp-main"><span class="tms-grid-icon mdi mdi-exit-to-app "></span></a>
         <a class="k-button tms-grid-phone-main"><span class="tms-grid-icon mdi mdi-phone-settings "></span></a>
         <a class="k-button tms-grid-pdf-main"><span class="tms-grid-icon mdi mdi-file-pdf "></span></a>
-        <a class="k-button tms-grid-word-main"><span class="tms-grid-icon mdi mdi-file-word "></span></a>
+        <a class="k-button tms-grid-word-main"><span class="tms-grid-icon mdi mdi-file-word "></span></a>*@
     </div>
 }
 <script id="PersonTemplate" type="text/kendo">
@@ -183,9 +184,9 @@
         }
 
 
-        if (User.IsInRole("CanViewPersonRoles"))
+        if (User.IsInRole("CanViewPersonRolesCRM"))
         {
-            i.Add().Text(lr.RolesTabTitile).LoadContentFrom("ManageRoles", "People", new { PersonID = Model.ID });
+            i.Add().Text(lr.RolesTabTitile).LoadContentFrom("ManageRolesCRM", "People", new { PersonID = Model.ID });
         }
         //if (User.IsInAnyRoles("CanViewPersonAchievement", "CanViewPersonSuggestedTraining", "CanViewPersonRelation", "CanViewPersonAttachments", "CanViewPersonNotes"))
         //{
@@ -218,6 +219,14 @@
             MaritialStatus_Single: 1,
             MaritialStatus_Married: 2
         };
+        tms.person.CrmClientType = {
+            Not_Specified: 0,
+            Lead: 1,
+            Caller: 2,
+            Visitor: 3,
+            Trainee: 4
+        };
+
 
     })(jQuery);
 
@@ -380,7 +389,7 @@
 </script>
 @(Html.Kendo().Grid<TMS.Library.TMS.Persons.Person>()
  .Name("PersonGrid")
- .Columns(columns => { columns.Bound(e => e.P_DisplayName); }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_PersonTemplate"))
+ .Columns(columns => { columns.Bound(e => e.P_DisplayName); }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_PersonDetailTemplate"))
  .Events(e => e.Edit("PersonGrid_onEdit").Save("Person_onSave"))
  .HtmlAttributes(new { style = "display:none" })
  .DataSource(dataSource => dataSource

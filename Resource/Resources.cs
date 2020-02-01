@@ -323,7 +323,37 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("ResourceUpdateValidationError", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Some Error Occur on Server Side</summary>
+        public static string ClassTrainerCannotAssignAsTrainee
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("ClassTrainerCannotAssignAsTrainee", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>Some Error Occur on Server Side</summary>
+        public static string ClassTraineeCannotAssignAsTrainee
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("ClassTraineeCannotAssignAsTrainee", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>Some Error Occur on Server Side</summary>
+        public static string LanguageDublication
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("LanguageDublication", CultureInfo.CurrentUICulture.Name);
+            }
+        }    /// <summary>Some Error Occur on Server Side</summary>
+        public static string DubliocationHappen
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("DubliocationHappen", CultureInfo.CurrentUICulture.Name);
+            }
+        }
         /// <summary>Lookup Primary Name</summary>
         public static string LookupPrimaryName {
                get {
@@ -372,7 +402,47 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("ErrorServerError", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Server Error</summary>
+        public static string MaximumSessionConflict
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("MaximumSessionConflict", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>Server Error</summary>
+        public static string MaximumSessionConflictDelete
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("MaximumSessionConflictDelete", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>Start  and End Date Conflict</summary>
+        public static string StartandEndDateConflict
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("StartandEndDateConflict", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>Start  and End Date Conflict</summary>
+        public static string StartandEndTimeConflict
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("StartandEndTimeConflict", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>Start  and End Date Conflict</summary>
+        public static string TrainingTitleAllreadyExists
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("TrainingTitleAllreadyExists", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>Created Date</summary>
         public static string GridCreatedDate {
                get {
@@ -498,21 +568,115 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("GridDeleteRecordMessage", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+
         /// <summary>No Record Found </summary>
-        public static string GridNoRecordFoundMessage {
-               get {
-                   return (string) resourceProvider.GetResource("GridNoRecordFoundMessage", CultureInfo.CurrentUICulture.Name);
-               }
+        public static string GridNoRecordFoundMessage
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("GridNoRecordFoundMessage", CultureInfo.CurrentUICulture.Name);
             }
-            
+        }
+        public static string InvoiceCreate
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceCreate", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceIssued
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceIssued", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceReIssued
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceReIssued", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceDeposit
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceDeposit", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceInstallment
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceInstallment", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>No Record Found </summary>
+        public static string BankDeposit
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("BankDeposit", CultureInfo.CurrentUICulture.Name);
+            }
+        }  /// <summary>No Record Found </summary>
+        public static string CashDeposit
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CashDeposit", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>Admin Section </summary>
         public static string AdminPageTitle {
                get {
                    return (string) resourceProvider.GetResource("AdminPageTitle", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        public static string LoyalCustomer
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("LoyalCustomer", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string DiscountCustomer
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("DiscountCustomer", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string NewCustomer
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("NewCustomer", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string TaxExclusive
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("TaxExclusive", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string TaxInclusive
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("TaxInclusive", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string NoTax
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("NoTax", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>Lookup</summary>
         public static string LookupPageTitle {
                get {
@@ -716,14 +880,22 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("PersonBasicInfoTab", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+       
         /// <summary>Registration Code</summary>
         public static string PersonRegistrationCode {
                get {
                    return (string) resourceProvider.GetResource("PersonRegistrationCode", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Registration Code</summary>
+        public static string clientstatus
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("clientstatus", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>Select Salutation</summary>
         public static string PersonSalutationRequired {
                get {
@@ -1906,8 +2078,25 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("AddressAddressOneRequired", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Please Enter Address 1</summary>
+        public static string AddressAddressDublication
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("AddressAddressDublication", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>Please Enter Education Dublication1</summary>
+        public static string EducationEducationDublication
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("EducationEducationDublication", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>Address 2</summary>
+
         public static string AddressAddressTwo {
                get {
                    return (string) resourceProvider.GetResource("AddressAddressTwo", CultureInfo.CurrentUICulture.Name);
@@ -1985,7 +2174,37 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("PersonPhoneNumber", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Number</summary>
+        public static string CustomerType
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CustomerType", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string CustomerTypeRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CustomerTypeRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string CustomerPrimaryNameRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CustomerPrimaryNameRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        
+
+             public static string CustomerSecondaryName
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CustomerSecondaryName", CultureInfo.CurrentUICulture.Name);
+            }
+        }
         /// <summary>Please Enter Number</summary>
         public static string PersonPhoneNumberRequired {
                get {
@@ -2132,6 +2351,13 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("PersonSkill", CultureInfo.CurrentUICulture.Name);
                }
             }
+        public static string VenueOcupaidByOther
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("VenueOcupaidByOther", CultureInfo.CurrentUICulture.Name);
+            }
+        }
         //public static string Coursescheck
         //{
         //    get
@@ -2139,7 +2365,7 @@ namespace Resources {
         //        return (string)resourceProvider.GetResource("Coursescheck", CultureInfo.CurrentUICulture.Name);
         //    }
         //}
-        
+
         //public static string Courses
         //{
         //    get
@@ -2266,7 +2492,14 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("GridAddedBy", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Added by</summary>PrimaryMaterial
+        public static string Language
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Language", CultureInfo.CurrentUICulture.Name);
+            }
+        }
         /// <summary>Please Enter Email or Phone Number</summary>
         public static string PersonEmailorPhoneRequired {
                get {
@@ -2363,8 +2596,74 @@ namespace Resources {
                get {
                    return (string) resourceProvider.GetResource("Areyousureyouwanttodeletethisrecord", CultureInfo.CurrentUICulture.Name);
                }
+        }  /// <summary>Are you sure you want to delete this record?</summary>
+        public static string SomeFieldsAreEmpty
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("SomeFieldsAreEmpty", CultureInfo.CurrentUICulture.Name);
             }
-            
+        }
+        /// <summary>Are you sure you want to delete this record?</summary>
+        public static string SomeFieldsAreEmptyOrNewPasswordMustBeGreater
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("SomeFieldsAreEmptyOrNewPasswordMustBeGreater", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>Are you sure you want to delete this record?</summary>
+        public static string NewPasswordDoesnotMatch
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("NewPasswordDoesnotMatch", CultureInfo.CurrentUICulture.Name);
+            }
+        } /// <summary>Are you sure you want to delete this record?</summary>
+        public static string NewPasswordDoesnotMatchExplain
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("NewPasswordDoesnotMatchExplain", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>Are you sure you want to delete this record?</summary>
+        public static string AttandanceMarked
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("AttandanceMarked", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Oops
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Oopss", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string PersonAssignedToDiffentClasses
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("PersonAssignedToDiffentClasses", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string DefaultPicture
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("DefaultPicture", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string SessionAttandanceMarked
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("SessionAttandanceMarked", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>Yes</summary>
         public static string confirmYes {
                get {
@@ -2427,7 +2726,32 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("OrganizationFullName", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+
+        /// <summary>FullName</summary>
+        public static string OrganizationNameDublicaton
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("OrganizationNameDublicaton", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>FullName</summary>
+        public static string LogisticDublication
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("LogisticDublication", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>FullName</summary>
+        public static string MaterialDublication
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("MaterialDublication", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        
         /// <summary>Short Name</summary>
         public static string OrganizationShortName {
                get {
@@ -2602,7 +2926,22 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("PointofContactDuplicationMessage", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Person already in Point of contacts</summary>
+        public static string CurrentUserPointOfContactAssignIssue
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CurrentUserPointOfContactAssignIssue", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>Person already in Point of contacts</summary>
+        public static string PointOfContactAssignIssue
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("PointOfContactAssignIssue", CultureInfo.CurrentUICulture.Name);
+            }
+        }
         /// <summary>Cannot Add Same Link again</summary>
         public static string OrganizationContactLinkDuplicationCheck {
                get {
@@ -3366,7 +3705,15 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("UserEmailAlreadyExist", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>User Email Already Exist</summary>
+        public static string CourseLogisticRequirementID
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CourseLogisticRequirementID", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>Password</summary>
         public static string UserPassword {
                get {
@@ -3380,7 +3727,14 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("UserConfirmPassword", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Confirm New Password</summary>
+        public static string UserConfirmNewPassword
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("UserConfirmNewPassword", CultureInfo.CurrentUICulture.Name);
+            }
+        }
         /// <summary>Confirm Password and Password do not match</summary>
         public static string UserConfirmPasswordNotMatch {
                get {
@@ -3938,7 +4292,15 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("SessionStartTime", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Start Time</summary>
+        public static string SessionTimeConflict
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("SessionTimeConflict", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>End Time</summary>
         public static string SessionEndTime {
                get {
@@ -3980,7 +4342,49 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("ClassMaximumSessionPerDay", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+
+        /// <summary>Maximum Session Per Day</summary>
+        public static string VenueAvailabelTimeRange
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("VenueAvailabelTimeRange", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
+        /// <summary>Maximum Session Per Day</summary>
+        public static string VenueIsInUse
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("VenueIsInUse", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>Maximum Session Per Day</summary>
+        public static string CourseIsAssigned 
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CourseIsAssigned", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>Maximum Session Per Day</summary>
+        public static string UserOldPassword
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("UserOldPassword", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>Maximum Session Per Day</summary>
+        public static string VenueAvailabelTimeRangeIssue
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("VenueAvailabelTimeRangeIssue", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>Minimum Trainee</summary>
         public static string ClassMinimumTrainee {
                get {
@@ -4705,7 +5109,15 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("RolesPrimaryName", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Role name</summary>
+        public static string PrintReport
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("PrintReport", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>Role secondary name</summary>
         public static string RolesSecondaryName {
                get {
@@ -4870,7 +5282,15 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("SessionIsValidSessionDateTime", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Specified date/time for the session conflicts with other sessions of the class</summary>
+        public static string SessionIsValidSessionTime
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("SessionIsValidSessionTime", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>Scheduled date should be between class start and end dates</summary>
         public static string SessionIsValidScheduleDate {
                get {
@@ -5159,7 +5579,15 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("CourseMaterialsPrimaryMaterialRequired", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Please enter Primary Material</summary>
+        public static string MaterialsPrimary
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("MaterialsPrimary", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        
         /// <summary>Primary Material already exists!</summary>
         public static string CourseMaterialsPrimaryMaterialDuplicate {
                get {
@@ -5180,7 +5608,14 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("CourseMaterialsTitle", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Course Materials</summary>
+        public static string CLassMaterialsTitle
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CLassMaterialsTitle", CultureInfo.CurrentUICulture.Name);
+            }
+        }
         /// <summary>Course Materials</summary>
         public static string CourseMaterialsPermissionName {
                get {
@@ -5285,7 +5720,15 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("CourseLogisticRequirementsTitle", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Course Logistic Requirements</summary>
+        public static string ClassLogisticRequirementsTitle
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("ClassLogisticRequirementsTitle", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>Pre Requisites</summary>
         public static string CoursePreRequisites {
                get {
@@ -5316,7 +5759,13 @@ namespace Resources {
                 return (string)resourceProvider.GetResource("TraineeRegistrationNo", CultureInfo.CurrentUICulture.Name);
             }
         }
-
+        public static string RollNo
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("RollNo", CultureInfo.CurrentUICulture.Name);
+            }
+        }
 
         public static string MarkAllPresent
         {
@@ -5787,6 +6236,212 @@ namespace Resources {
                 return (string)resourceProvider.GetResource("PrimaryContents", CultureInfo.CurrentUICulture.Name);
             }
         }
+        public static string KNetDeposit
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("KNetDeposit", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string CheckBookDeposit
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CheckBookDeposit", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string item
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("item", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string quantity
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("quantity", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Price
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Price", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string SubTotal
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("SubTotal", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceNumber
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceNumber", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceDetail
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceDetail", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string invoiceing
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("invoiceing", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Customer
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Customer", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string CustomerTo
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CustomerTo", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string CustomerSelect
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CustomerSelect", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string SelectTaxType
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("SelectTaxType", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceNumberSelect
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceNumberSelect", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceRefNumberSelect
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceRefNumberSelect", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string DiscountSelect
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("DiscountSelect", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string TaxAndDiscountDetail
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("TaxAndDiscountDetail", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceStatus
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceStatus", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceEdit
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceEdit", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string DueDate
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("DueDate", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceRefNumber
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceRefNumber", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceTaxType
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceTaxType", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string taxPercentage
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("taxPercentage", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string AddNewRow
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("AddNewRow", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Total
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Total", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Tax
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Tax", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string TotalAfterTax
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("TotalAfterTax", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string NetTotal
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("NetTotal", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        
+
+
+
+
+
+
+
+
+
 
     }
 

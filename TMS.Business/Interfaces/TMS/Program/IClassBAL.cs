@@ -54,7 +54,8 @@ namespace TMS.Business.Interfaces.TMS.Program
         /// <param name="SearchText">The search text.</param>
         /// <returns>List&lt;Classes&gt;.</returns>
         List<Classes> TMS_ClassesByOrganization_GetAllBAL(long CourseId, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid);
-
+        List<Classes> TMS_ClassesAllByOrganization_GetAllBAL(long CourseId, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText, string Oid,long PersonId);
+        List<PersonRoleGroup> personRoleGroups(long UserID);
         List<Classes> TMS_TrainerClasses_GetByIdBAL(long id, ref int Total);
         
         /// <summary>
@@ -86,6 +87,12 @@ namespace TMS.Business.Interfaces.TMS.Program
         /// <returns>System.Int32.</returns>
         int TMS_Classes_UpdateBAL(Classes _Classes);
         /// <summary>
+        /// TMSs the classes update bal.
+        /// </summary>
+        /// <param name="_Classes">The classes.</param>
+        /// <returns>System.Int32.</returns>
+        int TMS_Classes_SessionCountBAL(long _ClassesID);
+        /// <summary>
         /// TMSs the classes delete dal.
         /// </summary>
         /// <param name="_Classes">The classes.</param>
@@ -107,6 +114,8 @@ namespace TMS.Business.Interfaces.TMS.Program
         IList<ClassTraineeMapping> ClassTraineeMapping_GetAllBAL(string Culture, long ClassID);
 
         IList<ClassTraineeMapping> ClassTraineeMapping_GetAllBALOrganization(string Culture, long ClassID,long CompnayID);
+        IList<ClassTraineeMappingCertificatePrint> ClassTraineeMappingCertificate_GetAllBALOrganization(string Culture, long ClassID, long CompnayID, long CertificateID);
+
         /// <summary>
         /// Trainers the get all except class trainer bal.
         /// </summary>

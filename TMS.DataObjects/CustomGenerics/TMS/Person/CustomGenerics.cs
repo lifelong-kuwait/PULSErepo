@@ -42,6 +42,7 @@ namespace TMS.DataObjects.CustomGenerics
                 SqlCommand cmd = new SqlCommand("TMS_Trainer_Create", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("ID", _objPerson.ID);
+                cmd.Parameters.AddWithValue("Alias", _objPerson.Alias);
                 cmd.Parameters.AddWithValue("SalutationID", _objPerson.SalutationID);
                 cmd.Parameters.AddWithValue("P_FirstName", _objPerson.P_FirstName);
                 cmd.Parameters.AddWithValue("P_LastName", _objPerson.P_LastName);
@@ -71,6 +72,7 @@ namespace TMS.DataObjects.CustomGenerics
                 cmd.Parameters.AddWithValue("IsCoordinator", _objPerson.IsCoordinator);
                 cmd.Parameters.AddWithValue("Rating", _objPerson.Rating);
                 cmd.Parameters.AddWithValue("ClientType", _objPerson.ClientType);
+                cmd.Parameters.AddWithValue("CrmClientType", _objPerson.CrmClientType);
                 cmd.Parameters.AddWithValue("CreatedBy", _objPerson.CreatedBy);
                 cmd.Parameters.AddWithValue("CreatedDate", _objPerson.CreatedDate);
                 cmd.Parameters.AddWithValue("UserID", _objPerson.UserID);
@@ -135,13 +137,13 @@ namespace TMS.DataObjects.CustomGenerics
                 cmd.Parameters.AddWithValue("LoyaltyPointRedeemed", _objPerson.LoyaltyPointRedeemed);
                 cmd.Parameters.AddWithValue("Designation", _objPerson.Designation);
                 cmd.Parameters.AddWithValue("Password", _objPerson.Password);
-                 //AssignedTo = dr.GetInt64("AssignedTo");
+                cmd.Parameters.AddWithValue("CrmClientType", _objPerson.CrmClientType);
                 cmd.Parameters.AddWithValue("Gender", _objPerson.Gender);
                 cmd.Parameters.AddWithValue("Nationality", 0);
                 cmd.Parameters.AddWithValue("Type", _objPerson.Type);
                 cmd.Parameters.AddWithValue("IsCoordinator", _objPerson.IsCoordinator);
                 cmd.Parameters.AddWithValue("Rating", _objPerson.Rating);
-                cmd.Parameters.AddWithValue("ClientType", _objPerson.ClientType);
+                cmd.Parameters.AddWithValue("ClientType", _objPerson.CrmClientType);
                 cmd.Parameters.AddWithValue("CreatedBy", _objPerson.CreatedBy);
                 cmd.Parameters.AddWithValue("CreatedDate", _objPerson.CreatedDate);
                 cmd.Parameters.AddWithValue("UserID", _objPerson.UserID);

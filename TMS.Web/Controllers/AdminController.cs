@@ -23,21 +23,34 @@ using TMS.Business.Interfaces.Common.Groups;
 using TMS.Library.Common.Groups;
 using TMS.Library.Entities.Common.Roles;
 using lr = Resources.Resources;
+using TMS.Web.Core;
+using TMS.Business.Interfaces.TMS;
+using TMS.Library.Entities.TMS.Persons;
+using TMS.Library.Entities.TMS.Course;
+using System.Drawing;
+using TMS.Library.Entities.TMS.Program;
+using TMS.Business.Interfaces.TMS.Program;
 
 namespace TMS.Web.Controllers
 {
+    [SessionTimeout]
     public class AdminController : TMSControllerBase
     {
         private readonly IGroupsBAL _Groups;
-
+        private readonly IPersonBAL _PersonBAL;
         private readonly IRolesBAL _Roles;
+        private readonly ICourseBAL _CourseBAL;
+        private readonly ISessionBAL _SessionBAL;
         /// <summary>
         /// Initializes a new instance of the <see cref="AdminController" /> class.
         /// </summary>
         /// <param name="__RolesBAL">The roles bal.</param>
         /// <param name="GroupBAL">The group bal.</param>
-        public AdminController(IRolesBAL __RolesBAL, IGroupsBAL GroupBAL)
+        public AdminController(ICourseBAL ICourseBAL, ISessionBAL _ISessionBAL, IRolesBAL __RolesBAL, IGroupsBAL GroupBAL, IPersonBAL objIPersonBAL)
         {
+            _SessionBAL = _ISessionBAL;
+            _CourseBAL = ICourseBAL;
+            _PersonBAL = objIPersonBAL;
             _Groups = GroupBAL;
             _Roles = __RolesBAL;
         }
@@ -83,13 +96,25 @@ namespace TMS.Web.Controllers
             }
             if (CurrentUser.CompanyID > 0)
             {
-                var _Phone = _Groups.TMS_GroupsByOrganization_GetAllBAL(CurrentCulture, Convert.ToString(CurrentUser.CompanyID), startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
-                return Json(_Phone.ToDataSourceResult(request, ModelState));
+                var _Phone = _Groups.TMS_GroupsByOrganization_GetAllBAL(request.Page,CurrentCulture, Convert.ToString(CurrentUser.CompanyID), startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
+                var result = new DataSourceResult()
+                {
+
+                    Data = _Phone,
+                    Total = Total
+                };
+                return Json(result);
             }
             else
             {
-                var _Phone = _Groups.TMS_Groups_GetAllBAL(CurrentCulture, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
-                return Json(_Phone.ToDataSourceResult(request, ModelState));
+                var _Phone = _Groups.TMS_Groups_GetAllBAL(request.Page, CurrentCulture, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
+                var result = new DataSourceResult()
+                {
+                    
+                    Data = _Phone,
+                    Total = Total
+                };
+                return Json(result);
             }
         }
 
@@ -152,11 +177,11 @@ namespace TMS.Web.Controllers
         /// <returns>ActionResult.</returns>
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
-      //  [ActivityAuthorize]
+        //  [ActivityAuthorize]
         [ClaimsAuthorize("CanDeleteGroups")]
         public ActionResult Groups_Destroy([DataSourceRequest] DataSourceRequest request, SecurityGroups _objGroups)
         {
-          
+
             if (_Groups.IsDeletedAllow(_objGroups) > 0)
             {
                 return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
@@ -183,6 +208,33 @@ namespace TMS.Web.Controllers
 
                 var resultData = new[] { _objGroups };
                 return Json(resultData.AsQueryable().ToDataSourceResult(request, ModelState));
+            }
+        }
+        /// <summary>
+        /// Groups the destroy.
+        /// </summary>
+        /// <param name="request">The request.</param>
+        /// <param name="_objGroups">The object groups.</param>
+        /// <returns>ActionResult.</returns>
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        //  [ActivityAuthorize]
+
+        public JsonResult Groups_Destroy_Verify(long _objGroupsID)
+        {
+            SecurityGroups _objGroups = new SecurityGroups();
+            _objGroups.GroupId = _objGroupsID;
+            if (_objGroupsID == 1 || _objGroupsID == 20008)
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+            else if (_Groups.IsDeletedAllow(_objGroups) > 0)
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -219,9 +271,9 @@ namespace TMS.Web.Controllers
             //        //    PermissionData = this._Groups.SecurityGroupsPermission_GetAllByGroupIdBALbyOrg(CurrentCulture, GroupId, Convert.ToString(CurrentUser.CompanyID));
             //        //}
             //        // ViewData["model"] = PermissionData;
-                   Session["GroupId"] = GroupId;
-                    ViewData["GroupId"] = GetGroupName(GroupId);
-                    return View();
+            Session["GroupId"] = GroupId;
+            ViewData["GroupId"] = GetGroupName(GroupId);
+            return View();
             //    }
             //}
         }
@@ -232,7 +284,7 @@ namespace TMS.Web.Controllers
         /// <param name="GroupId">The group identifier.</param>
         /// <returns>ActionResult.</returns>
         [HttpGet]
-        [ClaimsAuthorize("CanViewGroupsDetail")]
+        //[ClaimsAuthorize("CanViewGroupsDetail")]
         public ActionResult CRMGroupDetail()
         {
             long GroupId = Convert.ToInt64(Session["GroupId"]);
@@ -254,13 +306,13 @@ namespace TMS.Web.Controllers
                 }
                 else
                 {
-                    var PermissionData = this._Groups.SecurityGroupsPermissions_GetAllByGroupIdBAL(CurrentCulture, GroupId);
+                    var PermissionData = this._Groups.SecurityGroupsPermissions_GetAllByGroupIdBAL(CurrentCulture, GroupId,CurrentUser.NameIdentifierInt64,CurrentUser.CompanyID.ToString());
                     //if (CurrentUser.CompanyID > 0)
                     //{
                     //    PermissionData = this._Groups.SecurityGroupsPermission_GetAllByGroupIdBALbyOrg(CurrentCulture, GroupId, Convert.ToString(CurrentUser.CompanyID));
                     //}
                     // ViewData["model"] = PermissionData;
-                    ViewData["GroupId"] =GetGroupName(GroupId);
+                    ViewData["GroupId"] = GetGroupName(GroupId);
                     return PartialView(PermissionData);
                 }
             }
@@ -276,6 +328,7 @@ namespace TMS.Web.Controllers
         [HttpGet]
         [ClaimsAuthorize("CanViewGroupsDetail")]
         public ActionResult TMSGroupDetail()
+
         {
             long GroupId = Convert.ToInt64(Session["GroupId"]);
             if (string.IsNullOrEmpty(GroupId.ToString()))
@@ -296,18 +349,34 @@ namespace TMS.Web.Controllers
                 }
                 else
                 {
-                    var PermissionData = this._Groups.SecurityGroupsPermission_GetAllByGroupIdBAL(CurrentCulture, GroupId);
+                    var PermissionData = this._Groups.SecurityGroupsPermission_GetAllByGroupIdBAL(CurrentCulture, GroupId,CurrentUser.CompanyID,CurrentUser.NameIdentifierInt64);
                     //if (CurrentUser.CompanyID > 0)
                     //{
                     //    PermissionData = this._Groups.SecurityGroupsPermission_GetAllByGroupIdBALbyOrg(CurrentCulture, GroupId, Convert.ToString(CurrentUser.CompanyID));
                     //}
-                    // ViewData["model"] = PermissionData;
-                    ViewData["GroupId"] =GetGroupName(GroupId);
+                    //ViewData["model"] = PermissionData;
+                    ViewData["GroupId"] = GetGroupName(GroupId);
                     return PartialView(PermissionData);
                 }
             }
         }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanViewGroupsDetail")]
 
+        public JsonResult GroupPermissionsPicture(string ID)
+        {
+            var url = "../Attachment/TMS/PermissionsPictures/";
+            var PermissionData = this._Groups.PermissionPicture(ID);
+            if(PermissionData=="-1")
+            {
+                url = "";
+            }else
+            {
+                url = url+PermissionData;
+            }
+            return Json(url, JsonRequestBehavior.AllowGet);
+        }
 
         /// <summary>
         /// Gets the name of the group.
@@ -327,8 +396,8 @@ namespace TMS.Web.Controllers
                 return GroupData.PrimaryGroupName;
             }
         }
-
-        [ClaimsAuthorize("CanViewCRMGroups")]
+        [HttpPost]
+        [ClaimsAuthorize("CanViewGroupsDetail")]
         public ActionResult CRMGroupDetail(List<SecurityGroupsPermission> permissionsList)
 
         {
@@ -375,13 +444,12 @@ namespace TMS.Web.Controllers
         public ActionResult TMSGroupDetail(List<SecurityGroupsPermission> permissionsList)
         {
             long GroupId = Convert.ToInt64(Session["GroupId"]);
-            var ChangesFromDb = permissionsList.Where(x => x.IsChecked != x.NewChecked);//all those whose values are changed this needs to be updated for the database
-            var NotPresentInDatabase = ChangesFromDb.Where(x => x.GroupPermissionId == int.MinValue);
-            var PresentInDatabase = ChangesFromDb.Where(x => x.GroupPermissionId != int.MinValue);
-
-            if (NotPresentInDatabase.Count() > 0)
-            {
-                foreach (var data in NotPresentInDatabase)
+            //var ChangesFromDb = permissionsList.Where(x => x.IsChecked != x.NewChecked);//all those whose values are changed this needs to be updated for the database
+            //var NotPresentInDatabase = ChangesFromDb.Where(x => x.GroupPermissionId == int.MinValue);
+            //var PresentInDatabase = ChangesFromDb.Where(x => x.GroupPermissionId != int.MinValue);
+            //if (NotPresentInDatabase.Count() <= 0)
+            //{
+                foreach (var data in permissionsList)
                 {
                     data.GroupId = GroupId;
                     data.IsChecked = data.NewChecked;
@@ -389,18 +457,31 @@ namespace TMS.Web.Controllers
                     data.CreatedDate = DateTime.UtcNow;
                     data.GroupPermissionId = this._Groups.TMS_GroupPermissions_CreateDAL(data);
                 }
-            }
-            if (PresentInDatabase.Count() > 0)
-            {
-                foreach (var data in PresentInDatabase)
-                {
-                    data.IsChecked = data.NewChecked;
-                    data.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                    data.UpdatedDate = DateTime.UtcNow;
-                    var Result = this._Groups.TMS_GroupPermissions_UpdateBAL(data);
-                }
-            }
-
+            //}
+            //else
+            //{
+            //    if (NotPresentInDatabase.Count() > 0)
+            //    {
+            //        foreach (var data in NotPresentInDatabase)
+            //        {
+            //            data.GroupId = GroupId;
+            //            data.IsChecked = data.NewChecked;
+            //            data.CreatedBy = CurrentUser.NameIdentifierInt64;
+            //            data.CreatedDate = DateTime.UtcNow;
+            //            data.GroupPermissionId = this._Groups.TMS_GroupPermissions_CreateDAL(data);
+            //        }
+            //    }
+            //    if (PresentInDatabase.Count() > 0)
+            //    {
+            //        foreach (var data in PresentInDatabase)
+            //        {
+            //            data.IsChecked = data.NewChecked;
+            //            data.UpdatedBy = CurrentUser.NameIdentifierInt64;
+            //            data.UpdatedDate = DateTime.UtcNow;
+            //            var Result = this._Groups.TMS_GroupPermissions_UpdateBAL(data);
+            //        }
+            //    }
+            //}
             // ViewData["model"] = permissionsList;
             TempData["Success"] = "Success";
             ViewData["GroupName"] = GetGroupName(GroupId);
@@ -545,5 +626,143 @@ namespace TMS.Web.Controllers
         }
 
         #endregion "Roles"
-    }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ActivityAuthorize]
+        [ClaimsAuthorize("CanViewTMSAdmin")]
+        public ActionResult PersonTrainerTraineeData()
+        {
+            List<PersonBarData> list = new List<PersonBarData>();
+            DateTime date = DateTime.Today;
+            int year = date.Year;
+            for(int i=1;i<=12;i++)
+            {
+                
+                var firstDayOfMonth = new DateTime(year, i, 1);
+                var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+                var result = _PersonBAL.PersonBarBAL(firstDayOfMonth, lastDayOfMonth,CurrentUser.CompanyID);
+                PersonBarData obj = new PersonBarData();
+                obj.month = firstDayOfMonth.ToString("MMM");
+                obj.person = result.First().person;
+                obj.trainer = result.First().trainer;
+                obj.trainee= result.First().trainee;
+                list.Add(obj);
+            }
+            return Json(list);
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ActivityAuthorize]
+        [ClaimsAuthorize("CanViewTMSAdmin")]
+        public ActionResult CourseData()
+        {
+
+            List<CourseDataBar> list = new List<CourseDataBar>();
+            DateTime date = DateTime.Today;
+            int year = date.Year;
+            for (int i = 1; i <= 12; i++)
+            {
+               
+                var firstDayOfMonth = new DateTime(year, i, 1);
+                var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+                var result = _CourseBAL.CourseDataBarBAL(firstDayOfMonth, lastDayOfMonth, CurrentUser.CompanyID);
+                CourseDataBar obj = new CourseDataBar();
+                obj.month = firstDayOfMonth.ToString("MMM");
+                obj.CourseCount = result.First().CourseCount;
+                var random = new Random();
+                var color = String.Format("#{0:X6}", random.Next(0x1000000));
+                obj.customColor = color.ToString();
+                list.Add(obj);
+            }
+            return Json(list);
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ActivityAuthorize]
+        [ClaimsAuthorize("CanViewTMSAdmin")]
+        public ActionResult CourseFutureData()
+        {
+
+            List<CourseDataBar> list = new List<CourseDataBar>();
+            DateTime date = DateTime.Today;
+            int year = date.Year;
+            int c = date.Month;
+            for (int i = 1; i <= 12; i++)
+            {
+                DateTime future = date.AddMonths(i-1);
+                var firstDayOfMonth = new DateTime(future.Year, future.Month, 1);
+                var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+                var result = _CourseBAL.CourseFutureDataBarBAL(firstDayOfMonth, lastDayOfMonth, CurrentUser.CompanyID);
+                CourseDataBar obj = new CourseDataBar();
+                obj.month = firstDayOfMonth.ToString("MMM-yyyy");
+                obj.CourseCount = result.First().CourseCount;
+                var random = new Random();
+                var color = String.Format("#{0:X6}", random.Next(0x1000000));
+                obj.customColor = color.ToString();
+                list.Add(obj);
+            }
+            return Json(list);
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ActivityAuthorize]
+        [ClaimsAuthorize("CanViewTMSAdmin")]
+        public ActionResult ClassFutureData()
+        {
+
+            List<CourseDataBar> list = new List<CourseDataBar>();
+            DateTime date = DateTime.Today;
+            int year = date.Year;
+            int c = date.Month;
+            for (int i = 1; i <= 12; i++)
+            {
+                DateTime future = date.AddMonths(i - 1);
+                var firstDayOfMonth = new DateTime(future.Year, future.Month, 1);
+                var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+                var result = _CourseBAL.CLassFutureDataBarBAL(firstDayOfMonth, lastDayOfMonth, CurrentUser.CompanyID);
+                CourseDataBar obj = new CourseDataBar();
+                obj.month = firstDayOfMonth.ToString("MMM-yyyy");
+                obj.CourseCount = result.First().CourseCount;
+                var random = new Random();
+                var color = String.Format("#{0:X6}", random.Next(0x1000000));
+                obj.customColor = color.ToString();
+                list.Add(obj);
+            }
+            return Json(list);
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ActivityAuthorize]
+        [ClaimsAuthorize("CanViewTMSAdmin")]
+        public ActionResult SessionsData()
+        {
+
+            List<SessionWeekBarData> list = new List<SessionWeekBarData>();
+            DateTime date = DateTime.Today;
+            int year = date.Year;
+            var firstDayOfMonth = new DateTime(year, date.Month, 1);
+            var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+            getweek getweek = new getweek();
+            foreach (WeekRange wr in getweek.GetWeekRange(firstDayOfMonth, lastDayOfMonth))
+            {
+                var result = _SessionBAL.TMS_Sessions_BarBAL(wr.Start.Date.ToString(), wr.End.ToShortDateString(), CurrentUser.CompanyID);
+                SessionWeekBarData obj = new SessionWeekBarData();
+                obj.week = "Week"+wr.WeekNo;
+                obj.sessionsCount = result.First().sessionsCount;
+                var random = new Random();
+                var color = String.Format("#{0:X6}", random.Next(0x1000000));
+                obj.customColor = color.ToString();
+                list.Add(obj);
+            }
+            return Json(list);
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ActivityAuthorize]
+        [ClaimsAuthorize("CanViewTMSAdmin")]
+        public ActionResult SchedulePartial()
+        {
+            return PartialView("Schedule_Read");
+        }
+        }
 }

@@ -246,7 +246,7 @@ namespace TMS.Web.Controllers
             _Attachments.CreatedDate = DateTime.Now;
             _Attachments.FileExtension = Path.GetExtension(fileupload.FileName);
             _Attachments.FileName = fileupload.FileName;
-            _Attachments.FilePath = targetString;
+            _Attachments.FilePath = targetString.Replace("~/", "");
             _Attachments.FileSize = fileupload.ContentLength;
             _Attachments.FileType = AttachmentsFileType.AttachmentsFileType_ProfilePicture;
             _Attachments.OpenID = oid;

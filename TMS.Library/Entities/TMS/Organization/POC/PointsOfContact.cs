@@ -108,7 +108,11 @@ namespace TMS.Library.TMS.Organization.POC
         /// </summary>
         /// <value><c>null</c> if [is deleted] contains no value, <c>true</c> if [is deleted]; otherwise, <c>false</c>.</value>
         public bool? IsDeleted { get; set; }
-
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is deleted.
+        /// </summary>
+        /// <value><c>null</c> if [is deleted] contains no value, <c>true</c> if [is deleted]; otherwise, <c>false</c>.</value>
+        public string email { get; set; }
         /// <summary>
         /// Maps the properties.
         /// </summary>
@@ -128,6 +132,7 @@ namespace TMS.Library.TMS.Organization.POC
             IsDeleted = dr.GetBoolean("IsDeleted");
             RelationName = dr.GetString("RelationName");
             PersonName = dr.GetString("PersonName");
+            email = dr.GetString("Email");
         }
     }
 }

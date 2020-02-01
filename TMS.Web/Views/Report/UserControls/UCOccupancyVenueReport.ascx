@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCOccupancyVenueReport.ascx.cs" Inherits="TMS.Web.Views.Report.UserControls.UCOccupancyVenueReport" %>
 
 
-  <%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
+  <%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
 
     <link href="../../../Content/bootstrap.css" rel="stylesheet" />
   <form id="form1" runat="server">

@@ -18,7 +18,7 @@
 </script>
 <div class="ChildGrid">
     @(Html.Kendo().Grid<TMS.Library.Entities.Common.Configuration.ClassMeterialsMapping>()
-            .Name("ManageClassMeterialMap" + Model)
+            .Name("ManageClassMeterialMap")
       .Columns(columns =>
       {
           columns.Bound(e => e.PrimaryMaterial).Title(lr.Description);
@@ -31,12 +31,12 @@
         .Pageable(pager => pager.Refresh(true)).Scrollable().Filterable().Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
         .HtmlAttributes(new { style = "height:350px;" }).DataSource(dataSource => dataSource.Ajax().Model(model => { model.Id(m => m.ID); }).PageSize(8)
         .Read(read => read.Action("ManageClassMeterialMap_Read", "Config", new { ClassID = Model }))
-        .Create(read => read.Action("ManageClassMeterialMap_Create", "Config").Data("CreateTrainerAdditionalData"))
+        .Create(read => read.Action("ManageClassMeterialMap_Create", "Config",new { oid = Model }))
          .Destroy(read => read.Action("ManageClassMeterialMap_Destroy", "Config"))
         //.Update(read => read.Action("MManageCourseMeterialMap_Update", "Config"))
 
-        .Events(e => e.Error("GeneralErrorHandler(\"ManageClassMeterialMap" + Model + "\")").RequestEnd("GridRequestEndUpdate"))
-                        ).NoRecords(lr.GridNoRecordFoundMessage)
+        .Events(e => e.Error("GeneralErrorHandler(\"ManageClassMeterialMap\")").RequestEnd("GridRequestEndUpdate")))
+        .NoRecords(lr.GridNoRecordFoundMessage)
     )
 
     @helper RenderAddTemplate()
@@ -56,4 +56,3 @@
 }
 </div>
 
-@*.Data("CreateTrainerAdditionalData")*@

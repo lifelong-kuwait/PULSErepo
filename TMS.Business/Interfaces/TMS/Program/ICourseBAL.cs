@@ -19,6 +19,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TMS.Library.Entities.Common.Configuration;
 using TMS.Library.Entities.Coordinator;
+using TMS.Library.Entities.TMS.Course;
 using TMS.Library.Entities.TMS.Program;
 using TMS.Library.TMS;
 
@@ -47,7 +48,15 @@ namespace TMS.Business.Interfaces.TMS
         /// <param name="SortExpression">The sort expression.</param>
         /// <param name="SearchText">The search text.</param>
         /// <returns>List&lt;Course&gt;.</returns>
-        List<Course> TMS_CoursesByOrganization_GetAllBAL(int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid);
+        List<Course> TMS_CoursesByOrganization_GetAllBAL(int page, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid, long PersonID);
+        /// </summary>
+        /// <param name="StartRowIndex">Start index of the row.</param>
+        /// <param name="PageSize">Size of the page.</param>
+        /// <param name="Total">The total.</param>
+        /// <param name="SortExpression">The sort expression.</param>
+        /// <param name="SearchText">The search text.</param>
+        /// <returns>List&lt;Course&gt;.</returns>
+        long TMS_CoursesDeleteCheck(string CourseId, string Oid);
 
         /// <summary>
         /// TMSs the courses get by identifier bal.
@@ -55,6 +64,25 @@ namespace TMS.Business.Interfaces.TMS
         /// <param name="ID">The identifier.</param>
         /// <returns>Course.</returns>
         Course TMS_Courses_GetByIdBAL(string ID);
+        /// <summary>
+        /// Persons the insert new person bal.
+        /// </summary>
+        /// <param name="_objPerson">The object person.</param>
+        /// <returns>PersonResponse.</returns>
+        List<CourseDataBar> CourseDataBarBAL(DateTime startdate, DateTime lastdate, long CompanyId);
+        /// <summary>
+        /// Persons the insert new person bal.
+        /// </summary>
+        /// <param name="_objPerson">The object person.</param>
+        /// <returns>PersonResponse.</returns>
+        List<CourseDataBar> CourseFutureDataBarBAL(DateTime startdate, DateTime lastdate, long CompanyId);
+        /// <summary>
+        /// Persons the insert new person bal.
+        /// </summary>
+        /// <param name="_objPerson">The object person.</param>
+        /// <returns>PersonResponse.</returns>
+        List<CourseDataBar> CLassFutureDataBarBAL(DateTime startdate, DateTime lastdate, long CompanyId);
+
         /// <summary>
         /// Courses the category code by course identifier bal.
         /// </summary>
@@ -73,6 +101,7 @@ namespace TMS.Business.Interfaces.TMS
         /// <param name="_Course">The course.</param>
         /// <returns>System.Int32.</returns>
         int TMS_Courses_UpdateBAL(Course _Course);
+        int TMS_Courses_Dublicate_PrimaryNameBAL(Course _Course);
         /// <summary>
         /// TMSs the courses delete bal.
         /// </summary>
@@ -81,7 +110,8 @@ namespace TMS.Business.Interfaces.TMS
         int TMS_Courses_DeleteBAL(Course _Course);
         int class_CheckBAL(Course _Course, long CompanyID);
         int Session_CheckBAL(Sessions _Course, long CompanyID);
-
+        IList<Sessions> TMS_SessionAttendance_GetAllBAL(Sessions _Course);
+        IList<Sessions> TMS_SessionAttendance_GetAllByIDBAL(int _Course);
         #region Course Coordinator
 
         IList<CourseCoordinatorMapping> TMS_CourseCoordinate_GetAllBAL(long CourseId);
@@ -103,7 +133,8 @@ namespace TMS.Business.Interfaces.TMS
         long TMS_CourseFocusArea_CreateBAL(FocusAreas _focusarea, long CourseId);
 
         int TMS_CourseFocusArea_UpdateBAL(FocusAreas _focusarea, long CourseId);
-
+         int TMS_CourseFocusArea_DublicationBAL(FocusAreas _focusarea, long CourseId);
+     
         int TMS_CourseFocusArea_DeleteDAL(FocusAreas _focusarea, long CourseId);
 
         #endregion

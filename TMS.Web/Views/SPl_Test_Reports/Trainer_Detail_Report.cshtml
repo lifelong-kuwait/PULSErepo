@@ -1,0 +1,288 @@
+﻿
+@{
+    ViewBag.Title = "Trainer_Detail_Report";
+}
+
+
+
+
+
+@using lr = Resources.Resources;
+
+
+
+<style>
+    div#calender {
+        width: 1082px;
+    }
+
+    .fc-content {
+        color: #000;
+    }
+
+    td.fc-day.fc-widget-content.fc-sun.fc-today.fc-state-highlight {
+        background-color: #80BFC8;
+    }
+
+    .right-inner-addon {
+        display: none;
+    }
+
+    .fc button .fc-icon {
+        position: relative;
+        top: -.05em;
+        margin: 0 .2em;
+        /* vertical-align: middle; */
+    }
+
+    span.fc-time {
+        display: none;
+    }
+    .control-label {
+        padding-left: 12%;
+    }
+</style>
+<style>
+#loader {
+  position: relative;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  display:none;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 }
+  to { bottom:0px; opacity:1 }
+}
+
+keyframes animatebottom {
+  from{ bottom:-100px; opacity:0 }
+  to{ bottom:0; opacity:1 }
+}
+
+
+</style>
+
+<style>
+    .form-group {
+        display: grid;
+    }
+
+    .input-group {
+        display: none;
+    }
+
+    .col-md-12.col-lg-offset-2 {
+        margin-bottom: 26px;
+    }
+    /*li {
+        display: none;
+    }*/
+</style>
+@*<div class="col-md-offset-2">*@
+<div class="row" style="margin-left:40%;">
+    <div class="form-group">
+        <h2>Trainer Detail Report</h2>
+    </div>
+</div>
+<div class="form-group" style="margin-left:10%;">
+    <div class="form-group">
+        <div class="row" style="margin-top:1%;">
+            @Html.Label("Course", new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.Kendo().DropDownList()
+                                                                                                                                                           .Name("Course")
+                                                                                                                                                           .DataTextField("Text")
+                                                                                                                                                           .DataValueField("Value")
+                                                                                                                                                           .OptionLabel("--Please select Course--")
+                                                                                                                                                           .Filter("contains")
+                                                                                                                                                           .DataSource(source =>
+                                                                                                                                                           {
+                                                                                                                                                               source.Read(read =>
+                                                                                                                                                               {
+                                                                                                                                                                   read.Action("Course", "DDL");
+                                                                                                                                                               }).ServerFiltering(false);
+                                                                                                                                                           })
+                                                                                                                                                          .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
+                )
+
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row" style="margin-top:1%;">
+            @Html.Label("Class", new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.Kendo().DropDownList()
+                  .Name("Class")
+                  .DataTextField("Text")
+                  .DataValueField("Value")
+                  .Filter("contains")
+                  .OptionLabel("--Please select Class--")
+                  //.DataSource(source =>
+                  //{
+                  //    source.Read(read =>
+                  //    {
+                  //        read.Action("Classes", "DDL");
+                  //    });
+                  //})
+                  .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
+                                                                                                      .HtmlAttributes(new { style = "width: 100%" })
+                )
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row" style="margin-top:1%;">
+            @Html.Label("Trainer", new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.Kendo().DropDownList()
+                  .Name("Trainer")
+                  .DataTextField("Text")
+                  .DataValueField("Value")
+                  .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
+                  .OptionLabel( "--Please select Trainer--")
+                )
+
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-md-2 col-lg-2 col-sm-2" style="margin-left:65%;margin-top:1%;">
+        @(Html.Kendo().Button()
+                                                                                                                                                       .Name("H2")
+                                                                                                                                                       .HtmlAttributes(new { type = "button", @class = "btn btn-primary k-primary" })
+                                                                                                                                                       .Content("" + @lr.ActivitySummaryReport + "")
+        )
+    </div>
+</div>
+<div id="loader"></div>
+<div class="row">
+    <div class="col-lg-12">
+        <iframe id="ifrmReportViewer" frameborder="0" EnableEventValidation="false" src=""  height="700" style="overflow:hidden;" allowtransparency="true" onload='showPage();' allowfullscreen ></iframe>
+    </div>
+</div>
+
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#H2").live("click", function (event) {
+            if (jQuery("#Class").data("kendoDropDownList").value().trim().length <= 0 || jQuery("#Course").data("kendoDropDownList").value().trim().length <= 0 || jQuery("#Trainer").data("kendoDropDownList").value().trim().length <= 0) {
+            } else {
+                url = "../Views/Report/SpLReports/TrainerDetailReport.aspx?rptmode=local&reportname=Tran_TrainerDetailReport&ClassID=" + jQuery("#Class").data("kendoDropDownList").value() + "&CourseID=" + jQuery("#Course").data("kendoDropDownList").value() + "&trainer=" + jQuery("#Trainer").data("kendoDropDownList").value() + "";
+            var myframe = document.getElementById("ifrmReportViewer");
+            if (myframe !== null) {
+                if (myframe.src) {
+                    myframe.src = url;
+                    document.getElementById("loader").style.display = "block";
+                   
+                }
+                else if (myframe.contentWindow !== null && myframe.contentWindow.location !== null) {
+                    myframe.contentWindow.location = url;
+                }
+                else {
+                    myframe.setAttribute('src', url);
+                }
+                }
+            }
+            jQuery("#ifrmReportViewer").css({ "width":"100%","border": "2px solid #009aee", "border - radius": "5px","margin-top":"5px" });
+            return false;
+        });
+        jQuery('#ifrmReportViewer').ready(function () {
+            console.log("ready!");
+        });
+        jQuery("#Class").live("change", function (event) {
+            var classId = jQuery("#Class").data("kendoDropDownList").value();
+           jQuery.ajax({
+                method: "post",
+                url: "/SPl_Test_Reports/Class_Trainer?classId=" + classId,
+                dataType: "JSON",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ classId: classId }),
+                success: function (msg) {
+                    jQuery("#Trainer").kendoDropDownList({
+                        OptionLabel: "--Please select Trainer--",
+                        dataTextField: "Text",
+                        dataValueField: "Value",
+                        filter:"contains",
+                        dataSource: msg,
+                        height: 100
+                    })
+                }
+            });
+        });
+        jQuery("#Course").live("change", function (event) {
+            var classId = jQuery("#Course").data("kendoDropDownList").value();
+            jQuery.ajax({
+                method: "post",
+                url: "/SPl_Test_Reports/Course_Class?course=" + classId,
+                dataType: "JSON",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ course: classId }),
+                success: function (msg) {
+                    jQuery("#Class").kendoDropDownList({
+                        OptionLabel: "--Please select Class--",
+                        dataTextField: "Text",
+                        dataValueField: "Value",
+                        dataSource: msg,
+                        filter: "contains",
+                        height: 100
+                    })
+                    var classId = jQuery("#Class").data("kendoDropDownList").value();
+                    if (classId != null) {
+                    jQuery.ajax({
+                        method: "post",
+                        url: "/SPl_Test_Reports/Class_Trainer?classId=" + classId,
+                        dataType: "JSON",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({ classId: classId }),
+                        success: function (msg) {
+                            jQuery("#Trainer").kendoDropDownList({
+                                OptionLabel: "--Please select Trainer--",
+                                dataTextField: "Text",
+                                dataValueField: "Value",
+                                dataSource: msg,
+                                filter: "contains",
+                                height: 100
+                            })
+                        }
+                        });
+                    }
+                }
+            });
+        });
+    });
+</script>
+<script>
+    function showPage() {
+        document.getElementById("loader").style.display = "none";
+    }
+</script>

@@ -70,7 +70,7 @@ namespace TMS.Library.TMS.Persons
         /// <value>The first name of the p.</value>
         [Display(Name = "PersonP_FirstName", ResourceType = typeof(lr))]
         [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "PersonP_FirstNameRequired")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "PersonP_FirstNameRequired")]
+        //[RegularExpression(@"^[a-zA-Z]+$", ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "PersonP_FirstNameRequired")]
         public string P_FirstName { get; set; }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace TMS.Library.TMS.Persons
         /// <value>The last name of the p.</value>
         [Display(Name = "PersonP_LastName", ResourceType = typeof(lr))]
         [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "PersonP_LastNameRequired")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "PersonP_LastNameRequired")]
+       // [RegularExpression(@"^[a-zA-Z]+$", ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "PersonP_LastNameRequired")]
         public string P_LastName { get; set; }
 
         /// <summary>
@@ -183,7 +183,9 @@ namespace TMS.Library.TMS.Persons
         /// <value>The official identifier number.</value>
         [Display(Name = "PersonOfficialIDNumber", ResourceType = typeof(lr))]
         public string OfficialIDNumber { get; set; }
-
+        [NotMapped]
+        [Display(Name = "TrainerLogin", ResourceType = typeof(lr))]
+        public bool? IsLogin { get; set; }
 
         public class MinimumAgeAttribute : ValidationAttribute
         {
@@ -266,6 +268,7 @@ namespace TMS.Library.TMS.Persons
 
 
         string _Dates = "Fri Nov 23 2010 16:44:41 GMT+0500 (Pakistan Standard Time)";
+        //"Fri Nov 23 2010 16:44:41 GMT+0500 (Pakistan Standard Time)"
         public string Dates
         {
             get
@@ -290,7 +293,7 @@ namespace TMS.Library.TMS.Persons
         //    public DateTime? Dates { get { return DateTime.Now; }   }
         [Display(Name = "DateOfBirth", ResourceType = typeof(lr))]
         // [DOB(EarlierDateField = "Dates", ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "EndDateShouldBeGreaterThanStartDate")]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         /// <summary>
         /// Gets or sets the availability from.
@@ -484,10 +487,11 @@ namespace TMS.Library.TMS.Persons
         }
         public string ClientStatusValue
         {
-            get
-            {
-                return clientstatus != null ? Fd.GetDisplayName(clientstatus) : "NotSpecified";
-            }
+            get;set;
+            //get
+            //{
+            //    return clientstatus != null ? Fd.GetDisplayName(clientstatus) : "NotSpecified";
+            //}
         }
         //public string personTypeValue
         //{
@@ -500,7 +504,7 @@ namespace TMS.Library.TMS.Persons
         /// <value>The name of the nick.</value>
         [Display(Name = "PersonNickName", ResourceType = typeof(lr))]
         // [Display(Name = "UserNickName", ResourceType = typeof(lr))]
-        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "UserNickNameRequired")]
+        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "UserNickNameRequired")]
         public string NickName { get; set; }
 
         /// <summary>
@@ -508,6 +512,8 @@ namespace TMS.Library.TMS.Persons
         /// </summary>
         /// <value>The alias.</value>
         [Display(Name = "PersonAlias", ResourceType = typeof(lr))]
+        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "UserNickNameRequired")]
+
         public string Alias { get; set; }
 
         /// <summary>
@@ -601,14 +607,17 @@ namespace TMS.Library.TMS.Persons
         [Display(Name = "LableAssignedTo", ResourceType = typeof(lr))]
         public long? AssignedTo { get; set; }
 
+        [Display(Name = "LableAssignedTo", ResourceType = typeof(lr))]
+        public string AssignedToString { get; set; }
 
-
-        [Display(Name = "CRMClientType", ResourceType = typeof(lr))]
+        [Display(Name = "clientstatus", ResourceType = typeof(lr))]
         public CRMClientType? clientstatus { get; set; }
 
         [Display(Name = "PersonClientType", ResourceType = typeof(lr))]
-        public ClientType ClientType { get; set; }
+        public ClientType? ClientType { get; set; }
 
+        [Display(Name = "PersonClientType", ResourceType = typeof(lr))]
+        public CRMClientType CrmClientType { get; set; }
         public string UserName { get; set; }
 
         public string ScheduleClasses { get; set; }
@@ -632,7 +641,6 @@ namespace TMS.Library.TMS.Persons
             Extension = dr.GetString("Extension");
             ContactNumber = dr.GetString("ContactNumber");
             ScheduleClasses = dr.GetString("ScheduleClasses");
-
             ID = dr.GetInt64("ID");
             SalutationID = (Salutation)dr.GetByte("SalutationID");
             P_FirstName = dr.GetString("P_FirstName");
@@ -663,6 +671,7 @@ namespace TMS.Library.TMS.Persons
             Designation = dr.GetString("Designation");
             Password = dr.GetString("Password");
             Gender = (Gender)dr.GetByte("Gender");
+            ProfilePicture = dr.GetStringForProfile("ProfilePicture");
             //Nationality = (Nationality)dr.GetByte("Nationality");
             Type = dr.GetByte("Type");
             IsCoordinator = dr.GetBoolean("IsCoordinator");
@@ -683,10 +692,11 @@ namespace TMS.Library.TMS.Persons
             MaritalStatus = (MaritalStatus)dr.GetByte("MaritalStatus");
             VendorID = dr.GetInt64("VendorID");
             //ProfilePicture = dr.GetStringForProfile("ProfilePicture");
-            if (clientstatus == null)
-                clientstatus = 0;
+            if (ClientType == null)
+                CrmClientType = 0;
             else
-                clientstatus = (CRMClientType)dr.GetByte("ClientStatus");
+                CrmClientType = (CRMClientType)dr.GetByte("ClientStatus");
+            
             AssignedTo = dr.GetInt64("AssignedTo");
             NickName = dr.GetString("NickName");
             Alias = dr.GetString("Alias");
@@ -701,6 +711,7 @@ namespace TMS.Library.TMS.Persons
             PClassTitle = dr.GetString("PClassTitle");
             FlagCount = dr.GetInt32("FlagCount");
             FlagIDs = dr.GetString("FlagIDs");
+           
         }
     }
 

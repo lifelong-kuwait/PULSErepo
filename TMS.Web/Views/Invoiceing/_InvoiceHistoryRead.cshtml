@@ -1,0 +1,34 @@
+﻿@model string
+@using lr = Resources.Resources;
+@if (User.IsInRole("CanViewPersonEmail"))
+{
+    <div class="ChildGrid">
+        @(Html.Kendo().Grid<TMS.Library.Entities.Invoice.InvoiceHistory>()
+                                    .Name("InvoiceHistory")
+                                      .Columns(columns =>
+                                      {
+
+                                          columns.Bound(e => e.History_Name);
+                                          columns.Bound(p => p.Invoice_Number).Title(lr.GridIsPrimary).Width(80).MinScreenWidth(550);
+
+                                      }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_EmailAddressTemplate").DisplayDeleteConfirmation(false))
+                                                    .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate() </text>))
+                                                                  .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+                                                                  .Pageable(pager => pager.Refresh(true))
+                                                                                                                  .Scrollable().Filterable().Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
+                                                                  .HtmlAttributes(new { style = "height:350px;" }).DataSource(dataSource => dataSource.Ajax().Model(model => { model.Id(m => m.ID); }).PageSize(8)
+                                                                  .Read(read => read.Action("InvoiceHistoryRead", "Invoiceing", new { PersonID = Model }))
+                                                                 
+                                                                                                                  .Events(e => e.Error("GeneralErrorHandler(\"InvoiceHistory\")").RequestEnd("GridRequestEndUpdate"))
+                                                                  ).NoRecords(lr.GridNoRecordFoundMessage)
+        )
+    </div>
+
+    @helper RenderAddTemplate()
+    {
+
+    }
+
+   
+
+}

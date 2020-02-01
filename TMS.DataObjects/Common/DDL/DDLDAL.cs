@@ -158,9 +158,9 @@ namespace TMS.DataObjects.Common.DDL
             return ExecuteListSp<DDlList>("TMS_PersonDDL", ParamBuilder.Par("OrganizationID", CompanyID));
 
         }
-        public IList<DDlList> UserGetAllforDDL_DAL()
+        public IList<DDlList> UserGetAllforDDL_DAL(long CompanyId)
         {
-            return ExecuteListSp<DDlList>("TMS_UserDDL");
+            return ExecuteListSp<DDlList>("TMS_UserDDL", ParamBuilder.Par("CompantID", CompanyId));
         }
 
         public IList<DDlList> UserGetAllUnassignedforDDL_DAL()
@@ -256,15 +256,32 @@ namespace TMS.DataObjects.Common.DDL
         {
             return ExecuteListSp<DDlList>("ProgramLanguages_GetAllByCulture", ParamBuilder.Par("culture", culture)); ;
         }
-
         /// <summary>
+        /// Programs the languages get all by culture dal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
+        public IList<DDlList> ProgramLanguages_GetAllByCourseCultureDAL(string culture)
+        {
+            return ExecuteListSp<DDlList>("TMS_CourseLanguage_DDL", ParamBuilder.Par("CourseID", culture)); ;
+        }
+        /// <summary>
+        /// Programs the languages get all by culture dal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
+        public IList<DDlList> ProgramLanguages_GetAllByClassCultureDAL(string culture)
+        {
+            return ExecuteListSp<DDlList>("TMS_ClassLanguage_DDL", ParamBuilder.Par("ClassID", culture)); ;
+        }
+        /// <summary>ProgramLanguages_GetAllByClassCultureDAL
         /// Courseses the get all by culture dal.
         /// </summary>
         /// <param name="culture">The culture.</param>
         /// <returns>IList&lt;DDlList&gt;.</returns>
-        public IList<DDlList> Courses_GetAllByCultureDAL(string culture, long CompanyID)
+        public IList<DDlList> Courses_GetAllByCultureDAL(string culture, long CompanyID,long personID)
         {
-            return ExecuteListSp<DDlList>("TMS_Courses_GetAllByCulture", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OrganizationID", CompanyID)); ;
+            return ExecuteListSp<DDlList>("TMS_Courses_GetAllByCulture", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OrganizationID", CompanyID), ParamBuilder.Par("PersonID", personID)); ;
         }
         /// <summary>
         /// Classeses the by course identifier and culture dal.
@@ -312,9 +329,9 @@ namespace TMS.DataObjects.Common.DDL
             return ExecuteListSp<DDlList>("TMS_CourseDDLAndCulture", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OrganizationID", CompnayID)); ;
 
         }
-        public IList<DDlList> Course_ClassDDLDAL(string culture, long CompnayID, long CourseID)
+        public IList<DDlList> Course_ClassDDLDAL(string culture, long CompnayID, long CourseID,long personId)
         {
-            return ExecuteListSp<DDlList>("TMS_Course_ClassDDLAndCulture", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OrganizationID", CompnayID), ParamBuilder.Par("CourseID", CourseID)); ;
+            return ExecuteListSp<DDlList>("TMS_Course_ClassDDLAndCulture", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OrganizationID", CompnayID), ParamBuilder.Par("CourseID", CourseID), ParamBuilder.Par("personID", personId) ); ;
 
         }
 

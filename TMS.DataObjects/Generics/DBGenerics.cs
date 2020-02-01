@@ -73,7 +73,25 @@ namespace TMS.DataObjects.Generics
 
             return ExecuteScalarSP(query, CommandType.StoredProcedure, prms);
         }
+        /// <summary>
+        /// Executes the scalar int32 sp.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="prms">The PRMS.</param>
+        /// <returns>System.Int32.</returns>
+        public double ExecuteScalarDoubleSp(string query, params DbParameter[] prms)
+        {
 
+            double id = -1;
+
+            object o = ExecuteScalar(query, prms);
+
+            if (o != null && o != DBNull.Value)
+            {
+                id = double.Parse(o.ToString());
+            }
+            return id;
+        }
 
         /// <summary>
         /// Executes the scalar sp int32.
@@ -397,8 +415,53 @@ namespace TMS.DataObjects.Generics
             return dsResult;
         }
 
+        /// <summary>
+        /// Executes the data set.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <param name="prms">The PRMS.</param>
+        /// <returns>DataSet.</returns>
+        public DataSet ExecuteDataSetSP(string query, params DbParameter[] prms)
+        {
+            DataSet dsResult = new DataSet();
+            try
+            {
+                using (DbConnection connection = Factory.CreateConnection())
+                {
+                    connection.ConnectionString = ConnectionString;
 
-      
+                    using (DbCommand command = Factory.CreateCommand())
+                    {
+                        command.CommandTimeout = CommandTimeout;
+                        command.Connection = connection;
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.CommandText = query;
+
+                        if (prms != null)
+                        {
+                            command.Parameters.AddRange(prms);
+                        }
+
+                        //connection.Open();
+                        DbDataAdapter adapter = Factory.CreateDataAdapter();
+                        adapter.SelectCommand = command;
+
+                        // Fill the DataTable.
+
+                        adapter.Fill(dsResult);
+
+                        //connection.Close();
+                    }
+                }
+            }
+            finally
+            {
+            }
+
+            return dsResult;
+        }
+
+
 
         /// <summary>
         /// Executes the scalar.
@@ -554,6 +617,7 @@ namespace TMS.DataObjects.Generics
                         command.CommandTimeout = CommandTimeout;
                         command.Connection = connection;
                         command.CommandType = commandType;
+                        
                         command.CommandText = query;
 
                         if (prms != null)

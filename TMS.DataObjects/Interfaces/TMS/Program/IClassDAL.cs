@@ -53,8 +53,9 @@ namespace TMS.DataObjects.Interfaces.TMS
         /// <param name="SearchText">The search text.</param>
         /// <returns>List&lt;Classes&gt;.</returns>
         List<Classes> TMS_ClassesByOrganization_GetAllDAL(long CourseId, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid);
+        List<Classes> TMS_ClassesAllByOrganization_GetAllDAL(long CourseId, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText, string Oid, long PersonId);
 
-
+        List<PersonRoleGroup> personRoleGroupsDAL(long UserID);
         List<Classes> TMS_TrainerClasses_GetAllDAL(long id, ref int Total);
 
         List<Classes> TMS_TrainerClasses_GetByOrganizationIdDAL(long id, long CompnayID, ref int Total);
@@ -90,7 +91,13 @@ namespace TMS.DataObjects.Interfaces.TMS
         /// <returns>System.Int32.</returns>
         int TMS_Classes_UpdateDAL(Classes _Classes);
         /// <summary>
-        /// TMSs the classes delete dal.
+        /// TMSs the classes update dal.
+        /// </summary>
+        /// <param name="_Classes">The classes.</param>
+        /// <returns>System.Int32.</returns>
+        int TMS_Classes_SessionCountDAL(long _ClassesID);
+        /// <summary>
+        /// TMSs the classes delete dal.int TMS_Classes_SessionCount(int _ClassesID)
         /// </summary>
         /// <param name="_Classes">The classes.</param>
         /// <returns>System.Int32.</returns>
@@ -110,6 +117,8 @@ namespace TMS.DataObjects.Interfaces.TMS
         /// <returns>IList&lt;ClassTraineeMapping&gt;.</returns>
         IList<ClassTraineeMapping> ClassTraineeMapping_GetAllDAL(string Culture, long ClassID);
         IList<ClassTraineeMapping> ClassTraineeMapping_GetAllDALOrganization(string Culture, long ClassID, long CompnayID);
+        IList<ClassTraineeMappingCertificatePrint> ClassTraineeMappingCertificate_GetAllBALOrganizationDAL(string Culture, long ClassID, long CompnayID, long CertificateID);
+
         /// <summary>
         /// Classes the trainee get all by class identifier for creating dal.
         /// </summary>

@@ -56,7 +56,7 @@
             .Name("CourseCoodinatorGrid")
     .Columns(columns =>
     {
-        columns.Bound(e => e.CoordinateID).ClientTemplate("#:data.DisplayName#");
+        columns.Bound(e => e.DisplayName).ClientTemplate("#:data.DisplayName#");
         //columns.Bound(e => e.AddedByAlias).ClientTemplate("#=AddedByAlias#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy);
     }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_CourseCoordinatorTemplate").DisplayDeleteConfirmation(false))
           .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>))

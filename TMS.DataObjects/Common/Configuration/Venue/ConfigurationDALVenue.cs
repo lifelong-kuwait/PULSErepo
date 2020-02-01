@@ -87,7 +87,18 @@ namespace TMS.DataObjects.Common.Configuration
             }
             return Venue.ToList();
         }
-
+        /// <summary>
+        /// Venues the create dal.
+        /// </summary>
+        /// <param name="_Venues">The venues.</param>
+        /// <returns>System.Int64.</returns>
+        public long VenuesForDestroy_GetAllDAL(long _Venues)
+        {
+            var parameters = new[] { ParamBuilder.Par("Count", 0) };
+            return ExecuteInt64withOutPutparameterSp("Venue_Delete_Cheque", parameters,
+                    ParamBuilder.Par("VenueID", _Venues)
+                    );
+        }
         /// <summary>
         /// Venues the create dal.
         /// </summary>
@@ -303,6 +314,10 @@ namespace TMS.DataObjects.Common.Configuration
                 {
                     case -1:
                         return ExecuteListSp<DDlList>("Venues_ForCourseGetAllByCulturebyOrg", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OrganizationID", CompnayID));
+                    case 3:
+                        return ExecuteListSp<DDlList>("Venues_ForCourseGetAllByCulturebyOrg", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OrganizationID", CompnayID));
+                    case 2:
+                        return ExecuteListSp<DDlList>("Venues_ForCourseGetAllByCulturebyOrg", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OrganizationID", CompnayID));
 
                     default:
                         return ExecuteListSp<DDlList>("Venues_ByOpenIdAndTypeAndCulturebyOrg", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OpenId", OpenId), ParamBuilder.Par("OpenType", OpenType), ParamBuilder.Par("OrganizationID", CompnayID));
@@ -314,12 +329,30 @@ namespace TMS.DataObjects.Common.Configuration
                 {
                     case -1:
                         return ExecuteListSp<DDlList>("Venues_ForCourseGetAllByCulture", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OrganizationID", CompnayID));
+                    case 3:
+                        return ExecuteListSp<DDlList>("Venues_ForCourseGetAllByCulturebyOrg", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OrganizationID", CompnayID));
+                    case 2:
+                        return ExecuteListSp<DDlList>("Venues_ForCourseGetAllByCulturebyOrg", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OrganizationID", CompnayID));
 
                     default:
                         return ExecuteListSp<DDlList>("Venues_ByOpenIdAndTypeAndCulture", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OpenId", OpenId), ParamBuilder.Par("OpenType", OpenType), ParamBuilder.Par("OrganizationID", CompnayID));
                 }
             }
            
+        }
+        /// <summary>
+        /// Venues the get all by culture dal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <param name="OpenType">Type of the open.</param>
+        /// <param name="OpenId">The open identifier.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
+        public IList<DDlList> Venues_GetAllByClassDAL(string culture, int OpenType, long OpenId, long CompnayID)
+        {
+           
+                return ExecuteListSp<DDlList>("VenueOpenMapping_GetByClassVenues", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OpenId", OpenId), ParamBuilder.Par("OpenType", 3));
+            
+
         }
 
         public IList<DDlList> Venues_GetAllByCultureDAL(string culture, long CompnayID)

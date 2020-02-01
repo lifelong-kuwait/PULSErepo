@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CoursePeriodicReport.aspx.cs" Inherits="TMS.Web.Views.Report.Pages.CoursePeriodicReport" %>
+<%@ Register Src="~/Views/Report/SpLReports/UserControls/VenueMatrixUserControl.ascx" TagPrefix="uc1" TagName="VenueMatrixUserControl" %>
 
-<%@ Register Src="~/Views/Report/UserControls/UCCoursePeriodicReport.ascx" TagPrefix="uc1" TagName="UCCoursePeriodicReport" %>
 
 
 <!DOCTYPE html>
@@ -11,8 +11,8 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
-        <uc1:UCCoursePeriodicReport runat="server" ID="UCCoursePeriodicReport" />
+      <div class="col-md-5" style="height: 700px;width:800px;">
+          <uc1:VenueMatrixUserControl runat="server" id="VenueMatrixUserControl" />
     </div>
     </form>
 </body>

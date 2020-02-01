@@ -28,7 +28,7 @@ namespace TMS.Business.Interfaces.Admin
         /// <param name="PageSize">Size of the page.</param>
         /// <param name="Total">The total.</param>
         /// <returns>IList&lt;TMSResource&gt;.</returns>
-        IList<TMSResource> GetTMSResourceBAL(int Page, int PageSize, ref int Total, string SearchText);
+        IList<TMSResource> GetTMSResourceBAL(int Page, int PageSize, ref int Total, string SearchText,string Oids);
         /// <summary>
         /// Gets the TMS resource bal.
         /// </summary>

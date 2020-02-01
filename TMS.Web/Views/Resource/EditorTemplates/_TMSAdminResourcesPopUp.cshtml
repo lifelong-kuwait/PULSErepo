@@ -13,7 +13,7 @@
         @Html.LabelFor(model => model.Name)
     </div>
     <div class="editor-field">
-        @Html.Kendo().TextBoxFor(model => model.Name).HtmlAttributes(new { @style = "width:100%" })
+        @Html.Kendo().TextBoxFor(model => model.Name).HtmlAttributes(new { @style = "width:100%",@disabled= "disabled" })
         @Html.ValidationMessageFor(model => model.Name)
     </div>
     <div class="editor-label">

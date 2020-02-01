@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using TMS.Library.Entities.CRM;
+using TMS.Library.Entities.TMS.Persons;
 using TMS.Library.Entities.TMS.Program;
 using TMS.Library.TMS.Persons;
 using TMS.Library.TMS.Persons.Others;
@@ -32,7 +33,12 @@ namespace TMS.Business.Interfaces.TMS
         /// <param name="_objPerson">The object person.</param>
         /// <returns>PersonResponse.</returns>
         PersonResponse PersonInsertNewPersonBAL(Person _objPerson,long RoeID);
-
+        /// <summary>
+        /// Persons the insert new person bal.
+        /// </summary>
+        /// <param name="_objPerson">The object person.</param>
+        /// <returns>PersonResponse.</returns>
+        List<PersonBarData> PersonBarBAL(DateTime startdate, DateTime lastdate,long CompanyId);
         PersonResponse ProspectInsertNewPersonBAL(Person _objPerson, long RoeID = 3);
 
         int Loginperson_DuplicationCheckBAL(Person _objPerson);
@@ -71,8 +77,8 @@ namespace TMS.Business.Interfaces.TMS
         /// <returns>System.Int32.</returns>
         int Person_UpdateBAL(Person _objPerson);
 
-     //  int Prospect_UpdateBAL(Person _objPerson);
-
+        //  int Prospect_UpdateBAL(Person _objPerson);
+        int ManageCourse_Assigned(long PID);
         /// <summary>
         /// Persons the delete bal.
         /// </summary>
@@ -132,7 +138,13 @@ namespace TMS.Business.Interfaces.TMS
         /// <param name="_objPersonRoles">The object person roles.</param>
         /// <returns>System.Int64.</returns>
         long TMS_PersonintoUser_CreateBAL(PersonRolesMapping _objPersonRoles);
-       // int LoginPerson_DuplicationCheckBAL(Person person);
+        /// <summary>
+        /// TMSs the person roles mapping create bal.
+        /// </summary>
+        /// <param name="_objPersonRoles">The object person roles.</param>
+        /// <returns>System.Int64.</returns>
+        int TMS_PersonintoUser_DestroyBAL(Person _objPersonRoles);
+        // int LoginPerson_DuplicationCheckBAL(Person person);
 
         /// <summary>
         /// TMSs the person roles mapping update bal.
@@ -247,7 +259,7 @@ namespace TMS.Business.Interfaces.TMS
 
 
         int ManageScheduledClasses_UpdateBAL(CRM_classPersonMapping _mapping);
-
+        int ManageScheduledClasses_DublicationBAL(CRM_classPersonMapping _mapping);
         int ManageScheduledClasses_DeleteBAL(CRM_classPersonMapping _mapping);
 
         #endregion ScheduledClasses
@@ -279,8 +291,9 @@ namespace TMS.Business.Interfaces.TMS
 
         #endregion Record Visit    
 
-
+        IList<DDlList> GetCourseFromTimeSpanDALBAL(DateTime startDate, DateTime endDate,long userID);
         int ManageCourse_DuplicationCheckBAL(CRM_CourseMapping _mapping);
+        int ManageCourseCategory_DuplicationCheckBAL(CRM_CourseCategoryMapping _mapping);
         int ManageScheduleCourse_DuplicationCheckBAL(CRM_classPersonMapping _mapping);
         
     }

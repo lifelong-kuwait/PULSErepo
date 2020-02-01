@@ -46,7 +46,8 @@ namespace TMS.Web.Controllers
             {
                 if (this._PersonEducationBAL.Degree_DuplicationCheckBAL(_personDegree) > 0)
                 {
-                    return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
+                    ModelState.AddModelError(lr.EducationEducationDublication, lr.EducationEducationDublication);
+                    // return Json(lr.DegreeCertificatesPrimaryNameDuplicate, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
@@ -67,12 +68,22 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _personDegree.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                _personDegree.UpdatedDate = DateTime.Now;
-                var result = _PersonEducationBAL.PersonEducationDegrees_UpdateBAL(_personDegree);
-                if (result == -1)
+                if (this._PersonEducationBAL.Degree_DuplicationCheckBAL(_personDegree) > 0)
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    ModelState.AddModelError(lr.EducationEducationDublication, lr.EducationEducationDublication);
+                    // return Json(lr.DegreeCertificatesPrimaryNameDuplicate, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+
+
+                    _personDegree.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                    _personDegree.UpdatedDate = DateTime.Now;
+                    var result = _PersonEducationBAL.PersonEducationDegrees_UpdateBAL(_personDegree);
+                    if (result == -1)
+                    {
+                        ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    }
                 }
             }
             var resultData = new[] { _personDegree };
@@ -193,7 +204,7 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorize("CanViewPersonTrainingHistory")]
         public ActionResult PersonTrainingDelivered_Read([DataSourceRequest] DataSourceRequest request, string PersonID)
         {
-            var _person = _PersonEducationBAL.PersonEducationTrainings_GetAllByPersonIDBAL(PersonID,(int)TrainingType.TrainingType_Existing);
+            var _person = _PersonEducationBAL.PersonEducationTrainings_GetAllByPersonIDBAL(PersonID, (int)TrainingType.TrainingType_Existing);
             return Json(_person.ToDataSourceResult(request, ModelState));
         }
 
@@ -204,20 +215,30 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var _person = _PersonEducationBAL.PersonEducationTrainings_GetAllByPersonIDBAL(pid, (int)TrainingType.TrainingType_Existing);
+                var _personExist = _person.Where(x => x.TrainingP_Title == _personTrainingDelivered.TrainingP_Title).ToList();
+                if (_personExist.Count>0)
+                {
+                    ModelState.AddModelError(lr.TrainingTitleAllreadyExists, lr.TrainingTitleAllreadyExists);
 
+                }
+                else
+                {
                     _personTrainingDelivered.CreatedBy = CurrentUser.NameIdentifierInt64;
                     _personTrainingDelivered.CreatedDate = DateTime.Now;
                     _personTrainingDelivered.PersonID = Convert.ToInt64(pid);
                     _personTrainingDelivered.TrainingType = TrainingType.TrainingType_Existing;
-                   var result= _PersonEducationBAL.PersonEducationTrainings_CreateBAL(_personTrainingDelivered);
-                if(result==-1)
-                {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.PersonEducationCertificationsDuplicationMessage);
+                    var result = _PersonEducationBAL.PersonEducationTrainings_CreateBAL(_personTrainingDelivered);
+                    if (result == -1)
+                    {
+                        ModelState.AddModelError(lr.ErrorServerError, lr.PersonEducationCertificationsDuplicationMessage);
+                    }
+                    else
+                    {
+                        _personTrainingDelivered.ID = result;
+                    }
                 }
-                else
-                {
-                    _personTrainingDelivered.ID = result;
-                }
+               
             }
             var resultData = new[] { _personTrainingDelivered };
             return Json(resultData.ToDataSourceResult(request, ModelState));
@@ -230,13 +251,37 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _personTrainingDelivered.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                _personTrainingDelivered.UpdatedDate = DateTime.Now;
-                _personTrainingDelivered.TrainingType = TrainingType.TrainingType_Existing;
-                var result = _PersonEducationBAL.PersonEducationTrainings_UpdateBAL(_personTrainingDelivered);
-                if (result == -1)
+                var _person = _PersonEducationBAL.PersonEducationTrainings_GetAllByPersonIDBAL(_personTrainingDelivered.PersonID.ToString(), (int)TrainingType.TrainingType_Existing);
+                var _personExist = _person.Where(x => x.TrainingP_Title == _personTrainingDelivered.TrainingP_Title).ToList();
+                if (_personExist.Count > 1)
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    ModelState.AddModelError(lr.TrainingTitleAllreadyExists, lr.TrainingTitleAllreadyExists);
+
+                }
+                else
+                {
+                    if(_personExist.Count <=1)
+                    {
+                        var _personTrainingTitle = _personExist.Where(x => x.ID == _personTrainingDelivered.ID).ToList();
+                        if(_personTrainingTitle.Count==1|| _personTrainingTitle.Count == 0)
+                        {
+                            _personTrainingDelivered.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                            _personTrainingDelivered.UpdatedDate = DateTime.Now;
+                            _personTrainingDelivered.TrainingType = TrainingType.TrainingType_Existing;
+                            var result = _PersonEducationBAL.PersonEducationTrainings_UpdateBAL(_personTrainingDelivered);
+                            if (result == -1)
+                            {
+                                ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                            }
+                        }else
+                        {
+                            ModelState.AddModelError(lr.TrainingTitleAllreadyExists, lr.TrainingTitleAllreadyExists);
+
+                        }
+
+                    }
+
+                  
                 }
             }
             var resultData = new[] { _personTrainingDelivered };
@@ -279,7 +324,7 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorize("CanViewWorkExperience")]
         public ActionResult PersonWorkExperience_Read([DataSourceRequest] DataSourceRequest request, string PersonID)
         {
-            var _person = _PersonEducationBAL.PersonEducationWorkExperiences_GetAllByPersonID(PersonID,CurrentCulture);
+            var _person = _PersonEducationBAL.PersonEducationWorkExperiences_GetAllByPersonID(PersonID, CurrentCulture);
             return Json(_person.ToDataSourceResult(request, ModelState));
         }
 
@@ -294,6 +339,17 @@ namespace TMS.Web.Controllers
             if (_personWorkExperiences.IsCurrent) { _personWorkExperiences.EndTimePeriod = startOfMonth; }
             if (ModelState.IsValid)
             {
+                if(_personWorkExperiences.IsCurrent==false)
+                {
+                    int result = DateTime.Compare(_personWorkExperiences.StartTimePeriod, _personWorkExperiences.EndTimePeriod);
+                    if(result==1)
+                    {
+                        ModelState.AddModelError(lr.StartandEndDateConflict, lr.StartandEndDateConflict);
+                    }
+
+                }
+
+
                 if (_personWorkExperiences.OrganizationID == -1)
                 {
                     _personWorkExperiences.CreatedBy = CurrentUser.NameIdentifierInt64;
@@ -330,20 +386,20 @@ namespace TMS.Web.Controllers
                         else
                         {
                             _personWorkExperiences.ID = result;
-                        }   
+                        }
                     }
                     else
                     {
                         ModelState.AddModelError(lr.PersonEducationWorkExperiencesTimePeriod, lr.PersonEducationWorkExperiencesTwoJobCheck);
                     }
                 }
-                
+
             }
             var resultData = new[] { _personWorkExperiences };
             return Json(resultData.ToDataSourceResult(request, ModelState));
         }
 
-        
+
         [DontWrapResult]
         [ActivityAuthorize]
         [ClaimsAuthorize("CanAddEditWorkExperience")]
@@ -352,11 +408,20 @@ namespace TMS.Web.Controllers
             if (_personWorkExperiences.IsCurrent) { _personWorkExperiences.EndTimePeriod = DateTime.Now; }
             if (ModelState.IsValid)
             {
+                if (_personWorkExperiences.IsCurrent == false)
+                {
+                    int result1 = DateTime.Compare(_personWorkExperiences.StartTimePeriod, _personWorkExperiences.EndTimePeriod);
+                    if (result1 == 1)
+                    {
+                        ModelState.AddModelError(lr.StartandEndDateConflict, lr.StartandEndDateConflict);
+                    }
+
+                }
                 _personWorkExperiences.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _personWorkExperiences.UpdatedDate = DateTime.Now;
                 if (_personWorkExperiences.OrganizationID == -1)
                 { _personWorkExperiences.OrganizationID = 0; }
-                
+
                 var result = _PersonEducationBAL.PersonEducationWorkExperiences_UpdateDAL(_personWorkExperiences);
                 if (result == -1)
                 {
@@ -367,7 +432,7 @@ namespace TMS.Web.Controllers
             return Json(resultData.AsQueryable().ToDataSourceResult(request, ModelState));
         }
 
-        
+
         [DontWrapResult]
         [ActivityAuthorize]
         [ClaimsAuthorize("CanDeleteWorkExperience")]
@@ -507,7 +572,7 @@ namespace TMS.Web.Controllers
                     _personTrainingDelivered.CreatedBy = CurrentUser.NameIdentifierInt64;
                     _personTrainingDelivered.CreatedDate = DateTime.Now;
                     _personTrainingDelivered.PersonID = Convert.ToInt64(pid);
-                   
+
                     var result = _PersonEducationBAL.PersonEducationSuggestedTrainings_CreateBAL(_personTrainingDelivered);
                     if (result == -1)
                     {

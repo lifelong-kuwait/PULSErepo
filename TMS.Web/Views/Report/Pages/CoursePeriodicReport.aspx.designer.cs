@@ -22,12 +22,12 @@ namespace TMS.Web.Views.Report.Pages {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// UCCoursePeriodicReport control.
+        /// VenueMatrixUserControl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::TMS.Web.Views.Report.UserControls.UCCoursePeriodicReport UCCoursePeriodicReport;
+        protected global::TMS.Web.Views.Report.SpLReports.UserControls.VenueMatrixUserControl VenueMatrixUserControl;
     }
 }

@@ -86,15 +86,25 @@
     <div class=''>
         <div class=''>
             <p>
-                <span class="heading">
-                    <b>
-                        #:data.ClassName#
-                    </b>
+                <label>
+
+                    Class Code :
+                </label>
+                <span>
+                    #:data.ClassName#
                 </span>
             </p>
             <p>
                 <label>
-                    #:lr.ClassType#:
+                    Class Name :
+                </label>
+                <span class="heading">
+                    #:data.PrimaryClassTitle#
+                </span>
+            </p>
+            <p>
+                <label>
+                    Class Type :
                 </label>
                 <span>
                     #:enumvalue(data.ClassTypeID,enumClassType)#
@@ -102,23 +112,23 @@
             </p>
             <p>
                 <label>
-                    #:lr.ClassCourse#:
+                    Course Name:
                 </label>
                 <span>
                     #:data.CourseName#
                 </span>
             </p>
-            <p>
+            @*<p>
                 <label>
-                    #:lr.ClassFee#:
+                   Class Fee
                 </label>
                 <span>
                     #:data.ClassFee#  (#:enumvalue(data.FeeCurrency,enumClassFeeCurrency)#)
                 </span>
-            </p>
+            </p>*@
             <p>
                 <label>
-                    #:lr.ClassDates#:
+                    Class Dates :
                 </label>
                 <label>
                     #=kendo.toString(data.StartDate, '@DateFormatScript')# - #=kendo.toString(data.EndDate, '@DateFormatScript')#

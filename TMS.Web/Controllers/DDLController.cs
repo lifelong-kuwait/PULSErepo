@@ -2,30 +2,44 @@
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using TMS.Business.Common.DDL;
 using TMS.Business.Interfaces.Common.Configuration;
 using TMS.Business.Interfaces.Common.DDL;
 using TMS.Business.Interfaces.TMS.Organization;
+using TMS.Business.Interfaces.TMS.Program;
+using TMS.Library;
+using TMS.Web.Core;
+using static TMS.UtilityFunctions;
 using lr = Resources.Resources;
 
 namespace TMS.Web.Controllers
 {
+    
     public class DDLController : TMSControllerBase
     {
         public readonly IOrganizationBAL _objeobjIOrganizationBAL = null;//For the Resorces Table Interface
         public readonly IDDLBAL _objIDDLBAL = null;//For the Resorces Table Interface
         public readonly IConfigurationBAL _objIConfigBAL = null;//For the Resorces Table Interface
-
-        public DDLController(IOrganizationBAL objIOrganizationBAL, IDDLBAL ObjDDLBAL, IConfigurationBAL ObjConfigBAL)
+        DDLBAL ddl = new DDLBAL();
+        private readonly IClassBAL _ClassBAL;
+        public DDLController(IOrganizationBAL objIOrganizationBAL, IClassBAL IClassBAL, IDDLBAL ObjDDLBAL, IConfigurationBAL ObjConfigBAL)
         {
             _objeobjIOrganizationBAL = objIOrganizationBAL;
             _objIDDLBAL = ObjDDLBAL;
             _objIConfigBAL = ObjConfigBAL;
+            _ClassBAL = IClassBAL;
         }
 
         [DontWrapResult]
         public JsonResult Organization()
         {
             return Json(_objeobjIOrganizationBAL.OrganizationAllbyCultureBAL(CurrentCulture), JsonRequestBehavior.AllowGet);
+        }
+        [DontWrapResult]
+        public JsonResult OrganizationForTrainer(string email)
+        {
+            var x = _objeobjIOrganizationBAL.OrganizationAllForTrainerbyCultureBAL(CurrentCulture, email);
+            return Json(x, JsonRequestBehavior.AllowGet);
         }
 
         [DontWrapResult]
@@ -62,7 +76,12 @@ namespace TMS.Web.Controllers
             _SessionList = Utility.FillDropDownRecentYears(ConfiguredYear);
             return Json(_SessionList, JsonRequestBehavior.AllowGet);
         }
-
+        [DontWrapResult]
+        public JsonResult CertificateDDL()
+        {
+           var _SessionList = _objeobjIOrganizationBAL.CertificatesByOiDBAL(Convert.ToInt64(CurrentUser.CompanyID));
+            return Json(_SessionList, JsonRequestBehavior.AllowGet);
+        }
         #endregion "Course"
 
         #region Course Language
@@ -133,7 +152,13 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public JsonResult CountryCode()
         {
-            return Json(_objIDDLBAL.CountryCode_GetAllByCultureBAL(CurrentCulture), JsonRequestBehavior.AllowGet);
+            DDlList obj = new DDlList();
+            obj.Text = "Not Selected";
+            obj.Value = -1;
+            obj.Selected = true;
+            var value = _objIDDLBAL.CountryCode_GetAllByCultureBAL(CurrentCulture);
+            value.Insert(0,obj);
+            return Json(value, JsonRequestBehavior.AllowGet);
         }
 
         [DontWrapResult]
@@ -179,7 +204,8 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public JsonResult CRM_Classes()
         {
-            return Json(_objIDDLBAL.CRMClasses(CurrentCulture,CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
+            var CrmClasses = _objIDDLBAL.CRMClasses(CurrentCulture, CurrentUser.CompanyID);
+            return Json(CrmClasses, JsonRequestBehavior.AllowGet);
         }
         [DontWrapResult]
         public JsonResult CRM_Courses()
@@ -201,7 +227,7 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public JsonResult UserAll()
         {
-            return Json(_objIDDLBAL.UserGetAllforDDL_BAL(), JsonRequestBehavior.AllowGet);
+            return Json(_objIDDLBAL.UserGetAllforDDL_BAL(CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
         }
 
         [DontWrapResult]
@@ -295,9 +321,21 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public JsonResult Course()
         {
-            return Json(_objIDDLBAL.Courses_GetAllByCultureBAL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
+            var list = this._ClassBAL.personRoleGroups(CurrentUser.NameIdentifierInt64);
+            long PersonId = 0;
+            if (list.Count == 1 && list[0].PrimaryGroupName == "Trainer")
+            {
+                PersonId = CurrentUser.NameIdentifierInt64;
+            }
+            return Json(_objIDDLBAL.Courses_GetAllByCultureBAL(CurrentCulture, CurrentUser.CompanyID, PersonId), JsonRequestBehavior.AllowGet);
         }
-
+        [DontWrapResult]
+        public JsonResult Classes()
+        {
+            return Json(_objIDDLBAL.ClassDDLBAL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
+        }
+      
+           
         #endregion Class
 
         #region SystemDefined Languages
@@ -305,12 +343,20 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public JsonResult Lang() => Json(_objIDDLBAL.ProgramLanguages_GetAllByCultureBAL(CurrentCulture), JsonRequestBehavior.AllowGet);
 
+        [DontWrapResult]
+        public JsonResult LanguageDDL(long courseId) => Json(_objIDDLBAL.ProgramLanguages_GetAllByCourseCultureBAL(Convert.ToString( courseId)), JsonRequestBehavior.AllowGet);
+        [DontWrapResult]
+        public JsonResult LanguageClassDDL(long ClassID) => Json(_objIDDLBAL.ProgramLanguages_GetAllByClassCultureBAL(Convert.ToString(ClassID)), JsonRequestBehavior.AllowGet);
+
         public ActionResult LangData() => PartialView("DropDownData", _objIDDLBAL.ProgramLanguages_GetAllByCultureBAL(CurrentCulture));
 
         #endregion SystemDefined Languages
 
         [DontWrapResult]
         public JsonResult Venues(int OpenType, long OpenId) => Json(_objIConfigBAL.Venues_GetAllByCultureBAL(CurrentCulture, OpenType, OpenId, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
+       
+        [DontWrapResult]
+        public JsonResult VenuesForClass(int OpenType, long OpenId) => Json(_objIConfigBAL.Venues_GetAllByClassBAL(CurrentCulture, OpenType, OpenId, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
 
         [DontWrapResult]
         public JsonResult ClasesbyCourseId()
@@ -324,24 +370,46 @@ namespace TMS.Web.Controllers
             return Json(_objIDDLBAL.Classes_ByCourseIdAndCultureBAL(CurrentCulture, CourseId, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
         }
 
+
         [DontWrapResult]
         public JsonResult Roles() => Json(_objIDDLBAL.Roles_GetAllByCultureBAL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
         [DontWrapResult]
         public JsonResult Trainer(int OpenType, long OpenId) => Json(_objIConfigBAL.ManageTrainer_GetAllByCultureBAL(CurrentCulture, OpenType, OpenId, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
+        [DontWrapResult]
+        public JsonResult VenueByClassId(int OpenType, long OpenId) => Json(_objIConfigBAL.ManageVenue_GetAllByCultureBAL(CurrentCulture, OpenType, OpenId, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
+
+        [DontWrapResult]
+        public JsonResult DDLTrainer() => Json(ddl.TrainerDDLBAL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
+        [DontWrapResult]
+        public JsonResult DDLVenue() => Json(ddl.VenueDDLBAL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
+        [DontWrapResult]
+        public JsonResult GetAllCourseCategories()
+        {
+            return Json(ddl.GetAllCourseCategories(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
+        }
+        [DontWrapResult]
+        public JsonResult ClassTypeDDL ()
+        {
+            return Json(EnumManager.GetEnumCollection(typeof(ClassType)), JsonRequestBehavior.AllowGet);
+        }
         //
-        //
+
         [DontWrapResult]
         public JsonResult CourseLogistic() => Json(_objIConfigBAL.CourseLogistic_GetAllByCultureBALL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
-    //    [DontWrapResult]
+        //    [DontWrapResult]
         //public JsonResult CourseLogistic()
         //{
         //    var logistic = _objIConfigBAL.CourseLogistic_GetAllByCultureBALL(CurrentCulture, CurrentUser.CompanyID);
         //  return  Json(logistic, JsonRequestBehavior.AllowGet);
-        //}
-            
+        //}ddl.Class_TraineeDDLBAL(CurrentCulture, CompanyID, Convert.ToInt64(DdlClass.SelectedValue)
+        //[DontWrapResult]
+        //public JsonResult ClassTrainer() => Json(ddl.Class_TraineeDDLBAL(CurrentCulture, CurrentUser.CompanyID,), JsonRequestBehavior.AllowGet);
+
 
         [DontWrapResult]
         public JsonResult CourseMeterial() => Json(_objIConfigBAL.CourseMeterial_GetAllByCultureBAL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
+        [DontWrapResult]
+        public JsonResult PersonsForInvoice() => Json(_objIConfigBAL.PersonsForInvoice_GetAllByCultureBAL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
 
     }
 }

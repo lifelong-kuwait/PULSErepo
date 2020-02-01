@@ -11,9 +11,15 @@
             .HtmlAttributes(new { style = "width:100%" })
             .DataTextField("Text")
             .DataValueField("Value")
+            .Filter("contains")
                      .OptionLabel(lr.PointofContactPersonOptionalLabel)
-          // .OptionLabel(new { Text = lr.PointofContactPersonOptionalLabel, Value = 0 })
-                            .DataSource(dataSource => { dataSource.Read(read => read.Action("UserAll", "DDL")); }))
+                            // .OptionLabel(new { Text = lr.PointofContactPersonOptionalLabel, Value = 0 })
+                            .DataSource(dataSource => {
+                                dataSource.Read(
+                                    read =>
+                                    { read.Action("UserAll", "DDL");
+                                    }).ServerFiltering(false);
+                            }))
             @Html.ValidationMessageFor(model => model.PersonID)
         </div>
     </div>

@@ -168,7 +168,7 @@ namespace TMS.Library.TMS.Education
             Session = dr.GetString("Session");
             Duration = dr.GetInt32("Duration");
             Major = dr.GetString("Major");
-            DegreeStatus = (DegreeStatus)dr.GetInt32("DegreeStatus");
+            DegreeStatus = (DegreeStatus)dr.GetByte("DegreeStatus");
             Description = dr.GetString("Description");
             CreatedBy = dr.GetInt64("CreatedBy");
             UpdatedBy = dr.GetInt64("UpdatedBy");

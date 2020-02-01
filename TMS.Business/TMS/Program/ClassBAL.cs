@@ -77,7 +77,16 @@ namespace TMS.Business.TMS.Program
         {
             return _ClassDAL.TMS_ClassesByOrganization_GetAllDAL(CourseId, StartRowIndex, PageSize, ref Total, SortExpression, SearchText,Oid);
         }
+        
+        public List<Classes> TMS_ClassesAllByOrganization_GetAllBAL(long CourseId, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText, string Oid, long PersonId)
+        {
+            return _ClassDAL.TMS_ClassesAllByOrganization_GetAllDAL(CourseId, StartRowIndex, PageSize, ref Total, SortExpression, SearchText, Oid,PersonId);
+        }
+        public List<PersonRoleGroup> personRoleGroups(long UserID)
+        {
+            return _ClassDAL.personRoleGroupsDAL(UserID);
 
+        }
         public List<Classes> TMS_TrainerClasses_GetByIdBAL(long id, ref int Total)
         {
             return _ClassDAL.TMS_TrainerClasses_GetAllDAL(id,ref Total);
@@ -129,12 +138,21 @@ namespace TMS.Business.TMS.Program
 
         /// <summary>
         /// TMSs the classes update bal.
-        /// </summary>
+        /// </summary>;
         /// <param name="_Classes">The classes.</param>
         /// <returns>System.Int32.</returns>
         public int TMS_Classes_UpdateBAL(Classes _Classes)
         {
             return _ClassDAL.TMS_Classes_UpdateDAL(_Classes);
+        }
+        /// <summary>
+        /// TMSs the classes update bal.
+        /// </summary>int TMS_Classes_SessionCount(int _ClassesID);
+        /// <param name="_Classes">The classes.</param>
+        /// <returns>System.Int32.</returns>
+        public int TMS_Classes_SessionCountBAL(long _ClassesID)
+        {
+            return _ClassDAL.TMS_Classes_SessionCountDAL(_ClassesID);
         }
         /// <summary>
         /// TMSs the classes delete dal.
@@ -173,6 +191,10 @@ namespace TMS.Business.TMS.Program
         public IList<ClassTraineeMapping> ClassTraineeMapping_GetAllBALOrganization(string Culture, long ClassID, long CompnayID)
         {
             return _ClassDAL.ClassTraineeMapping_GetAllDALOrganization(Culture, ClassID,CompnayID);
+        }
+        public IList<ClassTraineeMappingCertificatePrint> ClassTraineeMappingCertificate_GetAllBALOrganization(string Culture, long ClassID, long CompnayID,long CertificateID)
+        {
+            return _ClassDAL.ClassTraineeMappingCertificate_GetAllBALOrganizationDAL(Culture, ClassID, CompnayID,CertificateID);
         }
         /// <summary>
         /// Trainers the get all except class trainer bal.

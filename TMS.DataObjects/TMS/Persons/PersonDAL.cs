@@ -26,6 +26,9 @@ using TMS.Library.Entities.Common.Configuration.Venues;
 using System.Data.Common;
 using TMS.Library.Entities.TMS.Program;
 using TMS.Library.Entities.CRM;
+using TMS.Library.ModelMapper;
+using TMS.Library.Entities.TMS.Persons;
+using TMS.Library.TMS.Organization;
 
 namespace TMS.DataObjects.TMS
 {
@@ -40,6 +43,7 @@ namespace TMS.DataObjects.TMS
         /// Persons the get alldal.
         /// </summary>
         /// <returns>IList&lt;Person&gt;.</returns>
+        private string ConnectionString = DBHelper.ConnectionString;
         public IList<Person> Person_GetALLDAL(int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText)
         {
             List<Person> Person = new List<Person>();
@@ -254,7 +258,34 @@ namespace TMS.DataObjects.TMS
             CustomGenerics.CustomGenerics _obj = new CustomGenerics.CustomGenerics();
             return _obj.InsertRecordPersonReturnObject(_objPerson, clientType, RoleID);
         }
+        /// <summary>
+        /// Persons the insert new person dal.
+        /// </summary>
+        /// <param name="_objPerson">The object person.</param>
+        /// <param name="clientType">Type of the client.</param>
+        /// <returns>PersonResponse.</returns>
+        public List<PersonBarData> PersonBarBALDAL(DateTime startdate, DateTime lastdate,long CompanyId)
+        {
+            var _PersonData = ExecuteListSp<PersonBarData>("PersonTrainerTraineeData", ParamBuilder.Par("monthstart", startdate), ParamBuilder.Par("monthEndDate", lastdate), ParamBuilder.Par("CompanyId", CompanyId));
+            return _PersonData.ToList();
+            //List<PersonBarData> _PersonData = new List<PersonBarData>();
+            //var date = DateTime.Now.ToString("yyyy-MM-dd") + " " + CommonUtility.PersonFlagsClearingTime();
+            //using (var conn = new SqlConnection(DBHelper.ConnectionString))
+            //{
+            //    conn.Open();
+            //    DynamicParameters dbParam = new DynamicParameters();
+            //    dbParam.AddDynamicParams(new { monthstart = startdate, monthEndDate = lastdate, });
+            //    using (var multi = conn.QueryMultiple("PersonTrainerTraineeData", dbParam, commandType: System.Data.CommandType.StoredProcedure))
+            //    {
+            //        _PersonData = multi.Read<PersonBarData>().AsList<PersonBarData>();
 
+            //    }
+
+            //    conn.Close();
+            //}
+            //return _PersonData.ToList();
+        }
+       
 
         public PersonResponse ProspectInsertNewPersonDAL(Person _objPerson, string clientType, long RoleID)
         {
@@ -310,7 +341,7 @@ namespace TMS.DataObjects.TMS
                             ParamBuilder.Par("ClientType", _objPerson.ClientType),
                             ParamBuilder.Par("UpdatedBy", _objPerson.UpdatedBy),
                             ParamBuilder.Par("UpdatedDate", _objPerson.UpdatedDate),
-                            ParamBuilder.Par("IsActive", _objPerson.IsActive),
+                            ParamBuilder.Par("IsActive", true),
                             ParamBuilder.Par("UserID", _objPerson.UserID),
                             ParamBuilder.Par("AdditionalComments", _objPerson.AdditionalComments),
                             ParamBuilder.Par("IsOnline", _objPerson.IsOnline),
@@ -330,7 +361,8 @@ namespace TMS.DataObjects.TMS
         {
             return ExecuteScalarSPInt32("TMS_Person_Delete",
                            // ParamBuilder.OutPar("IsDeleted" ,_objPerson.IsDeleted),
-                           ParamBuilder.Par("ID", _objPerson.ID),
+                           ParamBuilder.Par("ID", _objPerson.ID), 
+                            ParamBuilder.Par("EmailId", _objPerson.EmailID),
                            ParamBuilder.Par("UpdatedBy", _objPerson.UpdatedBy),
                            ParamBuilder.Par("UpdatedDate", _objPerson.UpdatedDate));
         }
@@ -354,7 +386,7 @@ namespace TMS.DataObjects.TMS
         {
             return ExecuteListSp<PersonRelation>("TMS_PersonRelationToPerson_GetbyPersonId", ParamBuilder.Par("PersonID", PersonID));
         }
-
+       
         /// <summary>
         /// Persons the relation to person create dal.
         /// </summary>
@@ -444,8 +476,11 @@ namespace TMS.DataObjects.TMS
         public long TMS_PersonintoUser_CreateDAL(PersonRolesMapping _objPersonRoles)
         {
             Person obj = Person_GetAllByIdDAL(Convert.ToString(_objPersonRoles.PersonID));
-
-            var parameters = new[] { ParamBuilder.Par("UserID", 0) };
+            if (obj.NickName==null)
+            {
+                obj.NickName = "";
+            }
+                var parameters = new[] { ParamBuilder.Par("UserID", 0) };
             return ExecuteInt64withOutPutparameterSp("TMS_PersontoUser_Create", parameters,
                 ParamBuilder.Par("P_FirstName", obj.P_FirstName),
                 ParamBuilder.Par("P_MiddleName", obj.P_MiddleName),
@@ -461,6 +496,7 @@ namespace TMS.DataObjects.TMS
                 ParamBuilder.Par("IsActive", 1),
                 ParamBuilder.Par("CompanyID", obj.OrganizationID),
                 ParamBuilder.Par("DateOfBirth", obj.DateOfBirth),
+               
                 ParamBuilder.Par("NickName", obj.NickName),
                 ParamBuilder.Par("Salutation", obj.SalutationID),
                 ParamBuilder.Par("Gender", obj.Gender),
@@ -472,7 +508,20 @@ namespace TMS.DataObjects.TMS
                 ParamBuilder.Par("CreatedBy", _objPersonRoles.CreatedBy)
                     );
         }
+        /// <summary>
+        /// TMSs the person roles mapping create dal.
+        /// </summary>
+        /// <param name="_objPersonRoles">The object person roles.</param>
+        /// <returns>System.Int64.</returns>
+        public int TMS_PersonintoUser_DestroyDAL(Person obj)
+        {
 
+
+            return ExecuteScalarInt32Sp("TMS_TrainerUserDelete",
+                ParamBuilder.Par("UserID",obj.UserID),
+                ParamBuilder.Par("PersonID", obj.ID)              
+                    );
+        }
         /// <summary>
         /// TMSs the person roles mapping update dal.
         /// </summary>
@@ -488,8 +537,8 @@ namespace TMS.DataObjects.TMS
                         ParamBuilder.Par("PersonID", _objPersonRoles.PersonID),
                         ParamBuilder.Par("Email", obj.Email),
                         ParamBuilder.Par("UpdatedDate", _objPersonRoles.UpdatedDate),
-                        ParamBuilder.Par("UpdatedBy", _objPersonRoles.UpdatedBy),
-                        ParamBuilder.Par("ClientType", _objPersonRoles.ClientType)
+                        ParamBuilder.Par("UpdatedBy", _objPersonRoles.UpdatedBy)
+                       
                     );
         }
 
@@ -501,7 +550,11 @@ namespace TMS.DataObjects.TMS
         public int TMS_PersonRolesMapping_DeleteDAL(PersonRolesMapping _objPersonRoles)
         {
             Person obj = Person_GetAllByIdDAL(Convert.ToString(_objPersonRoles.PersonID));
-
+            if(obj.Email==null)
+            {
+                obj.Email = "";
+            }
+            
             return ExecuteScalarInt32Sp("TMS_PersonRolesMapping_Delete",
                         ParamBuilder.Par("ID", _objPersonRoles.ID),
                         ParamBuilder.Par("RoleID", _objPersonRoles.RoleID),
@@ -569,7 +622,22 @@ namespace TMS.DataObjects.TMS
             }
             return LoginUserAddGroups;// ExecuteListSp<LoginUserAddGroups>("TMS_Groups_GetAllByCulture", ParamBuilder.ParNVarChar("Culture", culture, 5));
         }
-
+        public List<OrganizationModel> GetOrganizationLogoDAL(long OrgID)
+        {
+            List<OrganizationModel> LoginUserAddGroups = new List<OrganizationModel>();
+            var conString = DBHelper.ConnectionString;
+            using (var conn = new SqlConnection(conString))
+            {
+                conn.Open();
+                string qry = @"TMS_Organizations_ProfilePicture";
+                DynamicParameters param = new DynamicParameters();
+                param.Add("@ID", OrgID);
+                LoginUserAddGroups = conn.Query<OrganizationModel>(qry.ToString(), param, commandType: System.Data.CommandType.StoredProcedure).AsList< OrganizationModel>();
+                conn.Close();
+            }
+            return LoginUserAddGroups;// ExecuteListSp<LoginUserAddGroups>("TMS_Groups_GetAllByCulture", ParamBuilder.ParNVarChar("Culture", culture, 5));
+        }
+        
         public DataTable GetTrainerDetailsForReportsDAL(long ClassID, long TrainerID)
         {
             DataTable dt = new DataTable();
@@ -759,7 +827,43 @@ namespace TMS.DataObjects.TMS
             //   return ExecuteDataSet("Tran_Venue_GetVenueOccupancyReports", ParamBuilder.Par("ClassID", ClassID), ParamBuilder.Par("VenueID", VenueID), ParamBuilder.Par("StartDate", StartDate), ParamBuilder.Par("EndDate", EndDate));
 
         }
+        public DataTable GetCertificateReportsDAL(string PersonId, long ClassID, long companyID, string Culture,long currentUser,long CertificateID)
+        {
+            DataTable dt = new DataTable();
+            var conString = DBHelper.ConnectionString;
 
+            SqlCommand cmd = new SqlCommand("TMS_OrganizationForCertificatePrintData");
+            cmd.Parameters.AddWithValue("@ClassID", ClassID);
+            cmd.Parameters.AddWithValue("@PersonID", PersonId);
+            cmd.Parameters.AddWithValue("@OrganizationID", companyID);
+            cmd.Parameters.AddWithValue("@Culture", Culture);
+            cmd.Parameters.AddWithValue("@CurrentUser", currentUser);
+            cmd.Parameters.AddWithValue("@CertificateID", CertificateID);
+            using (SqlConnection con = new SqlConnection(conString))
+            {
+                using (SqlDataAdapter sda = new SqlDataAdapter())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    sda.SelectCommand = cmd;
+                    using (DataSet dsCustomers = new DataSet())
+                    {
+                        sda.Fill(dsCustomers, "Customers");
+                        return dsCustomers.Tables[0];
+                    }
+                }
+
+
+
+                //    return ExecuteDataSet("GetDataForVenueMatrix", ParamBuilder.Par("VenueID", VenueID)).Tables[0];
+
+            }
+
+
+
+            //   return ExecuteDataSet("Tran_Venue_GetVenueOccupancyReports", ParamBuilder.Par("ClassID", ClassID), ParamBuilder.Par("VenueID", VenueID), ParamBuilder.Par("StartDate", StartDate), ParamBuilder.Par("EndDate", EndDate));
+
+        }
         public DataTable GetDataForVenueMatrix(long VenueID)
         {
 
@@ -846,9 +950,9 @@ namespace TMS.DataObjects.TMS
             }
         }
 
-        public DataTable ClassFutureReportDAL(long CurrentCourseCategoryID, DateTime ClassReportStartDateFrom, DateTime ClassReportStartDateTo, int ClassTypeID, bool ShowFutureClasses = false)
+        public DataTable ClassFutureReportDAL(long CurrentCourseCategoryID, DateTime ClassReportStartDateFrom, DateTime ClassReportStartDateTo, int ClassTypeID, bool ShowFutureClasses,long CompanyId)
         {
-
+            ShowFutureClasses = false;
             DataTable dt = new DataTable();
             var conString = DBHelper.ConnectionString;
 
@@ -858,6 +962,7 @@ namespace TMS.DataObjects.TMS
             cmd.Parameters.AddWithValue("@DateFrom", ClassReportStartDateFrom);
             cmd.Parameters.AddWithValue("@DateTo", ClassReportStartDateTo);
             cmd.Parameters.AddWithValue("@ShowFutureClasses", ShowFutureClasses);
+            cmd.Parameters.AddWithValue("@CompanyId", CompanyId);
 
             using (SqlConnection con = new SqlConnection(conString))
             {
@@ -905,14 +1010,43 @@ namespace TMS.DataObjects.TMS
 
             }
         }
+        public DataTable DailyVenueUtalizationReports2DAL(DateTime Startday, DateTime Endday, long venueid)
+        {
+            DataTable dt = new DataTable();
+            var conString = DBHelper.ConnectionString;
 
-        public DataTable DailyUtilizationReportDAL(DateTime day, int type)
+            SqlCommand cmd = new SqlCommand("TMS_Class_WeeklyUtilizationReport2");
+            cmd.Parameters.AddWithValue("@StartDate", Startday);
+            cmd.Parameters.AddWithValue("@EndDate", Endday);
+            cmd.Parameters.AddWithValue("@VenueID", venueid);
+
+
+            using (SqlConnection con = new SqlConnection(conString))
+            {
+                using (SqlDataAdapter sda = new SqlDataAdapter())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    sda.SelectCommand = cmd;
+                    using (DataSet dsCustomers = new DataSet())
+                    {
+                        sda.Fill(dsCustomers, "Customers");
+                        return dsCustomers.Tables[0];
+                    }
+                }
+
+
+            }
+        }
+
+        public DataTable DailyUtilizationReportDAL(DateTime day, int type,long companyID)
         {
             DataTable dt = new DataTable();
             var conString = DBHelper.ConnectionString;
 
             SqlCommand cmd = new SqlCommand("TMS_Class_DailyUtilizationReport");
             cmd.Parameters.AddWithValue("@Date", day);
+            cmd.Parameters.AddWithValue("@OrganizationID", companyID);
             cmd.Parameters.AddWithValue("@venuetype", type);
 
 
@@ -1024,7 +1158,7 @@ namespace TMS.DataObjects.TMS
             }
         }
 
-        public DataTable SessionsByCourseAndClassIDDAL(long? CourseID, long? ClassID, long CompanyID)
+        public DataTable SessionsByCourseAndClassIDDAL(long? CourseID, long? ClassID, long CompanyID,DateTime startDate,DateTime EndDate)
         {
             DataTable dt = new DataTable();
             var conString = DBHelper.ConnectionString;
@@ -1034,7 +1168,8 @@ namespace TMS.DataObjects.TMS
             cmd.Parameters.AddWithValue("@ClassID", ClassID);
             cmd.Parameters.AddWithValue("@CourseID", CourseID);
             cmd.Parameters.AddWithValue("@OrganizationID", CompanyID);
-
+            cmd.Parameters.AddWithValue("@MonthstartDate", startDate);
+            cmd.Parameters.AddWithValue("@MonthLastDate", EndDate);
 
 
             using (SqlConnection con = new SqlConnection(conString))
@@ -1144,7 +1279,7 @@ namespace TMS.DataObjects.TMS
             return ExecuteInt64withOutPutparameterSp("CRM_UserPersonMapping_Create", parameters,
                       ParamBuilder.Par("PersonID", _mapping.ID),
                         ParamBuilder.Par("AssignedTo", _mapping.AssignedTo),
-                        ParamBuilder.Par("ClientStatus", _mapping.clientstatus),
+                        ParamBuilder.Par("ClientStatus", _mapping.CrmClientType),
                         ParamBuilder.Par("CreatedBy", _mapping.CreatedBy),
                         ParamBuilder.Par("CreatedOn", _mapping.CreatedDate)
                         );
@@ -1256,7 +1391,14 @@ namespace TMS.DataObjects.TMS
                         ParamBuilder.Par("UpdatedBy", _mapping.UpdatedBy),
                         ParamBuilder.Par("UpdatedOn", _mapping.UpdatedOn));
         }
-
+        public int ManageScheduledClasses_DublicationDAL(CRM_classPersonMapping _mapping)
+        {
+            return ExecuteScalarSPInt32("CRM_ClassMapping_Dublication",
+                        ParamBuilder.Par("ClassID", _mapping.ClassID),
+                        ParamBuilder.Par("PersonID", _mapping.PersonID),
+                        ParamBuilder.Par("CreatedBy", _mapping.CreatedBy));
+                        //ParamBuilder.Par("UpdatedOn", _mapping.UpdatedOn)); 
+        }
         public int ManageScheduledClasses_DeleteDAL(CRM_classPersonMapping _mapping)
         {
             return ExecuteScalarInt32Sp("CRM_ClassSchedule_Delete",
@@ -1458,6 +1600,14 @@ namespace TMS.DataObjects.TMS
                         ParamBuilder.Par("CreatedOn", _person.CreatedOn)
                         );
         }
+       public IList<DDlList> GetCourseFromTimeSpanDALDDL(DateTime startDate,DateTime endDate,long useri)
+        {
+            return ExecuteListSp<DDlList>("TMS_Courses_GetCourseFromTimeSpan", ParamBuilder.Par("StartDAte", startDate), ParamBuilder.Par("EndDate", endDate),ParamBuilder.Par("CreatedByID", useri));
+        }
+        public IList<DDlList> GetCourseFromTimeSpanListDAL(DateTime StartTime, DateTime EndTime)
+        {
+            return ExecuteListSp<DDlList>("TMS_Courses_GetCourseFromTimeSpan", ParamBuilder.Par("StartDAte", StartTime), ParamBuilder.Par("EndDate", EndTime));
+        }
 
         public int ManageCourse_DuplicationCheckDAL(CRM_CourseMapping _mapping)
         {
@@ -1466,12 +1616,76 @@ namespace TMS.DataObjects.TMS
                                   ParamBuilder.Par("CourseID", _mapping.CourseID));
 
         }
+        public int ManageCourseCategory_DuplicationCheckDAL(CRM_CourseCategoryMapping _mapping)
+        {
+            return ExecuteScalarSPInt32("CRMCourseCategory_DuplicationCheck",
+                      ParamBuilder.Par("PersonID", _mapping.PersonID),
+                                  ParamBuilder.Par("CategoryID", _mapping.CategoryID));
 
+        }
+        public int ManageCourse_Assigned(long PID)
+        {
+            return ExecuteScalarSPInt32("CRM_Course_Assigned",
+                      ParamBuilder.Par("PersonID", PID)
+                                 );
+
+        }
         public int ManageScheduleCourse_DuplicationCheckDAL(CRM_classPersonMapping _mapping)
         {
             return ExecuteScalarSPInt32("CRMClass_DuplicationCheck",
                      ParamBuilder.Par("PersonID", _mapping.PersonID),
                                  ParamBuilder.Par("ClassID", _mapping.ClassID));
+        }
+        public IList<T> ExecuteListSp<T>(string query, params DbParameter[] prms) where T : new()
+        {
+            IList<T> objectList = new List<T>();
+            T obj = default(T);
+
+            try
+            {
+                using (DbConnection connection = Factory.CreateConnection())
+                {
+                    connection.ConnectionString = ConnectionString;
+
+                    using (DbCommand command = Factory.CreateCommand())
+                    {
+                        command.CommandTimeout = 30;
+                        command.Connection = connection;
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+                        command.CommandText = query;
+
+                        if (prms != null)
+                        {
+                            command.Parameters.AddRange(prms);
+                        }
+
+                        connection.Open();
+
+                        using (DbDataReader dataReader = command.ExecuteReader(CommandBehavior.CloseConnection))
+                        {
+                            if (dataReader.HasRows)
+                            {
+                                while (dataReader.Read())
+                                {
+                                    obj = new T();
+
+                                    IDataMapper mapper = obj as IDataMapper;
+                                    mapper.MapProperties(dataReader);
+
+                                    objectList.Add(obj);
+                                }
+                            }
+
+                            dataReader.Close();
+                        }
+                    }
+                }
+            }
+            finally
+            {
+            }
+
+            return objectList;
         }
 
 

@@ -32,7 +32,7 @@ namespace TMS.Business.Interfaces.TMS
         int ChangeStatus_RescheduleBAL(Sls_Task _objTask);
 
         long Task_CreateBAL(Sls_Task _objTasks);
-
+        
         int Tasks_DeleteBAL(Sls_Task _objTasks);
 
         int Tasks_UpdateBAL(Sls_Task _objTasks);

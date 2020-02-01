@@ -2,27 +2,36 @@
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web.Mvc;
+using TMS.Business.Interfaces.Common;
 using TMS.Business.Interfaces.Common.Configuration;
+using TMS.Business.Interfaces.TMS.Program;
 using TMS.Library;
+using TMS.Library.Common.Attachment;
 using TMS.Library.Entities.Common.Configuration;
 using TMS.Library.Entities.Common.Configuration.Categories;
 using TMS.Library.Entities.Common.Configuration.Vendor;
 using TMS.Library.Entities.Common.Configuration.Venues;
 using TMS.Library.Entities.Common.Roles;
+using TMS.Library.Entities.TMS.Program;
 using TMS.Library.TMS.Admin.Config;
+using TMS.Web.Core;
 using lr = Resources.Resources;
 
 namespace TMS.Web.Controllers
 {
+    [SessionTimeout]
     public class ConfigController : TMSControllerBase
     {
         private readonly IConfigurationBAL _objConfigurationBAL;
-
-        public ConfigController(IConfigurationBAL _objIConfigurationBAL)
+        private readonly IClassBAL _ClassBAL;
+        private readonly IAttachmentBAL _AttachmentBAL;
+        public ConfigController(IConfigurationBAL _objIConfigurationBAL, IClassBAL _ClassIBAL, IAttachmentBAL _AttachmentBAL)
         {
-            _objConfigurationBAL = _objIConfigurationBAL;
+            _objConfigurationBAL = _objIConfigurationBAL; _ClassBAL = _ClassIBAL; this._AttachmentBAL = _AttachmentBAL;
         }
 
         #region Flags
@@ -197,17 +206,23 @@ namespace TMS.Web.Controllers
             {
                 request.PageSize = 10;
             }
-            var Classs = this._objConfigurationBAL.Venues_GetAllBAL(startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
-            if (CurrentUser.CompanyID > 0)
+            List<Venues> Classs = new List<Venues>();
+            if (CurrentUser.CompanyID < 0)
+            {
+                Classs = this._objConfigurationBAL.Venues_GetAllBAL(startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
+
+            }
+            else if (CurrentUser.CompanyID > 0)
             {
                 Classs = this._objConfigurationBAL.VenuesbyOrganization_GetAllBAL(startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText,Convert.ToString(CurrentUser.CompanyID));
             }
-            var result = new DataSourceResult()
-            {
-                Data = Classs, // Process data (paging and sorting applied)
-                Total = Total // Total number of records
-            };
-            return Json(result);
+            //var result = new DataSourceResult()
+            //{
+            //    Data = Classs, // Process data (paging and sorting applied)
+            //    Total = Total // Total number of records
+            //};
+            //var resultData = new[] { Classs };
+            return Json(Classs.ToDataSourceResult(request, ModelState));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -217,6 +232,26 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (_objVenues.SecondaryName == null)
+                    _objVenues.SecondaryName = "";
+                if (_objVenues.VenueStatusID == null)
+                    _objVenues.VenueStatusID = 0;
+                if (_objVenues.VenueCodeID == null)
+                    _objVenues.VenueCodeID = "";
+                if (_objVenues.RateType == null)
+                    _objVenues.RateType = 0;
+                if (_objVenues.Cost == null)
+                    _objVenues.Cost = 0;
+                if (_objVenues.Currency == null)
+                    _objVenues.Currency =0;
+                if (_objVenues.Capacity == null)
+                    _objVenues.Capacity = "";
+                if (_objVenues.IsCommon == null)
+                    _objVenues.IsCommon = false;
+                if (_objVenues.CountryID == null)
+                    _objVenues.CountryID = 145;
+                if (_objVenues.StateID == null)
+                    _objVenues.StateID = 0;
                 _objVenues.CreatedBy = CurrentUser.NameIdentifierInt64;
                 _objVenues.CreatedDate = DateTime.Now;
                 _objVenues.OrganizationID = CurrentUser.CompanyID;
@@ -241,6 +276,26 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (_objVenues.SecondaryName == null)
+                    _objVenues.SecondaryName = "";
+                if (_objVenues.VenueStatusID == null)
+                    _objVenues.VenueStatusID = 0;
+                if (_objVenues.VenueCodeID == null)
+                    _objVenues.VenueCodeID = "";
+                if (_objVenues.RateType == null)
+                    _objVenues.RateType = 0;
+                if (_objVenues.Cost == null)
+                    _objVenues.Cost = 0;
+                if (_objVenues.Currency == null)
+                    _objVenues.Currency = 0;
+                if (_objVenues.Capacity == null)
+                    _objVenues.Capacity = "";
+                if (_objVenues.IsCommon == null)
+                    _objVenues.IsCommon = false;
+                if (_objVenues.CountryID == null)
+                    _objVenues.CountryID = 145;
+                if (_objVenues.StateID == null)
+                    _objVenues.StateID = 0;
                 _objVenues.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _objVenues.UpdatedDate = DateTime.Now;
                 _objVenues.AvailableFrom = UtilityFunctions.MapValue<DateTime>(_objVenues.AvailableFromString, typeof(DateTime));
@@ -283,7 +338,26 @@ namespace TMS.Web.Controllers
             var resultData = new[] { _objVenues };
             return Json(resultData.AsQueryable().ToDataSourceResult(request, ModelState));
         }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        //[ClaimsAuthorize("CanDeleteSession")]
 
+        public JsonResult VenuesDelteChk(string _Sessions)
+        {
+            bool result = false;
+            var _returnValue  = this._objConfigurationBAL.VenuesForDestroy_GetAllBAL(Convert.ToInt64(_Sessions));
+
+            if (_returnValue > 0)
+            {
+                result = false;
+
+            }
+            else
+            {
+                result = true;
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         #endregion Venues
 
         #region Venues Detail added for Open Type
@@ -294,6 +368,13 @@ namespace TMS.Web.Controllers
         {
             ViewData["OpenType"] = Opentype;
             return PartialView("_Venues", OpenId);
+        }
+        [ClaimsAuthorize("CanViewPrgramVenues")]
+        [DontWrapResult]
+        public ActionResult ManageVenuesClass(int Opentype, long OpenId)
+        {
+            ViewData["OpenType"] = Opentype;
+            return PartialView("_VenueClass", OpenId);
         }
 
         [DontWrapResult]
@@ -415,6 +496,25 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                IList<ClassTraineeMapping> ClassTrainee=null;
+                if (CurrentUser.CompanyID > 0)
+                {
+                    ClassTrainee= _ClassBAL.ClassTraineeMapping_GetAllBALOrganization(CurrentCulture, oid, CurrentUser.CompanyID);
+                }
+                else
+                {
+                    ClassTrainee= _ClassBAL.ClassTraineeMapping_GetAllBAL(CurrentCulture, oid);
+                }
+                var item = ClassTrainee
+                .Cast<ClassTraineeMapping>().Where(i => i.PersonID== _objtrainer.PersonID).ToList();
+                if(item.Count>0)
+                {
+                    ModelState.AddModelError(lr.Trainee, lr.ClassTraineeCannotAssignAsTrainee);
+                }
+                else
+                {
+
+                
                 _objtrainer.CreatedBy = CurrentUser.NameIdentifierInt64;
                 _objtrainer.CreatedDate = DateTime.Now;
                 _objtrainer.OpenId = oid;
@@ -435,11 +535,12 @@ namespace TMS.Web.Controllers
 
                 }
 
-                //  }
-                //else
-                //{
-                //    ModelState.AddModelError(lr.Trainer,"Trainer is not available for this Class Date.");
-                //}
+                    //  }
+                    //else
+                    //{
+                    //    ModelState.AddModelError(lr.Trainer,"Trainer is not available for this Class Date.");
+                    //}
+                }
             }
             var resultData = new[] { _objtrainer };
             return Json(resultData.ToDataSourceResult(request, ModelState));
@@ -455,8 +556,8 @@ namespace TMS.Web.Controllers
                 _objtrainer.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _objtrainer.UpdatedDate = DateTime.Now;
                 //
-                if (_objConfigurationBAL.ManageTrainer_AvalabilityCheckBAL(_objtrainer) > 0)
-                {
+                //if (_objConfigurationBAL.ManageTrainer_AvalabilityCheckBAL(_objtrainer) > 0)
+                //{
                     if (_objConfigurationBAL.ManageTrainer_DuplicationCheckBAL(_objtrainer) > 0)
                     {
                         ModelState.AddModelError(lr.Trainer, lr.TrainerDuplicationCheck);
@@ -474,11 +575,11 @@ namespace TMS.Web.Controllers
                             ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
                         }
                     }
-                }
-                else
-                {
-                    ModelState.AddModelError(lr.Trainer, "Trainer is not available for this Class Date.");
-                }
+                //}
+                //else
+                //{
+                //    ModelState.AddModelError(lr.Trainer, "Trainer is not available for this Class Date.");
+                //}
             }
             var resultData = new[] { _objtrainer };
             return Json(resultData.AsQueryable().ToDataSourceResult(request, ModelState));
@@ -659,6 +760,7 @@ namespace TMS.Web.Controllers
             {
                 request.PageSize = 10;
             }
+           
             var Classs = _objConfigurationBAL.TMSCategories_GetAllBAL(startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
             if (CurrentUser.CompanyID > 0)
             {
@@ -757,6 +859,123 @@ namespace TMS.Web.Controllers
         }
 
         #endregion Categories
+        #region CategoriesCRM
+        [ClaimsAuthorize("CanViewCourseCategory")]
+        [DontWrapResult]
+        public ActionResult CourseCategoriesCRM()
+        {
+            return PartialView("_CategoriesCRM");
+        }
+
+        [DontWrapResult]
+        [ClaimsAuthorize("CanViewCourseCategory")]
+        public ActionResult Categories_ReadCRM([DataSourceRequest] DataSourceRequest request)
+        {
+            var startRowIndex = (request.Page - 1) * request.PageSize;
+            int Total = 0;
+            var SearchText = Request.Form["SearchText"];
+            if (request.PageSize == 0)
+            {
+                request.PageSize = 10;
+            }
+
+            var Classs = _objConfigurationBAL.TMSCategories_GetAllBAL(startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
+            if (CurrentUser.CompanyID > 0)
+            {
+                Classs = _objConfigurationBAL.TMSCategoriesbyOrganization_GetAllBAL(startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
+            }
+            var result = new DataSourceResult()
+            {
+                Data = Classs, // Process data (paging and sorting applied)
+                Total = Total // Total number of records
+            };
+            return Json(result);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanAddEditCourseCategory")]
+        public ActionResult Categories_CreateCRM([DataSourceRequest] DataSourceRequest request, TMSCategories _Categories)
+        {
+            if (ModelState.IsValid)
+            {
+                _Categories.CreatedBy = CurrentUser.NameIdentifierInt64;
+                _Categories.CreatedDate = DateTime.Now;
+                _Categories.OrganizationID = CurrentUser.CompanyID;
+                if (_objConfigurationBAL.TMSCategories_DuplicationCheckBAL(_Categories) > 0)
+                {
+                    ModelState.AddModelError(lr.CategoryCode, lr.CategoryCodeDuplicate);
+                }
+                else
+                {
+                    _Categories.ID = _objConfigurationBAL.TMSCategories_CreateBAL(_Categories);
+                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                    if (string.IsNullOrEmpty(ip))
+                        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+
+                }
+            }
+            var resultData = new[] { _Categories };
+            return Json(resultData.ToDataSourceResult(request, ModelState));
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanAddEditCourseCategory")]
+        public ActionResult Categories_UpdateCRM([DataSourceRequest] DataSourceRequest request, TMSCategories _Categories)
+        {
+            if (ModelState.IsValid)
+            {
+                _Categories.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                _Categories.UpdatedDate = DateTime.Now;
+
+                if (_objConfigurationBAL.TMSCategories_DuplicationCheckBAL(_Categories) > 0)
+                {
+                    ModelState.AddModelError(lr.CategoryCode, lr.CategoryCodeDuplicate);
+                }
+                else
+                {
+                    var result = _objConfigurationBAL.TMSCategories_UpdateBAL(_Categories);
+                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                    if (string.IsNullOrEmpty(ip))
+                        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Update, System.Web.HttpContext.Current.Request.Browser.Browser);
+
+                    if (result == -1)
+                    {
+                        ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    }
+                }
+            }
+            var resultData = new[] { _Categories };
+            return Json(resultData.AsQueryable().ToDataSourceResult(request, ModelState));
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanDeleteCourseCategory")]
+        public ActionResult Categories_DestroyCRM([DataSourceRequest] DataSourceRequest request, TMSCategories _Categories)
+        {
+            if (ModelState.IsValid)
+            {
+                _Categories.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                _Categories.UpdatedDate = DateTime.Now;
+                var result = _objConfigurationBAL.TMSCategories_DeleteBAL(_Categories);
+                string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                if (string.IsNullOrEmpty(ip))
+                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Delete, System.Web.HttpContext.Current.Request.Browser.Browser);
+
+                if (result == -1)
+                {
+                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                }
+            }
+            var resultData = new[] { _Categories };
+            return Json(resultData.AsQueryable().ToDataSourceResult(request, ModelState));
+        }
+        #endregion
 
         #region FocusAreas
 
@@ -1056,9 +1275,9 @@ namespace TMS.Web.Controllers
 
 
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        [DontWrapResult]
-        [ClaimsAuthorize("CanDeleteProgramTrainer")]
+        //[AcceptVerbs(HttpVerbs.Post)]
+        //[DontWrapResult]
+        //[ClaimsAuthorize("CanDeleteProgramTrainer")]
         public ActionResult ManageCourseMeterialMap_Destroy([DataSourceRequest] DataSourceRequest request, CourseMeterialsMapping _objlogmap)
         {
             if (ModelState.IsValid)
@@ -1113,10 +1332,28 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-               
                 _objlogmap.CreatedBy = CurrentUser.NameIdentifierInt64;
                 _objlogmap.CreatedOn = DateTime.Now;
                 _objlogmap.ClassID = oid;
+                var DublicateCheck=_objConfigurationBAL.ManageClassMeterialMap_GetAllBAL(CurrentUser.CompanyID, oid);
+                bool flage = true;
+                foreach (var x in DublicateCheck)
+                {
+                    long str = x.CourseMaterialID;
+                    if (str == _objlogmap.CourseMaterialID)
+                    {
+                        flage = false;
+                        break;
+                    }
+                }
+                if (flage == false)
+                {
+                    ModelState.AddModelError(lr.DubliocationHappen, lr.MaterialDublication);
+                   
+                }
+                else
+                {
+
                 //
                 //if (_objConfigurationBAL.ManageTrainer_DuplicationCheckBAL(_objlogmap) > 0)
                 //{
@@ -1130,7 +1367,9 @@ namespace TMS.Web.Controllers
                     ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
                 _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
 
-                //}
+                    //}
+
+                }
             }
             var resultData = new[] { _objlogmap };
             return Json(resultData.ToDataSourceResult(request, ModelState));
@@ -1190,7 +1429,7 @@ namespace TMS.Web.Controllers
             return Json(_objConfigurationBAL.ManageSessionMeterialMap_GetAllBAL(CurrentUser.CompanyID).ToDataSourceResult(request, ModelState));
         }
 
-        [ClaimsAuthorize("CanViewProgramTrainer")]
+        [ClaimsAuthorize("CanViewSaleAdminstration")]
         [DontWrapResult]
         public ActionResult AuditLog()
         {
@@ -1199,7 +1438,7 @@ namespace TMS.Web.Controllers
         }
 
         [DontWrapResult]
-        [ClaimsAuthorize("CanViewProgramTrainer")]
+        [ClaimsAuthorize("CanViewSaleAdminstration")]
         public ActionResult AuditLog_Read([DataSourceRequest] DataSourceRequest request)
         {
             return Json(_objConfigurationBAL.AuditLog_GetAllBAL(CurrentUser.CompanyID).ToDataSourceResult(request, ModelState));
@@ -1301,7 +1540,7 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         
         [ClaimsAuthorize("CanAddEditDegreeCertificates")]
-        public ActionResult DegreeCertificates_Create([DataSourceRequest] DataSourceRequest request, DegreeCertificates _objDegreeCertificates)
+        public ActionResult DegreeCertificates_Create([DataSourceRequest] DataSourceRequest request, DegreeCertificates _objDegreeCertificates, string filename, long aid)
         {
             if (ModelState.IsValid)
             {
@@ -1315,6 +1554,7 @@ namespace TMS.Web.Controllers
                 else
                 {
                     _objDegreeCertificates.ID = _objConfigurationBAL.DegreeCertificates_CreateBAL(_objDegreeCertificates);
+                    string path=HandleCertificate(filename, _objDegreeCertificates.ID, aid);
                     string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
                     if (string.IsNullOrEmpty(ip))
                         ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
@@ -1325,23 +1565,55 @@ namespace TMS.Web.Controllers
             var resultData = new[] { _objDegreeCertificates };
             return Json(resultData.ToDataSourceResult(request, ModelState));
         }
+        [NonAction]
+        public string HandleCertificate(string picturename, long OrganizationId, long aid)//handle in case of new is created
+        {
+            if (!string.IsNullOrEmpty(picturename))
+            {
+                var _aatchedFromDB = _AttachmentBAL.TMS_Attachment_GetSingleByIdAndTypeBAL(aid);
 
+                var newparentroot = DateTime.Now.Ticks.ToString();
+                var physicalPath = Path.Combine(Server.MapPath("~/UploadTempFolder"));
+                string strSource = physicalPath + "/" + _aatchedFromDB.FileParentRootFolder + "/" + _aatchedFromDB.FileName;
+                string targetString = "~/Attachment/TMS/Organization/" + CurrentUser.CompanyID + "/Certificates/" + newparentroot + "/";
+                string targetSource = Utility.CreateDirectory(Path.Combine(Server.MapPath(targetString))) + _aatchedFromDB.FileName;
+                Utility.MoveAttachment(strSource, targetSource, false);
+                System.IO.DirectoryInfo di = new DirectoryInfo(physicalPath + "/" + _aatchedFromDB.FileParentRootFolder);
+                di.Delete();
+                _AttachmentBAL.TMS_Attachment_CompletedOrganizationLogoBAL(new TMS_Attachments { CompletedDate = DateTime.Now, ID = aid, OpenID = OrganizationId, OpenType = 4, FileParentRootFolder = newparentroot, FilePath = targetString });
+                var model = _AttachmentBAL.TMS_Attachment_GetSingleByIdAndTypeBAL(aid);
+                return model.FilePath.Replace("~/", "") + model.FileName;
+            }
+            return "/images/i/people.png";
+        }
+        //[AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanViewDegreeCertificates")]
+        public ActionResult Preview_Certificate(string pid)
+        {
+            int Total = 0;
+            List<DegreeCertificates> degree = new List<DegreeCertificates>();
+           degree= _objConfigurationBAL.DegreeCertificates_GetAllBALbyOrg(0, 1000, ref Total, null, "", Convert.ToString(CurrentUser.CompanyID));
+            var Newdegree = degree.FirstOrDefault(i => i.ID == Convert.ToInt64(pid));
+            return View(Newdegree);
+        }
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
         [ClaimsAuthorize("CanAddEditDegreeCertificates")]
-        public ActionResult DegreeCertificates_Update([DataSourceRequest] DataSourceRequest request, DegreeCertificates _objDegreeCertificates)
+        public ActionResult DegreeCertificates_Update([DataSourceRequest] DataSourceRequest request, DegreeCertificates _objDegreeCertificates, string filename, long aid)
         {
             if (ModelState.IsValid)
             {
                 _objDegreeCertificates.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _objDegreeCertificates.UpdatedDate = DateTime.Now;
-
+                _objDegreeCertificates.OrganizationID = CurrentUser.CompanyID;
                 if (_objConfigurationBAL.DegreeCertificates_DuplicationCheckBAL(_objDegreeCertificates) > 0)
                 {
                     ModelState.AddModelError(lr.DegreeCertificatesPrimaryName, lr.DegreeCertificatesPrimaryNameDuplicate);
                 }
                 else
                 {
+                    string path = HandleCertificate(filename, _objDegreeCertificates.ID, aid);
                     var result = _objConfigurationBAL.DegreeCertificates_UpdateBAL(_objDegreeCertificates);
                     string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
                     if (string.IsNullOrEmpty(ip))

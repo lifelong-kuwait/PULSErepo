@@ -4,30 +4,37 @@ using Kendo.Mvc.UI;
 using System;
 using System.IO;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using TMS.Business.Interfaces.Common;
+using TMS.Business.Interfaces.TMS;
 using TMS.Business.Interfaces.TMS.Organization;
+using TMS.Library;
 using TMS.Library.Common.Attachment;
 using TMS.Library.TMS.Organization;
 using TMS.Library.TMS.Organization.POC;
+using TMS.Web.Core;
 using lr = Resources.Resources;
 
 namespace TMS.Web.Controllers
 {
+    [SessionTimeout]
     public class OrganizationController : TMSControllerBase
     {
         private readonly IOrganizationBAL OrganizationBAL;
         private readonly IAttachmentBAL _AttachmentBAL;
-
-        public OrganizationController(IOrganizationBAL IOrganizationBAL, IAttachmentBAL _AttachmentBAL)
+        private readonly IBALUsers _UserBAL;
+        public OrganizationController(IOrganizationBAL IOrganizationBAL, IAttachmentBAL _AttachmentBAL, IBALUsers objUserBAL)
         {
-            this.OrganizationBAL = IOrganizationBAL; this._AttachmentBAL = _AttachmentBAL;
+            this.OrganizationBAL = IOrganizationBAL; this._AttachmentBAL = _AttachmentBAL; this._UserBAL = objUserBAL;
         }
 
         [ClaimsAuthorizeAttribute("CanViewOrganization")]
         public ActionResult Index()
         {
-          // var logopicture = this.OrganizationBAL.GetAllOrganizationbypicBAL(CurrentUser.CompanyID);
-        //   Session["logo"] = logopicture;
+            // var logopicture = this.OrganizationBAL.GetAllOrganizationbypicBAL(CurrentUser.CompanyID);
+            //   Session["logo"] = logopicture;
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to view organizitions " + DateTime.UtcNow +" with user id "+CurrentUser.NameIdentifierInt64+" ", "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
             return View();
         }
@@ -35,14 +42,15 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorizeAttribute("CanViewOrganizationDetail")]
         public ActionResult Detail(long oid)
         {
-           /// TMS.Library.TMS.Organization.OrganizationModel mod = new OrganizationModel();
-          //  Session["logo"] = mod.LogoPicture;
+            /// TMS.Library.TMS.Organization.OrganizationModel mod = new OrganizationModel();
+            //  Session["logo"] = mod.LogoPicture;
             if (string.IsNullOrEmpty(oid.ToString()))
             {
                 return RedirectPermanent(Url.Content("~/Organization/Index"));
             }
             else
             {
+
                 var data = this.OrganizationBAL.GetOrganizationByIdBAL(oid);
                 if (data == null)
                 {
@@ -51,6 +59,9 @@ namespace TMS.Web.Controllers
                 }
                 else
                 {
+                    var json = new JavaScriptSerializer().Serialize(0);
+                    _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to view organizitions " + DateTime.UtcNow + " with user id " + CurrentUser.NameIdentifierInt64 + " ", "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                     ViewData["model"] = data;
                     return View();
                 }
@@ -61,6 +72,9 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public ActionResult Organization_Read([DataSourceRequest] DataSourceRequest request)
         {
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to view organizitions " + DateTime.UtcNow + " with user id " + CurrentUser.NameIdentifierInt64 + " ", "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             // TMS.Library.TMS.Organization.OrganizationModel mod = new OrganizationModel();
             //  Session["logo"] = mod.LogoPicture;
             var startRowIndex = (request.Page - 1) * request.PageSize;
@@ -76,9 +90,10 @@ namespace TMS.Web.Controllers
                 var _Organization = this.OrganizationBAL.GetAllOrganizationbyIDBAL(Convert.ToString(CurrentUser.CompanyID), SearchText);
                 return Json(_Organization.ToDataSourceResult(request, ModelState));
             }
-            else { 
-            var _Organization = this.OrganizationBAL.GetAllOrganizationBAL(SearchText);
-            return Json(_Organization.ToDataSourceResult(request, ModelState));
+            else
+            {
+                var _Organization = this.OrganizationBAL.GetAllOrganizationBAL(SearchText);
+                return Json(_Organization.ToDataSourceResult(request, ModelState));
             }
         }
 
@@ -88,53 +103,76 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool _valid = false;
-                if (_Organization.P_Name != null)//when Email is Provided
+                var json = new JavaScriptSerializer().Serialize(0);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to insert new organizitions " + DateTime.UtcNow + " with user id " + CurrentUser.NameIdentifierInt64 + " ", "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
+                var _OrganizationDub = OrganizationBAL.GetAllOrganizationbyIDBAL(Convert.ToString(CurrentUser.CompanyID), "");
+                bool flage = true;
+                foreach (var x in _OrganizationDub)
                 {
-                    _valid = true;
+                    string str = x.P_Name;
+                    if (str == _Organization.P_Name)
+                    {
+                        flage = false;
+                        break;
+                    }
                 }
-                else if (_Organization.ShortName != null)//when Contact number is provided
+                if (flage == false)
                 {
-                    _valid = true;
+                    ModelState.AddModelError(lr.OrganizationNameDublicaton, lr.OrganizationNameDublicaton);
                 }
                 else
                 {
-                    ModelState.AddModelError(lr.OrganizationFullName, lr.OrganizationEnterFullNameOrShortName);
-                }
-                if (_valid)
-                {
-                    if (_Organization.P_Name != null)
+
+
+                    bool _valid = false;
+                    if (_Organization.P_Name != null)//when Email is Provided
                     {
-                        if (_Organization.ShortName == null)
-                        {
-                            _Organization.FullName = _Organization.P_Name;
-                        }
-                        else
-                        {
-                            _Organization.FullName = _Organization.P_Name + " (" + _Organization.ShortName + ")";
-                        }
+                        _valid = true;
+                    }
+                    else if (_Organization.ShortName != null)//when Contact number is provided
+                    {
+                        _valid = true;
                     }
                     else
                     {
-                        _Organization.FullName = _Organization.ShortName;
+                        ModelState.AddModelError(lr.OrganizationFullName, lr.OrganizationEnterFullNameOrShortName);
                     }
-                    _Organization.CreatedBy = CurrentUser.NameIdentifierInt64;
-                    _Organization.CreatedDate = DateTime.Now;
-                    _Organization.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                    _Organization.UpdatedDate = DateTime.Now;
-                    //   string _profilePict = string.Empty;
-                    // _Organization.LogoPicture = HandleOrganizationIndexLogo(filename, _Organization.ID, aid);
-                    _Organization.ID = this.OrganizationBAL.Organizations_CreateBAL(_Organization);
-                    var _profilePict = HandleOrganizationIndexLogo(filename,_Organization.ID, aid);
-
-                    if (!string.IsNullOrEmpty(_profilePict))
+                    if (_valid)
                     {
-                        _Organization.LogoPicture = _profilePict;
-                        var res =this.OrganizationBAL.Org_UpdateProfileImageBAL(_Organization);
-                        _Organization.LogoPicture = _profilePict.Replace("~/", "");
-                    }
-                    else { _Organization.LogoPicture = null; }
+                        if (_Organization.P_Name != null)
+                        {
+                            if (_Organization.ShortName == null)
+                            {
+                                _Organization.FullName = _Organization.P_Name;
+                            }
+                            else
+                            {
+                                _Organization.FullName = _Organization.P_Name + " (" + _Organization.ShortName + ")";
+                            }
+                        }
+                        else
+                        {
+                            _Organization.FullName = _Organization.ShortName;
+                        }
+                        _Organization.CreatedBy = CurrentUser.NameIdentifierInt64;
+                        _Organization.CreatedDate = DateTime.Now;
+                        _Organization.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                        _Organization.UpdatedDate = DateTime.Now;
+                        _Organization.CompanyID = CurrentUser.CompanyID;
+                        //   string _profilePict = string.Empty;
+                        // _Organization.LogoPicture = HandleOrganizationIndexLogo(filename, _Organization.ID, aid);
+                        _Organization.ID = this.OrganizationBAL.Organizations_CreateBAL(_Organization);
+                        var _profilePict = HandleOrganizationIndexLogo(filename, _Organization.ID, aid);
 
+                        if (!string.IsNullOrEmpty(_profilePict))
+                        {
+                            _Organization.LogoPicture = _profilePict;
+                            var res = this.OrganizationBAL.Org_UpdateProfileImageBAL(_Organization);
+                            _Organization.LogoPicture = _profilePict.Replace("~/", "");
+                        }
+                        else { _Organization.LogoPicture = null; }
+                    }
                 }
             }
 
@@ -148,42 +186,76 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool _valid = false;
-                if (_Organization.P_Name != null)//when Email is Provided
+                var json = new JavaScriptSerializer().Serialize(0);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to update organizitions " + DateTime.UtcNow + " with user id " + CurrentUser.NameIdentifierInt64 + " ", "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
+                var _OrganizationDub = OrganizationBAL.GetAllOrganizationbyIDBAL(Convert.ToString(CurrentUser.CompanyID), "");
+                bool flage = true;
+                foreach (var x in _OrganizationDub)
                 {
-                    _valid = true;
+                    string str = x.P_Name;
+                    long OrgId = x.ID;
+
+                    if (str == _Organization.P_Name)
+                    {
+                        if (OrgId != _Organization.ID)
+                        {
+                            flage = false;
+                            break;
+                        }
+
+                    }
                 }
-                else if (_Organization.ShortName != null)//when Contact number is provided
+                if (flage == false)
                 {
-                    _valid = true;
+                    ModelState.AddModelError(lr.OrganizationNameDublicaton, lr.OrganizationNameDublicaton);
                 }
                 else
                 {
-                    ModelState.AddModelError(lr.OrganizationFullName, lr.OrganizationEnterFullNameOrShortName);
-                }
-                if (_valid)
-                {
-                    if (_Organization.P_Name != null)
+                    bool _valid = false;
+                    if (_Organization.P_Name != null)//when Email is Provided
                     {
-                        if (_Organization.ShortName == null)
-                        {
-                            _Organization.FullName = _Organization.P_Name;
-                        }
-                        else
-                        {
-                            _Organization.FullName = _Organization.P_Name + " (" + _Organization.ShortName + ")";
-                        }
+                        _valid = true;
+                    }
+                    else if (_Organization.ShortName != null)//when Contact number is provided
+                    {
+                        _valid = true;
                     }
                     else
                     {
-                        _Organization.FullName = _Organization.ShortName;
+                        ModelState.AddModelError(lr.OrganizationFullName, lr.OrganizationEnterFullNameOrShortName);
                     }
-                    _Organization.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                    _Organization.UpdatedDate = DateTime.Now;
-                    string _profilePict = string.Empty;
-                    this.OrganizationBAL.Organizations_UpdateBAL(_Organization);
-                    if (!string.IsNullOrEmpty(filename))
-                        _Organization.LogoPicture = HandleOrganizationLogo(filename, _Organization.ID, aid);
+                    if (_valid)
+                    {
+                        if (_Organization.P_Name != null)
+                        {
+                            if (_Organization.ShortName == null)
+                            {
+                                _Organization.FullName = _Organization.P_Name;
+                            }
+                            else
+                            {
+                                _Organization.FullName = _Organization.P_Name + " (" + _Organization.ShortName + ")";
+                            }
+                        }
+                        else
+                        {
+                            _Organization.FullName = _Organization.ShortName;
+                        }
+                       // var _profilePict = HandleOrganizationIndexLogo(filename, _Organization.ID, aid);
+
+                        _Organization.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                        _Organization.UpdatedDate = DateTime.Now;
+                         
+                        this.OrganizationBAL.Organizations_UpdateBAL(_Organization);
+                        if (!string.IsNullOrEmpty(filename))
+                            _Organization.LogoPicture = HandleOrganizationLogo(filename, _Organization.ID, aid);
+                        if(_Organization.LogoPicture!=null)
+                        {
+                            _Organization.Logo = _Organization.LogoPicture;
+                        }
+                        this.OrganizationBAL.Organizations_UpdateBAL(_Organization);
+                    }
                 }
             }
 
@@ -198,6 +270,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(0);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to destroy organizitions " + DateTime.UtcNow + " with user id " + CurrentUser.NameIdentifierInt64 + " ", "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _Organization.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _Organization.UpdatedDate = DateTime.Now;
                 var result = this.OrganizationBAL.Organizations_DeleteBAL(_Organization);
@@ -257,6 +332,9 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorizeAttribute("CanViewPointofContact")]
         public ActionResult PointOfContact(string oid)
         {
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to view  point of caontact  " + DateTime.UtcNow + " with user id " + CurrentUser.NameIdentifierInt64 + " ", "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             return PartialView("_PointOfContact", oid);
         }
 
@@ -264,6 +342,9 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorizeAttribute("CanViewPointofContact")]
         public ActionResult PointOfContact_Read([DataSourceRequest] DataSourceRequest request, string oid)
         {
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to read  point of caontact  " + DateTime.UtcNow + " with user id " + CurrentUser.NameIdentifierInt64 + " ", "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             var _Organization = this.OrganizationBAL.GetPointOfContactByOrganizationIdBAL(Convert.ToInt64(oid));
             return Json(_Organization.ToDataSourceResult(request, ModelState));
         }
@@ -275,16 +356,26 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(0);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to create  point of caontact  " + DateTime.UtcNow + " with user id " + CurrentUser.NameIdentifierInt64 + " ", "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _PointsOfContact.OrganizationID = Convert.ToInt64(oid);
-                if (this.OrganizationBAL.PointOfContact_DuplicationCheckBAL(_PointsOfContact) == 0)
+                if (_PointsOfContact.PersonID == CurrentUser.NameIdentifierInt64)
                 {
-                    _PointsOfContact.CreatedBy = CurrentUser.NameIdentifierInt64;
-                    _PointsOfContact.CreatedDate = DateTime.Now;
-                    _PointsOfContact.ID = this.OrganizationBAL.PointOfContact_CreateBAL(_PointsOfContact);
+                    ModelState.AddModelError(lr.PointOfContactAssignIssue, lr.CurrentUserPointOfContactAssignIssue);
                 }
                 else
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.PointofContactDuplicationMessage);
+                    if (this.OrganizationBAL.PointOfContact_DuplicationCheckBAL(_PointsOfContact) == 0)
+                    {
+                        _PointsOfContact.CreatedBy = CurrentUser.NameIdentifierInt64;
+                        _PointsOfContact.CreatedDate = DateTime.Now;
+                        _PointsOfContact.ID = this.OrganizationBAL.PointOfContact_CreateBAL(_PointsOfContact);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(lr.ErrorServerError, lr.PointofContactDuplicationMessage);
+                    }
                 }
             }
 
@@ -299,15 +390,24 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _PointsOfContact.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                _PointsOfContact.UpdatedDate = DateTime.Now;
-                var result = this.OrganizationBAL.PointOfContact_UpdateBAL(_PointsOfContact);
-                if (result == -1)
+                var json = new JavaScriptSerializer().Serialize(0);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to update  point of caontact  " + DateTime.UtcNow + " with user id " + CurrentUser.NameIdentifierInt64 + " ", "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
+                if (_PointsOfContact.PersonID == CurrentUser.NameIdentifierInt64)
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    ModelState.AddModelError(lr.PointOfContactAssignIssue, lr.CurrentUserPointOfContactAssignIssue);
+                }
+                else
+                {
+                    _PointsOfContact.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                    _PointsOfContact.UpdatedDate = DateTime.Now;
+                    var result = this.OrganizationBAL.PointOfContact_UpdateBAL(_PointsOfContact);
+                    if (result == -1)
+                    {
+                        ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    }
                 }
             }
-
             var resultData = new[] { _PointsOfContact };
             return Json(resultData.ToDataSourceResult(request, ModelState));
         }
@@ -320,6 +420,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(0);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to destroy point of contact  " + DateTime.UtcNow + " with user id " + CurrentUser.NameIdentifierInt64 + " ", "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _PointsOfContact.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _PointsOfContact.UpdatedDate = DateTime.Now;
                 var result = this.OrganizationBAL.PointOfContact_DeleteBAL(_PointsOfContact);
@@ -342,6 +445,9 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorizeAttribute("CanViewPointofContact")]
         public ActionResult Resources(string oid)
         {
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to view  resources  " + DateTime.UtcNow + " with user id " + CurrentUser.NameIdentifierInt64 + " ", "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             return PartialView("_Resources", oid);
         }
 

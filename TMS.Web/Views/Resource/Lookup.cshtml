@@ -5,127 +5,130 @@
 }
 
 <h2>Lookup</h2>
-@*@Html.Partial("Static/_gridSearchWidget", lr.GroupsTitle)*@
-@(Html.Kendo().Grid<TMS.Library.Admin.Lookup.Lookup>()
-    .Name("ResourceLookupGridMian")
-         .Columns(columns =>
-           {
-               columns.Bound(p => p.LookupID).Title(lr.LookupID).Width(60);
-               columns.Bound(p => p.LookupP_Name).Title(lr.LookupPrimaryName).Width(130);
-               columns.Bound(p => p.LookupS_Name).Title(lr.LookupSecondaryName).Width(130);
-               columns.Bound(p => p.IsActive).ClientTemplate(
-     "<input type='checkbox' disabled='true' value='#= IsActive #' " +
-         "# if (IsActive) { #" +
-             "checked='checked'" +
-         "# } #" +
-     " />"
- ).Title(lr.GridIsActiveColumnTitle).Width(60);
-
-               columns.Bound(p => p.CreatedDate).Width(100).Format(KendoDateFormat).Title(lr.GridCreatedDate); ;
-               columns.Bound(p => p.Createdby).Width(80).Title(lr.GridCreatedBy);
-               columns.Bound(p => p.UpdatedDate).Width(100).Format(KendoDateFormat).Title(lr.GridUpdatedDate); ;
-               columns.Bound(p => p.Updatedby).Width(80).Title(lr.GridUpdatedBy);
-               columns.Command(command => { command.Edit().Text(lr.GridEditText); }).Width(140);
-           })
-         .ToolBar(toolbar => toolbar.Create().Text(lr.LookupAddNewLookup))
-     .ClientDetailTemplateId("LookupDetailGriTemplate")
-      .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_LookupAdminPopup"))
-          .RowAction(r =>
-          {
-              if (r.DataItem.IsActive)
-              {
-                  r.HtmlAttributes["style"] = "background:green";
-              }
-          })
-       .Pageable()
-         .Sortable()
-         .Scrollable().NoRecords(lr.GridNoRecordFoundMessage)
-         .HtmlAttributes(new { @style = "height: 480px;" })
-         .Events(e => e.Edit("LookupCreation_onEdit").Save("LookupGrid_onSave"))
-         .DataSource(dataSource => dataSource
-          .Ajax()
-         .PageSize(10)
-         .Model(model => model.Id(p => p.LookupID))
-         .Create(update => update.Action("Lookup_Create", "Resource"))
-         .Read(read => read.Action("Lookup_Read", "Resource").Data("withSearch"))
-         .Update(update => update.Action("Lookup_Update", "Resource"))
-         .Events(e => e.Error("LookupCreation_Error"))
-    )
-)
-
-@helper RenderAddTemplate()
+@if (User.IsInRole("CanViewLookup"))
 {
-    <div class="toolbar">
-        @if (User.IsInRole("CanAddEditGroups"))
-        {
-            <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
-            <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
-        }
-        @if (User.IsInRole("CanDeleteGroups"))
-        {
-            <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
-        }
-        @if (User.IsInRole("CanViewGroupsDetail"))
-        {
-            <a class="k-button tms-grid-detail"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>
-        }
-    </div>
-    @Html.Partial("Static/_gridSearchWidget", lr.GroupsTitle)
-}
+    @*@Html.Partial("Static/_gridSearchWidget", lr.GroupsTitle)*@
+    @(Html.Kendo().Grid<TMS.Library.Admin.Lookup.Lookup>()
+                .Name("ResourceLookupGridMian")
+                     .Columns(columns =>
+                     {
+                         columns.Bound(p => p.LookupID).Title(lr.LookupID).Width(60);
+                         columns.Bound(p => p.LookupP_Name).Title(lr.LookupPrimaryName).Width(130);
+                         columns.Bound(p => p.LookupS_Name).Title(lr.LookupSecondaryName).Width(130);
+                         columns.Bound(p => p.IsActive).ClientTemplate(
+               "<input type='checkbox' disabled='true' value='#= IsActive #' " +
+                   "# if (IsActive) { #" +
+                       "checked='checked'" +
+                   "# } #" +
+               " />"
+           ).Title(lr.GridIsActiveColumnTitle).Width(60);
 
-@*<h2>Lookup Detail Template</h2>*@
-<script id="LookupDetailGriTemplate" type="text/kendo-tmpl">
-    @(Html.Kendo().Grid<TMS.Library.Admin.Lookup.LookupDetail>()
-                            .Name("ResourceLookupDetailGridMian#=LookupID#") // template expression, to be evaluated in the master context
-            .Columns(columns =>
+                         columns.Bound(p => p.CreatedDate).Width(100).Format(KendoDateFormat).Title(lr.GridCreatedDate); ;
+                         columns.Bound(p => p.Createdby).Width(80).Title(lr.GridCreatedBy);
+                         columns.Bound(p => p.UpdatedDate).Width(100).Format(KendoDateFormat).Title(lr.GridUpdatedDate); ;
+                         columns.Bound(p => p.Updatedby).Width(80).Title(lr.GridUpdatedBy);
+                         columns.Command(command => { command.Edit().Text(lr.GridEditText); }).Width(140);
+                     })
+                     .ToolBar(toolbar => toolbar.Create().Text(lr.LookupAddNewLookup))
+                 .ClientDetailTemplateId("LookupDetailGriTemplate")
+                  .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_LookupAdminPopup"))
+                      .RowAction(r =>
+                      {
+                          if (r.DataItem.IsActive)
+                          {
+                              r.HtmlAttributes["style"] = "background:green";
+                          }
+                      })
+                   .Pageable()
+                     .Sortable()
+                     .Scrollable().NoRecords(lr.GridNoRecordFoundMessage)
+                     .HtmlAttributes(new { @style = "height: 480px;" })
+                     .Events(e => e.Edit("LookupCreation_onEdit").Save("LookupGrid_onSave"))
+                     .DataSource(dataSource => dataSource
+                      .Ajax()
+                     .PageSize(10)
+                     .Model(model => model.Id(p => p.LookupID))
+                     .Create(update => update.Action("Lookup_Create", "Resource"))
+                     .Read(read => read.Action("Lookup_Read", "Resource").Data("withSearch"))
+                     .Update(update => update.Action("Lookup_Update", "Resource"))
+                     .Events(e => e.Error("LookupCreation_Error"))
+                )
+    )
+
+    @helper RenderAddTemplate()
+    {
+        <div class="toolbar">
+            @if (User.IsInRole("CanAddEditGroups"))
             {
-                columns.Bound(o => o.LookupDetailP_Name).Width(110);
-                columns.Bound(o => o.LookupDetailS_Name).Width(110);
-                columns.Bound(p => p.IsActive).ClientTemplate("<input disabled='true' type='checkbox' \\#= IsActive ? checked='checked' :'' \\# />").Title(lr.GridIsActiveColumnTitle).Width(50); ;
-                columns.Bound(p => p.IsSelected).ClientTemplate("<input disabled='true' type='checkbox' \\#= IsSelected ? checked='checked' :'' \\# />").Title(lr.GridIsSelected).Width(50); ;
-                columns.Bound(p => p.CreatedDate).Width(100).Format(KendoDateFormat).Title(lr.GridCreatedDate); ;
-                columns.Bound(p => p.Createdby).Width(80).Title(lr.GridCreatedBy);
-                columns.Command(command =>
-                {
-                    command.Edit().Text(lr.GridEditText);
-                    command.Destroy().Text(lr.GridDeleteButtonText);
-                }).Width(140);
+                <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+                <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+            }
+            @if (User.IsInRole("CanDeleteGroups"))
+            {
+                <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+            }
+            @if (User.IsInRole("CanViewGroupsDetail"))
+            {
+                <a class="k-button tms-grid-detail"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>
+            }
+        </div>
+        @Html.Partial("Static/_gridSearchWidget", lr.GroupsTitle)
+    }
 
-            }).ToolBar(toolbar => toolbar.Create().Text(lr.LookupDetailsAdd))
-            .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_LookupDetailAdminPopup").DisplayDeleteConfirmation(lr.GridDeleteRecordMessage))
-              .Events(e => e.Edit("LookupDetailCreation_onEdit").Save("LookupDetailGrid_onSave"))
-            .DataSource(dataSource => dataSource
-                .Ajax()
-                .PageSize(10).Model(model => model.Id(p => p.LookupDetaiId))
-                      .Read(read => read.Action("LookupDetail_Read", "Resource", new { LookupId = "#=LookupID#" }))
-                      .Create(read => read.Action("LookupDetail_Create", "Resource", new { LookupIdCreate = "#=LookupID#" }))
-                      .Update(read => read.Action("LookupDetail_Update", "Resource"))
-                              .Destroy(read => read.Action("LookupDetail_Destroy", "Resource"))
-                   .Events(e => e.RequestEnd("onLookupDetailRequestEnd"))
-                    )
-                         .Events(e => e.DataBound("grid_dataBound"))
-            .Pageable()
-            .Sortable().NoRecords(lr.GridNoRecordFoundMessage)
+    @*<h2>Lookup Detail Template</h2>*@
+    <script id="LookupDetailGriTemplate" type="text/kendo-tmpl">
+        @(Html.Kendo().Grid<TMS.Library.Admin.Lookup.LookupDetail>()
+                                        .Name("ResourceLookupDetailGridMian#=LookupID#") // template expression, to be evaluated in the master context
+                        .Columns(columns =>
+                        {
+                            columns.Bound(o => o.LookupDetailP_Name).Width(110);
+                            columns.Bound(o => o.LookupDetailS_Name).Width(110);
+                            columns.Bound(p => p.IsActive).ClientTemplate("<input disabled='true' type='checkbox' \\#= IsActive ? checked='checked' :'' \\# />").Title(lr.GridIsActiveColumnTitle).Width(50); ;
+                            columns.Bound(p => p.IsSelected).ClientTemplate("<input disabled='true' type='checkbox' \\#= IsSelected ? checked='checked' :'' \\# />").Title(lr.GridIsSelected).Width(50); ;
+                            columns.Bound(p => p.CreatedDate).Width(100).Format(KendoDateFormat).Title(lr.GridCreatedDate); ;
+                            columns.Bound(p => p.Createdby).Width(80).Title(lr.GridCreatedBy);
+                            columns.Command(command =>
+                            {
+                                command.Edit().Text(lr.GridEditText);
+                                command.Destroy().Text(lr.GridDeleteButtonText);
+                            }).Width(140);
 
-            .ToClientTemplate()
-    )
-</script>
+                        }).ToolBar(toolbar => toolbar.Create().Text(lr.LookupDetailsAdd))
+                        .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_LookupDetailAdminPopup").DisplayDeleteConfirmation(lr.GridDeleteRecordMessage))
+                          .Events(e => e.Edit("LookupDetailCreation_onEdit").Save("LookupDetailGrid_onSave"))
+                        .DataSource(dataSource => dataSource
+                            .Ajax()
+                            .PageSize(10).Model(model => model.Id(p => p.LookupDetaiId))
+                                  .Read(read => read.Action("LookupDetail_Read", "Resource", new { LookupId = "#=LookupID#" }))
+                                  .Create(read => read.Action("LookupDetail_Create", "Resource", new { LookupIdCreate = "#=LookupID#" }))
+                                  .Update(read => read.Action("LookupDetail_Update", "Resource"))
+                                          .Destroy(read => read.Action("LookupDetail_Destroy", "Resource"))
+                               .Events(e => e.RequestEnd("onLookupDetailRequestEnd"))
+                                )
+                                     .Events(e => e.DataBound("grid_dataBound"))
+                        .Pageable()
+                        .Sortable().NoRecords(lr.GridNoRecordFoundMessage)
 
-@* lookup Grid Error Template *@
-<script type="text/x-kendo-template" id="LookupCreationErrorTemplate">
-    # if (messages.length) { #
-    <li class="ErrorDetailhead">
-        <span>#=field#</span>
-        <ul class="DetailsError">
-            # for (var i = 0; i < messages.length; ++i) { #
-            <li>#= messages[i] #</li>
-            # } #
-        </ul>
-    </li>
-    # } #
-</script>
-@section Scripts
+                        .ToClientTemplate()
+        )
+    </script>
+
+    @* lookup Grid Error Template *@
+    <script type="text/x-kendo-template" id="LookupCreationErrorTemplate">
+        # if (messages.length) { #
+        <li class="ErrorDetailhead">
+            <span>#=field#</span>
+            <ul class="DetailsError">
+                # for (var i = 0; i < messages.length; ++i) { #
+                <li>#= messages[i] #</li>
+                # } #
+            </ul>
+        </li>
+        # } #
+    </script>
+    @section Scripts
 {
-    <script src="@Url.Content("~/Views/Resource/Lookup.js")"></script>
+        <script src="@Url.Content("~/Views/Resource/Lookup.js")"></script>
 
+    }
 }

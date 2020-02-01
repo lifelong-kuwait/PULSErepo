@@ -36,17 +36,22 @@
     }))
 
     {
-       @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
         @Html.Hidden("UserID")
         @Html.Hidden("PersonID")
-      
-    
-        <div class="row">
-            <div class="col-md-11 button-div">
-                <input type="submit" id="btnsave"  class="btn btn-primary" value="Assign" />
 
+       
+
+            <div class="row">
+                <div class="col-md-11 button-div">
+                    @if (User.IsInRole("CanAddEditReassignProspect"))
+                    {
+                    <input type="submit" id="btnsave" class="btn btn-primary" value="Assign" />
+                    }
+
+                </div>
             </div>
-        </div>
+
     }
 </div>
 <script type="text/javascript">

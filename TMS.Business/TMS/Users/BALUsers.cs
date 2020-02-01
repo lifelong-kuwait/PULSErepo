@@ -21,6 +21,7 @@ using System.Linq;
 using TMS.Common.Utilities;
 using TMS.Library.TMS.Persons;
 using TMS.Library.Entities.TMS.Program;
+using TMS.Library.Entities.CRM;
 
 namespace TMS.Business.TMS
 {
@@ -55,7 +56,24 @@ namespace TMS.Business.TMS
         {
             return _DAL.LoginUserDAL(Email);
         }
-
+        /// <summary>
+        /// Logins the user bal.
+        /// </summary>
+        /// <param name="Email">The email.</param>
+        /// <returns>Users.</returns>
+        public List<Users> LoginUserListBAL(string Email)
+        {
+            return _DAL.LoginUserListDAL(Email);
+        }
+        /// <summary>
+        /// Logins the user bal.
+        /// </summary>
+        /// <param name="Email">The email.</param>
+        /// <returns>Users.</returns>
+        public Users LoginUserBALForTrainer(string Email,long companyId)
+        {
+            return _DAL.LoginUserDALForTrainer(Email,companyId);
+        }
         /// <summary>
         /// Updates the user locked out bal.
         /// </summary>
@@ -68,7 +86,18 @@ namespace TMS.Business.TMS
         {
             return _DAL.UpdateUserLockedOut(Email, UserID, LockedOutAttempt, IsLockedOut);
         }
-
+        /// <summary>
+        /// Updates the user locked out bal.
+        /// </summary>
+        /// <param name="Email">The email.</param>
+        /// <param name="UserID">The user identifier.</param>
+        /// <param name="LockedOutAttempt">The locked out attempt.</param>
+        /// <param name="IsLockedOut">if set to <c>true</c> [is locked out].</param>
+        /// <returns>System.Int32.</returns>
+        public int LogInsert(string Dates, string Threads, string Levels, string Loggers, string Messages, string Exceptions, long UserID, string Controllers, string Action, string Prarams, long companyID)
+        {
+            return _DAL.LogInsert( Dates,  Threads,  Levels,  Loggers,  Messages,  Exceptions,  UserID,  Controllers,  Action, Prarams,companyID);
+        }
         /// <summary>
         /// Updates the login user themes dal.
         /// </summary>
@@ -114,9 +143,30 @@ namespace TMS.Business.TMS
         {
             return _DAL.LoginUsers_GetAllDAL(culture,SearchText);
         }
+        // With Search
+        public IList<LoginUsers> LoginLockedUsers_GetAllBAL(string culture, string SearchText)
+        {
+            return _DAL.LoginLockedUsers_GetAllDAL(culture, SearchText);
+        }
         public IList<LoginUsers> LoginUsersOrganization_GetAllBAL(string culture, string ID, string SearchText)
         {
             return _DAL.LoginUsersOrganization_GetAllDAL(culture, ID, SearchText);
+        }
+        public IList<LoginUsers> LoginLockedUsersOrganization_GetAllBAL(string culture, string ID, string SearchText)
+        {
+            return _DAL.LoginLockedUsersOrganization_GetAllDAL(culture, ID, SearchText);
+        }
+        public IList<CRM_UserLog> LogOrganization_GetAllBAL(ref int Total, string OrgID, string SearchText, string SortExpression, int StartRowIndex, int page, int PageSize)
+        {
+            return _DAL.LogOrganization_GetAllDAL(ref Total,  OrgID,  SearchText,  SortExpression,  StartRowIndex,  page,  PageSize);
+        }
+        public IList<CRM_UserLog> ErrorLogOrganization_GetAllBAL(ref int Total, string OrgID, string SearchText, string SortExpression, int StartRowIndex, int page, int PageSize)
+        {
+            return _DAL.ErrorLogOrganization_GetAllDAL(ref Total, OrgID, SearchText, SortExpression, StartRowIndex, page, PageSize);
+        }
+        public int ErrorLogOrganization_GetAllBAL(CRM_UserLog objLog, long companyID, long ID)
+        {
+            return _DAL.ErrorLogOrganization_GetAllBAL( objLog,  companyID,  ID);
         }
         /// <summary>
         /// Logins the users get all bal.
@@ -298,7 +348,15 @@ namespace TMS.Business.TMS
         {
             return _DAL.LoginUsers_DeleteDAL(_objUsers);
         }
-
+        /// <summary>
+        /// Logins the users delete bal.
+        /// </summary>
+        /// <param name="_objUsers">The object users.</param>
+        /// <returns>System.Int32.</returns>
+        public int LoginUsers_UnlockBAL(LoginUsers _objUsers)
+        {
+            return _DAL.LoginUsers_UnlockDAL(_objUsers);
+        }
         /// <summary>
         /// Logins the users update password bal.
         /// </summary>
@@ -318,9 +376,27 @@ namespace TMS.Business.TMS
         {
             return _DAL.LoginUsers_DuplicationCheckDAL(_objUsers);
         }
+        /// <summary>
+        /// Logins the users duplication check bal.
+        /// </summary>
+        /// <param name="_objUsers">The object users.</param>
+        /// <returns>System.Int32.</returns>
+        public int LoginUsersAsTrainer_DuplicationCheckBAL(LoginUsers _objUsers)
+        {
+            return _DAL.LoginUsersAsTrainer_DuplicationCheckDAL(_objUsers);
+        }
+        public int LoginUsers_DuplicationCheckUpdateBAL(LoginUsers _objUsers)
+        {
+            return _DAL.LoginUsers_DuplicationCheckUpdateDAL(_objUsers);
+        }
         public int LoginPerson_DuplicationCheckBAL(Person objperson)
         {
             return _DAL.LoginPerson_DuplicationCheckDAL(objperson);
+        }
+        
+        public int LoginPerson_DuplicationCheckUpdateBAL(Person objperson)
+        {
+            return _DAL.LoginPerson_DuplicationCheckUpdateDAL(objperson);
         }
         int DeletePerson_CheckBAL(ClassTrainerMapping classTrainerMapping)
         {
@@ -348,10 +424,15 @@ namespace TMS.Business.TMS
 
             return _DAL.TrainerUsers_GetAllDAL(culture);
         }
-
+        
         int IBALUsers.DeletePerson_CheckBAL(ClassTrainerMapping classTrainerMapping)
         {
             return _DAL.DeletePerson_CheckDAL(classTrainerMapping);
+        }
+        
+            string IBALUsers.Person_AllAssignPersonClassesBAL(ClassTrainerMapping classTrainerMapping)
+        {
+            return _DAL.Person_AllAssignPersonClassesDAL(classTrainerMapping);
         }
         #endregion
     }

@@ -1,0 +1,41 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <title>Some Went Wrong</title>
+    <!-- Shamcey CSS -->
+
+    <link href="~/Content/Shamcey/css/shamcey.css" rel="stylesheet" />
+</head>
+
+<body class="bg-gray-900">
+
+    <div class="ht-100v d-flex align-items-center justify-content-center">
+        <div class="wd-lg-70p wd-xl-50p tx-center pd-x-40">
+            <h1 class="tx-100 tx-xs-140 tx-normal tx-gray-300 mg-b-0 text text-danger">ERROR!</h1>
+            <h5 class="tx-xs-24 tx-normal tx-primary mg-b-30 lh-5">Some Went Wrong.</h5>
+            <p class="tx-16 mg-b-30">
+                Something went wrong. Please try to refresh the page or contact with  administrator.
+            </p>
+
+            <div class="d-flex justify-content-center">
+                <div class="d-flex wd-xs-300">
+                    <input type="text" class="form-control ht-40" placeholder="Search..." style="visibility:hidden;">
+                    <button class="btn btn-success bd-0 mg-l-5 ht-40 pd-x-20" id="logout" onclick="moveToHome();">Back To Home</button>
+                </div>
+            </div>
+        </div>
+    </div><!-- ht-100v -->
+    <script type="text/javascript">
+        function moveToHome() {
+            window.location.href = "../Admin/Index";
+        }
+    </script>
+</body>
+
+</html>

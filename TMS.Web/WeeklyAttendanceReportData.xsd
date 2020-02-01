@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="WeeklyAttendanceReportData" targetNamespace="http://tempuri.org/WeeklyAttendanceReportData.xsd" xmlns:mstns="http://tempuri.org/WeeklyAttendanceReportData.xsd" xmlns="http://tempuri.org/WeeklyAttendanceReportData.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="WeeklyAttendanceReportData" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="WeeklyAttendanceReportData" msprop:Generator_UserDSName="WeeklyAttendanceReportData">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_RowClassName="DataTable1Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" minOccurs="0" />
+              <xs:element name="FullName" msprop:Generator_ColumnVarNameInTable="columnFullName" msprop:Generator_ColumnPropNameInRow="FullName" msprop:Generator_ColumnPropNameInTable="FullNameColumn" msprop:Generator_UserColumnName="FullName" type="xs:string" minOccurs="0" />
+              <xs:element name="CourseName" msprop:Generator_ColumnVarNameInTable="columnCourseName" msprop:Generator_ColumnPropNameInRow="CourseName" msprop:Generator_ColumnPropNameInTable="CourseNameColumn" msprop:Generator_UserColumnName="CourseName" type="xs:string" minOccurs="0" />
+              <xs:element name="ClassName" msprop:Generator_ColumnVarNameInTable="columnClassName" msprop:Generator_ColumnPropNameInRow="ClassName" msprop:Generator_ColumnPropNameInTable="ClassNameColumn" msprop:Generator_UserColumnName="ClassName" type="xs:string" minOccurs="0" />
+              <xs:element name="Trainers" msprop:Generator_ColumnVarNameInTable="columnTrainers" msprop:Generator_ColumnPropNameInRow="Trainers" msprop:Generator_ColumnPropNameInTable="TrainersColumn" msprop:Generator_UserColumnName="Trainers" type="xs:string" minOccurs="0" />
+              <xs:element name="Coordinators" msprop:Generator_ColumnVarNameInTable="columnCoordinators" msprop:Generator_ColumnPropNameInRow="Coordinators" msprop:Generator_ColumnPropNameInTable="CoordinatorsColumn" msprop:Generator_UserColumnName="Coordinators" type="xs:string" minOccurs="0" />
+              <xs:element name="Monday" msprop:Generator_ColumnVarNameInTable="columnMonday" msprop:Generator_ColumnPropNameInRow="Monday" msprop:Generator_ColumnPropNameInTable="MondayColumn" msprop:Generator_UserColumnName="Monday" type="xs:string" minOccurs="0" />
+              <xs:element name="Tuesday" msprop:Generator_ColumnVarNameInTable="columnTuesday" msprop:Generator_ColumnPropNameInRow="Tuesday" msprop:Generator_ColumnPropNameInTable="TuesdayColumn" msprop:Generator_UserColumnName="Tuesday" type="xs:string" minOccurs="0" />
+              <xs:element name="Wednesday" msprop:Generator_ColumnVarNameInTable="columnWednesday" msprop:Generator_ColumnPropNameInRow="Wednesday" msprop:Generator_ColumnPropNameInTable="WednesdayColumn" msprop:Generator_UserColumnName="Wednesday" type="xs:string" minOccurs="0" />
+              <xs:element name="Thursday" msprop:Generator_ColumnVarNameInTable="columnThursday" msprop:Generator_ColumnPropNameInRow="Thursday" msprop:Generator_ColumnPropNameInTable="ThursdayColumn" msprop:Generator_UserColumnName="Thursday" type="xs:string" minOccurs="0" />
+              <xs:element name="Friday" msprop:Generator_ColumnVarNameInTable="columnFriday" msprop:Generator_ColumnPropNameInRow="Friday" msprop:Generator_ColumnPropNameInTable="FridayColumn" msprop:Generator_UserColumnName="Friday" type="xs:string" minOccurs="0" />
+              <xs:element name="Saturday" msprop:Generator_ColumnVarNameInTable="columnSaturday" msprop:Generator_ColumnPropNameInRow="Saturday" msprop:Generator_ColumnPropNameInTable="SaturdayColumn" msprop:Generator_UserColumnName="Saturday" type="xs:string" minOccurs="0" />
+              <xs:element name="Sunday" msprop:Generator_ColumnVarNameInTable="columnSunday" msprop:Generator_ColumnPropNameInRow="Sunday" msprop:Generator_ColumnPropNameInTable="SundayColumn" msprop:Generator_UserColumnName="Sunday" type="xs:string" minOccurs="0" />
+              <xs:element name="SumP" msprop:Generator_ColumnVarNameInTable="columnSumP" msprop:Generator_ColumnPropNameInRow="SumP" msprop:Generator_ColumnPropNameInTable="SumPColumn" msprop:Generator_UserColumnName="SumP" type="xs:long" minOccurs="0" />
+              <xs:element name="SumA" msprop:Generator_ColumnVarNameInTable="columnSumA" msprop:Generator_ColumnPropNameInRow="SumA" msprop:Generator_ColumnPropNameInTable="SumAColumn" msprop:Generator_UserColumnName="SumA" type="xs:long" minOccurs="0" />
+              <xs:element name="SumL" msprop:Generator_ColumnVarNameInTable="columnSumL" msprop:Generator_ColumnPropNameInRow="SumL" msprop:Generator_ColumnPropNameInTable="SumLColumn" msprop:Generator_UserColumnName="SumL" type="xs:long" minOccurs="0" />
+              <xs:element name="SumQ" msprop:Generator_ColumnVarNameInTable="columnSumQ" msprop:Generator_ColumnPropNameInRow="SumQ" msprop:Generator_ColumnPropNameInTable="SumQColumn" msprop:Generator_UserColumnName="SumQ" type="xs:long" minOccurs="0" />
+              <xs:element name="SumU" msprop:Generator_ColumnVarNameInTable="columnSumU" msprop:Generator_ColumnPropNameInRow="SumU" msprop:Generator_ColumnPropNameInTable="SumUColumn" msprop:Generator_UserColumnName="SumU" type="xs:long" minOccurs="0" />
+              <xs:element name="SumQui" msprop:Generator_ColumnVarNameInTable="columnSumQui" msprop:Generator_ColumnPropNameInRow="SumQui" msprop:Generator_ColumnPropNameInTable="SumQuiColumn" msprop:Generator_UserColumnName="SumQui" type="xs:long" minOccurs="0" />
+              <xs:element name="AttendancePercentage" msprop:Generator_ColumnVarNameInTable="columnAttendancePercentage" msprop:Generator_ColumnPropNameInRow="AttendancePercentage" msprop:Generator_ColumnPropNameInTable="AttendancePercentageColumn" msprop:Generator_UserColumnName="AttendancePercentage" type="xs:double" minOccurs="0" />
+              <xs:element name="RowIndex" msprop:Generator_ColumnVarNameInTable="columnRowIndex" msprop:Generator_ColumnPropNameInRow="RowIndex" msprop:Generator_ColumnPropNameInTable="RowIndexColumn" msprop:Generator_UserColumnName="RowIndex" type="xs:long" minOccurs="0" />
+              <xs:element name="StartDate" msprop:Generator_ColumnVarNameInTable="columnStartDate" msprop:Generator_ColumnPropNameInRow="StartDate" msprop:Generator_ColumnPropNameInTable="StartDateColumn" msprop:Generator_UserColumnName="StartDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="EndDate" msprop:Generator_ColumnVarNameInTable="columnEndDate" msprop:Generator_ColumnPropNameInRow="EndDate" msprop:Generator_ColumnPropNameInTable="EndDateColumn" msprop:Generator_UserColumnName="EndDate" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

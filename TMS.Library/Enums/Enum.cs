@@ -578,17 +578,110 @@ namespace TMS.Library
 
 
     #endregion
+    #region Log4NET
 
+   
+
+    public enum Logs
+    {
+        [Display(Name = "Login_Susscess", ResourceType = typeof(lr))]
+        Login_Susscess = 0,
+
+        [Display(Name = "Login_Attempt", ResourceType = typeof(lr))]
+        Login_Attempt = 1,
+
+        [Display(Name = "Login_Locked", ResourceType = typeof(lr))]
+        Login_Locked = 2,
+        [Display(Name = "NotSpecified", ResourceType = typeof(lr))]
+        Error = 3,
+
+        [Display(Name = "Insert_Success", ResourceType = typeof(lr))]
+        Insert_Success = 4,
+
+        [Display(Name = "Delete_Success", ResourceType = typeof(lr))]
+        Delete_Success = 5,
+        [Display(Name = "Update_Success", ResourceType = typeof(lr))]
+        Update_Success = 6,
+
+        [Display(Name = "View_Success", ResourceType = typeof(lr))]
+        View_Success = 7,
+
+        [Display(Name = "Certificate_Success", ResourceType = typeof(lr))]
+        Certificate_Success = 8,
+
+        [Display(Name = "Report_View", ResourceType = typeof(lr))]
+        Report_View = 9,
+    }
+
+
+
+    #endregion
     #region Category
     public enum CategoryType
     {
         [Display(Name = "NotSpecified", ResourceType = typeof(lr))]
         CategoryType_NotSpecified = 0,
-        [Display(Name = "CategoryTypeFeedbackCategory", ResourceType = typeof(lr))]
-        CategoryType_Feedback_Category = 1,
+        //[Display(Name = "CategoryTypeFeedbackCategory", ResourceType = typeof(lr))]
+        //CategoryType_Feedback_Category = 1,
         [Display(Name = "CategoryTypeCourseCategory", ResourceType = typeof(lr))]
         CategoryType_Course_Category = 2,
     }
+    public enum TaxType
+    {
+        [Display(Name = "TaxExclusive", ResourceType = typeof(lr))]
+        Tax_Exclusive = 1,
+        [Display(Name = "TaxInclusive", ResourceType = typeof(lr))]
+        Tax_Inclusive = 2,
+        [Display(Name = "NoTax", ResourceType = typeof(lr))]
+        NoTax =3,
+    }
+    public enum CustomerType
+    {
+        [Display(Name = "LoyalCustomer", ResourceType = typeof(lr))]
+        Loyal_customer = 1,
+         [Display(Name = "DiscountCustomer", ResourceType = typeof(lr))]
+        Discount_customer = 2,
+         [Display(Name = "NewCustomer", ResourceType = typeof(lr))]
+        New_customer = 3,
+    }
+    public enum InvoiceStatus
+    {
+        [Display(Name = "InvoiceCreate", ResourceType = typeof(lr))]
+        InvoiceCreate = 1,
+        [Display(Name = "InvoiceRescheduled", ResourceType = typeof(lr))]
+        InvoiceRescheduled = 2,
+        [Display(Name = "InvoiceDeposit", ResourceType = typeof(lr))]
+        InvoiceDeposit = 3,
+        [Display(Name = "InvoiceReIssued", ResourceType = typeof(lr))]
+        InvoiceReIssued = 4,
+    }
+    public enum DepositType
+    {
+        [Display(Name = "BankDeposit", ResourceType = typeof(lr))]
+        BankDeposit = 1,
+        [Display(Name = "CashDeposit", ResourceType = typeof(lr))]
+        CashDeposit = 2,
+        [Display(Name = "KNetDeposit", ResourceType = typeof(lr))]
+        KNetDeposit = 3,
+        [Display(Name = "CheckBookDeposit", ResourceType = typeof(lr))]
+        CheckBookDeposit =4,
+
+    }
+    public enum HistoryType
+    {
+        [Display(Name = "InvoiceCreate", ResourceType = typeof(lr))]
+        InvoiceCreate = 1,
+        [Display(Name = "InvoiceIssued", ResourceType = typeof(lr))]
+        InvoiceIssued = 2,
+        [Display(Name = "InvoiceReIssued", ResourceType = typeof(lr))]
+        InvoiceReIssued = 3,
+        [Display(Name = "InvoiceDeposit", ResourceType = typeof(lr))]
+        InvoiceDeposit = 4,
+        [Display(Name = "InvoiceInstallment", ResourceType = typeof(lr))]
+        InvoiceInstallment = 5,
+
+    }
+
     #endregion
 
     #region

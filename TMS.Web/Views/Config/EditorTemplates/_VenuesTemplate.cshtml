@@ -185,11 +185,12 @@
                   .ValuePrimitive(true)
                   .OptionLabel(lr.AddressCountryOptionalLabel)
                           .DataTextField("Text")
+                          .Filter("contains")
                           .DataValueField("Value").HtmlAttributes(new { @class = "form-control ", style = "width:100%" })
                   .DataSource(dataSource =>
                   {
                       dataSource.Read(read => read.Action("CoreCountries", "DDL"))
-                                .ServerFiltering(true);
+                                .ServerFiltering(false);
                   })
             )
             @Html.ValidationMessageFor(m => m.CountryID)

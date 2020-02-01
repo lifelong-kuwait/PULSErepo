@@ -131,7 +131,18 @@ namespace TMS.DataObjects.Interfaces.Common.Configuration
         /// <returns>List&lt;Venues&gt;.</returns>
         List<Venues> VenuesbyOrganization_GetAllDAL(int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid);
 
+        /// <summary>
+        /// Venues the get all dal.
+        /// </summary>
+        /// <param name="StartRowIndex">Start index of the row.</param>
+        /// <param name="PageSize">Size of the page.</param>
+        /// <param name="Total">The total.</param>
+        /// <param name="SortExpression">The sort expression.</param>
+        /// <param name="SearchText">The search text.</param>
+        /// <returns>List&lt;Venues&gt;.</returns>
+        long VenuesForDestroy_GetAllDAL(long venueID);
 
+        
         /// <summary>
         /// Venues the create dal.
         /// </summary>
@@ -197,6 +208,7 @@ namespace TMS.DataObjects.Interfaces.Common.Configuration
         /// <param name="OpenId">The open identifier.</param>
         /// <returns>IList&lt;DDlList&gt;.</returns>
         IList<DDlList> Venues_GetAllByCultureDAL(string culture, int OpenType, long OpenId, long CompnayID);
+        IList<DDlList> Venues_GetAllByClassDAL(string culture, int OpenType, long OpenId, long CompnayID);
 
         IList<DDlList> Venues_GetAllByCultureDAL(string culture, long CompnayID);
 
@@ -264,6 +276,14 @@ namespace TMS.DataObjects.Interfaces.Common.Configuration
         /// <param name="OpenId">The open identifier.</param>
         /// <returns>IList&lt;DDlList&gt;.</returns>
         IList<DDlList> ManageTrainer_GetAllByCultureDAL(string culture, int OpenType, long OpenId, long CompnayID);
+        /// <summary>
+        /// Manages the trainer get all by culture dal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <param name="OpenType">Type of the open.</param>
+        /// <param name="OpenId">The open identifier.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
+        IList<DDlList> ManageVenue_GetAllByCultureDAL(string culture, int OpenType, long OpenId, long CompnayID);
 
         #endregion Trainer
 
@@ -620,7 +640,8 @@ namespace TMS.DataObjects.Interfaces.Common.Configuration
 
 
         IList<DDlList> CourseMeterial_GetAllByCultureDAL(string culture, long CompnayID);
-
+        IList<DDlList> PersonsForInvoice_GetAllByCultureDAL(string culture, long CompnayID);
+        
         IList<DDlList> HowHeard_GetAllByCultureDAL(string culture, long CompnayID);
 
         IList<DDlList> CRMUser_GetAllByCultureDAL(string culture, long CompnayID);

@@ -1,86 +1,109 @@
 ﻿@*@using lr = Resources.Resources;
 @model IEnumerable<TMS.Library.Common.Groups.SecurityGroupsPermission>
-@{
+    @{
     string GroupName = (string)ViewData["GroupName"];
     ViewBag.Title = GroupName;
-    //List<TMS.Library.Common.Groups.SecurityGroupsPermission> Model = (List<TMS.Library.Common.Groups.SecurityGroupsPermission>)ViewData["model"];
+    //List<TMS.Library.Common.Groups.SecurityGroupsPermission>
+        Model = (List<TMS.Library.Common.Groups.SecurityGroupsPermission>
+            )ViewData["model"];
 
-}*@
-@*@if (TempData["Success"] != null)
-{
-    if (TempData["Success"].ToString() == "Success")
-    {
-        <script>
-            jQuery(function () {
-                swal({
-                    title: '@lr.confirmUpdated',
-                    text: '@lr.RecordUpdatedSuccessfully',
-                    type: "success"
+            }*@
+            @*@if (TempData["Success"] != null)
+            {
+            if (TempData["Success"].ToString() == "Success")
+            {
+            <script>
+                jQuery(function () {
+                    swal({
+                        title: '@lr.confirmUpdated',
+                        text: '@lr.RecordUpdatedSuccessfully',
+                        type: "success"
+                    });
                 });
-            });
-        </script>
-    }
-}
-<style>
-    .right-inner-addon {
-    display: none;
-}
-</style>
-<div class="form-horizontal">
-    <div class="pageTitle">@GroupName</div>
-    <form method="post" action="@Url.Content("~/Admin/GroupDetail?GroupId=" +Request.QueryString["GroupId"])">
-        @Html.AntiForgeryToken()
-        <input id="GroupId" value="@Request.QueryString["GroupId"]" type="hidden" />
-        @foreach (var codeGroup in Model.GroupBy(x => x.CategoryLabelResource))
-        {
-            <fieldset class="scheduler-border">
-                <legend class="scheduler-border">@lr.GetByName(codeGroup.Key)</legend>
-                <div class="control-group">
-                    @foreach (var country in codeGroup)
-                    {
+            </script>
+            }
+            }
+            <style>
+                .right-inner-addon {
+                    display: none;
+                }
+            </style>
+            <div class="form-horizontal">
+                <div class="pageTitle">@GroupName</div>
+                <form method="post" action="@Url.Content(" ~/Admin/GroupDetail?GroupId=" +Request.QueryString["GroupId"])">
+                @Html.AntiForgeryToken()
+                <input id="GroupId" value="@Request.QueryString[" GroupId"]" type="hidden" />
+                @foreach (var codeGroup in Model.GroupBy(x => x.CategoryLabelResource))
+                {
+                <fieldset class="scheduler-border">
+                    <legend class="scheduler-border">@lr.GetByName(codeGroup.Key)</legend>
+                    <div class="control-group">
+                        @foreach (var country in codeGroup)
+                        {
                         { Html.RenderPartial("_GroupsPermissionRow", country); }
-                    }
-                </div>
-            </fieldset>
-        }
-        @if (User.IsInRole("CanUpdateGroupsDetail"))
-        {
-            <button type="submit" class="k-button k-button-icontext k-primary k-grid-update"><span class="k-icon k-i-check"></span>@lr.Submit</button>
-        }
-    </form>
-</div>
-
-<style>
-    .mTop20 {
-        margin-top: 10px;
-    }
-</style>*@
-
-@*@model string
-
-      @using lr = Resources.Resources;
-
-        <div class="container">
-            <div class="panel-group" id="accordion">
-
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">CRM</a>
-                        </h4>
+                        }
                     </div>
-                    <div id="collapse3" class="panel-collapse collapse">
-                        <div class="panel-body">
+                </fieldset>
+                }
+                @if (User.IsInRole("CanUpdateGroupsDetail"))
+                {
+                <button type="submit" class="k-button k-button-icontext k-primary k-grid-update"><span class="k-icon k-i-check"></span>@lr.Submit</button>
+                }
+                </form>
+            </div>
+
+            <style>
+                .mTop20 {
+                    margin-top: 10px;
+                }
+            </style>*@
+
+            @*@model string
+
+            @using lr = Resources.Resources;
+
+            <div class="container">
+                <div class="panel-group" id="accordion">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">CRM</a>
+                            </h4>
+                        </div>
+                        <div id="collapse3" class="panel-collapse collapse">
+                            <div class="panel-body">
 
 
-                            <div id="collapse2" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <div id="collapse1" class="panel-collapse collapse in">
-                                        <div class="panel-body">
-                                            @{
+                                <div id="collapse2" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <div id="collapse1" class="panel-collapse collapse in">
+                                            <div class="panel-body">
+                                                @{
                                                 Html.RenderAction("CRMGroupDetail", "Admin");
-                                            }
+                                                }
+                                            </div>
                                         </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">TMS</a>
+                            </h4>
+                        </div>
+                        <div id="collapse2" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div id="collapse1" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        @{
+                                        Html.RenderAction("TMSGroupDetail", "Admin");
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -88,127 +111,108 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">TMS</a>
-                        </h4>
-                    </div>
-                    <div id="collapse2" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <div id="collapse1" class="panel-collapse collapse in">
-                                <div class="panel-body">
-                                  @{
-                                      Html.RenderAction("TMSGroupDetail", "Admin");
-                                  }
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    </div>*@
+            </div>*@
 
 
-@using lr = Resources.Resources;
+            @using lr = Resources.Resources;
 
-<h2>Group Details</h2>
-@(Html.Kendo().PanelBar()
-        .Name("SaleAdminstration")
-    .ExpandMode(PanelBarExpandMode.Multiple)
-    .Items(i =>
-    {
+            <h2>Group Details</h2>
+            @(Html.Kendo().PanelBar()
+            .Name("SaleAdminstration")
+            .ExpandMode(PanelBarExpandMode.Multiple)
+            .Items(i =>
+            {
 
-        //if (User.IsInRole("CanViewTMSGroups"))
-        //{
-        //i.Add().Text("TMS").LoadContentFrom("TMSGroupDetail", "Admin");
-        i.Add().Text("TMS").LoadContentFrom("TMSGroupDetail", "Admin", new {GroupId = ViewData["GroupId"] });
-   // }
-   //     if (User.IsInRole("CanViewCRMGroups"))
-  //  {
-        i.Add().Text("CRM").LoadContentFrom("CRMGroupDetail", "Admin", new { GroupId = ViewData["GroupId"] });
-        //i.Add().Text("CRM").LoadContentFrom("CRMGroupDetail", "Admin");
-  //  }
-}).Events(e => e.Expand("onExpand")))
+                 if (User.IsInRole("CanViewTMSGroups"))
+                 {
+               // i.Add().Text("TMS").LoadContentFrom("TMSGroupDetail", "Admin");
+                i.Add().Text("TMS").LoadContentFrom("TMSGroupDetail", "Admin", new {GroupId = ViewData["GroupId"] });
+                 }
+                 if (User.IsInRole("CanViewCRMGroups"))
+                 {
+                i.Add().Text("CRM").LoadContentFrom("CRMGroupDetail", "Admin", new { GroupId = ViewData["GroupId"] });
+               // i.Add().Text("CRM").LoadContentFrom("CRMGroupDetail", "Admin");
+                 }
+            }).Events(e => e.Expand("onExpand")))
 
 
 
-<script type="text/javascript">
-    jQuery(function () {
+            <script type="text/javascript">
+                jQuery(function () {
 
-        jQuery(".tms-grid-add-main").live("mousedown", function (event) {
-            jQuery("#ClassGrid").data("kendoGrid").addRow();
-        });
-
-        //destroy from header
-        jQuery(".tms-grid-destroy-main").live("mousedown", function (event) {
-            grid = jQuery("#ClassDetailGrid").data("kendoGrid");
-            var selectedrow = jQuery("#ClassDetailGrid tr:nth(1)");
-
-            swal({
-                title: '@lr.Areyousureyouwanttodeletethisrecord',
-                text: '@lr.Youwillnotbeabletorecover',
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "@lr.confirmDelete",
-                cancelButtonText: "@lr.confirmNo",
-                closeOnConfirm: false,
-                closeOnCancel: true,
-                customClass:"tmsconfirm"
-            },
-               function(isConfirm){
-                   if (isConfirm) {
-                       jQuery("#ClassDetailGrid").data("kendoGrid").removeRow(selectedrow);
-                       swal({
-                           title: '@lr.confirmDeleted',
-                           text:  '@lr.confirmDeletedMessage',
-                           type: "success"
-                       },
-                    function(){
-                        window.location="@Url.Content("~/Program/Class")";
+                    jQuery(".tms-grid-add-main").live("mousedown", function (event) {
+                        jQuery("#ClassGrid").data("kendoGrid").addRow();
                     });
-                   }
-               });
-        });
 
-    //edit from header
-    jQuery(".tms-grid-edit-main").live("mousedown", function (event) {
-        jQuery("#ClassDetailGrid").data("kendoGrid").editRow(jQuery("#ClassDetailGrid tr:nth(1)"));
-    });
-    });
+                    //destroy from header
+                    jQuery(".tms-grid-destroy-main").live("mousedown", function (event) {
+                        grid = jQuery("#ClassDetailGrid").data("kendoGrid");
+                        var selectedrow = jQuery("#ClassDetailGrid tr:nth(1)");
 
-    function onExpand(e) {
-        jQuery('html, body').animate({
-            scrollTop:  e.item.offsetTop
-        }, 1500);
-    }
-</script>
+                        swal({
+                            title: '@lr.Areyousureyouwanttodeletethisrecord',
+                            text: '@lr.Youwillnotbeabletorecover',
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "@lr.confirmDelete",
+                            cancelButtonText: "@lr.confirmNo",
+                            closeOnConfirm: false,
+                            closeOnCancel: true,
+                            customClass: "tmsconfirm"
+                        },
+                            function (isConfirm) {
+                                if (isConfirm) {
+                                    jQuery("#ClassDetailGrid").data("kendoGrid").removeRow(selectedrow);
+                                    swal({
+                                        title: '@lr.confirmDeleted',
+                                        text: '@lr.confirmDeletedMessage',
+                                        type: "success"
+                                    },
+                                        function () {
+                                            //alert('hello class');
+                                            window.location = "@Url.Content("~/Program/Class")";
+                                        });
+                                }
+                            });
+                    });
+
+                    //edit from header
+                    jQuery(".tms-grid-edit-main").live("mousedown", function (event) {
+                        jQuery("#ClassDetailGrid").data("kendoGrid").editRow(jQuery("#ClassDetailGrid tr:nth(1)"));
+                        alert('hello');
+                    });
+                });
+
+                function onExpand(e) {
+                    jQuery('html, body').animate({
+                        scrollTop: e.item.offsetTop
+                    }, 1500);
+                }
+            </script>
 
 
 
-@*@section Scripts
-    {
-        <script src="@Url.Content("~/Scripts/ts/tms/Program/Program.js")"></script>
-    }*@
-<style>
-    .person-box {
-        color: #0c4e6f;
-    }
+            @*@section Scripts
+            {
+            <script src="@Url.Content(" ~/Scripts/ts/tms/Program/Program.js")"></script>
+            }*@
+            <style>
+                .person-box {
+                    color: #0c4e6f;
+                }
 
-    #ClassDetailGrid > table tr:first-child td {
-        background: #e2f4fd;
-    }
+                #ClassDetailGrid > table tr:first-child td {
+                    background: #e2f4fd;
+                }
 
-    .input-group {
-        display: none;
-    }
+                .input-group {
+                    display: none;
+                }
 
-    #inforecords .alert-success {
-        padding: 5px 5px 5px 15px;
-        font-size: 13px;
-        margin-bottom: 3px;
-    }
-</style>
+                #inforecords .alert-success {
+                    padding: 5px 5px 5px 15px;
+                    font-size: 13px;
+                    margin-bottom: 3px;
+                }
+            </style>

@@ -1,0 +1,43 @@
+﻿@model DDlList
+@using TMS;
+
+
+@*<div class=" btn-group " style=" width: 100%;">
+        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style=" width: 100%;">
+            <i class="@Model.CurrentLanguage.Icon"></i>
+            <span>@Model.CurrentLanguage.DisplayName</span> <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+            @foreach (var language in Model.Languages)
+            {
+                if (language.Name != Model.CurrentLanguage.Name)
+                {
+                    <li><a href="@Url.Action("ChangeCulture", "AbpLocalization")?cultureName=@(language.Name)&returnUrl=@(Request.Url)"><i class="@language.Icon"></i> @language.DisplayName</a></li>
+                }
+            }
+        </ul>
+    </div>*@
+
+
+<div class="LoginDropDown " style=" ">
+    <a class="btn btn-primary dropdown" style=" width: 100%; color:#fff" data-toggle="dropdown" href="#">
+
+        <i class="@Model.CurrentLanguage.Icon"></i>
+        <span>@Model.CurrentLanguage.DisplayName</span>
+    </a>
+    <ul class="dropdown-menu">
+        @foreach (var language in Model.Languages)
+        {
+
+            if (language.Name != CultureHelper.GetCurrentCulture())
+            {
+                <li><a href="@Url.Action("ChangeCulture", "Layout")?cultureName=@(language.Name)&returnUrl=@(Request.Url)"><i class="@language.Icon"></i> @language.DisplayName</a></li>
+            }
+            else
+            {
+                <li class="disabled"><a class="not-active" href="@Url.Action("ChangeCulture", "Layout")?cultureName=@(language.Name)&returnUrl=@(Request.Url)"><i class="@language.Icon"></i> @language.DisplayName</a></li>
+
+            }
+        }
+    </ul>
+</div>

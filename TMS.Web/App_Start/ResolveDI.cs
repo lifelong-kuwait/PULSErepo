@@ -30,6 +30,7 @@ using TMS.Business.Interfaces.Common.Configuration;
 using TMS.Business.Interfaces.Common.DDL;
 using TMS.Business.Interfaces.Common.Groups;
 using TMS.Business.Interfaces.CRM;
+using TMS.Business.Interfaces.Invoiceing;
 using TMS.Business.Interfaces.TMS;
 using TMS.Business.Interfaces.TMS.Exams;
 using TMS.Business.Interfaces.TMS.Language;
@@ -39,6 +40,7 @@ using TMS.Business.Interfaces.TMS.Program;
 using TMS.Business.Interfaces.TMS.SkillsInterestLevel;
 using TMS.Business.TMS;
 using TMS.Business.TMS.Exams;
+using TMS.Business.TMS.Invoice;
 using TMS.Business.TMS.Language;
 using TMS.Business.TMS.Organization;
 using TMS.Business.TMS.Persons.Contact;
@@ -90,7 +92,8 @@ namespace TMS.Web.App_Start
                 Component.For<ITrainerBAL>().ImplementedBy<TrainerBAL>().LifestyleTransient(),
                    Component.For<ILanguageBAL>().ImplementedBy<LanguageBAL>().LifestyleTransient(),
                    Component.For<IAttendanceBAL>().ImplementedBy<AttendanceBAL>().LifestyleTransient(),
-                      Component.For<ISalesAdministrationBAL>().ImplementedBy<SalesAdministrationBAL>().LifestyleTransient()
+                      Component.For<ISalesAdministrationBAL>().ImplementedBy<SalesAdministrationBAL>().LifestyleTransient(),
+                      Component.For<IInvoiceingBAL>().ImplementedBy<InvoiceBAL>().LifestyleTransient()
 
                 );//
             container.Install(new DependencyInjectionExtension());

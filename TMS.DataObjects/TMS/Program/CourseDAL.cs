@@ -12,6 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 using Dapper;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -20,6 +21,7 @@ using TMS.DataObjects.Generics;
 using TMS.DataObjects.Interfaces.TMS;
 using TMS.Library.Entities.Common.Configuration;
 using TMS.Library.Entities.Coordinator;
+using TMS.Library.Entities.TMS.Course;
 using TMS.Library.Entities.TMS.Program;
 using TMS.Library.TMS;
 using TMS.Library.TMS.Persons;
@@ -70,14 +72,14 @@ namespace TMS.DataObjects.TMS
         /// <param name="SortExpression">The sort expression.</param>
         /// <param name="SearchText">The search text.</param>
         /// <returns>List&lt;Course&gt;.</returns>
-        public List<Course> TMS_CoursesByOrganization_GetAllDAL(int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid)
+        public List<Course> TMS_CoursesByOrganization_GetAllDAL(int page,int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid,long PersonID)
         {
             List<Course> Course = new List<Course>();
             using (var conn = new SqlConnection(DBHelper.ConnectionString))
             {
                 conn.Open();
                 DynamicParameters dbParams = new DynamicParameters();
-                dbParams.AddDynamicParams(new { StartRowIndex = StartRowIndex, PageSize = PageSize, SortExpression = SortExpression, SearchText = SearchText, Oid = Oid });
+                dbParams.AddDynamicParams(new { StartRowIndex = StartRowIndex, PageSize = PageSize, SortExpression = SortExpression, SearchText = SearchText, Oid = Oid,Page= page ,PersonId= PersonID });
                 using (var multi = conn.QueryMultiple("TMS_CoursesByOrganization_GetAll", dbParams, commandType: System.Data.CommandType.StoredProcedure))
                 {
                     Course = multi.Read<Course>().AsList<Course>();
@@ -87,6 +89,23 @@ namespace TMS.DataObjects.TMS
                 conn.Close();
             }
             return Course.ToList();
+        }
+        /// <summary>
+        /// TMSs the courses get all dal.
+        /// </summary>
+        /// <param name="StartRowIndex">Start index of the row.</param>
+        /// <param name="PageSize">Size of the page.</param>
+        /// <param name="Total">The total.</param>
+        /// <param name="SortExpression">The sort expression.</param>
+        /// <param name="SearchText">The search text.</param>
+        /// <returns>List&lt;Course&gt;.</returns>
+        public long TMS_CoursesDeleteCheckDAL(string CourseId, string Oid)
+        {
+            var parameters = new[] { ParamBuilder.Par("Count", 0) };
+            return ExecuteInt64withOutPutparameterSp("Course_Delete_Cheque", parameters,
+                    ParamBuilder.Par("CourseID", CourseId),
+                     ParamBuilder.Par("OID", Oid)
+                    );
         }
 
         /// <summary>
@@ -107,6 +126,36 @@ namespace TMS.DataObjects.TMS
                 conn.Close();
             }
             return Course;
+        }
+        /// <summary>
+        /// TMSs the courses get by identifier dal.
+        /// </summary>
+        /// <param name="ID">The identifier.</param>
+        /// <returns>Course.</returns>
+        public List<CourseDataBar> CourseDataBarDAL(DateTime startdate, DateTime lastdate, long CompanyId)
+        {
+            var _PersonData = ExecuteListSp<CourseDataBar>("CourseBarData", ParamBuilder.Par("monthstart", startdate), ParamBuilder.Par("monthEndDate", lastdate), ParamBuilder.Par("CompanyId", CompanyId));
+            return _PersonData.ToList();
+        }
+        /// <summary>
+        /// TMSs the courses get by identifier dal.
+        /// </summary>
+        /// <param name="ID">The identifier.</param>
+        /// <returns>Course.</returns>
+        public List<CourseDataBar> CourseFutureDataBarDAL(DateTime startdate, DateTime lastdate, long CompanyId)
+        {
+            var _PersonData = ExecuteListSp<CourseDataBar>("CourseFutureBarData", ParamBuilder.Par("monthstart", startdate), ParamBuilder.Par("monthEndDate", lastdate), ParamBuilder.Par("CompanyId", CompanyId));
+            return _PersonData.ToList();
+        }
+        /// <summary>
+        /// TMSs the courses get by identifier dal.
+        /// </summary>
+        /// <param name="ID">The identifier.</param>
+        /// <returns>Course.</returns>
+        public List<CourseDataBar> ClassFutureDataBarDAL(DateTime startdate, DateTime lastdate, long CompanyId)
+        {
+            var _PersonData = ExecuteListSp<CourseDataBar>("ClasseFutureBarData", ParamBuilder.Par("monthstart", startdate), ParamBuilder.Par("monthEndDate", lastdate), ParamBuilder.Par("CompanyId", CompanyId));
+            return _PersonData.ToList();
         }
         /// <summary>
         /// Courses the category code by course identifier dal.
@@ -190,7 +239,18 @@ namespace TMS.DataObjects.TMS
 
             );
         }
-
+        /// <summary>
+        /// TMSs the courses Dublicate primary name check.
+        /// </summary>
+        /// <param name="_Course">The course.</param>
+        /// <returns>System.Int32.</returns>
+        public int TMS_Courses_Dublicate_PrimaryNameDAL(Course _Course)
+        {
+            return ExecuteScalarSPInt32("TMS_Courses_Dublication_Primary_Name",
+                        ParamBuilder.Par("UserID", _Course.CreatedBy),
+                        ParamBuilder.Par("CousrseFirstName", _Course.PrimaryName)
+            );
+        }
         /// <summary>
         /// TMSs the courses delete dal.
         /// </summary>
@@ -219,11 +279,45 @@ namespace TMS.DataObjects.TMS
         {
             return ExecuteScalarInt32Sp("TMS_Session_DeleteCheck",
                         ParamBuilder.Par("ID", _Course.ID),
-                        ParamBuilder.Par("OrganizationID", CompanyID)
+                         ParamBuilder.Par("MyCount", 0)
 
             );
         }
-      //  int Session_CheckBAL(Sessions _Course, long CompanyID);
+        public IList<Sessions> TMS_SessionAttendance_GetAllDAL(Sessions _Course)
+        {
+            List<Sessions> Course = new List<Sessions>();
+            var conString = DBHelper.ConnectionString;
+            using (var conn = new SqlConnection(conString))
+            {
+                conn.Open();
+                string qry = @"TMS_Session_Attandance_DeleteCheck";
+                DynamicParameters param = new DynamicParameters();
+
+                param.Add("@ID", _Course.ID);
+                Course = conn.Query<Sessions>(qry.ToString(), param, commandType: System.Data.CommandType.StoredProcedure).AsList<Sessions>();
+                conn.Close();
+            }
+            return Course;// ExecuteListSp<LoginUserAddGroups>("TMS_Groups_GetAllByCulture", ParamBuilder.ParNVarChar("Culture", culture, 5));
+
+        }
+        public IList<Sessions> TMS_SessionAttendance_GetAllByIDDAL(int _Course)
+        {
+            List<Sessions> Course = new List<Sessions>();
+            var conString = DBHelper.ConnectionString;
+            using (var conn = new SqlConnection(conString))
+            {
+                conn.Open();
+                string qry = @"TMS_Session_Attandance_DeleteCheck";
+                DynamicParameters param = new DynamicParameters();
+
+                param.Add("@ID", _Course);
+                Course = conn.Query<Sessions>(qry.ToString(), param, commandType: System.Data.CommandType.StoredProcedure).AsList<Sessions>();
+                conn.Close();
+            }
+            return Course;// ExecuteListSp<LoginUserAddGroups>("TMS_Groups_GetAllByCulture", ParamBuilder.ParNVarChar("Culture", culture, 5));
+
+        }
+        //  int Session_CheckBAL(Sessions _Course, long CompanyID);
         #region Course Coordinator
         public IList<CourseCoordinatorMapping> TMS_CourseCoordinator_GetAllDAL(long CourseID)
         {
@@ -348,8 +442,9 @@ namespace TMS.DataObjects.TMS
             
             return ExecuteScalarInt32Sp("TMS_CourseCoordinator_Update",
                             ParamBuilder.Par("ID",_Coordinate.ID),
-                            ParamBuilder.Par("CoordinateID", _Coordinate.ID),
-                            ParamBuilder.Par("CourseID", CourseId),
+                             ParamBuilder.Par("CID", _Coordinate.CID),
+                            ParamBuilder.Par("CoordinateID", _Coordinate.CoordinateID),
+                            ParamBuilder.Par("CourseID", _Coordinate.CourseID),
                             ParamBuilder.Par("ModifiedBy", _Coordinate.ModifiedBy),
                             ParamBuilder.Par("ModifiedDate", _Coordinate.ModifiedDate));
         }
@@ -399,7 +494,7 @@ namespace TMS.DataObjects.TMS
         {
             var parameters = new[] { ParamBuilder.Par("ID", 0) };
             return ExecuteInt64withOutPutparameterSp("TMS_CourseFocus_Create", parameters,
-                            ParamBuilder.Par("FocusID", _Coordinate.FocusID),
+                            ParamBuilder.Par("FocusID", _Coordinate.ID),
                             ParamBuilder.Par("CourseID", CourseId),
                             ParamBuilder.Par("CreatedBy", _Coordinate.CreatedBy),
                             ParamBuilder.Par("CreatedDate", _Coordinate.CreatedDate));
@@ -409,8 +504,8 @@ namespace TMS.DataObjects.TMS
         {
 
             return ExecuteScalarInt32Sp("TMS_CourseFocusArea_Update",
-                            ParamBuilder.Par("ID", _Coordinate.ID),
-                            ParamBuilder.Par("FocusID", _Coordinate.FocusID),
+                            ParamBuilder.Par("FocusID", _Coordinate.ID),
+                            ParamBuilder.Par("OldID", _Coordinate.OLdID),
                             ParamBuilder.Par("CourseID", CourseId),
                             ParamBuilder.Par("ModifiedBy", _Coordinate.UpdatedBy),
                             ParamBuilder.Par("ModifiedDate", _Coordinate.UpdatedDate));
@@ -426,9 +521,17 @@ namespace TMS.DataObjects.TMS
 
             );
         }
+        public int TMS_CourseFocusArea_DublicationDAL(FocusAreas _focusarea, long CourseId)
+        {
+            return ExecuteScalarSPInt32("TMS_CourseFocus_DublicationCheck",
+                        ParamBuilder.Par("CourseID", CourseId),
+                        ParamBuilder.Par("FocusID", _focusarea.ID),
+                        ParamBuilder.Par("CreatedBy", _focusarea.CreatedBy)
+            );
+        }
 
         #endregion
 
-       
+
     }
 }

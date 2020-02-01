@@ -154,10 +154,11 @@ namespace TMS.Web.Views.Report.UserControls
                      ShowFutureClasses = true;
                       ClassTypeID = Convert.ToInt32(ddlClassType.SelectedValue);
 
-    
-          
+                    long CompanyId = Convert.ToInt64(HttpContext.Current.Session["CompanyID"]);
 
-            DataTable dt = _PersonBAL.ClassFutureReport(CurrentCourseCategoryID, ClassReportStartDateFrom, ClassReportStartDateTo, ShowFutureClasses, ClassTypeID);
+
+
+                    DataTable dt = _PersonBAL.ClassFutureReport(CurrentCourseCategoryID, ClassReportStartDateFrom, ClassReportStartDateTo, ShowFutureClasses, ClassTypeID, CompanyId);
             ReportViewer1.ProcessingMode = ProcessingMode.Local;
             ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/Report/Tran_ClassReport.rdlc");
             //  DataSet ds = GetTrainerDetailsForReports;

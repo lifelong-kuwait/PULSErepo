@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using System;
 using System.Collections.Generic;
 using TMS.Library.Entities.Common.Configuration;
 using TMS.Library.TMS.Persons.Skills;
@@ -44,7 +45,7 @@ namespace TMS.DataObjects.Interfaces.TMS.SkillsInterestLevel
         /// </summary>
         /// <param name="PersonId">The PersonId.</param>
         /// <returns>IList&lt;PersonSkill&gt;.</returns>
-        IList<FocusAreas> PersonFocusAreaSkill_GetbyPersonId();
+        IList<FocusAreas> PersonFocusAreaSkill_GetbyPersonId(string CompanyId);
 
         /// <summary>
         /// Persons the interest getby person identifier.
@@ -65,7 +66,7 @@ namespace TMS.DataObjects.Interfaces.TMS.SkillsInterestLevel
         /// </summary>
         /// <param name="_objPersonSkillsInterest">The object person skills interest.</param>
         /// <returns>System.Int64.</returns>
-        long PersonSkillsInterest_CreateDAL(string PersonIds,long user,string date,long cid, long OrganizationID);
+        long PersonSkillsInterest_CreateDAL(long PersonId, long OrganizationID, string title, long Type, string description, long user, DateTime date);
 
         /// <summary>
         /// Persons the skills interest update dal.
@@ -73,6 +74,12 @@ namespace TMS.DataObjects.Interfaces.TMS.SkillsInterestLevel
         /// <param name="_objPersonSkillsInterest">The object person skills interest.</param>
         /// <returns>System.Int32.</returns>
         int PersonSkillsInterest_UpdateDAL(PersonSkillsInterest _objPersonSkillsInterest);
+        /// <summary>
+        /// Persons the skills interest update dal.
+        /// </summary>
+        /// <param name="_objPersonSkillsInterest">The object person skills interest.</param>
+        /// <returns>System.Int32.</returns>
+        int PersonSkills_DuplicationCheckDAL(long cid, string _skill, long value);
 
         /// <summary>
         /// Persons the skills interest delete dal.

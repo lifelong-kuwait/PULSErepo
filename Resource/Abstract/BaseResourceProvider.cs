@@ -61,23 +61,28 @@ namespace Resources.Abstract
 
             // normalize
             culture = culture.ToLowerInvariant();
-
+           
             if (Cache && resources == null) {
                 // Fetch all resources
-                
+               // ClearCache();
                 lock (lockResources) {
 
                     if (resources == null) {
-                        resources = ReadResources().ToDictionary(r => string.Format("{0}.{1}", r.Culture.ToLowerInvariant(), r.Name));
+                        resources = ReadResources(culture).ToDictionary(r => string.Format("{0}.{1}", r.Culture.ToLowerInvariant(), r.Name));
                     }
                 }
             }
 
             if (Cache) {
-          //    ClearCache();
+                //ClearCache();
+                var first = resources.FirstOrDefault();
+                if(first.Value.Culture.ToString()!=culture)
+                {
+                    ClearCache();
+                }
                 if (ForceCache)
                 {
-                    resources = ReadResources().ToDictionary(r => string.Format("{0}.{1}", r.Culture.ToLowerInvariant(), r.Name));
+                    resources = ReadResources(culture).ToDictionary(r => string.Format("{0}.{1}", r.Culture.ToLowerInvariant(), r.Name));
                     ForceCache = false;
                 }
                 return resources[string.Format("{0}.{1}", culture, name)].Value;
@@ -100,7 +105,7 @@ namespace Resources.Abstract
         /// Returns all resources for all cultures. (Needed for caching)
         /// </summary>
         /// <returns>A list of resources</returns>
-        protected abstract IList<ResourceEntry> ReadResources();
+        protected abstract IList<ResourceEntry> ReadResources(string culture);
        
 
         /// <summary>

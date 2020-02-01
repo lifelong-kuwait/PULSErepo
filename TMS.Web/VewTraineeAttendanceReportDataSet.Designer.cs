@@ -312,7 +312,7 @@ namespace Lifelong.EIS.TrainingWeb {
             private global::System.Data.DataColumn columnSumL;
             
             private global::System.Data.DataColumn columnSumQ;
-            
+            private global::System.Data.DataColumn columnSumQui;
             private global::System.Data.DataColumn columnStartDate;
             
             private global::System.Data.DataColumn columnEndDate;
@@ -507,7 +507,16 @@ namespace Lifelong.EIS.TrainingWeb {
                     return this.columnSumQ;
                 }
             }
-            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn SumQuiColumn
+            {
+                get
+                {
+                    return this.columnSumQui;
+                }
+            }
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn StartDateColumn {
@@ -666,7 +675,8 @@ namespace Lifelong.EIS.TrainingWeb {
                         string SumP, 
                         string SumA, 
                         string SumL, 
-                        string SumQ, 
+                        string SumQ,
+                        string SumQui,
                         string StartDate, 
                         string EndDate, 
                         string RowIndex, 
@@ -699,6 +709,7 @@ namespace Lifelong.EIS.TrainingWeb {
                         SumA,
                         SumL,
                         SumQ,
+                        SumQui,
                         StartDate,
                         EndDate,
                         RowIndex,
@@ -758,6 +769,7 @@ namespace Lifelong.EIS.TrainingWeb {
                 this.columnSumA = base.Columns["SumA"];
                 this.columnSumL = base.Columns["SumL"];
                 this.columnSumQ = base.Columns["SumQ"];
+                this.columnSumQui = base.Columns["SumQui"];
                 this.columnStartDate = base.Columns["StartDate"];
                 this.columnEndDate = base.Columns["EndDate"];
                 this.columnRowIndex = base.Columns["RowIndex"];
@@ -810,6 +822,8 @@ namespace Lifelong.EIS.TrainingWeb {
                 base.Columns.Add(this.columnSumL);
                 this.columnSumQ = new global::System.Data.DataColumn("SumQ", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSumQ);
+                this.columnSumQui = new global::System.Data.DataColumn("SumQui", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSumQui);
                 this.columnStartDate = new global::System.Data.DataColumn("StartDate", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnStartDate);
                 this.columnEndDate = new global::System.Data.DataColumn("EndDate", typeof(string), null, global::System.Data.MappingType.Element);
@@ -872,6 +886,8 @@ namespace Lifelong.EIS.TrainingWeb {
                 this.columnSumL1.Caption = "SumL";
                 this.columnSumQ1.ReadOnly = true;
                 this.columnSumQ1.Caption = "SumQ";
+                this.columnSumQui.ReadOnly = true;
+                this.columnSumQui.Caption = "SumQui";
                 this.columnSumU1.ReadOnly = true;
                 this.columnSumU1.Caption = "SumU";
                 this.columnAttendancePercentage1.ReadOnly = true;
@@ -1236,7 +1252,27 @@ namespace Lifelong.EIS.TrainingWeb {
                     this[this.tableTran_Attendances_GetReportData.SumQColumn] = value;
                 }
             }
-            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string SumQui
+            {
+                get
+                {
+                    try
+                    {
+                        return ((string)(this[this.tableTran_Attendances_GetReportData.SumQuiColumn]));
+                    }
+                    catch (global::System.InvalidCastException e)
+                    {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SumQui\' in table \'Tran_Attendances_GetReportData\' is DBNull.", e);
+                    }
+                }
+                set
+                {
+                    this[this.tableTran_Attendances_GetReportData.SumQuiColumn] = value;
+                }
+            }
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string StartDate {
@@ -1528,7 +1564,19 @@ namespace Lifelong.EIS.TrainingWeb {
             public void SetSumQNull() {
                 this[this.tableTran_Attendances_GetReportData.SumQColumn] = global::System.Convert.DBNull;
             }
-            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsSumQuiNull()
+            {
+                return this.IsNull(this.tableTran_Attendances_GetReportData.SumQuiColumn);
+            }
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetSumQuiNull()
+            {
+                this[this.tableTran_Attendances_GetReportData.SumQuiColumn] = global::System.Convert.DBNull;
+            }
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsStartDateNull() {
@@ -1863,6 +1911,7 @@ namespace Lifelong.EIS.TrainingWeb.VewTraineeAttendanceReportDataSetTableAdapter
             tableMapping.ColumnMappings.Add("SumA", "SumA1");
             tableMapping.ColumnMappings.Add("SumL", "SumL1");
             tableMapping.ColumnMappings.Add("SumQ", "SumQ1");
+            tableMapping.ColumnMappings.Add("SumQui", "SumQui");
             tableMapping.ColumnMappings.Add("SumU", "SumU1");
             tableMapping.ColumnMappings.Add("AttendancePercentage", "AttendancePercentage1");
             tableMapping.ColumnMappings.Add("RowIndex", "RowIndex1");

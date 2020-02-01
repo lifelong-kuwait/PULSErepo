@@ -131,8 +131,8 @@
         <div class="col-md-7 col-lg-7 col-sm-11">
             @(Html.Kendo().DropDownListFor(c => c.MaritalStatus).DataTextField("Text").DataValueField("Value")
             .OptionLabel(lr.MaritalStatusOptionalLabel)
-            // .OptionLabel(new { Text = lr.GenderOptionallabel, Value = 0 })
-            .HtmlAttributes(new { @class = "form-control txtrequired ", style = "width:100%" })
+            .OptionLabel(new { Text = lr.MaritalStatusOptionalLabel, Value = 0 })
+            .HtmlAttributes(new { @class = "form-control", style = "width:100%" })
             .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.MaritalStatus>(typeof(TMS.Library.MaritalStatus))))
 
         </div>
@@ -141,11 +141,18 @@
     <div class="form-group">
         @Html.LabelFor(model => model.DateOfBirth, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-7 col-lg-7 col-sm-11">
-            @(Html.Kendo().DatePickerFor(x => x.DateOfBirth).Start(CalendarView.Month).Depth(CalendarView.Month).Format(KendoDateFormat).Value("").HtmlAttributes(new { style = "width: 100%;", @class = "txtrequired" }).Max(DateTime.Now.AddYears(-10)).Events(e => e.Change("onDOBChange")))
+            @(Html.Kendo().DatePickerFor(x => x.DateOfBirth)
+        .Start(CalendarView.Month)
+        .Depth(CalendarView.Month)
+        .Format(KendoDateFormat)
+        .Value(DateTime.Now.AddYears(-10))
+        //.OptionLabel(new { Text = lr.OfficialIDTypeOptionalLabel, Value = 0 })
+        .HtmlAttributes(new { style = "width: 100%;" })
+        .Max(DateTime.Now.AddYears(-10)).Events(e => e.Change("onDOBChange")))
 
 
             @*@(Html.Kendo().DatePickerFor(model => model.DateOfBirth).Start(CalendarView.Month).Depth(CalendarView.Month).Format(KendoDateFormat).Value("").HtmlAttributes(new { style = "width: 100%;padding-bottom: 10px;", @class = "txtrequired" }).Max(DateTime.Now).Events(e => e.Change("onDOBChange")))*@
-            @Html.ValidationMessageFor(model => model.DateOfBirth)
+            @*@Html.ValidationMessageFor(model => model.DateOfBirth)*@
         </div>
     </div>
 
@@ -157,10 +164,15 @@
             .HtmlAttributes(new { style = "width:100%" })
             .DataTextField("Text")
             .DataValueField("Value")
+            .SelectedIndex(110)
+            .Filter("contains")
             .OptionLabel(new { Text = lr.NationalityOptionalLabel, Value = 0 })
             .DataSource(dataSource =>
             {
-                dataSource.Read(read => read.Action("NationalityCode", "DDL"));
+                dataSource.Read(read =>
+                {
+                    read.Action("NationalityCode", "DDL");
+                }).ServerFiltering(false);
 
             })
             )
@@ -182,11 +194,12 @@
     {
         <div class="form-group">
             @Html.LabelFor(model => model.ClientType, new { @class = "col-md-3 col-lg-3 control-label" })
-            <div class="col-md-7 col-lg-7 col-sm-11">
+            <div class="col-md-3 col-lg-3 col-sm-11">
                 @(Html.Kendo().DropDownListFor(c => c.ClientType).DataTextField("Text").DataValueField("Value")
                 .OptionLabel(lr.ClientTypeOptionalLabel)
+                .SelectedIndex(2)
                 //.OptionLabel(new { Text = lr.GenderOptionallabel, Value = 0 })
-                .HtmlAttributes(new { @class = "form-control txtrequired ", style = "width:100%" })
+                .HtmlAttributes(new { @class = "form-control", style = "width:100%" })
                 .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.ClientType>(typeof(TMS.Library.ClientType))))
 
             </div>
@@ -195,17 +208,18 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.OfficialIdentificationTypeID, new { @class = "col-md-3 col-lg-3 control-label" })
-        <div class="col-md-4 col-lg-3 col-sm-11">
+        <div class="col-md-3 col-lg-3 col-sm-11">
             @(Html.Kendo().DropDownListFor(c => c.OfficialIdentificationTypeID).DataTextField("Text").DataValueField("Value")
                 .OptionLabel(lr.OfficialIDTypeOptionalLabel)
-                //.OptionLabel(new { Text = lr.GenderOptionallabel, Value = 0 })
-                .HtmlAttributes(new { @class = "form-control txtrequired ", style = "width:100%" })
+                .SelectedIndex(1)
+                .OptionLabel(new { Text = lr.OfficialIDTypeOptionalLabel, Value = 0 })
+                .HtmlAttributes(new {  style = "width:100%" })
                 .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.IDType>(typeof(TMS.Library.IDType))))
 
         </div>
-        @Html.LabelFor(model => model.OfficialIDNumber, new { @class = "col-sm-1 control-label" })
+        @Html.LabelFor(model => model.OfficialIDNumber, new { @class = "control-label pull-left " })
         <div class="col-md-3 col-lg-3 col-sm-11">
-            @(Html.Kendo().TextBoxFor(c => c.OfficialIDNumber).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+            @(Html.Kendo().TextBoxFor(c => c.OfficialIDNumber).HtmlAttributes(new { @class = "form-control ", style = "width:104%" }))
 
         </div>
     </div>
@@ -216,29 +230,26 @@
 
 
     <div class="form-group">
-        <div class="col-md-2 col-lg-2"></div>
-        <div class="col-md-3 col-lg-3 col-sm-6" style="margin-left:30px;">
+        <div class= "col-md-3 col-lg-3 control-label"></div>
+        <div class="col-md-3 col-lg-3 col-sm-11">
             @Html.Kendo().CheckBoxFor(model => model.IsCoordinator)
         </div>
-        @*@{  role = ViewData["RoleID"];}
-            @if ((int)personType.Trainer == Convert.ToInt32(role))
-            {
+        @{ var roles = ViewData["RoleID"];}
+       
+        @if ((int)personType.Trainer == Convert.ToInt32(roles))
+        {
 
-                <div class="form-group islogin">
-                    <div class="col-md-2 col-lg-2"></div>
+            <div class="col-md-3 col-lg-3 col-sm-11 pull-left islogin" style="margin-left:25px;">
                
-                    <div class="col-md-7 col-lg-7 col-sm-11" style="margin-left:30px;">
-
-
-                        @Html.Kendo().CheckBoxFor(model => model.roles.IsLogin)
-                    </div>
-                </div>
-            }*@
-    </div>
+                    @Html.Kendo().CheckBoxFor(model => model.IsLogin).HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
+              
+            </div>
+            }
+        </div>
     <div class="form-group pwd">
-        @Html.LabelFor(model => model.roles.Password, new { @class = "col-md-3 col-lg-3 control-label" })
+        @Html.LabelFor(model => model.Password, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-7 col-lg-7 col-sm-11">
-            @Html.Kendo().TextBoxFor(model => model.roles.Password).HtmlAttributes(new { @class = "form-control ", @Type = "Password", @style = " width: 100%;" })
+            @Html.Kendo().TextBoxFor(model => model.Password).HtmlAttributes(new { @class = "form-control ", @Type = "Password", @style = " width: 100%;" })
         </div>
     </div>
     <div class="form-group country_Code" id="country_Code">
@@ -249,14 +260,20 @@
             .HtmlAttributes(new { style = "width:100%" })
             .DataTextField("Text")
             .DataValueField("Value")
+            .Filter("contains")
+            .SelectedIndex(111)
              //  .AutoBind(true).SelectedIndex(134)
              .OptionLabel(lr.PersonPhoneCountryCodeOptionalLabel)
             //   .OptionLabel(new { Text = lr.PersonPhoneCountryCodeOptionalLabel, Value = 0 })
             .DataSource(dataSource =>
             {
-                dataSource.Read(read => read.Action("CountryCode", "DDL"));
+                dataSource.Read(
+                         read =>
+                         {
+                             read.Action("CountryCode", "DDL");
+                         }
+                         ).ServerFiltering(false);
             })
-            .Value("134")
             )
         </div>
     </div>
@@ -313,10 +330,22 @@
 </script>
 
 <script>
+    jQuery(document).ready(function (e) {
+        var roles=@ViewData["RoleID"];
+       
+      
+        if (roles == '2') {
+            jQuery(".islogin").show();
+        }
+        else {
+            jQuery(".islogin").hide();
+            jQuery(".pwd").text("");
+        } });
     jQuery(".pwd").hide();
     jQuery(".islogin").hide();
 
     jQuery(function () {
+        var roles=@ViewData["RoleID"];
         jQuery("#IsLogin").click(function () {
             if (jQuery(this).is(':checked')) {
                 jQuery(".pwd").show();
@@ -325,20 +354,11 @@
                 jQuery(".pwd").hide();
             }
         });
-
-        jQuery("#RoleID").change(function () {
-            if (jQuery(this).val()=='2') {
-                jQuery(".islogin").show();
-            }
-            else {
-                jQuery(".islogin").hide();
-                jQuery(".Password").text("");
-            }
-
-        });
+        
+       
 
     });
-
+   
 </script>
 <script>
     jQuery(document).ready(function () {

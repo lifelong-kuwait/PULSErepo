@@ -1,6 +1,6 @@
 ﻿@using lr = Resources.Resources;
 @using TMS.Library
-@model long
+@model long?
 @{
     ViewBag.Title = lr.PersonPageTitle;
     Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
@@ -10,7 +10,7 @@
     var organizationName = lr.PersonOrganization;
     var gender = lr.Gender;
     var org = lr.OrganizationFullName;
-
+    var Alias = lr.PersonAlias;
 }
 @if ((int)personType.Trainer == Model)
 {
@@ -26,16 +26,16 @@
     .Name("PersonGrid")
     .Columns(columns =>
     {
-        columns.Bound(e => e.P_DisplayName).ClientTemplate(@"<div  class='person-box'>
+        columns.Bound(e => e.P_DisplayName).Filterable(true).ClientTemplate(@"<div  class='person-box'>
                 <div class='person'>
                     <img src='../#:ProfilePicture#' class='paddig'  alt=''>" +
                     @"<h3>#:P_DisplayName#</h3>" +
                      @"# if (Email!=null) { #" +
                     @"<p>" + personEmail + @" : #:Email#</p> #} if(ContactNumber!=null){#<p>" + phonenubner + @" : #:ContactNumber#</p> #}#
-                      #if(OrganizationName!=null){#<p>" + org + @" : #:OrganizationName#</p> #}#
+                    
                       #if(RoleName!=null){#<p>" + role + @" : #:RoleName#</p> #}#
                     #if(Gender!=0){#<p>" + gender + @" : #:GenderValue#</p> #}#
-
+                    
                 </div>"
                );
         columns.Bound(e => e.AddedByAlias).Width(190).MinScreenWidth(550).Title(lr.GridAddedBy).ClientTemplate(@"<div class='gridaddedby'>
@@ -53,7 +53,8 @@
     .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_PersonTemplate").DisplayDeleteConfirmation(false))
     .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>)).Groupable()
     .Sortable().Selectable(selectable => selectable
-    .Mode(GridSelectionMode.Multiple))
+    .Mode(GridSelectionMode.Single))
+    .Groupable()
     .Pageable(pager => pager
     .Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
     .Scrollable()
@@ -62,12 +63,13 @@
     .HtmlAttributes(new { style = "height:700px !important;" })
     .DataSource(dataSource => dataSource
         .Ajax()
+        //.ServerOperation(false)
         .Model(model =>
         {
             model.Id(m => m.ID);
             model.Field(p => p.Flags).DefaultValue(new List<TMS.Library.TMS.Admin.Config.PersonFlagsNested>());
         })
-       .PageSize(15)
+       .PageSize(5)
         .Read(read => read.Action("Person_Read", "People", new { RoleID = Model }).Data("withSearch"))
         .Create(read => read.Action("Person_Create", "People", new { RoleID = Model }).Data("PersonProfilePictureData"))
         .Destroy(read => read.Action("Person_Destroy", "People"))
@@ -140,7 +142,7 @@
         return '';
     }
     jQuery(function () {
-       // debugger;
+       debugger;
         var template = kendo.template(jQuery("#toolTipTemplate").html());
         //initialize tooltip to grid tbody with filter cells with given CSS class
         var tooltip = jQuery("#PersonGrid tbody").kendoTooltip({
@@ -155,15 +157,16 @@
                 var grid = jQuery("#PersonGrid").data("kendoGrid");
                 //get current row dataItem
                 var dataItem = grid.dataItem(currentRow);
-
                 //pass the dataItem to the template
                 var generatedTemplate = template(dataItem);
-                //set the generated template to the content of the tooltip
+                               //set the generated template to the content of the tooltip
                 this.content.html(generatedTemplate);
+              
             },
         }).data("kendoTooltip");
         jQuery(".edit").live("mousedown", function (event) {
-            //debugger;
+           // debugger;
+            //alert('edit click');
             jQuery("#PersonGrid").data("kendoGrid").editRow(jQuery("[data-uid='" + jQuery(this).attr("dat-uid") + "']"));
         });
 
@@ -202,7 +205,7 @@
 
 
         jQuery(".delete").live("mousedown", function (event) {
-            //debugger;
+           // debugger;
             grid = jQuery("#PersonGrid").data("kendoGrid");
             var selectedRows = jQuery("#PersonGrid tr.k-state-selected");
             var checkedLength = selectedRows.length;
@@ -210,7 +213,6 @@
             if (checkedLength == 1) {
                 var grid = jQuery("#PersonGrid").data("kendoGrid");
                 var data = grid.dataItem(jQuery("[data-uid='" + jQuery(this).attr("dat-uid") + "']"));  //get the row data so it can be referred later
-
                 swal({
                     title: '@lr.Areyousureyouwanttodeletethisrecord',
                     text: '@lr.Youwillnotbeabletorecover',
@@ -224,17 +226,47 @@
                     customClass: "tmsconfirm"
                 },
                 function (isConfirm) {
-                    if (isConfirm) {
-                        grid.removeRow(selectedRows);
-                        swal({
-                           title: '@lr.confirmDeleted',
-                           text:  '@lr.confirmDeletedMessage',
-                           type: "success"
-                       },
-                    function(){
-                        window.location="@Url.Content("~/People/Person?pT=" + ViewData["RoleID"])";
-                        });
-                   }
+                     if (isConfirm) {
+                             jQuery.ajax({
+                                 method: "post",
+                                 url: "/People/PersonDeleteChk",
+                                 dataType: "JSON",
+                                 contentType: "application/json; charset=utf-8",
+                                 data: JSON.stringify({ _Sessions: data.ID }),
+                                 success: function (msg) {
+                                     if (msg == -1) {
+                                          grid.removeRow(selectedRows);
+                                         swal({
+                                             title: '@lr.confirmDeleted',
+                                             text: '@lr.confirmDeletedMessage',
+                                             type: "success"
+                                         },
+                                             function () {
+                                                 window.location.reload;
+                                             });
+                                     } else if (!msg == "") {
+                                         swal({
+                                             title: '@lr.Oops',
+                                             text: '@lr.PersonAssignedToDiffentClasses :' + msg,
+                                             type: "error"
+                                         });
+                                             window.location.reload;
+                                         
+                                     }
+                                     else {
+                                         grid.removeRow(selectedRows);
+                                         swal({
+                                             title: '@lr.confirmDeleted',
+                                             text: '@lr.confirmDeletedMessage',
+                                             type: "success"
+                                         },
+                                             function () {
+                                                 window.location.reload;
+                                             });
+                                     }
+                                 }
+                             });
+                         }
                 });
             } else if (checkedLength > 1) {
                 var grid = jQuery("#PersonGrid").data("kendoGrid");
@@ -277,18 +309,19 @@
             window.open(url, '_blank');
         });
         jQuery(".persondetail").live("mousedown", function (event) {
-            //debugger;
+           // debugger;
             var url = '@Url.Content("~/People/Detail?pid=")' + jQuery(this).attr("dat-pid");
             window.open(url, '_blank');
         });
 
         jQuery(".tms-grid-detail").live("mousedown", function (event) {
-            //debugger;
+           // debugger;
             var checkedLength = jQuery("#PersonGrid tr.k-state-selected").length;
             if (checkedLength == 1) {
                 grid = jQuery("#PersonGrid").data("kendoGrid");
                 var data = grid.dataItem(jQuery("#PersonGrid tr.k-state-selected"));
                 var url = '@Url.Content("~/Trainer/DetailCard?pid=")' + data.ID;
+               
                 window.open(url, '_blank');
             } else {
 
@@ -297,7 +330,7 @@
         });
 
         jQuery(".Registrationdetail").live("mousedown", function (event) {
-            //debugger;
+         //  debugger;
             var url = '@Url.Content("~/Trainer/RegistrationSlip?pid=")' + jQuery(this).attr("dat-pid");
             window.open(url, '_blank');
         });
@@ -319,7 +352,7 @@
         });
 
         jQuery(".Classdetail").live("mousedown", function (event) {
-            //debugger;
+          //  debugger;
             var url = '@Url.Content("~/Trainer/ClassDetail?pid=")' + jQuery(this).attr("dat-pid");
             window.open(url, '_blank');
         });
@@ -327,7 +360,7 @@
 
 
         jQuery(".tms-grid-detail_Class").live("mousedown", function (event) {
-            //debugger;
+         //  debugger;
             var checkedLength = jQuery("#PersonGrid tr.k-state-selected").length;
             if (checkedLength == 1) {
                 grid = jQuery("#PersonGrid").data("kendoGrid");
@@ -341,7 +374,7 @@
         });
 
         jQuery(".tms-grid-Persondetail").live("mousedown", function (event) {
-            //debugger;
+         //   debugger;
             var checkedLength = jQuery("#PersonGrid tr.k-state-selected").length;
             if (checkedLength == 1) {
                 grid = jQuery("#PersonGrid").data("kendoGrid");
@@ -354,13 +387,13 @@
         });
 
         jQuery(".detailtrainee").live("mousedown", function (event) {
-            // debugger;
+           //  debugger;
             var url = '@Url.Content("~/Trainer/TraineeDetailCard?pid=")' + jQuery(this).attr("dat-pid");
             window.open(url, '_blank');
         });
 
         jQuery(".tms-grid-detailtrainee").live("mousedown", function (event) {
-            //debugger;
+       //   debugger;
             var checkedLength = jQuery("#PersonGrid tr.k-state-selected").length;
             if (checkedLength == 1) {
                 grid = jQuery("#PersonGrid").data("kendoGrid");
@@ -449,7 +482,7 @@
                             var checkedLength = jQuery("#PersonGrid tr.k-state-selected").length;
                             if (checkedLength == 1) {
                                 //jQuery("#Users").data("kendoGrid").editRow(jQuery("#Users tr.k-state-selected"));
-                                debugger
+                            //    debugger
                                 grid = jQuery("#PersonGrid").data("kendoGrid");
                                 var data = grid.dataItem(jQuery("#PersonGrid tr.k-state-selected"));
                                 var ID = data.ID;
@@ -509,7 +542,7 @@
                        var checkedLength = jQuery("#PersonGrid tr.k-state-selected").length;
                        if (checkedLength == 1) {
                            //jQuery("#Users").data("kendoGrid").editRow(jQuery("#Users tr.k-state-selected"));
-                           debugger
+                         //  debugger
                            grid = jQuery("#PersonGrid").data("kendoGrid");
                            var data = grid.dataItem(jQuery("#PersonGrid tr.k-state-selected"));
                            var ID = data.ID;

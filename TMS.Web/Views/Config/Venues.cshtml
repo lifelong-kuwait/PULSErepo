@@ -24,10 +24,12 @@ ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"
        .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
      .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
      .Scrollable()
+     
      .Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
      .HtmlAttributes(new { style = "height:700px !important;" })
         .Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
         .DataSource(dataSource => dataSource.Ajax().PageSize(10).Model(model => { model.Id(p => p.ID); })
+        .PageSize(5)
         .Read(read => read.Action("Venues_Read", "Config").Data("withSearch"))
         .Update(update => update.Action("Venues_Update", "Config"))
         .Destroy(update => update.Action("Venues_Destroy", "Config"))
@@ -107,7 +109,7 @@ ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"
             if (checkedLength == 1) {
                 var grid = jQuery("#VenuesGrid").data("kendoGrid");
                 var data = grid.dataItem(jQuery("[data-uid='" + jQuery(this).attr("dat-uid") + "']"));  //get the row data so it can be referred later
-
+                console.log(data);
                 swal({
                     title: '@lr.Areyousureyouwanttodeletethisrecord',
                     text: '@lr.Youwillnotbeabletorecover',
@@ -122,17 +124,40 @@ ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"
                 },
                 function (isConfirm) {
                     if (isConfirm) {
-                        grid.removeRow(selectedRows);
-                        swal({
-                           title: '@lr.confirmDeleted',
-                           text:  '@lr.confirmDeletedMessage',
-                           type: "success"
-                       }
+                        jQuery.ajax({
+                            method: "post",
+                            url: "/Config/VenuesDelteChk",
+                            dataType: "JSON",
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify({ _Sessions: data.ID }),
+                            success: function (msg) {
+                                if (!msg) {
+                                    swal({
+                                        title: '@lr.Oops',
+                                        text: '@lr.VenueIsInUse',
+                                        type: "error"
+                                    });
+                                    window.location.reload;
+                                }
+                                else {
+                                    grid.removeRow(selectedRows);
+                                    swal({
+                                        title: '@lr.confirmDeleted',
+                                        text: '@lr.confirmDeletedMessage',
+                                        type: "success"
+                                    },
+                                        function () {
+                                            window.location = "@Url.Content("~/Config/Venues")";
+                                        });
+                                }
+                            }
+                        });
+
                     @*function(){
                        window.location="@Url.Content("~/Program/Class")";
                     }*@
-                        );
-                   }
+
+                    }
                 });
             } else if (checkedLength > 1) {
                 var grid = jQuery("#VenuesGrid").data("kendoGrid");

@@ -117,26 +117,123 @@ The section is about the the widget search
         var checkedLength = selectedRows.length;
         if (checkedLength == 1) {
             var grid = jQuery(this).parents('.k-grid').data("kendoGrid");
-            swal({
-                title: lr.Areyousureyouwanttodeletethisrecord,
-                text: lr.Youwillnotbeabletorecover,
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: lr.confirmDelete,
-                cancelButtonText: lr.confirmNo,
-                closeOnConfirm: false,
-                closeOnCancel: true,
-                customClass: "tmsconfirm"
-            },
-            function (isConfirm) {
-                if (isConfirm) {
-                    grid.removeRow(selectedRows);
-                    swal(lr.confirmDeleted, lr.confirmDeletedMessage, "success");
-                } else {
-                }
-            });
-        } else if (checkedLength > 1) {
+            var gridId = jQuery(this).parents('.k-grid')[0].id;
+            if (gridId.search("ClassGrid") == 0) {
+                var dataitem = grid.dataItem(grid.select());
+                swal({
+                    title: lr.Areyousureyouwanttodeletethisrecord,
+                    text: lr.Youwillnotbeabletorecover,
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: lr.confirmDelete,
+                    cancelButtonText: lr.confirmNo,
+                    closeOnConfirm: false,
+                    closeOnCancel: true,
+                    customClass: "tmsconfirm"
+                },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            jQuery.ajax({
+                                method: "post",
+                                url: "/Program/ClassDelteChk",
+                                dataType: "JSON",
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify({ _ClassID: dataitem.ID }),
+                                success: function (msg) {
+                                    if (!msg) {
+                                        swal({
+                                            title: lr.Oops,
+                                            text: lr.MaximumSessionConflictDelete,
+                                            type: "error"
+                                        });
+                                    } else {
+                                        grid.removeRow(selectedRows);
+                                        swal({
+                                            title: lr.confirmDeleted,
+                                            text:lr.confirmDeletedMessage,
+                                            type: "success"
+                                        },
+                                            function () {
+                                                window.location.reload;
+                                            });
+                                    }
+                                }
+                            });
+
+                        }
+                    });
+            }
+            else if (gridId.search("SessionsGrid") == 0) {
+                var dataitem = grid.dataItem(grid.select());
+                swal({
+                    title: lr.Areyousureyouwanttodeletethisrecord,
+                    text: lr.Youwillnotbeabletorecover,
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: lr.confirmDelete,
+                    cancelButtonText: lr.confirmNo,
+                    closeOnConfirm: false,
+                    closeOnCancel: true,
+                    customClass: "tmsconfirm"
+                },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            jQuery.ajax({
+                                method: "post",
+                                url: "/Program/SessionDelteChk",
+                                dataType: "JSON",
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify({ _Sessions: dataitem.ID }),
+                                success: function (msg) {
+                                    if (!msg) {
+                                        swal({
+                                            title: lr.Oops,
+                                            text: lr.SessionAttandanceMarked,
+                                            type: "error"
+                                        });
+                                        window.location.reload;
+                                    }
+                                    else {
+                                        grid.removeRow(selectedRows);
+                                        swal({
+                                            title: lr.confirmDeleted,
+                                            text: lr.confirmDeletedMessage,
+                                            type: "success"
+                                        },
+                                            function () {
+                                                window.location.reload;
+                                            });
+                                    }
+                                }
+                            });
+                        }
+                    });
+            } else {
+                swal({
+                    title: lr.Areyousureyouwanttodeletethisrecord,
+                    text: lr.Youwillnotbeabletorecover,
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: lr.confirmDelete,
+                    cancelButtonText: lr.confirmNo,
+                    closeOnConfirm: false,
+                    closeOnCancel: true,
+                    customClass: "tmsconfirm"
+                },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            grid.removeRow(selectedRows);
+                            swal(lr.confirmDeleted, lr.confirmDeletedMessage, "success");
+                        } else {
+                        }
+                    });
+            }
+            
+        }
+        else if (checkedLength > 1) {
             var grid = jQuery(this).parents('.k-grid').data("kendoGrid");
 
             swal({
@@ -159,8 +256,10 @@ The section is about the the widget search
                 } else {
                 }
             });
-        } else {
         }
+        else {
+            }
+            
     });
 });
 

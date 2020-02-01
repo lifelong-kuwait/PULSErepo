@@ -298,7 +298,7 @@ namespace Lifelong.EIS.TrainingWeb {
             private global::System.Data.DataColumn columnSumA;
             
             private global::System.Data.DataColumn columnSumL;
-            
+            private global::System.Data.DataColumn columnSumLA;
             private global::System.Data.DataColumn columnSumQ;
             
             private global::System.Data.DataColumn columnSumU;
@@ -419,7 +419,15 @@ namespace Lifelong.EIS.TrainingWeb {
                     return this.columnSumL;
                 }
             }
-            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn SumLAColumn
+            {
+                get
+                {
+                    return this.columnSumLA;
+                }
+            }
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn SumQColumn {
@@ -489,7 +497,7 @@ namespace Lifelong.EIS.TrainingWeb {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Tran_AttendancesCourse_GetReportDataRow AddTran_AttendancesCourse_GetReportDataRow(string FullName, string CourseName, string ClassName, string Trainers, string Coordinators, string SessionStatistic, int SumP, int SumA, int SumL, int SumQ, int SumU, double AttendancePercentage, int RowIndex) {
+            public Tran_AttendancesCourse_GetReportDataRow AddTran_AttendancesCourse_GetReportDataRow(string FullName, string CourseName, string ClassName, string Trainers, string Coordinators, string SessionStatistic, int SumP, int SumA, int SumL,int SumLA, int SumQ, int SumU, double AttendancePercentage, int RowIndex) {
                 Tran_AttendancesCourse_GetReportDataRow rowTran_AttendancesCourse_GetReportDataRow = ((Tran_AttendancesCourse_GetReportDataRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -502,6 +510,7 @@ namespace Lifelong.EIS.TrainingWeb {
                         SumP,
                         SumA,
                         SumL,
+                        SumLA,
                         SumQ,
                         SumU,
                         AttendancePercentage,
@@ -545,6 +554,7 @@ namespace Lifelong.EIS.TrainingWeb {
                 this.columnSumP = base.Columns["SumP"];
                 this.columnSumA = base.Columns["SumA"];
                 this.columnSumL = base.Columns["SumL"];
+                this.columnSumLA = base.Columns["SumLA"];
                 this.columnSumQ = base.Columns["SumQ"];
                 this.columnSumU = base.Columns["SumU"];
                 this.columnAttendancePercentage = base.Columns["AttendancePercentage"];
@@ -574,6 +584,8 @@ namespace Lifelong.EIS.TrainingWeb {
                 base.Columns.Add(this.columnSumA);
                 this.columnSumL = new global::System.Data.DataColumn("SumL", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSumL);
+                this.columnSumLA = new global::System.Data.DataColumn("SumLA", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSumLA);
                 this.columnSumQ = new global::System.Data.DataColumn("SumQ", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSumQ);
                 this.columnSumU = new global::System.Data.DataColumn("SumU", typeof(int), null, global::System.Data.MappingType.Element);
@@ -605,6 +617,7 @@ namespace Lifelong.EIS.TrainingWeb {
                 this.columnSumP.ReadOnly = true;
                 this.columnSumA.ReadOnly = true;
                 this.columnSumL.ReadOnly = true;
+                this.columnSumLA.ReadOnly = true;
                 this.columnSumQ.ReadOnly = true;
                 this.columnSumU.ReadOnly = true;
                 this.columnAttendancePercentage.ReadOnly = true;
@@ -894,7 +907,27 @@ namespace Lifelong.EIS.TrainingWeb {
                     this[this.tableTran_AttendancesCourse_GetReportData.SumLColumn] = value;
                 }
             }
-            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int SumLA
+            {
+                get
+                {
+                    try
+                    {
+                        return ((int)(this[this.tableTran_AttendancesCourse_GetReportData.SumLAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e)
+                    {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SumL\' in table \'Tran_AttendancesCourse_GetReportData\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set
+                {
+                    this[this.tableTran_AttendancesCourse_GetReportData.SumLAColumn] = value;
+                }
+            }
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public int SumQ {
@@ -1034,7 +1067,19 @@ namespace Lifelong.EIS.TrainingWeb {
             public void SetSumLNull() {
                 this[this.tableTran_AttendancesCourse_GetReportData.SumLColumn] = global::System.Convert.DBNull;
             }
-            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsSumLANull()
+            {
+                return this.IsNull(this.tableTran_AttendancesCourse_GetReportData.SumLAColumn);
+            }
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetSumLANull()
+            {
+                this[this.tableTran_AttendancesCourse_GetReportData.SumLAColumn] = global::System.Convert.DBNull;
+            }
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsSumQNull() {
@@ -1253,6 +1298,7 @@ namespace Lifelong.EIS.TrainingWeb.VewCourseAttendanceReportDataSetTableAdapters
             tableMapping.ColumnMappings.Add("SumP", "SumP");
             tableMapping.ColumnMappings.Add("SumA", "SumA");
             tableMapping.ColumnMappings.Add("SumL", "SumL");
+            tableMapping.ColumnMappings.Add("SumLA", "SumLA");
             tableMapping.ColumnMappings.Add("SumQ", "SumQ");
             tableMapping.ColumnMappings.Add("SumU", "SumU");
             tableMapping.ColumnMappings.Add("AttendancePercentage", "AttendancePercentage");

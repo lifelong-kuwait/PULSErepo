@@ -104,7 +104,11 @@ namespace TMS.Library.Admin
         /// <value>The updated date.</value>
         [Display(Name = "GridUpdatedDate", ResourceType = typeof(lr))]
         public DateTime? UpdatedDate { get; set; }
-
+        /// <summary>
+        /// Gets or sets the culture.
+        /// </summary>
+        /// <value>The culture.</value>
+        public string P_FirstName { get; set; }
         /// <summary>
         /// Maps the properties.
         /// </summary>
@@ -122,6 +126,7 @@ namespace TMS.Library.Admin
             UpdatedDate = dr.GetDateTimeNullable("UpdatedDate");
             CreatedBy = dr.GetInt64Nullable("CreatedBy");
             UpdatedBy = dr.GetInt64Nullable("UpdatedBy");
+            P_FirstName = dr.GetString("P_FirstName");
         }
     }
 

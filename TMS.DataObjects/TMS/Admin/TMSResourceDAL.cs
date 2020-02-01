@@ -36,7 +36,7 @@ namespace TMS.DataObjects.TMS.Admin
         /// <param name="PageSize">Size of the page.</param>
         /// <param name="Total">The total.</param>
         /// <returns>IList&lt;TMSResource&gt;.</returns>
-        public IList<TMSResource> GetTMSResourceDAL(int Page, int PageSize, ref int Total, string SearchText)
+        public IList<TMSResource> GetTMSResourceDAL(int Page, int PageSize, ref int Total, string SearchText,string Oids)
         {
             //return ExecuteListSp<TMSResource>("TMS_Admin_GetResourcesIndex");
 
@@ -45,7 +45,7 @@ namespace TMS.DataObjects.TMS.Admin
             {
                 conn.Open();
                 DynamicParameters dbParam = new DynamicParameters();
-                dbParam.AddDynamicParams(new { Page = Page, PageSize = PageSize,  SearchText= SearchText });
+                dbParam.AddDynamicParams(new { Page = Page, PageSize = PageSize,  SearchText= SearchText,Oid = Oids });
                 using (var multi = conn.QueryMultiple("TMS_Admin_GetResourcesIndex", dbParam, commandType: System.Data.CommandType.StoredProcedure))
                 {
                     Users = multi.Read<TMSResource>().AsList<TMSResource>();

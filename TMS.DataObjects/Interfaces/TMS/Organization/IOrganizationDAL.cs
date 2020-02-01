@@ -29,7 +29,19 @@ namespace TMS.DataObjects.Interfaces.TMS.Organization
         /// <param name="culture">The culture.</param>
         /// <returns>IList&lt;DDlList&gt;.</returns>
         IList<DDlList> OrganizationAllbyCultureDAL(string culture);
-
+        /// <summary>
+        /// Organization the allby culture dal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
+        IList<DDlList> OrganizationAllForTrainerbyCultureDAL(string culture, string email);
+        /// <summary>
+        /// Organization the allby culture dal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
+        IList<DDlList> CertificatesByOiDDAL(long Oid);
+        
         /// <summary>
         /// Gets all organization dal.
         /// </summary>

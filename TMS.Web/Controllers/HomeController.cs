@@ -10,31 +10,43 @@ using System.Web;
 using System.Web.Mvc;
 using TMS.Business.Interfaces.TMS;
 using TMS.Library.Users;
+using TMS.Web.Core;
+using log4net;
 using lr = Resources.Resources;
+using System.Configuration;
+using System.Web.Script.Serialization;
+using TMS.Library;
+using TMS.Business.Interfaces.TMS.Organization;
 
 namespace TMS.Web.Controllers
 {
+
     public class HomeController : TMSControllerBase
     {
+
         private readonly IBALUsers BALUsers;
-        private  ICurrentUserClaims Claims { get; set; }
+        public readonly IOrganizationBAL _objeobjIOrganizationBAL = null;
+        private ICurrentUserClaims Claims { get; set; }
         private IOffice365UsersBAL _Office365UsersBAL { get; set; }
-        public HomeController(IBALUsers _BALUsers, ICurrentUserClaims CurrentUserClaims, IOffice365UsersBAL __Office365UsersBAL)
+        private new static readonly ILog Logger = LogManager.GetLogger(System.Environment.MachineName);
+        public HomeController(IOrganizationBAL objIOrganizationBAL, IBALUsers _BALUsers, ICurrentUserClaims CurrentUserClaims, IOffice365UsersBAL __Office365UsersBAL)
         {
+            this._objeobjIOrganizationBAL = objIOrganizationBAL;
             this.BALUsers = _BALUsers; this.Claims = CurrentUserClaims; this._Office365UsersBAL = __Office365UsersBAL;
         }
         UserHistory userlogin = new UserHistory();
         LoginUsers objloginuser = new LoginUsers();
+        [SessionTimeout]
         public ActionResult Index()
         {
             return View();
         }
-
+        [SessionTimeout]
         public ActionResult Main()
         {
             return View();
         }
-          [HttpGet]
+        [HttpGet]
         public ActionResult Office365Enabled()
         {
             var value = this._Office365UsersBAL.TMS_Setting_GetOffice365BAL();
@@ -53,20 +65,36 @@ namespace TMS.Web.Controllers
         [HttpGet]
         public ActionResult Login(string returnUrl)
         {
-           // var dd = Crypto.CreatePasswordHash("almas");
+            // var dd = Crypto.CreatePasswordHash("almas");
             var value = this._Office365UsersBAL.TMS_Setting_GetOffice365BAL();
             var model = new LoginModel { ReturnUrl = returnUrl, isOffice365Enabled = value };
             return View(model);
         }
-
+        [HttpGet]
+        public ActionResult LoginForTrainer(string returnUrl, string email)
+        {
+            // var dd = Crypto.CreatePasswordHash("almas");
+            var value = this._Office365UsersBAL.TMS_Setting_GetOffice365BAL();
+            var c = _objeobjIOrganizationBAL.OrganizationAllForTrainerbyCultureBAL(CurrentCulture, email);
+            List<DDlList> list = (List<DDlList>)c;
+            var model = new LoginModel { ReturnUrl = returnUrl, isOffice365Enabled = value, Email = email, dDlList = list };
+            return View(model);
+        }
+        public PartialViewResult OrganizationForTrainerLogin(string email)
+        {
+            var model = _objeobjIOrganizationBAL.OrganizationAllForTrainerbyCultureBAL(CurrentCulture, email);
+            return PartialView("_OrganizationForTrainerLogin", model);
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [DisableValidation]
-        public ActionResult Login(LoginModel infoOfData)
+        //[DisableValidation]
+        public ActionResult LoginForTrainer(LoginModel infoOfData)
         {
             infoOfData.isOffice365Enabled = false;
-
-           
+            var c = _objeobjIOrganizationBAL.OrganizationAllForTrainerbyCultureBAL(CurrentCulture, infoOfData.Email);
+            List<DDlList> list = (List<DDlList>)c;
+            infoOfData.dDlList = list;
+            var json = new JavaScriptSerializer().Serialize(infoOfData);
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("", L("Invalidpassword"));
@@ -74,17 +102,27 @@ namespace TMS.Web.Controllers
             }
             else
             {
-                var _objUser = this.BALUsers.LoginUserBAL(infoOfData.Email);
-              
+                Users _objUser = this.BALUsers.LoginUserBALForTrainer(infoOfData.Email, infoOfData.OrgnizationId);
 
-                if (_objUser != null)//check if the email is found
+                if (_objUser != null && _objUser.UserRole == 2)//check if the email is found
                 {
-                  
-                   
-                  
+                    DateTime startTime = Convert.ToDateTime(_objUser.LockedOutDate);
+                    DateTime endTime = DateTime.Now;
+                    Logger.Info("User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow);
+                    TimeSpan span = endTime.Subtract(startTime);
+
+                    if (_objUser.IsLockedOut && span.TotalMinutes <= 10)
+                    {
+                        BALUsers.LogInsert(DateTime.Now.ToString(), "10", Logs.Login_Locked.ToString(), System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(), 0);
+                        ModelState.AddModelError("", "User Locked Please try after " + ConfigurationManager.AppSettings["LockedTime"].ToString() + " minutes");
+
+                        //var model = new LoginModel { ReturnUrl = returnUrl, isOffice365Enabled = value, Email = email, dDlList = list }
+                        return View(infoOfData);
+                    }
                     if (_objUser.IsLockedOut)
                     {
-                        ModelState.AddModelError("", lr.UserLockedOutMessage);
+                        BALUsers.LogInsert(DateTime.Now.ToString(), "10", Logs.Login_Locked.ToString(), System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(), 0);
+                        ModelState.AddModelError("", "User Locked Please try after " + ConfigurationManager.AppSettings["LockedTime"].ToString() + " minutes");
                         return View(infoOfData);
                     }
                     //then verify the password
@@ -105,25 +143,29 @@ namespace TMS.Web.Controllers
                         //}
                         if (Crypto.VerifyPassword(infoOfData.Password, _objUser.Password))
                         {
+                            Logger.Info("User login with email " + infoOfData.Email + " at " + DateTime.UtcNow);
                             Session["CompanyID"] = _objUser.CompanyID;
                             Session["UserID"] = _objUser.UserID;
                             userlogin.UserID = _objUser.UserID;
                             userlogin.LoginDateTime = DateTime.Now;
                             this.BALUsers.Create_UserHistoryBAL(userlogin);
                             IdentitySignin(_objUser, false);
+                            BALUsers.LogInsert(DateTime.Now.ToString(), "10", Logs.Login_Susscess.ToString(), System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(), 0);
                             return Redirect(GetRedirectUrl(infoOfData.ReturnUrl));
-                           
+
                         }
                         else
                         {
                             if (_objUser.LockedOutAttempt >= TMSHelper.FormAuthenticationLockedOutAttemptMax())
                             {
+                                BALUsers.LogInsert(DateTime.Now.ToString(), "10", Logs.Login_Attempt.ToString(), System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(), 0);
                                 this.BALUsers.UpdateUserLockedOutBAL(infoOfData.Email, _objUser.UserID, _objUser.LockedOutAttempt + 1, true);
                                 ModelState.AddModelError("", lr.UserLockedOutMessage);
                             }
                             else
                             {
                                 this.BALUsers.UpdateUserLockedOutBAL(infoOfData.Email, _objUser.UserID, _objUser.LockedOutAttempt + 1, false);
+                                BALUsers.LogInsert(DateTime.Now.ToString(), "10", Logs.Login_Attempt.ToString(), System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(), 0);
 
                                 if (_objUser.LockedOutAttempt >= TMSHelper.FormAuthenticationLockedOutAttemptNotifyUser())
                                 {
@@ -140,12 +182,152 @@ namespace TMS.Web.Controllers
                 }
                 else
                 {//user is not found with form authentication.
+                    BALUsers.LogInsert(DateTime.Now.ToString(), "10", Logs.Login_Attempt.ToString(), System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(), 0);
+
+                    ModelState.AddModelError("", L("Invalidpassword"));
+                }
+                infoOfData.OrgnizationId = 0;
+                return View(infoOfData);
+                //return RedirectToAction("LoginForTrainer", new { returnUrl = infoOfData.ReturnUrl, email = infoOfData.Email });
+            }
+        }
+        [HttpPost]
+        //[DisableValidation]
+        //[ValidateAntiForgeryToken]
+        public ActionResult LoginAjax(string Email)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", L("Invalidpassword"));
+                return Json("Error"); ;
+            }
+            else
+            {
+                List<Users> _objUsers = this.BALUsers.LoginUserListBAL(Email);
+                var x = _objeobjIOrganizationBAL.OrganizationAllForTrainerbyCultureBAL(CurrentCulture, Email);
+
+                var data = new
+                {
+                    query = _objUsers.Count,
+                    suggestions =x
+                };
+                return Json(data);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(LoginModel infoOfData)
+        {
+            infoOfData.isOffice365Enabled = false;
+
+            var json = new JavaScriptSerializer().Serialize(infoOfData);
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", L("Invalidpassword"));
+                return View(infoOfData);
+            }
+            else
+            {
+                Users _objUser = new Users();
+                if (infoOfData.OrgnizationId > 0)
+                {
+                    _objUser = this.BALUsers.LoginUserBALForTrainer(infoOfData.Email, infoOfData.OrgnizationId);
+                }
+                else
+                {
+                    _objUser = this.BALUsers.LoginUserBAL(infoOfData.Email);
+                }
+               
+                 if (_objUser != null)//check if the email is found
+                {
+                    DateTime startTime = Convert.ToDateTime(_objUser.LockedOutDate);
+                    DateTime endTime = DateTime.Now;
+                    Logger.Info("User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow);
+                    TimeSpan span = endTime.Subtract(startTime);
+
+                    if (_objUser.IsLockedOut && span.TotalMinutes <= 10)
+                    {
+                        BALUsers.LogInsert(DateTime.Now.ToString(), "10", Logs.Login_Locked.ToString(), System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(), 0);
+                        ModelState.AddModelError("", "User Locked Please try after " + ConfigurationManager.AppSettings["LockedTime"].ToString() + " minutes");
+                        return View(infoOfData);
+                    }
+                    if (_objUser.IsLockedOut)
+                    {
+                        BALUsers.LogInsert(DateTime.Now.ToString(), "10", Logs.Login_Locked.ToString(), System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(), 0);
+                        ModelState.AddModelError("", "User Locked Please try after " + ConfigurationManager.AppSettings["LockedTime"].ToString() + " minutes");
+                        return View(infoOfData);
+                    }
+                    //then verify the password
+                    if (string.IsNullOrEmpty(_objUser.Password))
+                    {
+                        ModelState.AddModelError("", L("Invalidpassword"));
+                    }
+                    else
+                    {
+
+                        //  UserHistory userlogin = new UserHistory();
+                        //if (_objUser.UserID > 0)
+                        //{
+                        //    Session["UserID"] = _objUser.UserID;
+                        //    userlogin.UserID = _objUser.UserID;
+                        //    userlogin.LoginDateTime = DateTime.Now;
+                        //    this.BALUsers.Create_UserHistoryBAL(userlogin);
+                        //}
+                        if (Crypto.VerifyPassword(infoOfData.Password, _objUser.Password))
+                        {
+                            Logger.Info("User login with email " + infoOfData.Email + " at " + DateTime.UtcNow);
+                            Session["CompanyID"] = _objUser.CompanyID;
+                            Session["UserID"] = _objUser.UserID;
+                            userlogin.UserID = _objUser.UserID;
+                            userlogin.LoginDateTime = DateTime.Now;
+                            this.BALUsers.Create_UserHistoryBAL(userlogin);
+                            IdentitySignin(_objUser, false);
+                            BALUsers.LogInsert(DateTime.Now.ToString(), "10", Logs.Login_Susscess.ToString(), System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(), 0);
+                            return Redirect(GetRedirectUrl(infoOfData.ReturnUrl));
+
+                        }
+                        else
+                        {
+                            if (_objUser.LockedOutAttempt >= TMSHelper.FormAuthenticationLockedOutAttemptMax())
+                            {
+                                BALUsers.LogInsert(DateTime.Now.ToString(), "10", Logs.Login_Attempt.ToString(), System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(), 0);
+                                this.BALUsers.UpdateUserLockedOutBAL(infoOfData.Email, _objUser.UserID, _objUser.LockedOutAttempt + 1, true);
+                                ModelState.AddModelError("", lr.UserLockedOutMessage);
+                            }
+                            else
+                            {
+                                this.BALUsers.UpdateUserLockedOutBAL(infoOfData.Email, _objUser.UserID, _objUser.LockedOutAttempt + 1, false);
+                                BALUsers.LogInsert(DateTime.Now.ToString(), "10", Logs.Login_Attempt.ToString(), System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(), 0);
+
+                                if (_objUser.LockedOutAttempt >= TMSHelper.FormAuthenticationLockedOutAttemptNotifyUser())
+                                {
+                                    ModelState.AddModelError("", lr.InvalidpasswordWithAttempts + " " + (TMSHelper.FormAuthenticationLockedOutAttemptMax() - _objUser.LockedOutAttempt));
+                                }
+                                else
+                                {
+                                    ModelState.AddModelError("", L("Invalidpassword"));
+                                }
+                            }
+
+                        }
+                    }
+                }
+                else
+                {//user is not found with form authentication.
+                    BALUsers.LogInsert(DateTime.Now.ToString(), "10", Logs.Login_Attempt.ToString(), System.Environment.MachineName, "User tried to login with email " + infoOfData.Email + " at " + DateTime.UtcNow, "", 0, "Home", "Login", json.ToString(), 0);
+
                     ModelState.AddModelError("", L("Invalidpassword"));
                 }
                 return View(infoOfData);
             }
         }
-
+        [HttpPost]
+        public JsonResult OrganizationForTrainer(string email)
+        {
+            var x = _objeobjIOrganizationBAL.OrganizationAllForTrainerbyCultureBAL(CurrentCulture, email);
+            return Json(x);
+        }
         public void IdentitySignin(Users _objUser, bool isPersistent = false)
         {
             ////var claims = new List<Claim>();
@@ -271,7 +453,10 @@ namespace TMS.Web.Controllers
         {
             return Content("403");
         }
-
+        public ActionResult PageNotFound()
+        {
+            return View();
+        }
         public ActionResult Test()
         {
             List<string> ff = new List<string>();

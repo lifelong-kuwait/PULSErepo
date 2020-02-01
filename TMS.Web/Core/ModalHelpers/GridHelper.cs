@@ -1,5 +1,6 @@
 ﻿using Kendo.Mvc;
 using Kendo.Mvc.UI;
+using System;
 using System.ComponentModel;
 using System.Linq;
 
@@ -9,6 +10,10 @@ namespace TMS.Web
     {
         public static string GetSortExpression(DataSourceRequest Request, string DefaultID)
         {
+            try
+            {
+
+            
             if (Request.Sorts.Any())
             {
                 foreach (SortDescriptor sortDescriptor in Request.Sorts)
@@ -18,6 +23,11 @@ namespace TMS.Web
                 }
             }
             return DefaultID + " DESC";
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
         }
     }
 }

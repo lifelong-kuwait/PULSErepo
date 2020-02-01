@@ -82,7 +82,16 @@ namespace TMS.Library.Common.Address
         /// </summary>
         /// <value><c>true</c> if this instance is active; otherwise, <c>false</c>.</value>
         public bool IsActive { get; set; }
-
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is active.
+        /// </summary>
+        /// <value><c>true</c> if this instance is active; otherwise, <c>false</c>.</value>
+        public long PersonID { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is active.
+        /// </summary>
+        /// <value><c>true</c> if this instance is active; otherwise, <c>false</c>.</value>
+        public long OrganizationID { get; set; }
         /// <summary>
         /// Maps the properties.
         /// </summary>
@@ -98,6 +107,8 @@ namespace TMS.Library.Common.Address
             UpdatedBy = dr.GetInt64("UpdatedBy");
             IsDeleted = dr.GetBoolean("IsDeleted");
             IsActive = dr.GetBoolean("IsActive");
+            PersonID = dr.GetInt64("PersonID");
+            OrganizationID = dr.GetInt64("OrganizationID");
         }
     }
 }

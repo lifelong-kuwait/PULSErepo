@@ -11,10 +11,12 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using System;
 using System.Collections.Generic;
 using System.Data;
 using TMS.Library.Entities.Common.Configuration;
 using TMS.Library.Entities.Coordinator;
+using TMS.Library.Entities.TMS.Course;
 using TMS.Library.Entities.TMS.Program;
 using TMS.Library.TMS;
 
@@ -45,14 +47,41 @@ namespace TMS.DataObjects.Interfaces.TMS
         /// <param name="SortExpression">The sort expression.</param>
         /// <param name="SearchText">The search text.</param>
         /// <returns>List&lt;Course&gt;.</returns>
-        List<Course> TMS_CoursesByOrganization_GetAllDAL(int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid);
-
+        List<Course> TMS_CoursesByOrganization_GetAllDAL(int page, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid, long PersonID);
+        /// <summary>
+        /// TMSs the courses get all dal.
+        /// </summary>
+        /// <param name="StartRowIndex">Start index of the row.</param>
+        /// <param name="PageSize">Size of the page.</param>
+        /// <param name="Total">The total.</param>
+        /// <param name="SortExpression">The sort expression.</param>
+        /// <param name="SearchText">The search text.</param>
+        /// <returns>List&lt;Course&gt;.</returns>
+        long TMS_CoursesDeleteCheckDAL(string CourseId, string Oid);
         /// <summary>
         /// TMSs the courses get by identifier dal.
         /// </summary>
         /// <param name="ID">The identifier.</param>
         /// <returns>Course.</returns>
         Course TMS_Courses_GetByIdDAL(string ID);
+        /// <summary>
+        /// TMSs the courses get by identifier dal.
+        /// </summary>
+        /// <param name="ID">The identifier.</param>
+        /// <returns>Course.</returns>
+        List<CourseDataBar> CourseDataBarDAL(DateTime startdate, DateTime lastdate, long CompanyId);
+        /// <summary>
+        /// TMSs the courses get by identifier dal.
+        /// </summary>
+        /// <param name="ID">The identifier.</param>
+        /// <returns>Course.</returns>
+        List<CourseDataBar> CourseFutureDataBarDAL(DateTime startdate, DateTime lastdate, long CompanyId);
+        /// <summary>
+        /// TMSs the courses get by identifier dal.
+        /// </summary>
+        /// <param name="ID">The identifier.</param>
+        /// <returns>Course.</returns>
+        List<CourseDataBar> ClassFutureDataBarDAL(DateTime startdate, DateTime lastdate, long CompanyId);
 
         /// <summary>
         /// Courses the category code by course identifier dal.
@@ -67,14 +96,20 @@ namespace TMS.DataObjects.Interfaces.TMS
         /// <param name="_Course">The course.</param>
         /// <returns>System.Int64.</returns>
         long TMS_Courses_CreateDAL(Course _Course);
-
+        /// <summary>
+        /// TMSs the courses create dal.
+        /// </summary>
+        /// <param name="_Course">The course.</param>
+        /// <returns>System.Int64.</returns>
+        IList<Sessions> TMS_SessionAttendance_GetAllDAL(Sessions _Course);
+        IList<Sessions> TMS_SessionAttendance_GetAllByIDDAL(int _Course);
         /// <summary>
         /// TMSs the courses update dal.
         /// </summary>
         /// <param name="_Course">The course.</param>
         /// <returns>System.Int32.</returns>
         int TMS_Courses_UpdateDAL(Course _Course);
-
+        int TMS_Courses_Dublicate_PrimaryNameDAL(Course _Course);
         /// <summary>
         /// TMSs the courses delete dal.
         /// </summary>
@@ -108,9 +143,9 @@ namespace TMS.DataObjects.Interfaces.TMS
         int TMS_CourseFocusArea_UpdateDAL(FocusAreas _focusarea, long CourseId);
 
         int TMS_CourseFocusArea_DeleteDAL(FocusAreas _focusarea, long CourseId);
-
+         int TMS_CourseFocusArea_DublicationDAL(FocusAreas _focusarea, long CourseId);
         #endregion
 
-       // DataSet GetCourseReportDataDAL(long ClassID, long CourseID);
+        // DataSet GetCourseReportDataDAL(long ClassID, long CourseID);
     }
 }

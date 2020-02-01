@@ -456,7 +456,7 @@ namespace TMS.Library.Entities.Common.Configuration.Venues
         /// </summary>
         /// <value>The name of the secondary.</value>
         [Display(Name = "VenueSecondaryName", ResourceType = typeof(lr))]
-        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "VenueSecondaryNameRequired")]
+        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "VenueSecondaryNameRequired")]
         public string SecondaryName { get; set; }
 
         //
@@ -465,8 +465,8 @@ namespace TMS.Library.Entities.Common.Configuration.Venues
         /// </summary>
         /// <value>The venue status identifier.</value>
         [Display(Name = "VenueStatus", ResourceType = typeof(lr))]
-        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "VenueStatusRequired")]
-        public VenueStatusType VenueStatusID { get; set; }
+        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "VenueStatusRequired")]
+        public VenueStatusType? VenueStatusID { get; set; }
 
         /// <summary>
         /// Gets or sets the driving instruction.
@@ -491,7 +491,7 @@ namespace TMS.Library.Entities.Common.Configuration.Venues
         /// </summary>
         /// <value>The venue code identifier.</value>
         [Display(Name = "VenueCode", ResourceType = typeof(lr))]
-        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "VenueCodeRequired")]
+        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "VenueCodeRequired")]
         public string VenueCodeID { get; set; }
 
         /// <summary>
@@ -513,15 +513,15 @@ namespace TMS.Library.Entities.Common.Configuration.Venues
         /// </summary>
         /// <value>The type of the rate.</value>
         [Display(Name = "VenueRateType", ResourceType = typeof(lr))]
-        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "VenueRateTypeRequired")]
-        public RateType RateType { get; set; }
+        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "VenueRateTypeRequired")]
+        public RateType? RateType { get; set; }
 
         /// <summary>
         /// Gets or sets the cost.
         /// </summary>
         /// <value>The cost.</value>
         [Display(Name = "VenuesCost", ResourceType = typeof(lr))]
-        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "VenueCostRequired")]
+        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "VenueCostRequired")]
         public decimal? Cost { get; set; }
 
         // // //
@@ -530,8 +530,8 @@ namespace TMS.Library.Entities.Common.Configuration.Venues
         /// </summary>
         /// <value>The currency.</value>
         [Display(Name = "VenueCurrency", ResourceType = typeof(lr))]
-        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "CurrencyRequired")]
-        public int Currency { get; set; }
+        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "CurrencyRequired")]
+        public int? Currency { get; set; }
 
         /// <summary>
         /// Gets or sets the setup.
@@ -552,7 +552,7 @@ namespace TMS.Library.Entities.Common.Configuration.Venues
         /// </summary>
         /// <value>The capacity.</value>
         [Display(Name = "VenueCapacity", ResourceType = typeof(lr))]
-        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "VenueCapacityRequired")]
+        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "VenueCapacityRequired")]
         public string Capacity { get; set; }
 
         /// <summary>
@@ -568,7 +568,7 @@ namespace TMS.Library.Entities.Common.Configuration.Venues
         /// </summary>
         /// <value>The contact person phone.</value>
         [Display(Name = "VenueContactPersonPhone", ResourceType = typeof(lr))]
-        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "VenueContactPersonPhoneRequired")]
+        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "VenueContactPersonPhoneRequired")]
         public string ContactPersonPhone { get; set; }
 
         /// <summary>
@@ -623,14 +623,14 @@ namespace TMS.Library.Entities.Common.Configuration.Venues
         /// </summary>
         /// <value><c>true</c> if this instance is common; otherwise, <c>false</c>.</value>
         [Display(Name = "VenueIsCommon", ResourceType = typeof(lr))]
-        public bool IsCommon { get; set; }
+        public bool? IsCommon { get; set; }
 
         /// <summary>
         /// Gets or sets the address line1.
         /// </summary>
         /// <value>The address line1.</value>
         [Display(Name = "AddressAddressOne", ResourceType = typeof(lr))]
-        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "AddressAddressOneRequired")]
+       // [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "AddressAddressOneRequired")]
         public string AddressLine1 { get; set; }
 
         /// <summary>
@@ -652,8 +652,8 @@ namespace TMS.Library.Entities.Common.Configuration.Venues
         /// </summary>
         /// <value>The country identifier.</value>
         [Display(Name = "AddressCountry", ResourceType = typeof(lr))]
-        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "AddressCountryRequired")]
-        public long CountryID { get; set; }
+        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "AddressCountryRequired")]
+        public long? CountryID { get; set; }
 
         /// <summary>
         /// Gets or sets the country.
@@ -666,8 +666,8 @@ namespace TMS.Library.Entities.Common.Configuration.Venues
         /// </summary>
         /// <value>The state identifier.</value>
         [Display(Name = "AddressStateRegion", ResourceType = typeof(lr))]
-        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "AddressStateRegionRequired")]
-        public long StateID { get; set; }
+        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "AddressStateRegionRequired")]
+        public long? StateID { get; set; }
 
         /// <summary>
         /// Gets or sets the state.

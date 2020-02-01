@@ -6,7 +6,7 @@
 </div>
 <div class="form-horizontal form-person-popup">
     <div class="form-group">
-        @Html.LabelFor(model => model.CourseID, new { @class = "col-md-3 col-lg-3 control-label" })
+        @Html.LabelFor(model => model.CourseName, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-7 col-lg-7 col-sm-11">
             @(Html.Kendo().DropDownListFor(m => m.CourseID)
             .HtmlAttributes(new { style = "width:100%" })

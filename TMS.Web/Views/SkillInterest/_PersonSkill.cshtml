@@ -18,13 +18,13 @@
 
          columns.Bound(e => e.Title);
          columns.Command(cmd =>
-         { cmd.Edit(); cmd.Destroy(); }).Title("Edit/Delete").Width(100);
+         {  cmd.Destroy(); }).Title("Delete").Width(100);
      }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_SkillTemplate").DisplayDeleteConfirmation(false).AdditionalViewData(new { PersonID = Model }))
                     .ToolBar(toolbar => toolbar.Template(@<text>
         <div class="toolbar">
             @if (User.IsInRole("CanAddEditPersonSkillsAreasofFocus"))
             { <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
-            <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>}
+            }
 
             @if (User.IsInRole("CanDeletePersonSkillsAreasofFocus"))
             {<a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a> }
@@ -46,11 +46,22 @@
                            })
 
             .PageSize(8)
-                                .Read(read => read.Action("PersonSkill_Read", "SkillInterest", new { PersonID = Model }))
+             .Events(events =>
+             {
+                 events.RequestEnd("onRequestEnd"); 
+             })
+             .Read(read => read.Action("PersonSkill_Read", "SkillInterest", new { PersonID = Model }))
                 .Create(read => read.Action("PersonSkill_Create", "SkillInterest").Data("filterPersontoadded"))
-                        .Update(read => read.Action("PersonSkill_Update", "SkillInterest"))
+                .Update(read => read.Action("PersonSkill_Update", "SkillInterest", new { pid = Model }))
                 .Destroy(read => read.Action("PersonSkill_Destroy", "SkillInterest"))
-                                .Events(e => e.Error("GeneralErrorHandler(\"PersonSkillGrid" + Model + "\")"))
+                                .Events(e => e.Error("GeneralErrorHandler(\"PersonSkillGrid" + Model + "\")").RequestEnd("GridRequestEndUpdate"))
         ).NoRecords(lr.GridNoRecordFoundMessage)
     )
 </div>
+<script>
+    function onRequestEnd(e) {
+        if (e.type == "update") {
+            $("#PersonSkillGrid").data("kendoGrid").dataSource.read();
+        }
+    }
+</script>

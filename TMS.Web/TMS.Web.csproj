@@ -63,163 +63,156 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Abp, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Abp.dll</HintPath>
+    <Reference Include="Abp">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Abp.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Abp.AutoMapper, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Abp.AutoMapper.0.11.0.2\lib\net452\Abp.AutoMapper.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Abp.AutoMapper">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Abp.AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="Abp.Castle.Log4Net, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Abp.Castle.Log4Net.dll</HintPath>
+    <Reference Include="Abp.Castle.Log4Net">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Abp.Castle.Log4Net.dll</HintPath>
     </Reference>
-    <Reference Include="Abp.Web, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Abp.Web.dll</HintPath>
+    <Reference Include="Abp.Web">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Abp.Web.dll</HintPath>
     </Reference>
-    <Reference Include="Abp.Web.Api, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Abp.Web.Api.dll</HintPath>
+    <Reference Include="Abp.Web.Api">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Abp.Web.Api.dll</HintPath>
     </Reference>
-    <Reference Include="Abp.Web.Common, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Abp.Web.Common.dll</HintPath>
+    <Reference Include="Abp.Web.Common">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Abp.Web.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Abp.Web.Mvc, Version=0.11.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Abp.Web.Mvc.dll</HintPath>
+    <Reference Include="Abp.Web.Mvc">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Abp.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Antlr3.Runtime.dll</HintPath>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="AutoMapper, Version=5.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="AutoMapper">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="BeginCollectionItem, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\BeginCollectionItem.dll</HintPath>
+    <Reference Include="BeginCollectionItem">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\BeginCollectionItem.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Castle.Core.dll</HintPath>
+    <Reference Include="Castle.Core">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Facilities.Logging, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Castle.Facilities.Logging.dll</HintPath>
+    <Reference Include="Castle.Facilities.Logging">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Castle.Facilities.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Windsor, Version=3.4.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Castle.Windsor.dll</HintPath>
+    <Reference Include="Castle.Windsor">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Dapper">
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Dapper.dll</HintPath>
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Dapper.dll</HintPath>
     </Reference>
-    <Reference Include="DapperExtensions">
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.DataObjects\bin\Release\DapperExtensions.dll</HintPath>
+    <Reference Include="EntityFramework">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework.DynamicFilters">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\EntityFramework.DynamicFilters.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.DynamicFilters, Version=2.0.0.0, Culture=neutral, PublicKeyToken=146423a1b8d60775, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\EntityFramework.DynamicFilters.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="ExtensionMethods, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\ExtensionMethods.dll</HintPath>
+    <Reference Include="ExtensionMethods">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\ExtensionMethods.dll</HintPath>
     </Reference>
     <Reference Include="Kendo.Mvc, Version=2017.3.1026.545, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Content\Kendo.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\log4net.dll</HintPath>
+    <Reference Include="log4net">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.IdentityModel.Protocol.Extensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Microsoft.IdentityModel.Protocol.Extensions.dll</HintPath>
+    <Reference Include="Microsoft.IdentityModel.Protocol.Extensions">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Microsoft.IdentityModel.Protocol.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Microsoft.Owin.dll</HintPath>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Microsoft.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Microsoft.Owin.Security.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Microsoft.Owin.Security.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Microsoft.Owin.Security.Cookies.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.OpenIdConnect, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Microsoft.Owin.Security.OpenIdConnect.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security.OpenIdConnect">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Microsoft.Owin.Security.OpenIdConnect.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebDesign, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WebDesign.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Helpers">
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Microsoft.Web.Helpers.dll</HintPath>
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Microsoft.Web.Helpers.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Microsoft.Web.Infrastructure.dll</HintPath>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="MvcSiteMapProvider, Version=4.6.26.0, Culture=neutral, PublicKeyToken=1923abe4657913cc, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvcSiteMapProvider.MVC5.Core.4.6.26\lib\net45\MvcSiteMapProvider.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="MvcSiteMapProvider">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\MvcSiteMapProvider.dll</HintPath>
     </Reference>
-    <Reference Include="MvcSiteMapProvider.WebActivator, Version=4.6.26.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvcSiteMapProvider.MVC5.4.6.26\lib\net45\MvcSiteMapProvider.WebActivator.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="MvcSiteMapProvider.WebActivator">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\MvcSiteMapProvider.WebActivator.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Nito.AsyncEx, Version=4.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Nito.AsyncEx.dll</HintPath>
+    <Reference Include="Nito.AsyncEx">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Nito.AsyncEx.dll</HintPath>
     </Reference>
-    <Reference Include="Nito.AsyncEx.Concurrent, Version=4.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Nito.AsyncEx.Concurrent.dll</HintPath>
+    <Reference Include="Nito.AsyncEx.Concurrent">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Nito.AsyncEx.Concurrent.dll</HintPath>
     </Reference>
-    <Reference Include="Nito.AsyncEx.Enlightenment, Version=4.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Nito.AsyncEx.Enlightenment.dll</HintPath>
+    <Reference Include="Nito.AsyncEx.Enlightenment">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Nito.AsyncEx.Enlightenment.dll</HintPath>
     </Reference>
-    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Owin.dll</HintPath>
+    <Reference Include="Owin">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Owin.dll</HintPath>
     </Reference>
-    <Reference Include="System.Collections.Immutable, Version=1.1.37.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\System.Collections.Immutable.dll</HintPath>
+    <Reference Include="System.Collections.Immutable">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\System.Collections.Immutable.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.IdentityModel" />
-    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.0\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="System.IdentityModel.Tokens.Jwt">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\System.Net.Http.Formatting.dll</HintPath>
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Runtime.Caching" />
@@ -232,42 +225,37 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\System.Web.Helpers.dll</HintPath>
-    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\System.Web.Http.dll</HintPath>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\System.Web.Helpers.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\System.Web.Http.WebHost.dll</HintPath>
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=3.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Optimization">
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\System.Web.Optimization.dll</HintPath>
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\System.Web.Optimization.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\System.Web.Razor.dll</HintPath>
+    <Reference Include="System.Web.Razor">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\System.Web.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\System.Web.WebPages.dll</HintPath>
+    <Reference Include="System.Web.WebPages">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\System.Web.WebPages.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\System.Web.WebPages.Deployment.dll</HintPath>
+    <Reference Include="System.Web.WebPages.Deployment">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\System.Web.WebPages.Deployment.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\PULSE Update 19-05-2019\GUST - Conversion19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\System.Web.WebPages.Razor.dll</HintPath>
+    <Reference Include="System.Web.WebPages.Razor">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -286,20 +274,37 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Telerik.ReportViewer.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.ReportViewer.WebForms, Version=11.2.17.1025, Culture=neutral, PublicKeyToken=a9d7983dfcc261be, processorArchitecture=MSIL" />
-    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
-      <HintPath>..\packages\WebActivatorEx.2.0.1\lib\net40\WebActivatorEx.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Telerik.ReportViewer.WebForms, Version=12.1.18.516, Culture=neutral, PublicKeyToken=a9d7983dfcc261be, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\WebGrease.dll</HintPath>
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\Telerik.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <HintPath>D:\New folder\PULSE Update 19-05-2019\GUST - Conversion\GUST - Conversion\TMS\TMS.Web\bin\WebGrease.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\MyController.cs" />
+    <Compile Include="CertificateDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CertificateDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\CertificateController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\InvoiceingController.cs" />
     <Compile Include="Controllers\SalesAdministrationController.cs" />
+    <Compile Include="Controllers\SPl_Test_ReportsController.cs" />
     <Compile Include="Controllers\TestWaqasControllerController.cs" />
+    <Compile Include="Controllers\UserLogController.cs" />
+    <Compile Include="Core\getweek.cs" />
+    <Compile Include="Core\SessionTimeoutAttribute.cs" />
+    <Compile Include="CourseAttendanceDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CourseAttendanceDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DailySummaryDataset.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -311,7 +316,43 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DailyUtilizationReport.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DS_CompanyInfo.Designer.cs" />
+    <Compile Include="InvoiceReciptDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceReciptDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="PULSE_With_InvoiceinDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PULSE_With_InvoiceinDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\WeeklyAttendanceReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WeeklyAttendanceReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TMS_Class_WeeklyUtilizationReport2DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TMS_Class_WeeklyUtilizationReport2DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="TMS_SPL_PULSEDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TMS_SPL_PULSEDataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="TrainerDetail.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -423,6 +464,171 @@
     <Compile Include="Views\Report\Pages\WeeklySummeryReport.aspx.designer.cs">
       <DependentUpon>WeeklySummeryReport.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Report\SpLReports\CertificatePrinting.aspx.cs">
+      <DependentUpon>CertificatePrinting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\CertificatePrinting.aspx.designer.cs">
+      <DependentUpon>CertificatePrinting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\ClassDetailReport.aspx.cs">
+      <DependentUpon>ClassDetailReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\ClassDetailReport.aspx.designer.cs">
+      <DependentUpon>ClassDetailReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\ClassFutureReport.aspx.cs">
+      <DependentUpon>ClassFutureReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\ClassFutureReport.aspx.designer.cs">
+      <DependentUpon>ClassFutureReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\CoursePeriodicReport.aspx.cs">
+      <DependentUpon>CoursePeriodicReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\CoursePeriodicReport.aspx.designer.cs">
+      <DependentUpon>CoursePeriodicReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\ReportBasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\ReportData.cs" />
+    <Compile Include="Views\Report\SpLReports\ReportView.aspx.cs">
+      <DependentUpon>ReportView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\ReportView.aspx.designer.cs">
+      <DependentUpon>ReportView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\SchedueReport.aspx.cs">
+      <DependentUpon>SchedueReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\SchedueReport.aspx.designer.cs">
+      <DependentUpon>SchedueReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\TraineeDetailReport.aspx.cs">
+      <DependentUpon>TraineeDetailReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\TraineeDetailReport.aspx.designer.cs">
+      <DependentUpon>TraineeDetailReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\TrainerDetailReport.aspx.cs">
+      <DependentUpon>TrainerDetailReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\TrainerDetailReport.aspx.designer.cs">
+      <DependentUpon>TrainerDetailReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\UserControls\UCVenueMatrixReport.ascx.cs">
+      <DependentUpon>UCVenueMatrixReport.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\UserControls\UCVenueMatrixReport.ascx.designer.cs">
+      <DependentUpon>UCVenueMatrixReport.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\UserControls\UCViewClassTimeTable.ascx.cs">
+      <DependentUpon>UCViewClassTimeTable.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\UserControls\UCViewClassTimeTable.ascx.designer.cs">
+      <DependentUpon>UCViewClassTimeTable.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\UserControls\VenueMatrixUserControl.ascx.cs">
+      <DependentUpon>VenueMatrixUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\UserControls\VenueMatrixUserControl.ascx.designer.cs">
+      <DependentUpon>VenueMatrixUserControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\VenueDailyUtilizationReport.aspx.cs">
+      <DependentUpon>VenueDailyUtilizationReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\VenueDailyUtilizationReport.aspx.designer.cs">
+      <DependentUpon>VenueDailyUtilizationReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\VenueDetailReport.aspx.cs">
+      <DependentUpon>VenueDetailReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\VenueDetailReport.aspx.designer.cs">
+      <DependentUpon>VenueDetailReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\VenueDetailUtilizationReport.aspx.cs">
+      <DependentUpon>VenueDetailUtilizationReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\VenueDetailUtilizationReport.aspx.designer.cs">
+      <DependentUpon>VenueDetailUtilizationReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\VenueMatrixReportCustomRDLC.aspx.cs">
+      <DependentUpon>VenueMatrixReportCustomRDLC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\VenueMatrixReportCustomRDLC.aspx.designer.cs">
+      <DependentUpon>VenueMatrixReportCustomRDLC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\VenueOccupancyReport.aspx.cs">
+      <DependentUpon>VenueOccupancyReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\VenueOccupancyReport.aspx.designer.cs">
+      <DependentUpon>VenueOccupancyReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\Venue_Matrix_Report.aspx.cs">
+      <DependentUpon>Venue_Matrix_Report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\Venue_Matrix_Report.aspx.designer.cs">
+      <DependentUpon>Venue_Matrix_Report.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\ViewAttendanceReport.aspx.cs">
+      <DependentUpon>ViewAttendanceReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\ViewAttendanceReport.aspx.designer.cs">
+      <DependentUpon>ViewAttendanceReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\ClassCurrentReport.aspx.cs">
+      <DependentUpon>ClassCurrentReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\ClassCurrentReport.aspx.designer.cs">
+      <DependentUpon>ClassCurrentReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\ViewTraineePeriodicReport.aspx.cs">
+      <DependentUpon>ViewTraineePeriodicReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\ViewTraineePeriodicReport.aspx.designer.cs">
+      <DependentUpon>ViewTraineePeriodicReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\WeeklyUtilizatinDynamicColumns.aspx.cs">
+      <DependentUpon>WeeklyUtilizatinDynamicColumns.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\WeeklyUtilizatinDynamicColumns.aspx.designer.cs">
+      <DependentUpon>WeeklyUtilizatinDynamicColumns.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\WeeklyUtilizationReport.aspx.cs">
+      <DependentUpon>WeeklyUtilizationReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\WeeklyUtilizationReport.aspx.designer.cs">
+      <DependentUpon>WeeklyUtilizationReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\WeeklyUtilizationReport2.aspx.cs">
+      <DependentUpon>WeeklyUtilizationReport2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SpLReports\WeeklyUtilizationReport2.aspx.designer.cs">
+      <DependentUpon>WeeklyUtilizationReport2.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Report\UserControls\UCClassReportCurrent.ascx.cs">
       <DependentUpon>UCClassReportCurrent.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -479,26 +685,12 @@
     <Compile Include="Views\Report\UserControls\UCVenueDetailUtilizationReport.ascx.designer.cs">
       <DependentUpon>UCVenueDetailUtilizationReport.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Report\UserControls\UCVenueMatrixReport.ascx.cs">
-      <DependentUpon>UCVenueMatrixReport.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Report\UserControls\UCVenueMatrixReport.ascx.designer.cs">
-      <DependentUpon>UCVenueMatrixReport.ascx</DependentUpon>
-    </Compile>
     <Compile Include="Views\Report\UserControls\UCViewAttendanceReport.ascx.cs">
       <DependentUpon>UCViewAttendanceReport.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\Report\UserControls\UCViewAttendanceReport.ascx.designer.cs">
       <DependentUpon>UCViewAttendanceReport.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Report\UserControls\UCViewClassTimeTable.ascx.cs">
-      <DependentUpon>UCViewClassTimeTable.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Report\UserControls\UCViewClassTimeTable.ascx.designer.cs">
-      <DependentUpon>UCViewClassTimeTable.ascx</DependentUpon>
     </Compile>
     <Compile Include="Views\Report\UserControls\UCWeeklyUtilizationReport.ascx.cs">
       <DependentUpon>UCWeeklyUtilizationReport.ascx</DependentUpon>
@@ -508,6 +700,11 @@
       <DependentUpon>UCWeeklyUtilizationReport.ascx</DependentUpon>
     </Compile>
     <Compile Include="ViewTraineePeriodicReportDataSet.Designer.cs" />
+    <Compile Include="WeeklyAttendanceReportData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WeeklyAttendanceReportData.xsd</DependentUpon>
+    </Compile>
     <Compile Include="WeeklySummaryDataset.Designer.cs" />
     <Compile Include="WeeklySummaryDataset1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1427,6 +1624,7 @@
     <Content Include="Content\Shamcey\css\prettyPhoto.css" />
     <Content Include="Content\Shamcey\css\responsive-tables.css" />
     <Content Include="Content\Shamcey\css\roboto.css" />
+    <Content Include="Content\Shamcey\css\shamcey.css" />
     <Content Include="Content\Shamcey\css\style.pink.css" />
     <Content Include="Content\Shamcey\css\style.default.css" />
     <Content Include="Content\Shamcey\css\style.green.css" />
@@ -2215,6 +2413,17 @@
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <None Include="bundleconfig.json" />
+    <Content Include="CertificateDataSet.xsc">
+      <DependentUpon>CertificateDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="CertificateDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CertificateDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="CertificateDataSet.xss">
+      <DependentUpon>CertificateDataSet.xsd</DependentUpon>
+    </Content>
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
@@ -2316,12 +2525,25 @@
     <Content Include="Content\kendo\2018.1.117\fonts\glyphs\WebComponentsIcons.woff" />
     <Content Include="Content\kendo\2018.1.117\images\kendoui.ttf" />
     <Content Include="Content\kendo\2018.1.117\images\kendoui.woff" />
-    <Content Include="Mvc.sitemap" />
+    <Content Include="Mvc.sitemap">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="DS_ClassReportByCourseCategoryID.xsc">
       <DependentUpon>DS_ClassReportByCourseCategoryID.xsd</DependentUpon>
     </Content>
     <Content Include="DailySummaryDataset.xsc">
       <DependentUpon>DailySummaryDataset.xsd</DependentUpon>
+    </Content>
+    <Content Include="CourseAttendanceDataSet.xsc">
+      <DependentUpon>CourseAttendanceDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="CourseAttendanceDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CourseAttendanceDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="CourseAttendanceDataSet.xss">
+      <DependentUpon>CourseAttendanceDataSet.xsd</DependentUpon>
     </Content>
     <None Include="DailySummaryDataset.xsd">
       <Generator>MSDataSetGenerator</Generator>
@@ -2342,6 +2564,28 @@
     <Content Include="DailyUtilizationReport.xss">
       <DependentUpon>DailyUtilizationReport.xsd</DependentUpon>
     </Content>
+    <Content Include="DataSet.xsc">
+      <DependentUpon>DataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSet.xss">
+      <DependentUpon>DataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Content>
     <None Include="DS_ClassReportByCourseCategoryID.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>DS_ClassReportByCourseCategoryID.Designer.cs</LastGenOutput>
@@ -2350,9 +2594,92 @@
     <Content Include="DS_ClassReportByCourseCategoryID.xss">
       <DependentUpon>DS_ClassReportByCourseCategoryID.xsd</DependentUpon>
     </Content>
+    <Content Include="InvoiceReciptDataSet.xsc">
+      <DependentUpon>InvoiceReciptDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="InvoiceReciptDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>InvoiceReciptDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="InvoiceReciptDataSet.xss">
+      <DependentUpon>InvoiceReciptDataSet.xsd</DependentUpon>
+    </Content>
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile10.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile11.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile12.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile13.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile14.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile15.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile16.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile17.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile18.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile19.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile20.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile21.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile22.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile23.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile24.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile25.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile26.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile27.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile28.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile29.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile3.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile30.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile31.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile32.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile33.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile34.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile35.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile36.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile37.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile38.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile39.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile4.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile40.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile41.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile42.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile43.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile44.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile45.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile46.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile47.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile48.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile49.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile5.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile50.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile51.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile52.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile53.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile54.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile55.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile56.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile57.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile58.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile59.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile6.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile60.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile61.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile62.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile63.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile64.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile65.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile66.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile67.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile68.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile69.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile7.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile70.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile8.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile9.pubxml" />
     <None Include="Properties\PublishProfiles\New TMS.pubxml" />
     <Content Include="Reports\Barcodes Report.trdx">
       <SubType>Designer</SubType>
@@ -2369,6 +2696,17 @@
     <Content Include="Reports\Product Tag Report.trdx" />
     <Content Include="Reports\Sales Order Details.trdx" />
     <Content Include="Reports\SalesByRegionDashboard.trdx" />
+    <Content Include="PULSE_With_InvoiceinDataSet.xsc">
+      <DependentUpon>PULSE_With_InvoiceinDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="PULSE_With_InvoiceinDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PULSE_With_InvoiceinDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="PULSE_With_InvoiceinDataSet.xss">
+      <DependentUpon>PULSE_With_InvoiceinDataSet.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="ReportViewer\js\telerikReportViewer-11.2.17.1025.js" />
     <Content Include="ReportViewer\js\telerikReportViewer-11.2.17.1025.min.js" />
@@ -4306,6 +4644,29 @@
     <Content Include="Views\Report\Pages\VenueMatrixReport.aspx" />
     <Content Include="Views\Report\Pages\ViewClassTimeTable.aspx" />
     <Content Include="Views\Report\Pages\WeeklySummeryReport.aspx" />
+    <Content Include="Views\Report\SpLReports\CertificatePrinting.aspx" />
+    <Content Include="Views\Report\SpLReports\ClassDetailReport.aspx" />
+    <Content Include="Views\Report\SpLReports\ClassFutureReport.aspx" />
+    <Content Include="Views\Report\SpLReports\CoursePeriodicReport.aspx" />
+    <Content Include="Views\Report\SpLReports\ReportView.aspx" />
+    <Content Include="Views\Report\SpLReports\SchedueReport.aspx" />
+    <Content Include="Views\Report\SpLReports\TraineeDetailReport.aspx" />
+    <Content Include="Views\Report\SpLReports\TrainerDetailReport.aspx" />
+    <Content Include="Views\Report\SpLReports\UserControls\UCVenueMatrixReport.ascx" />
+    <Content Include="Views\Report\SpLReports\UserControls\UCViewClassTimeTable.ascx" />
+    <Content Include="Views\Report\SpLReports\UserControls\VenueMatrixUserControl.ascx" />
+    <Content Include="Views\Report\SpLReports\VenueDailyUtilizationReport.aspx" />
+    <Content Include="Views\Report\SpLReports\VenueDetailReport.aspx" />
+    <Content Include="Views\Report\SpLReports\VenueDetailUtilizationReport.aspx" />
+    <Content Include="Views\Report\SpLReports\VenueMatrixReportCustomRDLC.aspx" />
+    <Content Include="Views\Report\SpLReports\VenueOccupancyReport.aspx" />
+    <Content Include="Views\Report\SpLReports\Venue_Matrix_Report.aspx" />
+    <Content Include="Views\Report\SpLReports\ViewAttendanceReport.aspx" />
+    <Content Include="Views\Report\SpLReports\ClassCurrentReport.aspx" />
+    <Content Include="Views\Report\SpLReports\ViewTraineePeriodicReport.aspx" />
+    <Content Include="Views\Report\SpLReports\WeeklyUtilizatinDynamicColumns.aspx" />
+    <Content Include="Views\Report\SpLReports\WeeklyUtilizationReport.aspx" />
+    <Content Include="Views\Report\SpLReports\WeeklyUtilizationReport2.aspx" />
     <Content Include="Views\Report\UserControls\UCClassReport.ascx" />
     <Content Include="Views\Report\UserControls\UCClassReportCurrent.ascx" />
     <Content Include="Views\Report\UserControls\UCClassReportFuture.ascx" />
@@ -4317,9 +4678,7 @@
     <Content Include="Views\Report\UserControls\UCTrainerDetailReport.ascx" />
     <Content Include="Views\Report\UserControls\UCVenueDetailReport.ascx" />
     <Content Include="Views\Report\UserControls\UCVenueDetailUtilizationReport.ascx" />
-    <Content Include="Views\Report\UserControls\UCVenueMatrixReport.ascx" />
     <Content Include="Views\Report\UserControls\UCViewAttendanceReport.ascx" />
-    <Content Include="Views\Report\UserControls\UCViewClassTimeTable.ascx" />
     <Content Include="Views\Report\UserControls\UCViewCourseAttendanceReport.ascx" />
     <Content Include="Views\Report\UserControls\UCWeeklyUtilizationReport.ascx" />
     <Content Include="Views\Resource\Lookup.js" />
@@ -4349,6 +4708,28 @@
     </Content>
     <Content Include="TrainerDetail.xsc">
       <DependentUpon>TrainerDetail.xsd</DependentUpon>
+    </Content>
+    <Content Include="TMS_SPL_PULSEDataSet1.xsc">
+      <DependentUpon>TMS_SPL_PULSEDataSet1.xsd</DependentUpon>
+    </Content>
+    <Content Include="TMS_Class_WeeklyUtilizationReport2DataSet.xsc">
+      <DependentUpon>TMS_Class_WeeklyUtilizationReport2DataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="TMS_Class_WeeklyUtilizationReport2DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TMS_Class_WeeklyUtilizationReport2DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="TMS_Class_WeeklyUtilizationReport2DataSet.xss">
+      <DependentUpon>TMS_Class_WeeklyUtilizationReport2DataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="TMS_SPL_PULSEDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TMS_SPL_PULSEDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="TMS_SPL_PULSEDataSet1.xss">
+      <DependentUpon>TMS_SPL_PULSEDataSet1.xsd</DependentUpon>
     </Content>
     <None Include="TrainerDetail.xsd">
       <SubType>Designer</SubType>
@@ -4460,6 +4841,64 @@
     <Content Include="Views\Admin\GroupDetails.cshtml" />
     <Content Include="Views\Admin\TMSGroupDetail.cshtml" />
     <Content Include="Views\Config\AuditLog.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\ReportViewer.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\Trainer_Detail_Report.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\Trainee_Detail_Report.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\Class_Detail_Report.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\Venue_Detail_Report.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\Venue_Ocupancy_Detail_Report.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\Weekly_Attandence_Report.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\Class_Future_Report.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\Class_Current_Report.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\VenueDetailUtilizationReport.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\WeeklyUtilizationReport.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\VenueDailyUtilizationReport.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\TraineePeriodicReport.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\CoursePeriodicReport.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\VenueMatrixReport.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\Schedules.cshtml" />
+    <Content Include="Views\Config\_VenueClass.cshtml" />
+    <Content Include="Views\Config\EditorTemplates\_NestedVenueClassTemplate.cshtml" />
+    <Content Include="Views\User\ResetUserPassword.cshtml" />
+    <Content Include="WeeklyAttendanceReportData.xsc">
+      <DependentUpon>WeeklyAttendanceReportData.xsd</DependentUpon>
+    </Content>
+    <Content Include="Views\SPl_Test_Reports\WeeklyUtilizationReport2.cshtml" />
+    <Content Include="Views\Home\PageNotFound.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\WeeklyUtilizationReportModified.cshtml" />
+    <Content Include="Views\SPl_Test_Reports\VenueMatrixRDLCReport.cshtml" />
+    <Content Include="Views\Admin\Schedule_Read.cshtml" />
+    <Content Include="Views\Certificate\Index.cshtml" />
+    <Content Include="Views\Certificate\_ManageTrainee.cshtml" />
+    <Content Include="Views\Config\Preview_Certificate.cshtml" />
+    <Content Include="Views\Task\ManageCourseCRM.cshtml" />
+    <Content Include="Views\Config\_CategoriesCRM.cshtml" />
+    <Content Include="Views\People\_PersonRolesCRM.cshtml" />
+    <Content Include="Views\User\UnlockUser.cshtml" />
+    <Content Include="Views\UserLog\UserLog.cshtml" />
+    <Content Include="Views\UserLog\EditorTemplates\_UserLog.cshtml" />
+    <Content Include="Views\UserLog\UserErrorLog.cshtml" />
+    <Content Include="Views\UserLog\EditorTemplates\_UserErrorLog.cshtml" />
+    <Content Include="Views\Home\LoginForTrainer.cshtml" />
+    <Content Include="Views\Home\_OrganizationForTrainerLogin.cshtml" />
+    <Content Include="Views\Invoiceing\Index.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\EditorTemplates\_CustomerTemplete.cshtml" />
+    <Content Include="Views\Invoiceing\InvoiceGrid.cshtml" />
+    <Content Include="Views\Invoiceing\InvoiceDetail.cshtml" />
+    <Content Include="Views\Invoiceing\_InvoiceHistoryRead.cshtml" />
+    <Content Include="Views\Invoiceing\_InvoiceReIssued.cshtml" />
+    <Content Include="Views\Invoiceing\_InvoiceDeposit.cshtml" />
+    <Content Include="Views\Invoiceing\EditorTemplates\_DepositTemplete.cshtml" />
+    <Content Include="Views\Invoiceing\InvoiceEdit.cshtml" />
+    <None Include="WeeklyAttendanceReportData.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>WeeklyAttendanceReportData.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="WeeklyAttendanceReportData.xss">
+      <DependentUpon>WeeklyAttendanceReportData.xsd</DependentUpon>
+    </Content>
     <None Include="WeeklySummaryDataset.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>WeeklySummaryDataset1.Designer.cs</LastGenOutput>
@@ -5069,6 +5508,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="Attachment\TMS\Organization\" />
     <Folder Include="Attachment\TMS\Person\" />
+    <Folder Include="ErrorLog\" />
+    <Folder Include="TempReports\" />
     <Folder Include="UploadTempFolder\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\Exams\" />
@@ -5096,6 +5537,10 @@
       <Project>{5bb71d9a-df63-4863-87fe-4552ba27420f}</Project>
       <Name>TMS.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TMS.DataObjects\TMS.DataObjects.csproj">
+      <Project>{A16CFE52-802D-4D4E-A7E3-9C271F21EACA}</Project>
+      <Name>TMS.DataObjects</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TMS.Library\TMS.Library.csproj">
       <Project>{df954994-9c97-447c-afb1-9ea6f3027f80}</Project>
       <Name>TMS.Library</Name>
@@ -5108,27 +5553,49 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reports\Report2.resx">
       <DependentUpon>Report2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report\DailySummaryReport.rdlc" />
-    <EmbeddedResource Include="Report\DailyUtilizationReport.rdlc" />
-    <EmbeddedResource Include="Report\TrainerDetail.rdlc" />
-    <EmbeddedResource Include="Report\Tran_ClassDetailReport.rdlc" />
-    <EmbeddedResource Include="Report\Tran_ClassReport.rdlc" />
-    <EmbeddedResource Include="Report\Tran_ClassTraineeReport.rdlc" />
-    <EmbeddedResource Include="Report\Tran_ConductedCoursesReport.rdlc" />
-    <EmbeddedResource Include="Report\Tran_TraineeDetailReport.rdlc" />
-    <EmbeddedResource Include="Report\Tran_TrainerDetailReport.rdlc" />
-    <EmbeddedResource Include="Report\Tran_VenueDetailReport.rdlc" />
-    <EmbeddedResource Include="Report\Tran_VenueOccupancyReport.rdlc" />
-    <EmbeddedResource Include="Report\Tran_ViewAttendanceReport.rdlc" />
-    <EmbeddedResource Include="Report\Tran_ViewCourseAttendanceReport.rdlc" />
-    <EmbeddedResource Include="Report\Tran_ViewTraineePeriodicReport.rdlc" />
-    <EmbeddedResource Include="Report\WeeklyUtilizationReport.rdlc" />
+    <Content Include="Report\DailySummaryReport.rdlc" />
+    <Content Include="Report\DailyUtilizationReport.rdlc" />
+    <Content Include="Report\Resources1.rdlc" />
+    <Content Include="Report\TrainerDetail.rdlc" />
+    <Content Include="Report\Tran_ClassDetailReport.rdlc" />
+    <Content Include="Report\Tran_ClassReport.rdlc" />
+    <Content Include="Report\Tran_ClassTraineeReport.rdlc" />
+    <Content Include="Report\Tran_ConductedCoursesReport.rdlc" />
+    <Content Include="Report\Tran_TraineeDetailReport.rdlc" />
+    <Content Include="Report\Tran_TrainerDetailReport.rdlc" />
+    <Content Include="Report\Tran_VenueDetailReport.rdlc" />
+    <Content Include="Report\Tran_VenueOccupancyReport.rdlc" />
+    <Content Include="Report\Tran_ViewAttendanceReport.rdlc" />
+    <Content Include="Report\Tran_ViewCourseAttendanceReport.rdlc" />
+    <Content Include="Report\Tran_ViewTraineePeriodicReport.rdlc" />
+    <Content Include="Report\WeeklyUtilizationReport.rdlc" />
+    <EmbeddedResource Include="Reports\WeeklyAttendanceReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WeeklyAttendanceReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Content Include="Report\INO_InvoiceRecipt.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\INO_Deposit_Slips_For_Invoices.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Report\Report1.rdlc" />
+    <Content Include="Report\Venue_Matrix_ReportCustomized.rdlc" />
+    <Content Include="Report\WeeklyUtilizatinDynamicColumns.rdlc" />
+    <Content Include="Report\WeeklyUtilizationReport2.rdlc" />
+    <Content Include="Report\Tran_CertificatePrinting.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\Tran_CertificateSimplePrint.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -22,7 +22,9 @@ using TMS.DataObjects.Interfaces.TMS;
 using TMS.DataObjects.TMS;
 using TMS.Library;
 using TMS.Library.Entities.CRM;
+using TMS.Library.Entities.TMS.Persons;
 using TMS.Library.Entities.TMS.Program;
+using TMS.Library.TMS.Organization;
 using TMS.Library.TMS.Persons;
 using TMS.Library.TMS.Persons.Others;
 
@@ -80,9 +82,17 @@ namespace TMS.Business.TMS
             return result;
         }
 
+        /// <summary>
+        /// Persons the insert new person bal.
+        /// </summary>
+        /// <param name="_objPerson">The object person.</param>
+        /// <returns>PersonResponse.</returns>
+        public List<PersonBarData> PersonBarBAL(DateTime startdate, DateTime lastdate,long CompanyId)
+        {
+            return DAL.PersonBarBALDAL(startdate, lastdate, CompanyId);
+        }
 
-
-        public PersonResponse ProspectInsertNewPersonBAL(Person _objPerson, long RoleID)
+            public PersonResponse ProspectInsertNewPersonBAL(Person _objPerson, long RoleID)
         {
             string clientType = string.Empty;
             if (_objPerson.ClientType == ClientType.ClientType_Internal)
@@ -334,6 +344,12 @@ namespace TMS.Business.TMS
         /// <param name="_objPersonRoles">The object person roles.</param>
         /// <returns>System.Int64.</returns>
         public long TMS_PersonintoUser_CreateBAL(PersonRolesMapping _objPersonRoles) => DAL.TMS_PersonintoUser_CreateDAL(_objPersonRoles);
+        /// <summary>
+        /// TMSs the person roles mapping create bal.
+        /// </summary>
+        /// <param name="_objPersonRoles">The object person roles.</param>
+        /// <returns>System.Int64.</returns>
+        public int TMS_PersonintoUser_DestroyBAL(Person _objPersonRoles) => DAL.TMS_PersonintoUser_DestroyDAL(_objPersonRoles);
 
         /// <summary>
         /// TMSs the person roles mapping update bal.
@@ -379,7 +395,10 @@ namespace TMS.Business.TMS
         {
             return DAL.TMS_Coordinate_GetAllByCultureDAL(culture);
         }
-
+        public List<OrganizationModel> GetOrganizationLogo(long OrgId)
+        {
+            return DAL.GetOrganizationLogoDAL(OrgId);
+        }
         public DataTable GetTrainerDetailsForReports(long ClassID, long TrainerID)
         {
             return DAL.GetTrainerDetailsForReportsDAL(ClassID, TrainerID);
@@ -401,9 +420,9 @@ namespace TMS.Business.TMS
             return DAL.AttendanceReportsDAL(CourseID,ClassID, startdate, enddate);
         }
 
-        public DataTable ClassFutureReport(long CurrentCourseCategoryID,DateTime ClassReportStartDateFrom,DateTime ClassReportStartDateTo,bool ShowFutureClasses,int ClassTypeID)
+        public DataTable ClassFutureReport(long CurrentCourseCategoryID,DateTime ClassReportStartDateFrom,DateTime ClassReportStartDateTo,bool ShowFutureClasses,int ClassTypeID,long CompanyId)
         {
-            return DAL.ClassFutureReportDAL(CurrentCourseCategoryID, ClassReportStartDateFrom, ClassReportStartDateTo, ClassTypeID, ShowFutureClasses);
+            return DAL.ClassFutureReportDAL(CurrentCourseCategoryID, ClassReportStartDateFrom, ClassReportStartDateTo, ClassTypeID, ShowFutureClasses, CompanyId);
         }
         
         public DataTable GetCourseFromTimeSpan(DateTime StartTime, DateTime EndTime)
@@ -414,6 +433,10 @@ namespace TMS.Business.TMS
         {
             return DAL.GetOccVenueDetailsForReportsDAL(ClassID, VenueID, StartTime,EndTime);
         }
+        public DataTable GetCertificateReports(string PersonId, long ClassID,long companyID,string Culture,long currentUser,long certificateID)
+        {
+            return DAL.GetCertificateReportsDAL(PersonId,ClassID, companyID,Culture,currentUser, certificateID);
+        }
         public DataTable GetCourseReportData(long ClassID, long CourseID)
         {
             return DAL.GetCourseReportDataDAL(ClassID, CourseID);
@@ -423,10 +446,13 @@ namespace TMS.Business.TMS
         {
             return DAL.DailyVenueUtalizationReportsDAL(Startday, Endday, venueid);
         }
-
-        public DataTable DailyUtilizationReport(DateTime day, int type)
+        public DataTable DailyVenueUtalizationReports2(DateTime Startday, DateTime Endday, long venueid)
         {
-            return DAL.DailyUtilizationReportDAL(day, type);
+            return DAL.DailyVenueUtalizationReports2DAL(Startday, Endday, venueid);
+        }
+        public DataTable DailyUtilizationReport(DateTime day, int type,long companyID)
+        {
+            return DAL.DailyUtilizationReportDAL(day, type, companyID);
         }
 
         public DataTable GetTraineePeriodicData(DateTime StartDate, DateTime EndDate,long CourseID)
@@ -449,9 +475,9 @@ namespace TMS.Business.TMS
             return DAL.GetDataForVenueMatrix(VenueID);
         }
       
-        public DataTable SessionsByCourseAndClassID(long? CourseID, long? ClassID,long CompanyID)
+        public DataTable SessionsByCourseAndClassID(long? CourseID, long? ClassID,long CompanyID, DateTime startdate, DateTime EndDate)
         {
-            return DAL.SessionsByCourseAndClassIDDAL(CourseID,ClassID, CompanyID);
+            return DAL.SessionsByCourseAndClassIDDAL(CourseID,ClassID, CompanyID,startdate,EndDate);
         }
 
         
@@ -566,6 +592,10 @@ namespace TMS.Business.TMS
         {
             return DAL.ManageScheduledClasses_UpdateDAL(_mapping);
         }
+        public int ManageScheduledClasses_DublicationBAL(CRM_classPersonMapping _mapping)
+        {
+            return DAL.ManageScheduledClasses_DublicationDAL(_mapping);
+        }
 
         public int ManageScheduledClasses_DeleteBAL(CRM_classPersonMapping _mapping)
         {
@@ -639,15 +669,28 @@ namespace TMS.Business.TMS
         {
             return DAL.ManageCourse_DuplicationCheckDAL(_mapping);
         }
-
+        public int ManageCourseCategory_DuplicationCheckBAL(CRM_CourseCategoryMapping _mapping)
+        {
+            return DAL.ManageCourseCategory_DuplicationCheckDAL(_mapping);
+        }
+        public int ManageCourse_Assigned(long PID)
+        {
+            return DAL.ManageCourse_Assigned(PID);
+        }
         public int ManageScheduleCourse_DuplicationCheckBAL(CRM_classPersonMapping _mapping)
         {
             return DAL.ManageScheduleCourse_DuplicationCheckDAL(_mapping);
         }
 
-
-
-
+        public IList<DDlList> GetCourseFromTimeSpanDALBAL(DateTime startDate, DateTime endDate,long userid)
+        {
+            return DAL.GetCourseFromTimeSpanDALDDL(startDate, endDate, userid);
+        }
+        
+        public IList<DDlList> GetCourseFromTimeSpanBAL(DateTime startDate, DateTime endDate)
+        {
+            return DAL.GetCourseFromTimeSpanListDAL(startDate, endDate);
+        }
         #endregion ScheduledClasses
     }
 }

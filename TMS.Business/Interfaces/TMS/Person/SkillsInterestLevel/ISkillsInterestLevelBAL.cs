@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using System;
 using System.Collections.Generic;
 using TMS.Library.Entities.Common.Configuration;
 using TMS.Library.TMS.Persons.Skills;
@@ -44,7 +45,7 @@ namespace TMS.Business.Interfaces.TMS.SkillsInterestLevel
         /// </summary>
         /// <param name="PersonId">The person identifier.</param>
         /// <returns>IList&lt;PersonSkill&gt;.</returns>
-        IList<FocusAreas> PersonFocusAreaSkill_GetbyPersonIdBAL();
+        IList<FocusAreas> PersonFocusAreaSkill_GetbyPersonIdBAL(string CompanyId);
 
         /// <summary>
         /// Persons the interest getby person identifier bal.
@@ -59,14 +60,21 @@ namespace TMS.Business.Interfaces.TMS.SkillsInterestLevel
         /// <param name="_objPersonSkillsInterest">The object person skills interest.</param>
         /// <returns>System.Int64.</returns>
         long PersonSkillsInterest_CreateBAL(PersonSkillsInterest _objPersonSkillsInterest);
+        /// <summary>
+        /// Persons the skills interest create bal.
+        /// </summary>
+        /// <param name="_objPersonSkillsInterest">The object person skills interest.</param>
+        /// <returns>System.Int64.</returns>
+        //long PersonSkillsInterest_CreateBAL(long PersonIds,long user, DateTime date,long cid,long OrganizationID);
+        long PersonSkillsInterest_CreateBAL(long PersonId, long OrganizationID, string title, long Type, string description, long user, DateTime date);
 
         /// <summary>
         /// Persons the skills interest create bal.
         /// </summary>
         /// <param name="_objPersonSkillsInterest">The object person skills interest.</param>
         /// <returns>System.Int64.</returns>
-        long PersonSkillsInterest_CreateBAL(string PersonIds,long user,string date,long cid,long OrganizationID);
-
+        //long PersonSkillsInterest_CreateBAL(long PersonIds,long user, DateTime date,long cid,long OrganizationID);
+        long PersonSkills_DuplicationCheckBAL(long cid,string _skill,long value);
         /// <summary>
         /// Persons the skills interest update bal.
         /// </summary>

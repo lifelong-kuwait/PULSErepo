@@ -54,10 +54,10 @@ namespace TMS.Business.Admin
         /// <param name="PageSize">Size of the page.</param>
         /// <param name="Total">The total.</param>
         /// <returns>IList&lt;TMSResource&gt;.</returns>
-        public IList<TMSResource> GetTMSResourceBAL(int Page, int PageSize, ref int Total, string SearchText)
+        public IList<TMSResource> GetTMSResourceBAL(int Page, int PageSize, ref int Total, string SearchText,string Oids)
         {
 
-            return DAL.GetTMSResourceDAL(Page, PageSize, ref Total,  SearchText);
+            return DAL.GetTMSResourceDAL(Page, PageSize, ref Total,  SearchText, Oids);
         }
 
         /// <summary>

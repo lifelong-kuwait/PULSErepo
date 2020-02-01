@@ -78,14 +78,14 @@
 " + @"#} else {#<div>Not Modified</div> </div>#}#");
     }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_SessionNestedTemplate").DisplayDeleteConfirmation(false))
           .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>))
-     .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+     .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
      .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
      .Scrollable()
      .Events(e => e.Edit("SessionGridNested_onEdit").Save("General_onSave"))
      .HtmlAttributes(new { style = "height:450px !important;" })
      .DataSource(dataSource => dataSource.Ajax().ServerOperation(true).Model(model => { model.Id(m => m.ID); })
      .PageSize(5)
-     .Read(read => read.Action("Sessions_Read", "Program", new { ClassId = Model }))
+     .Read(read => read.Action("Sessions_Read", "Program", new { ClassId = Model }).Data("withSearch"))
      .Create(read => read.Action("Sessions_Create", "Program"))
      .Destroy(read => read.Action("Sessions_Destroy", "Program"))
      .Update(read => read.Action("Sessions_Update", "Program"))
@@ -130,7 +130,7 @@
                         #:lr.ClassName#:
                     </label>
                     <span>
-                        #:data.ClassName#
+                        #:data.ClassName2#
                     </span>
                 </p>
                 <p>
@@ -141,14 +141,7 @@
                         #:data.CourseName#
                     </span>
                 </p>
-                <p>
-                    <label>
-                        #:lr.ClassLanguage#:
-                    </label>
-                    <span>
-                        #:enumvalue(data.LanguageID,enumSesssionLangData)#
-                    </span>
-                </p>
+               
                 <p>
                     <label>
                         #:lr.VenueName#:
@@ -162,7 +155,7 @@
                         #:lr.ScheduleInfo#:
                     </label>
                     <label>
-                        #=kendo.toString(data.ScheduleDate, '@DateFormatScript')#      #:data.StartTimeString#  #:data.EndTimeString#
+                        #=kendo.toString(data.ScheduleDate, '@DateFormatScript')#  From    #:data.StartTimeString# To #:data.EndTimeString#
                     </label>
                 </p>
                 <p>

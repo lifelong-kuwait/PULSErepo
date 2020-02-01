@@ -1,0 +1,835 @@
+﻿
+
+
+
+@using lr = Resources.Resources;
+@using TMS.Library
+@model long?
+@{
+    ViewBag.Title = "CertificatePrint";
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+    var phonenubner = lr.PersonPhoneNumber;
+    var personEmail = lr.PersonContactEmail;
+    var role = lr.RoleName;
+    var organizationName = lr.PersonOrganization;
+    var gender = lr.Gender;
+    var org = lr.OrganizationFullName;
+    var Alias = lr.PersonAlias;
+}
+<script type="text/javascript">
+    function onData(e) {
+        var ddl = jQuery("#Class").getKendoDropDownList();
+        var certificateId = jQuery("#Certificate").getKendoDropDownList();
+        return {
+            ClassId: ddl.value(),
+            CertificateID: certificateId.value()
+        }
+    }
+
+</script>
+<style>
+    #loader {
+        position: relative;
+        left: 50%;
+        top: 50%;
+        z-index: 1;
+        width: 150px;
+        height: 150px;
+        margin: -75px 0 0 -75px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 120px;
+        height: 120px;
+        display: none;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+
+    -webkit-keyframes spin {
+        0%
+
+    {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+
+    }
+
+    keyframes spin {
+        0%
+
+    {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+
+    }
+
+
+    .animate-bottom {
+        position: relative;
+        -webkit-animation-name: animatebottom;
+        -webkit-animation-duration: 1s;
+        animation-name: animatebottom;
+        animation-duration: 1s
+    }
+
+    -webkit-keyframes animatebottom {
+        from
+
+    {
+        bottom: -100px;
+        opacity: 0
+    }
+
+    to {
+        bottom: 0px;
+        opacity: 1
+    }
+
+    }
+
+    keyframes animatebottom {
+        from
+
+    {
+        bottom: -100px;
+        opacity: 0
+    }
+
+    to {
+        bottom: 0;
+        opacity: 1
+    }
+    }
+</style>
+@if (User.IsInAnyRoles("CanViewCertificates"))
+{
+    <div class="form-group">
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                @Html.Label("Course")
+                @(Html.Kendo().DropDownList()
+                                    .Name("Course")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .OptionLabel("--Please select Course--")
+                                    .Filter("contains")
+                                    .DataSource(source =>
+                                    {
+                                        source.Read(read =>
+                                        {
+                                            read.Action("Course", "DDL");
+                                        }).ServerFiltering(false);
+                                    })
+     //.HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
+     .HtmlAttributes(new { style = "width: 100%" })
+                )
+            </div>
+            <div class="col-md-4">
+
+                @Html.Label("Class")
+                @(Html.Kendo().DropDownList()
+                                  .Name("Class")
+                                  .DataTextField("Text")
+                                  .DataValueField("Value")
+                                 .OptionLabel("--Please select Class--")
+                                 .Filter("contains")
+                        //.DataSource(source =>
+                        //{
+                        //    source.Read(read =>
+                        //    {
+                        //        read.Action("Classes", "DDL");
+                        //    });
+                        //})
+                        //.HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
+                        .HtmlAttributes(new { style = "width: 100%" })
+                )
+            </div>
+            <div class="col-md-4">
+                @Html.Label(lr.MenuCertificate)
+                @(Html.Kendo().DropDownList()
+                                            .Name("Certificate")
+                                            .DataTextField("Text")
+                                            .DataValueField("Value")
+                                            .OptionLabel("--Please select Certificate--")
+                                            .Filter("contains")
+                                            .DataSource(source =>
+                                            {
+                                                source.Read(read =>
+                                                {
+                                                    read.Action("CertificateDDL", "DDL");
+                                                }).ServerFiltering(false);
+                                            })
+             //.HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
+             .HtmlAttributes(new { style = "width: 100%" })
+                )
+                <a id="PreviewCertificate">Preview Certificate</a>
+            </div>
+           
+               
+                
+        </div>
+    </div>
+    <div style="margin-top:3%;">
+
+        @using lr = Resources.Resources;
+        <script type="text/javascript">
+    function PersonTemplate(data) {
+        if (data != null) {
+            var personTemplate = kendo.template(jQuery("#PersonTemplate").html(), { useWithBlock: false });
+            return personTemplate(data);
+        }
+        return '';
+    }
+        function IsCompletedTemplate(data) {
+            if (data != null) {
+                var personTemplate = kendo.template(jQuery("#IsCompletedTemplate").html(), { useWithBlock: false });
+                return personTemplate(data);
+            }
+            return '';
+        }
+        function EligibleForTemplate(data) {
+            if (data != null) {
+                var personTemplate = kendo.template(jQuery("#EligibleForTemplate").html(), { useWithBlock: false });
+                return personTemplate(data);
+            }
+            return '';
+        }
+    function imgPersonError(image) {
+        image.onerror = "";
+        image.src = '@string.Format("{0}{1}", Url.Content("~/"), DefaultPicture)';
+        return true;
+    }
+
+    function onClick(e) {
+        if (jQuery(e.target).hasClass("k-checkbox-label")) {
+            return;
+        }
+       var row = jQuery(e.target).closest("tr");
+        var checkbox = jQuery(row).find(".k-checkbox");
+        checkbox.checked = true;
+        checkbox.click();
+    };
+
+
+
+        </script>
+       
+        <div class="ChildGrid">
+            <div id="loader"></div>
+            @(Html.Kendo().Grid<TMS.Library.Entities.TMS.Program.ClassTraineeMappingCertificatePrint>()
+                                                                                            .Name("ManageTrainee")
+                                                                                      .Columns(columns =>
+                                                                                      {
+                                                                                          columns.Select().Width(50);
+                                                                                          columns.Bound(e => e.Person.P_DisplayName).Title(lr.Trainee).ClientTemplate("#=PersonTemplate(data)#");
+                                                                                  //columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy);
+                                                                                  columns.Bound(e => e.ClassCompleted).ClientTemplate("#=IsCompletedTemplate(data)#").Title("Last Session Mark").Width(160);
+                                                                                          columns.Bound(e => e.EligibleFor).ClientTemplate("#=EligibleForTemplate(data)#").Title("Eligible For").Width(120);
+                                                                                          columns.Bound(e => e.SessionStatistic).Title("Attendance Statics").Width(160);
+                                                                                          columns.Bound(e => e.AttendancePercentage).Title("Current Percentage").Width(160);
+                                                                                      }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_ClassTraineeTemplate").DisplayDeleteConfirmation(false).AdditionalViewData(new { ClassID = Model }))
+                                                                                                    .ToolBar(toolbar => toolbar.Template(@<text> @RenderAddTemplate()</text>))
+                                                                                                                                                 .Sortable()
+
+                                                                                                                                                    .Selectable(selection =>
+                                                                                                                                                    {
+                                                                                                                                                        selection.Enabled(false);
+
+                                                                                                                                                    })
+                                                                                                                                                    .PersistSelection(true)
+
+                                                                                                                                                    .Pageable(pager => pager.Refresh(true)).Scrollable()
+                                                                                                                                                    .Filterable().Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
+                                                                                                                                                    .HtmlAttributes(new { style = "height:350px;" }).DataSource(dataSource =>
+                                                                                                                                                    dataSource.Ajax().Model(model => { model.Id(m => m.ID); model.Field(p => p.Person).DefaultValue(new TMS.Library.TMS.Persons.Person()); })
+                                                                                                                                                    .PageSize(70)
+                                                                                                                                                    .ServerOperation(false)
+                                                                                                                                                    .Read(read => read.Action("ManageTrainee_Read", "Certificate").Data("onData"))
+                                                                                                                                                    .Events(e => e.Error("GeneralErrorHandler(\"ManageTrainee\")").RequestEnd("GridRequestEndUpdate"))
+                                                                                                                                                                    ).NoRecords(lr.GridNoRecordFoundMessage)
+            )
+            @helper RenderAddTemplate()
+            {
+                <div class="toolbar">
+
+                    @*@if (User.IsInAnyRoles("CanPrintCertificates"))
+                    {
+                        <a class="k-button tms-grid-destroyperson"><span class="tms-grid-icon mdi mdi-printer "></span></a>
+                    }*@
+                    @if (User.IsInAnyRoles("CanPrintCertificates"))
+                    {
+                        <a class="k-button tms-grid-Download"><span class="tms-grid-icon mdi mdi-download "></span></a>
+                    }
+                </div>
+            }
+        </div>
+        <script id="IsCompletedTemplate" type="text/kendo">
+            <div>
+                <p>
+                    <label>
+                        #if (data.ClassCompleted){ # <span class="mdi mdi-checkbox-blank-circle text-success"></span>    #}else{#  <span class="mdi mdi-checkbox-blank-circle text-danger"></span>  #}#
+
+                    </label>
+                </p>
+            </div>
+        </script>
+        <script id="EligibleForTemplate" type="text/kendo">
+            <div>
+                <p>
+                    <label>
+                        #if (data.EligibleFor){ # <span class="mdi mdi-checkbox-blank-circle text-success"></span>    #}else{#  <span class="mdi mdi-checkbox-blank-circle text-danger"></span>  #}#
+
+                    </label>
+                </p>
+            </div>
+        </script>
+        <script id="PersonTemplate" type="text/kendo">
+            <div class='person-box'>
+                <div class='person'>
+                    <img src='../#:data.Person.ProfilePicture#' onerror="imgPersonError(this)" class='paddig' alt=''>
+
+                    <h2>
+
+                        <span class="heading">
+                            <b>
+                                #:data.Person.P_DisplayName# # if (data.Person.NickName!=null){ #(#:data.Person.NickName#)  #}#
+                            </b>
+                        </span>
+                    </h2>
+
+                    <p>
+                        # if (data.Person.Email!=null) { # <label> #:data.Person.Email#</label> #}#
+                    </p>
+                    <p>
+                        #if(data.Person.ContactNumber!=null){#<label> #:data.Person.ContactNumber#</label> #}#
+                    </p>
+
+                    <p>Printed Count: <label>#:data.PrintedTimeCount#</label></p>
+                    <p><label><a class="DigitalCertificate" ID="#:data.PersonID#"  data-id="#:data.PersonID#">Digital Certificate</a></label></p>
+
+                </div>
+            </div>
+        </script>
+    </div>
+
+    <script type="text/javascript">
+        jQuery(function () {
+            jQuery("#PreviewCertificate").live("mousedown", function (event) {
+         //   debugger;
+                if (jQuery("#Certificate").data("kendoDropDownList").value() > 0) {
+                    var url = '@Url.Content("~/Config/Preview_Certificate?pid=")' + jQuery("#Certificate").data("kendoDropDownList").value();
+                    window.open(url, '_blank');
+                }
+
+            });
+            jQuery(".DigitalCertificate").live("mousedown", function (event) {
+         //   debugger;
+                var Pid =jQuery(this).attr("ID");
+                if (jQuery(this).attr("ID") > 0 && jQuery("#Certificate").data("kendoDropDownList").value() > 0 && jQuery("#Class").data("kendoDropDownList").value() > 0 && jQuery("#Course").data("kendoDropDownList").value() > 0) {
+                    swal({
+                        title: 'Do You Want To Print Digital Certificate?',
+                        text: 'Do you want to print Digital Certificate @lr.confirmRecords',
+                        type: "success",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "@lr.confirmYes",
+                        cancelButtonText: "@lr.confirmNo",
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    },
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                console.log(Pid);
+                               jQuery.ajax({
+                                    url: '/Certificate/SetSessionValues',
+                                    method: "post",
+                                    dataType: "JSON",
+                                    contentType: "application/json; charset=utf-8",
+                                   data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: Pid, IsDigital: 1, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
+                                    success: function (data) {
+                                        window.open("/Certificate/Print_Read", "_blank");
+                                    }
+                                });
+                            }
+                        })
+                }
+        });
+        jQuery("#Course").live("change", function (event) {
+            var classId = jQuery("#Course").data("kendoDropDownList").value();
+            jQuery.ajax({
+                method: "post",
+                url: "/SPl_Test_Reports/Course_Class?course=" + classId,
+                dataType: "JSON",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ course: classId }),
+                success: function (msg) {
+                    jQuery("#Class").kendoDropDownList({
+                        OptionLabel: "--Please select Class--",
+                        dataTextField: "Text",
+                        dataValueField: "Value",
+                        filter: "contains",
+                        dataSource: msg,
+                        height: 100
+                    })
+
+                }
+            });
+            jQuery("#Class").live("change", function (event) {
+                if (jQuery("#Certificate").data("kendoDropDownList").value() > 0) {
+                jQuery('#ManageTrainee').data('kendoGrid').dataSource.read();
+                    jQuery('#ManageTrainee').data('kendoGrid').refresh();
+                }
+            });
+            jQuery("#Certificate").live("change", function (event) {
+                console.log(jQuery("#Class").data("kendoDropDownList").value())
+                jQuery('#ManageTrainee').data('kendoGrid').dataSource.read();
+                jQuery('#ManageTrainee').data('kendoGrid').refresh();
+            });
+
+        });
+        jQuery(".tms-grid-destroyperson").live("mousedown", function (event) {
+            var selectedRows = jQuery("#ManageTrainee tr.k-state-selected");
+            var checkedLength = selectedRows.length;
+            var checkedLength = selectedRows.length;
+            if (checkedLength == 1) {
+                var grid = jQuery("#ManageTrainee").data("kendoGrid");
+                var data = grid.dataItem(jQuery("#ManageTrainee tr.k-state-selected"));
+                if (jQuery("#Certificate").data("kendoDropDownList").value() > 0 && jQuery("#Course").data("kendoDropDownList").value() > 0 && jQuery("#Class").data("kendoDropDownList").value() > 0) {
+                    var grid = jQuery("#ManageTrainee").data("kendoGrid");
+                    var data = grid.dataItem(jQuery("#ManageTrainee tr.k-state-selected"));
+
+                    if (data.EligibleFor.toString() === 'false') {
+                        swal({
+                            title: 'Some information is missing do you want to continue?',
+                            text: 'Do you want to print !',// + checkedLength + ' ' + '@lr.confirmRecords',
+                            type: "error",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "@lr.confirmYes",
+                            cancelButtonText: "@lr.confirmNo",
+                            closeOnConfirm: true,
+                            closeOnCancel: true
+                        },
+                            function (isConfirm) {
+                                if (isConfirm) {
+                                    // debugger
+                                      
+                                    grid = jQuery("#ManageTrainee").data("kendoGrid");
+                                    var dataGrid = grid.dataItem(jQuery("#ManageTrainee tr.k-state-selected"));
+                                   // window.open("/Certificate/Print_Read?_classID=" + jQuery("#Class").data("kendoDropDownList").value() + "&_personID=" + jQuery(".DigitalCertificate").attr("data-id") + "&IsDigital=0&certificateID=" + jQuery("#Certificate").data("kendoDropDownList").value(), "_blank");
+
+                                    jQuery.ajax({
+                                        url: '/Certificate/SetSessionValues',
+                                        method: "post",
+                                        dataType: "JSON",
+                                        contentType: "application/json; charset=utf-8",
+                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: data.PersonID, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
+                                        success: function (data) {
+                                            window.open("/Certificate/Print_Read", "_blank");
+                                        }
+                                    });
+                                }
+                            }
+                        )
+                    } else {
+                         swal({
+                            title: 'Do You Want To Print?',
+                            text: 'Do you want to print' + checkedLength + ' ' + '@lr.confirmRecords',
+                            type: "success",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "@lr.confirmYes",
+                            cancelButtonText: "@lr.confirmNo",
+                            closeOnConfirm: true,
+                            closeOnCancel: true
+                        },
+                            function (isConfirm) {
+                                if (isConfirm) {
+                                    // debugger
+                                   //   
+                                    grid = jQuery("#ManageTrainee").data("kendoGrid");
+                                    var dataGrid = grid.dataItem(jQuery("#ManageTrainee tr.k-state-selected"));
+                                    jQuery.ajax({
+                                        url: '/Certificate/SetSessionValues',
+                                        method: "post",
+                                        dataType: "JSON",
+                                        contentType: "application/json; charset=utf-8",
+                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: dataGrid.PersonID, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
+                                        success: function (data) {
+                                            window.open("/Certificate/Print_Read", "_blank");
+                                        }
+                                    });
+                                }
+                            }
+                        )
+                    }
+                } else {
+                    swal({
+                        title: '@lr.MenuCertificate',
+                        text: '@lr.MenuCertificate Not Selected',
+                        type: "error"
+                    });
+                }
+            } else if (checkedLength > 1) {
+                grid2 = jQuery("#ManageTrainee").data("kendoGrid");
+                var rows2 = grid2.select();
+                var str22 = "";
+                rows2.each(function (index, row2) {
+                    var selectedItem2 = grid2.dataItem(row2);
+                     str22 = selectedItem2.EligibleFor.toString();
+
+                });
+                if (str22 === 'false') {
+                    swal({
+                        title: 'Some information is missing do you want to continue?',
+                        text: 'Do you want to print !',// + checkedLength + ' ' + '@lr.confirmRecords',
+                        type: "error",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "@lr.confirmYes",
+                        cancelButtonText: "@lr.confirmNo",
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    },
+                        function (isConfirm22) {
+                           // console.log(isConfirm22.toString());
+                            //if (isConfirm22.toString() === 'true') {
+                            @*swal({
+                                title: 'Do you want to print all selected ?',
+                                text: 'Do you want to print ' + checkedLength + ' ' + '@lr.confirmRecords',
+                                type: "success",
+                                showCancelButton: true,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "@lr.confirmYes",
+                                cancelButtonText: "@lr.confirmNo",
+                                closeOnConfirm: true,
+                                closeOnCancel: true
+                            },
+                                function (isConfirm2) {
+                                    if (isConfirm2) {*@
+                            //console.log("Confirmed");
+                            //document.getElementById("loader").style.display = "block";
+                            var grid = jQuery("#ManageTrainee").data("kendoGrid");
+                            var checkedLength = jQuery("#ManageTrainee tr.k-state-selected").length;
+                            if (checkedLength > 1) {
+                                grid = jQuery("#ManageTrainee").data("kendoGrid");
+                                var res = "";
+                                var rows = grid.select();
+                                // console.log(rows);
+                                rows.each(function (index, row) {
+                                    var selectedItem = grid.dataItem(row);
+                                    var str2 = selectedItem.PersonID + ',';
+                                    res = res.concat(str2);
+                                });
+                                jQuery.ajax({
+                                    url: '/Certificate/SetSessionValues',
+                                    method: "post",
+                                    dataType: "JSON",
+                                    contentType: "application/json; charset=utf-8",
+                                    data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: res, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
+                                    success: function (data) {
+                                        window.open("/Certificate/Print_Read", "_blank");
+                                    }
+                                });
+                            }
+                            //    }
+                            //});
+                            //}
+                        });
+                } else {
+                    swal({
+                        title: 'Do you want to print all selected ?',
+                        text: 'Do you want to print ' + checkedLength + ' ' + '@lr.confirmRecords',
+                        type: "success",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "@lr.confirmYes",
+                        cancelButtonText: "@lr.confirmNo",
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    },
+                        function (isConfirm2) {
+                            if (isConfirm2) {
+                                //console.log("Confirmed");
+                                  
+                                var grid = jQuery("#ManageTrainee").data("kendoGrid");
+                                var checkedLength = jQuery("#ManageTrainee tr.k-state-selected").length;
+                                if (checkedLength > 1) {
+                                    grid = jQuery("#ManageTrainee").data("kendoGrid");
+                                    var res = "";
+                                    var rows = grid.select();
+                                    // console.log(rows);
+                                    rows.each(function (index, row) {
+                                        var selectedItem = grid.dataItem(row);
+                                        var str2 = selectedItem.PersonID + ',';
+                                        res = res.concat(str2);
+                                    });
+                                    jQuery.ajax({
+                                        url: '/Certificate/SetSessionValues',
+                                        method: "post",
+                                        dataType: "JSON",
+                                        contentType: "application/json; charset=utf-8",
+                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: res, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
+                                        success: function (data) {
+                                            window.open("/Certificate/Print_Read", "_blank");
+                                        }
+                                    });
+                                }
+                            }
+                        })
+                }
+            }
+        });
+        jQuery(".tms-grid-Download").live("mousedown", function (event) {
+            var selectedRows = jQuery("#ManageTrainee tr.k-state-selected");
+            var checkedLength = selectedRows.length;
+            var checkedLength = selectedRows.length;
+            if (checkedLength == 1) {
+                var grid = jQuery("#ManageTrainee").data("kendoGrid");
+                var data = grid.dataItem(jQuery("#ManageTrainee tr.k-state-selected"));
+                if (jQuery("#Certificate").data("kendoDropDownList").value() > 0 && jQuery("#Course").data("kendoDropDownList").value() > 0 && jQuery("#Class").data("kendoDropDownList").value() > 0) {
+                    var grid = jQuery("#ManageTrainee").data("kendoGrid");
+                    var data = grid.dataItem(jQuery("#ManageTrainee tr.k-state-selected"));
+
+                    if (data.EligibleFor.toString() === 'false') {
+                        swal({
+                            title: 'Some information is missing do you want to continue?',
+                            text: 'Do you want to print !',// + checkedLength + ' ' + '@lr.confirmRecords',
+                            type: "error",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "@lr.confirmYes",
+                            cancelButtonText: "@lr.confirmNo",
+                            closeOnConfirm: true,
+                            closeOnCancel: true
+                        },
+                            function (isConfirm) {
+                                if (isConfirm) {
+                                    // debugger
+                                      
+                                    grid = jQuery("#ManageTrainee").data("kendoGrid");
+                                    var dataGrid = grid.dataItem(jQuery("#ManageTrainee tr.k-state-selected"));
+                                    jQuery.ajax({
+                                        url: '/Certificate/SetSessionValues',
+                                        method: "post",
+                                        dataType: "JSON",
+                                        contentType: "application/json; charset=utf-8",
+                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: dataGrid.PersonID, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
+                                        success: function (data) {
+                                            window.open("/Certificate/Print_Read", "_blank");
+                                        }
+                                    });
+                                }
+                            }
+                        )
+                    } else {
+                         swal({
+                            title: 'Do You Want To Print?',
+                            text: 'Do you want to print' + checkedLength + ' ' + '@lr.confirmRecords',
+                            type: "success",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "@lr.confirmYes",
+                            cancelButtonText: "@lr.confirmNo",
+                            closeOnConfirm: true,
+                            closeOnCancel: true
+                        },
+                            function (isConfirm23) {
+                                if (isConfirm23) {
+                                    // debugger
+                                      
+                                    grid = jQuery("#ManageTrainee").data("kendoGrid");
+                                    var dataGrid = grid.dataItem(jQuery("#ManageTrainee tr.k-state-selected"));
+                                    jQuery.ajax({
+                                        url: '/Certificate/SetSessionValues',
+                                        method: "post",
+                                        dataType: "JSON",
+                                        contentType: "application/json; charset=utf-8",
+                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: dataGrid.PersonID, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
+                                        success: function (data) {
+                                            window.open("/Certificate/Print_Read", "_blank");
+                                        }
+                                    });
+                                }
+                            }
+                        )
+                    }
+                } else {
+                    swal({
+                        title: '@lr.MenuCertificate',
+                        text: '@lr.MenuCertificate Not Selected',
+                        type: "error"
+                    });
+                }
+            } else if (checkedLength > 1) {
+                grid2 = jQuery("#ManageTrainee").data("kendoGrid");
+                var rows2 = grid2.select();
+                var str22 = "";
+                rows2.each(function (index, row2) {
+                    var selectedItem2 = grid2.dataItem(row2);
+                     str22 = selectedItem2.EligibleFor.toString();
+
+                });
+                if (str22 === 'false') {
+                    swal({
+                        title: 'Some information is missing do you want to continue?',
+                        text: 'Do you want to print !',// + checkedLength + ' ' + '@lr.confirmRecords',
+                        type: "error",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "@lr.confirmYes",
+                        cancelButtonText: "@lr.confirmNo",
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    },
+                        function (isConfirm22) {
+                              
+                            var grid = jQuery("#ManageTrainee").data("kendoGrid");
+                            var checkedLength = jQuery("#ManageTrainee tr.k-state-selected").length;
+                            if (checkedLength > 1) {
+                                grid = jQuery("#ManageTrainee").data("kendoGrid");
+                                var res = "";
+                                var rows = grid.select();
+                                rows.each(function (index, row) {
+                                    var selectedItem = grid.dataItem(row);
+                                    var str2 = selectedItem.PersonID + ',';
+                                    res = res.concat(str2);
+                                });
+                                jQuery.ajax({
+                                    url: '/Certificate/SetSessionValues',
+                                    method: "post",
+                                    dataType: "JSON",
+                                    contentType: "application/json; charset=utf-8",
+                                    data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: res, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
+                                    success: function (data) {
+                                        window.open("/Certificate/Print_Read", "_blank");
+                                    }
+                                });
+                            }
+                        });
+                } else {
+                    swal({
+                        title: 'Do you want to print all selected ?',
+                        text: 'Do you want to print ' + checkedLength + ' ' + '@lr.confirmRecords',
+                        type: "success",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "@lr.confirmYes",
+                        cancelButtonText: "@lr.confirmNo",
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    },
+                        function (isConfirm2) {
+                            if (isConfirm2) {
+                                //console.log("Confirmed");
+                                  
+                                var grid = jQuery("#ManageTrainee").data("kendoGrid");
+                                var checkedLength = jQuery("#ManageTrainee tr.k-state-selected").length;
+                                if (checkedLength > 1) {
+                                    grid = jQuery("#ManageTrainee").data("kendoGrid");
+                                    var res = "";
+                                    var rows = grid.select();
+                                    rows.each(function (index, row) {
+                                        var selectedItem = grid.dataItem(row);
+                                        var str2 = selectedItem.PersonID + ',';
+                                        res = res.concat(str2);
+                                    });
+                                    jQuery.ajax({
+                                        url: '/Certificate/SetSessionValues',
+                                        method: "post",
+                                        dataType: "JSON",
+                                        contentType: "application/json; charset=utf-8",
+                                        data: JSON.stringify({ _classID: jQuery("#Class").data("kendoDropDownList").value(), _personID: res, IsDigital: 0, certificateID: jQuery("#Certificate").data("kendoDropDownList").value() }),
+                                        success: function (data) {
+                                            window.open("/Certificate/Print_Read", "_blank");
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                }
+            }
+        });
+    });
+    function saveTextAsFile(fileNameToSaveAs, textToWrite) {
+        /* Saves a text string as a blob file*/
+        var ie = navigator.userAgent.match(/MSIE\s([\d.]+)/),
+            ie11 = navigator.userAgent.match(/Trident\/7.0/) && navigator.userAgent.match(/rv:11/),
+            ieEDGE = navigator.userAgent.match(/Edge/g),
+            ieVer = (ie ? ie[1] : (ie11 ? 11 : (ieEDGE ? 12 : -1)));
+
+        if (ie && ieVer < 10) {
+            console.log("No blobs on IE ver<10");
+            return;
+        }
+
+        var textFileAsBlob = new Blob([textToWrite], { type: 'application/pdf' });
+
+        if (ieVer > -1) {
+            window.navigator.msSaveBlob(textFileAsBlob, fileNameToSaveAs);
+
+        } else {
+            var fileURL = URL.createObjectURL(textFileAsBlob);
+            window.open(fileURL,"_blank");
+            showPage();
+            //var downloadLink = document.createElement("a");
+            //downloadLink.download = fileNameToSaveAs;
+            //downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+            //downloadLink.onclick = function (e) { document.body.removeChild(e.target); };
+            //downloadLink.style.display = "none";
+            //document.body.appendChild(downloadLink);
+            //downloadLink.click();
+        }
+    }
+    function saveTextAsFileDownload(fileNameToSaveAs, textToWrite) {
+        /* Saves a text string as a blob file*/
+        var ie = navigator.userAgent.match(/MSIE\s([\d.]+)/),
+            ie11 = navigator.userAgent.match(/Trident\/7.0/) && navigator.userAgent.match(/rv:11/),
+            ieEDGE = navigator.userAgent.match(/Edge/g),
+            ieVer = (ie ? ie[1] : (ie11 ? 11 : (ieEDGE ? 12 : -1)));
+
+        if (ie && ieVer < 10) {
+            console.log("No blobs on IE ver<10");
+            return;
+        }
+
+        var textFileAsBlob = new Blob([textToWrite], { type: 'application/pdf' });
+
+        if (ieVer > -1) {
+            window.navigator.msSaveBlob(textFileAsBlob, fileNameToSaveAs);
+
+        } else {
+            //var fileURL = URL.createObjectURL(textFileAsBlob);
+            //window.open(fileURL);
+            var downloadLink = document.createElement("a");
+            downloadLink.download = fileNameToSaveAs;
+            downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+            downloadLink.onclick = function (e) { document.body.removeChild(e.target); };
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            showPage();
+        }
+        }
+        
+        function showPage() {
+           
+        document.getElementById("loader").style.display = "none";
+    }
+    
+    </script>
+}
+    @section Scripts
+{
+        <script src="@Url.Content("~/Views/People/Person.js")"></script>
+    }
+

@@ -31,6 +31,7 @@
         jQuery("#file").val(parentFoldername).trigger("change");
     }
     function AttachmentRemove(e) {
+        
         if (attachmentname == e.files[0].name) {
             jQuery("#FileName").val(null).trigger("change");
             var FileType = jQuery("#FileType").data('kendoDropDownList'); FileType.value(0); FileType.trigger("change");
@@ -217,10 +218,61 @@
         }
     }
 </script>
+<script>
+    jQuery(function () {
+        jQuery(".tms-grid-destroy").live("mousedown", function (event) {
+            var selectedRows = jQuery("#TMS_AttachmentsGrid tr.k-state-selected");
+            var checkedLength = selectedRows.length;
+            var checkedLength = selectedRows.length;
+            if (checkedLength == 1) {
+                var grid = jQuery("#TMS_AttachmentsGrid").data("kendoGrid");
+                var selectedItem = grid.dataItem(grid.select());
+                
+                if (selectedItem.ID < 0) {
+                    swal({
+                        title: '@lr.Oops',
+                        text: '@lr.DefaultPicture',
+                        type: "error"
+                    });
+                    window.location.reload;
+                }
+                else {
+
+               
+                swal({
+                    title: '@lr.Areyousureyouwanttodeletethisrecord',
+                    text: '@lr.Youwillnotbeabletorecover',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "@lr.confirmDelete",
+                    cancelButtonText: "@lr.confirmNo",
+                    closeOnConfirm: false,
+                    closeOnCancel: true,
+                    customClass: "tmsconfirm"
+                },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                             grid.removeRow(selectedRows);
+                                         swal({
+                                             title: '@lr.confirmDeleted',
+                                             text: '@lr.confirmDeletedMessage',
+                                             type: "success"
+                                         },
+                                             function () {
+                                                 window.location.reload;
+                                             });
+                        }
+                    });
+                }
+            }  
+        });
+    });
+</script>
 
 <div class="ChildGrid">
     @(Html.Kendo().Grid<TMS.Library.Common.Attachment.TMS_Attachments>()
-     .Name("TMS_AttachmentsGrid" + Model)
+     .Name("TMS_AttachmentsGrid")
               .Columns(columns =>
      {
          columns.Bound(e => e.FileName);
@@ -261,7 +313,7 @@
         .Create(read => read.Action("Attachment_Create", "Attachment").Data("CreateAttachmentAdditionalData"))
         .Update(read => read.Action("Attachment_Update", "Attachment").Data("UpdateAttachmentAdditionalData"))
         .Destroy(read => read.Action("Attachment_Destroy", "Attachment"))
-        .Events(e => e.Error("GeneralErrorHandler(\"TMS_AttachmentsGrid" + Model + "\")").RequestEnd("AttachmentRequestEnd"))
+        .Events(e => e.Error("GeneralErrorHandler(\"TMS_AttachmentsGrid\")").RequestEnd("AttachmentRequestEnd"))
         ).NoRecords(lr.GridNoRecordFoundMessage)
     )
 </div>

@@ -63,7 +63,6 @@ namespace TMS.Business.TMS.Program
         {
             return _SessionBAL.TMS_Sessions_GetALLByCultureDAL(ClassID, StartRowIndex, PageSize, ref Total, SortExpression, SearchText);
         }
-
         /// <summary>
         /// TMSs the sessions get all by culture bal.
         /// </summary>
@@ -74,11 +73,39 @@ namespace TMS.Business.TMS.Program
         /// <param name="SortExpression">The sort expression.</param>
         /// <param name="SearchText">The search text.</param>
         /// <returns>List&lt;Sessions&gt;.</returns>
-        public List<Sessions> TMS_SessionsbyOrganization_GetALLByCultureBAL(long ClassID, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid)
+        public List<SessionWeekBarData> TMS_Sessions_BarBAL(string FirstDate, string lastDate, long companyID)
+        {
+            return _SessionBAL.TMS_Sessions_BarDAL(FirstDate, lastDate, companyID);
+        }
+        /// <summary>
+        /// TMSs the sessions get all by culture bal.
+        /// </summary>
+        /// <param name="ClassID">The class identifier.</param>
+        /// <param name="StartRowIndex">Start index of the row.</param>
+        /// <param name="PageSize">Size of the page.</param>
+        /// <param name="Total">The total.</param>
+        /// <param name="SortExpression">The sort expression.</param>
+        /// <param name="SearchText">The search text.</param>
+        /// <returns>List&lt;Sessions&gt;.</returns>
+        public IList<Sessions> TMS_SessionsbyOrganization_GetALLByCultureBAL(long ClassID, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid)
         {
             return _SessionBAL.TMS_SessionsbyOrganization_GetALLByCultureDAL(ClassID, StartRowIndex, PageSize, ref Total, SortExpression, SearchText,Oid);
         }
-
+        /// <summary>
+        /// TMSs the sessions get all by culture bal.
+        /// </summary>
+        /// <param name="ClassID">The class identifier.</param>
+        /// <param name="StartRowIndex">Start index of the row.</param>
+        /// <param name="PageSize">Size of the page.</param>
+        /// <param name="Total">The total.</param>
+        /// <param name="SortExpression">The sort expression.</param>
+        /// <param name="SearchText">The search text.</param>
+        /// <returns>List&lt;Sessions&gt;.</returns>
+        public List<Sessions> TMS_SessionsbyOrganization_GetALLSessionsByCultureBAL(long ClassID, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText, string Oid, int page, long personId)
+        {
+            return _SessionBAL.TMS_SessionsbyOrganization_GetALLSessionsByCultureDAL(ClassID, StartRowIndex, PageSize, ref Total, SortExpression, SearchText, Oid,page,personId);
+        }
+        
         /// <summary>
         /// TMSs the sessions create bal.
         /// </summary>
@@ -123,7 +150,14 @@ namespace TMS.Business.TMS.Program
         /// <param name="Sessions">The sessions.</param>
         /// <returns>SessionCreationRules.</returns>
         public SessionCreationRules GetClassDetailByClassIdForNewSessionBAL(Sessions Sessions) { return _SessionBAL.TMS_Session_CheckValidSessionDAL(Sessions); }
-
+        public int GetSessionVenueOccupancyDetailBAL(Sessions Sessions)
+        {
+             return _SessionBAL.GetSessionVenueOccupancyDetailDAL(Sessions); 
+        }
+        public int GetSessionVenueOccupancyDetailUPBAL(Sessions Sessions)
+        {
+            return _SessionBAL.GetSessionVenueOccupancyDetailUPDAL(Sessions);
+        }
         public int User_EmailCheckBAL(long CompanyID, string Email)
         {
             return _SessionBAL.User_EmailCheckDAL(CompanyID,Email);

@@ -30,7 +30,7 @@
    
 </script>
 @(Html.Kendo().Grid<TMS.Library.Entities.Common.Configuration.CourseLogisticRequirements>()
-            .Name("Logisticgroup" + Model)
+            .Name("Logisticgroup")
     .Columns(columns =>
     {
         columns.Bound(e => e.PrimaryRequirementName).ClientTemplate("#=PrimaryRequirementName#");
@@ -45,7 +45,7 @@
      .DataSource(dataSource => dataSource.Ajax().Model(model => { model.Id(m => m.ID); })
      .PageSize(5)
      .Read(read => read.Action("ClassLogistics_Read", "Program", new { ClassId = Model }))
-     .Create(read => read.Action("ClassLogistics_Create", "Program").Data("CreateVenueAdditionalData"))
+     .Create(read => read.Action("ClassLogistics_Create", "Program", new { ClassId = Model }))
      .Destroy(read => read.Action("ClassLogistics_Destroy", "Program").Data("CreateVenueAdditionalData"))
      .Update(read => read.Action("ClassLogistics_Update", "Program").Data("CreateVenueAdditionalData"))
      .Events(e => e.Error("GeneralErrorHandler(\"Logisticgroup\")").RequestEnd("GridRequestEndUpdate")))

@@ -110,6 +110,16 @@ namespace TMS.Business.Interfaces.Common.Configuration
         /// <param name="SearchText">The search text.</param>
         /// <returns>List&lt;Venues&gt;.</returns>
         List<Venues> VenuesbyOrganization_GetAllBAL(int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid);
+        /// <summary>
+        /// Venueses the get all bal.
+        /// </summary>
+        /// <param name="StartRowIndex">Start index of the row.</param>
+        /// <param name="PageSize">Size of the page.</param>
+        /// <param name="Total">The total.</param>
+        /// <param name="SortExpression">The sort expression.</param>
+        /// <param name="SearchText">The search text.</param>
+        /// <returns>List&lt;Venues&gt;.</returns>
+        long VenuesForDestroy_GetAllBAL(long venueID);
 
 
         /// <summary>
@@ -177,6 +187,8 @@ namespace TMS.Business.Interfaces.Common.Configuration
         /// <param name="OpenId">The open identifier.</param>
         /// <returns>IList&lt;DDlList&gt;.</returns>
         IList<DDlList> Venues_GetAllByCultureBAL(string culture, int OpenType, long OpenId,long CompnayID);
+        
+        IList<DDlList> Venues_GetAllByClassBAL(string culture, int OpenType, long OpenId, long CompnayID);
 
         IList<DDlList> Venues_GetAllByCultureBAL(string culture, long CompnayID);
 
@@ -242,6 +254,7 @@ namespace TMS.Business.Interfaces.Common.Configuration
         /// <param name="OpenId">The open identifier.</param>
         /// <returns>IList&lt;DDlList&gt;.</returns>
         IList<DDlList> ManageTrainer_GetAllByCultureBAL(string culture, int OpenType, long OpenId,long CompnayID);
+        IList<DDlList> ManageVenue_GetAllByCultureBAL(string culture, int OpenType, long OpenId, long CompnayID);
 
         #endregion Trainer
 
@@ -593,6 +606,7 @@ namespace TMS.Business.Interfaces.Common.Configuration
         IList<DDlList> CourseLogistic_GetAllByCultureBALL(string culture, long CompnayID);
 
         IList<DDlList> CourseMeterial_GetAllByCultureBAL(string culture, long CompnayID);
+        IList<DDlList> PersonsForInvoice_GetAllByCultureBAL(string culture, long CompnayID);
         IList<DDlList> HowHeard_GetAllByCultureBAL(string culture, long CompnayID);
 
         IList<DDlList> CRMUser_GetAllByCultureBAL(string culture, long CompnayID);

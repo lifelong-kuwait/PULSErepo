@@ -71,23 +71,40 @@
     <mvcSiteMapNode title="Prospects" controller="Prospect" action="Index">
       <mvcSiteMapNode title="Detail" controller="Prospect" action="Detail"/>
     </mvcSiteMapNode>
-
+ <mvcSiteMapNode title="User Log" controller="UserLog" action="UserLog">
+      <mvcSiteMapNode title="User Log" controller="UserLog" action="UserLog"/>
+ 
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="User Error Log" controller="UserLog" action="UserErrorLog">
+      
+ <mvcSiteMapNode title="User Error Log" controller="UserLog" action="UserErrorLog"/>
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="Certificate" controller="Certificate" action="Index">
+      <mvcSiteMapNode title="Certificate" controller="Certificate" action="Index"/>
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="Locked Users" controller="User" action="UnlockUser">
+      <mvcSiteMapNode title="Locked Users" controller="User" action="UnlockUser"/>
+    </mvcSiteMapNode>
     <!--<mvcSiteMapNode title="Tasks" controller="Task" action="Index"/>
     <mvcSiteMapNode title="Task History" controller="Task" action="Detail"/>-->
-    <!--<mvcSiteMapNode title="Prospects" controller="Prospect" action="Index"/>-->
-
-    <mvcSiteMapNode title="Reports" controller="Task" action="Index">
-      <mvcSiteMapNode title="First Report" controller="Task" action="ThirdReporting"/>
-      <mvcSiteMapNode title="Trainee Detail Report" controller="Task" action="TraineeDetailReport"/>
-      <mvcSiteMapNode title="Class Detail Report" controller="Task" action="ClassDetailReport"/>
-      <mvcSiteMapNode title="Trainer Detail Report" controller="Task" action="TrainerDetailReport"/>
-      <mvcSiteMapNode title="Trainer Detail Report" controller="Task" action="SampleTrainarDetailReport"/>
-      <mvcSiteMapNode title="Invoice Report" controller="Task" action="InvoiceReport"/>
-      <mvcSiteMapNode title="Sales Order Detail Report" controller="Task" action="SalesOrderDetailReport"/>
-      <mvcSiteMapNode title="Report Catalog" controller="Task" action="ReportCatalog"/>
-      <mvcSiteMapNode title="Employee Sales Summary Report" controller="Task" action="EmployeeSalesSummaryReport"/>
-      <mvcSiteMapNode title="List Bound Report" controller="Task" action="ListBoundReport"/>
-    </mvcSiteMapNode>
+    <!--<mvcSiteMapNode title="Prospects" controller="Prospect" action="Index"/>VenueMatrixReport-->
+    <mvcSiteMapNode title="Venue Matrix Report" controller="SPl_Test_Reports" action="VenueMatrixReport"/>
+    <mvcSiteMapNode title="Course Attandence Report" controller="SPl_Test_Reports" action="ReportViewer"/>
+      <mvcSiteMapNode title="Trainer Detail Report" controller="SPl_Test_Reports" action="Trainer_Detail_Report"/>
+      <mvcSiteMapNode title="Trainee Detail Report" controller="SPl_Test_Reports" action="Trainee_Detail_Report"/>
+      <mvcSiteMapNode title="Class Detail Report" controller="SPl_Test_Reports" action="Class_Detail_Report"/>
+      <mvcSiteMapNode title="Venue Detail Report" controller="SPl_Test_Reports" action="Venue_Detail_Report"/>
+      <mvcSiteMapNode title="Venue Ocupancy Detail Report" controller="SPl_Test_Reports" action="Venue_Ocupancy_Detail_Report"/>
+      <mvcSiteMapNode title="Weekly Utilization Report" controller="SPl_Test_Reports" action="WeeklyUtilizationReport"/>
+      <mvcSiteMapNode title="Weekly Attandence Report" controller="SPl_Test_Reports" action="Weekly_Attandence_Report"/>
+      <mvcSiteMapNode title="Class Future Report" controller="SPl_Test_Reports" action="Class_Future_Report"/>
+      <mvcSiteMapNode title="Class Current Report" controller="SPl_Test_Reports" action="Class_Current_Report"/>
+      <mvcSiteMapNode title="Venue Detail Utilization Report" controller="SPl_Test_Reports" action="VenueDetailUtilizationReport"/>
+      <mvcSiteMapNode title="Venue Daily Utilization Report" controller="SPl_Test_Reports" action="VenueDailyUtilizationReport"/>
+      <mvcSiteMapNode title="Trainee Periodic Report" controller="SPl_Test_Reports" action="TraineePeriodicReport"/>
+      <mvcSiteMapNode title="Course Periodic Report" controller="SPl_Test_Reports" action="CoursePeriodicReport"/>
+      <mvcSiteMapNode title="Venue Utilization Report" controller="SPl_Test_Reports" action="WeeklyUtilizationReportModified"/>
+     <mvcSiteMapNode title="Schedules Report" controller="SPl_Test_Reports" action="Schedules"/>
   </mvcSiteMapNode>
-
+ 
 </mvcSiteMap>

@@ -41,9 +41,10 @@ namespace TMS.Web.Views.Report.UserControls
 
         private void LoadClassDetailReport()
         {
+            CompanyID = Convert.ToInt64(HttpContext.Current.Session["CompanyID"]);
             DateTime day = Convert.ToDateTime(TxtStartDate.Text);
             int VenueType = Convert.ToInt32(ddlVenueType.SelectedValue);
-            DataTable dt = _PersonBAL.DailyUtilizationReport(day, VenueType);
+            DataTable dt = _PersonBAL.DailyUtilizationReport(day, VenueType, CompanyID);
             ReportViewerMasterReport.ProcessingMode = ProcessingMode.Local;
             ReportViewerMasterReport.LocalReport.ReportPath = Server.MapPath("~/Report/DailyUtilizationReport.rdlc");
             //  DataSet ds = GetTrainerDetailsForReports;

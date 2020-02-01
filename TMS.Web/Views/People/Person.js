@@ -8,18 +8,31 @@
     jQuery(cancel).html('<span class="k-icon k-i-cancel"></span>' + lr.CencelRecordGeneralButton);
     if (e.model.isNew()) {
         // add
+        jQuery(".islogin").hide();
         jQuery("#personeditdiv").hide();
+        if (e.model.RoleName = 'Trainer') {
+            jQuery(".islogin").show();
+        }
+
         //jQuery("#country_Code").hide();
         jQuery(title).text(lr.AddRecordGeneralTitle);
         jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.SaveRecordGeneralButton);
 
     } else {
+        if (e.model.RoleName = 'Trainer') {
+            jQuery(".islogin").show();
+        }
         // edit
+        console.log(e.model.IsLogin);
+        if (e.model.IsLogin) {
+            jQuery(".pwd").show();
+        }
+        //jQuery(".islogin").hide();
         jQuery("#personeditdiv").show();
         jQuery(title).text(lr.EditRecordGeneralTitle);
         jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.UpdateRecordGeneralButton);
     }
-   //var dropdownlistNationality = jQuery("#Nationality").data('kendoDropDownList'); dropdownlistNationality.value("83"); dropdownlistNationality.trigger("change");
+    //var dropdownlistNationality = jQuery("#Nationality").data('kendoDropDownList'); dropdownlistNationality.value("83"); dropdownlistNationality.trigger("change");
     PicturelastUploadedFile = null;
 
 }
@@ -36,7 +49,7 @@ function Person_onSave(e) {
 
 
 
-function PersonEducationRequestEnd(e) { if (e.type=="update") { this.read(); } if (e.type=="create") { this.read(); } }
+function PersonEducationRequestEnd(e) { if (e.type == "update") { this.read(); } if (e.type == "create") { this.read(); } }
 //Special Function Editing For the WorkExperince
 function PersonWEducationWorkExperienceGrid_onEdit(e) {
     //if current model is not new then remove the Name editor

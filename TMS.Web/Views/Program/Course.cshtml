@@ -17,54 +17,60 @@
 <h2>@lr.CourseTitle</h2>
 @Html.AntiForgeryToken()
 @(Html.Kendo().Grid<TMS.Library.TMS.Course>()
-    .Name("CourseGrid")
-    .Columns(columns =>
-    {
-        columns.Bound(e => e.PrimaryName).ClientTemplate("#=CourseTemplate(data)#");
-        columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy);
-        columns.Bound(e => e.UpdatedByAlias).Width(170).Title(lr.ModifiedBy).
- ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"<span class='Addedby'>#=UpdatedByAlias# </span>
-    <span class='date' >#=kendo.toString(UpdatedDate,'" + DateFormatScript + @"')#</span>
+            .Name("CourseGrid")
+            .Columns(columns =>
+            {
+
+                columns.Bound(e => e.PrimaryName).ClientTemplate("#=CourseTemplate(data)#");
+                columns.Bound(e => e.PrimaryCategoryName).Width(220).Title(lr.CourseCategory);
+                columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(210).MinScreenWidth(560).Title(lr.GridAddedBy);
+                columns.Bound(e => e.UpdatedByAlias).Width(190).Title(lr.ModifiedBy).
+         ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"<span class='Addedby'>#=UpdatedByAlias# </span>
+<span class='date' >#=kendo.toString(UpdatedDate,'" + DateFormatScript + @"')#</span>
 <span class='time' >#=kendo.toString(UpdatedDate,'" + TimeFormatScript + @"')#</span>
 " + @"#} else {#<div>Not Modified</div> </div>#}#");
-    }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_CourseTemplate").DisplayDeleteConfirmation(false))
+            }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_CourseTemplate").DisplayDeleteConfirmation(false))
 
-          .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>))
-     .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
-     .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
-     .Scrollable()
-     .Events(e => e.Edit("CourseGrid_onEdit").Save("General_onSave"))
-     .HtmlAttributes(new { style = "height:700px !important;" })
-     .DataSource(dataSource => dataSource.Ajax().ServerOperation(true).Model(model => { model.Id(m => m.ID); })
-     .PageSize(5)
-     .Read(read => read.Action("Course_Read", "Program").Data("withSearch"))
-     .Create(read => read.Action("Course_Create", "Program").Data("courseAddtionalData"))
-     .Destroy(read => read.Action("Course_Destroy", "Program"))
-     .Update(read => read.Action("Course_Update", "Program").Data("courseAddtionalData"))
-     .Events(e => e.Error("GeneralErrorHandler(\"CourseGrid\")").RequestEnd("GridRequestEndUpdate")))
-     .NoRecords(lr.GridNoRecordFoundMessage)
+                  .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>))
+                         .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+                         .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
+                         .Scrollable()
+                         .Groupable()
+                         .Filterable()
+                         .Events(e => e.Edit("CourseGrid_onEdit").Save("General_onSave"))
+                         .HtmlAttributes(new { style = "height:700px !important;" })
+                         .DataSource(dataSource => dataSource.Ajax().ServerOperation(true).Model(model => { model.Id(m => m.ID); })
+                         .PageSize(10)
+                         .Read(read => read.Action("Course_Read", "Program").Data("withSearch"))
+                         .Create(read => read.Action("Course_Create", "Program").Data("courseAddtionalData"))
+                         .Destroy(read => read.Action("Course_Destroy", "Program"))
+                         .Update(read => read.Action("Course_Update", "Program").Data("courseAddtionalData"))
+                         .Events(e => e.Error("GeneralErrorHandler(\"CourseGrid\")").RequestEnd("GridRequestEndUpdate")))
+                         .NoRecords(lr.GridNoRecordFoundMessage)
 )
 @helper RenderAddTemplate()
 {
     <div class="toolbar">
         @if (User.IsInRole("CanAddEditCourse"))
         {
+            <a class="k-button tms-grid-detail-Course"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>
             <a class="k-button tms-grid-add" title="" data-placement="left" data-toggle="tooltip" data-original-title="Tooltip on left">
                 <span class="tms-grid-icon mdi mdi-plus "></span>
             </a>
             <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+
         }
         @if (User.IsInRole("CanDeleteCourse"))
         {
-            <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+            <a class="k-button tms-grid-destroy-Courses" dat-uid="#=uid#"><span class="tms-grid-icon mdi mdi-delete " dat-uid="#=uid#"></span></a>
         }
         @if (User.IsInRole("CanViewCourse"))
         {
-            <a class="k-button tms-grid-detail-Course"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>
+
         }
-        
+
     </div>
- 
+
 }
 @{
     List<TMS.DDlList> enumCourseDurationType = TMS.Extensions.EnumToSelectList<TMS.Library.CourseDurationType>(typeof(TMS.Library.CourseDurationType)).ToList();
@@ -76,7 +82,8 @@
 
     @if (User.IsInRole("CanAddEditCourse"))
     {
-       
+        <span class="grid-tooltip-icon persondetail" dat-uid="#=ID#" title="See the detail of #=PrimaryName#"><i class="mdi mdi-open-in-new"></i></span>
+
         <span class="grid-tooltip-icon edit" dat-uid="#=uid#" title="Edit #=PrimaryName#"><i class="mdi mdi-pencil"></i></span>
     }
     @if (User.IsInRole("CanDeleteCourse"))
@@ -85,7 +92,6 @@
     }
     @if (User.IsInRole("CanViewCourse"))
     {
-        <span class="grid-tooltip-icon persondetail" dat-uid="#=ID#" title="See the detail of #=PrimaryName#"><i class="mdi mdi-open-in-new"></i></span>
 
 
     }
@@ -93,7 +99,7 @@
 
 <script>
      jQuery(function () {
-       // debugger;
+
         var template = kendo.template(jQuery("#toolTipTemplate").html());
         //initialize tooltip to grid tbody with filter cells with given CSS class
         var tooltip = jQuery("#CourseGrid tbody").kendoTooltip({
@@ -102,6 +108,7 @@
             filter: "td:nth-child(1)",
             showOn: "click",
             show: function (e) {
+
                 //get current target row
                 this.popup.element.addClass("tmstooltip");
                 var currentRow = this.target().closest("tr");
@@ -122,7 +129,6 @@
         });
 
         jQuery(".delete").live("mousedown", function (event) {
-            //debugger;
             grid = jQuery("#CourseGrid").data("kendoGrid");
             var selectedRows = jQuery("#CourseGrid tr.k-state-selected");
             var checkedLength = selectedRows.length;
@@ -143,19 +149,43 @@
                     closeOnCancel: true,
                     customClass: "tmsconfirm"
                 },
-                function (isConfirm) {
+              function (isConfirm) {
                     if (isConfirm) {
-                        grid.removeRow(selectedRows);
-                        swal({
-                           title: '@lr.confirmDeleted',
-                           text:  '@lr.confirmDeletedMessage',
-                           type: "success"
-                       },
-                    function(){
-                         window.location="@Url.Content("~/Program/Course")";
+                        jQuery.ajax({
+                            method: "post",
+                            url: "/Program/CourseDelteChk",
+                            dataType: "JSON",
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify({ _Sessions: data.ID }),
+                            success: function (msg) {
+                                if (!msg) {
+                                    swal({
+                                        title: '@lr.Oops',
+                                        text: '@lr.CourseIsAssigned',
+                                        type: "error"
+                                    });
+                                    window.location.reload;
+                                }
+                                else {
+                                    grid.removeRow(selectedRows);
+                                    swal({
+                                        title: '@lr.confirmDeleted',
+                                        text: '@lr.confirmDeletedMessage',
+                                        type: "success"
+                                    },
+                                        function () {
+                                            window.location="@Url.Content("~/Program/Course")";
+                                        });
+                                }
+                            }
                         });
-                   }
-                });
+
+                    @*function(){
+                       window.location="@Url.Content("~/Program/Class")";
+                    }*@
+
+                    }
+               });
             } else if (checkedLength > 1) {
                 var grid = jQuery("#CourseGrid").data("kendoGrid");
 
@@ -173,19 +203,43 @@
                     html: true,
                     customClass: "tmsconfirm"
                 },
-              function (isConfirm) {
-                  if (isConfirm) {
-                      selectedRows.each(function () { grid.removeRow(jQuery(this)); });
-                      swal({
-                           title: '@lr.confirmDeleted',
-                           text:  '@lr.confirmDeletedMessage',
-                           type: "success"
-                       },
-                    function(){
-                        window.location="@Url.Content("~/Program/Course")";
+               function (isConfirm) {
+                    if (isConfirm) {
+                        jQuery.ajax({
+                            method: "post",
+                            url: "/Program/CourseDelteChk",
+                            dataType: "JSON",
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify({ _Sessions: data.ID }),
+                            success: function (msg) {
+                                if (!msg) {
+                                    swal({
+                                        title: '@lr.Oops',
+                                        text: '@lr.CourseIsAssigned',
+                                        type: "error"
+                                    });
+                                    window.location.reload;
+                                }
+                                else {
+                                    grid.removeRow(selectedRows);
+                                    swal({
+                                        title: '@lr.confirmDeleted',
+                                        text: '@lr.confirmDeletedMessage',
+                                        type: "success"
+                                    },
+                                        function () {
+                                            window.location="@Url.Content("~/Program/Course")";
+                                        });
+                                }
+                            }
                         });
-                   }
-              });
+
+                    @*function(){
+                       window.location="@Url.Content("~/Program/Class")";
+                    }*@
+
+                    }
+               });
             } else {
 
             }
@@ -194,14 +248,16 @@
 
 
         //destroy from header
-        jQuery(".tms-grid-destroyperson").live("mousedown", function (event) {
+         jQuery("#CourseGrid .tms-grid-destroy-Courses").live("mousedown", function (event) {
+
             var selectedRows = jQuery("#CourseGrid tr.k-state-selected");
             var checkedLength = selectedRows.length;
             var checkedLength = selectedRows.length;
-            if (checkedLength == 1) {
+             if (checkedLength == 1) {
                 var grid = jQuery("#CourseGrid").data("kendoGrid");
-
-                swal({
+                 var selectedItem = grid.dataItem(grid.select());
+                 console.log(selectedItem.ID);
+                 swal({
                     title: '@lr.Areyousureyouwanttodeletethisrecord',
                     text: '@lr.Youwillnotbeabletorecover',
                     type: "warning",
@@ -213,22 +269,52 @@
                     closeOnCancel: true,
                     customClass: "tmsconfirm"
                 },
-                function (isConfirm) {
+              function (isConfirm) {
                     if (isConfirm) {
-                        grid.removeRow(selectedRows);
-                        swal({
-                           title: '@lr.confirmDeleted',
-                           text:  '@lr.confirmDeletedMessage',
-                           type: "success"
-                       },
-                    function(){
-                        window.location="@Url.Content("~/Program/Course")";
-                        });
-                   }
-                });
-            } else if (checkedLength > 1) {
-                var grid = jQuery("#CourseGrid").data("kendoGrid");
+                        jQuery.ajax({
+                            method: "post",
+                            url: "/Program/CourseDelteChk",
+                            dataType: "JSON",
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify({ _Sessions: selectedItem.ID }),
+                            success: function (msg) {
+                                if (!msg) {
+                                    swal({
+                                        title: '@lr.Oops',
+                                        text: '@lr.CourseIsAssigned',
+                                        type: "error"
+                                    });
+                                    window.location.reload;
+                                }
+                                else {
+                                    grid.removeRow(selectedRows);
+                                    swal({
+                                        title: '@lr.confirmDeleted',
+                                        text: '@lr.confirmDeletedMessage',
+                                        type: "success"
+                                    },
+                                        function () {
+                                            window.location = "@Url.Content("~/Program/Course")";
+                                        });
+                                     }
+                                 }
+                             });
 
+                             @* function () {
+                                 window.location = "@Url.Content("~/Program/Class")";
+                             } *@
+
+                    }
+                     });
+
+
+
+
+            } else if (checkedLength > 1) {
+
+                 var grid = jQuery("#CourseGrid").data("kendoGrid");
+                 var selectedItem = grid.dataItem(grid.select());
+                 console.log(selectedItem.ID);
                 swal({
                     title: '@lr.Areyousureyouwanttodeletetheserecord',
                     text: '@lr.Youwillnotbeabletorecover' + ' <strong style="font-weight:bold">' + checkedLength + ' ' + '@lr.confirmRecords' + '</strong> ?',
@@ -242,20 +328,43 @@
                     html: true,
                     customClass: "tmsconfirm"
                 },
-           function (isConfirm) {
-               if (isConfirm) {
-                   selectedRows.each(function () { grid.removeRow(jQuery(this)); });
-                   swal({
-                           title: '@lr.confirmDeleted',
-                           text:  '@lr.confirmDeletedMessage',
-                           type: "success"
-                       },
-                    function(){
-                        window.location="@Url.Content("~/Program/Course")";
-                    });
-                   }
-           });
+            function (isConfirm) {
+                    if (isConfirm) {
+                        jQuery.ajax({
+                            method: "post",
+                            url: "/Program/CourseDelteChk",
+                            dataType: "JSON",
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify({ _Sessions: selectedItem.ID }),
+                            success: function (msg) {
+                                if (!msg) {
+                                    swal({
+                                        title: '@lr.Oops',
+                                        text: '@lr.CourseIsAssigned',
+                                        type: "error"
+                                    });
+                                    window.location.reload;
+                                }
+                                else {
+                                    grid.removeRow(selectedRows);
+                                    swal({
+                                        title: '@lr.confirmDeleted',
+                                        text: '@lr.confirmDeletedMessage',
+                                        type: "success"
+                                    },
+                                        function () {
+                                           window.location="@Url.Content("~/Program/Course")";
+                                        });
+                                }
+                            }
+                        });
 
+                    @*function(){
+                       window.location="@Url.Content("~/Program/Class")";
+                    }*@
+
+                    }
+               });
 
 
             } else {
@@ -298,56 +407,56 @@
 <script>
         var enumCourseDurationType=  @(Html.Raw(Json.Encode(enumCourseDurationType)));
 </script>
-    <script id="CourseTemplate" type="text/kendo">
+<script id="CourseTemplate" type="text/kendo">
+    <div class=''>
         <div class=''>
-            <div class=''>
-                <p>
-                    <span class="heading">
-                        <b>
-                            #:data.PrimaryName#
-                        </b>
-                    </span>
-                </p>
-                <p>
-                    <label>
-                        Code:
-                    </label>
-                    <span>
-                        #:data.CourseCode#
-                    </span>
-                </p>
-                <p>
-                    <label>
-                        Duration:
-                    </label>
-                    <span>
-                        #:data.CourseDuration#    #:enumvalue(data.CourseDurationType,enumCourseDurationType)#
-                    </span>
-                </p>
-                <p>
-                    <label>
-                        Course Fee:
-                    </label>
-                    <span>
-                        #:data.CourseFee#
-                    </span>
-                </p>
-                <p>
-                    <label>
-                        Minimum Attendance Required (%):
-                    </label>
-                    <span>
-                        #:data.MinimumAttendanceRequirement#
-                    </span>
-                </p>
-            </div>
+            <p>
+                <span class="heading">
+                    <b>
+                        #:data.PrimaryName#
+                    </b>
+                </span>
+            </p>
+            <p>
+                <label>
+                    Code:
+                </label>
+                <span>
+                    #:data.CourseCode#
+                </span>
+            </p>
+            <p>
+                <label>
+                    Duration:
+                </label>
+                <span>
+                    #:data.CourseDuration#    #:enumvalue(data.CourseDurationType,enumCourseDurationType)#
+                </span>
+            </p>
+            <p>
+                <label>
+                    Course Fee:
+                </label>
+                <span>
+                    #:data.CourseFee#
+                </span>
+            </p>
+            <p>
+                <label>
+                    Minimum Attendance Required (%):
+                </label>
+                <span>
+                    #:data.MinimumAttendanceRequirement#
+                </span>
+            </p>
         </div>
-    </script>
+    </div>
+</script>
 @section Scripts
 {
 
-  
-<script>
+
+    <script>
 
         jQuery(".tms-grid-detail-Course").live("mousedown", function (event) {
             var checkedLength = jQuery("#CourseGrid tr.k-state-selected").length;
@@ -360,6 +469,6 @@
 
             }
         });
-</script>
+    </script>
     <script src="@Url.Content("~/Scripts/ts/tms/Program/Program.js")"></script>
 }

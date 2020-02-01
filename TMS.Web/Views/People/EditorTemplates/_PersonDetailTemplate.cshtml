@@ -151,10 +151,10 @@
                     function addPreview(file, wrapper) {
                         var raw = file.rawFile;
                         var reader = new FileReader();
-                        debugger;
+                       
                         if (raw) {
                             reader.onloadend = function () {
-                                debugger;
+                             
                                 var preview = jQuery("<img class='image-preview'>").attr("src", this.result);
 
                                 wrapper.find(".k-file[data-uid='" + file.uid + "'] .k-file-extension-wrapper")

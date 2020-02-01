@@ -15,7 +15,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using TMS.Library.Entities.CRM;
+using TMS.Library.Entities.TMS.Persons;
 using TMS.Library.Entities.TMS.Program;
+using TMS.Library.TMS.Organization;
 using TMS.Library.TMS.Persons;
 using TMS.Library.TMS.Persons.Others;
 
@@ -33,6 +35,13 @@ namespace TMS.DataObjects.Interfaces.TMS
         /// <param name="clientType">Type of the client.</param>
         /// <returns>PersonResponse.</returns>
         PersonResponse PersonInsertNewPersonDAL(Person _objPerson, string clientType,long RoleID);
+        /// <summary>
+        /// Persons the insert new person dal.
+        /// </summary>
+        /// <param name="_objPerson">The object person.</param>
+        /// <param name="clientType">Type of the client.</param>
+        /// <returns>PersonResponse.</returns>
+        List<PersonBarData> PersonBarBALDAL(DateTime startdate, DateTime lastdate,long CompanyId);
 
 
         PersonResponse ProspectInsertNewPersonDAL(Person _objPerson, string clientType, long RoleID);
@@ -61,7 +70,7 @@ namespace TMS.DataObjects.Interfaces.TMS
         Person Person_GetAllByIdDAL(string ID);
         Person Prospect_GetAllByIdDAL(string ID);
 
-        
+        int ManageCourse_Assigned(long PID);
 
         Classes ClassGetByIDDAL(long CurrentClassID);
 
@@ -137,7 +146,12 @@ namespace TMS.DataObjects.Interfaces.TMS
         /// <param name="_objPersonRoles">The object person roles.</param>
         /// <returns>System.Int64.</returns>
         long TMS_PersonintoUser_CreateDAL(PersonRolesMapping _objPersonRoles);
-
+        /// <summary>
+        /// TMSs the person roles mapping create dal.
+        /// </summary>
+        /// <param name="_objPersonRoles">The object person roles.</param>
+        /// <returns>System.Int64.</returns>
+        int TMS_PersonintoUser_DestroyDAL(Person _objPersonRoles);
         /// <summary>
         /// TMSs the person roles mapping update dal.
         /// </summary>
@@ -174,9 +188,10 @@ namespace TMS.DataObjects.Interfaces.TMS
         IList<PersonRolesMapping> TMS_PersonRolesMapping_GetbyPersonIDDAL(long PersonID,long CompanyID , int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText);
 
         IList<Person> TMS_Coordinate_GetAllByCultureDAL(string culture);
-
-
-       DataTable GetTrainerDetailsForReportsDAL(long ClssID, long TrainerID);
+        IList<DDlList> GetCourseFromTimeSpanDALDDL(DateTime StartTime, DateTime EndTime,long userid);
+        //GetCourseFromTimeSpanDAL
+        List<OrganizationModel> GetOrganizationLogoDAL(long OrgID);
+        DataTable GetTrainerDetailsForReportsDAL(long ClssID, long TrainerID);
 
         DataTable GetTraineeDetailsForReportsDAL(long ClssID, long TrainerID);
         DataTable GetTraineePeriodicDataDAL(DateTime StartDate, DateTime EndDate, long CourseID);
@@ -185,17 +200,20 @@ namespace TMS.DataObjects.Interfaces.TMS
         DataTable GetVenueDetailsForReportsDAL(long ClssID, long VenueID);
 
         DataTable GetCourseFromTimeSpanDAL(DateTime StartTime, DateTime EndTime);
-        DataTable ClassFutureReportDAL(long CurrentCourseCategoryID, DateTime ClassReportStartDateFrom, DateTime ClassReportStartDateTo, int ClassTypeID, bool ShowFutureClasses);
+        IList<DDlList> GetCourseFromTimeSpanListDAL(DateTime StartTime, DateTime EndTime);
+        DataTable ClassFutureReportDAL(long CurrentCourseCategoryID, DateTime ClassReportStartDateFrom, DateTime ClassReportStartDateTo, int ClassTypeID, bool ShowFutureClasses,long CompanyId);
         DataTable AttendanceReportsDAL(long CourseID, long ClassID, DateTime startdate, DateTime enddate);
         DataTable GetOccVenueDetailsForReportsDAL(long ClassID, long VenueID, DateTime StartTime, DateTime EndTime);
+        DataTable GetCertificateReportsDAL(string PersonId, long ClassID, long companyID, string Culture,long currentUser,long certificateID);
         DataTable GetCourseReportDataDAL(long ClassID, long CourseID);
 
         DataTable DailyVenueUtalizationReportsDAL(DateTime Startday, DateTime Endday, long venueid);
-        DataTable DailyUtilizationReportDAL(DateTime day, int type);
+        DataTable DailyVenueUtalizationReports2DAL(DateTime Startday, DateTime Endday, long venueid);
+        DataTable DailyUtilizationReportDAL(DateTime day, int type,long companyID);
         DataTable GetClassDetailReportDataDAL(long ClassID, long CourseID);
         DataTable GetDataForVenueMatrix(long VenueID);
 
-        DataTable SessionsByCourseAndClassIDDAL(long? CourseID, long? ClassID,long CompanyID);
+        DataTable SessionsByCourseAndClassIDDAL(long? CourseID, long? ClassID,long CompanyID,DateTime startdate,DateTime EndDate);
 
      
 
@@ -257,7 +275,7 @@ namespace TMS.DataObjects.Interfaces.TMS
 
         int ManageAssigned_DeleteDAL(CRM_UserMapping _mapping);
 
-
+        int ManageScheduledClasses_DublicationDAL(CRM_classPersonMapping _mapping);
 
         #endregion ScheduledClasses
 
@@ -288,7 +306,9 @@ namespace TMS.DataObjects.Interfaces.TMS
         int ManageRecordVisit_DeleteDAL(CRM_VisitHistory _mapping);
 
         int ManageCourse_DuplicationCheckDAL(CRM_CourseMapping _mapping);
+        int ManageCourseCategory_DuplicationCheckDAL(CRM_CourseCategoryMapping _mapping);
 
+        
              int ManageScheduleCourse_DuplicationCheckDAL(CRM_classPersonMapping _mapping);
 
         #endregion Record Visit    

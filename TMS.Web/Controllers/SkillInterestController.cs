@@ -43,7 +43,7 @@ namespace TMS.Web.Controllers
         public ActionResult ManageTraineePerson_Read([DataSourceRequest] DataSourceRequest request)
         {
 
-            var _Phone = _objISkillsInterestLevelBAL.PersonFocusAreaSkill_GetbyPersonIdBAL();
+            var _Phone = _objISkillsInterestLevelBAL.PersonFocusAreaSkill_GetbyPersonIdBAL(CurrentUser.CompanyID.ToString());
             return Json(_Phone.ToDataSourceResult(request, ModelState));
         }
 
@@ -52,17 +52,52 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorize("CanAddEditPersonSkillsAreasofFocus")]
         public ActionResult PersonSkill_Create([DataSourceRequest] DataSourceRequest request, string PersonIds, long cid)
         {
+            var items = PersonIds.Split(new char[] { ',' });
+            List<long> termsList = new List<long>();
+            foreach (string s in items)
+            {
+                long val;
+
+                if (long.TryParse(s, out val))
+                {
+                    termsList.Add(Convert.ToInt64(val));
+                }
+            }
+           
             long user = CurrentUser.NameIdentifierInt64;
-            string date = DateTime.Now.ToString();
+            DateTime date = DateTime.Now;
             long OrganizationID = CurrentUser.CompanyID;
-            var list = _objISkillsInterestLevelBAL.PersonSkillsInterest_CreateBAL(PersonIds, user, date, cid, OrganizationID);
-            return Json(list);
+            List<long> list= new List<long>();
+            var _Phone = _objISkillsInterestLevelBAL.PersonFocusAreaSkill_GetbyPersonIdBAL(CurrentUser.CompanyID.ToString());
+            var _Phone22 = _objISkillsInterestLevelBAL.PersonSkill_GetbyPersonIdBAL(Convert.ToInt64(cid), CurrentUser.CompanyID);
+
+            foreach (long value in termsList)
+            {
+                var _skill =
+                   (from c in _Phone
+                    where c.ID == value
+                    select c.PrimaryFocusAreaName).Single();
+
+                if (_objISkillsInterestLevelBAL.PersonSkills_DuplicationCheckBAL(cid, _skill, value) > 0)
+                {
+                    ModelState.AddModelError(lr.PersonContactEmail, lr.PersonContactEmailDuplicationCheck);
+                    return Json(_Phone.ToDataSourceResult(request, ModelState));
+                }
+                else
+                {
+                    list.Add(_objISkillsInterestLevelBAL.PersonSkillsInterest_CreateBAL(cid, OrganizationID, _skill, value, _skill, user, date));
+                    // list.Add(_objISkillsInterestLevelBAL.PersonSkillsInterest_CreateBAL(value, user, date, cid, OrganizationID));
+                }
+            }
+            var _Phone2 = _objISkillsInterestLevelBAL.PersonSkill_GetbyPersonIdBAL(Convert.ToInt64(cid), CurrentUser.CompanyID);
+            var resultData = new[] { _Phone2 };
+            return Json(_Phone.ToDataSourceResult(request, ModelState));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
         [ClaimsAuthorize("CanAddEditPersonSkillsAreasofFocus")]
-        public ActionResult PersonSkill_Update([DataSourceRequest] DataSourceRequest request, PersonSkill _objPersonSkill)
+        public ActionResult PersonSkill_Update([DataSourceRequest] DataSourceRequest request,string Pid, PersonSkill _objPersonSkill)
         {
             if (ModelState.IsValid)
             {

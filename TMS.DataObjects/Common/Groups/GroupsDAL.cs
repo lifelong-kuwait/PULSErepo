@@ -33,7 +33,7 @@ namespace TMS.DataObjects.Common.Groups
 
         public int IsDeletedAllowDAL(SecurityGroups _ObjTMS_Groups)
         {
-            return ExecuteScalarInt32Sp("TMS_Groups_IsDeleteAllow",
+            return ExecuteScalarSPInt32("TMS_Groups_IsDeleteAllow",
                     ParamBuilder.Par("GroupId", _ObjTMS_Groups.GroupId));
         }
         /// <summary>
@@ -61,7 +61,7 @@ namespace TMS.DataObjects.Common.Groups
         /// </summary>
         /// <param name="Culture">The culture.</param>
         /// <returns>IList&lt;SecurityGroups&gt;.</returns>
-        public IList<SecurityGroups> TMS_Groups_GetAllDAL(string Culture, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText)
+        public IList<SecurityGroups> TMS_Groups_GetAllDAL(int page,string Culture, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText)
         {
 
 
@@ -71,7 +71,7 @@ namespace TMS.DataObjects.Common.Groups
             {
                 conn.Open();
                 DynamicParameters dbParam = new DynamicParameters();
-                dbParam.AddDynamicParams(new { Culture = Culture, StartRowIndex = StartRowIndex, PageSize = PageSize, SortExpression = SortExpression, SearchText = SearchText });
+                dbParam.AddDynamicParams(new { Culture = Culture, StartRowIndex = StartRowIndex, PageSize = PageSize, SortExpression = SortExpression, SearchText = SearchText, page=page });
                 using (var multi = conn.QueryMultiple("TMS_Groups_GetAll", dbParam, commandType: System.Data.CommandType.StoredProcedure))
                 {
                     groups = multi.Read<SecurityGroups>().AsList<SecurityGroups>();
@@ -91,14 +91,14 @@ namespace TMS.DataObjects.Common.Groups
         /// </summary>
         /// <param name="Culture">The culture.</param>
         /// <returns>IList&lt;SecurityGroups&gt;.</returns>
-        public IList<SecurityGroups> TMS_GroupsByOrganization_GetAllDAL(string Culture, string Oid, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText)
+        public IList<SecurityGroups> TMS_GroupsByOrganization_GetAllDAL(int page,string Culture, string Oid, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText)
         {
             List<SecurityGroups> groups = new List<SecurityGroups>();
             using (var conn = new SqlConnection(DBHelper.ConnectionString))
             {
                 conn.Open();
                 DynamicParameters dbParam = new DynamicParameters();
-                dbParam.AddDynamicParams(new { Culture = Culture,Oid=Oid, StartRowIndex = StartRowIndex, PageSize = PageSize, SortExpression = SortExpression, SearchText = SearchText });
+                dbParam.AddDynamicParams(new { Culture = Culture,Oid=Oid, StartRowIndex = StartRowIndex, PageSize = PageSize, SortExpression = SortExpression, SearchText = SearchText,page=page});
                 using (var multi = conn.QueryMultiple("TMS_Groups_GetAllByOrganization", dbParam, commandType: System.Data.CommandType.StoredProcedure))
                 {
                     groups = multi.Read<SecurityGroups>().AsList<SecurityGroups>();
@@ -239,20 +239,30 @@ namespace TMS.DataObjects.Common.Groups
         /// <param name="Culture">The culture.</param>
         /// <param name="GroupId">The group identifier.</param>
         /// <returns>IList&lt;SecurityGroupsPermission&gt;.</returns>
-        public IList<SecurityGroupsPermission> SecurityGroupsPermission_GetAllByGroupId(string Culture, long GroupId)
+        public IList<SecurityGroupsPermission> SecurityGroupsPermission_GetAllByGroupId(string Culture, long GroupId,long organizationID, long UserID)
         {
-            return ExecuteListSp<SecurityGroupsPermission>("TMS_GroupPermissions_GetAllByGroupId", ParamBuilder.Par("Culture", Culture), ParamBuilder.Par("GroupId", GroupId));
+            return ExecuteListSp<SecurityGroupsPermission>("TMS_GroupPermissions_GetAllByGroupId", ParamBuilder.Par("counter", 0) , ParamBuilder.Par("OrganizationID", organizationID),ParamBuilder.Par("Culture", Culture), ParamBuilder.Par("GroupId", GroupId), ParamBuilder.Par("userID", UserID));
         }
-
         /// <summary>
         /// Securities the groups permission get all by group identifier.
         /// </summary>
         /// <param name="Culture">The culture.</param>
         /// <param name="GroupId">The group identifier.</param>
         /// <returns>IList&lt;SecurityGroupsPermission&gt;.</returns>
-        public IList<SecurityGroupsPermission> SecurityGroupsPermissions_GetAllByGroupId(string Culture, long GroupId)
+        public string PermissionPictureDAL(string ID)
         {
-            return ExecuteListSp<SecurityGroupsPermission>("TMS_GroupPermission_GetAllByGroupId", ParamBuilder.Par("Culture", Culture), ParamBuilder.Par("GroupId", GroupId));
+            var parameters = new[] { ParamBuilder.Par("ID", ID) };
+            return ExecuteScalarNvarchar("TMS_GroupPermissions_PermissionPictureName", parameters);
+        }
+        /// <summary>
+        /// Securities the groups permission get all by group identifier.
+        /// </summary>
+        /// <param name="Culture">The culture.</param>
+        /// <param name="GroupId">The group identifier.</param>
+        /// <returns>IList&lt;SecurityGroupsPermission&gt;.</returns>
+        public IList<SecurityGroupsPermission> SecurityGroupsPermissions_GetAllByGroupId(string Culture, long GroupId, long userid, string companyID)
+        {
+            return ExecuteListSp<SecurityGroupsPermission>("TMS_GroupPermission_GetAllByGroupId", ParamBuilder.Par("counter", 0), ParamBuilder.Par("Culture", Culture), ParamBuilder.Par("GroupId", GroupId), ParamBuilder.Par("OrganizationID", companyID), ParamBuilder.Par("userID", userid));
         }
         /// <summary>
         /// Securities the groups permission get all by group identifier.

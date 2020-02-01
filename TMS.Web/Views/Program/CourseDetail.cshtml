@@ -25,11 +25,8 @@
             .Name("CourseDetailGrid")
     .Columns(columns =>
     {
-
-
-
         columns.Bound(e => e.PrimaryName).ClientTemplate("#=CourseTemplate(data)#").HeaderHtmlAttributes(new { @style = "display: none" });
-        columns.Bound(e => e.AddedByAlias).ClientTemplate("#=modifiedtemplate(data)#").Width(220).MinScreenWidth(550).Title(lr.GridAddedBy).HeaderHtmlAttributes(new { @style = "display: none" });
+        columns.Bound(e => e.AddedByAlias).ClientTemplate("#=modifiedtemplate(data)#").Width(240).MinScreenWidth(550).Title(lr.GridAddedBy).HeaderHtmlAttributes(new { @style = "display: none" });
     }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_CourseTemplate").DisplayDeleteConfirmation(false))
      .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>))
 .Events(e => e.Edit("CourseGrid_onEdit").Save("General_onSave"))
@@ -83,28 +80,28 @@
 
             //, new { CourseId = Model.ID }
         }
+        if (User.IsInRole("CanAddEditProgramTrainer"))
+        {
 
+
+            i.Add().Text(lr.ClassLanguage).LoadContentFrom("CourseLanguage", "Program", new { CourseID = Model.ID });
+        }
         if (User.IsInRole("CanViewClass"))
         {
             i.Add().Text(lr.MenuClass).LoadContentFrom("ClassNested", "Program", new { CourseID = Model.ID });
         }
-        if (User.IsInRole("CanAddEditProgramTrainer"))
-        {
 
-           
-            i.Add().Text(lr.ClassLanguage).LoadContentFrom("CourseLanguage", "Program", new { CourseID = Model.ID });
-        }
         if (User.IsInRole("CanAddEditProgramTrainer"))
         {
 
             i.Add().Text(lr.PersonIsCoordinator).LoadContentFrom("CourseCoordinator", "Program", new { CourseID = Model.ID });
-           
-        }
+
+        } 
         if (User.IsInRole("CanAddEditProgramTrainer"))
         {
 
             i.Add().Text(lr.FocusAreaTitle).LoadContentFrom("CourseFocusArea", "Program", new { CourseID = Model.ID });
-            
+
         }
 
 
@@ -141,18 +138,42 @@
                 closeOnCancel: true,
                 customClass:"tmsconfirm"
             },
-               function(isConfirm){
-                   if (isConfirm) {
-                       jQuery("#CourseDetailGrid").data("kendoGrid").removeRow(selectedrow);
-                       swal({
-                           title: '@lr.confirmDeleted',
-                           text:  '@lr.confirmDeletedMessage',
-                           type: "success"
-                       },
-                    function(){
-                        window.location="@Url.Content("~/Program/Course")";
-                    });
-                   }
+                 function (isConfirm) {
+                    if (isConfirm) {
+                        jQuery.ajax({
+                            method: "post",
+                            url: "/Program/CourseDelteChk",
+                            dataType: "JSON",
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify({ _Sessions: data.ID }),
+                            success: function (msg) {
+                                if (!msg) {
+                                    swal({
+                                        title: '@lr.Oops',
+                                        text: '@lr.VenueIsInUse',
+                                        type: "error"
+                                    });
+                                    window.location.reload;
+                                }
+                                else {
+                                    grid.removeRow(selectedRows);
+                                    swal({
+                                        title: '@lr.confirmDeleted',
+                                        text: '@lr.confirmDeletedMessage',
+                                        type: "success"
+                                    },
+                                        function () {
+                                            window.location="@Url.Content("~/Program/Course")";
+                                        });
+                                }
+                            }
+                        });
+
+                    @*function(){
+                       window.location="@Url.Content("~/Program/Class")";
+                    }*@
+
+                    }
                });
         });
 

@@ -11,12 +11,14 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using System;
 using System.Collections.Generic;
 using System.Data;
 using TMS.Business.Interfaces.TMS;
 using TMS.DataObjects.Interfaces.TMS;
 using TMS.Library.Entities.Common.Configuration;
 using TMS.Library.Entities.Coordinator;
+using TMS.Library.Entities.TMS.Course;
 using TMS.Library.Entities.TMS.Program;
 using TMS.Library.TMS;
 
@@ -66,11 +68,24 @@ namespace TMS.Business.TMS
         /// <param name="SortExpression">The sort expression.</param>
         /// <param name="SearchText">The search text.</param>
         /// <returns>List&lt;Course&gt;.</returns>
-        public List<Course> TMS_CoursesByOrganization_GetAllBAL(int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid)
+        public List<Course> TMS_CoursesByOrganization_GetAllBAL(int page, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid,long PersonID)
         {
-            return _CourseDAL.TMS_CoursesByOrganization_GetAllDAL(StartRowIndex, PageSize, ref Total, SortExpression, SearchText,Oid);
+            return _CourseDAL.TMS_CoursesByOrganization_GetAllDAL( page, StartRowIndex, PageSize, ref Total, SortExpression, SearchText,Oid,PersonID);
         }
         /// <summary>
+        /// TMSs the courses get all bal.
+        /// </summary>
+        /// <param name="StartRowIndex">Start index of the row.</param>
+        /// <param name="PageSize">Size of the page.</param>
+        /// <param name="Total">The total.</param>
+        /// <param name="SortExpression">The sort expression.</param>
+        /// <param name="SearchText">The search text.</param>
+        /// <returns>List&lt;Course&gt;.</returns>
+        public long TMS_CoursesDeleteCheck(string CourseId, string Oid)
+        {
+            return _CourseDAL.TMS_CoursesDeleteCheckDAL( CourseId,  Oid);
+        }
+        /// <summary>long TMS_CoursesDeleteCheck(string CourseId, string Oid);
         /// TMSs the courses get by identifier bal.
         /// </summary>
         /// <param name="ID">The identifier.</param>
@@ -78,6 +93,18 @@ namespace TMS.Business.TMS
         public Course TMS_Courses_GetByIdBAL(string ID)
         {
             return _CourseDAL.TMS_Courses_GetByIdDAL(ID);
+        }
+       public List<CourseDataBar> CourseDataBarBAL(DateTime startdate, DateTime lastdate, long CompanyId)
+        {
+            return _CourseDAL.CourseDataBarDAL(startdate,lastdate,CompanyId);
+        }
+        public List<CourseDataBar> CourseFutureDataBarBAL(DateTime startdate, DateTime lastdate, long CompanyId)
+        {
+            return _CourseDAL.CourseFutureDataBarDAL(startdate, lastdate, CompanyId);
+        }
+        public List<CourseDataBar> CLassFutureDataBarBAL(DateTime startdate, DateTime lastdate, long CompanyId)
+        {
+            return _CourseDAL.ClassFutureDataBarDAL(startdate, lastdate, CompanyId);
         }
         /// <summary>
         /// Courses the category code by course identifier bal.
@@ -108,6 +135,10 @@ namespace TMS.Business.TMS
         {
             return _CourseDAL.TMS_Courses_UpdateDAL(_Course);
         }
+      public  int TMS_Courses_Dublicate_PrimaryNameBAL(Course _Course)
+        {
+            return _CourseDAL.TMS_Courses_Dublicate_PrimaryNameDAL(_Course);
+        }
 
         /// <summary>
         /// TMSs the courses delete bal.
@@ -127,9 +158,17 @@ namespace TMS.Business.TMS
         {
             return _CourseDAL.Session_CheckBAL(_Course, CompanyID);
         }
-       
+       public IList<Sessions> TMS_SessionAttendance_GetAllBAL(Sessions _Course)
+        {
+            return _CourseDAL.TMS_SessionAttendance_GetAllDAL(_Course);
+        }
         #region Course Coordinate
-
+        public IList<Sessions> TMS_SessionAttendance_GetAllByIDBAL(int _Course)
+        {
+            
+                return _CourseDAL.TMS_SessionAttendance_GetAllByIDDAL(_Course);
+            
+        }
         public IList<CourseCoordinatorMapping> TMS_CourseCoordinate_GetAllBAL(long CourseId)
         {
             return _CourseDAL.TMS_CourseCoordinator_GetAllDAL(CourseId);
@@ -174,7 +213,10 @@ namespace TMS.Business.TMS
         {
             return _CourseDAL.TMS_CourseFocusArea_UpdateDAL(_focusarea, CourseId);
         }
-
+        public int TMS_CourseFocusArea_DublicationBAL(FocusAreas _focusarea, long CourseId)
+        {
+            return _CourseDAL.TMS_CourseFocusArea_DublicationDAL(_focusarea, CourseId);
+        }
         public int TMS_CourseFocusArea_DeleteDAL(FocusAreas _focusarea, long CourseId)
         {
             return _CourseDAL.TMS_CourseFocusArea_DeleteDAL(_focusarea, CourseId);

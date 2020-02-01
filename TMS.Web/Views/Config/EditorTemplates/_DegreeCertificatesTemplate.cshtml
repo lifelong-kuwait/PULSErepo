@@ -3,6 +3,7 @@
     <ul class="errors"></ul>
 </div>
 <input type="hidden" id="modelid" value="@Model.ID">
+
 <div class="form-horizontal form-person-popup">
     <div class="form-group">
         @Html.LabelFor(model => model.PrimaryName, new { @class = "col-md-3 col-lg-3 control-label" })
@@ -19,7 +20,7 @@
             @Html.ValidationMessageFor(model => model.SecondaryName)
         </div>
     </div>
-  
+
     <div class="form-group">
         @Html.LabelFor(model => model.PrimaryDescription, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-7 col-lg-7 col-sm-11">
@@ -34,4 +35,81 @@
             @Html.ValidationMessageFor(model => model.SecondaryDescription)
         </div>
     </div>
+    <div class="form-group" style="margin:0; padding:0px;">
+        @Html.LabelFor(model => model.Logo, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-6 col-lg-6 col-sm-11">
+            @*@(Html.Kendo().Upload().Name("fileupload").Multiple(false).Async(a => a.Save("SaveOrganizationLogo", "Attachment").Remove("RemoveOrganizationLogo", "Attachment").AutoUpload(true)).Events(
+                e => e.Success("OrganizationIndexLogoSuccess").Remove("OrganizationIndexOnRemove").Select("OrganizationIndexAttachmentSelect")))*@
+            <input id="fileupload" name="fileupload" type="file" accept="application/pdf,image/*"/>
+            @Html.ValidationMessageFor(model => model.Logo)
+
+
+
+            <script>
+                    jQuery(document).ready(function () {
+                        jQuery("#fileupload").kendoUpload({
+                            multiple: false,
+                            async: {
+                                saveUrl: '@Url.Content("~/Attachment/SaveOrganizationLogo")',
+                                @*removeUrl: '@Url.Content("~/Attachment/RemoveOrganizationLogo")',*@
+                                autoUpload: true
+                            },
+                            remove: OrganizationPictureOnRemove,
+                            success: OrganizationLogoOnSuccess,
+                            select: OrganizationIndexAttachmentSelect,
+                            select: function (e) {
+                                var fileInfo = e.files[0];
+                                var wrapper = this.wrapper;
+
+                                setTimeout(function () {
+                                    addPreview(fileInfo, wrapper);
+                                });
+                            }
+                        });
+                    });
+
+                    function addPreview(file, wrapper) {
+                        var raw = file.rawFile;
+                        var reader = new FileReader();
+
+                        if (raw) {
+                            reader.onloadend = function () {
+
+                                var preview = jQuery("<img class='image-preview'>").attr("src", this.result);
+
+                                wrapper.find(".k-file[data-uid='" + file.uid + "'] .k-file-extension-wrapper")
+                                  .replaceWith(preview);
+                            };
+
+                            reader.readAsDataURL(raw);
+                        }
+                    }
+            </script>
+            <style>
+                .image-preview {
+                    position: relative;
+                    vertical-align: top;
+                    height: 45px;
+                }
+            </style>
+
+        </div>
+        <script>
+            jQuery(document).ready(function (e) {
+                jQuery('.pfirstname , .plast_name').bind('keypress blur', function () {
+                    jQuery('.pdisplayname').val(jQuery('.pfirstname').val() + ' ' +
+                        jQuery('.plast_name').val()
+                    ).change();
+                });
+            });
+        </script>
+
+        @*<div class="col-md-4 col-lg-4 col-sm-4">
+
+
+                <img src="@AvatarUrl" alt="Image" height="50" width="50" />
+
+            </div>*@
+    </div>
+
 </div>

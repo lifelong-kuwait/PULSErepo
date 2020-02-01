@@ -13,7 +13,7 @@ namespace TMS.DataObjects.Interfaces.TMS.Program
 
         List<Attendance> ManageSessionAttendanceDAL(long companyID, long SessionID);
 
-        List<Schedule> ManageScheduleDAL(long companyID, long? CourseID, long? ClassID);
+        List<Schedule> ManageScheduleDAL(long companyID, long? CourseID, long? ClassID, DateTime firstdate, DateTime LastDate);
 
         List<Course> CourseGetAllDAL(string Culture, long CompanyID);
         long MarkTraineesAttendanceDAL(Attendance _Attendance, int Atttype);

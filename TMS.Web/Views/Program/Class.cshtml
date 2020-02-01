@@ -6,48 +6,51 @@
 }
 <script>
     //Class
-function ClassTemplate(data) {
-    if (data !== null) {
-        var ClassTemplate = kendo.template(jQuery("#ClassTemplate").html(), { useWithBlock: false });
-        return ClassTemplate(data);
+    function ClassTemplate(data) {
+        if (data !== null) {
+            var ClassTemplate = kendo.template(jQuery("#ClassTemplate").html(), { useWithBlock: false });
+            return ClassTemplate(data);
+        }
+        return '';
     }
-    return '';
-}
 </script>
 <h2>@lr.ClassTitle</h2>
 @Html.AntiForgeryToken()
 @(Html.Kendo().Grid<TMS.Library.Entities.TMS.Program.Classes>()
-            .Name("ClassGrid")
-    .Columns(columns =>
-    {
-        columns.Bound(e => e.PrimaryClassTitle).ClientTemplate("#=ClassTemplate(data)#");
-        columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy);
-        columns.Bound(e => e.UpdatedByAlias).Width(170).Title(lr.ModifiedBy).
- ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"<span class='Addedby'>#=UpdatedByAlias# </span>
-    <span class='date' >#=kendo.toString(UpdatedDate,'" + DateFormatScript + @"')#</span>
+                .Name("ClassGrid")
+        .Columns(columns =>
+        {
+            columns.Bound(e => e.PrimaryClassTitle).ClientTemplate("#=ClassTemplate(data)#").Filterable(true).Title(lr.ClassTitle);
+            columns.Bound(e => e.CourseName).Width(180).Title(lr.PrimaryCourseName);
+            columns.Bound(e => e.AddedByAlias).ClientTemplate("#=addedbytemplate(data)#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy).Filterable(true);
+            columns.Bound(e => e.UpdatedByAlias).Width(170).Title(lr.ModifiedBy).
+     ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"<span class='Addedby'>#=UpdatedByAlias# </span>
+<span class='date' >#=kendo.toString(UpdatedDate,'" + DateFormatScript + @"')#</span>
 <span class='time' >#=kendo.toString(UpdatedDate,'" + TimeFormatScript + @"')#</span>
 " + @"#} else {#<div>Not Modified</div> </div>#}#");
-    }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_ClassTemplate").DisplayDeleteConfirmation(false))
-          .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>))
-     .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
-     .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
-     .Scrollable()
-     .Events(e => e.Edit("ClassGrid_onEdit").Save("General_onSave"))
-     .HtmlAttributes(new { style = "height:700px !important;" })
-     .DataSource(dataSource => dataSource.Ajax().ServerOperation(true).Model(model => { model.Id(m => m.ID); })
-     .PageSize(5)
-    .Read(read => read.Action("Class_Read", "Program").Data("withSearch"))
-     .Create(read => read.Action("Class_Create", "Program"))
-     .Destroy(read => read.Action("Class_Destroy", "Program"))
-     .Update(read => read.Action("Class_Update", "Program"))
-     .Events(e => e.Error("GeneralErrorHandler(\"ClassGrid\")").RequestEnd("GridRequestEndUpdate")))
-     .NoRecords(lr.GridNoRecordFoundMessage)
+        }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_ClassTemplate").DisplayDeleteConfirmation(false))
+              .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>))
+               .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+               .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
+               .Scrollable()
+               .Filterable()
+               .Groupable()
+               .Events(e => e.Edit("ClassGrid_onEdit").Save("General_onSave"))
+               .HtmlAttributes(new { style = "height:700px !important;" })
+               .DataSource(dataSource => dataSource.Ajax().ServerOperation(true).Model(model => { model.Id(m => m.ID); })
+               .PageSize(5)
+               .Read(read => read.Action("Class_Read", "Program").Data("withSearch"))
+               .Create(read => read.Action("Class_Create", "Program"))
+               .Destroy(read => read.Action("Class_Destroy", "Program"))
+               .Update(read => read.Action("Class_Update", "Program"))
+               .Events(e => e.Error("GeneralErrorHandler(\"ClassGrid\")").RequestEnd("GridRequestEndUpdate")))
+               .NoRecords(lr.GridNoRecordFoundMessage)
 )
 @helper RenderAddTemplate()
 {
     <div class="toolbar">
         @if (User.IsInRole("CanAddEditClass"))
-        {
+        {<a class="k-button tms-grid-detail-class"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>
             <a class="k-button tms-grid-add" title="" data-placement="left" data-toggle="tooltip" data-original-title="Tooltip on left">
                 <span class="tms-grid-icon mdi mdi-plus "></span>
             </a>
@@ -59,19 +62,19 @@ function ClassTemplate(data) {
         }
         @if (User.IsInRole("CanViewClass"))
         {
-            <a class="k-button tms-grid-detail-class"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>
+
         }
         @*@if (User.IsInRole("CanViewAttendanceReport"))
-        {
-            <a class="k-button tms-class-attendancereport"><span class="tms-grid-icon mdi mdi-chart-bar"></span></a>
+            {
+                <a class="k-button tms-class-attendancereport"><span class="tms-grid-icon mdi mdi-chart-bar"></span></a>
 
-        }
-        @if (User.IsInRole("CanViewClassFeedBack"))
-        {
+            }
+            @if (User.IsInRole("CanViewClassFeedBack"))
+            {
 
-            <a class="k-button tms-class-feedback"><span class="tms-grid-icon mdi mdi-comment-text-outline"></span></a>
-        }*@
-         
+                <a class="k-button tms-class-feedback"><span class="tms-grid-icon mdi mdi-comment-text-outline"></span></a>
+            }*@
+
     </div>
 }
 
@@ -79,6 +82,8 @@ function ClassTemplate(data) {
 
     @if (User.IsInRole("CanAddEditClass"))
     {
+
+        <span class="grid-tooltip-icon persondetail" dat-uid="#=ID#" title="See the detail of #=PrimaryClassTitle#"><i class="mdi mdi-open-in-new"></i></span>
 
         <span class="grid-tooltip-icon edit" dat-uid="#=uid#" title="Edit #=PrimaryClassTitle#"><i class="mdi mdi-pencil"></i></span>
     }
@@ -88,8 +93,6 @@ function ClassTemplate(data) {
     }
     @if (User.IsInRole("CanViewClass"))
     {
-        <span class="grid-tooltip-icon persondetail" dat-uid="#=ID#" title="See the detail of #=PrimaryClassTitle#"><i class="mdi mdi-open-in-new"></i></span>
-
 
     }
 </script>
@@ -148,18 +151,36 @@ function ClassTemplate(data) {
                 },
                 function (isConfirm) {
                     if (isConfirm) {
-                        grid.removeRow(selectedRows);
-                        swal({
-                           title: '@lr.confirmDeleted',
-                           text:  '@lr.confirmDeletedMessage',
-                           type: "success"
-                       },
-                    function(){
-                         window.location="@Url.Content("~/Program/Class")";
+                        jQuery.ajax({
+                            method: "post",
+                            url: "/Program/ClassDelteChk",
+                            dataType: "JSON",
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify({ _ClassID: data.ID }),
+                            success: function (msg) {
+                                if (!msg) {
+                                    swal({
+                                        title: '@lr.Oops',
+                                        text: '@lr.MaximumSessionConflictDelete ',
+                                        type: "error"
+                                    });
+                                } else {
+                                     grid.removeRow(selectedRows);
+                                        swal({
+                                           title: '@lr.confirmDeleted',
+                                           text:  '@lr.confirmDeletedMessage',
+                                           type: "success"
+                                       },
+                                    function(){
+                                         window.location="@Url.Content("~/Program/Class")";
+                                        });
+                                                }
+                                            }
                         });
+
                    }
                 });
-            } else if (checkedLength > 1) {
+            }@*else if (checkedLength > 1) {
                 var grid = jQuery("#ClassGrid").data("kendoGrid");
 
 
@@ -189,7 +210,7 @@ function ClassTemplate(data) {
                         });
                    }
               });
-            } else {
+            }*@ else {
 
             }
         });
@@ -304,24 +325,24 @@ function ClassTemplate(data) {
         <div class=''>
             <p>
                 <label>
-                   
-                    Class Title
+
+                    Class Code :
                 </label>
                 <span>
-                    #:data.PrimaryClassTitle#
-                </span>
-            </p>
-            <p>
-                <label>
-                    Class Name
-                </label>
-                <span class="heading">
                     #:data.ClassName#
                 </span>
             </p>
             <p>
                 <label>
-                  Class Type
+                    Class Name :
+                </label>
+                <span class="heading">
+                    #:data.PrimaryClassTitle#
+                </span>
+            </p>
+            <p>
+                <label>
+                    Class Type :
                 </label>
                 <span>
                     #:enumvalue(data.ClassTypeID,enumClassType)#
@@ -329,23 +350,23 @@ function ClassTemplate(data) {
             </p>
             <p>
                 <label>
-                   Course
+                    Course Name:
                 </label>
                 <span>
                     #:data.CourseName#
                 </span>
             </p>
+            @*<p>
+                    <label>
+                       Class Fee
+                    </label>
+                    <span>
+                        #:data.ClassFee#  (#:enumvalue(data.FeeCurrency,enumClassFeeCurrency)#)
+                    </span>
+                </p>*@
             <p>
                 <label>
-                   Class Fee
-                </label>
-                <span>
-                    #:data.ClassFee#  (#:enumvalue(data.FeeCurrency,enumClassFeeCurrency)#)
-                </span>
-            </p>
-            <p>
-                <label>
-                   Class Dates
+                    Class Dates :
                 </label>
                 <label>
                     #=kendo.toString(data.StartDate, '@DateFormatScript')# - #=kendo.toString(data.EndDate, '@DateFormatScript')#

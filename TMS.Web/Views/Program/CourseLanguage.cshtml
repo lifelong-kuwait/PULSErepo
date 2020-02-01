@@ -34,7 +34,7 @@
             .Name("CourseLanguageGrid")
     .Columns(columns =>
     {
-        columns.Bound(e => e.PrimaryLanguageName).ClientTemplate("#=PrimaryLanguageName#");
+        columns.Bound(e => e.PrimaryLanguageName).ClientTemplate("#=PrimaryLanguageName#").Title(lr.Language);
         columns.Bound(e => e.AddedByAlias).ClientTemplate("#=AddedByAlias#").Width(190).MinScreenWidth(550).Title(lr.GridAddedBy);
     }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_CourseLanguageTemplate").DisplayDeleteConfirmation(false))
           .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>))

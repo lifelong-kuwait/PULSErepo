@@ -23,6 +23,8 @@ using TMS.Library.TMS;
 using TMS.Library.TMS.Persons;
 using TMS.Library.Entities.Language;
 using TMS.Library.Entities.Common.Configuration;
+using System;
+using System.Data;
 
 namespace TMS.DataObjects.TMS.Program
 {
@@ -92,15 +94,62 @@ namespace TMS.DataObjects.TMS.Program
                 using (var multi = conn.QueryMultiple("TMS_Classes_GetAllByOrganization", dbParam, commandType: System.Data.CommandType.StoredProcedure))
                 {
                     Course = multi.Read<Classes>().AsList<Classes>();
-                    if (!multi.IsConsumed)
-                        Total = multi.Read<int>().FirstOrDefault<int>();
+                    //if (!multi.IsConsumed)
+                    //    Total = multi.Read<int>().FirstOrDefault<int>();
                 }
 
                 conn.Close();
             }
             return Course.ToList();
         }
+        /// <summary>
+        /// TMSs the classes get all dal.
+        /// </summary>
+        /// <param name="CourseId">The course identifier.</param>
+        /// <param name="StartRowIndex">Start index of the row.</param>
+        /// <param name="PageSize">Size of the page.</param>
+        /// <param name="Total">The total.</param>
+        /// <param name="SortExpression">The sort expression.</param>
+        /// <param name="SearchText">The search text.</param>
+        /// <returns>List&lt;Classes&gt;.</returns>
+        public List<Classes> TMS_ClassesAllByOrganization_GetAllDAL(long CourseId, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText, string Oid, long PersonId)
+        {
+            List<Classes> Course = new List<Classes>();
+            using (var conn = new SqlConnection(DBHelper.ConnectionString))
+            {
+                conn.Open();
+                DynamicParameters dbParam = new DynamicParameters();
+                dbParam.AddDynamicParams(new { CourseID = CourseId, StartRowIndex = StartRowIndex, PageSize = PageSize, SortExpression = SortExpression, SearchText = SearchText, Oid = Oid , PersonId = PersonId });
+                using (var multi = conn.QueryMultiple("TMS_Classes_GetAllClassesByOrganization", dbParam, commandType: System.Data.CommandType.StoredProcedure))
+                {
+                    Course = multi.Read<Classes>().AsList<Classes>();
+                    //if (!multi.IsConsumed)
+                    //    Total = multi.Read<int>().FirstOrDefault<int>();
+                }
 
+                conn.Close();
+            }
+            return Course.ToList();
+        }
+        public List<PersonRoleGroup> personRoleGroupsDAL(long UserID)
+        {
+            List<PersonRoleGroup> Course = new List<PersonRoleGroup>();
+            using (var conn = new SqlConnection(DBHelper.ConnectionString))
+            {
+                conn.Open();
+                DynamicParameters dbParam = new DynamicParameters();
+                dbParam.AddDynamicParams(new { PersonID = UserID });
+                using (var multi = conn.QueryMultiple("TMS_PersonRolesAll", dbParam, commandType: System.Data.CommandType.StoredProcedure))
+                {
+                    Course = multi.Read<PersonRoleGroup>().AsList<PersonRoleGroup>();
+                    //if (!multi.IsConsumed)
+                    //    Total = multi.Read<int>().FirstOrDefault<int>();
+                }
+
+                conn.Close();
+            }
+            return Course.ToList();
+        }
 
         public IList<CourseLogisticRequirements> CourseLogistic_GetAllByOrgDAL(string Culture, long OrganizationID, long ClassID, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText)
         {
@@ -305,13 +354,35 @@ namespace TMS.DataObjects.TMS.Program
 
             );
         }
-
         /// <summary>
+        /// TMSs the classes update dal.
+        /// </summary>
+        /// <param name="_Classes">The classes.</param>
+        /// <returns>System.Int32.</returns>
+        public int TMS_Classes_SessionCountDAL(long _ClassesID)
+        {
+
+
+
+            DataSet avd = ExecuteDataSetSP("ClassSessionCount",
+                        ParamBuilder.Par("@ClassID", Convert.ToInt64(_ClassesID)));
+            if(avd.Tables[0].Rows.Count <= 0)
+            {
+                return 0;
+            }
+            else
+            {
+                int i = Convert.ToInt32(avd.Tables[0].Rows[0]["maximum"]);
+                return i;
+            }
+            
+        }
+        /// <summary>int TMS_Classes_SessionCountDAL(int _ClassesID);
         /// TMSs the classes delete dal.
         /// </summary>
         /// <param name="_Classes">The classes.</param>
         /// <returns>System.Int32.</returns>
-        public int TMS_Classes_DeleteDAL(Classes _Classes)
+            public int TMS_Classes_DeleteDAL(Classes _Classes)
         {
             return ExecuteScalarInt32Sp("TMS_Classes_Delete",
                         ParamBuilder.Par("ID", _Classes.ID),
@@ -324,11 +395,12 @@ namespace TMS.DataObjects.TMS.Program
         public int TMS_CourseLanguage_UpdateDAL(MapLanguage _Corelanguage, long CourseId)
         {
             return ExecuteScalarInt32Sp("TMS_CourseLanguage_Update",
-                        ParamBuilder.Par("ID", _Corelanguage.ID),
-                        ParamBuilder.Par("LanguageID", _Corelanguage.LanguageID),
+                        ParamBuilder.Par("OldLanguageID", _Corelanguage.ID),
+                        ParamBuilder.Par("NewLanguageID", _Corelanguage.LanguageID),
                         ParamBuilder.Par("CourseID", CourseId),
                         ParamBuilder.Par("ModifiedBy", _Corelanguage.ModifiedBy),
-                        ParamBuilder.Par("ModifiedDate", _Corelanguage.ModifiedDate)
+                        ParamBuilder.Par("ModifiedDate", _Corelanguage.ModifiedDate),
+                        ParamBuilder.Par("MapperId", _Corelanguage.ID2)
 
             );
         }
@@ -390,7 +462,7 @@ namespace TMS.DataObjects.TMS.Program
             // ExecuteListSp<LoginUsers>("TMS_Users_GetAll");
         }
 
-
+        
         public IList<ClassTraineeMapping> ClassTraineeMapping_GetAllDALOrganization(string Culture, long ClassID,long OrganizationID)
         {
             List<ClassTraineeMapping> LoginUserList = new List<ClassTraineeMapping>();
@@ -423,7 +495,38 @@ namespace TMS.DataObjects.TMS.Program
             return LoginUserList;
             // ExecuteListSp<LoginUsers>("TMS_Users_GetAll");
         }
-
+        public IList<ClassTraineeMappingCertificatePrint> ClassTraineeMappingCertificate_GetAllBALOrganizationDAL(string Culture, long ClassID, long OrganizationID,long CertificateID)
+        {
+            List<ClassTraineeMappingCertificatePrint> LoginUserList = new List<ClassTraineeMappingCertificatePrint>();
+            var conString = DBHelper.ConnectionString;
+            using (var conn = new SqlConnection(conString))
+            {
+                conn.Open();
+                string qry = @"TMS_ClassTraineeMapping_GetAllOrganizationForCertificatePrint";
+                DynamicParameters param = new DynamicParameters(new { Culture = Culture, ClassID = ClassID, OrganizationID = OrganizationID, CertificateID= CertificateID });
+                var ClassTraineeMappingDictionary = new Dictionary<long, ClassTraineeMappingCertificatePrint>();
+                LoginUserList = conn.Query<ClassTraineeMappingCertificatePrint, Person, ClassTraineeMappingCertificatePrint>(
+                       qry, (loginUsers, person) =>
+                       {
+                           ClassTraineeMappingCertificatePrint ClassTraineeMappingEntry;
+                           if (!ClassTraineeMappingDictionary.TryGetValue(loginUsers.ID, out ClassTraineeMappingEntry))
+                           {
+                               ClassTraineeMappingEntry = loginUsers;
+                               ClassTraineeMappingEntry.Person = new Person();
+                               ClassTraineeMappingDictionary.Add(ClassTraineeMappingEntry.ID, ClassTraineeMappingEntry);
+                           }
+                           if (person != null)
+                               ClassTraineeMappingEntry.Person = person;
+                           return ClassTraineeMappingEntry;
+                       }, param, commandType: System.Data.CommandType.StoredProcedure,
+                       splitOn: "PersonID")
+                   .Distinct()
+                   .ToList();
+                conn.Close();
+            }
+            return LoginUserList;
+            // ExecuteListSp<LoginUsers>("TMS_Users_GetAll");
+        }
 
         /// <summary>
         /// Classes the trainee get all by class identifier for creating dal.

@@ -15,9 +15,14 @@ using System.Collections.Generic;
 using TMS.Library;
 using TMS.Library.TMS.Persons;
 using TMS.Business.Interfaces.Common.Configuration;
+using Abp.Runtime.Validation;
+using TMS.Web.Core;
+using TMS.Library.Entities.Common.Roles;
+using System.Web.Script.Serialization;
 
 namespace TMS.Web.Controllers
 {
+    [SessionTimeout]
     public class ProgramController : TMSControllerBase
     {
         private readonly ICourseBAL _CourseBAL;
@@ -25,14 +30,15 @@ namespace TMS.Web.Controllers
         private readonly ISessionBAL _SessionBAL;
         private readonly IAttendanceBAL _AttendanceBAL;
         private readonly IConfigurationBAL _objConfigurationBAL;
+        private readonly IBALUsers _UserBAL;
 
-
-        public ProgramController(ICourseBAL ICourseBAL, IConfigurationBAL _objIConfigurationBAL, IClassBAL IClassBAL, ISessionBAL _ISessionBAL, IAttendanceBAL _IAttendanceBAL)
+        public ProgramController(ICourseBAL ICourseBAL, IConfigurationBAL _objIConfigurationBAL, IClassBAL IClassBAL, ISessionBAL _ISessionBAL, IAttendanceBAL _IAttendanceBAL,IBALUsers objUserBAL)
         {
             _objConfigurationBAL = _objIConfigurationBAL;
             _CourseBAL = ICourseBAL;
             _ClassBAL = IClassBAL;
             _SessionBAL = _ISessionBAL;
+            _UserBAL = objUserBAL;
             _AttendanceBAL = _IAttendanceBAL;
         }
 
@@ -41,6 +47,9 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorize("CanViewCourse")]
         public ActionResult Course()
         {
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to view Courses at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             return View();
         }
 
@@ -48,6 +57,9 @@ namespace TMS.Web.Controllers
         public ActionResult CourseDetail()
         {
             var id = Request.QueryString["id"];
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to view Courses detail at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             if (string.IsNullOrEmpty(id))
             {
                 return RedirectPermanent(Url.Content("~/Program/Course"));
@@ -71,7 +83,24 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorize("CanViewCourse")]
         [DontWrapResult]
         public ActionResult Course_Read([DataSourceRequest] DataSourceRequest request)
-        {
+         {
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to view Courses at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
+            var list = this._ClassBAL.personRoleGroups(CurrentUser.NameIdentifierInt64);
+            long PersonID = 0;
+            if (list.Count == 1 && list[0].PrimaryGroupName == "Trainer")
+            {
+                PersonID = CurrentUser.NameIdentifierInt64;
+            }
+            var kendoRequest = new Kendo.Mvc.UI.DataSourceRequest
+            {
+
+                Filters = request.Filters,
+                Sorts = request.Sorts,
+                Groups = request.Groups,
+                Aggregates = request.Aggregates
+            };
             var startRowIndex = (request.Page - 1) * request.PageSize;
             int Total = 0;
             var SearchText = Request.Form["SearchText"];
@@ -83,14 +112,51 @@ namespace TMS.Web.Controllers
 
             if (CurrentUser.CompanyID > 0)
             {
-                Courses = this._CourseBAL.TMS_CoursesByOrganization_GetAllBAL(startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText,Convert.ToString(CurrentUser.CompanyID));
+                if (kendoRequest.Filters.Count > 0)
+                {
+                    Courses = this._CourseBAL.TMS_CoursesByOrganization_GetAllBAL(request.Page, startRowIndex, 10000, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID),PersonID);
+                }
+                else
+                {
+                    Courses = this._CourseBAL.TMS_CoursesByOrganization_GetAllBAL(request.Page, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID), PersonID);
+
+                }
             }
+            //var result = new DataSourceResult()
+            //{
+            //    Data = Courses, // Process data (paging and sorting applied)
+            //    Total = Total // Total number of records
+            //};
+            var data = Courses.ToDataSourceResult(kendoRequest);
+
             var result = new DataSourceResult()
             {
-                Data = Courses, // Process data (paging and sorting applied)
-                Total = Total // Total number of records
+                AggregateResults = data.AggregateResults,
+                Data = data.Data,
+                Errors = data.Errors,
+                Total = Total
             };
             return Json(result);
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        //[ClaimsAuthorize("CanDeleteSession")]
+
+        public JsonResult CourseDelteChk(string _Sessions)
+        {
+            bool result = false;
+            var _returnValue = this._CourseBAL.TMS_CoursesDeleteCheck(Convert.ToString(_Sessions),CurrentUser.CompanyID.ToString());
+
+            if (_returnValue > 0)
+            {
+                result = false;
+
+            }
+            else
+            {
+                result = true;
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [ClaimsAuthorize("CanViewCourse")]
@@ -106,17 +172,26 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(_Course);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to create Courses at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _Course.CreatedBy = CurrentUser.NameIdentifierInt64;
                 _Course.CreatedDate = DateTime.Now;
                 _Course.OrganizationID = CurrentUser.CompanyID;
                 var codeSuffix = Request.Form["codeSuffix"];
                 _Course.CourseCode = codeSuffix + "-" + _Course.CourseCode;
-                _Course.ID = this._CourseBAL.TMS_Courses_CreateBAL(_Course);
-                string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                if (string.IsNullOrEmpty(ip))
-                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
-
+                if (this._CourseBAL.TMS_Courses_Dublicate_PrimaryNameBAL(_Course) > 0)
+                {
+                    ModelState.AddModelError(lr.PersonSkill, lr.FlagDuplicationCheck);
+                }
+                else
+                {
+                    _Course.ID = this._CourseBAL.TMS_Courses_CreateBAL(_Course);
+                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                    if (string.IsNullOrEmpty(ip))
+                        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+                }
             }
 
             var resultData = new[] { _Course };
@@ -129,6 +204,9 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(_Course);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Update_Success.ToString(), System.Environment.MachineName, "User tried to update Courses at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _Course.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _Course.UpdatedDate = DateTime.Now;
                 var codeSuffix = Request.Form["codeSuffix"];
@@ -150,31 +228,48 @@ namespace TMS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
         [ClaimsAuthorize("CanDeleteCourse")]
+        [DisableValidation]
         public ActionResult Course_Destroy([DataSourceRequest] DataSourceRequest request, Course _Course)
         {
-            if (ModelState.IsValid)
-            {
-                _Course.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                _Course.UpdatedDate = DateTime.Now;
-                if (_CourseBAL.class_CheckBAL(_Course, CurrentUser.CompanyID) > 0)
-                {
-                    ModelState.AddModelError(lr.PersonSkill, lr.FlagDuplicationCheck);
-                }
-                else {
-                    var result = this._CourseBAL.TMS_Courses_DeleteBAL(_Course);
-                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                    if (string.IsNullOrEmpty(ip))
-                        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                    // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
-                    // string browserName = req.Browser.Browser;
-                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Delete, System.Web.HttpContext.Current.Request.Browser.Browser);
+            //if (ModelState.IsValid)
+            //{
 
-                    if (result == -1)
+                var json = new JavaScriptSerializer().Serialize(_Course);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Delete_Success.ToString(), System.Environment.MachineName, "User tried to destroy Courses at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
+                bool result1 = false;
+                var _returnValue = this._CourseBAL.TMS_CoursesDeleteCheck(_Course.ID.ToString(), CurrentUser.CompanyID.ToString());
+
+                if (_returnValue > 0)
+                {
+                    result1 = false;
+
+                }
+                else
+                {
+                    _Course.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                    _Course.UpdatedDate = DateTime.Now;
+                    if (_CourseBAL.class_CheckBAL(_Course, CurrentUser.CompanyID) > 0)
                     {
-                        ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                        ModelState.AddModelError(lr.PersonSkill, lr.FlagDuplicationCheck);
+                    }
+                    else
+                    {
+                        var result = this._CourseBAL.TMS_Courses_DeleteBAL(_Course);
+                        string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                        if (string.IsNullOrEmpty(ip))
+                            ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                        // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
+                        // string browserName = req.Browser.Browser;
+                        _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Delete, System.Web.HttpContext.Current.Request.Browser.Browser);
+
+                        if (result == -1)
+                        {
+                            ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                        }
                     }
                 }
-            }
+            //}
             var resultData = new[] { _Course };
             return Json(resultData.ToDataSourceResult(request, ModelState));
         }
@@ -195,32 +290,63 @@ namespace TMS.Web.Controllers
             return View();
         }
 
-       
+
 
         [ClaimsAuthorize("CanViewClass")]
         [DontWrapResult]
         public ActionResult Class_Read([DataSourceRequest] DataSourceRequest request)
         {
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to read Class at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
+            var list =this._ClassBAL.personRoleGroups(CurrentUser.NameIdentifierInt64);
+            var kendoRequest = new Kendo.Mvc.UI.DataSourceRequest
+            {
+
+                Filters = request.Filters,
+                Sorts = request.Sorts,
+                Groups = request.Groups,
+                Aggregates = request.Aggregates
+            };
             var startRowIndex = (request.Page - 1) * request.PageSize;
             int Total = 0;
             var SearchText = Request.Form["SearchText"];
+            if (SearchText == "")
+                SearchText = null;
             if (request.PageSize == 0)
             {
                 request.PageSize = 10;
             }
             long CourseId = 0;
             CourseId = Convert.ToInt64(Request.QueryString["CourseId"]);
-            var Classs = this._ClassBAL.TMS_Classes_GetAllBAL(CourseId,startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
-            if (CurrentUser.CompanyID > 0)
+            List<Classes> Classs = new List<Classes>();
+            if (CurrentUser.CompanyID < 0)
             {
-                Classs = this._ClassBAL.TMS_ClassesByOrganization_GetAllBAL(CourseId, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText,Convert.ToString(CurrentUser.CompanyID));
+                Classs = this._ClassBAL.TMS_Classes_GetAllBAL(CourseId, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
             }
-            var result = new DataSourceResult()
+
+            else if (CurrentUser.CompanyID > 0)
             {
-                Data = Classs, // Process data (paging and sorting applied)
-                Total = Total // Total number of records
-            };
-            return Json(result);
+                long PersonId = 0;
+                if(list.Count==1 && list[0].PrimaryGroupName=="Trainer")
+                {
+                    PersonId = CurrentUser.NameIdentifierInt64;
+                }
+                if (CourseId <= 0)
+                {
+                    Classs = this._ClassBAL.TMS_ClassesAllByOrganization_GetAllBAL(CourseId, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID),PersonId);
+                }
+                else
+                {
+                    Classs = this._ClassBAL.TMS_ClassesByOrganization_GetAllBAL(CourseId, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
+                }
+            }
+            //var result = new DataSourceResult()
+            //{
+            //    Data = Classs, // Process data (paging and sorting applied)
+            //    Total = Total // Total number of records
+            //};
+            return Json(Classs.ToDataSourceResult(request, ModelState));
         }
 
         [ClaimsAuthorize("CanViewClass")]
@@ -229,6 +355,9 @@ namespace TMS.Web.Controllers
         {
             int count = 0;
             var result = _ClassBAL.GetCourseDetailByIdForNewClassBAL(id, ref count);
+            var json = new JavaScriptSerializer().Serialize(id);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to detail Class at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             if (count > 0)
             {
                 result.CourseCode = result.CourseCode + "-" + DateTime.Now.Year.ToString().Substring(2, 2) + "-" + (count + 1).ToString("000");
@@ -246,23 +375,50 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _Class.CreatedBy = CurrentUser.NameIdentifierInt64;
-                _Class.CreatedDate = DateTime.Now;
-                _Class.OrganizationID = CurrentUser.CompanyID;
-                _Class.StartTime = UtilityFunctions.MapValue<DateTime>(_Class.StartDate.ToShortDateString() + " " + _Class.StartTimeString, typeof(DateTime));
-                DateTime dtEndTime = UtilityFunctions.MapValue<DateTime>(_Class.EndDate.ToShortDateString() + " " + _Class.EndTimeString, typeof(DateTime));
-                if (dtEndTime < _Class.StartTime)
-                    dtEndTime = dtEndTime.AddDays(1);
-                _Class.EndTime = dtEndTime;
+                var json = new JavaScriptSerializer().Serialize(_Class);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to create Class at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
-                _Class.ID = _ClassBAL.TMS_Classes_CreateBAL(_Class);
-                string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                if (string.IsNullOrEmpty(ip))
-                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
-                // string browserName = req.Browser.Browser;
-                _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+                DateTime t1 = Convert.ToDateTime(_Class.StartTimeString);
+                DateTime t2 = Convert.ToDateTime(_Class.EndTimeString);
+                int value = DateTime.Compare(t1, t2);
+                // checking 
+                if (value < 0)
+                {
+                    _Class.CreatedBy = CurrentUser.NameIdentifierInt64;
+                    _Class.CreatedDate = DateTime.Now;
+                    _Class.OrganizationID = CurrentUser.CompanyID;
+                    _Class.StartTime = UtilityFunctions.MapValue<DateTime>(_Class.StartDate.ToShortDateString() + " " + _Class.StartTimeString, typeof(DateTime));
+                    DateTime dtEndTime = UtilityFunctions.MapValue<DateTime>(_Class.EndDate.ToShortDateString() + " " + _Class.EndTimeString, typeof(DateTime));
+                    if (dtEndTime < _Class.StartTime)
+                        dtEndTime = dtEndTime.AddDays(1);
+                    _Class.EndTime = dtEndTime;
+                    if (_Class.EvaluationLink == null)
+                    {
+                        _Class.EvaluationLink = "";
+                    }
+                    if (_Class.FollowUp == null)
+                    {
+                        _Class.FollowUp = "";
+                    }
+                    if (_Class.SecondaryClassTitle == null)
+                    {
+                        _Class.SecondaryClassTitle = "";
+                    }
 
+
+                    _Class.ID = _ClassBAL.TMS_Classes_CreateBAL(_Class);
+                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                    if (string.IsNullOrEmpty(ip))
+                        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                    // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
+                    // string browserName = req.Browser.Browser;
+                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+
+                }
+                else
+                {
+                    ModelState.AddModelError(lr.SessionTimeConflict, lr.StartandEndTimeConflict);
+                }
             }
 
             var resultData = new[] { _Class };
@@ -275,21 +431,54 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _Class.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                _Class.UpdatedDate = DateTime.Now;
-                _Class.StartTime = UtilityFunctions.MapValue<DateTime>(_Class.StartDate.ToShortDateString() + " " + _Class.StartTimeString, typeof(DateTime));
-                DateTime dtEndTime = UtilityFunctions.MapValue<DateTime>(_Class.EndDate.ToShortDateString() + " " + _Class.EndTimeString, typeof(DateTime));
-                if (dtEndTime < _Class.StartTime)
-                    dtEndTime = dtEndTime.AddDays(1);
-                _Class.EndTime = dtEndTime;
-                _ClassBAL.TMS_Classes_UpdateBAL(_Class);
-                string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                if (string.IsNullOrEmpty(ip))
-                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
-                // string browserName = req.Browser.Browser;
-                _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Update, System.Web.HttpContext.Current.Request.Browser.Browser);
+                var json = new JavaScriptSerializer().Serialize(_Class);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Update_Success.ToString(), System.Environment.MachineName, "User tried to update Class at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
+                DateTime t1 = Convert.ToDateTime(_Class.StartTimeString);
+                DateTime t2 = Convert.ToDateTime(_Class.EndTimeString);
+                int value = DateTime.Compare(t1, t2);
+                // checking 
+                if (value < 0)
+                {
+                    int sessioncount = _ClassBAL.TMS_Classes_SessionCountBAL(_Class.ID);
+                    if (_Class.MaximumSessionPerDay < sessioncount)
+                    {
+                        ModelState.AddModelError(lr.MaximumSessionConflict, lr.MaximumSessionConflict);
+                    }
+                    else
+                    {
+
+
+                        _Class.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                        _Class.UpdatedDate = DateTime.Now;
+                        _Class.StartTime = UtilityFunctions.MapValue<DateTime>(_Class.StartDate.ToShortDateString() + " " + _Class.StartTimeString, typeof(DateTime));
+                        DateTime dtEndTime = UtilityFunctions.MapValue<DateTime>(_Class.EndDate.ToShortDateString() + " " + _Class.EndTimeString, typeof(DateTime));
+                        if (dtEndTime < _Class.StartTime)
+                            dtEndTime = dtEndTime.AddDays(1);
+                        _Class.EndTime = dtEndTime;
+                        if (_Class.EvaluationLink == null)
+                        {
+                            _Class.EvaluationLink = "";
+                        }
+                        if (_Class.FollowUp == null)
+                        {
+                            _Class.FollowUp = "";
+                        }
+                        if (_Class.SecondaryClassTitle == null)
+                            _Class.SecondaryClassTitle = "";
+                        _ClassBAL.TMS_Classes_UpdateBAL(_Class);
+                        string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                        if (string.IsNullOrEmpty(ip))
+                            ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                        // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
+                        // string browserName = req.Browser.Browser;
+                        _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Update, System.Web.HttpContext.Current.Request.Browser.Browser);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(lr.SessionTimeConflict, lr.StartandEndTimeConflict);
+                }
             }
 
             var resultData = new[] { _Class };
@@ -303,19 +492,30 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _Class.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                _Class.UpdatedDate = DateTime.Now;
-                var result = _ClassBAL.TMS_Classes_DeleteDAL(_Class);
-                string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                if (string.IsNullOrEmpty(ip))
-                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
-                // string browserName = req.Browser.Browser;
-                _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Delete, System.Web.HttpContext.Current.Request.Browser.Browser);
+                var json = new JavaScriptSerializer().Serialize(_Class);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Delete_Success.ToString(), System.Environment.MachineName, "User tried to destroy Class at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
-                if (result == -1)
+                int sessioncount = _ClassBAL.TMS_Classes_SessionCountBAL(_Class.ID);
+                if (sessioncount > 0)
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    ModelState.AddModelError(lr.MaximumSessionConflictDelete, lr.MaximumSessionConflictDelete);
+                }
+                else
+                {
+                    _Class.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                    _Class.UpdatedDate = DateTime.Now;
+                    var result = _ClassBAL.TMS_Classes_DeleteDAL(_Class);
+                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                    if (string.IsNullOrEmpty(ip))
+                        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                    // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
+                    // string browserName = req.Browser.Browser;
+                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Delete, System.Web.HttpContext.Current.Request.Browser.Browser);
+
+                    if (result == -1)
+                    {
+                        ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    }
                 }
             }
             var resultData = new[] { _Class };
@@ -325,7 +525,7 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorize("CanViewClass")]
         public ActionResult ClassDetail()
         {
-           var id = Request.QueryString["id"];
+            var id = Request.QueryString["id"];
             if (string.IsNullOrEmpty(id))
             {
                 return RedirectPermanent(Url.Content("~/Program/Class"));
@@ -345,7 +545,48 @@ namespace TMS.Web.Controllers
                 }
             }
         }
-
+        [ClaimsAuthorize("CanViewClass")]
+        public ActionResult ClassDetail2()
+        {
+            var id = Request.QueryString["id"];
+            if (string.IsNullOrEmpty(id))
+            {
+                return RedirectPermanent(Url.Content("~/Program/Class"));
+            }
+            else
+            {
+                var data = _ClassBAL.TMS_Classes_GetByIdBAL(id);
+                if (data == null)
+                {
+                    ViewData["model"] = Url.Content("~/Program/Class");
+                    return View("Static/NotFound");
+                }
+                else
+                {
+                    ViewData["model"] = data;
+                    return View();
+                }
+            }
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanDeleteClass")]
+        [DisableValidation]
+        public JsonResult ClassDelteChk(long _ClassID)
+        {
+            bool result = false;
+            int sessioncount = _ClassBAL.TMS_Classes_SessionCountBAL(_ClassID);
+            if (sessioncount > 0)
+            {
+                result = false;
+                //ModelState.AddModelError(lr.MaximumSessionConflictDelete, lr.MaximumSessionConflictDelete);
+            }
+            else
+            {
+                result = true;
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         [ClaimsAuthorize("CanViewProgramTrainee")]
         [DontWrapResult]
         public ActionResult ManageTrainee(long ClassId)
@@ -358,9 +599,12 @@ namespace TMS.Web.Controllers
         public ActionResult ManageTrainee_Read([DataSourceRequest] DataSourceRequest request, long ClassID)
         {
             ViewData["ClassTraineeClassIdCreating"] = ClassID;
+            var json = new JavaScriptSerializer().Serialize(ClassID);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to read Class trainee at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             if (CurrentUser.CompanyID > 0)
             {
-                return Json(_ClassBAL.ClassTraineeMapping_GetAllBALOrganization(CurrentCulture, ClassID,CurrentUser.CompanyID).ToDataSourceResult(request, ModelState));
+                return Json(_ClassBAL.ClassTraineeMapping_GetAllBALOrganization(CurrentCulture, ClassID, CurrentUser.CompanyID).ToDataSourceResult(request, ModelState));
             }
             else
             {
@@ -375,7 +619,9 @@ namespace TMS.Web.Controllers
 
             var startRowIndex = (request.Page - 1) * request.PageSize;
             int Total = 0;
-           
+            var json = new JavaScriptSerializer().Serialize(ClassID);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to read Class trainee at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             var SearchText = Request.Form["SearchText"];
             if (request.PageSize == 0)
             {
@@ -384,7 +630,7 @@ namespace TMS.Web.Controllers
             if (CurrentUser.CompanyID > 0)
             {
                 var Classs = this._ClassBAL.ClassTrainee_GetAllByClassIDForCreatingBALOrganization(CurrentCulture, CurrentUser.CompanyID, ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
-
+                
                 var result = new DataSourceResult()
                 {
                     Data = Classs, // Process data (paging and sorting applied)
@@ -414,24 +660,50 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
 
         public ActionResult ManageTrainee_Create([DataSourceRequest] DataSourceRequest request, string PersonIds, long cid)
-        {           
+        {
             ClassTraineeMapping _Classes = new ClassTraineeMapping();
-            if (ModelState.IsValid)
-            {
-                //  string PersonIds = "2233";
-                _Classes.CreatedBy = CurrentUser.NameIdentifierInt64;
-                _Classes.CreatedDate = DateTime.Now;
-                _Classes.ClassID = cid;             
-                _Classes.ID = _ClassBAL.TMS_ClassTraineeMapping_CreateBAL(_Classes, PersonIds);
-                string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                if (string.IsNullOrEmpty(ip))
-                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
-                // string browserName = req.Browser.Browser;
-                _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+            List<TrainerOpenMapping> ManageTrainer = _objConfigurationBAL.ManageTrainer_GetAllBAL(Convert.ToInt32(cid), 2);
+            bool flage = true;
+            long trainerid = -1;
+            var json = new JavaScriptSerializer().Serialize(PersonIds);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to create Class trainee at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
+            foreach (var x in ManageTrainer)
+            {
+                if (PersonIds.Contains(x.PersonID.ToString()))
+                {
+                    flage = false;
+                    trainerid = x.PersonID;
+                    break;
+                }
+            }
+            if (flage == false)
+            {
+                ModelState.AddModelError(lr.Trainer, lr.ClassTrainerCannotAssignAsTrainee);
+            }
+            else
+            {
+
+
+
+                if (ModelState.IsValid)
+                {
+                    //  string PersonIds = "2233";
+                    _Classes.CreatedBy = CurrentUser.NameIdentifierInt64;
+                    _Classes.CreatedDate = DateTime.Now;
+                    _Classes.ClassID = cid;
+                    _Classes.ID = _ClassBAL.TMS_ClassTraineeMapping_CreateBAL(_Classes, PersonIds);
+                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                    if (string.IsNullOrEmpty(ip))
+                        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                    // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
+                    // string browserName = req.Browser.Browser;
+                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+
+                }
             }
             var resultData = new[] { _Classes };
+
             return Json(resultData.ToDataSourceResult(request, ModelState));
         }
 
@@ -443,6 +715,9 @@ namespace TMS.Web.Controllers
             ClassTraineeMapping _Class = new ClassTraineeMapping();
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(ID);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Delete_Success.ToString(), System.Environment.MachineName, "User tried to destroy Class trainee at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _Class.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _Class.UpdatedDate = DateTime.Now;
                 _Class.ID = ID;
@@ -470,13 +745,16 @@ namespace TMS.Web.Controllers
             var startRowIndex = (request.Page - 1) * request.PageSize;
             int Total = 0;
             var SearchText = Request.Form["SearchText"];
+            var json = new JavaScriptSerializer().Serialize(ClassID);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to read Class trainee at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             if (request.PageSize == 0)
             {
                 request.PageSize = 10;
             }
             if (CurrentUser.CompanyID > 0)
             {
-                var Classs = this._ClassBAL.TrainerGetAllOrganizationExceptClassTrainerBAL(CurrentCulture,CurrentUser.CompanyID, ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
+                var Classs = this._ClassBAL.TrainerGetAllOrganizationExceptClassTrainerBAL(CurrentCulture, CurrentUser.CompanyID, ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
                 var result = new DataSourceResult()
                 {
                     Data = Classs, // Process data (paging and sorting applied)
@@ -495,7 +773,7 @@ namespace TMS.Web.Controllers
                 };
                 return Json(result);
             }
-           
+
         }
 
         [ClaimsAuthorize("CanAddEditProgramTrainee")]
@@ -505,6 +783,9 @@ namespace TMS.Web.Controllers
             ClassTrainerMapping _Classes = new ClassTrainerMapping();
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(PersonIds);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to create Class trainee at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _Classes.CreatedBy = CurrentUser.NameIdentifierInt64;
                 _Classes.CreatedDate = DateTime.Now;
                 _Classes.ClassID = cid;
@@ -532,8 +813,8 @@ namespace TMS.Web.Controllers
         {
             //  string pid = Request.QueryString["pid"];
             //ViewData["OpenType"] = Opentype;
-           // var pid = (string)Session["pid"];
-            return PartialView("_TrainerClasses",id);
+            // var pid = (string)Session["pid"];
+            return PartialView("_TrainerClasses", id);
         }
 
         [ClaimsAuthorize("CanViewPrgramVenues")]
@@ -542,36 +823,38 @@ namespace TMS.Web.Controllers
         {
             var pid = (string)Session["pid"];
             long id = Convert.ToInt64(pid);
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to read Class trainer at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
             int Total = 0;
             //  long id = 60066;
             //   string pid = Request.QueryString["pid"];
             if (CurrentUser.CompanyID > 0)
             {
-                var Class = this._ClassBAL.TMS_TrainerClasses_GetByOrganizationIdBAL(id,CurrentUser.CompanyID,ref Total);
+                var Class = this._ClassBAL.TMS_TrainerClasses_GetByOrganizationIdBAL(id, CurrentUser.CompanyID, ref Total);
                 var result = new DataSourceResult()
                 {
                     Data = Class,
-                    Total= Total// Process data (paging and sorting applied)
-                                //Total = Total // Total number of records
+                    Total = Total// Process data (paging and sorting applied)
+                                 //Total = Total // Total number of records
                 };
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                var Class = this._ClassBAL.TMS_TrainerClasses_GetByIdBAL(id,ref Total);
+                var Class = this._ClassBAL.TMS_TrainerClasses_GetByIdBAL(id, ref Total);
                 var result = new DataSourceResult()
                 {
                     Data = Class,
                     Total = Total   /// Process data (paging and sorting applied)
-                                  //Total = Total // Total number of records
+                    //Total = Total // Total number of records
                 };
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
-         
-          
+
+
             //return Json(_ClassBAL.TMS_TrainerClasses_GetByIdBAL(id).ToDataSourceResult( request, ModelState),JsonRequestBehavior.AllowGet);
-           
+
         }
 
         #endregion
@@ -587,9 +870,9 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public JsonResult LogisticsGroups()
         {
-            long ClassID =Convert.ToInt64(Session["ClassID"]);
+            long ClassID = Convert.ToInt64(Session["ClassID"]);
             Session.Remove("ClassID");
-            return Json(this._ClassBAL.TMS_ClassLogisticsDLL_GetAllBAL(CurrentCulture,CurrentUser.CompanyID,ClassID), JsonRequestBehavior.AllowGet);
+            return Json(this._ClassBAL.TMS_ClassLogisticsDLL_GetAllBAL(CurrentCulture, CurrentUser.CompanyID, ClassID), JsonRequestBehavior.AllowGet);
         }
 
         [ClaimsAuthorize("CanViewClass")]
@@ -612,22 +895,41 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                 //long ClassID = 30014;
-                _Class.CreatedBy = CurrentUser.NameIdentifierInt64;
-                _Class.CreatedDate = DateTime.Now;
-                //_Class.OrganizationID = ID;
-                _Class.ID = _ClassBAL.TMS_ClassLogistics_CreateBAL(_Class, ClassID);
-                string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                if (string.IsNullOrEmpty(ip))
-                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
-                // string browserName = req.Browser.Browser;
-                _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
 
+                var Classs = this._ClassBAL.TMS_ClassLogestics_GetAllBAL(ClassID);
+                bool flage = true;
+                foreach (var x in Classs)
+                {
+                    long str = x.ID;
+                    if (str == _Class.ID)
+                    {
+                        flage = false;
+                        break;
+                    }
+                }
+                if (flage == false)
+                {
+                    ModelState.AddModelError(lr.DubliocationHappen, lr.LogisticDublication);
+                }
+                else
+                {
+                    //long ClassID = 30014;
+                    _Class.CreatedBy = CurrentUser.NameIdentifierInt64;
+                    _Class.CreatedDate = DateTime.Now;
+                    //_Class.OrganizationID = ID;
+                    _Class.ID = _ClassBAL.TMS_ClassLogistics_CreateBAL(_Class, ClassID);
+                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                    if (string.IsNullOrEmpty(ip))
+                        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                    // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
+                    // string browserName = req.Browser.Browser;
+                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+
+                }
             }
             var resultData = new[] { _Class };
             return Json(resultData.ToDataSourceResult(request, ModelState));
-            
+
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -700,7 +1002,7 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public ActionResult CourseLanguage_Read([DataSourceRequest] DataSourceRequest request)
         {
-            
+
             var SearchText = Request.Form["SearchText"];
             long CourseId = 0;
             CourseId = Convert.ToInt64(Request.QueryString["CourseId"]);
@@ -708,7 +1010,7 @@ namespace TMS.Web.Controllers
             return Json(Classs.ToDataSourceResult(request, ModelState));
         }
 
-        
+
         [ClaimsAuthorizeAttribute("CanAddEditClass")]
         [DontWrapResult]
         public ActionResult CourseLanguage_Create([DataSourceRequest] DataSourceRequest request, MapLanguage _Class)
@@ -717,16 +1019,35 @@ namespace TMS.Web.Controllers
             {
                 long CourseId = 0;
                 CourseId = Convert.ToInt64(Request.QueryString["CourseId"]);
-                _Class.CreatedBy = CurrentUser.NameIdentifierInt64;
-                _Class.CreatedDate = DateTime.Now;
-                _Class.ID = _ClassBAL.TMS_CourseLanguage_CreateBAL(_Class, CourseId);
-                string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                if (string.IsNullOrEmpty(ip))
-                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
-                // string browserName = req.Browser.Browser;
-                _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+                var Classs = this._ClassBAL.TMS_Classes_GetAllBAL(CourseId, "");
+                bool flage = true;
+                foreach (var x in Classs)
+                {
+                    long _LanguageName = x.LanguageID;
+                    if (_Class.LanguageID == _LanguageName)
+                    {
+                        flage = false;
+                        break;
+                    }
+                }
+                if (flage == true)
+                {
 
+
+                    _Class.CreatedBy = CurrentUser.NameIdentifierInt64;
+                    _Class.CreatedDate = DateTime.Now;
+                    _Class.ID = _ClassBAL.TMS_CourseLanguage_CreateBAL(_Class, CourseId);
+                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                    if (string.IsNullOrEmpty(ip))
+                        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                    // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
+                    // string browserName = req.Browser.Browser;
+                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+                }
+                else
+                {
+                    ModelState.AddModelError(lr.DubliocationHappen, lr.LanguageDublication);
+                }
             }
 
             var resultData = new[] { _Class };
@@ -743,15 +1064,33 @@ namespace TMS.Web.Controllers
                 CourseId = Convert.ToInt64(Request.QueryString["CourseId"]);
                 _Class.ModifiedBy = CurrentUser.NameIdentifierInt64;
                 _Class.ModifiedDate = DateTime.Now;
-                var result = _ClassBAL.TMS_CourseLanguage_UpdateDAL(_Class, CourseId);
-                string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                if (string.IsNullOrEmpty(ip))
-                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
-                // string browserName = req.Browser.Browser;
-                _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Update, System.Web.HttpContext.Current.Request.Browser.Browser);
+                var Classs = this._ClassBAL.TMS_Classes_GetAllBAL(CourseId, "");
+                bool flage = true;
+                foreach (var x in Classs)
+                {
+                    long _LanguageName = x.LanguageID;
+                    if (_Class.LanguageID == _LanguageName)
+                    {
+                        flage = false;
+                        break;
+                    }
+                }
+                if (flage == true)
+                {
+                    var result = _ClassBAL.TMS_CourseLanguage_UpdateDAL(_Class, CourseId);
+                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                    if (string.IsNullOrEmpty(ip))
+                        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                    // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
+                    // string browserName = req.Browser.Browser;
+                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Update, System.Web.HttpContext.Current.Request.Browser.Browser);
 
-                if (result == -1)
+                    if (result == -1)
+                    {
+                        ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    }
+                }
+                else
                 {
                     ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
                 }
@@ -799,13 +1138,13 @@ namespace TMS.Web.Controllers
             return PartialView(CourseID);
         }
         [ClaimsAuthorize("CanAddEditProgramTrainer")]
-        [DontWrapResult]      
+        [DontWrapResult]
         public JsonResult CourseCoordinateGroups()
         {
             long ClassID = Convert.ToInt64(Session["ClassID"]);
             Session.Remove("ClassID");
 
-            return Json(this._ClassBAL.TMS_ClassLogisticsDLL_GetAllBAL(CurrentCulture,CurrentUser.CompanyID,ClassID), JsonRequestBehavior.AllowGet);
+            return Json(this._ClassBAL.TMS_ClassLogisticsDLL_GetAllBAL(CurrentCulture, CurrentUser.CompanyID, ClassID), JsonRequestBehavior.AllowGet);
         }
 
         [ClaimsAuthorize("CanAddEditProgramTrainer")]
@@ -816,7 +1155,7 @@ namespace TMS.Web.Controllers
             long CourseId = 0;
             CourseId = Convert.ToInt64(Request.QueryString["CourseId"]);
             var Classs = this._CourseBAL.TMS_CourseCoordinate_GetAllBAL(CourseId);
-            return Json(Classs.ToDataSourceResult(request, ModelState),JsonRequestBehavior.AllowGet);
+            return Json(Classs.ToDataSourceResult(request, ModelState), JsonRequestBehavior.AllowGet);
         }
 
         [ClaimsAuthorizeAttribute("CanAddEditClass")]
@@ -825,22 +1164,39 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                //long CourseId = 0;
-                //CourseId = Convert.ToInt64(Request.QueryString["CourseId"]);
-                _Class.CreatedBy = CurrentUser.NameIdentifierInt64;
-                _Class.CreatedDate = DateTime.Now;
-                _Class.ID = _CourseBAL.TMS_CourseCoordinate_CreateBAL(_Class, ClassID);
-                string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                if (string.IsNullOrEmpty(ip))
-                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
-                // string browserName = req.Browser.Browser;
-                _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
 
+                var Classs = this._CourseBAL.TMS_CourseCoordinate_GetAllBAL(ClassID);
+                bool flage = true;
+                foreach (var x in Classs)
+                {
+                    long coordinatorId = x.CoordinateID;
+                    if (coordinatorId == _Class.CoordinateID)
+                    {
+                        flage = false;
+                        break;
+                    }
+                }
+                if (flage)
+                {
+
+                    _Class.CreatedBy = CurrentUser.NameIdentifierInt64;
+                    _Class.CreatedDate = DateTime.Now;
+                    _Class.ID = _CourseBAL.TMS_CourseCoordinate_CreateBAL(_Class, ClassID);
+                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                    if (string.IsNullOrEmpty(ip))
+                        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                    // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
+                    // string browserName = req.Browser.Browser;
+                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+                }
+                else
+                {
+                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                }
             }
 
             var resultData = new[] { _Class };
-            return Json(resultData.ToDataSourceResult(request, ModelState),JsonRequestBehavior.AllowGet);
+            return Json(resultData.ToDataSourceResult(request, ModelState), JsonRequestBehavior.AllowGet);
         }
 
         [ActivityAuthorize]
@@ -848,23 +1204,41 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorizeAttribute("CanAddEditClass")]
         public ActionResult CourseCoordinator_Update([DataSourceRequest] DataSourceRequest request, CourseCoordinatorMapping _Class, long ClassID)
         {
+            var Classs = this._CourseBAL.TMS_CourseCoordinate_GetAllBAL(ClassID);
+            bool flage = true;
+            foreach (var x in Classs)
+            {
+                long coordinatorId = x.CoordinateID;
+                if (coordinatorId == _Class.CoordinateID)
+                {
+                    flage = false;
+                    break;
+                }
+            }
+            if (flage)
+            {
+
                 long CourseId = 0;
                 CourseId = Convert.ToInt64(Session["_CLassID"]);
                 _Class.CreatedBy = CurrentUser.NameIdentifierInt64;
-                _Class.CreatedDate = DateTime.Now;
+                _Class.ModifiedDate = DateTime.Now;
                 var result = _CourseBAL.TMS_CourseCoordinate_UpdateBAL(_Class, CourseId);
-            string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-            if (string.IsNullOrEmpty(ip))
-                ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-            // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
-            // string browserName = req.Browser.Browser;
-            _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Update, System.Web.HttpContext.Current.Request.Browser.Browser);
+                string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                if (string.IsNullOrEmpty(ip))
+                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
+                // string browserName = req.Browser.Browser;
+                _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Update, System.Web.HttpContext.Current.Request.Browser.Browser);
 
-            if (result == -1)
+                if (result == -1)
                 {
                     ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
                 }
-           
+            }
+            else
+            {
+                ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+            }
 
             var resultData = new[] { _Class };
             return Json(resultData.ToDataSourceResult(request, ModelState), JsonRequestBehavior.AllowGet);
@@ -911,7 +1285,7 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public JsonResult CoordinateGroups()
         {
-            return Json(this._CourseBAL.TMS_FocusAreaDLL_GetAllBAL(CurrentCulture,CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
+            return Json(this._CourseBAL.TMS_FocusAreaDLL_GetAllBAL(CurrentCulture, CurrentUser.CompanyID), JsonRequestBehavior.AllowGet);
         }
 
         [ClaimsAuthorize("CanAddEditProgramTrainer")]
@@ -937,14 +1311,23 @@ namespace TMS.Web.Controllers
                 CourseId = Convert.ToInt64(Request.QueryString["CourseId"]);
                 _Class.CreatedBy = CurrentUser.NameIdentifierInt64;
                 _Class.CreatedDate = DateTime.Now;
-                _Class.ID = _CourseBAL.TMS_CourseFocusArea_CreateBAL(_Class, CourseId);
-                string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                if (string.IsNullOrEmpty(ip))
-                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
-                // string browserName = req.Browser.Browser;
-                _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
 
+                if (_CourseBAL.TMS_CourseFocusArea_DublicationBAL(_Class, CourseId) > 0)
+                {
+                    ModelState.AddModelError(lr.DubliocationHappen, lr.DubliocationHappen);
+                }
+                else
+                {
+
+
+                    _Class.ID = _CourseBAL.TMS_CourseFocusArea_CreateBAL(_Class, CourseId);
+                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                    if (string.IsNullOrEmpty(ip))
+                        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                    // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
+                    // string browserName = req.Browser.Browser;
+                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+                }
             }
 
             var resultData = new[] { _Class };
@@ -961,17 +1344,21 @@ namespace TMS.Web.Controllers
                 CourseId = Convert.ToInt64(Request.QueryString["CourseId"]);
                 _Class.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _Class.UpdatedDate = DateTime.Now;
-                var result = _CourseBAL.TMS_CourseFocusArea_UpdateBAL(_Class, CourseId);
-                string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                if (string.IsNullOrEmpty(ip))
-                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
-                // string browserName = req.Browser.Browser;
-                _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Update, System.Web.HttpContext.Current.Request.Browser.Browser);
-
-                if (result == -1)
+                if (_CourseBAL.TMS_CourseFocusArea_DublicationBAL(_Class, CourseId) > 0)
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    ModelState.AddModelError(lr.DubliocationHappen, lr.DubliocationHappen);
+                }
+                else
+                {
+                    var result = _CourseBAL.TMS_CourseFocusArea_UpdateBAL(_Class, CourseId);
+                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                    if (string.IsNullOrEmpty(ip))
+                        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                    // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
+                    // string browserName = req.Browser.Browser;
+                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Update, System.Web.HttpContext.Current.Request.Browser.Browser);
+
+
                 }
             }
             var resultData = new[] { _Class };
@@ -1005,7 +1392,7 @@ namespace TMS.Web.Controllers
             var resultData = new[] { _Class };
             return Json(resultData.ToDataSourceResult(request, ModelState));
         }
-        
+
         #endregion
 
         #region Sessions
@@ -1019,13 +1406,16 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorize("CanViewSession")]
         public ActionResult Sessions()
         {
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to read sessions at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
             return View();
         }
         [ClaimsAuthorize("CanViewReports")]
         public ActionResult TrainerDetailReport()
         {
             return View();
-           // return View("Views/Report/TrainerDetailReport");
+            // return View("Views/Report/TrainerDetailReport");
             //return View("~/Views/Report/TrainerDetailReport");
         }
 
@@ -1062,7 +1452,7 @@ namespace TMS.Web.Controllers
             //return View("~/Views/Report/TrainerDetailReport");
         }
 
-        
+
         [ClaimsAuthorize("CanViewReports")]
         public ActionResult CourseAttendanceReport()
         {
@@ -1129,9 +1519,9 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorize("CanViewReports")]
         public ActionResult CoursePeriodicReport()
         {
-            return View();       
+            return View();
         }
-        
+
 
         [ClaimsAuthorize("CanViewReports")]
         public ActionResult VenueDetailUtilizationReport()
@@ -1153,7 +1543,7 @@ namespace TMS.Web.Controllers
         public ActionResult Schedules()
         {
             return View();
-           
+
         }
 
         //[ClaimsAuthorize("CanViewSession")]
@@ -1198,6 +1588,9 @@ namespace TMS.Web.Controllers
                 }
                 else
                 {
+                    var json = new JavaScriptSerializer().Serialize(0);
+                    _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to read sessions detail at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                     ViewData["model"] = data;
                     return View();
                 }
@@ -1208,7 +1601,23 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public ActionResult Sessions_Read([DataSourceRequest] DataSourceRequest request)
         {
-           
+            var list = this._ClassBAL.personRoleGroups(CurrentUser.NameIdentifierInt64);
+            long PersonID = 0;
+            var json = new JavaScriptSerializer().Serialize(0);
+            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to read sessions detail at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
+            if (list.Count==1 && list[0].PrimaryGroupName=="Trainer")
+            {
+                PersonID = CurrentUser.NameIdentifierInt64;
+            }
+            var kendoRequest = new Kendo.Mvc.UI.DataSourceRequest
+            {
+
+                Filters = request.Filters,
+                Sorts = request.Sorts,
+                Groups = request.Groups,
+                Aggregates = request.Aggregates
+            };
             var startRowIndex = (request.Page - 1) * request.PageSize;
             int Total = 0;
             var SearchText = Request.Form["SearchText"];
@@ -1218,25 +1627,44 @@ namespace TMS.Web.Controllers
             {
                 request.PageSize = 10;
             }
-           
-            var Courses = this._SessionBAL.TMS_Sessions_GetALLByCultureBAL(ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
-            if (CurrentUser.CompanyID > 0)
+            IList<Sessions> Sessions=null;
+            if (CurrentUser.CompanyID <= 0)
             {
-                if (_SessionBAL.User_EmailCheckBAL(CurrentUser.CompanyID, CurrentUser.Email) > 0)
+                Sessions = this._SessionBAL.TMS_Sessions_GetALLByCultureBAL(ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText);
+            }
+            else if (CurrentUser.CompanyID > 0)
+            {
+                if (ClassID <= 0)
                 {
-                    Courses = this._SessionBAL.TMS_SessionsTrainer_GetALLByCultureBAL(CurrentUser.Email,ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
+                    if (kendoRequest.Filters.Count > 0)
+                    {
+                        Sessions = this._SessionBAL.TMS_SessionsbyOrganization_GetALLSessionsByCultureBAL(ClassID, startRowIndex, 10000, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID), request.Page, PersonID);
+                    }
+                    else
+                    {
+                        Sessions = this._SessionBAL.TMS_SessionsbyOrganization_GetALLSessionsByCultureBAL(ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID), request.Page, PersonID);
 
+                    }
                 }
-                else {
-                    Courses = this._SessionBAL.TMS_SessionsbyOrganization_GetALLByCultureBAL(ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
+                else
+                {
+                    Sessions = this._SessionBAL.TMS_SessionsbyOrganization_GetALLByCultureBAL(ClassID, startRowIndex, request.PageSize, ref Total, GridHelper.GetSortExpression(request, "ID"), SearchText, Convert.ToString(CurrentUser.CompanyID));
                 }
-                }
-           
+            }
+            
+            var data = Sessions.ToDataSourceResult(kendoRequest);
             var result = new DataSourceResult()
             {
-                Data = Courses, // Process data (paging and sorting applied)
-                Total = Total // Total number of records
+                AggregateResults = data.AggregateResults,
+                Data = data.Data,
+                Errors = data.Errors,
+                Total = Total
             };
+            //var result = new DataSourceResult()
+            //{
+            //    Data = Sessions, // Process data (paging and sorting applied)
+            //    Total = Total // Total number of records
+            //};
             return Json(result);
         }
 
@@ -1246,21 +1674,54 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _Sessions.CreatedBy = CurrentUser.NameIdentifierInt64;
-                _Sessions.CreatedDate = DateTime.Now;
-                _Sessions.OrganizationID = CurrentUser.CompanyID;
-                _Sessions.ClassID = ClassID;
                 if (VerifyBussinessRules(_Sessions))
                 {
-                    _Sessions.ID = this._SessionBAL.TMS_Sessions_CreateBAL(_Sessions);
-                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                    if (string.IsNullOrEmpty(ip))
-                        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                    // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
-                    // string browserName = req.Browser.Browser;
-                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+                    var json = new JavaScriptSerializer().Serialize(_Sessions);
+                    _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to create sessions detail at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
+                    DateTime t1 = Convert.ToDateTime(_Sessions.StartTimeString);
+                    DateTime t2 = Convert.ToDateTime(_Sessions.EndTimeString);
+                    int value = DateTime.Compare(t1, t2);
+                    // checking 
+                    if (value < 0)
+                    {
+
+
+                        _Sessions.CreatedBy = CurrentUser.NameIdentifierInt64;
+                        _Sessions.CreatedDate = DateTime.Now;
+                        _Sessions.OrganizationID = CurrentUser.CompanyID;
+                        _Sessions.ClassID = ClassID;
+                        if (VerifyBussinessRules(_Sessions))
+                        {
+                            if (_SessionBAL.GetSessionVenueOccupancyDetailBAL(_Sessions) > 0)
+                            {
+                                ModelState.AddModelError(lr.VenueOcupaidByOther, lr.VenueOcupaidByOther);
+                            }
+                            else
+                            {
+                                _Sessions.ID = this._SessionBAL.TMS_Sessions_CreateBAL(_Sessions);
+                                string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                                if (string.IsNullOrEmpty(ip))
+                                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                                // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
+                                // string browserName = req.Browser.Browser;
+                                _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+
+                            }
+
+
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(lr.SessionTimeConflict, lr.StartandEndDateConflict);
+
+                    }
+
 
                 }
+
+
             }
 
             var resultData = new[] { _Sessions };
@@ -1273,18 +1734,42 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(_Sessions);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Update_Success.ToString(), System.Environment.MachineName, "User tried to update sessions detail at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _Sessions.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _Sessions.UpdatedDate = DateTime.Now;
                 if (VerifyBussinessRules(_Sessions))
                 {
-                    this._SessionBAL.TMS_Sessions_UpdateBAL(_Sessions);
-                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                    if (string.IsNullOrEmpty(ip))
-                        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                    // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
-                    // string browserName = req.Browser.Browser;
-                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Update, System.Web.HttpContext.Current.Request.Browser.Browser);
+                    //int value = DateTime.Compare(_Sessions.StartTime, _Sessions.EndTime);
+                    DateTime t1 = Convert.ToDateTime(_Sessions.StartTimeString);
+                    DateTime t2 = Convert.ToDateTime(_Sessions.EndTimeString);
+                    string date = Convert.ToDateTime(_Sessions.ScheduleDate).ToString("MM-dd-yyyy");
+                    _Sessions.ScheduleDate = Convert.ToDateTime(date);
+                    int value = DateTime.Compare(t1, t2);
+                    // checking 
+                    if (value < 0)
+                    {
+                        if (_SessionBAL.GetSessionVenueOccupancyDetailUPBAL(_Sessions) > 0)
+                        {
+                            ModelState.AddModelError(lr.VenueOcupaidByOther, lr.VenueOcupaidByOther);
+                        }
+                        else
+                        {
+                            this._SessionBAL.TMS_Sessions_UpdateBAL(_Sessions);
+                            string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                            if (string.IsNullOrEmpty(ip))
+                                ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                            // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
+                            // string browserName = req.Browser.Browser;
+                            _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Update, System.Web.HttpContext.Current.Request.Browser.Browser);
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(lr.SessionTimeConflict, lr.StartandEndTimeConflict);
 
+                    }
                 }
             }
 
@@ -1299,12 +1784,17 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var json = new JavaScriptSerializer().Serialize(_Sessions);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Delete_Success.ToString(), System.Environment.MachineName, "User tried to destroy sessions detail at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
                 _Sessions.UpdatedBy = CurrentUser.NameIdentifierInt64;
                 _Sessions.UpdatedDate = DateTime.Now;
-                if (_CourseBAL.Session_CheckBAL(_Sessions, CurrentUser.CompanyID) > 0)
+                var _returnValue = _CourseBAL.TMS_SessionAttendance_GetAllBAL(_Sessions);
+                if (_returnValue.Count > 0)
                 {
                     ModelState.AddModelError(lr.PersonSkill, lr.FlagDuplicationCheck);
                 }
+                else
                 {
                     var result = this._SessionBAL.TMS_Sessions_DeleteBAL(_Sessions);
                     string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
@@ -1322,6 +1812,26 @@ namespace TMS.Web.Controllers
             }
             var resultData = new[] { _Sessions };
             return Json(resultData.ToDataSourceResult(request, ModelState));
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanDeleteSession")]
+
+        public JsonResult SessionDelteChk(string _Sessions)
+        {
+            bool result = false;
+            var _returnValue = _CourseBAL.TMS_SessionAttendance_GetAllByIDBAL(Convert.ToInt32(_Sessions));
+            if (_returnValue.Count > 0)
+            {
+                result = false;
+
+            }
+            else
+            {
+                result = true;
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [ClaimsAuthorize("CanAddEditSession")]
@@ -1353,7 +1863,7 @@ namespace TMS.Web.Controllers
             }
             else if (!result.IsValidSessionDateTime)
             {
-                ModelState.AddModelError(lr.SessionStartTime, lr.SessionIsValidSessionDateTime);
+                ModelState.AddModelError(lr.SessionTimeConflict, lr.SessionIsValidSessionTime);
                 return false;
             }
             else if (!result.IsValidScheduleDate)
@@ -1371,11 +1881,17 @@ namespace TMS.Web.Controllers
                 ModelState.AddModelError(lr.VenueName, lr.SessionIsValidVenueTime);
                 return false;
             }
-            else if (!string.IsNullOrEmpty(result.ConflictNames.Trim()))
+            else if (!result.IsValidVenueAvailabilityTime)
             {
-                ModelState.AddModelError(lr.ClassMaximumSessionPerDay, string.Format(lr.SessionConflictNames, result.ConflictNames.Trim()) );
+                ModelState.AddModelError(lr.VenueAvailabelTimeRange, lr.VenueAvailabelTimeRangeIssue);
                 return false;
             }
+            else if (!string.IsNullOrEmpty(result.ConflictNames.Trim()))
+            {
+                ModelState.AddModelError(lr.ClassMaximumSessionPerDay, string.Format(lr.SessionConflictNames, result.ConflictNames.Trim()));
+                return false;
+            }
+
             return isValid;
             //if (CurrentSessionPresenter.MaximumLimitReached(ClassID, CurrentSessionID, ObjSession.ScheduleDate)) //some how completed
             //{
@@ -1432,7 +1948,7 @@ namespace TMS.Web.Controllers
         {
             long ClassID = Convert.ToInt64(Session["ClassID"]);
             Session.Remove("ClassID");
-            return Json(this._ClassBAL.TMS_ClassLogisticsDLL_GetAllBAL(CurrentCulture,CurrentUser.CompanyID,ClassID), JsonRequestBehavior.AllowGet);
+            return Json(this._ClassBAL.TMS_ClassLogisticsDLL_GetAllBAL(CurrentCulture, CurrentUser.CompanyID, ClassID), JsonRequestBehavior.AllowGet);
         }
 
         [ClaimsAuthorize("CanViewClass")]
@@ -1559,8 +2075,10 @@ namespace TMS.Web.Controllers
             int Atttype = 0;
             if (ModelState.IsValid)
             {
-                
-               // string att = frm["Present"].ToString();
+                var json = new JavaScriptSerializer().Serialize(Attendance);
+                _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to insert sessions attendance detail at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+
+                // string att = frm["Present"].ToString();
                 if ("Mark All Present" == frm["Present"].ToString())
                 {
                     foreach (var _Attendance in Attendance)
@@ -1587,9 +2105,11 @@ namespace TMS.Web.Controllers
                     }
 
                 }
-                else {
+                else
+                {
                     foreach (var _Attendance in Attendance)
                     {
+
                         _Attendance.CreatedBy = CurrentUser.NameIdentifierInt64;
                         _Attendance.CreatedOn = DateTime.Now;
                         _Attendance.UpdatedBy = CurrentUser.NameIdentifierInt64;
@@ -1625,6 +2145,7 @@ namespace TMS.Web.Controllers
                         _Attendance.Date = DateTime.Now;
                         _Attendance.OrganizationID = CurrentUser.CompanyID;
                         _Attendance.ID = _AttendanceBAL.MarkTraineesAttendanceBAL(_Attendance, Atttype);
+
                     }
                 }
             }
@@ -1633,7 +2154,6 @@ namespace TMS.Web.Controllers
         }
 
         #endregion Attendance
-
 
         #region Schedule
         [ClaimsAuthorize("CanViewSchedule")]
@@ -1644,11 +2164,15 @@ namespace TMS.Web.Controllers
         }
         [ClaimsAuthorize("CanViewSchedule")]
         [DontWrapResult]
-        public virtual JsonResult Schedule_Read()
+        public virtual JsonResult Schedule_Read(string courseId, string classId)
         {
-            long? CourseID = 0;
-            long? ClassID = 0;
-            return new JsonResult { Data = _AttendanceBAL.ManageScheduleBAL(CurrentUser.CompanyID, CourseID, ClassID), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            long? CourseID = Convert.ToInt64(courseId);
+            long? ClassID = Convert.ToInt64(classId);
+            DateTime date = DateTime.Today;
+            int year = date.Year;
+            var firstDayOfMonth = new DateTime(year, date.Month, 1);
+            var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+            return new JsonResult { Data = _AttendanceBAL.ManageScheduleBAL(CurrentUser.CompanyID, CourseID, ClassID, firstDayOfMonth,lastDayOfMonth), MaxJsonLength = Int32.MaxValue, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
 
             // return Json(_AttendanceBAL.ManageScheduleBAL(CurrentUser.CompanyID,CourseID,ClassID).ToDataSourceResult());
         }
@@ -1669,6 +2193,7 @@ namespace TMS.Web.Controllers
 
         //    return Json(obgcity);
         //}
+
 
         #endregion Schedule
     }

@@ -24,7 +24,7 @@ namespace TMS.Web
             System.Web.Helpers.AntiForgeryConfig.UniqueClaimTypeIdentifier =
             System.Security.Claims.ClaimTypes.NameIdentifier;
             ReportsControllerConfiguration.RegisterRoutes(GlobalConfiguration.Configuration);
-
+            log4net.Config.XmlConfigurator.Configure();
             base.Application_Start(sender, e);
         }
      //   public override void OnActionExecuting(HttpActionContext actionContext)

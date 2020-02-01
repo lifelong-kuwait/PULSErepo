@@ -5,6 +5,12 @@
         return {
             OpenId: jQuery("#ClassID").val(), OpenType: 2
         };
+       
+    } function filteSessionrrelateditems222() {
+       
+        return {
+            ClassID: jQuery("#ClassID").val()
+        };
     }
 
 </script>
@@ -43,7 +49,11 @@
             .DataValueField("Value")
             .OptionLabel(lr.ClassLanguageOptionalLabel)
             // .OptionLabel(new { Text = lr.CourseCategoryOptionalLabel, Value = 0 })
-            .DataSource(dataSource => { dataSource.Read(read => read.Action("Lang", "DDL")); }))
+             .DataSource(dataSource =>
+                     {
+                         dataSource.Read(read => read.Action("LanguageClassDDL", "DDL").Data("filteSessionrrelateditems222"))
+                        .ServerFiltering(true);
+                     }).CascadeFrom("ClassID"))
             @Html.ValidationMessageFor(model => model.LanguageID)
         </div>
     </div>
@@ -128,7 +138,7 @@
             //  .OptionLabel(new { Text = lr.VenueOpenTypeOptionalLabel, Value = 0 })
             .DataSource(dataSource =>
             {
-                dataSource.Read(read => read.Action("Venues", "DDL").Data("filteSessionrrelateditems"))
+                dataSource.Read(read => read.Action("VenueByClassId", "DDL").Data("filteSessionrrelateditems"))
                 .ServerFiltering(true);
             }).CascadeFrom("ClassID"))
 

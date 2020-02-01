@@ -5,6 +5,7 @@
     var phonenubner = lr.PersonPhoneNumber;
     var personEmail = lr.PersonContactEmail;
     var gender = lr.Gender;
+    var clientStatus= lr.CRMClientType;
 
 }
 <h2>@lr.ProspectsList</h2>
@@ -15,7 +16,7 @@
         columns.Bound(e => e.P_DisplayName).ClientTemplate(@"<div  class='person-box'>
                 <div class='person'>
                    " +
-                    @" <h2>#:P_DisplayName#</h2>" + @" <h5>Client Status: #:ClientStatusValue#</h5>"
+                    @" <h2>#:P_DisplayName#</h2>" + @" <h5>"+clientStatus+": #:CrmClientType#</h5>"
                     + @" <h5>Assigned To: #:UserName#</h5>" +
                     @"# if (Email!=null) { #" +
                     @"<p>" + personEmail + @"::#:Email#</p> #} if(ContactNumber!=null){#<h5>" + phonenubner + @"::#:ContactNumber#</h5> #}#
@@ -61,10 +62,10 @@
             model.Id(m => m.ID);
             model.Field(p => p.Flags).DefaultValue(new List<TMS.Library.TMS.Admin.Config.PersonFlagsNested>());
         })
-        .PageSize(15)
+        .PageSize(5)
         .Read(read => read.Action("Person_Read", "Prospect").Data("withSearch"))
-        .Create(read => read.Action("Person_Create", "Prospect").Data("PersonCreateAttachmentInfoData"))
-        .Destroy(read => read.Action("Person_Destroy", "Prospect"))
+        .Create(read => read.Action("Person_Create", "Prospect"))
+        .Destroy(read => read.Action("Prospect_Destroy", "Prospect"))
         .Update(read => read.Action("Person_Update", "Prospect").Data("PersonProfilePictureData"))
         .Events(e => e.Error("GeneralErrorHandler(\"PersonGrid\")"))
         ).NoRecords(lr.GridNoRecordFoundMessage)
@@ -113,7 +114,7 @@
 
 <script type="text/javascript">
     function FlagsTemplate(data) {
-        debugger;
+      
         if (data != null) {
             var FlagsTemplate = kendo.template(jQuery("#FlagsTemplateformat").html(), { useWithBlock: false });
             return FlagsTemplate(data);
@@ -121,7 +122,7 @@
         return '';
     }
     jQuery(function () {
-        debugger;
+        
         var template = kendo.template(jQuery("#toolTipTemplate").html());
         //initialize tooltip to grid tbody with filter cells with given CSS class
         var tooltip = jQuery("#PersonGrid tbody").kendoTooltip({
@@ -144,7 +145,7 @@
             },
         }).data("kendoTooltip");
         jQuery(".edit").live("mousedown", function (event) {
-            debugger;
+           
             jQuery("#PersonGrid").data("kendoGrid").editRow(jQuery("[data-uid='" + jQuery(this).attr("dat-uid") + "']"));
         });
 
@@ -177,7 +178,7 @@
 
         });
         jQuery(".delete").live("mousedown", function (event) {
-            debugger;
+            
             grid = jQuery("#PersonGrid").data("kendoGrid");
             var selectedRows = jQuery("#PersonGrid tr.k-state-selected");
             var checkedLength = selectedRows.length;
@@ -185,10 +186,10 @@
             if (checkedLength == 1) {
                 var grid = jQuery("#PersonGrid").data("kendoGrid");
                 var data = grid.dataItem(jQuery("[data-uid='" + jQuery(this).attr("dat-uid") + "']"));  //get the row data so it can be referred later
-
-                swal({
-                    title: '@lr.Areyousureyouwanttodeletethisrecord',
-                    text: '@lr.Youwillnotbeabletorecover',
+               
+             swal({
+                 title: '@lr.Areyousureyouwanttodeletethisrecord',
+                 text: '@lr.Youwillnotbeabletorecover' ,
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
@@ -234,7 +235,7 @@
             }
         });
         jQuery(".detail").live("mousedown", function (event) {
-            debugger;
+            
             @*var url = '@Url.Content("~/Prospect/Detail?pid=")' + jQuery(this).attr("dat-pid");
             window.open(url, '_blank');*@
 
@@ -340,7 +341,7 @@
         });
 
         jQuery(".tms-grid-detail").live("mousedown", function (event) {
-            debugger;
+            
             var checkedLength = jQuery("#PersonGrid tr.k-state-selected").length;
             if (checkedLength == 1) {
                 grid = jQuery("#PersonGrid").data("kendoGrid");
@@ -380,7 +381,7 @@
         <span class=" grid-tooltip-icon phone" dat-uid="#=uid#" title="Record Communication "><i class="mdi mdi-phone-settings "></i></span>*@
 </script>
 <script>
-    debugger;
+   
     var tms = tms || {};
     (function ($) {
 
@@ -404,7 +405,21 @@
             MaritialStatus_Single: 1,
             MaritialStatus_Married: 2
         };
+       
 
+        tms.person.maritialStatus = {
+            Not_Specified: 0,
+            MaritialStatus_Single: 1,
+            MaritialStatus_Married: 2
+        };
+        tms.person.CrmClientType = {
+            Not_Specified : 0,
+            Lead : 1,
+            Caller : 2,
+            Visitor : 3,
+            Trainee : 4
+            };
+        
     })(jQuery);
 
     var PicturelastUploadedFile;
@@ -444,7 +459,7 @@
     }
 
     function SalutationChange(e) {
-        debugger;
+        //debugger;
         var dataItem = this.dataItem(e.item);
         var salutation = parseInt(dataItem.Value);
         var dropdownlist = jQuery("#Gender").data("kendoDropDownList");

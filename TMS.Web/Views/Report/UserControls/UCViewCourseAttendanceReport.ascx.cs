@@ -94,7 +94,7 @@ namespace TMS.Web.Views.Report.User_Controls
             {
                 if (DdlCourse.SelectedIndex > 0)
                 {
-                    DropDownUtil.FillDropDown(DdlClass, ddl.Course_ClassDDLBAL(CurrentCulture, CompanyID, Convert.ToInt64(DdlCourse.SelectedValue)), "Text", "Value", "Class");
+                    DropDownUtil.FillDropDown(DdlClass, ddl.Course_ClassDDLBAL(CurrentCulture, CompanyID, Convert.ToInt64(DdlCourse.SelectedValue),0), "Text", "Value", "Class");
                   }
                 else
                 {

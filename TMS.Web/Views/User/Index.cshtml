@@ -23,6 +23,7 @@
     "# } #" +
 " />"
 ).Width(100);
+           columns.Bound(p => p.UserRoleName).Width(190).MinScreenWidth(550).Title("Login Type");
            columns.Bound(e => e.CreatedBy).Width(190).MinScreenWidth(550).Title(lr.GridAddedBy).ClientTemplate(@"<div class='gridaddedby'>
 #if(AddedByAlias!=null){#<span class='Addedby' >#:AddedByAlias#</span>#}#
 <span class='date' >#=kendo.toString(CreatedDate,'" + DateFormatScript + @"')#</span>
@@ -83,7 +84,7 @@ ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"
 
 <script>
      jQuery(function () {
-       // debugger;
+        //debugger;
         var template = kendo.template(jQuery("#toolTipTemplate").html());
         //initialize tooltip to grid tbody with filter cells with given CSS class
         var tooltip = jQuery("#Users tbody").kendoTooltip({
@@ -106,13 +107,13 @@ ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"
             },
         }).data("kendoTooltip");
         jQuery(".edit").live("mousedown", function (event) {
-            //debugger;
+          // debugger;
             jQuery("#Users").data("kendoGrid").editRow(jQuery("[data-uid='" + jQuery(this).attr("dat-uid") + "']"));
         });
 
 
         jQuery(".delete").live("mousedown", function (event) {
-            //debugger;
+           // debugger;
             grid = jQuery("#Users").data("kendoGrid");
             var selectedRows = jQuery("#Users tr.k-state-selected");
             var checkedLength = selectedRows.length;
@@ -413,7 +414,7 @@ return allValues
 
     function UsersLoginGrid_onEdit(e) {
         //if current model is not new then remove the Name editor
-
+        
         var title = jQuery(e.container).parent().find(".k-window-title");
         var update = jQuery(e.container).parent().find(".k-grid-update");
         var cancel = jQuery(e.container).parent().find(".k-grid-cancel");

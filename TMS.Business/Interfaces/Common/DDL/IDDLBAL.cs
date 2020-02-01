@@ -114,7 +114,7 @@ namespace TMS.Business.Interfaces.Common.DDL
         /// Users the get allfor DDL bal.
         /// </summary>
         /// <returns>IList&lt;DDlList&gt;.</returns>
-        IList<DDlList> UserGetAllforDDL_BAL();
+        IList<DDlList> UserGetAllforDDL_BAL(long companyId);
 
         IList<DDlList> UserGetAllUnassignedforDDL_BAL();
 
@@ -163,11 +163,23 @@ namespace TMS.Business.Interfaces.Common.DDL
         /// <returns>IList&lt;DDlList&gt;.</returns>
         IList<DDlList> ProgramLanguages_GetAllByCultureBAL(string culture);
         /// <summary>
+        /// Programs the languages get all by culture bal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
+        IList<DDlList> ProgramLanguages_GetAllByCourseCultureBAL(string culture);
+        /// <summary>
+        /// Programs the languages get all by culture bal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
+        IList<DDlList> ProgramLanguages_GetAllByClassCultureBAL(string culture);
+        /// <summary>
         /// Courseses the get all by culture bal.
         /// </summary>
         /// <param name="culture">The culture.</param>
         /// <returns>IList&lt;DDlList&gt;.</returns>
-        IList<DDlList> Courses_GetAllByCultureBAL(string culture, long CompanyID);
+        IList<DDlList> Courses_GetAllByCultureBAL(string culture, long CompanyID,long personID);
         /// <summary>
         /// Classeses the by course identifier and culture bal.
         /// </summary>
@@ -191,7 +203,7 @@ namespace TMS.Business.Interfaces.Common.DDL
         IList<DDlList> ClassDDLBAL(string culture, long CompnayID);
         IList<DDlList> CourseDDLBAL(string culture, long CompnayID);
 
-        IList<DDlList> Course_ClassDDLBAL(string culture, long CompnayID,long CourseID);
+        IList<DDlList> Course_ClassDDLBAL(string culture, long CompnayID,long CourseID,long PersonId);
 
         IList<DDlList> Class_TrainerDDLBAL(string culture, long CompnayID, long ClassID);
 

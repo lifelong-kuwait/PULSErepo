@@ -32,6 +32,17 @@ namespace TMS.DataObjects.Interfaces.TMS.Program
         /// <param name="SearchText">The search text.</param>
         /// <returns>List&lt;Sessions&gt;.</returns>
         List<Sessions> TMS_Sessions_GetALLByCultureDAL(long ClassID, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText);
+        /// <summary>
+        /// TMSs the sessions get all by culture dal.
+        /// </summary>
+        /// <param name="ClassID">The class identifier.</param>
+        /// <param name="StartRowIndex">Start index of the row.</param>
+        /// <param name="PageSize">Size of the page.</param>
+        /// <param name="Total">The total.</param>
+        /// <param name="SortExpression">The sort expression.</param>
+        /// <param name="SearchText">The search text.</param>
+        /// <returns>List&lt;Sessions&gt;.</returns>
+       List<SessionWeekBarData> TMS_Sessions_BarDAL(string FirstDate, string lastDate, long companyID);
 
         /// <summary>
         /// TMSs the sessions get all by culture dal.
@@ -43,9 +54,21 @@ namespace TMS.DataObjects.Interfaces.TMS.Program
         /// <param name="SortExpression">The sort expression.</param>
         /// <param name="SearchText">The search text.</param>
         /// <returns>List&lt;Sessions&gt;.</returns>
-        List<Sessions> TMS_SessionsbyOrganization_GetALLByCultureDAL(long ClassID, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid);
+        IList<Sessions> TMS_SessionsbyOrganization_GetALLByCultureDAL(long ClassID, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText,string Oid);
 
+        /// <summary>
+        /// TMSs the sessions get all by culture dal.
+        /// </summary>
+        /// <param name="ClassID">The class identifier.</param>
+        /// <param name="StartRowIndex">Start index of the row.</param>
+        /// <param name="PageSize">Size of the page.</param>
+        /// <param name="Total">The total.</param>
+        /// <param name="SortExpression">The sort expression.</param>
+        /// <param name="SearchText">The search text.</param>
+        /// <returns>List&lt;Sessions&gt;.</returns>
+        List<Sessions> TMS_SessionsbyOrganization_GetALLSessionsByCultureDAL(long ClassID, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText, string Oid,int page,long personId);
 
+        
         /// <summary>
         /// TMSs the sessions get all by culture dal.
         /// </summary>
@@ -90,7 +113,8 @@ namespace TMS.DataObjects.Interfaces.TMS.Program
         /// <param name="Sessions">The sessions.</param>
         /// <returns>SessionCreationRules.</returns>
         SessionCreationRules TMS_Session_CheckValidSessionDAL(Sessions Sessions);
-
+        int GetSessionVenueOccupancyDetailDAL(Sessions Sessions);
+        int GetSessionVenueOccupancyDetailUPDAL(Sessions Sessions);
         int User_EmailCheckDAL(long CompanyID, string Email);
 
         List<Sessions> TMS_SessionsTrainer_GetALLByCultureDAL(string Email, long ClassID, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText, string Oid);

@@ -180,7 +180,20 @@ namespace TMS.Business.Common.Configuration
         {
             return _ConfigurationDAL.VenuesbyOrganization_GetAllDAL(StartRowIndex, PageSize, ref Total, SortExpression, SearchText,Oid);
         }
-
+        /// <summary>
+        /// Venue the get all bal.
+        /// </summary>
+        /// <param name="StartRowIndex">Start index of the row.</param>
+        /// <param name="PageSize">Size of the page.</param>
+        /// <param name="Total">The total.</param>
+        /// <param name="SortExpression">The sort expression.</param>
+        /// <param name="SearchText">The search text.</param>
+        /// <returns>List&lt;Venues&gt;.</returns>
+        public long VenuesForDestroy_GetAllBAL(long venueID)
+        {
+            return _ConfigurationDAL.VenuesForDestroy_GetAllDAL(venueID);
+        }
+        
         /// <summary>
         /// Venue the create bal.
         /// </summary>
@@ -273,7 +286,11 @@ namespace TMS.Business.Common.Configuration
         {
             return _ConfigurationDAL.Venues_GetAllByCultureDAL(culture, OpenType, OpenId,CompnayID);
         }
-
+       
+        public IList<DDlList> Venues_GetAllByClassBAL(string culture, int OpenType, long OpenId, long CompnayID)
+        {
+            return _ConfigurationDAL.Venues_GetAllByClassDAL(culture, OpenType, OpenId, CompnayID);
+        }
         public IList<DDlList> Venues_GetAllByCultureBAL(string culture, long CompnayID)
         {
             return _ConfigurationDAL.Venues_GetAllByCultureDAL(culture, CompnayID);
@@ -344,6 +361,15 @@ namespace TMS.Business.Common.Configuration
         /// <param name="OpenId">The open identifier.</param>
         /// <returns>IList&lt;DDlList&gt;.</returns>
         public IList<DDlList> ManageTrainer_GetAllByCultureBAL(string culture, int OpenType, long OpenId, long CompnayID) => _ConfigurationDAL.ManageTrainer_GetAllByCultureDAL(culture, OpenType, OpenId,CompnayID);
+
+        /// <summary>
+        /// Manages the trainer get all by culture bal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <param name="OpenType">Type of the open.</param>
+        /// <param name="OpenId">The open identifier.</param>
+        /// <returns>IList&lt;DDlList&gt;.</returns>
+        public IList<DDlList> ManageVenue_GetAllByCultureBAL(string culture, int OpenType, long OpenId, long CompnayID) => _ConfigurationDAL.ManageVenue_GetAllByCultureDAL(culture, OpenType, OpenId, CompnayID);
 
         #endregion Trainer
 
@@ -731,7 +757,9 @@ namespace TMS.Business.Common.Configuration
         public IList<DDlList> CourseLogistic_GetAllByCultureBALL(string culture, long CompnayID) => _ConfigurationDAL.CourseLogistic_GetAllByCultureDAL(culture, CompnayID);
 
         public IList<DDlList> CourseMeterial_GetAllByCultureBAL(string culture, long CompnayID) => _ConfigurationDAL.CourseMeterial_GetAllByCultureDAL(culture, CompnayID);
+        public IList<DDlList> PersonsForInvoice_GetAllByCultureBAL(string culture, long CompnayID) => _ConfigurationDAL.PersonsForInvoice_GetAllByCultureDAL(culture, CompnayID);
 
+        
         public IList<DDlList> HowHeard_GetAllByCultureBAL(string culture, long CompnayID) => _ConfigurationDAL.HowHeard_GetAllByCultureDAL(culture, CompnayID);
 
 

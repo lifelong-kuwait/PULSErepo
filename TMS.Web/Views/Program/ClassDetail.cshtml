@@ -69,7 +69,7 @@
     {
         if (User.IsInRole("CanViewVenue"))
         {
-            i.Add().Text(lr.VenueTabTitle).LoadContentFrom("ManageVenues", "Config", new { OpenId = Model.ID, Opentype = 2 });
+            i.Add().Text(lr.VenueTabTitle).LoadContentFrom("ManageVenuesClass", "Config", new { OpenId = Model.ID, Opentype = 2 });
         }
         if (User.IsInRole("CanViewProgramTrainer"))
         {
@@ -81,14 +81,17 @@
         }
         if (User.IsInRole("CanViewProgramTrainee"))
         {
-            i.Add().Text(lr.CourseMaterialsTitle).LoadContentFrom("ManageClassMeterialMap", "Config", new { ClassId = Model.ID });
+            i.Add().Text(lr.CLassMaterialsTitle).LoadContentFrom("ManageClassMeterialMap", "Config", new { ClassId = Model.ID });
         }
         if (User.IsInRole("CanViewSession"))
         {
             i.Add().Text(lr.MenuSession).LoadContentFrom("SessionNested", "Program", new { ClassId = Model.ID });
         }
-        i.Add().Text(lr.CourseLogisticRequirementsTitle).LoadContentFrom("ClassLogistics", "Program", new { ClassId = Model.ID });
-        //i.Add().Text(lr.MenuSession +" "+ lr.CourseLogisticRequirementsTitle).LoadContentFrom("SessionLogistics", "Program", new { ClassId = Model.ID });
+        if (User.IsInRole("CanViewCourseLogisticRequirements"))
+        {
+
+            i.Add().Text(lr.ClassLogisticRequirementsTitle).LoadContentFrom("ClassLogistics", "Program", new { ClassId = Model.ID });
+        }  //i.Add().Text(lr.MenuSession +" "+ lr.CourseLogisticRequirementsTitle).LoadContentFrom("SessionLogistics", "Program", new { ClassId = Model.ID });
     }).Events(e => e.Expand("onExpand")))
 
 
@@ -112,7 +115,7 @@
         jQuery(".tms-grid-destroy-main").live("mousedown", function (event) {
             grid = jQuery("#ClassDetailGrid").data("kendoGrid");
             var selectedrow = jQuery("#ClassDetailGrid tr:nth(1)");
-
+            alert('h3llo');
             swal({
                 title: '@lr.Areyousureyouwanttodeletethisrecord',
                 text: '@lr.Youwillnotbeabletorecover',
@@ -163,6 +166,7 @@
  .Events(e => e.Error("GeneralErrorHandler(\"ClassGrid\")").RequestEnd("requestendClassgrid")))
 )
 <script type="text/x-kendo-template" id="showrecordinserted">
+  
     <div class="alert alert-success">
         <button data-dismiss="alert" class="close" type="button">×</button>
         @lr.ClassRecordAddedSuccessfully<strong><a target="_blank" href="@Url.Content("~/Program/ClassDetail?id=")#=data.ID#"> #=data.ClassName#</a></strong>
@@ -172,6 +176,7 @@
     function requestendClassgrid(e) {
         if (e.type == "create") {
             if (e.response.Data[0].ID != 0) {
+
                 showaddedClass();
             }
         }

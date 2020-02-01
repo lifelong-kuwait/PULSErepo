@@ -1,0 +1,300 @@
+﻿
+@{
+    ViewBag.Title = "Schedules";
+}
+
+
+
+
+
+
+
+@using lr = Resources.Resources;
+
+
+
+<style>
+    div#calender {
+        width: 1082px;
+    }
+
+    .fc-content {
+        color: #000;
+    }
+
+    td.fc-day.fc-widget-content.fc-sun.fc-today.fc-state-highlight {
+        background-color: #80BFC8;
+    }
+
+    .right-inner-addon {
+        display: none;
+    }
+    .control-label {
+        padding-left: 12%;
+    }
+
+    .fc button .fc-icon {
+        position: relative;
+        top: -.05em;
+        margin: 0 .2em;
+        /* vertical-align: middle; */
+    }
+
+    span.fc-time {
+        display: none;
+    }
+</style>
+<style>
+    #loader {
+        position: relative;
+        left: 50%;
+        top: 50%;
+        z-index: 1;
+        width: 150px;
+        height: 150px;
+        margin: -75px 0 0 -75px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 120px;
+        height: 120px;
+        display: none;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+
+    -webkit-keyframes spin {
+        0%
+
+    {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+
+    }
+
+    keyframes spin {
+        0%
+
+    {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+
+    }
+
+
+    .animate-bottom {
+        position: relative;
+        -webkit-animation-name: animatebottom;
+        -webkit-animation-duration: 1s;
+        animation-name: animatebottom;
+        animation-duration: 1s
+    }
+
+    -webkit-keyframes animatebottom {
+        from
+
+    {
+        bottom: -100px;
+        opacity: 0
+    }
+
+    to {
+        bottom: 0px;
+        opacity: 1
+    }
+
+    }
+
+    keyframes animatebottom {
+        from
+
+    {
+        bottom: -100px;
+        opacity: 0
+    }
+
+    to {
+        bottom: 0;
+        opacity: 1
+    }
+    }
+</style>
+
+<style>
+    .form-group {
+        display: grid;
+    }
+
+    .input-group {
+        display: none;
+    }
+
+    .col-md-12.col-lg-offset-2 {
+        margin-bottom: 26px;
+    }
+    /*li {
+        display: none;
+    }*/
+</style>
+@*<div class="col-md-offset-2">*@
+<div class="row" style="margin-left:40%;">
+    <div class="form-group" style="padding-left:10%;">
+        <h2>Schedules</h2>
+    </div>
+</div>
+<div class="form-group" style="margin-left:10%;">
+    <div class="form-group">
+        <div class="row" style="margin-top:1%;">
+            @Html.Label("Course", new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11 col-lg-7 col-sm-11">
+                @(Html.Kendo().DropDownList()
+                                                                                                                                                                                                                            .Name("Course")
+                                                                                                                                                                                                                            .DataTextField("Text")
+                                                                                                                                                                                                                            .DataValueField("Value")
+                                                                                                                                                                                                                            .OptionLabel("---Select Course---")
+                                                                                                                                                                                                                            .Filter("contains")
+                                                                                                                                                                                                                            .DataSource(source =>
+                                                                                                                                                                                                                            {
+                                                                                                                                                                                                                                source.Read(read =>
+                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                    read.Action("Course", "DDL");
+                                                                                                                                                                                                                                }).ServerFiltering(false);
+                                                                                                                                                                                                                            })
+                                                                                                                                                                                                                            .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
+                                                                                                                                                                                                                                                                                                                .HtmlAttributes(new { style = "width: 100%" })
+                )
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row" style="margin-top:1%;">
+            @Html.Label("Class", new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.Kendo().DropDownList()
+                                .Name("Class")
+                                .DataTextField("Text")
+                                .DataValueField("Value")
+                                .Filter("contains")
+                                .OptionLabel("--Please select Class--")
+                                .HtmlAttributes(new { @class = "form-control ", @style = " width: 100%;" })
+                              
+                )
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row" style="margin-top:1%;">
+            @Html.Label("Select Month", new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11 col-lg-7 col-sm-11">
+                @(Html.Kendo().DatePicker()
+                                                              .Name("monthpicker")
+                                                              .Start(CalendarView.Year)
+                                                              .Depth(CalendarView.Year)
+                                                              .Format("MMMM yyyy")
+                                                              .Value(DateTime.Now)
+                                                              .DateInput()
+                                                              .HtmlAttributes(new { @class = "form-control ", style = "width: 100%", title = "monthpicker" })
+                )
+
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-2 col-lg-2 col-sm-2" style="margin-left:65%;margin-top:1%;">
+        @(Html.Kendo().Button()
+                                                                                                                                                                                                                               .Name("H2")
+                                                                                                                                                                                                                               .HtmlAttributes(new { type = "button", @class = "btn btn-primary k-primary" })
+                                                                                                                                                                                                                               .Content("" + @lr.ActivitySummaryReport + "")
+        )
+    </div>
+</div>
+<div id="loader"></div>
+<div class="row">
+    <div class="col-lg-12">
+        <iframe id="ifrmReportViewer"onload='showPage();'frameborder="0" EnableEventValidation="false" src=""  height="1000" style="overflow:hidden;" allowtransparency="true" allowfullscreen></iframe>
+    </div>
+</div>
+
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#H2").live("click", function (event) {
+            jQuery("#H2").attr("disabled", true);
+            var datepicker = jQuery("#monthpicker").data("kendoDatePicker");
+            startDate = new Date(datepicker.value());
+            startDate = kendo.toString(startDate, "MM/yyyy");
+            if (startDate.trim().length <= 0 || jQuery("#Class").data("kendoDropDownList").value().trim().length <= 0 || jQuery("#Course").data("kendoDropDownList").value().trim().length <= 0) {
+
+            } else {
+                url = "../Views/Report/SpLReports/SchedueReport.aspx?rptmode=local&reportname=ScheduleReport&Course=" + jQuery("#Course").data("kendoDropDownList").value() + "&Class=" + jQuery("#Class").data("kendoDropDownList").value() + "&Date=" + startDate+"";
+            var myframe = document.getElementById("ifrmReportViewer");
+            if (myframe !== null) {
+                if (myframe.src) {
+                    myframe.src = url;
+                    document.getElementById("loader").style.display = "block";
+                  
+                }
+                else if (myframe.contentWindow !== null && myframe.contentWindow.location !== null) {
+                    myframe.contentWindow.location = url;
+                }
+                else { myframe.setAttribute('src', url); }
+                }
+            }
+            jQuery("#H2").attr("disabled", false);
+            jQuery("#ifrmReportViewer").css({ "width": "100%", "border": "2px solid #009aee", "border - radius": "5px", "margin-top": "5px" });
+            return false;
+        });
+        jQuery("#Course").live("change", function (event) {
+            var classId = jQuery("#Course").data("kendoDropDownList").value();
+            if (classId.trim().length <= 0) {
+                console.log('null value');
+            } else {
+                jQuery.ajax({
+                    method: "post",
+                    url: "/SPl_Test_Reports/ClassTrainer?ClassID=" + classId,
+                    dataType: "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ ClassID: classId }),
+                    success: function (msg1) {
+                        jQuery("#Class").kendoDropDownList({
+                            OptionLabel: "--Please select Class--",
+                            dataTextField: "Text",
+                            dataValueField: "Value",
+                            dataSource: msg1.Data,
+                            filter: "contains",
+                            height: 100
+                        })
+                            .closest(".k-widget")
+                            .attr("id", "products_wrapper");
+                        if (msg1.Data != null) {
+                            jQuery.ajax({
+                                method: "post",
+                                url: "/SPl_Test_Reports/classStatAndEndDate?ClassID=" + msg1.Data[0].Value,
+                                dataType: "JSON",
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify({ ClassID: msg1.Data[0].Value }),
+                                success: function (msg2) {
+                                    jQuery("#startDate").val(msg2.Data.StartDate).change();
+                                    jQuery("#endDate").val(msg2.Data.EndDate).change();
+                                }
+                            })
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
+<script>
+    function showPage() {
+        document.getElementById("loader").style.display = "none";
+    }
+</script>
+

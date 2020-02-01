@@ -1,0 +1,80 @@
+﻿@model TMS.Library.Entities.Invoice.Customer
+@using lr = Resources.Resources
+<div class="Alertbox alert alert-danger" style="display:none">
+    <ul class="errors"></ul>
+</div>
+<div class="form-horizontal form-person-popup">
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.Customer_PName, new { @class = "col-md-3 col-lg-3 control-label" })
+            <div class="col-md-7 col-lg-7 col-sm-11">
+                @(Html.Kendo().DropDownListFor(c => c.Customer_PName).DataTextField("Text").DataValueField("Value")
+                                .OptionLabel(lr.SalutationOptionalLabel)
+                                //  .OptionLabel(new { Text = lr.SalutationOptionalLabel, Value = 0 })
+                                .HtmlAttributes(new { @class = "form-control txtrequired ", style = "width:100%", })
+                                                    .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.Salutation>(typeof(TMS.Library.Salutation))).Events(e => e.Change("SalutationChange")))
+
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Customer_PName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().TextBoxFor(model => model.Customer_PName).HtmlAttributes(new { @class = "form-control pfirstname txtrequired", @placeholder = lr.PersonP_FirstName, @dir = @PLDIR, @style = " width: 100%;" })
+            @Html.ValidationMessageFor(model => model.Customer_PName)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Customer_SName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().TextBoxFor(model => model.Customer_SName).HtmlAttributes(new { @class = "form-control pmidddlename", @placeholder = lr.PersonP_MiddleName, @dir = @PLDIR, @style = " width: 100%;" })
+            @Html.ValidationMessageFor(model => model.Customer_SName)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Customer_MiddleName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().TextBoxFor(model => model.Customer_MiddleName).HtmlAttributes(new { @class = "form-control  plast_name txtrequired", @placeholder = lr.PersonP_LastName, @dir = @PLDIR, @style = " width: 100%;" })
+            @Html.ValidationMessageFor(model => model.Customer_MiddleName)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Customer_LastName, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().TextBoxFor(model => model.Customer_LastName).HtmlAttributes(new { @class = "form-control nickname txtrequired", @placeholder = lr.PersonNickName, @dir = @PLDIR, @style = " width: 100%;" })
+            @Html.ValidationMessageFor(model => model.Customer_LastName)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Detail, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().TextBoxFor(model => model.Detail).HtmlAttributes(new { @class = "form-control alias", @placeholder = lr.PersonAlias, @dir = @PLDIR, @style = " width: 100%;" })
+            @Html.ValidationMessageFor(model => model.Detail)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @Html.Kendo().TextBoxFor(model => model.Email).HtmlAttributes(new { @class = "form-control txtrequired", @placeholder = lr.PersonContactEmail, @style = " width: 100%;" })
+            @Html.ValidationMessageFor(model => model.Email)
+            @Html.Hidden("InitialEmail", Model.Email)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.PersonContact, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().TextBoxFor(c => c.PersonContact).HtmlAttributes(new { @class = "form-control ", style = "width:100%" }))
+
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Customer_Type, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().DropDownListFor(c => c.Customer_Type).DataTextField("Text").DataValueField("Value")
+                                    //.OptionLabel("Customer Type")
+                                     .OptionLabel(new { Text = "Customer Type", Value = 0 })
+                                    .HtmlAttributes(new { @class = "form-control txtrequired ", style = "width:100%" })
+                                                           .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.CustomerType>(typeof(TMS.Library.CustomerType))))
+
+        </div>
+    </div>
+</div>

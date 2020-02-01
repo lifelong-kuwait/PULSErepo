@@ -71,9 +71,9 @@ namespace TMS.Business.Common.Groups
         /// </summary>
         /// <param name="Culture">The culture.</param>
         /// <returns>IList&lt;SecurityGroups&gt;.</returns>
-        public IList<SecurityGroups> TMS_Groups_GetAllBAL(string Culture, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText)
+        public IList<SecurityGroups> TMS_Groups_GetAllBAL(int page,string Culture, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText)
         {
-            return _DAL.TMS_Groups_GetAllDAL(Culture, StartRowIndex, PageSize, ref Total, SortExpression, SearchText);
+            return _DAL.TMS_Groups_GetAllDAL(page,Culture, StartRowIndex, PageSize, ref Total, SortExpression, SearchText);
         }
 
         /// <summary>
@@ -81,9 +81,9 @@ namespace TMS.Business.Common.Groups
         /// </summary>
         /// <param name="Culture">The culture.</param>
         /// <returns>IList&lt;SecurityGroups&gt;.</returns>
-        public IList<SecurityGroups> TMS_GroupsByOrganization_GetAllBAL(string Culture, string Oid, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText)
+        public IList<SecurityGroups> TMS_GroupsByOrganization_GetAllBAL(int page,string Culture, string Oid, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText)
         {
-            return _DAL.TMS_GroupsByOrganization_GetAllDAL(Culture,Oid, StartRowIndex, PageSize, ref Total, SortExpression, SearchText);
+            return _DAL.TMS_GroupsByOrganization_GetAllDAL(page,Culture,Oid, StartRowIndex, PageSize, ref Total, SortExpression, SearchText);
         }
 
         /// <summary>
@@ -136,20 +136,30 @@ namespace TMS.Business.Common.Groups
         /// <param name="Culture">The culture.</param>
         /// <param name="GroupId">The group identifier.</param>
         /// <returns>IList&lt;SecurityGroupsPermission&gt;.</returns>
-        public IList<SecurityGroupsPermission> SecurityGroupsPermission_GetAllByGroupIdBAL(string Culture, long GroupId)
+        public IList<SecurityGroupsPermission> SecurityGroupsPermission_GetAllByGroupIdBAL(string Culture, long GroupId, long organizationID, long userid)
         {
-            return _DAL.SecurityGroupsPermission_GetAllByGroupId(Culture, GroupId);
+            return _DAL.SecurityGroupsPermission_GetAllByGroupId(Culture, GroupId, organizationID, userid);
         }
-
         /// <summary>
         /// Securities the groups permission get all by group identifier bal.
         /// </summary>
         /// <param name="Culture">The culture.</param>
         /// <param name="GroupId">The group identifier.</param>
         /// <returns>IList&lt;SecurityGroupsPermission&gt;.</returns>
-        public IList<SecurityGroupsPermission> SecurityGroupsPermissions_GetAllByGroupIdBAL(string Culture, long GroupId)
+        public string PermissionPicture(string ID)
         {
-            return _DAL.SecurityGroupsPermissions_GetAllByGroupId(Culture, GroupId);
+            return _DAL.PermissionPictureDAL(ID);
+        }
+       
+        /// <summary>
+        /// Securities the groups permission get all by group identifier bal.
+        /// </summary>
+        /// <param name="Culture">The culture.</param>
+        /// <param name="GroupId">The group identifier.</param>
+        /// <returns>IList&lt;SecurityGroupsPermission&gt;.</returns>
+        public IList<SecurityGroupsPermission> SecurityGroupsPermissions_GetAllByGroupIdBAL(string Culture, long GroupId, long userid, string companyID)
+        {
+            return _DAL.SecurityGroupsPermissions_GetAllByGroupId(Culture, GroupId,userid,companyID);
         }
 
         /// <summary>

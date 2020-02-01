@@ -90,7 +90,7 @@ namespace TMS.Web.Controllers
             //   int Total
                 if (CurrentUser.CompanyID > 0)
             {
-                var _trainer = this._TrainerBAL.TrainerOrganization_GetAllBAL(CurrentCulture, RoleID, Convert.ToString(CurrentUser.CompanyID), SearchText);
+                var _trainer = this._TrainerBAL.TrainerOrganization_GetAllBAL(ref Total,CurrentCulture, RoleID, Convert.ToString(CurrentUser.CompanyID), SearchText, request.Sorts.ToString(), startRowIndex, request.Page, request.PageSize,0);
                     return Json(_trainer.ToDataSourceResult(request, ModelState));
             }
             //var result = new DataSourceResult()
