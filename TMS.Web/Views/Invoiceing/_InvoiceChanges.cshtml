@@ -1,0 +1,51 @@
+﻿
+@model string
+@using lr = Resources.Resources;
+@if (User.IsInRole("CanViewPersonEmail"))
+{
+    <div class="ChildGrid">
+        @(Html.Kendo().Grid<TMS.Library.Entities.Invoice.InvoiceChanges>()
+                                                                    .Name("ChangesGrid")
+                                                                      .Columns(columns =>
+                                                                      {
+                                                                          columns.Bound(e => e.Old_Sub_total);
+                                                                          columns.Bound(e => e.Old_Tax_Value);
+                                                                          columns.Bound(e => e.Old_Discount_Vlaue);
+                                                                          columns.Bound(e => e.Old_Net_Value);
+                                                                          columns.Bound(e => e.Old_Discount);
+                                                                          columns.Bound(e => e.Old_Tax_Value);
+                                                                          columns.Bound(e => e.Old_Discount_Vlaue);
+                                                                          columns.Bound(e => e.Created_Date);
+                                                                          columns.Bound(e => e.Creator.P_DisplayName);
+                                                                         
+                                                                      }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("").DisplayDeleteConfirmation(false))
+                                                                      .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate() </text>))
+                                                                            .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+                                                                            .Pageable(pager => pager.Refresh(true))
+                                                                            .Scrollable().Filterable().Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
+                                                                            .HtmlAttributes(new { style = "height:350px;" }).DataSource(dataSource => dataSource.Ajax().Model(model => { model.Id(m => m.ID); }).PageSize(8)
+                                                                            .Read(read => read.Action("InvoiceChanges_Read", "Invoiceing", new { PersonID = Model }))
+                                                                         
+                                                                            .Events(e => e.Error("GeneralErrorHandler(\"ChangesGrid\")").RequestEnd("GridRequestEndUpdate"))
+                                                                            ).NoRecords(lr.GridNoRecordFoundMessage)
+        )
+    </div>
+
+    @helper RenderAddTemplate()
+    {
+        @*/**/
+        <div class="toolbar">
+            <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+            <a class="k-button tms-grid-edit download"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+
+        </div>*@
+        /**/
+
+    }
+   
+
+
+
+}
+
+

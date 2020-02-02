@@ -106,7 +106,11 @@
                 {
                     i.Add().Text("Deposit").LoadContentFrom("InvoiceDeposit", "Invoiceing", new { PersonID = Model.ID });
                 }
-               
+                if (User.IsInRole("CanViewPersonAddresses"))
+                {
+                    i.Add().Text("Change").LoadContentFrom("InvoiceChanges", "Invoiceing", new { PersonID = Model.ID });
+                }
+
             }))
 
  <script id="SessionTemplate" type="text/kendo">

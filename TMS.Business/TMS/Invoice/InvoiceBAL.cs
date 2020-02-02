@@ -108,5 +108,9 @@ namespace TMS.Business.TMS.Invoice
         {
             return DAL.create_InvoiceHistoryDAL(invoiceHistory);
         }
+        public List<InvoiceChanges> Read_InvoiceChangesBAL(string invoiceId)
+        {
+            return DAL.Read_InvoiceChangesDAL(invoiceId);
+        }
     }
 }

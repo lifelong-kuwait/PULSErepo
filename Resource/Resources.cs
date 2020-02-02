@@ -6432,7 +6432,37 @@ namespace Resources {
                 return (string)resourceProvider.GetResource("NetTotal", CultureInfo.CurrentUICulture.Name);
             }
         }
+        public static string IsDeposit
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("IsDeposit", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string isIssued
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("isIssued", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string IsPartialyDeposite
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("IsPartialyDeposite", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Discount
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Discount", CultureInfo.CurrentUICulture.Name);
+            }
+        }
         
+
+
 
 
 

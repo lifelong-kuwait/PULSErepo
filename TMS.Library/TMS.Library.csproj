@@ -92,6 +92,7 @@
     <Compile Include="Entities\Invoice\Customer.cs" />
     <Compile Include="Entities\Invoice\DepositDetail.cs" />
     <Compile Include="Entities\Invoice\Invoice.cs" />
+    <Compile Include="Entities\Invoice\InvoiceChanges.cs" />
     <Compile Include="Entities\Invoice\InvoiceHistory.cs" />
     <Compile Include="Entities\Invoice\ReIssued.cs" />
     <Compile Include="Entities\TMS\Course\CourseDataBar.cs" />
