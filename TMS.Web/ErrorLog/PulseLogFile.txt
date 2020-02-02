@@ -1627,3 +1627,21 @@ INFO  2020-02-01 14:55:57,221 62163ms DESKTOP-LSN82VI        Login              
 INFO  2020-02-01 14:55:57,599 62541ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/1/2020 11:55:57 AM
 INFO  2020-02-01 14:56:01,342 66283ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/1/2020 11:56:01 AM
 INFO  2020-02-01 14:56:02,108 67050ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/1/2020 11:56:02 AM
+INFO  2020-02-02 09:11:19,687 37756ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/2/2020 6:11:19 AM
+INFO  2020-02-02 09:11:20,154 38223ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/2/2020 6:11:20 AM
+INFO  2020-02-02 09:11:33,103 51172ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/2/2020 6:11:33 AM
+INFO  2020-02-02 09:11:33,743 51813ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/2/2020 6:11:33 AM
+ERROR 2020-02-02 09:42:09,234 1887304ms DESKTOP-LSN82VI        OnException        - c:\Users\SynergicProfessional\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\Views\Invoiceing\InvoiceGrid.cshtml(254): error CS0117: 'Resources.Resources' does not contain a definition for 'IsDeposit'
+ERROR 2020-02-02 09:43:25,217 1963286ms DESKTOP-LSN82VI        OnException        - c:\Users\SynergicProfessional\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\Views\Invoiceing\InvoiceGrid.cshtml(254): error CS0117: 'Resources.Resources' does not contain a definition for 'IsDeposit'
+INFO  2020-02-02 10:23:25,458 32860ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/2/2020 7:23:25 AM
+INFO  2020-02-02 10:23:25,845 33247ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/2/2020 7:23:25 AM
+INFO  2020-02-02 10:23:37,807 45209ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/2/2020 7:23:37 AM
+INFO  2020-02-02 10:23:38,282 45684ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/2/2020 7:23:38 AM
+INFO  2020-02-02 12:51:49,443 29305ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/2/2020 9:51:49 AM
+INFO  2020-02-02 12:51:49,831 29693ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/2/2020 9:51:49 AM
+INFO  2020-02-02 12:52:00,415 40277ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/2/2020 9:52:00 AM
+INFO  2020-02-02 12:52:00,884 40745ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/2/2020 9:52:00 AM
+ERROR 2020-02-02 12:52:53,529 93390ms DESKTOP-LSN82VI        OnException        - The model item passed into the dictionary is of type 'TMS.Library.Entities.Invoice.InvoiceChanges', but this dictionary requires a model item of type 'TMS.Library.Entities.Invoice.DepositDetail'.
+ERROR 2020-02-02 13:38:08,900 2808762ms DESKTOP-LSN82VI        OnException        - The model item passed into the dictionary is of type 'TMS.Library.Entities.Invoice.InvoiceChanges', but this dictionary requires a model item of type 'TMS.Library.Entities.Invoice.DepositDetail'.
+ERROR 2020-02-02 13:38:35,489 2835351ms DESKTOP-LSN82VI        OnException        - The model item passed into the dictionary is of type 'TMS.Library.Entities.Invoice.InvoiceChanges', but this dictionary requires a model item of type 'TMS.Library.Entities.Invoice.DepositDetail'.
+ERROR 2020-02-02 13:39:53,782 2913644ms DESKTOP-LSN82VI        OnException        - The model item passed into the dictionary is of type 'TMS.Library.Entities.Invoice.InvoiceChanges', but this dictionary requires a model item of type 'TMS.Library.Entities.Invoice.DepositDetail'.

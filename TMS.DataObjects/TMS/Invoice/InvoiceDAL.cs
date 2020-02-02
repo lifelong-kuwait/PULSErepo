@@ -408,5 +408,29 @@ namespace TMS.DataObjects.TMS.Invoice
                 );
 
         }
+        public List<InvoiceChanges> Read_InvoiceChangesDAL(string invoiceId)
+        {
+            List<InvoiceChanges> _CustomerData = new List<InvoiceChanges>();
+            using (var conn = new SqlConnection(DBHelper.ConnectionString))
+            {
+                conn.Open();
+                DynamicParameters dbParam = new DynamicParameters();
+                dbParam.AddDynamicParams(new { InoID = invoiceId });
+                using (var multi = conn.QueryMultiple("INO_Get_InvoiceChanges", dbParam, commandType: System.Data.CommandType.StoredProcedure))
+                {
+                    _CustomerData = multi.Read<InvoiceChanges>().AsList<InvoiceChanges>();
+                }
+                conn.Close();
+            }
+            foreach (var single in _CustomerData)
+            {
+                if (single.Created_By > 0)
+                {
+                    var x = ExecuteSinglewithSP<LoginUsers>(@"INO_Get_User", ParamBuilder.Par("UID", single.Created_By));
+                    single.Creator = x;
+                }
+            }
+            return _CustomerData.ToList();
+        }
     }
 }

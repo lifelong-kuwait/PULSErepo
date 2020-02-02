@@ -452,6 +452,22 @@ namespace TMS.Web.Controllers
 
             }
 
+
+        }
+        [ContentAuthorize]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanViewPersonEmail")]
+        public ActionResult InvoiceChanges(string PersonID)
+        {
+            return PartialView("_InvoiceChanges", PersonID);
+        }
+
+        [DontWrapResult]
+        [ClaimsAuthorize("CanViewPersonEmail")]
+        public ActionResult InvoiceChanges_Read([DataSourceRequest] DataSourceRequest request, string PersonID)
+        {
+            var _Phone = _CustomerBAL.Read_InvoiceChangesBAL(PersonID);
+            return Json(_Phone.ToDataSourceResult(request, ModelState));
         }
 
     }
