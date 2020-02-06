@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Common;
 using System.Globalization;
+using System.Reflection;
 using TMS.Library.ModelMapper;
 using TMS.Library.TMS.Organization;
 using TMS.Library.Users;
@@ -93,12 +94,18 @@ namespace TMS.Library.TMS
         /// </summary>
         /// <value>The rating.</value>
         public TaxType Tax_Type { get; set; }
-
-        /// <summary>
-        /// Gets or sets the rating.
-        /// </summary>
-        /// <value>The rating.</value>
-        public double Tax_Value { get; set; }
+        public string tax_Value
+        {
+            get
+            {
+                return Tax_Type != null ? Fd.GetDisplayName(Tax_Type) : "NotSpecified";
+            }
+        }
+    /// <summary>
+    /// Gets or sets the rating.
+    /// </summary>
+    /// <value>The rating.</value>
+    public double Tax_Value { get; set; }
         /// <summary>
         /// Gets or sets the rating.
         /// </summary>
@@ -133,6 +140,13 @@ namespace TMS.Library.TMS
         /// <value>The minimum trainee.</value>
         //[Display(Name = "ClassMinimumTrainee", ResourceType = typeof(lr))]
         public InvoiceStatus Invoice_Status { get; set; }
+        public string Invoice_StatusString
+        {
+            get
+            {
+                return Invoice_Status != null ? Fd.GetDisplayName(Invoice_Status) : "NotSpecified";
+            }
+        }
         /// <summary>
         /// Gets or sets the course fee.
         /// </summary>
@@ -180,7 +194,20 @@ namespace TMS.Library.TMS
         /// <value>The  PreRequisites.</value>
        // [Display(Name = "CoursePreRequisites", ResourceType = typeof(lr))]
         public bool Is_Installment { get; set; }
-
+        /// <summary>
+        /// Gets or sets the PreRequisites.
+        /// </summary>
+        /// <value>The  PreRequisites.</value>
+       // [Display(Name = "CoursePreRequisites", ResourceType = typeof(lr))]
+        public HistoryType invoiceLastActivity { get; set; }
+        public string invoiceLastActivityValue
+        {
+            get
+            {
+                return invoiceLastActivity != null ? Fd.GetDisplayName(invoiceLastActivity) : "NotSpecified";
+            }
+        }
+        public string INO_GetlatestHistoryCreator { get; set; }
         /// <summary>
         /// Gets or sets the feedback form identifier.
         /// </summary>
@@ -227,9 +254,33 @@ namespace TMS.Library.TMS
             Is_Partial_Deposit = dr.GetBoolean("Is_Partial_Deposit"); 
             Deposite_Type_ID = dr.GetLong("Deposit_Type_ID");
             Is_Re_Issued = dr.GetBoolean("Is_Re_Issued");
+            invoiceLastActivity = (HistoryType)dr.GetInt32("invoiceLastActivity");
+            INO_GetlatestHistoryCreator = dr.GetString("INO_GetlatestHistoryCreator");
             Notes = dr.GetString("Notes");
             IsActive = dr.GetBoolean("IsActive");
             IsDelete = dr.GetBoolean("IsDelete");
+        }
+    }
+    public static class Fd
+    {
+        /// <summary>
+        /// Gets the display name.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string GetDisplayName(this Enum value)
+        {
+            FieldInfo field = value.GetType().GetField(value.ToString());
+
+            if (field == null)
+                return String.Empty;
+
+            object[] attribs = field.GetCustomAttributes(typeof(DisplayAttribute), true);
+            if (attribs.Length > 0)
+            {
+                return ((DisplayAttribute)attribs[0]).GetName();
+            }
+            return value.ToString();
         }
     }
     public class InvoiceDetail : IDataMapper

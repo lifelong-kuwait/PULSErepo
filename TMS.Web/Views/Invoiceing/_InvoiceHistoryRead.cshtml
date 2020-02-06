@@ -7,9 +7,14 @@
                                     .Name("InvoiceHistory")
                                       .Columns(columns =>
                                       {
-
-                                          columns.Bound(e => e.History_Name);
-                                          columns.Bound(p => p.Invoice_Number).Title(lr.GridIsPrimary).Width(80).MinScreenWidth(550);
+                                          columns.Bound(e => e.History_Name).Title(lr.InvoiceLastActivity);
+                                          columns.Bound(e => e.Type).Title(lr.LastActivityType);
+                                          columns.Bound(e => e.users.P_DisplayName).Title(lr.GridAddedBy);
+                                          columns.Bound(e => e.Date_TIME).ClientTemplate(@"<div class='gridaddedby'>
+            <span class='Addedby' >#:users.P_DisplayName#</span>
+            <span class='date' >#=kendo.toString(Date_TIME,'" + DateFormatScript + @"')#</span>
+            <span class='time' >#=kendo.toString(Date_TIME,'" + TimeFormatScript + @"')#</span>
+        </div>").Title(lr.InvoiceCreate);
 
                                       }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_EmailAddressTemplate").DisplayDeleteConfirmation(false))
                                                     .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate() </text>))

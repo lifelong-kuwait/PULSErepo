@@ -628,12 +628,11 @@ namespace TMS.Library
     }
     public enum TaxType
     {
-        [Display(Name = "TaxExclusive", ResourceType = typeof(lr))]
-        Tax_Exclusive = 1,
-        [Display(Name = "TaxInclusive", ResourceType = typeof(lr))]
-        Tax_Inclusive = 2,
-        [Display(Name = "NoTax", ResourceType = typeof(lr))]
-        NoTax =3,
+        [Display(Name = "corporate", ResourceType = typeof(lr))]
+        corporate = 1,
+        [Display(Name = "Individual", ResourceType = typeof(lr))]
+        Individual = 2,
+       
     }
     public enum CustomerType
     {
@@ -646,14 +645,24 @@ namespace TMS.Library
     }
     public enum InvoiceStatus
     {
-        [Display(Name = "InvoiceCreate", ResourceType = typeof(lr))]
-        InvoiceCreate = 1,
-        [Display(Name = "InvoiceRescheduled", ResourceType = typeof(lr))]
-        InvoiceRescheduled = 2,
-        [Display(Name = "InvoiceDeposit", ResourceType = typeof(lr))]
-        InvoiceDeposit = 3,
+        [Display(Name = "InvoiceInvented", ResourceType = typeof(lr))]
+        InvoiceInvented = 1,
+        [Display(Name = "InvoiceIssued", ResourceType = typeof(lr))]
+        InvoiceIssued = 2,
         [Display(Name = "InvoiceReIssued", ResourceType = typeof(lr))]
-        InvoiceReIssued = 4,
+        InvoiceReIssued = 3,
+        [Display(Name = "InvoiceInProcess", ResourceType = typeof(lr))]
+        InvoiceInProcess = 4,
+        [Display(Name = "InvoiceReadyForCollection", ResourceType = typeof(lr))]
+        InvoiceReadyForCollection = 5,
+        [Display(Name = "InvoiceDeposit", ResourceType = typeof(lr))]
+        InvoiceDeposit = 6,
+        [Display(Name = "InvoiceCashRecived", ResourceType = typeof(lr))]
+        InvoiceCashRecived = 7,
+        [Display(Name = "InvoiceCashPartialyRecived", ResourceType = typeof(lr))]
+        InvoiceCashPartialyRecived = 8,
+        [Display(Name = "InvoiceCancled", ResourceType = typeof(lr))]
+        InvoiceCancled = 9,
     }
     public enum DepositType
     {

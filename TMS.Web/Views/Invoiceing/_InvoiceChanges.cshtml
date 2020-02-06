@@ -8,16 +8,19 @@
                                                                     .Name("ChangesGrid")
                                                                       .Columns(columns =>
                                                                       {
-                                                                          columns.Bound(e => e.Old_Sub_total);
-                                                                          columns.Bound(e => e.Old_Tax_Value);
-                                                                          columns.Bound(e => e.Old_Discount_Vlaue);
-                                                                          columns.Bound(e => e.Old_Net_Value);
-                                                                          columns.Bound(e => e.Old_Discount);
-                                                                          columns.Bound(e => e.Old_Tax_Value);
-                                                                          columns.Bound(e => e.Old_Discount_Vlaue);
-                                                                          columns.Bound(e => e.Created_Date);
-                                                                          columns.Bound(e => e.Creator.P_DisplayName);
-                                                                         
+                                                                          columns.Bound(e => e.Old_Sub_total).Title(lr.OldSubTotal);
+                                                                          columns.Bound(e => e.Old_Tax_Value).Title(lr.OldTaxValue);
+                                                                          columns.Bound(e => e.Old_Discount_Vlaue).Title(lr.OldDiscountValue);
+                                                                          columns.Bound(e => e.Old_Net_Value).Title(lr.OldNetValue);
+                                                                          columns.Bound(e => e.Old_Discount).Title(lr.OldDiscountPercontageValue);
+                                                                          columns.Bound(e => e.Old_Tax_Type).Title(lr.OldTaxValue);
+                                                                          columns.Bound(e => e.Old_Discount).Title(lr.OldDiscountValue);
+                                                                          columns.Bound(e => e.Creator.P_DisplayName).ClientTemplate(@"<div class='gridaddedby'>
+            <span class='Addedby' >#:Creator.P_DisplayName#</span>
+            <span class='date' >#=kendo.toString(Created_Date,'" + DateFormatScript + @"')#</span>
+            <span class='time' >#=kendo.toString(Created_Date,'" + TimeFormatScript + @"')#</span>
+        </div>").Title(lr.GridUpdatedBy);
+
                                                                       }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("").DisplayDeleteConfirmation(false))
                                                                       .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate() </text>))
                                                                             .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))

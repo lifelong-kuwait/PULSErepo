@@ -3,25 +3,27 @@
 @if (User.IsInRole("CanViewPersonEmail"))
 {
     <div class="ChildGrid">
-        @(Html.Kendo().Grid<TMS.Library.Entities.Invoice.ReIssued>()
-                                            .Name("ReissuedGrid")
+        @(Html.Kendo().Grid<TMS.Library.Entities.Invoice.InvoiceStatusModel>()
+                                            .Name("InvoiceHistory")
                                               .Columns(columns =>
                                               {
-                                                  columns.Bound(p => p.users.P_DisplayName).Title(lr.GridCreatedBy).MinScreenWidth(550);
-                                                  columns.Bound(e => e.Re_Issued_Date).ClientTemplate(@"<div class='gridaddedby'>
-                                                       <span class='Addedby' >#:users.P_DisplayName#</span>
-                                                       <span class='date' >#=kendo.toString(Re_Issued_Date,'" + DateFormatScript + @"')#</span>
-                                                       <span class='time' >#=kendo.toString(Re_Issued_Date,'" + TimeFormatScript + @"')#</span>
-                                                   </div>").Title(lr.InvoiceCreate);
+                                                  columns.Bound(e => e.Status_Name).Title(lr.InvoiceLastActivity);
+                                                  columns.Bound(e => e.Description).Title(lr.LastActivityType);
+                                                  columns.Bound(e => e.CreatedDate).ClientTemplate(@"<div class='gridaddedby'>
+        <span class='Addedby' >#:users.P_DisplayName#</span>
+        <span class='date' >#=kendo.toString(CreatedDate,'" + DateFormatScript + @"')#</span>
+        <span class='time' >#=kendo.toString(CreatedDate,'" + TimeFormatScript + @"')#</span>
+    </div>").Title(lr.InvoiceCreate);
+
                                               }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_EmailAddressTemplate").DisplayDeleteConfirmation(false))
                                                             .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate() </text>))
                                                                                   .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
                                                                                   .Pageable(pager => pager.Refresh(true))
                                                                                                                                   .Scrollable().Filterable().Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
                                                                                   .HtmlAttributes(new { style = "height:350px;" }).DataSource(dataSource => dataSource.Ajax().Model(model => { model.Id(m => m.ID); }).PageSize(8)
-                                                                                  .Read(read => read.Action("InvoiceReIssuedRead", "Invoiceing", new { PersonID = Model }))
+                                                                                  .Read(read => read.Action("InvoiceStatusChanges_Read", "Invoiceing", new { PersonID = Model }))
 
-                                                                                                                                  .Events(e => e.Error("GeneralErrorHandler(\"ReissuedGrid\")").RequestEnd("GridRequestEndUpdate"))
+                                                                                                                                  .Events(e => e.Error("GeneralErrorHandler(\"InvoiceHistory\")").RequestEnd("GridRequestEndUpdate"))
                                                                                   ).NoRecords(lr.GridNoRecordFoundMessage)
         )
     </div>

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using TMS.Library.ModelMapper;
@@ -31,6 +33,18 @@ namespace TMS.Library.Entities.Invoice
         /// <value>The name of the secondary.</value>
        // [Display(Name = "SecondaryCourseName", ResourceType = typeof(lr))]
         public DepositType Payment_Type { get; set; }
+        /// <summary>
+        /// Gets or sets the name of the secondary.
+        /// </summary>
+        /// <value>The name of the secondary.</value>
+       // [Display(Name = "SecondaryCourseName", ResourceType = typeof(lr))]
+        public string  Payment_Type_Value
+        {
+            get
+            {
+                return Payment_Type != null ? Fd.GetDisplayName(Payment_Type) : "NotSpecified";
+            }
+        }
 
         /// <summary>
         /// Gets or sets the course category identifier.
@@ -123,5 +137,27 @@ namespace TMS.Library.Entities.Invoice
             IsActive = dr.GetBoolean("IsActive");
             IsDeleted = dr.GetBoolean("IsDeleted");
         }
+    }
+}
+public static class Fd
+{
+    /// <summary>
+    /// Gets the display name.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    /// <returns>System.String.</returns>
+    public static string GetDisplayName(this Enum value)
+    {
+        FieldInfo field = value.GetType().GetField(value.ToString());
+
+        if (field == null)
+            return String.Empty;
+
+        object[] attribs = field.GetCustomAttributes(typeof(DisplayAttribute), true);
+        if (attribs.Length > 0)
+        {
+            return ((DisplayAttribute)attribs[0]).GetName();
+        }
+        return value.ToString();
     }
 }

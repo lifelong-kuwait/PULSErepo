@@ -34,5 +34,8 @@ namespace TMS.DataObjects.Interfaces.Invoiceing
         long create_InvoiceReIssueDAL(ReIssued invoiceDetail);
         long create_InvoiceHistoryDAL(InvoiceHistory invoiceHistory);
         List<InvoiceChanges> Read_InvoiceChangesDAL(string invoiceId);
+        List<InvoiceStatusModel> Read_InvoiceStatusChangesDAL(string invoiceId);
+        
+        long InvoiceStatusChangeCreateDAL(InvoiceStatusModel invoiceStatus);
     }
 }

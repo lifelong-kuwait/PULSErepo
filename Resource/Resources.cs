@@ -6460,9 +6460,147 @@ namespace Resources {
                 return (string)resourceProvider.GetResource("Discount", CultureInfo.CurrentUICulture.Name);
             }
         }
+        public static string InvoiceInvented
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceInvented", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceInProcess
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceInProcess", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceReadyForCollection
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceReadyForCollection", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceCashRecived
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceCashRecived", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceCashPartialyRecived
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceCashPartialyRecived", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceCancled
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceCancled", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceLastActivity
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceLastActivity", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string LastActivityType
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("LastActivityType", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string corporate
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("corporate", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Individual
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Individual", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Payment
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Payment", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string TotalPayment
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("TotalPayment", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Balance
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Balance", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceDepositType
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceDepositType", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string OldSubTotal
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("OldSubTotal", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string OldTaxValue
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("OldTaxValue", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string OldDiscountValue
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("OldDiscountValue", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string OldNetValue
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("OldNetValue", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string OldDiscountPercontageValue
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("OldDiscountPercontageValue", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string OldTaxPercentageValue
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("OldTaxPercentageValue", CultureInfo.CurrentUICulture.Name);
+            }
+        }
         
-
-
 
 
 
