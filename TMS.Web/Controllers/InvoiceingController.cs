@@ -51,6 +51,7 @@ namespace TMS.Web.Controllers
                 _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to insert Invoice " + DateTime.UtcNow, "", 0, "Invoice", "Invoice_Create", json.ToString(), CurrentUser.CompanyID);
                 _invoice.Generated_By = CurrentUser.NameIdentifierInt64;
                 _invoice.Generated_Date = DateTime.UtcNow;
+                _invoice.Invoice_Status = InvoiceStatus.InvoiceInvented;
                 _invoice.Organization_ID = CurrentUser.CompanyID;
                 _invoice.ID = _CustomerBAL.create_InvoiceBAL(_invoice);
                 InvoiceHistory invoiceHistory = new InvoiceHistory();
@@ -81,6 +82,7 @@ namespace TMS.Web.Controllers
                 _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to insert Invoice " + DateTime.UtcNow, "", 0, "Invoice", "Invoice_Create", json.ToString(), CurrentUser.CompanyID);
                 _invoice.Generated_By = CurrentUser.NameIdentifierInt64;
                 _invoice.Generated_Date = DateTime.UtcNow;
+                _invoice.Invoice_Status = InvoiceStatus.InvoiceInvented;
                 _invoice.Organization_ID = CurrentUser.CompanyID;
                 var xx = _CustomerBAL.Update_InvoiceBAL(_invoice);
                 InvoiceHistory invoiceHistory = new InvoiceHistory();
@@ -468,6 +470,41 @@ namespace TMS.Web.Controllers
         {
             var _Phone = _CustomerBAL.Read_InvoiceChangesBAL(PersonID);
             return Json(_Phone.ToDataSourceResult(request, ModelState));
+        }
+        [ContentAuthorize]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanViewPersonEmail")]
+        public ActionResult InvoiceStatusChanges(string PersonID)
+        {
+            return PartialView("_InvoiceStatusChanges", PersonID);
+        }
+
+        [DontWrapResult]
+        [ClaimsAuthorize("CanViewPersonEmail")]
+        public ActionResult InvoiceStatusChanges_Read([DataSourceRequest] DataSourceRequest request, string PersonID)
+        {
+            var _Phone = _CustomerBAL.Read_InvoiceStatusChangesBAL(PersonID);
+            return Json(_Phone.ToDataSourceResult(request, ModelState));
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ActivityAuthorize]
+        [ClaimsAuthorize("CanAddEditRescheduled")]
+        public ActionResult EditChangeStatus(InvoiceStatusModel _objTask)
+        {
+            _objTask.Status_Name = _objTask.Type.ToString();
+            _objTask.Description = _objTask.Type.ToString();
+            _objTask.CreatedBy = CurrentUser.NameIdentifierInt64;
+            _objTask.CreatedDate = DateTime.Now;
+            _objTask.Invoice_ID = _objTask.ID;
+            _objTask.Organization_ID = CurrentUser.CompanyID;
+            var result = this._CustomerBAL.InvoiceStatusChangeCreateBAL(_objTask);
+            if (result == -1)
+            {
+                ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+            }
+            var resultData = new[] { _objTask };
+            return RedirectToAction("InvoiceGrid");
         }
 
     }

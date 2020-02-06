@@ -12,6 +12,7 @@
     ViewBag.Title = Model.Referance_Number;
     Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
     List<TMS.Library.TMS.Invoice> modellist = new List<TMS.Library.TMS.Invoice>() { Model };
+    var LastActivityType = lr.LastActivityType;
 }
 <script>
     //Class
@@ -50,15 +51,15 @@
                    
                 </div>"
                         ).Title(lr.InvoiceDetail);
-                            columns.Bound(e => e.Tax_Type).Filterable(true).ClientTemplate(@"<div  class='person-box'>
+                            columns.Bound(e => e.invoiceLastActivity).Filterable(true).ClientTemplate(@"<div  class='person-box'>
                 <div class='person'>
                     " +
-                            @"<h5> <b>Tax Percentage</b>:#:Tax_Percentage#</h5>" +
-                             @"# if (Discount!=null) { #" +
-                            @"<p> <b>Discount %</b>: #:Discount#</p> #}#
-                </div>"
-                       ).Title(lr.TaxAndDiscountDetail);
-                        
+                 @"<h5> <b>" + LastActivityType + @"</b>:#:invoiceLastActivityValue#</h5>" +
+                    @"<h5> <b>Done By:</b>:#:INO_GetlatestHistoryCreator#</h5>" +
+
+             @"</div>"
+            ).Title(lr.InvoiceLastActivity);
+
                             columns.Bound(e => e.Is_Re_Issued).Filterable(true).ClientTemplate("#=SessionTemplate(data)#").Title(lr.InvoiceStatus);
                         }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_PersonDetailTemplate").DisplayDeleteConfirmation(false))
                           .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate() </text>))
@@ -110,6 +111,10 @@
                 {
                     i.Add().Text("Change").LoadContentFrom("InvoiceChanges", "Invoiceing", new { PersonID = Model.ID });
                 }
+                if (User.IsInRole("CanViewPersonAddresses"))
+                {
+                    i.Add().Text("Change").LoadContentFrom("InvoiceStatusChanges", "Invoiceing", new { PersonID = Model.ID });
+                }
 
             }))
 
@@ -126,6 +131,12 @@
                         </span>
                     </p>
                 </h5>
+                <p>
+                    <label>
+                        @lr.InvoiceStatus:
+                        #:data.Invoice_StatusString#
+                    </label>
+                </p>
                 <p>
                     <label>Is Deposit: </label>
                     <label>

@@ -112,5 +112,14 @@ namespace TMS.Business.TMS.Invoice
         {
             return DAL.Read_InvoiceChangesDAL(invoiceId);
         }
+        public List<InvoiceStatusModel> Read_InvoiceStatusChangesBAL(string invoiceId)
+        {
+            return DAL.Read_InvoiceStatusChangesDAL(invoiceId);
+        }
+        
+        public long InvoiceStatusChangeCreateBAL(InvoiceStatusModel  invoiceStatus)
+        {
+            return DAL.InvoiceStatusChangeCreateDAL(invoiceStatus);
+        }
     }
 }

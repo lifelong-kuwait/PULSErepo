@@ -4892,6 +4892,9 @@
     <Content Include="Views\Invoiceing\EditorTemplates\_DepositTemplete.cshtml" />
     <Content Include="Views\Invoiceing\InvoiceEdit.cshtml" />
     <Content Include="Views\Invoiceing\_InvoiceChanges.cshtml" />
+    <Content Include="Views\Invoiceing\EditorTemplates\UnderProcessProcess.cshtml" />
+    <Content Include="Views\Invoiceing\EditorTemplates\ReadyForCollection.cshtml" />
+    <Content Include="Views\Invoiceing\_InvoiceStatusChanges.cshtml" />
     <None Include="WeeklyAttendanceReportData.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>

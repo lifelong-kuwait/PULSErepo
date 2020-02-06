@@ -208,6 +208,21 @@ namespace TMS.DataObjects.TMS.Invoice
                 ParamBuilder.Par("@OrganizationID", invoiceHistory.Organization_ID)
                 );
         }
+        public long InvoiceStatusChangeCreateDAL(InvoiceStatusModel invoiceHistory)
+        {
+            var date = DateTime.Now.ToString("yyyy-MM-dd") + " " + CommonUtility.PersonFlagsClearingTime();
+            var parameters = new[] { ParamBuilder.Par("ID", 0) };
+            return ExecuteInt64withOutPutparameterSp("INO_Create_Invoice_Status_Change", parameters,
+                ParamBuilder.Par("@InvoiceID", invoiceHistory.Invoice_ID),
+                ParamBuilder.Par("@Name", invoiceHistory.Status_Name),
+                ParamBuilder.Par("@type", invoiceHistory.Type),
+                ParamBuilder.Par("@description", invoiceHistory.Description),
+                ParamBuilder.Par("@UserBy", invoiceHistory.CreatedBy),
+                ParamBuilder.Par("@Date", invoiceHistory.CreatedDate),
+                ParamBuilder.Par("@OrganizationID", invoiceHistory.Organization_ID)
+                );
+        }
+        
         public DataTable GetInvoiceReportsDAL(long InoID, long companyID)
         {
             DataTable dt = new DataTable();
@@ -344,7 +359,15 @@ namespace TMS.DataObjects.TMS.Invoice
                 }
                 conn.Close();
             }
-            return _CustomerData.ToList();
+            foreach (var single in _CustomerData)
+            {
+                if (single.User_ID > 0)
+                {
+                    var x = ExecuteSinglewithSP<LoginUsers>(@"INO_Get_User", ParamBuilder.Par("UID", single.User_ID));
+                    single.users = x;
+                }
+            }
+                return _CustomerData.ToList();
         }
         public List<ReIssued> Read_InvoiceReIssuedByDAL(string invoiceId)
         {
@@ -428,6 +451,30 @@ namespace TMS.DataObjects.TMS.Invoice
                 {
                     var x = ExecuteSinglewithSP<LoginUsers>(@"INO_Get_User", ParamBuilder.Par("UID", single.Created_By));
                     single.Creator = x;
+                }
+            }
+            return _CustomerData.ToList();
+        }
+        public List<InvoiceStatusModel> Read_InvoiceStatusChangesDAL(string invoiceId)
+        {
+            List<InvoiceStatusModel> _CustomerData = new List<InvoiceStatusModel>();
+            using (var conn = new SqlConnection(DBHelper.ConnectionString))
+            {
+                conn.Open();
+                DynamicParameters dbParam = new DynamicParameters();
+                dbParam.AddDynamicParams(new { InoID = invoiceId });
+                using (var multi = conn.QueryMultiple("INO_Get_InvoiceStatusChanges", dbParam, commandType: System.Data.CommandType.StoredProcedure))
+                {
+                    _CustomerData = multi.Read<InvoiceStatusModel>().AsList<InvoiceStatusModel>();
+                }
+                conn.Close();
+            }
+            foreach (var single in _CustomerData)
+            {
+                if (single.CreatedBy > 0)
+                {
+                    var x = ExecuteSinglewithSP<LoginUsers>(@"INO_Get_User", ParamBuilder.Par("UID", single.CreatedBy));
+                    single.users = x;
                 }
             }
             return _CustomerData.ToList();

@@ -9,14 +9,17 @@
                                                               .Columns(columns =>
                                                               {
 
-                                                                  columns.Bound(e => e.Invoice_ID);
-                                                                  columns.Bound(e => e.Payment);
-                                                                  columns.Bound(e => e.Total_Payment);
-                                                                  columns.Bound(e => e.Balance);
-                                                                  columns.Bound(e => e.Created_By);
-                                                                  columns.Bound(e => e.Created_Date);
-                                                                  columns.Bound(e => e.Detail);
-                                                                  columns.Bound(p => p.Payment).Title(lr.GridIsPrimary).Width(80).MinScreenWidth(550);
+                                                                  columns.Bound(e => e.Invoice_ID).Title(lr.InvoiceNumber);
+                                                                  columns.Bound(e => e.Payment).Title(lr.Payment);
+                                                                  columns.Bound(e => e.Total_Payment).Title(lr.TotalPayment);
+                                                                  columns.Bound(e => e.Balance).Title(lr.Balance);
+                                                                  columns.Bound(e => e.Created_By).ClientTemplate(@"<div class='gridaddedby'>
+            <span class='Addedby' >#:users.P_DisplayName#</span>
+            <span class='date' >#=kendo.toString(Created_Date,'" + DateFormatScript + @"')#</span>
+            <span class='time' >#=kendo.toString(Created_Date,'" + TimeFormatScript + @"')#</span>
+        </div>").Title(lr.InvoiceCreate);
+                                                                  columns.Bound(e => e.Payment_Type_Value).Title(lr.InvoiceDepositType);
+                                                                  
 
                                                               }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_DepositTemplete").DisplayDeleteConfirmation(false))
                                                               .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate() </text>))

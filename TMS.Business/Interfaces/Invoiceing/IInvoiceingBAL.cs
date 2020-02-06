@@ -28,10 +28,13 @@ namespace TMS.Business.Interfaces.Invoiceing
         List<ReIssued> Read_InvoiceReIssuedByBAL(string invoiceId);
         List<DepositDetail> Read_InvoiceDepositBAL(string invoiceId);
         List<InvoiceChanges> Read_InvoiceChangesBAL(string invoiceId);
+        List<InvoiceStatusModel> Read_InvoiceStatusChangesBAL(string invoiceId);
         object InvoiceBalanceCheckBAL(DepositDetail depositDetail);
         object InvoiceGrossTotalCheckBAL(DepositDetail depositDetail);
         long InvoicePaymentDepositeCreateBAL(DepositDetail depositDetail);
         long create_InvoiceReIssueBAL(ReIssued invoiceReIssue);
         long create_InvoiceHistoryBAL(InvoiceHistory invoiceHistory);
+        long InvoiceStatusChangeCreateBAL(InvoiceStatusModel invoiceStatus);
+
     }
 }

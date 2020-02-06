@@ -23,19 +23,19 @@
                     @lr.CustomerTo
                 </label>
                 @(Html.Kendo().DropDownList()
-                                                                                                                    .Name("PersonsForInvoice")
-                                                                                                                    .DataTextField("Text")
-                                                                                                                    .DataValueField("Value")
-                                                                                                                    .OptionLabel(lr.CustomerSelect)
-                                                                                                                    .Filter("contains")
-                                                                                                                    .DataSource(source =>
-                                                                                                                    {
-                                                                                                                        source.Read(read =>
-                                                                                                                        {
-                                                                                                                            read.Action("PersonsForInvoice", "DDL");
-                                                                                                                        }).ServerFiltering(false);
-                                                                                                                    })
-                                                                                     .HtmlAttributes(new { style = "width: 100%" })
+                                                                                                                            .Name("PersonsForInvoice")
+                                                                                                                            .DataTextField("Text")
+                                                                                                                            .DataValueField("Value")
+                                                                                                                            .OptionLabel(lr.CustomerSelect)
+                                                                                                                            .Filter("contains")
+                                                                                                                            .DataSource(source =>
+                                                                                                                            {
+                                                                                                                                source.Read(read =>
+                                                                                                                                {
+                                                                                                                                    read.Action("PersonsForInvoice", "DDL");
+                                                                                                                                }).ServerFiltering(false);
+                                                                                                                            })
+                                                                                             .HtmlAttributes(new { style = "width: 100%" })
                 )
             </div>
             <div class="col col-md-3">
@@ -43,11 +43,13 @@
                     @lr.DueDate
                 </label>
                 @(Html.Kendo().DatePicker()
-                                                                                                   .Name("Due_Date")
-                                                                                                   .Value(DateTime.Now.Date)
-                                                                                                   .Format("{0:MM/dd/yyyy}")
-                                                                                                   .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker", required = true })
-                                                                                                   .DateInput()
+                                                                                                           .Name("Due_Date")
+                                                                                                           .Value(DateTime.Now.Date)
+                                                                                                           .Format("{0:MM/dd/yyyy}")
+                                                                                                           .Min(DateTime.Now.AddDays(0))
+                                                                                                           .Events(e => e.Change("onDOBChange"))
+                                                                                                           .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker", required = true })
+                                                                                                           .DateInput()
                 )
             </div>
             <div class="col col-md-3">
@@ -55,9 +57,9 @@
                     @lr.InvoiceNumber
                 </label>
                 @(Html.Kendo().TextBox()
-                                                                                                         .Name("Invoice_Number")
-                                                                                                         .Value("")
-                                                                                                         .HtmlAttributes(new { style = "width: 100%;border:1px solid;", title = "datetimepicker" })
+                                                                                                                 .Name("Invoice_Number")
+                                                                                                                 .Value("")
+                                                                                                                 .HtmlAttributes(new { style = "width: 100%;border:1px solid;", title = "datetimepicker" })
 
                 )
             </div>
@@ -66,9 +68,9 @@
                     @lr.InvoiceRefNumber
                 </label>
                 @(Html.Kendo().TextBox()
-                                                                                                                 .Name("Referance_Number")
-                                                                                                                 .Value("")
-                                                                                                                 .HtmlAttributes(new { style = "width: 100%;border:1px solid;", title = "datetimepicker" })
+                                                                                                                         .Name("Referance_Number")
+                                                                                                                         .Value("")
+                                                                                                                         .HtmlAttributes(new { style = "width: 100%;border:1px solid;", title = "datetimepicker" })
 
                 )
             </div>
@@ -79,22 +81,22 @@
         <div class="col col-md-12">
             <div class="col col-md-3">
                 <label>
-                   @lr.CourseFeeCurrency
+                    @lr.CourseFeeCurrency
                 </label>
                 @(Html.Kendo().DropDownList()
-                                                                                                                                  .Name("Currency")
-                                                                                                                                  .DataTextField("Text")
-                                                                                                                                  .DataValueField("Value")
-                                                                                                                                  .OptionLabel(lr.CurrencyOptionalLabel)
-                                                                                                                                  .Filter("contains")
-                                                                                                                                  .DataSource(source =>
-                                                                                                                                  {
-                                                                                                                                      source.Read(read =>
-                                                                                                                                      {
-                                                                                                                                          read.Action("Currencies", "DDL");
-                                                                                                                                      }).ServerFiltering(false);
-                                                                                                                                  })
-                                                                                                   .HtmlAttributes(new { style = "width: 100%" })
+                                                                                                                                          .Name("Currency")
+                                                                                                                                          .DataTextField("Text")
+                                                                                                                                          .DataValueField("Value")
+                                                                                                                                          .OptionLabel(lr.CurrencyOptionalLabel)
+                                                                                                                                          .Filter("contains")
+                                                                                                                                          .DataSource(source =>
+                                                                                                                                          {
+                                                                                                                                              source.Read(read =>
+                                                                                                                                              {
+                                                                                                                                                  read.Action("Currencies", "DDL");
+                                                                                                                                              }).ServerFiltering(false);
+                                                                                                                                          })
+                                                                                                           .HtmlAttributes(new { style = "width: 100%" })
                 )
             </div>
             <div class="col col-md-3">
@@ -102,39 +104,39 @@
                     @lr.InvoiceTaxType
                 </label>
                 @(Html.Kendo().DropDownList()
-                                                                                                                                                  .Name("TaxType")
-                                                                                                                                                  .DataTextField("Text")
-                                                                                                                                                  .DataValueField("Value")
-                                                                                                                                                  .OptionLabel(lr.SelectTaxType)
-                                                                                                                                                  .Filter("contains")
+                                                                                                                                                          .Name("TaxType")
+                                                                                                                                                          .DataTextField("Text")
+                                                                                                                                                          .DataValueField("Value")
+                                                                                                                                                          .OptionLabel(lr.SelectTaxType)
+                                                                                                                                                          .Filter("contains")
 
-                                                                                                                   .HtmlAttributes(new { style = "width: 100%" })
-                                                                                                                   .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.TaxType>(typeof(TMS.Library.TaxType))))
+                                                                                                                           .HtmlAttributes(new { style = "width: 100%" })
+                                                                                                                           .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.TaxType>(typeof(TMS.Library.TaxType))))
             </div>
             <div class="col col-md-3 TaxPercentage" style="display:none">
                 <label>
-                   @lr.taxPercentage
+                    @lr.taxPercentage
                 </label>
                 @(Html.Kendo().NumericTextBox<decimal>
-                                                                                                                                                ()
-                                                                                                                                                .Name("TaxPercentage")
-                                                                                                                                                .Min(0)
-                                                                                                                                                .Max(100)
-                                                                                                                                                .Value(1)
-                                                                                                                                                .HtmlAttributes(new { visibility = false, style = "width: 100%", title = "currency" })
+                                                                                                                                                        ()
+                                                                                                                                                        .Name("TaxPercentage")
+                                                                                                                                                        .Min(0)
+                                                                                                                                                        .Max(100)
+                                                                                                                                                        .Value(1)
+                                                                                                                                                        .HtmlAttributes(new { visibility = false, style = "width: 100%", title = "currency" })
                 )
             </div>
             <div class="col col-md-3">
                 <label>
-                   @lr.DiscountCustomer
+                    @lr.DiscountCustomer
                 </label>
                 @(Html.Kendo().NumericTextBox<decimal>
-                                                                                                                                                ()
-                                                                                                                                                .Name("DiscountPercentage")
-                                                                                                                                                .Min(0)
-                                                                                                                                                .Max(100)
-                                                                                                                                                .Value(1)
-                                                                                                                                                .HtmlAttributes(new { style = "width: 100%", title = "currency" })
+                                                                                                                                                        ()
+                                                                                                                                                        .Name("DiscountPercentage")
+                                                                                                                                                        .Min(0)
+                                                                                                                                                        .Max(100)
+                                                                                                                                                        .Value(1)
+                                                                                                                                                        .HtmlAttributes(new { style = "width: 100%", title = "currency" })
                 )
             </div>
         </div>
@@ -148,21 +150,21 @@
                     <tr>
                         <td>
 
-                           @lr.item
+                            @lr.item
 
                         </td>
                         <td>
-                           @lr.Description
+                            @lr.Description
                         </td>
                         <td>
-                           @lr.quantity
+                            @lr.quantity
                         </td>
                         <td>
-                           @lr.Price
+                            @lr.Price
                         </td>
 
                         <td>
-                           @lr.SubTotal
+                            @lr.SubTotal
                         </td>
                     </tr>
                 </thead>
@@ -170,50 +172,50 @@
                     <tr id="0">
                         <td>
                             @(Html.Kendo().TextBox()
-                                                                                                                            .Name("item0")
-                                                                                                                            .Value("")
-                                                                                                                            .HtmlAttributes(new { style = "width: 100%", title = "Item", required = "true" })
+                                                                                                                                    .Name("item0")
+                                                                                                                                    .Value("")
+                                                                                                                                    .HtmlAttributes(new { style = "width: 100%", title = "Item", required = "true" })
 
                             )
                         </td>
                         <td>
                             @(Html.Kendo().TextBox()
-                                                                                                                            .Name("Description0")
-                                                                                                                            .Value("")
-                                                                                                                            .HtmlAttributes(new { style = "width: 100%", title = "Description", required = "true" })
+                                                                                                                                    .Name("Description0")
+                                                                                                                                    .Value("")
+                                                                                                                                    .HtmlAttributes(new { style = "width: 100%", title = "Description", required = "true" })
 
                             )
                         </td>
                         <td>
                             @(Html.Kendo().NumericTextBox<int>
-                                                                                                                                ()
-                                                                                                                                .Name("Qty0")
-                                                                                                                                .Min(1)
+                                                                                                                                        ()
+                                                                                                                                        .Name("Qty0")
+                                                                                                                                        .Min(1)
 
-                                                                                                                                .Value(1)
-                                                                                                                                .HtmlAttributes(new { style = "width: 100%", @class = "currency", title = "Quantity", required = "true" })
+                                                                                                                                        .Value(1)
+                                                                                                                                        .HtmlAttributes(new { style = "width: 100%", @class = "currency", title = "Quantity", required = "true" })
                             )
                         </td>
                         <td>
                             @(Html.Kendo().NumericTextBox<decimal>
-                                                                                                                                ()
-                                                                                                                                .Name("currency0")
-                                                                                                                                .Min(1)
-                                                                                                                                .Value(1)
-                                                                                                                                .Format("00.000")
-                                                                                                                                .Decimals(3)
-                                                                                                                                .Events(e => e
-                                                                                                                                      .Change("change")
-                                                                                                                                      .Spin("spin")
-                                                                                                                                  )
-                                                                                                                                .HtmlAttributes(new { style = "width: 100%", @class = "currency", title = "currency", required = "true" })
+                                                                                                                                        ()
+                                                                                                                                        .Name("currency0")
+                                                                                                                                        .Min(1)
+                                                                                                                                        .Value(1)
+                                                                                                                                        .Format("00.000")
+                                                                                                                                        .Decimals(3)
+                                                                                                                                        .Events(e => e
+                                                                                                                                              .Change("change")
+                                                                                                                                              .Spin("spin")
+                                                                                                                                          )
+                                                                                                                                        .HtmlAttributes(new { style = "width: 100%", @class = "currency", title = "currency", required = "true" })
                             )
                         </td>
                         <td>
                             @(Html.Kendo().TextBox()
-                                                                                                                            .Name("Total0")
-                                                                                                                            .Value("")
-                                                                                                                            .HtmlAttributes(new { style = "width:70%;", title = "Total", disabled = true, required = "true" })
+                                                                                                                                    .Name("Total0")
+                                                                                                                                    .Value("")
+                                                                                                                                    .HtmlAttributes(new { style = "width:70%;", title = "Total", disabled = true, required = "true" })
                             )
                             <label style="float:right;">
                                 <button type="button" class="RemoveRow" value="X"><span class="glyphicon glyphicon-trash"></span></button>
@@ -223,46 +225,46 @@
                     <tr id="1">
                         <td>
                             @(Html.Kendo().TextBox()
-                                                                                                                            .Name("item1")
-                                                                                                                            .Value("")
-                                                                                                                            .HtmlAttributes(new { style = "width: 100%", title = "Item", required = "true" })
+                                                                                                                                    .Name("item1")
+                                                                                                                                    .Value("")
+                                                                                                                                    .HtmlAttributes(new { style = "width: 100%", title = "Item", required = "true" })
 
                             )
                         </td>
                         <td>
                             @(Html.Kendo().TextBox()
-                                                                                                                            .Name("Description1")
-                                                                                                                            .Value("")
-                                                                                                                            .HtmlAttributes(new { style = "width: 100%", title = "Description", required = "true" })
+                                                                                                                                    .Name("Description1")
+                                                                                                                                    .Value("")
+                                                                                                                                    .HtmlAttributes(new { style = "width: 100%", title = "Description", required = "true" })
 
                             )
                         </td>
                         <td>
                             @(Html.Kendo().NumericTextBox<int>
-                                                                                                                                ()
-                                                                                                                                .Name("Qty1")
-                                                                                                                                .Min(1)
-                                                                                                                                .Decimals(0)
-                                                                                                                                .Value(1)
-                                                                                                                                .HtmlAttributes(new { style = "width: 100%", title = "Quantity", required = "true" })
+                                                                                                                                        ()
+                                                                                                                                        .Name("Qty1")
+                                                                                                                                        .Min(1)
+                                                                                                                                        .Decimals(0)
+                                                                                                                                        .Value(1)
+                                                                                                                                        .HtmlAttributes(new { style = "width: 100%", title = "Quantity", required = "true" })
                             )
                         </td>
                         <td>
                             @(Html.Kendo().NumericTextBox<decimal>
-                                                                                                                                ()
-                                                                                                                                .Name("currency1")
-                                                                                                                                .Min(1)
-                                                                                                                                .Value(1)
-                                                                                                                                .Format("00.000")
-                                                                                                                                .Decimals(3)
-                                                                                                                                .HtmlAttributes(new { style = "width: 100%", title = "currency", required = "true" })
+                                                                                                                                        ()
+                                                                                                                                        .Name("currency1")
+                                                                                                                                        .Min(1)
+                                                                                                                                        .Value(1)
+                                                                                                                                        .Format("00.000")
+                                                                                                                                        .Decimals(3)
+                                                                                                                                        .HtmlAttributes(new { style = "width: 100%", title = "currency", required = "true" })
                             )
                         </td>
                         <td>
                             @(Html.Kendo().TextBox()
-                                                                                                                            .Name("Total1")
-                                                                                                                            .Value("")
-                                                                                                                            .HtmlAttributes(new { style = "width:70%;", title = "Total", disabled = true, required = true })
+                                                                                                                                    .Name("Total1")
+                                                                                                                                    .Value("")
+                                                                                                                                    .HtmlAttributes(new { style = "width:70%;", title = "Total", disabled = true, required = true })
                             )
                             <label style="float:right;">
                                 <button type="button" class="RemoveRow" value="X"><span class="glyphicon glyphicon-trash"></span></button>
@@ -273,46 +275,46 @@
                     <tr id="2">
                         <td>
                             @(Html.Kendo().TextBox()
-                                                                                                                            .Name("item2")
-                                                                                                                            .Value("")
-                                                                                                                            .HtmlAttributes(new { style = "width: 100%", title = "Item", required = "true" })
+                                                                                                                                    .Name("item2")
+                                                                                                                                    .Value("")
+                                                                                                                                    .HtmlAttributes(new { style = "width: 100%", title = "Item", required = "true" })
 
                             )
                         </td>
                         <td>
                             @(Html.Kendo().TextBox()
-                                                                                                                            .Name("Description2")
-                                                                                                                            .Value("")
-                                                                                                                            .HtmlAttributes(new { style = "width: 100%", title = "Description", required = "true" })
+                                                                                                                                    .Name("Description2")
+                                                                                                                                    .Value("")
+                                                                                                                                    .HtmlAttributes(new { style = "width: 100%", title = "Description", required = "true" })
 
                             )
                         </td>
                         <td>
                             @(Html.Kendo().NumericTextBox<int>
-                                                                                                                                ()
-                                                                                                                                .Name("Qty2")
-                                                                                                                                .Min(1)
-                                                                                                                                .Decimals(0)
-                                                                                                                                .Value(1)
-                                                                                                                                .HtmlAttributes(new { style = "width: 100%", title = "Quantity", required = "true" })
+                                                                                                                                        ()
+                                                                                                                                        .Name("Qty2")
+                                                                                                                                        .Min(1)
+                                                                                                                                        .Decimals(0)
+                                                                                                                                        .Value(1)
+                                                                                                                                        .HtmlAttributes(new { style = "width: 100%", title = "Quantity", required = "true" })
                             )
                         </td>
                         <td>
                             @(Html.Kendo().NumericTextBox<decimal>
-                                                                                                                                ()
-                                                                                                                                .Name("currency2")
-                                                                                                                                .Min(1)
-                                                                                                                                .Value(1)
-                                                                                                                                .Format("00.000")
-                                                                                                                                .Decimals(3)
-                                                                                                                                .HtmlAttributes(new { style = "width: 100%", title = "currency", required = "true" })
+                                                                                                                                        ()
+                                                                                                                                        .Name("currency2")
+                                                                                                                                        .Min(1)
+                                                                                                                                        .Value(1)
+                                                                                                                                        .Format("00.000")
+                                                                                                                                        .Decimals(3)
+                                                                                                                                        .HtmlAttributes(new { style = "width: 100%", title = "currency", required = "true" })
                             )
                         </td>
                         <td>
                             @(Html.Kendo().TextBox()
-                                                                                                                            .Name("Total2")
-                                                                                                                            .Value("")
-                                                                                                                            .HtmlAttributes(new { style = "width:70%;", title = "Total", required = true, disabled = true })
+                                                                                                                                    .Name("Total2")
+                                                                                                                                    .Value("")
+                                                                                                                                    .HtmlAttributes(new { style = "width:70%;", title = "Total", required = true, disabled = true })
                             )
                             <label style="float:right;">
                                 <button type="button" class="RemoveRow" value="X"><span class="glyphicon glyphicon-trash"></span></button>
@@ -457,7 +459,7 @@
                     x = x + Number(a)
                 }
             }
-           
+
             jQuery('#subTotal:text').val(getFlooredFixed(x, 3));
             var numerictextboxTax = jQuery('#TaxType').data("kendoDropDownList");
             var qTax = numerictextboxTax.value();
@@ -502,7 +504,7 @@
             }
             jQuery('#Discount:text').val(getFlooredFixed(dV, 3))
             var gTotal = Number(total) - Number(dV);
-            
+
             jQuery('#invoiceTotal:text').val(getFlooredFixed(gTotal, 3))
         })
         jQuery('.addRow').click(function () {
@@ -522,7 +524,7 @@
         jQuery(document).on('change', '#TaxType', function () {
             var numerictextboxTax = jQuery('#TaxType').data("kendoDropDownList");
             var qTax = numerictextboxTax.value();
-            var x = jQuery('#subTotal:text').val();          
+            var x = jQuery('#subTotal:text').val();
             if (isNaN(Number(x))) {
 
             } else {
@@ -546,7 +548,7 @@
                         jQuery('#TAXTax:text').val(000);
                     } else {
                         var taxvalue = (x / (100 + Number(qTaxP))) * Number(qTaxP)
-                       
+
                         jQuery('#TAXTax:text').val(getFlooredFixed(taxvalue, 3));
                         jQuery('#taxlabel').text('Tax (inclusive of ' + qTaxP + ' % )');
                         // var ac = Number(taxvalue) + Number(x);
@@ -682,7 +684,7 @@
                 var xx = 'currency' + jQuery(this).closest('tr').attr('id') + '';
                 var p = f(xx);
                 var CT = q * p;
-                
+
                 jQuery('#Total' + jQuery(this).closest('tr').attr('id') + ':text').val(getFlooredFixed(CT, 3));
                 var le = jQuery('#InvoiceTable tbody tr:last').attr('id');
                 var l = Number(le) + 1;
@@ -719,7 +721,7 @@
                         jQuery('#TAXTax:text').val(000);
                     } else {
                         var taxvalue = (x / (100 + Number(qTaxP))) * Number(qTaxP)
-                       
+
                         jQuery('#TAXTax:text').val(getFlooredFixed(taxvalue, 3));
                         jQuery('#taxlabel').text('Tax (inclusive of ' + qTaxP + ' % )');
                         jQuery('#totalAfterTax:text').val(getFlooredFixed(x, 3));
@@ -832,4 +834,20 @@
         });
     });
 
+</script>
+<script>
+    function onDOBChange(e) {
+        var dt = e.sender;
+        var value = dt.value();
+
+        if (value === null) {
+            value = kendo.parseDate(dt.element.val(), dt.options.parseFormats);
+        }
+
+        if (value < dt.min()) {
+            dt.value(dt.min());
+        } else if (value > dt.max()) {
+            dt.value(dt.max());
+        }
+    }
 </script>
