@@ -52,6 +52,16 @@ namespace TMS.DataObjects.Common.Groups
         /// <param name="Culture">The culture.</param>
         /// <param name="GroupId">The group identifier.</param>
         /// <returns>SecurityGroups.</returns>
+        public SecurityGroups INO_Groups_GetbyGroupIdDAL(string Culture, long GroupId)
+        {
+            return ExecuteSinglewithSP<SecurityGroups>("TMS_Groups_GetbyId", ParamBuilder.Par("Culture", Culture), ParamBuilder.Par("GroupId", GroupId));
+        }
+        /// <summary>
+        /// TMSs the groups getby group identifier dal.
+        /// </summary>
+        /// <param name="Culture">The culture.</param>
+        /// <param name="GroupId">The group identifier.</param>
+        /// <returns>SecurityGroups.</returns>
         public SecurityGroups TMS_Groups_GetbyGroupIdDALbyOrg(string Culture, long GroupId,string Oid)
         {
             return ExecuteSinglewithSP<SecurityGroups>("TMS_Groups_GetbyIdOrg", ParamBuilder.Par("Culture", Culture), ParamBuilder.Par("GroupId", GroupId), ParamBuilder.Par("Oid",Oid));
@@ -263,6 +273,16 @@ namespace TMS.DataObjects.Common.Groups
         public IList<SecurityGroupsPermission> SecurityGroupsPermissions_GetAllByGroupId(string Culture, long GroupId, long userid, string companyID)
         {
             return ExecuteListSp<SecurityGroupsPermission>("TMS_GroupPermission_GetAllByGroupId", ParamBuilder.Par("counter", 0), ParamBuilder.Par("Culture", Culture), ParamBuilder.Par("GroupId", GroupId), ParamBuilder.Par("OrganizationID", companyID), ParamBuilder.Par("userID", userid));
+        }
+        /// <summary>
+        /// Securities the groups permission get all by group identifier.
+        /// </summary>
+        /// <param name="Culture">The culture.</param>
+        /// <param name="GroupId">The group identifier.</param>
+        /// <returns>IList&lt;SecurityGroupsPermission&gt;.</returns>
+        public IList<SecurityGroupsPermission> INO_SecurityGroupsPermissions_GetAllByGroupId(string Culture, long GroupId, long userid, string companyID)
+        {
+            return ExecuteListSp<SecurityGroupsPermission>("INO_GroupPermission_GetAllByGroupId", ParamBuilder.Par("counter", 0), ParamBuilder.Par("Culture", Culture), ParamBuilder.Par("GroupId", GroupId), ParamBuilder.Par("OrganizationID", companyID), ParamBuilder.Par("userID", userid));
         }
         /// <summary>
         /// Securities the groups permission get all by group identifier.

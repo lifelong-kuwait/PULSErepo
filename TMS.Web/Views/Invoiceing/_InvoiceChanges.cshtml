@@ -1,14 +1,14 @@
 ﻿
 @model string
 @using lr = Resources.Resources;
-@if (User.IsInRole("CanViewPersonEmail"))
+@if (User.IsInRole("CanViewChangeHistoryInvoice"))
 {
     <div class="ChildGrid">
         @(Html.Kendo().Grid<TMS.Library.Entities.Invoice.InvoiceChanges>()
                                                                     .Name("ChangesGrid")
                                                                       .Columns(columns =>
                                                                       {
-                                                                          columns.Bound(e => e.Old_Sub_total).Title(lr.OldSubTotal);
+                                                                          columns.Bound(e => e.Old_Sub_total);
                                                                           columns.Bound(e => e.Old_Tax_Value).Title(lr.OldTaxValue);
                                                                           columns.Bound(e => e.Old_Discount_Vlaue).Title(lr.OldDiscountValue);
                                                                           columns.Bound(e => e.Old_Net_Value).Title(lr.OldNetValue);
@@ -36,13 +36,6 @@
 
     @helper RenderAddTemplate()
     {
-        @*/**/
-        <div class="toolbar">
-            <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
-            <a class="k-button tms-grid-edit download"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
-
-        </div>*@
-        /**/
 
     }
    

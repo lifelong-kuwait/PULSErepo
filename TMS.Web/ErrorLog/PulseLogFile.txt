@@ -1746,3 +1746,335 @@ INFO  2020-02-06 16:03:47,958 100386ms DESKTOP-LSN82VI        Login             
 INFO  2020-02-06 16:03:48,524 100953ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/6/2020 1:03:48 PM
 INFO  2020-02-06 16:04:53,193 165621ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/6/2020 1:04:53 PM
 INFO  2020-02-06 16:04:53,556 165984ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/6/2020 1:04:53 PM
+INFO  2020-02-07 08:22:28,884 40286ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 5:22:28 AM
+INFO  2020-02-07 08:22:29,358 40760ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 5:22:29 AM
+INFO  2020-02-07 08:22:42,226 53629ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 5:22:42 AM
+INFO  2020-02-07 08:22:42,726 54128ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 5:22:42 AM
+INFO  2020-02-07 08:48:31,980 32855ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 5:48:31 AM
+INFO  2020-02-07 08:48:32,375 33249ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 5:48:32 AM
+INFO  2020-02-07 08:48:42,092 42967ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 5:48:42 AM
+INFO  2020-02-07 08:48:42,670 43545ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 5:48:42 AM
+INFO  2020-02-07 09:18:14,056 128648ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 6:18:14 AM
+INFO  2020-02-07 09:18:14,464 129056ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 6:18:14 AM
+INFO  2020-02-07 09:18:26,128 140720ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 6:18:26 AM
+INFO  2020-02-07 09:18:26,601 141193ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 6:18:26 AM
+INFO  2020-02-07 09:37:17,290 82638ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 6:37:17 AM
+INFO  2020-02-07 09:37:17,689 83037ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 6:37:17 AM
+INFO  2020-02-07 09:37:27,493 92841ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 6:37:27 AM
+INFO  2020-02-07 09:37:28,048 93395ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 6:37:28 AM
+INFO  2020-02-07 10:04:34,094 25245ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 7:04:34 AM
+INFO  2020-02-07 10:04:34,487 25638ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 7:04:34 AM
+INFO  2020-02-07 10:05:03,340 54491ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 7:05:03 AM
+INFO  2020-02-07 10:05:04,058 55209ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 7:05:04 AM
+INFO  2020-02-07 10:44:26,270 121138ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 7:44:26 AM
+INFO  2020-02-07 10:44:26,665 121533ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 7:44:26 AM
+INFO  2020-02-07 10:44:36,439 131307ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 7:44:36 AM
+INFO  2020-02-07 10:44:37,025 131893ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 7:44:37 AM
+INFO  2020-02-07 12:02:25,953 174572ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 9:02:25 AM
+INFO  2020-02-07 12:02:26,334 174953ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 9:02:26 AM
+INFO  2020-02-07 12:02:36,140 184759ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 9:02:36 AM
+INFO  2020-02-07 12:02:36,969 185588ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 9:02:36 AM
+INFO  2020-02-07 14:12:36,963 25056ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 11:12:36 AM
+INFO  2020-02-07 14:12:37,371 25465ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 11:12:37 AM
+INFO  2020-02-07 14:12:49,931 38024ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 11:12:49 AM
+INFO  2020-02-07 14:12:50,482 38576ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 11:12:50 AM
+ERROR 2020-02-07 14:14:15,974 124068ms DESKTOP-LSN82VI        OnException        - Exception has been thrown by the target of an invocation.
+ERROR 2020-02-07 14:15:28,224 196318ms DESKTOP-LSN82VI        OnException        - Exception has been thrown by the target of an invocation.
+ERROR 2020-02-07 14:17:46,755 334849ms DESKTOP-LSN82VI        OnException        - Cannot retrieve property 'Name' because localization failed.  Type 'Resources.Resources' is not public or does not contain a public static string property with the name 'invoiceLastActivity'.
+INFO  2020-02-07 14:21:08,159 73674ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 11:21:08 AM
+INFO  2020-02-07 14:21:08,539 74055ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 11:21:08 AM
+INFO  2020-02-07 14:21:18,247 83763ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 11:21:18 AM
+INFO  2020-02-07 14:21:18,879 84394ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 11:21:18 AM
+INFO  2020-02-07 14:26:53,489 187573ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@Llk.com at 2/7/2020 11:26:53 AM
+INFO  2020-02-07 14:26:53,874 187958ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@Llk.com at 2/7/2020 11:26:53 AM
+INFO  2020-02-07 14:27:03,787 197871ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@Llk.com at 2/7/2020 11:27:03 AM
+INFO  2020-02-07 14:27:04,321 198404ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@Llk.com at 2/7/2020 11:27:04 AM
+ERROR 2020-02-07 14:28:46,436 300520ms DESKTOP-LSN82VI        OnException        - Cannot retrieve property 'Name' because localization failed.  Type 'Resources.Resources' is not public or does not contain a public static string property with the name 'invoiceLastActivity'.
+INFO  2020-02-07 14:29:06,518 15363ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@Llk.com at 2/7/2020 11:29:06 AM
+INFO  2020-02-07 14:29:06,906 15751ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@Llk.com at 2/7/2020 11:29:06 AM
+INFO  2020-02-07 14:29:09,561 18406ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@Llk.com at 2/7/2020 11:29:09 AM
+INFO  2020-02-07 14:29:09,954 18799ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@Llk.com at 2/7/2020 11:29:09 AM
+ERROR 2020-02-07 14:30:31,919 100764ms DESKTOP-LSN82VI        OnException        - Cannot retrieve property 'Name' because localization failed.  Type 'Resources.Resources' is not public or does not contain a public static string property with the name 'invoiceLastActivity'.
+ERROR 2020-02-07 14:31:00,077 128922ms DESKTOP-LSN82VI        OnException        - Cannot retrieve property 'Name' because localization failed.  Type 'Resources.Resources' is not public or does not contain a public static string property with the name 'invoiceLastActivity'.
+INFO  2020-02-07 14:42:49,827 29505ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 11:42:49 AM
+INFO  2020-02-07 14:42:50,248 29926ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 11:42:50 AM
+ERROR 2020-02-07 14:43:32,381 72059ms DESKTOP-LSN82VI        OnException        - Cannot retrieve property 'Name' because localization failed.  Type 'Resources.Resources' is not public or does not contain a public static string property with the name 'invoiceLastActivity'.
+INFO  2020-02-07 14:53:06,657 185529ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 11:53:06 AM
+INFO  2020-02-07 14:53:07,033 185906ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 11:53:07 AM
+INFO  2020-02-07 14:53:16,786 195658ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 11:53:16 AM
+INFO  2020-02-07 14:53:17,305 196177ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 11:53:17 AM
+INFO  2020-02-07 14:55:23,069 23763ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 11:55:23 AM
+INFO  2020-02-07 14:55:23,459 24153ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 11:55:23 AM
+INFO  2020-02-07 14:55:33,102 33796ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 11:55:33 AM
+INFO  2020-02-07 14:55:33,769 34464ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 11:55:33 AM
+ERROR 2020-02-07 14:56:35,679 96373ms DESKTOP-LSN82VI        OnException        - Cannot retrieve property 'Name' because localization failed.  Type 'Resources.Resources' is not public or does not contain a public static string property with the name 'Item'.
+INFO  2020-02-07 14:58:12,241 26161ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 11:58:12 AM
+INFO  2020-02-07 14:58:12,637 26557ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 11:58:12 AM
+INFO  2020-02-07 15:02:42,134 36074ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 12:02:42 PM
+INFO  2020-02-07 15:02:42,515 36455ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 12:02:42 PM
+INFO  2020-02-07 15:02:52,585 46525ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 12:02:52 PM
+INFO  2020-02-07 15:02:53,199 47138ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 12:02:53 PM
+ERROR 2020-02-07 15:04:33,858 147798ms DESKTOP-LSN82VI        OnException        - Cannot retrieve property 'Name' because localization failed.  Type 'Resources.Resources' is not public or does not contain a public static string property with the name 'OldSubtotal'.
+INFO  2020-02-07 15:04:52,507 11452ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 12:04:52 PM
+INFO  2020-02-07 15:04:52,894 11839ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 12:04:52 PM
+INFO  2020-02-07 15:04:58,900 17845ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 12:04:58 PM
+INFO  2020-02-07 15:04:59,263 18208ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 12:04:59 PM
+INFO  2020-02-07 15:08:18,545 28678ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 12:08:18 PM
+INFO  2020-02-07 15:08:18,959 29093ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 12:08:18 PM
+INFO  2020-02-07 15:08:29,197 39331ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 12:08:29 PM
+INFO  2020-02-07 15:08:29,969 40102ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 12:08:29 PM
+INFO  2020-02-07 15:59:13,095 25136ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@Llk.com at 2/7/2020 12:59:13 PM
+INFO  2020-02-07 15:59:13,478 25519ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@Llk.com at 2/7/2020 12:59:13 PM
+INFO  2020-02-07 15:59:23,707 35748ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@Llk.com at 2/7/2020 12:59:23 PM
+INFO  2020-02-07 15:59:24,392 36433ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@Llk.com at 2/7/2020 12:59:24 PM
+ERROR 2020-02-07 16:01:20,715 152756ms DESKTOP-LSN82VI        OnException        - An item with the same key has already been added.
+ERROR 2020-02-07 16:02:39,857 231898ms DESKTOP-LSN82VI        OnException        - Method arguments are not valid! See ValidationErrors for details.
+ERROR 2020-02-07 16:02:51,799 243840ms DESKTOP-LSN82VI        OnException        - An item with the same key has already been added.
+INFO  2020-02-07 16:08:16,870 50117ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 1:08:16 PM
+INFO  2020-02-07 16:08:17,271 50517ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 1:08:17 PM
+INFO  2020-02-07 16:08:27,039 60286ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 1:08:27 PM
+INFO  2020-02-07 16:08:27,671 60917ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 1:08:27 PM
+ERROR 2020-02-07 16:11:18,719 231966ms DESKTOP-LSN82VI        OnException        - An item with the same key has already been added.
+INFO  2020-02-07 16:16:30,882 83890ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 1:16:30 PM
+INFO  2020-02-07 16:16:31,263 84271ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 1:16:31 PM
+INFO  2020-02-07 16:16:41,094 94102ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 1:16:41 PM
+INFO  2020-02-07 16:16:41,803 94811ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 1:16:41 PM
+ERROR 2020-02-07 16:18:00,999 174007ms DESKTOP-LSN82VI        OnException        - An item with the same key has already been added.
+INFO  2020-02-07 16:23:56,522 166097ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 1:23:56 PM
+INFO  2020-02-07 16:23:56,903 166478ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 1:23:56 PM
+INFO  2020-02-07 16:24:10,085 179659ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 1:24:10 PM
+INFO  2020-02-07 16:24:10,733 180308ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 1:24:10 PM
+ERROR 2020-02-07 16:25:34,098 263673ms DESKTOP-LSN82VI        OnException        - An item with the same key has already been added.
+INFO  2020-02-07 16:38:17,965 233811ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 1:38:17 PM
+INFO  2020-02-07 16:38:18,356 234202ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 1:38:18 PM
+INFO  2020-02-07 16:38:28,399 244246ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 1:38:28 PM
+INFO  2020-02-07 16:38:28,775 244622ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 1:38:28 PM
+ERROR 2020-02-07 16:39:51,656 327502ms DESKTOP-LSN82VI        OnException        - An item with the same key has already been added.
+INFO  2020-02-07 16:41:34,541 34772ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 1:41:34 PM
+INFO  2020-02-07 16:41:34,940 35170ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 1:41:34 PM
+INFO  2020-02-07 16:41:44,654 44885ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 1:41:44 PM
+INFO  2020-02-07 16:41:45,292 45523ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 1:41:45 PM
+ERROR 2020-02-07 16:43:02,419 122650ms DESKTOP-LSN82VI        OnException        - An item with the same key has already been added.
+INFO  2020-02-07 16:48:07,389 28704ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@Llk.com at 2/7/2020 1:48:07 PM
+INFO  2020-02-07 16:48:07,780 29095ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@Llk.com at 2/7/2020 1:48:07 PM
+INFO  2020-02-07 16:48:17,948 39263ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@Llk.com at 2/7/2020 1:48:17 PM
+INFO  2020-02-07 16:48:18,573 39888ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@Llk.com at 2/7/2020 1:48:18 PM
+ERROR 2020-02-07 16:49:16,365 97680ms DESKTOP-LSN82VI        OnException        - An item with the same key has already been added.
+INFO  2020-02-07 16:52:58,818 24022ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 1:52:58 PM
+INFO  2020-02-07 16:52:59,217 24421ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 1:52:59 PM
+INFO  2020-02-07 16:53:09,011 34216ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/7/2020 1:53:09 PM
+INFO  2020-02-07 16:53:09,608 34812ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/7/2020 1:53:09 PM
+ERROR 2020-02-07 16:53:47,191 72395ms DESKTOP-LSN82VI        OnException        - An item with the same key has already been added.
+ERROR 2020-02-07 16:54:07,550 92754ms DESKTOP-LSN82VI        OnException        - An item with the same key has already been added.
+ERROR 2020-02-07 16:55:04,948 150153ms DESKTOP-LSN82VI        OnException        - An item with the same key has already been added.
+ERROR 2020-02-07 16:55:22,806 168010ms DESKTOP-LSN82VI        OnException        - An item with the same key has already been added.
+INFO  2020-02-08 08:54:44,333 292986ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 5:54:44 AM
+INFO  2020-02-08 08:54:44,742 293395ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 5:54:44 AM
+INFO  2020-02-08 08:54:55,340 303993ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 5:54:55 AM
+INFO  2020-02-08 08:54:55,917 304570ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 5:54:55 AM
+ERROR 2020-02-08 08:59:12,887 561540ms DESKTOP-LSN82VI        OnException        - An item with the same key has already been added.
+INFO  2020-02-08 09:05:26,491 23686ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 6:05:26 AM
+INFO  2020-02-08 09:05:26,890 24085ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 6:05:26 AM
+INFO  2020-02-08 09:05:36,636 33831ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 6:05:36 AM
+INFO  2020-02-08 09:05:37,311 34506ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 6:05:37 AM
+INFO  2020-02-08 09:14:11,580 155860ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 6:14:11 AM
+INFO  2020-02-08 09:14:11,970 156251ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 6:14:11 AM
+INFO  2020-02-08 09:14:21,595 165876ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 6:14:21 AM
+INFO  2020-02-08 09:14:22,428 166708ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 6:14:22 AM
+INFO  2020-02-08 09:16:39,511 25779ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 6:16:39 AM
+INFO  2020-02-08 09:16:39,898 26166ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 6:16:39 AM
+INFO  2020-02-08 09:16:49,566 35834ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 6:16:49 AM
+INFO  2020-02-08 09:16:50,206 36474ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 6:16:50 AM
+INFO  2020-02-08 09:38:40,145 22918ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 6:38:40 AM
+INFO  2020-02-08 09:38:40,534 23307ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 6:38:40 AM
+INFO  2020-02-08 09:38:50,310 33083ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 6:38:50 AM
+INFO  2020-02-08 09:38:50,955 33727ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 6:38:50 AM
+ERROR 2020-02-08 09:46:59,211 521983ms DESKTOP-LSN82VI        OnException        - Invalid object name 'TMS_SPL_PULSE.dbo.Users_TMS_GroupsMapping'.
+INFO  2020-02-08 09:52:59,607 24518ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 6:52:59 AM
+INFO  2020-02-08 09:52:59,994 24906ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 6:52:59 AM
+ERROR 2020-02-08 09:53:00,189 25101ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'GroupId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult GroupDetail(Int64)' in 'TMS.Web.Controllers.AdminController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+INFO  2020-02-08 09:53:00,554 25466ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 6:53:00 AM
+INFO  2020-02-08 09:53:00,936 25848ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 6:53:00 AM
+INFO  2020-02-08 09:53:24,446 49358ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 6:53:24 AM
+INFO  2020-02-08 09:53:24,822 49733ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 6:53:24 AM
+INFO  2020-02-08 09:53:34,795 59706ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 6:53:34 AM
+INFO  2020-02-08 09:53:35,472 60384ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 6:53:35 AM
+INFO  2020-02-08 09:57:02,917 28006ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 6:57:02 AM
+INFO  2020-02-08 09:57:03,309 28399ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 6:57:03 AM
+INFO  2020-02-08 09:57:12,929 38018ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 6:57:12 AM
+INFO  2020-02-08 09:57:13,584 38673ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 6:57:13 AM
+ERROR 2020-02-08 09:57:43,463 68553ms DESKTOP-LSN82VI        OnException        - The partial view 'INOGroupDetail' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Views/Admin/INOGroupDetail.aspx
+~/Views/Admin/INOGroupDetail.ascx
+~/Views/Shared/INOGroupDetail.aspx
+~/Views/Shared/INOGroupDetail.ascx
+~/Views/Admin/INOGroupDetail.cshtml
+~/Views/Admin/INOGroupDetail.vbhtml
+~/Views/Shared/INOGroupDetail.cshtml
+~/Views/Shared/INOGroupDetail.vbhtml
+~/__MVCSITEMAPPROVIDER/INOGroupDetail.ascx
+ERROR 2020-02-08 09:57:58,131 83220ms DESKTOP-LSN82VI        OnException        - The partial view 'INOGroupDetail' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Views/Admin/INOGroupDetail.aspx
+~/Views/Admin/INOGroupDetail.ascx
+~/Views/Shared/INOGroupDetail.aspx
+~/Views/Shared/INOGroupDetail.ascx
+~/Views/Admin/INOGroupDetail.cshtml
+~/Views/Admin/INOGroupDetail.vbhtml
+~/Views/Shared/INOGroupDetail.cshtml
+~/Views/Shared/INOGroupDetail.vbhtml
+~/__MVCSITEMAPPROVIDER/INOGroupDetail.ascx
+INFO  2020-02-08 10:03:14,523 22080ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 7:03:14 AM
+INFO  2020-02-08 10:03:14,913 22471ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 7:03:14 AM
+INFO  2020-02-08 10:03:24,739 32297ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 7:03:24 AM
+INFO  2020-02-08 10:03:25,530 33087ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 7:03:25 AM
+INFO  2020-02-08 10:10:35,957 21691ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@Llk.com at 2/8/2020 7:10:35 AM
+INFO  2020-02-08 10:10:36,943 22677ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@Llk.com at 2/8/2020 7:10:36 AM
+INFO  2020-02-08 10:10:42,309 28043ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@Llk.com at 2/8/2020 7:10:42 AM
+INFO  2020-02-08 10:10:42,682 28416ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@Llk.com at 2/8/2020 7:10:42 AM
+INFO  2020-02-08 10:17:09,852 27084ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 7:17:09 AM
+INFO  2020-02-08 10:17:10,260 27492ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 7:17:10 AM
+INFO  2020-02-08 10:17:19,916 37148ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 7:17:19 AM
+INFO  2020-02-08 10:17:20,564 37795ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 7:17:20 AM
+ERROR 2020-02-08 10:18:52,115 129347ms DESKTOP-LSN82VI        OnException        - Method arguments are not valid! See ValidationErrors for details.
+ERROR 2020-02-08 10:18:56,288 133520ms DESKTOP-LSN82VI        OnException        - Method arguments are not valid! See ValidationErrors for details.
+INFO  2020-02-08 11:10:22,400 27643ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 8:10:22 AM
+INFO  2020-02-08 11:10:22,807 28050ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 8:10:22 AM
+INFO  2020-02-08 11:10:34,133 39377ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 8:10:34 AM
+INFO  2020-02-08 11:10:34,686 39929ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 8:10:34 AM
+INFO  2020-02-08 11:23:04,845 63134ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@Llk.com at 2/8/2020 8:23:04 AM
+INFO  2020-02-08 11:23:05,267 63556ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@Llk.com at 2/8/2020 8:23:05 AM
+INFO  2020-02-08 11:23:14,905 73194ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@Llk.com at 2/8/2020 8:23:14 AM
+INFO  2020-02-08 11:23:15,529 73818ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@Llk.com at 2/8/2020 8:23:15 AM
+INFO  2020-02-08 11:32:15,247 22796ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 8:32:15 AM
+INFO  2020-02-08 11:32:15,633 23182ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 8:32:15 AM
+INFO  2020-02-08 11:32:25,768 33317ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 8:32:25 AM
+INFO  2020-02-08 11:32:26,250 33799ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 8:32:26 AM
+INFO  2020-02-08 11:52:03,098 23955ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 8:52:03 AM
+INFO  2020-02-08 11:52:03,492 24349ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 8:52:03 AM
+INFO  2020-02-08 11:52:13,099 33956ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 8:52:13 AM
+INFO  2020-02-08 11:52:13,907 34764ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 8:52:13 AM
+INFO  2020-02-08 12:02:34,744 26330ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 9:02:34 AM
+ERROR 2020-02-08 12:02:37,496 29083ms DESKTOP-LSN82VI        OnException        - An item with the same key has already been added.
+INFO  2020-02-08 12:02:37,879 29466ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 9:02:37 AM
+INFO  2020-02-08 12:02:38,255 29841ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 9:02:38 AM
+INFO  2020-02-08 12:02:56,004 47591ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 9:02:56 AM
+INFO  2020-02-08 12:02:56,374 47961ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 9:02:56 AM
+INFO  2020-02-08 12:03:06,863 58449ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 9:03:06 AM
+INFO  2020-02-08 12:03:07,313 58900ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 9:03:07 AM
+ERROR 2020-02-08 12:06:51,521 283108ms DESKTOP-LSN82VI        OnException        - Procedure or function 'INO_Create_Invoice_History' expects parameter '@Name', which was not supplied.
+ERROR 2020-02-08 12:08:24,636 376223ms DESKTOP-LSN82VI        OnException        - Procedure or function 'INO_Create_Invoice_History' expects parameter '@Name', which was not supplied.
+ERROR 2020-02-08 12:08:38,188 389774ms DESKTOP-LSN82VI        OnException        - Procedure or function 'INO_Create_Invoice_History' expects parameter '@Name', which was not supplied.
+INFO  2020-02-08 12:15:08,586 26327ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 9:15:08 AM
+INFO  2020-02-08 12:15:08,985 26727ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 9:15:08 AM
+INFO  2020-02-08 12:15:18,665 36407ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 9:15:18 AM
+INFO  2020-02-08 12:15:19,285 37027ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 9:15:19 AM
+INFO  2020-02-08 12:48:06,021 55950ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 9:48:06 AM
+INFO  2020-02-08 12:48:06,513 56442ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 9:48:06 AM
+INFO  2020-02-08 12:48:15,460 65390ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 9:48:15 AM
+INFO  2020-02-08 12:48:15,739 65668ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 9:48:15 AM
+INFO  2020-02-08 12:51:53,383 283312ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/8/2020 9:51:53 AM
+INFO  2020-02-08 12:51:53,644 283573ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/8/2020 9:51:53 AM
+INFO  2020-02-08 12:51:53,884 283813ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/8/2020 9:51:53 AM
+INFO  2020-02-08 12:51:54,164 284093ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/8/2020 9:51:54 AM
+INFO  2020-02-08 13:13:51,681 31521ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 10:13:51 AM
+INFO  2020-02-08 13:13:52,078 31917ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 10:13:52 AM
+INFO  2020-02-08 13:14:02,196 42035ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 10:14:02 AM
+INFO  2020-02-08 13:14:03,054 42893ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 10:14:03 AM
+INFO  2020-02-08 13:14:17,954 57793ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/8/2020 10:14:17 AM
+INFO  2020-02-08 13:14:18,326 58165ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/8/2020 10:14:18 AM
+INFO  2020-02-08 13:32:04,359 1124198ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 10:32:04 AM
+INFO  2020-02-08 13:32:04,753 1124592ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 10:32:04 AM
+INFO  2020-02-08 13:32:05,332 1125171ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 10:32:05 AM
+INFO  2020-02-08 13:32:05,749 1125588ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 10:32:05 AM
+INFO  2020-02-08 13:35:10,926 1310765ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 10:35:10 AM
+INFO  2020-02-08 13:35:11,291 1311131ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 10:35:11 AM
+INFO  2020-02-08 13:35:11,856 1311696ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 10:35:11 AM
+INFO  2020-02-08 13:35:12,284 1312123ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 10:35:12 AM
+INFO  2020-02-08 13:35:36,652 1336491ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/8/2020 10:35:36 AM
+INFO  2020-02-08 13:35:37,027 1336866ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/8/2020 10:35:37 AM
+INFO  2020-02-08 13:35:37,606 1337445ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/8/2020 10:35:37 AM
+INFO  2020-02-08 13:35:38,036 1337876ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/8/2020 10:35:38 AM
+INFO  2020-02-08 13:39:36,275 1576114ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 10:39:36 AM
+INFO  2020-02-08 13:39:36,642 1576481ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 10:39:36 AM
+INFO  2020-02-08 13:39:37,345 1577185ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 10:39:37 AM
+INFO  2020-02-08 13:39:37,928 1577767ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 10:39:37 AM
+INFO  2020-02-08 13:39:52,971 1592811ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/8/2020 10:39:52 AM
+INFO  2020-02-08 13:39:53,358 1593197ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/8/2020 10:39:53 AM
+INFO  2020-02-08 13:39:54,256 1594095ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/8/2020 10:39:54 AM
+INFO  2020-02-08 13:39:54,801 1594641ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/8/2020 10:39:54 AM
+INFO  2020-02-08 13:40:32,741 1632580ms DESKTOP-LSN82VI        Login              - User tried to login with email PaceAdmin@llk.com at 2/8/2020 10:40:32 AM
+INFO  2020-02-08 13:40:33,115 1632954ms DESKTOP-LSN82VI        Login              - User login with email PaceAdmin@llk.com at 2/8/2020 10:40:33 AM
+INFO  2020-02-08 13:51:33,893 2293733ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/8/2020 10:51:33 AM
+INFO  2020-02-08 13:51:34,261 2294100ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/8/2020 10:51:34 AM
+INFO  2020-02-08 13:51:35,349 2295189ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/8/2020 10:51:35 AM
+INFO  2020-02-08 13:51:35,762 2295602ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/8/2020 10:51:35 AM
+INFO  2020-02-08 13:53:13,489 2393328ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 10:53:13 AM
+INFO  2020-02-08 13:53:13,860 2393699ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 10:53:13 AM
+INFO  2020-02-08 13:53:14,465 2394304ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 10:53:14 AM
+INFO  2020-02-08 13:53:14,910 2394749ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 10:53:14 AM
+INFO  2020-02-08 13:58:18,235 2698074ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/8/2020 10:58:18 AM
+INFO  2020-02-08 13:58:18,605 2698444ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/8/2020 10:58:18 AM
+INFO  2020-02-08 13:58:19,734 2699574ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/8/2020 10:58:19 AM
+INFO  2020-02-08 13:58:20,335 2700174ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/8/2020 10:58:20 AM
+INFO  2020-02-08 14:06:22,228 3182067ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 11:06:22 AM
+INFO  2020-02-08 14:06:22,599 3182438ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 11:06:22 AM
+INFO  2020-02-08 14:06:23,182 3183021ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 11:06:23 AM
+INFO  2020-02-08 14:06:23,606 3183445ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 11:06:23 AM
+ERROR 2020-02-08 14:20:27,172 4027012ms DESKTOP-LSN82VI        OnException        - Specified cast is not valid.
+ERROR 2020-02-08 14:20:37,666 4037505ms DESKTOP-LSN82VI        OnException        - Specified cast is not valid.
+ERROR 2020-02-08 14:21:56,450 4116289ms DESKTOP-LSN82VI        OnException        - Specified cast is not valid.
+INFO  2020-02-08 14:57:04,961 6224800ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/8/2020 11:57:04 AM
+INFO  2020-02-08 14:57:05,339 6225179ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/8/2020 11:57:05 AM
+INFO  2020-02-08 14:57:06,418 6226258ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/8/2020 11:57:06 AM
+INFO  2020-02-08 14:57:06,828 6226667ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/8/2020 11:57:06 AM
+INFO  2020-02-08 14:58:53,796 6333635ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 11:58:53 AM
+INFO  2020-02-08 14:58:54,165 6334004ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 11:58:54 AM
+INFO  2020-02-08 14:58:54,758 6334597ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 11:58:54 AM
+INFO  2020-02-08 14:58:55,169 6335009ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 11:58:55 AM
+INFO  2020-02-08 16:08:27,381 23311ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 1:08:27 PM
+INFO  2020-02-08 16:08:27,770 23700ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 1:08:27 PM
+INFO  2020-02-08 16:08:38,130 34060ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 1:08:38 PM
+INFO  2020-02-08 16:08:38,667 34597ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 1:08:38 PM
+INFO  2020-02-08 16:09:03,611 59541ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/8/2020 1:09:03 PM
+INFO  2020-02-08 16:09:03,976 59906ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/8/2020 1:09:03 PM
+INFO  2020-02-08 16:09:04,678 60608ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/8/2020 1:09:04 PM
+INFO  2020-02-08 16:09:05,311 61242ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/8/2020 1:09:05 PM
+INFO  2020-02-08 16:10:38,560 154490ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 1:10:38 PM
+INFO  2020-02-08 16:10:38,930 154860ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 1:10:38 PM
+INFO  2020-02-08 16:10:39,526 155456ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 1:10:39 PM
+INFO  2020-02-08 16:10:39,938 155868ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 1:10:39 PM
+INFO  2020-02-08 16:11:23,069 198999ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/8/2020 1:11:23 PM
+INFO  2020-02-08 16:11:23,441 199371ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/8/2020 1:11:23 PM
+INFO  2020-02-08 16:11:24,030 199960ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/8/2020 1:11:24 PM
+INFO  2020-02-08 16:11:24,443 200373ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/8/2020 1:11:24 PM
+INFO  2020-02-08 16:48:49,216 64403ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 1:48:49 PM
+INFO  2020-02-08 16:48:49,603 64790ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 1:48:49 PM
+INFO  2020-02-08 16:49:00,139 75326ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 1:49:00 PM
+INFO  2020-02-08 16:49:00,751 75938ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 1:49:00 PM
+INFO  2020-02-08 16:49:35,107 110294ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/8/2020 1:49:35 PM
+INFO  2020-02-08 16:49:35,474 110661ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/8/2020 1:49:35 PM
+INFO  2020-02-08 16:50:12,468 147655ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 1:50:12 PM
+INFO  2020-02-08 16:50:12,840 148027ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 1:50:12 PM
+INFO  2020-02-08 16:50:14,450 149637ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 1:50:14 PM
+INFO  2020-02-08 16:50:14,831 150018ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 1:50:14 PM
+ERROR 2020-02-08 16:50:39,203 174390ms DESKTOP-LSN82VI        OnException        - Method arguments are not valid! See ValidationErrors for details.
+INFO  2020-02-08 16:51:25,124 220312ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/8/2020 1:51:25 PM
+INFO  2020-02-08 16:51:25,500 220687ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/8/2020 1:51:25 PM
+INFO  2020-02-08 16:52:15,217 270404ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@Llk.com at 2/8/2020 1:52:15 PM
+INFO  2020-02-08 16:52:15,607 270794ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@Llk.com at 2/8/2020 1:52:15 PM
+INFO  2020-02-08 16:52:16,161 271349ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@Llk.com at 2/8/2020 1:52:16 PM
+INFO  2020-02-08 16:52:16,572 271759ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@Llk.com at 2/8/2020 1:52:16 PM
+INFO  2020-02-08 17:10:53,499 1388686ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 2:10:53 PM
+INFO  2020-02-08 17:10:53,868 1389055ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 2:10:53 PM
+INFO  2020-02-08 17:10:54,940 1390128ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 2:10:54 PM
+INFO  2020-02-08 17:10:55,340 1390527ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 2:10:55 PM
+INFO  2020-02-08 17:11:57,961 1453148ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/8/2020 2:11:57 PM
+INFO  2020-02-08 17:12:03,853 1459040ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/8/2020 2:12:03 PM
+INFO  2020-02-08 17:12:04,226 1459414ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/8/2020 2:12:04 PM
+INFO  2020-02-08 17:13:22,366 1537554ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/8/2020 2:13:22 PM
+INFO  2020-02-08 17:13:22,735 1537922ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/8/2020 2:13:22 PM
+INFO  2020-02-08 17:13:23,315 1538502ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/8/2020 2:13:23 PM
+INFO  2020-02-08 17:13:23,727 1538914ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/8/2020 2:13:23 PM
+INFO  2020-02-08 17:13:41,944 1557131ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 2:13:41 PM
+INFO  2020-02-08 17:13:42,321 1557508ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 2:13:42 PM

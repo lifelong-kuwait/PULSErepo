@@ -505,52 +505,57 @@
                         }
                         @*@if (User.IsInRole("CanViewUserErrorLog"))
         {*@
-                        <div class="o365cs-nav-appItem">
-                            <div>
-                                <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="@Url.Content("~/Invoiceing/InvoiceGrid")"
-                                   aria-disabled="false" id="O365_AppTile_ShellTasks" aria-label="Tasks" title="">
-                                    <div class="o365cs-nav-appTileBackground ms-bgc-tp" style="">
-                                        <span class="o365cs-nav-appTileIcon owaimg ms-Icon--tasks ms-icon-font-size-55 ms-fcl-w fa fa-bug "> </span>
-                                        <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>Invoicing</span> </span>
-                                    </div>
-                                </a>
+                        @if (User.IsInRole("CanViewInvoicing"))
+                        {
+                            <div class="o365cs-nav-appItem">
+                                <div>
+                                    <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="@Url.Content("~/Invoiceing/InvoiceGrid")"
+                                       aria-disabled="false" id="O365_AppTile_ShellTasks" aria-label="Tasks" title="">
+                                        <div class="o365cs-nav-appTileBackground ms-bgc-tp" style="">
+                                            <span class="o365cs-nav-appTileIcon owaimg ms-Icon--tasks ms-icon-font-size-55 ms-fcl-w mdi fa fa-file-pdf-o"> </span>
+                                            <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>Invoicing</span> </span>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="o365cs-nav-appItem">
-                            <div>
-                                <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="@Url.Content("~/Customer/Index")"
-                                   aria-disabled="false" id="O365_AppTile_ShellTasks" aria-label="Tasks" title="">
-                                    <div class="o365cs-nav-appTileBackground ms-bgc-tp" style="">
-                                        <span class="o365cs-nav-appTileIcon owaimg ms-Icon--tasks ms-icon-font-size-55 ms-fcl-w fa fa-bug "> </span>
-                                        <span class="o365cs-nav-appTileTitle ms-fcl-w"><span>Customers</span> </span>
+                        }
+                            @if (User.IsInRole("CanViewCustomer"))
+                            {
+                                <div class="o365cs-nav-appItem">
+                                    <div>
+                                        <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="@Url.Content("~/Customer/Index")"
+                                           aria-disabled="false" id="O365_AppTile_ShellTasks" aria-label="Tasks" title="">
+                                            <div class="o365cs-nav-appTileBackground ms-bgc-tp" style="">
+                                                <span class="o365cs-nav-appTileIcon owaimg ms-Icon--tasks ms-icon-font-size-55 ms-fcl-w fa fa-user-plus "> </span>
+                                                <span class="o365cs-nav-appTileTitle ms-fcl-w"><span>Customers</span> </span>
+                                            </div>
+                                        </a>
                                     </div>
-                                </a>
+                                </div>
+                            }
+                            @*@if (User.IsInRole("CanViewProspects"))
+            {
+                <div class="o365cs-nav-appItem">
+                    <div>
+                        <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="@Url.Content("~/Task/OrphanProspect")"
+                           aria-disabled="false" id="O365_AppTile_ShellTasks" aria-label="Tasks" title="">
+                            <div class="o365cs-nav-appTileBackground ms-bgc-tp" style="">
+                                <span class="o365cs-nav-appTileIcon owaimg ms-Icon--tasks ms-icon-font-size-55 ms-fcl-w fa fa-user-plus "> </span>
+                                <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>Prospects</span> </span>
                             </div>
-                        </div>
-                        @*}*@
-                        @*@if (User.IsInRole("CanViewProspects"))
-        {
-            <div class="o365cs-nav-appItem">
-                <div>
-                    <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="@Url.Content("~/Task/OrphanProspect")"
-                       aria-disabled="false" id="O365_AppTile_ShellTasks" aria-label="Tasks" title="">
-                        <div class="o365cs-nav-appTileBackground ms-bgc-tp" style="">
-                            <span class="o365cs-nav-appTileIcon owaimg ms-Icon--tasks ms-icon-font-size-55 ms-fcl-w fa fa-user-plus "> </span>
-                            <span class="o365cs-nav-appTileTitle ms-fcl-w"> <span>Prospects</span> </span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        }*@
-
-
-
-                        @*<div>
-            <div></div>
-        </div>
-        <div class="o365cs-nav-navMenuMyApps" style="display: none;"></div>
-        <div class="ms-fcl-tp ms-fcl-ts-h o365cs-nav-navMenuError o365cs-clear" style="display: none;"></div>*@
+                        </a>
                     </div>
+                </div>
+            }*@
+
+
+
+                            @*<div>
+                <div></div>
+            </div>
+            <div class="o365cs-nav-navMenuMyApps" style="display: none;"></div>
+            <div class="ms-fcl-tp ms-fcl-ts-h o365cs-nav-navMenuError o365cs-clear" style="display: none;"></div>*@
+                        </div>
                         
 
                     @*<div style="display: none;"></div>

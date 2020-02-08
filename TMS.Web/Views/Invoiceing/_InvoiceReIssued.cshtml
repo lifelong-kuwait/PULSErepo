@@ -1,6 +1,6 @@
 ﻿@model string
 @using lr = Resources.Resources;
-@if (User.IsInRole("CanViewPersonEmail"))
+@if (User.IsInRole("CanReissueHistoryInvoice"))
 {
     <div class="ChildGrid">
         @(Html.Kendo().Grid<TMS.Library.Entities.Invoice.ReIssued>()

@@ -4895,6 +4895,9 @@
     <Content Include="Views\Invoiceing\EditorTemplates\UnderProcessProcess.cshtml" />
     <Content Include="Views\Invoiceing\EditorTemplates\ReadyForCollection.cshtml" />
     <Content Include="Views\Invoiceing\_InvoiceStatusChanges.cshtml" />
+    <Content Include="Views\Invoiceing\EditorTemplates\_StatusAddTemplate.cshtml" />
+    <Content Include="Views\Admin\INOGroupDetail.cshtml" />
+    <Content Include="Views\Invoiceing\EditorTemplates\_InvoiceHistoryTemplate.cshtml" />
     <None Include="WeeklyAttendanceReportData.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>

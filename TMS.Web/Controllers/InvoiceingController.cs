@@ -1,4 +1,5 @@
-﻿using Abp.Web.Models;
+﻿using Abp.Runtime.Validation;
+using Abp.Web.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Microsoft.Reporting.WebForms;
@@ -35,6 +36,7 @@ namespace TMS.Web.Controllers
             _UserBAL = objUserBAL; _CustomerBAL = customerBAL;
         }
         // GET: Invoiceing
+        [ClaimsAuthorize("CanAddInvoicing", "CanViewInvoicing")]
         public ActionResult Index()
         {
             Session["InvoiceID"] = -1;
@@ -43,6 +45,9 @@ namespace TMS.Web.Controllers
             return View();
         }
         [DontWrapResult]
+        //[DisableValidation]
+        [HttpPost]
+        [ClaimsAuthorize("CanAddInvoicing", "CanViewInvoicing")]
         public ActionResult Invoice_Create([DataSourceRequest] DataSourceRequest request, Invoice _invoice)
         {
             if (ModelState.IsValid)
@@ -56,7 +61,7 @@ namespace TMS.Web.Controllers
                 _invoice.ID = _CustomerBAL.create_InvoiceBAL(_invoice);
                 InvoiceHistory invoiceHistory = new InvoiceHistory();
                 invoiceHistory.History_Name = "Invoice Create";
-                invoiceHistory.Type = HistoryType.InvoiceCreate;
+                invoiceHistory.Type = InvoiceStatus.InvoiceInvented;
                 invoiceHistory.Description = "";
                 invoiceHistory.Invoice_Number = _invoice.ID;
                 invoiceHistory.User_ID = CurrentUser.NameIdentifierInt64;
@@ -74,6 +79,7 @@ namespace TMS.Web.Controllers
             //return Json(resultData.ToDataSourceResult(request, ModelState));
         }
         [DontWrapResult]
+        [ClaimsAuthorize("CanEditInvoicing", "CanViewInvoicing")]
         public ActionResult Invoice_Update([DataSourceRequest] DataSourceRequest request, Invoice _invoice)
         {
             if (ModelState.IsValid)
@@ -87,7 +93,7 @@ namespace TMS.Web.Controllers
                 var xx = _CustomerBAL.Update_InvoiceBAL(_invoice);
                 InvoiceHistory invoiceHistory = new InvoiceHistory();
                 invoiceHistory.History_Name = "Invoice Update";
-                invoiceHistory.Type = HistoryType.InvoiceCreate;
+                invoiceHistory.Type = InvoiceStatus.InvoiceInvented;
                 invoiceHistory.Description = "";
                 invoiceHistory.Invoice_Number = _invoice.ID;
                 invoiceHistory.User_ID = CurrentUser.NameIdentifierInt64;
@@ -105,6 +111,9 @@ namespace TMS.Web.Controllers
             //return Json(resultData.ToDataSourceResult(request, ModelState));
         }
         [DontWrapResult]
+        [DisableValidation]
+        [ClaimsAuthorize("CanAddInvoicing", "CanViewInvoicing")]
+
         public ActionResult InvoiceDetail_Create([DataSourceRequest] DataSourceRequest request, InvoiceDetail _invoice)
         {
             if (ModelState.IsValid)
@@ -122,7 +131,9 @@ namespace TMS.Web.Controllers
 
             //return Json(resultData.ToDataSourceResult(request, ModelState));
         }
-        [DontWrapResult]
+        [DontWrapResult] 
+        [ClaimsAuthorize("CanEditInvoicing", "CanViewInvoicing")]
+
         public ActionResult InvoiceDetail_Update([DataSourceRequest] DataSourceRequest request, InvoiceDetail _invoice)
         {
             if (ModelState.IsValid)
@@ -149,6 +160,8 @@ namespace TMS.Web.Controllers
         // [ClaimsAuthorize("CanPrintCertificates")]
         [DontWrapResult]
         //[HttpPost]
+        [ClaimsAuthorize("CanPrintInvoice", "CanViewInvoicing")]
+
         public FileResult PrintInvoice_Read()
         {
 
@@ -166,6 +179,15 @@ namespace TMS.Web.Controllers
                 reIssued.Re_Issued_Date = DateTime.Now;
                 reIssued.Organization_ID = CurrentUser.CompanyID;
                 reIssued.ID = _CustomerBAL.create_InvoiceReIssueBAL(reIssued);
+                InvoiceHistory invoiceHistory = new InvoiceHistory();
+                invoiceHistory.History_Name = "Invoice Issued";
+                invoiceHistory.Type = InvoiceStatus.InvoiceReIssued;
+                invoiceHistory.Description = "";
+                invoiceHistory.Invoice_Number = Convert.ToInt64(_classID);
+                invoiceHistory.User_ID = CurrentUser.NameIdentifierInt64;
+                invoiceHistory.Organization_ID = CurrentUser.CompanyID;
+                invoiceHistory.Date_TIME = DateTime.Now;
+                var x = _CustomerBAL.create_InvoiceHistoryBAL(invoiceHistory);
                 ReportViewer ReportViewerRSFReports = new ReportViewer();
                 ReportViewerRSFReports.Height = Unit.Parse("100%");
                 ReportViewerRSFReports.Width = Unit.Parse("100%");
@@ -186,11 +208,15 @@ namespace TMS.Web.Controllers
             }
 
         }
+        [ClaimsAuthorize("CanViewInvoicing")]
+        [DontWrapResult]
         public ActionResult InvoiceGrid()
         {
             return View();
         }
         [DontWrapResult]
+        [ClaimsAuthorize("CanViewInvoicing")]
+
         public ActionResult Invoice_Read([DataSourceRequest] DataSourceRequest request)
         {
             var kendoRequest = new Kendo.Mvc.UI.DataSourceRequest
@@ -231,6 +257,8 @@ namespace TMS.Web.Controllers
             return Json(result);
         }
         [DontWrapResult]
+        [ClaimsAuthorize("CanViewInvoicing")]
+
         public ActionResult InvoiceDetail_Read([DataSourceRequest] DataSourceRequest request, long InvoiceID)
         {
 
@@ -254,6 +282,8 @@ namespace TMS.Web.Controllers
             return Json(result);
         }
         [DontWrapResult]
+        [ClaimsAuthorize("CanViewInvoicing")]
+
         public ActionResult InvoiceDetail(string Inoid)
         {
             if (string.IsNullOrEmpty(Inoid))
@@ -278,6 +308,7 @@ namespace TMS.Web.Controllers
             }
         }
         [DontWrapResult]
+        [ClaimsAuthorize("CanViewInvoicing", "CanEditUserLog")]
         public ActionResult InvoiceEdit(string Inoid)
         {
             if (string.IsNullOrEmpty(Inoid))
@@ -306,7 +337,7 @@ namespace TMS.Web.Controllers
         
        [ContentAuthorize]
         [DontWrapResult]
-        [ClaimsAuthorize("CanViewPersonEmail")]
+        [ClaimsAuthorize("CanViewActivityInvoice")]
         public ActionResult InvoiceHistory(string PersonID)
         {
             return PartialView("_InvoiceHistoryRead", PersonID);
@@ -314,21 +345,41 @@ namespace TMS.Web.Controllers
 
         [DontWrapResult]
         [ClaimsAuthorize("CanViewPersonEmail")]
+        [ClaimsAuthorize("CanViewActivityInvoice")]
         public ActionResult InvoiceHistoryRead([DataSourceRequest] DataSourceRequest request, string PersonID)
         {
             var _Phone = _CustomerBAL.Read_InvoiceHistoryBAL(PersonID);
             return Json(_Phone.ToDataSourceResult(request, ModelState));
         }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ActivityAuthorize]
+        [ClaimsAuthorize("CanAddActivityInvoice")]
+        public ActionResult InvoiceHistoryCreate([DataSourceRequest] DataSourceRequest request, InvoiceHistory _objTask,string PersonID)
+        {
+            
+            _objTask.Invoice_Number = Convert.ToInt64(PersonID);
+            _objTask.User_ID = CurrentUser.NameIdentifierInt64;
+            _objTask.Organization_ID = CurrentUser.CompanyID;
+            _objTask.Date_TIME = DateTime.Now;
+            var result=_CustomerBAL.create_InvoiceHistoryBAL(_objTask);
+            if (result == -1)
+            {
+                ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+            }
+            var resultData = new[] { _objTask };
+            return Json(resultData.ToDataSourceResult(request, ModelState));
+        }
         [ContentAuthorize]
         [DontWrapResult]
-        [ClaimsAuthorize("CanViewPersonEmail")]
+        [ClaimsAuthorize("CanReissueHistoryInvoice")]
         public ActionResult InvoiceReIssued(string PersonID)
         {
             return PartialView("_InvoiceReIssued", PersonID);
         }
 
         [DontWrapResult]
-        [ClaimsAuthorize("CanViewPersonEmail")]
+        [ClaimsAuthorize("CanReissueHistoryInvoice")]
         public ActionResult InvoiceReIssuedRead([DataSourceRequest] DataSourceRequest request, string PersonID)
         {
             var _Phone = _CustomerBAL.Read_InvoiceReIssuedByBAL(PersonID);
@@ -336,20 +387,20 @@ namespace TMS.Web.Controllers
         }
         [ContentAuthorize]
         [DontWrapResult]
-        [ClaimsAuthorize("CanViewPersonEmail")]
+        [ClaimsAuthorize("CanViewDepositInvoice")]
         public ActionResult InvoiceDeposit(string PersonID)
         {
             return PartialView("_InvoiceDeposit", PersonID);
         }
 
         [DontWrapResult]
-        [ClaimsAuthorize("CanViewPersonEmail")]
+        [ClaimsAuthorize("CanViewDepositInvoice")]
         public ActionResult InvoiceDeposit_Read([DataSourceRequest] DataSourceRequest request, string PersonID)
         {
             var _Phone = _CustomerBAL.Read_InvoiceDepositBAL(PersonID);
             return Json(_Phone.ToDataSourceResult(request, ModelState));
         }
-        [ClaimsAuthorize("CanAddEditCourse")]
+        [ClaimsAuthorize("CanAddDepositInvoice")]
         [DontWrapResult]
         public ActionResult InvoiceDeposit_Create([DataSourceRequest] DataSourceRequest request, DepositDetail _DepositDetail, string PersonID)
         {
@@ -357,14 +408,22 @@ namespace TMS.Web.Controllers
             {
                 var json = new JavaScriptSerializer().Serialize(_DepositDetail);
                 _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to create Courses at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
-                
+                InvoiceHistory invoiceHistory = new InvoiceHistory();
+                invoiceHistory.History_Name = "Invoice Deposit";
+                invoiceHistory.Type = InvoiceStatus.InvoiceDeposit;
+                invoiceHistory.Description = "";
+                invoiceHistory.Invoice_Number = Convert.ToInt64(PersonID);
+                invoiceHistory.User_ID = CurrentUser.NameIdentifierInt64;
+                invoiceHistory.Organization_ID = CurrentUser.CompanyID;
+                invoiceHistory.Date_TIME = DateTime.Now;
+                 _CustomerBAL.create_InvoiceHistoryBAL(invoiceHistory);
                 _DepositDetail.Invoice_ID = PersonID;
                 var x = this._CustomerBAL.InvoiceBalanceCheckBAL(_DepositDetail);
                 var xx = this._CustomerBAL.InvoiceGrossTotalCheckBAL(_DepositDetail);
                 double invoiceTotalPayment = Convert.ToDouble(x);
                 double invoiceGrossTotal = Convert.ToDouble(xx);
                 double balance = Math.Round(invoiceGrossTotal, 2)  - Math.Round(invoiceTotalPayment, 2);
-                balance = Math.Round(balance, 2);
+                balance = Math.Round(balance, 3);
                 if (balance == 0)
                 {
                     ModelState.AddModelError(lr.PersonSkill, lr.FlagDuplicationCheck);
@@ -380,18 +439,7 @@ namespace TMS.Web.Controllers
                 {
                     ModelState.AddModelError(lr.ErrorServerError, lr.FlagDuplicationCheck);
                 }
-                //if (this._CustomerBAL.InvoiceBalanceCheckBAL(_DepositDetail) > 0)
-                //{
-                //    ModelState.AddModelError(lr.PersonSkill, lr.FlagDuplicationCheck);
-                //}
-                //else
-                //{
-                //    //_Course.ID = this._CourseBAL.TMS_Courses_CreateBAL(_Course);
-                //    //string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                //    //if (string.IsNullOrEmpty(ip))
-                //    //    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                //    //_objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
-                //}
+              
             }
 
             var resultData = new[] { _DepositDetail };
@@ -407,6 +455,8 @@ namespace TMS.Web.Controllers
         // [ClaimsAuthorize("CanPrintCertificates")]
         [DontWrapResult]
         //[HttpPost]
+        [ClaimsAuthorize("CanPrintDepositInvoice")]
+
         public FileResult PrintDepositSlip_Read()
         {
 
@@ -421,12 +471,15 @@ namespace TMS.Web.Controllers
             }
             else
             {
-                //ReIssued reIssued = new ReIssued();
-                //reIssued.Invoice_ID = Convert.ToInt64(_classID);
-                //reIssued.Re_Issued_By = CurrentUser.NameIdentifierInt64;
-                //reIssued.Re_Issued_Date = DateTime.Now;
-                //reIssued.Organization_ID = CurrentUser.CompanyID;
-                //reIssued.ID = _CustomerBAL.create_InvoiceReIssueBAL(reIssued);
+                InvoiceHistory invoiceHistory = new InvoiceHistory();
+                invoiceHistory.History_Name = "Invoice Deposit Deposit";
+                invoiceHistory.Type = InvoiceStatus.InvoiceDeposit;
+                invoiceHistory.Description = "";
+                invoiceHistory.Invoice_Number = Convert.ToInt64(_InvoiceID);
+                invoiceHistory.User_ID = CurrentUser.NameIdentifierInt64;
+                invoiceHistory.Organization_ID = CurrentUser.CompanyID;
+                invoiceHistory.Date_TIME = DateTime.Now;
+                _CustomerBAL.create_InvoiceHistoryBAL(invoiceHistory);
                 ReportViewer ReportViewerRSFReports = new ReportViewer();
                 ReportViewerRSFReports.Height = Unit.Parse("100%");
                 ReportViewerRSFReports.Width = Unit.Parse("100%");
@@ -458,14 +511,14 @@ namespace TMS.Web.Controllers
         }
         [ContentAuthorize]
         [DontWrapResult]
-        [ClaimsAuthorize("CanViewPersonEmail")]
+        [ClaimsAuthorize("CanViewChangeHistoryInvoice")]
         public ActionResult InvoiceChanges(string PersonID)
         {
             return PartialView("_InvoiceChanges", PersonID);
         }
 
         [DontWrapResult]
-        [ClaimsAuthorize("CanViewPersonEmail")]
+        [ClaimsAuthorize("CanViewChangeHistoryInvoice")]
         public ActionResult InvoiceChanges_Read([DataSourceRequest] DataSourceRequest request, string PersonID)
         {
             var _Phone = _CustomerBAL.Read_InvoiceChangesBAL(PersonID);
@@ -473,14 +526,14 @@ namespace TMS.Web.Controllers
         }
         [ContentAuthorize]
         [DontWrapResult]
-        [ClaimsAuthorize("CanViewPersonEmail")]
+        [ClaimsAuthorize("CanViewStatusInvoice")]
         public ActionResult InvoiceStatusChanges(string PersonID)
         {
             return PartialView("_InvoiceStatusChanges", PersonID);
         }
 
         [DontWrapResult]
-        [ClaimsAuthorize("CanViewPersonEmail")]
+        [ClaimsAuthorize("CanViewStatusInvoice")]
         public ActionResult InvoiceStatusChanges_Read([DataSourceRequest] DataSourceRequest request, string PersonID)
         {
             var _Phone = _CustomerBAL.Read_InvoiceStatusChangesBAL(PersonID);
@@ -489,9 +542,18 @@ namespace TMS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
         [ActivityAuthorize]
-        [ClaimsAuthorize("CanAddEditRescheduled")]
+        [ClaimsAuthorize("CanAddStatusInvoice")]
         public ActionResult EditChangeStatus(InvoiceStatusModel _objTask)
         {
+            InvoiceHistory invoiceHistory = new InvoiceHistory();
+            invoiceHistory.History_Name = "Invoice Status Change";
+            invoiceHistory.Type = InvoiceStatus.InvoiceInvented;
+            invoiceHistory.Description = "";
+            invoiceHistory.Invoice_Number = Convert.ToInt64(_objTask.ID);
+            invoiceHistory.User_ID = CurrentUser.NameIdentifierInt64;
+            invoiceHistory.Organization_ID = CurrentUser.CompanyID;
+            invoiceHistory.Date_TIME = DateTime.Now;
+            _CustomerBAL.create_InvoiceHistoryBAL(invoiceHistory);
             _objTask.Status_Name = _objTask.Type.ToString();
             _objTask.Description = _objTask.Type.ToString();
             _objTask.CreatedBy = CurrentUser.NameIdentifierInt64;
@@ -502,6 +564,43 @@ namespace TMS.Web.Controllers
             if (result == -1)
             {
                 ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+            }
+            var resultData = new[] { _objTask };
+            return RedirectToAction("InvoiceGrid");
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ActivityAuthorize]
+        [ClaimsAuthorize("CanAddStatusInvoice")]
+        public ActionResult InvoiceStatusChanges_Create(InvoiceStatusModel _objTask,string PersonID)
+        {
+            InvoiceHistory invoiceHistory = new InvoiceHistory();
+            invoiceHistory.History_Name = "Invoice Status Change";
+            invoiceHistory.Type = InvoiceStatus.InvoiceReIssued;
+            invoiceHistory.Description = "";
+            invoiceHistory.Invoice_Number = Convert.ToInt64(PersonID);
+            invoiceHistory.User_ID = CurrentUser.NameIdentifierInt64;
+            invoiceHistory.Organization_ID = CurrentUser.CompanyID;
+            invoiceHistory.Date_TIME = DateTime.Now;
+            _CustomerBAL.create_InvoiceHistoryBAL(invoiceHistory);
+            _objTask.Status_Name = _objTask.Type.ToString();
+            _objTask.Description = _objTask.Type.ToString();
+            _objTask.CreatedBy = CurrentUser.NameIdentifierInt64;
+            _objTask.CreatedDate = DateTime.Now;
+            _objTask.Invoice_ID = Convert.ToInt64(PersonID);
+            _objTask.Organization_ID = CurrentUser.CompanyID;
+            var data = _CustomerBAL.Read_InvoiceByIDBAL(PersonID);
+            if(data.Invoice_Status==InvoiceStatus.InvoiceCancled|| data.Invoice_Status == InvoiceStatus.InvoiceCashPartialyRecived || data.Invoice_Status == InvoiceStatus.InvoiceCashRecived || data.Invoice_Status == InvoiceStatus.InvoiceDeposit)
+            {
+                ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+            }
+            else
+            {
+                    var result = this._CustomerBAL.InvoiceStatusChangeCreateBAL(_objTask);
+                    if (result == -1)
+                    {
+                        ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    }
             }
             var resultData = new[] { _objTask };
             return RedirectToAction("InvoiceGrid");

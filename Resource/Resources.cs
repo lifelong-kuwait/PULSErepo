@@ -6285,6 +6285,13 @@ namespace Resources {
                 return (string)resourceProvider.GetResource("InvoiceNumber", CultureInfo.CurrentUICulture.Name);
             }
         }
+        public static string HistoryName
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("HistoryName", CultureInfo.CurrentUICulture.Name);
+            }
+        }
         public static string InvoiceDetail
         {
             get
@@ -6516,6 +6523,14 @@ namespace Resources {
                 return (string)resourceProvider.GetResource("LastActivityType", CultureInfo.CurrentUICulture.Name);
             }
         }
+        public static string invoiceLastActivityValue
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("invoiceLastActivityValue", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        
         public static string corporate
         {
             get
@@ -6572,6 +6587,34 @@ namespace Resources {
                 return (string)resourceProvider.GetResource("OldTaxValue", CultureInfo.CurrentUICulture.Name);
             }
         }
+        public static string OldTaxType
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("OldTaxType", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string OldTaxPercentage
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("OldTaxPercentage", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string OldDiscount
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("OldDiscount", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string OldDiscountVlaue
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("OldDiscountVlaue", CultureInfo.CurrentUICulture.Name);
+            }
+        }
         public static string OldDiscountValue
         {
             get
@@ -6600,7 +6643,302 @@ namespace Resources {
                 return (string)resourceProvider.GetResource("OldTaxPercentageValue", CultureInfo.CurrentUICulture.Name);
             }
         }
-        
+        public static string InvoiceNumberRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceNumberRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string ReferanceNumber
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("ReferanceNumber", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string OrganizationID
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("OrganizationID", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceType
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceType", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceAmount
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceAmount", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceAmountWithTax
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceAmountWithTax", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceGrossTotal
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceGrossTotal", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string TaxType
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("TaxType", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string TaxValue
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("TaxValue", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string DiscountValue
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("DiscountValue", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string CreatedBy
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CreatedBy", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string CreatedDate
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CreatedDate", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string IsPartialDeposit
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("IsPartialDeposit", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string DepositeTypeID
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("DepositeTypeID", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string IsReIssued
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("IsReIssued", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string IsInstallment
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("IsInstallment", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string HistoryCreator
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("HistoryCreator", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Notes
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Notes", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string ReferanceNumberRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("ReferanceNumberRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceAmountRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceAmountRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string taxPercentageRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("taxPercentageRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string DiscountRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("DiscountRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceAmountWithTaxRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceAmountWithTaxRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
+        public static string InvoiceGrossTotalRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceGrossTotalRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string TaxTypeRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("TaxTypeRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string TaxValueRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("TaxValueRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string DiscountValueRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("DiscountValueRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceID
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceID", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceIDRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceIDRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string ItemRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("ItemRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string DescriptionRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("DescriptionRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string quantityRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("quantityRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string PriceRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("PriceRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string SubTotalRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("SubTotalRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string ReIssuedDate
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("ReIssuedDate", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string StatusName
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("StatusName", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string PaymentType
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("PaymentType", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Detail
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Detail", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string DueDate2
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("DueDate2", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Status
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Status", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string FollowUp
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("FollowUp", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
+
+
+
+
+
+
+
 
 
 
