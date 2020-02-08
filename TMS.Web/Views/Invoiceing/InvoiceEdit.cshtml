@@ -10,701 +10,703 @@
     Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
     TMS.Library.TMS.Invoice modellist = Model;
 }
-<h2>@lr.InvoiceEdit</h2>
-
-<style>
-    .k-textbox {
-        border: none;
-    }
-
-    input {
-        border: none;
-    }
-
-    .k-input {
-        width: 100%;
-    }
-</style>
-@if(modellist.Is_Partial_Deposit!=true||modellist.Is_Deposit!=true)
+@if (User.IsInRole("CanEditInvoicing"))
 {
-<form name="registration" id="registration" onsubmit="event.preventDefault();" method="post">
-    <div class="row" style="border:outset 2px;border-radius:5px; border-color:lightgrey">
-        <input type="text" id="invoiceId" value="@modellist.ID" style="display:none" />
-        <div class="col col-md-12">
-            <div class="col col-md-3">
-                <label>
-                    @lr.CustomerTo
-                </label>
-                @(Html.Kendo().DropDownList()
-                         .Name("PersonsForInvoice")
+    <h2>@lr.InvoiceEdit</h2>
+
+    <style>
+        .k-textbox {
+            border: none;
+        }
+
+        input {
+            border: none;
+        }
+
+        .k-input {
+            width: 100%;
+        }
+    </style>
+    if (modellist.Is_Partial_Deposit != true || modellist.Is_Deposit != true)
+    {
+        <form name="registration" id="registration" onsubmit="event.preventDefault();" method="post">
+            <div class="row" style="border:outset 2px;border-radius:5px; border-color:lightgrey">
+                <input type="text" id="invoiceId" value="@modellist.ID" style="display:none" />
+                <div class="col col-md-12">
+                    <div class="col col-md-3">
+                        <label>
+                            @lr.CustomerTo
+                        </label>
+                        @(Html.Kendo().DropDownList()
+                     .Name("PersonsForInvoice")
+                     .DataTextField("Text")
+                     .DataValueField("Value")
+                     .OptionLabel(lr.CustomerSelect)
+                     .Filter("contains")
+                     .DataSource(source =>
+                     {
+                         source.Read(read =>
+                         {
+                             read.Action("PersonsForInvoice", "DDL");
+                         }).ServerFiltering(false);
+                     })
+                     .Events(e =>
+                     {
+                         e.DataBound("onDataBound");
+                     })
+                     .HtmlAttributes(new { style = "width: 100%;", disabled = true })
+                        )
+                    </div>
+                    <div class="col col-md-3">
+                        <label>
+                            @lr.DueDate
+                        </label>
+                        @(Html.Kendo().DatePicker()
+                        .Name("Due_Date")
+                        .Value(DateTime.Now.Date)
+                        .Format("{0:MM/dd/yyyy}")
+                        .HtmlAttributes(new { style = "width: 100%;disabled:true;", title = "datetimepicker", required = true })
+                        .DateInput()
+
+                        )
+                    </div>
+                    <div class="col col-md-3">
+                        <label>
+                            @lr.InvoiceNumber
+                        </label>
+                        @(Html.Kendo().TextBox()
+                         .Name("Invoice_Number")
+                         .Value(modellist.Invoice_Number)
+                         .HtmlAttributes(new { style = "width: 100%;border:1px solid; disabled:true;", title = "datetimepicker", disabled = true })
+                        )
+                    </div>
+                    <div class="col col-md-3">
+                        <label>
+                            @lr.InvoiceRefNumber
+                        </label>
+                        @(Html.Kendo().TextBox()
+                            .Name("Referance_Number")
+                            .Value(modellist.Referance_Number)
+                            .HtmlAttributes(new { style = "disabled:true;width: 100%;border:1px solid;", title = "datetimepicker", disabled = true })
+                        )
+                    </div>
+                </div>
+
+            </div>
+            <div class="row" style="border:outset 2px;border-radius:5px; border-color:lightgrey">
+                <div class="col col-md-12">
+                    <div class="col col-md-3">
+                        <label>
+                            @lr.CourseFeeCurrency
+                        </label>
+                        @(Html.Kendo().DropDownList()
+                         .Name("Currency")
                          .DataTextField("Text")
                          .DataValueField("Value")
-                         .OptionLabel(lr.CustomerSelect)
+                         .OptionLabel(lr.CurrencyOptionalLabel)
                          .Filter("contains")
                          .DataSource(source =>
                          {
                              source.Read(read =>
                              {
-                                 read.Action("PersonsForInvoice", "DDL");
+                                 read.Action("Currencies", "DDL");
                              }).ServerFiltering(false);
                          })
-                         .Events(e =>
-                         {
-                             e.DataBound("onDataBound");
-                         })
-                         .HtmlAttributes(new { style = "width: 100%;", disabled = true })
-                )
+                         .HtmlAttributes(new { style = "width: 100%" })
+                        )
+                    </div>
+                    <div class="col col-md-3">
+                        <label>
+                            @lr.InvoiceTaxType
+                        </label>
+                        @(Html.Kendo().DropDownList()
+                          .Name("TaxType")
+                          .DataTextField("Text")
+                          .DataValueField("Value")
+                          .OptionLabel(lr.SelectTaxType)
+                          .Filter("contains")
+                        .HtmlAttributes(new { style = "width: 100%" })
+                        .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.TaxType>(typeof(TMS.Library.TaxType))))
+                    </div>
+                    <div class="col col-md-3 TaxPercentage" style="display:none">
+                        <label>
+                            @lr.taxPercentage
+                        </label>
+                        @(Html.Kendo().NumericTextBox<decimal>
+                        ()
+                        .Name("TaxPercentage")
+                        .Min(0)
+                        .Max(100)
+                        .Value(1)
+                        .HtmlAttributes(new { visibility = false, style = "width: 100%", title = "currency" })
+                        )
+                    </div>
+                    <div class="col col-md-3">
+                        <label>
+                            @lr.DiscountCustomer
+                        </label>
+                        @(Html.Kendo().NumericTextBox<decimal>
+                         ()
+                         .Name("DiscountPercentage")
+                         .Min(0)
+                         .Max(100)
+                         .Value(1)
+                         .HtmlAttributes(new { style = "width: 100%", title = "currency" })
+                        )
+                    </div>
+                </div>
+
             </div>
-            <div class="col col-md-3">
-                <label>
-                    @lr.DueDate
-                </label>
-                @(Html.Kendo().DatePicker()
-                            .Name("Due_Date")
-                            .Value(DateTime.Now.Date)
-                            .Format("{0:MM/dd/yyyy}")
-                            .HtmlAttributes(new { style = "width: 100%;disabled:true;", title = "datetimepicker", required = true })
-                            .DateInput()
 
-                )
+            <div class="row" style="border:outset 2px;border-radius:5px; border-color:lightgrey">
+                <div class="col col-md-12" style=" margin-top:2%;">
+                    <table class="table table-bordered" id="InvoiceTable">
+                        <thead class="thead-light">
+                            <tr>
+                                <td>
+
+                                    @lr.item
+
+                                </td>
+                                <td>
+                                    @lr.Description
+                                </td>
+                                <td>
+                                    @lr.quantity
+                                </td>
+                                <td>
+                                    @lr.Price
+                                </td>
+
+                                <td>
+                                    @lr.Total
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int i = 0; }
+                            @foreach (var x in modellist.invoiceDetailslist)
+                            {
+
+                                <tr id="@i">
+                                    <td style="display:none" name="ItemId">
+                                        <input type="text" />
+                                        @x.ID
+
+                                    </td>
+                                    <td>
+                                        @(Html.Kendo().TextBox()
+                                                            .Name("item" + i)
+                                                            .Value(x.Item)
+                                                            .HtmlAttributes(new { style = "width: 100%", title = "Item", required = "true" })
+                                        )
+                                    </td>
+                                    <td>
+                                        @(Html.Kendo().TextBox()
+                                                               .Name("Description" + i)
+                                                               .Value(x.Description)
+                                                               .HtmlAttributes(new { style = "width: 100%", title = "Description", required = "true" })
+
+                                        )
+                                    </td>
+                                    <td>
+                                        @(Html.Kendo().NumericTextBox<int>
+                                                                     ()
+                                                                     .Name("Qty" + i)
+                                                                     .Min(1)
+                                                                     .Value(Convert.ToInt32(x.Qty))
+                                                                     .HtmlAttributes(new { style = "width: 100%", @class = "currency", title = "Quantity", required = "true" })
+                                        )
+                                    </td>
+                                    <td>
+                                        @(Html.Kendo().NumericTextBox<decimal>
+                                                                     ()
+                                                                     .Name("currency" + i)
+                                                                     .Min(1)
+                                                                     .Value((decimal)x.Price)
+                                                                     .Format("00.000")
+                                                                     .Decimals(3)
+                                                                     .Events(e => e
+                                                                           .Change("change")
+                                                                           .Spin("spin")
+                                                                       )
+                                                                     .HtmlAttributes(new { style = "width: 100%", @class = "currency", title = "currency", required = "true" })
+                                        )
+                                    </td>
+                                    <td>
+                                        @(Html.Kendo().TextBox()
+                                                                                                                                                    .Name("Total" + i)
+                                                                                                                                                    .Value(x.Sub_Total.ToString())
+                                                                                                                                                    .HtmlAttributes(new { style = "width:70%;", title = "Total", disabled = true, required = "true" })
+                                        )
+                                        <label style="float:right;">
+                                            <button type="button" class="RemoveRow" value="X"><span class="glyphicon glyphicon-trash"></span></button>
+                                        </label>
+                                    </td>
+                                </tr>
+                                i++;
+
+                            }
+
+
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col col-md-3">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-success addRow" value="1">@lr.AddNewRow</button>
+                            </div>
+                        </div>
+                        <div class="col col-md-9" style=" margin-top:2%;">
+                            <div class="grid-total">
+                                <div>
+                                    <label width="50%;" style="margin-left:50%;">
+                                        @lr.Total
+                                    </label>
+                                    <span style="float:right"><input type="text" id="subTotal" readonly="" class="subTotalField" value="@modellist.Invoice_Amount"></span>
+                                </div>
+                                <div style="margin-top:2%;margin-bottom:2%;border-bottom:solid 1px;">
+                                    <div style="height: 50px;">
+                                        <label width="50%;" style="margin-left:50%" id="taxlabel">@lr.Tax (@modellist.Tax_Type)</label>
+                                        <span style="float:right"><input type="text" id="TAXTax" readonly="" class="subTotalField" value="@modellist.Tax_Value"></span>
+                                    </div>
+                                </div>
+                                <div style="margin-top:2%;margin-bottom:2%;">
+                                    <div style="height: 50px;">
+                                        <label width="50%;" style="margin-left:50%">@lr.TotalAfterTax</label>
+                                        <span style="float:right"><input type="text" id="totalAfterTax" readonly="" class="subTotalField" value="@modellist.Invoice_Amount_With_Tax"></span>
+                                    </div>
+                                </div>
+                                <div style="margin-top:2%;margin-bottom:2%;border-bottom:solid 1px;">
+                                    <div style="height: 50px;">
+                                        <label width="50%;" style="margin-left:50%">@lr.DiscountCustomer %</label>
+                                        <span style="float:right"><input type="text" id="Discount" readonly="" class="subTotalField" value="@modellist.Discount_Value"></span>
+                                    </div>
+                                </div>
+                                <div id="invoiceTotalSection" class="total" style="height:50px;margin-bottom:2%;border-bottom:double 3px;">
+                                    <label id="InvoiceTotal" width="50%;" style="margin-left:50%">@lr.NetTotal</label>
+                                    <span id="totalCredit" style="float:right"><em id="currency_exchangeTotal" style="display: none;"></em><input type="text" id="invoiceTotal" readonly="" class="totalField" value="@modellist.Invoice_Gross_Total" style="color: rgb(0, 0, 0);"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" name="submit" class="btn btn-success FormSubmit" style="margin-left:80%; margin-top:1%;margin-bottom:1%;" value="submit" id="FormSubmit">@lr.confirmUpdated</button>
             </div>
-            <div class="col col-md-3">
-                <label>
-                    @lr.InvoiceNumber
-                </label>
-                @(Html.Kendo().TextBox()
-                             .Name("Invoice_Number")
-                             .Value(modellist.Invoice_Number)
-                             .HtmlAttributes(new { style = "width: 100%;border:1px solid; disabled:true;", title = "datetimepicker", disabled = true })
-                )
-            </div>
-            <div class="col col-md-3">
-                <label>
-                    @lr.InvoiceRefNumber
-                </label>
-                @(Html.Kendo().TextBox()
-                                .Name("Referance_Number")
-                                .Value(modellist.Referance_Number)
-                                .HtmlAttributes(new { style = "disabled:true;width: 100%;border:1px solid;", title = "datetimepicker", disabled = true })
-                )
-            </div>
-        </div>
 
-    </div>
-    <div class="row" style="border:outset 2px;border-radius:5px; border-color:lightgrey">
-        <div class="col col-md-12">
-            <div class="col col-md-3">
-                <label>
-                    @lr.CourseFeeCurrency
-                </label>
-                @(Html.Kendo().DropDownList()
-                             .Name("Currency")
-                             .DataTextField("Text")
-                             .DataValueField("Value")
-                             .OptionLabel(lr.CurrencyOptionalLabel)
-                             .Filter("contains")
-                             .DataSource(source =>
-                             {
-                                 source.Read(read =>
-                                 {
-                                     read.Action("Currencies", "DDL");
-                                 }).ServerFiltering(false);
-                             })
-                             .HtmlAttributes(new { style = "width: 100%" })
-                )
-            </div>
-            <div class="col col-md-3">
-                <label>
-                    @lr.InvoiceTaxType
-                </label>
-                @(Html.Kendo().DropDownList()
-                              .Name("TaxType")
-                              .DataTextField("Text")
-                              .DataValueField("Value")
-                              .OptionLabel(lr.SelectTaxType)
-                              .Filter("contains")
-                            .HtmlAttributes(new { style = "width: 100%" })
-                            .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.TaxType>(typeof(TMS.Library.TaxType))))
-            </div>
-            <div class="col col-md-3 TaxPercentage" style="display:none">
-                <label>
-                    @lr.taxPercentage
-                </label>
-                @(Html.Kendo().NumericTextBox<decimal>
-                            ()
-                            .Name("TaxPercentage")
-                            .Min(0)
-                            .Max(100)
-                            .Value(1)
-                            .HtmlAttributes(new { visibility = false, style = "width: 100%", title = "currency" })
-                )
-            </div>
-            <div class="col col-md-3">
-                <label>
-                   @lr.DiscountCustomer
-                </label>
-                @(Html.Kendo().NumericTextBox<decimal>
-                             ()
-                             .Name("DiscountPercentage")
-                             .Min(0)
-                             .Max(100)
-                             .Value(1)
-                             .HtmlAttributes(new { style = "width: 100%", title = "currency" })
-                )
-            </div>
-        </div>
+        </form>
+        <script type="text/javascript">
+            jQuery(document).ready(function () {
+                jQuery(".TaxPercentage").hide();
+                jQuery('.FormSubmit').click(function () {
+                    if (jQuery("#registration").valid()) {
+                        var ID = jQuery("#invoiceId").val()
+                        var jsDate = jQuery("#Due_Date").val();
+                        var a = jQuery('#Invoice_Number').val();
+                        var aVal = a;
+                        var b = jQuery('#Referance_Number').val();
+                        var bVal = b;
+                        var c = jQuery('#TaxPercentage').data("kendoNumericTextBox");
+                        var cVal = c.value();
+                        var d = jQuery('#DiscountPercentage').data("kendoNumericTextBox");
+                        var dVal = d.value();
+                        var eVal = jQuery('#totalAfterTax').val();
+                        var etVal = jQuery('#TAXTax').val();
+                        var dtVal = jQuery('#Discount').val();
+                        var fVal = jQuery('#invoiceTotal').val();
+                        var gfVal = jQuery('#subTotal').val();
+                        var g = jQuery('#PersonsForInvoice').data("kendoDropDownList");
+                        var gVal = g.value();
+                        var gh = jQuery('#TaxType').data("kendoDropDownList");
+                        var ghVal = gh.value();
+                        var model = {
+                            ID: ID,
+                            Invoice_Number: aVal,
+                            Referance_Number: bVal,
+                            Tax_Type: ghVal,
+                            Tax_Value: etVal,
+                            Tax_Percentage: cVal,
+                            Discount: dVal,
+                            Discount_Value: dtVal,
+                            Invoice_Amount_With_Tax: eVal,
+                            InvoiceGross_Total: fVal,
+                            Generated_To: gVal,
+                            Invoice_Amount_With_Tax: eVal,
+                            Invoice_Gross_Total: fVal,
+                            Generated_To: gVal,
+                            Due_Date: jsDate,
+                            Invoice_Amount: gfVal,
+                        };
+                        var response = jQuery.ajax({
+                            method: "post",
+                            url: "/Invoiceing/Invoice_Update",
+                            dataType: "JSON",
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify(model),
+                            success: function (msg) {
+                                if (msg.success === true && msg.responseText > 0) {
+                                    jQuery('#InvoiceTable > tbody  > tr').each(function (index, tr) {
+                                        var itemId = jQuery(this).children('td:first').text();
+                                        var itemIdValue = -1;
+                                        if (itemId > 0) { itemIdValue = itemId };
 
-    </div>
+                                        jQuery('#item' + jQuery(this).attr("id") + '').val()
+                                        var model2 = {
+                                            ID: itemIdValue,
+                                            Invoice_ID: msg.responseText,
+                                            Item: jQuery('#item' + jQuery(this).attr("id") + '').val(),
+                                            Description: jQuery('#Description' + jQuery(this).attr("id") + '').val(),
+                                            Qty: jQuery('#Qty' + jQuery(this).attr("id") + '').val(),
+                                            Price: jQuery('#currency' + jQuery(this).attr("id") + '').val(),
+                                            Sub_Total: jQuery('#Total' + jQuery(this).attr("id") + '').val(),
+                                        };
+                                        jQuery.ajax({
+                                            method: "post",
+                                            url: "/Invoiceing/InvoiceDetail_Update",
+                                            dataType: "JSON",
+                                            contentType: "application/json; charset=utf-8",
+                                            data: JSON.stringify(model2),
+                                            success: function (msgg) {
+                                            }
+                                        });
 
-    <div class="row" style="border:outset 2px;border-radius:5px; border-color:lightgrey">
-        <div class="col col-md-12" style=" margin-top:2%;">
-            <table class="table table-bordered" id="InvoiceTable">
-                <thead class="thead-light">
-                    <tr>
-                        <td>
+                                    });
+                                    window.open("/Invoiceing/InvoiceGrid", "_self")
 
-                            @lr.item
+                                } else {
 
-                        </td>
-                        <td>
-                            @lr.Description
-                        </td>
-                        <td>
-                            @lr.quantity
-                        </td>
-                        <td>
-                            @lr.Price
-                        </td>
+                                }
+                            }
 
-                        <td>
-                            @lr.Total
-                        </td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @{int i = 0; }
-                    @foreach (var x in modellist.invoiceDetailslist)
-                    {
-
-                        <tr id="@i">
-                            <td style="display:none" name="ItemId">
-                                <input type="text" />
-                                @x.ID
-
-                            </td>
-                            <td>
-                                @(Html.Kendo().TextBox()
-                                    .Name("item" + i)
-                                    .Value(x.Item)
-                                    .HtmlAttributes(new { style = "width: 100%", title = "Item", required = "true" })
-                                )
-                            </td>
-                            <td>
-                                @(Html.Kendo().TextBox()
-                                       .Name("Description" + i)
-                                       .Value(x.Description)
-                                       .HtmlAttributes(new { style = "width: 100%", title = "Description", required = "true" })
-
-                                )
-                            </td>
-                            <td>
-                                @(Html.Kendo().NumericTextBox<int>
-                                             ()
-                                             .Name("Qty" + i)
-                                             .Min(1)
-                                             .Value(Convert.ToInt32(x.Qty))
-                                             .HtmlAttributes(new { style = "width: 100%", @class = "currency", title = "Quantity", required = "true" })
-                                )
-                            </td>
-                            <td>
-                                @(Html.Kendo().NumericTextBox<decimal>
-                                             ()
-                                             .Name("currency" + i)
-                                             .Min(1)
-                                             .Value((decimal)x.Price)
-                                             .Format("00.000")
-                                             .Decimals(3)
-                                             .Events(e => e
-                                                   .Change("change")
-                                                   .Spin("spin")
-                                               )
-                                             .HtmlAttributes(new { style = "width: 100%", @class = "currency", title = "currency", required = "true" })
-                                )
-                            </td>
-                            <td>
-                                @(Html.Kendo().TextBox()
-                                                                                                                            .Name("Total" + i)
-                                                                                                                            .Value(x.Sub_Total.ToString())
-                                                                                                                            .HtmlAttributes(new { style = "width:70%;", title = "Total", disabled = true, required = "true" })
-                                )
-                                <label style="float:right;">
-                                    <button type="button" class="RemoveRow" value="X"><span class="glyphicon glyphicon-trash"></span></button>
-                                </label>
-                            </td>
-                        </tr>
-                        i++;
-
+                        });
                     }
-
-
-                </tbody>
-            </table>
-            <div class="row">
-                <div class="col col-md-3">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-success addRow" value="1">@lr.AddNewRow</button>
-                    </div>
-                </div>
-                <div class="col col-md-9" style=" margin-top:2%;">
-                    <div class="grid-total">
-                        <div>
-                            <label width="50%;" style="margin-left:50%;">
-                                @lr.Total
-                            </label>
-                            <span style="float:right"><input type="text" id="subTotal" readonly="" class="subTotalField" value="@modellist.Invoice_Amount"></span>
-                        </div>
-                        <div style="margin-top:2%;margin-bottom:2%;border-bottom:solid 1px;">
-                            <div style="height: 50px;">
-                                <label width="50%;" style="margin-left:50%" id="taxlabel">@lr.Tax (@modellist.Tax_Type)</label>
-                                <span style="float:right"><input type="text" id="TAXTax" readonly="" class="subTotalField" value="@modellist.Tax_Value"></span>
-                            </div>
-                        </div>
-                        <div style="margin-top:2%;margin-bottom:2%;">
-                            <div style="height: 50px;">
-                                <label width="50%;" style="margin-left:50%">@lr.TotalAfterTax</label>
-                                <span style="float:right"><input type="text" id="totalAfterTax" readonly="" class="subTotalField" value="@modellist.Invoice_Amount_With_Tax"></span>
-                            </div>
-                        </div>
-                        <div style="margin-top:2%;margin-bottom:2%;border-bottom:solid 1px;">
-                            <div style="height: 50px;">
-                                <label width="50%;" style="margin-left:50%">@lr.DiscountCustomer %</label>
-                                <span style="float:right"><input type="text" id="Discount" readonly="" class="subTotalField" value="@modellist.Discount_Value"></span>
-                            </div>
-                        </div>
-                        <div id="invoiceTotalSection" class="total" style="height:50px;margin-bottom:2%;border-bottom:double 3px;">
-                            <label id="InvoiceTotal" width="50%;" style="margin-left:50%">@lr.NetTotal</label>
-                            <span id="totalCredit" style="float:right"><em id="currency_exchangeTotal" style="display: none;"></em><input type="text" id="invoiceTotal" readonly="" class="totalField" value="@modellist.Invoice_Gross_Total" style="color: rgb(0, 0, 0);"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button type="submit" name="submit" class="btn btn-success FormSubmit" style="margin-left:80%; margin-top:1%;margin-bottom:1%;" value="submit" id="FormSubmit">@lr.confirmUpdated</button>
-    </div>
-
-</form>
-<script type="text/javascript">
-    jQuery(document).ready(function () {
-        jQuery(".TaxPercentage").hide();
-        jQuery('.FormSubmit').click(function () {
-            if (jQuery("#registration").valid()) {
-                var ID = jQuery("#invoiceId").val()
-                var jsDate = jQuery("#Due_Date").val();
-                var a = jQuery('#Invoice_Number').val();
-                var aVal = a;
-                var b = jQuery('#Referance_Number').val();
-                var bVal = b;
-                var c = jQuery('#TaxPercentage').data("kendoNumericTextBox");
-                var cVal = c.value();
-                var d = jQuery('#DiscountPercentage').data("kendoNumericTextBox");
-                var dVal = d.value();
-                var eVal = jQuery('#totalAfterTax').val();
-                var etVal = jQuery('#TAXTax').val();
-                var dtVal = jQuery('#Discount').val();
-                var fVal = jQuery('#invoiceTotal').val();
-                var gfVal = jQuery('#subTotal').val();
-                var g = jQuery('#PersonsForInvoice').data("kendoDropDownList");
-                var gVal = g.value();
-                var gh = jQuery('#TaxType').data("kendoDropDownList");
-                var ghVal = gh.value();
-                var model = {
-                    ID: ID,
-                    Invoice_Number: aVal,
-                    Referance_Number: bVal,
-                    Tax_Type: ghVal,
-                    Tax_Value: etVal,
-                    Tax_Percentage: cVal,
-                    Discount: dVal,
-                    Discount_Value: dtVal,
-                    Invoice_Amount_With_Tax: eVal,
-                    InvoiceGross_Total: fVal,
-                    Generated_To: gVal,
-                    Invoice_Amount_With_Tax: eVal,
-                    Invoice_Gross_Total: fVal,
-                    Generated_To: gVal,
-                    Due_Date: jsDate,
-                    Invoice_Amount: gfVal,
-                };
-                var response = jQuery.ajax({
-                    method: "post",
-                    url: "/Invoiceing/Invoice_Update",
-                    dataType: "JSON",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify(model),
-                    success: function (msg) {
-                        if (msg.success === true && msg.responseText > 0) {
-                            jQuery('#InvoiceTable > tbody  > tr').each(function (index, tr) {
-                                var itemId = jQuery(this).children('td:first').text();
-                                var itemIdValue = -1;
-                                if (itemId > 0) { itemIdValue = itemId };
-
-                                jQuery('#item' + jQuery(this).attr("id") + '').val()
-                                var model2 = {
-                                    ID: itemIdValue,
-                                    Invoice_ID: msg.responseText,
-                                    Item: jQuery('#item' + jQuery(this).attr("id") + '').val(),
-                                    Description: jQuery('#Description' + jQuery(this).attr("id") + '').val(),
-                                    Qty: jQuery('#Qty' + jQuery(this).attr("id") + '').val(),
-                                    Price: jQuery('#currency' + jQuery(this).attr("id") + '').val(),
-                                    Sub_Total: jQuery('#Total' + jQuery(this).attr("id") + '').val(),
-                                };
-                                jQuery.ajax({
-                                    method: "post",
-                                    url: "/Invoiceing/InvoiceDetail_Update",
-                                    dataType: "JSON",
-                                    contentType: "application/json; charset=utf-8",
-                                    data: JSON.stringify(model2),
-                                    success: function (msgg) {
-                                    }
-                                });
-
-                            });
-                            window.open("/Invoiceing/InvoiceGrid", "_self")
-
+                });
+                jQuery('#InvoiceTable').on('click', 'button', function () {
+                    if (jQuery('#InvoiceTable tbody tr').length > 1) {
+                        jQuery(this).closest('tr').remove();
+                    }
+                    var le = jQuery('#InvoiceTable tbody tr:last').attr('id');
+                    var l = Number(le) + 1;
+                    var x = 0.00;
+                    for (i = 0; i < l; i++) {
+                        var a = jQuery('#Total' + i + ':text').val();
+                        if (isNaN(Number(a))) {
                         } else {
-
+                            x = x + Number(a)
                         }
                     }
+                    jQuery('#subTotal:text').val(getFlooredFixed(x, 3));
+                    var numerictextboxTax = jQuery('#TaxType').data("kendoDropDownList");
+                    var qTax = numerictextboxTax.value();
+                    if (qTax === '1') {
+                        var numerictextboxTaxP = jQuery('#TaxPercentage').data("kendoNumericTextBox");
+                        var qTaxP = numerictextboxTaxP.value();
+                        if (qTaxP === '0') {
+                            jQuery('#TAXTax:text').val(00);
+                        } else {
+                            var taxvalue = (x / 100) * Number(qTaxP)
+                            jQuery('#TAXTax:text').val(getFlooredFixed(taxvalue, 3));
+                            jQuery('#taxlabel').text('Tax (Exclusive of ' + qTaxP + ' % )');
+                            var ac = Number(taxvalue) + Number(x);
+                            jQuery('#totalAfterTax:text').val(getFlooredFixed(ac, 3));
+                        }
+                    }
+                    else if (qTax === '2') {
+                        var numerictextboxTaxP = jQuery('#TaxPercentage').data("kendoNumericTextBox");
+                        var qTaxP = numerictextboxTaxP.value();
+                        if (qTaxP === 0) {
+                            jQuery('#TAXTax:text').val(000);
+                        } else {
+                            var taxvalue = (x / (100 + Number(qTaxP))) * Number(qTaxP)
+                            jQuery('#TAXTax:text').val(getFlooredFixed(taxvalue, 3));
+                            jQuery('#taxlabel').text('Tax (inclusive of ' + qTaxP + ' % )');
+                            jQuery('#totalAfterTax:text').val(getFlooredFixed(x, 3));
 
-                });
-            }
-        });
-        jQuery('#InvoiceTable').on('click', 'button', function () {
-            if (jQuery('#InvoiceTable tbody tr').length > 1) {
-                jQuery(this).closest('tr').remove();
-            }
-            var le = jQuery('#InvoiceTable tbody tr:last').attr('id');
-            var l = Number(le) + 1;
-            var x = 0.00;
-            for (i = 0; i < l; i++) {
-                var a = jQuery('#Total' + i + ':text').val();
-                if (isNaN(Number(a))) {
-                } else {
-                    x = x + Number(a)
-                }
-            }
-            jQuery('#subTotal:text').val(getFlooredFixed(x, 3));
-            var numerictextboxTax = jQuery('#TaxType').data("kendoDropDownList");
-            var qTax = numerictextboxTax.value();
-            if (qTax === '1') {
-                var numerictextboxTaxP = jQuery('#TaxPercentage').data("kendoNumericTextBox");
-                var qTaxP = numerictextboxTaxP.value();
-                if (qTaxP === '0') {
-                    jQuery('#TAXTax:text').val(00);
-                } else {
-                    var taxvalue = (x / 100) * Number(qTaxP)
-                    jQuery('#TAXTax:text').val(getFlooredFixed(taxvalue, 3));
-                    jQuery('#taxlabel').text('Tax (Exclusive of ' + qTaxP + ' % )');
-                    var ac = Number(taxvalue) + Number(x);
-                    jQuery('#totalAfterTax:text').val(getFlooredFixed(ac, 3));
-                }
-            }
-            else if (qTax === '2') {
-                var numerictextboxTaxP = jQuery('#TaxPercentage').data("kendoNumericTextBox");
-                var qTaxP = numerictextboxTaxP.value();
-                if (qTaxP === 0) {
-                    jQuery('#TAXTax:text').val(000);
-                } else {
-                    var taxvalue = (x / (100 + Number(qTaxP))) * Number(qTaxP)
-                    jQuery('#TAXTax:text').val(getFlooredFixed(taxvalue, 3));
-                    jQuery('#taxlabel').text('Tax (inclusive of ' + qTaxP + ' % )');
-                    jQuery('#totalAfterTax:text').val(getFlooredFixed(x, 3));
+                        }
+                    } else if (qTax === '3') {
+                        jQuery('#TAXTax:text').val(000);
+                        jQuery('#taxlabel').text('No Tax');
+                        jQuery('#totalAfterTax:text').val(getFlooredFixed(x, 3));
 
-                }
-            } else if (qTax === '3') {
-                jQuery('#TAXTax:text').val(000);
-                jQuery('#taxlabel').text('No Tax');
-                jQuery('#totalAfterTax:text').val(getFlooredFixed(x, 3));
+                    }
+                    var total = jQuery('#totalAfterTax:text').val();
+                    var dV = 0;
+                    var DP = f('DiscountPercentage');
+                    if (DP === '0') {
 
-            }
-            var total = jQuery('#totalAfterTax:text').val();
-            var dV = 0;
-            var DP = f('DiscountPercentage');
-            if (DP === '0') {
+                    } else {
+                        dV = (Number(total) / 100) * Number(DP);
+                    }
+                    jQuery('#Discount:text').val(getFlooredFixed(dV, 3))
+                    var gTotal = Number(total) - Number(dV);
+                    jQuery('#invoiceTotal:text').val(getFlooredFixed(gTotal, 3))
+                })
+                jQuery('.addRow').click(function () {
+                    var le = jQuery('#InvoiceTable tbody tr:last').attr('id');
+                    var leng = Number(le) + 1;
+                    var td1 = '<td><input class="k-textbox" id="item' + leng + '" name="item' + leng + '" style="width: 100%" title="item" required="true"></td>';
+                    var td2 = '<td><input class="k-textbox" id="Description' + leng + '" name="Description' + leng + '" style="width: 100%" title="Description" required="true"></td>';
+                    var td3 = '<td><input id="Qty' + leng + '" min="1" style="wigth:100%" name="Qty' + leng + '" style="display: none;" title="Quantity" type="text" value="1" data-role="numerictextbox" role="spinbutton" aria-valuemin="1" class="k-input" aria-valuenow="1" aria-disabled="false" required="true"></td>';
+                    var td4 = '<td><input id="currency' + leng + '" min="1" style="wigth:100%" name="currency' + leng + '" style="display: none;" title="currency" type="text" value="1" data-role="numerictextbox" role="spinbutton" aria-valuemin="1" class="k-input" aria-valuenow="1" aria-disabled="false" required="true"></td>';
+                    var td5 = '<td><input class="k-textbox" disabled="True" id="Total' + leng + '" name="Total" style="width:70%;" title="Total" required="true"><label class="rowRemo" style="float:right;"><button type = "button" class="RemoveRow" value = "X"><span class="glyphicon glyphicon-trash"></span></button></label></td>';
+                    jQuery('#InvoiceTable tr:last').after('<tr id="' + leng + '">' + td1 + td2 + td3 + td4 + td5 + '</tr>');
+                    kendo.syncReady(function () {
+                        jQuery("#Qty" + leng + "").kendoNumericTextBox({ "decimals": 0 });
+                        jQuery("#currency" + leng + "").kendoNumericTextBox({ "decimals": 2 });
+                    });
+                })
+                jQuery(document).on('change', '#TaxType', function () {
+                    var numerictextboxTax = jQuery('#TaxType').data("kendoDropDownList");
+                    var qTax = numerictextboxTax.value();
+                    var x = jQuery('#subTotal:text').val();
+                    if (isNaN(Number(x))) {
 
-            } else {
-                dV = (Number(total) / 100) * Number(DP);
-            }
-            jQuery('#Discount:text').val(getFlooredFixed(dV, 3))
-            var gTotal = Number(total) - Number(dV);
-            jQuery('#invoiceTotal:text').val(getFlooredFixed(gTotal, 3))
-        })
-        jQuery('.addRow').click(function () {
-            var le = jQuery('#InvoiceTable tbody tr:last').attr('id');
-            var leng = Number(le) + 1;
-            var td1 = '<td><input class="k-textbox" id="item' + leng + '" name="item' + leng + '" style="width: 100%" title="item" required="true"></td>';
-            var td2 = '<td><input class="k-textbox" id="Description' + leng + '" name="Description' + leng + '" style="width: 100%" title="Description" required="true"></td>';
-            var td3 = '<td><input id="Qty' + leng + '" min="1" style="wigth:100%" name="Qty' + leng + '" style="display: none;" title="Quantity" type="text" value="1" data-role="numerictextbox" role="spinbutton" aria-valuemin="1" class="k-input" aria-valuenow="1" aria-disabled="false" required="true"></td>';
-            var td4 = '<td><input id="currency' + leng + '" min="1" style="wigth:100%" name="currency' + leng + '" style="display: none;" title="currency" type="text" value="1" data-role="numerictextbox" role="spinbutton" aria-valuemin="1" class="k-input" aria-valuenow="1" aria-disabled="false" required="true"></td>';
-            var td5 = '<td><input class="k-textbox" disabled="True" id="Total' + leng + '" name="Total" style="width:70%;" title="Total" required="true"><label class="rowRemo" style="float:right;"><button type = "button" class="RemoveRow" value = "X"><span class="glyphicon glyphicon-trash"></span></button></label></td>';
-            jQuery('#InvoiceTable tr:last').after('<tr id="' + leng + '">' + td1 + td2 + td3 + td4 + td5 + '</tr>');
-            kendo.syncReady(function () {
-                jQuery("#Qty" + leng + "").kendoNumericTextBox({ "decimals": 0 });
-                jQuery("#currency" + leng + "").kendoNumericTextBox({ "decimals": 2 });
+                    } else {
+                        if (qTax === '1') {
+                            var numerictextboxTaxP = jQuery('#TaxPercentage').data("kendoNumericTextBox");
+                            var qTaxP = numerictextboxTaxP.value();
+                            if (qTaxP === 0) {
+                                jQuery('#TAXTax:text').val(000);
+                            } else {
+                                var taxvalue = (x / 100) * Number(qTaxP)
+                                jQuery('#TAXTax:text').val(getFlooredFixed(taxvalue, 3));
+                                jQuery('#taxlabel').text('Tax (Exclusive of ' + qTaxP + ' % )');
+                                var ac = Number(taxvalue) + Number(x);
+                                jQuery('#totalAfterTax:text').val(getFlooredFixed(ac, 3));
+                            }
+                        }
+                        else if (qTax === '2') {
+                            var numerictextboxTaxP = jQuery('#TaxPercentage').data("kendoNumericTextBox");
+                            var qTaxP = numerictextboxTaxP.value();
+                            if (qTaxP === 0) {
+                                jQuery('#TAXTax:text').val(000);
+                            } else {
+                                var taxvalue = (x / (100 + Number(qTaxP))) * Number(qTaxP)
+                                jQuery('#TAXTax:text').val(getFlooredFixed(taxvalue, 3));
+                                jQuery('#taxlabel').text('Tax (inclusive of ' + qTaxP + ' % )');
+                                // var ac = Number(taxvalue) + Number(x);
+                                jQuery('#totalAfterTax:text').val(getFlooredFixed(x, 3));
+                            }
+                        } else if (qTax === '3') {
+                            jQuery('#TAXTax:text').val('00');
+                            jQuery('#taxlabel').text('No Tax');
+                            jQuery('#totalAfterTax:text').val(getFlooredFixed(x, 3));
+
+                        }
+                        var total = jQuery('#totalAfterTax:text').val();
+                        var dV = 0;
+                        var DP = f('DiscountPercentage');
+                        if (DP === '0') {
+
+                        } else {
+                            dV = (Number(total) / 100) * Number(DP);
+                        }
+                        jQuery('#Discount:text').val(getFlooredFixed(dV, 3))
+                        var gTotal = Number(total) - Number(dV);
+                        jQuery('#invoiceTotal:text').val(getFlooredFixed(gTotal, 3))
+                    }
+                })
+                jQuery(document).on('change', '#TaxPercentage', function () {
+                    var numerictextboxTax = jQuery('#TaxType').data("kendoDropDownList");
+                    var qTax = numerictextboxTax.value();
+                    var x = jQuery('#subTotal:text').val();
+                    if (isNaN(Number(x))) {
+
+                    } else {
+                        if (qTax === '1') {
+                            var xx = 'TaxPercentage';
+                            var qTaxP = f(xx);
+                            if (qTaxP === 0) {
+                                jQuery('#TAXTax:text').val(000);
+                            } else {
+                                var taxvalue = (x / 100) * Number(qTaxP)
+                                jQuery('#TAXTax:text').val(getFlooredFixed(taxvalue, 3));
+                                jQuery('#taxlabel').text('Tax (Exclusive of ' + qTaxP + ' % )');
+                                var ac = Number(taxvalue) + Number(x);
+                                jQuery('#totalAfterTax:text').val(getFlooredFixed(ac, 3));
+                            }
+                        }
+                        else if (qTax === '2') {
+                            var xx = 'TaxPercentage';
+                            var qTaxP = f(xx);
+                            if (qTaxP === 0) {
+                                jQuery('#TAXTax:text').val(00);
+                            } else {
+                                var taxvalue = (x / (100 + Number(qTaxP))) * Number(qTaxP)
+                                jQuery('#TAXTax:text').val(getFlooredFixed(taxvalue, 3));
+                                jQuery('#taxlabel').text('Tax (inclusive of ' + qTaxP + ' % )');
+                                jQuery('#totalAfterTax:text').val(getFlooredFixed(x, 3));
+                            }
+                        } else if (qTax === '3') {
+                            jQuery('#TAXTax:text').val('00');
+                            jQuery('#taxlabel').text('No Tax');
+                            jQuery('#totalAfterTax:text').val(getFlooredFixed(x, 3));
+
+                        }
+                        var total = jQuery('#totalAfterTax:text').val();
+                        var dV = 0;
+                        var DP = f('DiscountPercentage');
+                        if (DP === '0') {
+
+                        } else {
+                            dV = (Number(total) / 100) * Number(DP);
+                        }
+                        jQuery('#Discount:text').val(getFlooredFixed(dV, 3))
+                        var qTotal = Number(total) - Number(dV)
+                        jQuery('#invoiceTotal:text').val(getFlooredFixed(qTotal, 3))
+
+                    }
+                })
+                //Discount
+                jQuery(document).on('change', '#DiscountPercentage', function () {
+                    var numerictextboxTax = jQuery('#TaxType').data("kendoDropDownList");
+                    var qTax = numerictextboxTax.value();
+                    var x = jQuery('#subTotal:text').val();
+                    if (isNaN(Number(x))) {
+
+                    } else {
+                        if (qTax === '1') {
+                            var xx = 'TaxPercentage';
+                            var qTaxP = f(xx);
+                            if (qTaxP === 0) {
+                                jQuery('#TAXTax:text').val(000);
+                            } else {
+                                var taxvalue = (x / 100) * Number(qTaxP)
+                                jQuery('#TAXTax:text').val(getFlooredFixed(taxvalue, 3));
+                                jQuery('#taxlabel').text('Tax (Exclusive of ' + qTaxP + ' % )');
+                                var ac = Number(taxvalue) + Number(x);
+                                jQuery('#totalAfterTax:text').val(getFlooredFixed(ac, 3));
+                            }
+                        }
+                        else if (qTax === '2') {
+                            var xx = 'TaxPercentage';
+                            var qTaxP = f(xx);
+                            if (qTaxP === 0) {
+                                jQuery('#TAXTax:text').val(000);
+                            } else {
+                                var taxvalue = (x / (100 + Number(qTaxP))) * Number(qTaxP)
+                                jQuery('#TAXTax:text').val(getFlooredFixed(taxvalue, 3));
+                                jQuery('#taxlabel').text('Tax (inclusive of ' + qTaxP + ' % )');
+                                jQuery('#totalAfterTax:text').val(getFlooredFixed(x, 3));
+                            }
+                        } else if (qTax === '3') {
+                            jQuery('#TAXTax:text').val('00');
+                            jQuery('#taxlabel').text('No Tax');
+                            jQuery('#totalAfterTax:text').val(getFlooredFixed(x, 3));
+
+                        }
+                        var total = jQuery('#totalAfterTax:text').val();
+                        var dV = 0;
+                        var DP = f('DiscountPercentage');
+                        if (DP === '0') {
+
+                        } else {
+                            dV = (Number(total) / 100) * Number(DP);
+                        }
+                        jQuery('#Discount:text').val(getFlooredFixed(dV, 3))
+                        var qTotal = Number(total) - Number(dV);
+                        jQuery('#invoiceTotal:text').val(getFlooredFixed(qTotal, 3))
+
+                    }
+                })
+                jQuery(document).on('change', '#InvoiceTable tbody tr td', function () {
+                    var numerictextboxTax = jQuery('#TaxType').data("kendoDropDownList");
+                    var qTax = numerictextboxTax.value();
+                    if (qTax === '1' || qTax === '2' || qTax === '3') {
+                        var cc = 'Qty' + jQuery(this).closest('tr').attr('id') + ''
+                        var q = f(cc);
+                        var xx = 'currency' + jQuery(this).closest('tr').attr('id') + '';
+                        var p = f(xx);
+                        var CT = q * p;
+                        jQuery('#Total' + jQuery(this).closest('tr').attr('id') + ':text').val(getFlooredFixed(CT, 3));
+                        var le = jQuery('#InvoiceTable tbody tr:last').attr('id');
+                        var l = Number(le) + 1;
+                        var x = 0.00;
+                        for (i = 0; i < l; i++) {
+                            var a = jQuery('#Total' + i + ':text').val();
+                            if (isNaN(Number(a))) {
+
+                            } else {
+                                x = x + Number(a)
+                            }
+                        }
+                        jQuery('#subTotal:text').val(getFlooredFixed(x, 3));
+                        var numerictextboxTax = jQuery('#TaxType').data("kendoDropDownList");
+                        var qTax = numerictextboxTax.value();
+                        if (qTax === '1') {
+                            var numerictextboxTaxP = jQuery('#TaxPercentage').data("kendoNumericTextBox");
+                            var qTaxP = numerictextboxTaxP.value();
+                            if (qTaxP === '0') {
+                                jQuery('#TAXTax:text').val(000);
+                            } else {
+                                var taxvalue = (x / 100) * Number(qTaxP)
+                                jQuery('#TAXTax:text').val(getFlooredFixed(taxvalue, 3));
+                                jQuery('#taxlabel').text('Tax (Exclusive of ' + qTaxP + ' % )');
+                                var ac = Number(taxvalue) + Number(x);
+                                jQuery('#totalAfterTax:text').val(getFlooredFixed(ac, 3));
+                            }
+                        }
+                        else if (qTax === '2') {
+                            var numerictextboxTaxP = jQuery('#TaxPercentage').data("kendoNumericTextBox");
+                            var qTaxP = numerictextboxTaxP.value();
+
+                            if (qTaxP === '0') {
+                                jQuery('#TAXTax:text').val(000);
+                            } else {
+                                var taxvalue = (x / (100 + Number(qTaxP))) * Number(qTaxP)
+                                jQuery('#TAXTax:text').val(getFlooredFixed(taxvalue, 3));
+                                jQuery('#taxlabel').text('Tax (inclusive of ' + qTaxP + ' % )');
+                                jQuery('#totalAfterTax:text').val(getFlooredFixed(x, 3));
+                            }
+                        } else if (qTax === '3') {
+                            jQuery('#TAXTax:text').val('00');
+                            jQuery('#taxlabel').text('No Tax');
+                            jQuery('#totalAfterTax:text').val(getFlooredFixed(x, 3));
+
+                        } var total = jQuery('#totalAfterTax:text').val();
+                        var dV = 0;
+                        var DP = f('DiscountPercentage');
+                        if (DP === '0') {
+
+                        } else {
+                            dV = (Number(total) / 100) * Number(DP);
+                        }
+                        jQuery('#Discount:text').val(getFlooredFixed(dV, 3))
+                        var qTotal = Number(total) - Number(dV)
+                        jQuery('#invoiceTotal:text').val(getFlooredFixed(qTotal, 3))
+
+                    } else {
+                        alert('Please Select tax type');
+                    }
+                })
+                jQuery(document).on('change', '#TaxType', function () {
+                    var numerictextboxTax = jQuery('#TaxType').data("kendoDropDownList");
+                    var qTax = numerictextboxTax.value();
+                    if (qTax === '1' || qTax === '2') {
+                        jQuery(".TaxPercentage").show();
+                    } else {
+                        jQuery(".TaxPercentage").hide();
+                    }
+                })
             });
-        })
-        jQuery(document).on('change', '#TaxType', function () {
-            var numerictextboxTax = jQuery('#TaxType').data("kendoDropDownList");
-            var qTax = numerictextboxTax.value();
-            var x = jQuery('#subTotal:text').val();
-            if (isNaN(Number(x))) {
-
-            } else {
-                if (qTax === '1') {
-                    var numerictextboxTaxP = jQuery('#TaxPercentage').data("kendoNumericTextBox");
-                    var qTaxP = numerictextboxTaxP.value();
-                    if (qTaxP === 0) {
-                        jQuery('#TAXTax:text').val(000);
-                    } else {
-                        var taxvalue = (x / 100) * Number(qTaxP)
-                        jQuery('#TAXTax:text').val(getFlooredFixed(taxvalue, 3));
-                        jQuery('#taxlabel').text('Tax (Exclusive of ' + qTaxP + ' % )');
-                        var ac = Number(taxvalue) + Number(x);
-                        jQuery('#totalAfterTax:text').val(getFlooredFixed(ac, 3));
-                    }
-                }
-                else if (qTax === '2') {
-                    var numerictextboxTaxP = jQuery('#TaxPercentage').data("kendoNumericTextBox");
-                    var qTaxP = numerictextboxTaxP.value();
-                    if (qTaxP === 0) {
-                        jQuery('#TAXTax:text').val(000);
-                    } else {
-                        var taxvalue = (x / (100 + Number(qTaxP))) * Number(qTaxP)
-                        jQuery('#TAXTax:text').val(getFlooredFixed(taxvalue, 3));
-                        jQuery('#taxlabel').text('Tax (inclusive of ' + qTaxP + ' % )');
-                        // var ac = Number(taxvalue) + Number(x);
-                        jQuery('#totalAfterTax:text').val(getFlooredFixed(x, 3));
-                    }
-                } else if (qTax === '3') {
-                    jQuery('#TAXTax:text').val('00');
-                    jQuery('#taxlabel').text('No Tax');
-                    jQuery('#totalAfterTax:text').val(getFlooredFixed(x, 3));
-
-                }
-                var total = jQuery('#totalAfterTax:text').val();
-                var dV = 0;
-                var DP = f('DiscountPercentage');
-                if (DP === '0') {
-
-                } else {
-                    dV = (Number(total) / 100) * Number(DP);
-                }
-                jQuery('#Discount:text').val(getFlooredFixed(dV, 3))
-                var gTotal = Number(total) - Number(dV);
-                jQuery('#invoiceTotal:text').val(getFlooredFixed(gTotal, 3))
+            function f(x) {
+                return document.getElementById("" + x + "").value;
             }
-        })
-        jQuery(document).on('change', '#TaxPercentage', function () {
-            var numerictextboxTax = jQuery('#TaxType').data("kendoDropDownList");
-            var qTax = numerictextboxTax.value();
-            var x = jQuery('#subTotal:text').val();
-            if (isNaN(Number(x))) {
 
-            } else {
-                if (qTax === '1') {
-                    var xx = 'TaxPercentage';
-                    var qTaxP = f(xx);
-                    if (qTaxP === 0) {
-                        jQuery('#TAXTax:text').val(000);
-                    } else {
-                        var taxvalue = (x / 100) * Number(qTaxP)
-                        jQuery('#TAXTax:text').val(getFlooredFixed(taxvalue, 3));
-                        jQuery('#taxlabel').text('Tax (Exclusive of ' + qTaxP + ' % )');
-                        var ac = Number(taxvalue) + Number(x);
-                        jQuery('#totalAfterTax:text').val(getFlooredFixed(ac, 3));
-                    }
-                }
-                else if (qTax === '2') {
-                    var xx = 'TaxPercentage';
-                    var qTaxP = f(xx);
-                    if (qTaxP === 0) {
-                        jQuery('#TAXTax:text').val(00);
-                    } else {
-                        var taxvalue = (x / (100 + Number(qTaxP))) * Number(qTaxP)
-                        jQuery('#TAXTax:text').val(getFlooredFixed(taxvalue, 3));
-                        jQuery('#taxlabel').text('Tax (inclusive of ' + qTaxP + ' % )');
-                        jQuery('#totalAfterTax:text').val(getFlooredFixed(x, 3));
-                    }
-                } else if (qTax === '3') {
-                    jQuery('#TAXTax:text').val('00');
-                    jQuery('#taxlabel').text('No Tax');
-                    jQuery('#totalAfterTax:text').val(getFlooredFixed(x, 3));
-
-                }
-                var total = jQuery('#totalAfterTax:text').val();
-                var dV = 0;
-                var DP = f('DiscountPercentage');
-                if (DP === '0') {
-
-                } else {
-                    dV = (Number(total) / 100) * Number(DP);
-                }
-                jQuery('#Discount:text').val(getFlooredFixed(dV, 3))
-               var qTotal= Number(total) - Number(dV)
-                jQuery('#invoiceTotal:text').val(getFlooredFixed(qTotal, 3))
-
+        </script>
+        <script>
+            function getFlooredFixed(v, d) {
+                return (Math.floor(v * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d);
             }
-        })
-        //Discount
-        jQuery(document).on('change', '#DiscountPercentage', function () {
-            var numerictextboxTax = jQuery('#TaxType').data("kendoDropDownList");
-            var qTax = numerictextboxTax.value();
-            var x = jQuery('#subTotal:text').val();
-            if (isNaN(Number(x))) {
-
-            } else {
-                if (qTax === '1') {
-                    var xx = 'TaxPercentage';
-                    var qTaxP = f(xx);
-                    if (qTaxP === 0) {
-                        jQuery('#TAXTax:text').val(000);
-                    } else {
-                        var taxvalue = (x / 100) * Number(qTaxP)
-                        jQuery('#TAXTax:text').val(getFlooredFixed(taxvalue, 3));
-                        jQuery('#taxlabel').text('Tax (Exclusive of ' + qTaxP + ' % )');
-                        var ac = Number(taxvalue) + Number(x);
-                        jQuery('#totalAfterTax:text').val(getFlooredFixed(ac, 3));
-                    }
-                }
-                else if (qTax === '2') {
-                    var xx = 'TaxPercentage';
-                    var qTaxP = f(xx);
-                    if (qTaxP === 0) {
-                        jQuery('#TAXTax:text').val(000);
-                    } else {
-                        var taxvalue = (x / (100 + Number(qTaxP))) * Number(qTaxP)
-                        jQuery('#TAXTax:text').val(getFlooredFixed(taxvalue, 3));
-                        jQuery('#taxlabel').text('Tax (inclusive of ' + qTaxP + ' % )');
-                        jQuery('#totalAfterTax:text').val(getFlooredFixed(x, 3));
-                    }
-                } else if (qTax === '3') {
-                    jQuery('#TAXTax:text').val('00');
-                    jQuery('#taxlabel').text('No Tax');
-                    jQuery('#totalAfterTax:text').val(getFlooredFixed(x, 3));
-
-                }
-                var total = jQuery('#totalAfterTax:text').val();
-                var dV = 0;
-                var DP = f('DiscountPercentage');
-                if (DP === '0') {
-
-                } else {
-                    dV = (Number(total) / 100) * Number(DP);
-                }
-                jQuery('#Discount:text').val(getFlooredFixed(dV, 3))
-                var qTotal = Number(total) - Number(dV);
-                jQuery('#invoiceTotal:text').val(getFlooredFixed(qTotal, 3))
-
+            function change() {
+                // console.log("Change :: " + this.value());
             }
-        })
-        jQuery(document).on('change', '#InvoiceTable tbody tr td', function () {
-            var numerictextboxTax = jQuery('#TaxType').data("kendoDropDownList");
-            var qTax = numerictextboxTax.value();
-            if (qTax === '1' || qTax === '2' || qTax === '3') {
-                var cc = 'Qty' + jQuery(this).closest('tr').attr('id') + ''
-                var q = f(cc);
-                var xx = 'currency' + jQuery(this).closest('tr').attr('id') + '';
-                var p = f(xx);
-                var CT = q * p;
-                jQuery('#Total' + jQuery(this).closest('tr').attr('id') + ':text').val(getFlooredFixed(CT, 3));
-                var le = jQuery('#InvoiceTable tbody tr:last').attr('id');
-                var l = Number(le) + 1;
-                var x = 0.00;
-                for (i = 0; i < l; i++) {
-                    var a = jQuery('#Total' + i + ':text').val();
-                    if (isNaN(Number(a))) {
 
-                    } else {
-                        x = x + Number(a)
-                    }
-                }
-                jQuery('#subTotal:text').val(getFlooredFixed(x, 3));
-                var numerictextboxTax = jQuery('#TaxType').data("kendoDropDownList");
-                var qTax = numerictextboxTax.value();
-                if (qTax === '1') {
-                    var numerictextboxTaxP = jQuery('#TaxPercentage').data("kendoNumericTextBox");
-                    var qTaxP = numerictextboxTaxP.value();
-                    if (qTaxP === '0') {
-                        jQuery('#TAXTax:text').val(000);
-                    } else {
-                        var taxvalue = (x / 100) * Number(qTaxP)
-                        jQuery('#TAXTax:text').val(getFlooredFixed(taxvalue, 3));
-                        jQuery('#taxlabel').text('Tax (Exclusive of ' + qTaxP + ' % )');
-                        var ac = Number(taxvalue) + Number(x);
-                        jQuery('#totalAfterTax:text').val(getFlooredFixed(ac, 3));
-                    }
-                }
-                else if (qTax === '2') {
-                    var numerictextboxTaxP = jQuery('#TaxPercentage').data("kendoNumericTextBox");
-                    var qTaxP = numerictextboxTaxP.value();
-
-                    if (qTaxP === '0') {
-                        jQuery('#TAXTax:text').val(000);
-                    } else {
-                        var taxvalue = (x / (100 + Number(qTaxP))) * Number(qTaxP)
-                        jQuery('#TAXTax:text').val(getFlooredFixed(taxvalue, 3));
-                        jQuery('#taxlabel').text('Tax (inclusive of ' + qTaxP + ' % )');
-                        jQuery('#totalAfterTax:text').val(getFlooredFixed(x, 3));
-                    }
-                } else if (qTax === '3') {
-                    jQuery('#TAXTax:text').val('00');
-                    jQuery('#taxlabel').text('No Tax');
-                    jQuery('#totalAfterTax:text').val(getFlooredFixed(x, 3));
-
-                } var total = jQuery('#totalAfterTax:text').val();
-                var dV = 0;
-                var DP = f('DiscountPercentage');
-                if (DP === '0') {
-
-                } else {
-                    dV = (Number(total) / 100) * Number(DP);
-                }
-                jQuery('#Discount:text').val(getFlooredFixed(dV, 3))
-                var qTotal = Number(total) - Number(dV)
-                jQuery('#invoiceTotal:text').val(getFlooredFixed(qTotal, 3))
-
-            } else {
-                alert('Please Select tax type');
+            function spin() {
+                //.log("Spin :: " + this.value());
             }
-        })
-        jQuery(document).on('change', '#TaxType', function () {
-            var numerictextboxTax = jQuery('#TaxType').data("kendoDropDownList");
-            var qTax = numerictextboxTax.value();
-            if (qTax === '1' || qTax === '2') {
-                jQuery(".TaxPercentage").show();
-            } else {
-                jQuery(".TaxPercentage").hide();
-            }
-        })
-    });
-    function f(x) {
-        return document.getElementById("" + x + "").value;
-    }
-
-</script>
-<script>
-    function getFlooredFixed(v, d) {
-        return (Math.floor(v * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d);
-    }
-    function change() {
-        // console.log("Change :: " + this.value());
-    }
-
-    function spin() {
-        //.log("Spin :: " + this.value());
-    }
-</script>
-<script>
+        </script>
+        <script>
     jQuery(function () {
         // Initialize form validation on the registration form.
         // It has the name attribute "registration"
@@ -793,12 +795,13 @@
         });
     });
 
-</script>
-<script>
-    function onDataBound() {
+        </script>
+        <script>
+            function onDataBound() {
 
 
 
-    }
-</script>
-                        }
+            }
+        </script>
+                                }
+                                }

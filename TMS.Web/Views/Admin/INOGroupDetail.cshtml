@@ -1,0 +1,130 @@
+﻿@using lr = Resources.Resources;
+@model IEnumerable<TMS.Library.Common.Groups.SecurityGroupsPermission>
+@{
+    string GroupName = (string)ViewData["GroupName"];
+    ViewBag.Title = GroupName;
+    //List<TMS.Library.Common.Groups.SecurityGroupsPermission> Model = (List<TMS.Library.Common.Groups.SecurityGroupsPermission>)ViewData["model"];
+
+}
+@if (User.IsInRole("CanViewTMSGroups"))
+{
+    if (TempData["Success"] != null)
+    {
+        if (TempData["Success"].ToString() == "Success")
+        {
+            <script>
+            jQuery(function () {
+                swal({
+                    title: '@lr.confirmUpdated',
+                    text: '@lr.RecordUpdatedSuccessfully',
+                    type: "success"
+                });
+            });
+            </script>
+        }
+    }
+    <script>
+        jQuery('#checkbox_id2').change(function () {
+
+
+            jQuery('.checkBoxClass').prop("checked", this.checked);
+
+        });
+
+        jQuery('.checkBoxClass').change(function () {
+
+            if (jQuery('input:checkbox:checked.checkBoxClass').length === jQuery("input:checkbox.checkBoxClass").length) {
+                jQuery('#checkbox_id2').prop("checked", true);
+            }
+            else {
+                jQuery('#checkbox_id2').prop("checked", false);
+            }
+
+        })
+    </script>
+    <style>
+        .right-inner-addon {
+            display: none;
+        }
+    </style>
+    <div class="form-horizontal">
+        <div class="pageTitle">@GroupName</div>
+        <form method="post" action="@Url.Content("~/Admin/CRMGroupDetail?GroupId=" + Request.QueryString["GroupId"])">
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border">Click to Check All</legend>
+                <div class="control-group">
+                    <div class="custom-checkbox">
+                        <input type="checkbox" class="checkbox-inline" id="checkbox_id2" value="true" style="display:inline-table;" />
+                        <label class="checkbox-inline" for="checkbox_id2">Click To check All</label>
+                    </div>
+                </div>
+            </fieldset>
+            @Html.AntiForgeryToken()
+            <input id="GroupId" value="@Request.QueryString["GroupId"]" type="hidden" />
+            @foreach (var codeGroup in Model.GroupBy(x => x.CategoryLabelResource))
+            {
+                <fieldset class="scheduler-border">
+                    <legend class="scheduler-border">@lr.GetByName(codeGroup.Key)</legend>
+                    <div class="control-group">
+                        @foreach (var country in codeGroup)
+                        {
+                            { Html.RenderPartial("_GroupsPermissionRow", country); }
+                        }
+                    </div>
+                </fieldset>
+            }
+            @if (User.IsInRole("CanUpdateGroupsDetail"))
+            {
+                <button type="submit" class="k-button k-button-icontext k-primary k-grid-update" style="float: right"><span class="k-icon k-i-check"></span>@lr.Submit</button>
+            }
+        </form>
+    </div>
+
+    <style>
+        .mTop20 {
+            margin-top: 10px;
+        }
+    </style>
+} <div class="container">
+    <div class="modal fade" style="margin-top:8%;" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="width:65%;" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">These Permissions will affect on</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="" id="ImageModel" style="width:100%;height:300px;" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery(".scheduler-border .control-group label").on('click', function () {
+        }, function () {
+            var ID = jQuery(this).next('.GroupPermissionId').val();
+            if (ID === undefined) {
+            } else {
+                var response = jQuery.ajax({
+                    method: "post",
+                    url: "/Admin/GroupPermissionsPicture?ID=" + ID,
+                    dataType: "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ ID: ID }),
+                    success: function (msg) {
+                        var url = msg;
+                        jQuery("#ImageModel").attr("src", url);
+                        jQuery("#exampleModalCenter").modal();
+                    }
+                });
+            }
+        });
+    });
+</script>

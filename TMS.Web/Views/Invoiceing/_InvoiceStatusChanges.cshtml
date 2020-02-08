@@ -1,39 +1,39 @@
 ﻿@model string
 @using lr = Resources.Resources;
-@if (User.IsInRole("CanViewPersonEmail"))
+@if (User.IsInRole("CanViewStatusInvoice"))
 {
     <div class="ChildGrid">
         @(Html.Kendo().Grid<TMS.Library.Entities.Invoice.InvoiceStatusModel>()
-                                            .Name("InvoiceHistory")
-                                              .Columns(columns =>
-                                              {
-                                                  columns.Bound(e => e.Status_Name).Title(lr.InvoiceLastActivity);
-                                                  columns.Bound(e => e.Description).Title(lr.LastActivityType);
-                                                  columns.Bound(e => e.CreatedDate).ClientTemplate(@"<div class='gridaddedby'>
-        <span class='Addedby' >#:users.P_DisplayName#</span>
-        <span class='date' >#=kendo.toString(CreatedDate,'" + DateFormatScript + @"')#</span>
-        <span class='time' >#=kendo.toString(CreatedDate,'" + TimeFormatScript + @"')#</span>
-    </div>").Title(lr.InvoiceCreate);
+                                                            .Name("InvoiceStatusChange")
+                                                              .Columns(columns =>
+                                                              {
+                                                                  columns.Bound(e => e.Status_Name).Title(lr.InvoiceLastActivity);
+                                                                  columns.Bound(e => e.Description).Title(lr.LastActivityType);
+                                                                  columns.Bound(e => e.CreatedDate).ClientTemplate(@"<div class='gridaddedby'>
+<span class='Addedby' >#:usersName#</span>
+<span class='date' >#=kendo.toString(CreatedDate,'" + DateFormatScript + @"')#</span>
+<span class='time' >#=kendo.toString(CreatedDate,'" + TimeFormatScript + @"')#</span>
+</div>").Title(lr.InvoiceCreate);
 
-                                              }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_EmailAddressTemplate").DisplayDeleteConfirmation(false))
-                                                            .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate() </text>))
-                                                                                  .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
-                                                                                  .Pageable(pager => pager.Refresh(true))
-                                                                                                                                  .Scrollable().Filterable().Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
-                                                                                  .HtmlAttributes(new { style = "height:350px;" }).DataSource(dataSource => dataSource.Ajax().Model(model => { model.Id(m => m.ID); }).PageSize(8)
-                                                                                  .Read(read => read.Action("InvoiceStatusChanges_Read", "Invoiceing", new { PersonID = Model }))
-
-                                                                                                                                  .Events(e => e.Error("GeneralErrorHandler(\"InvoiceHistory\")").RequestEnd("GridRequestEndUpdate"))
-                                                                                  ).NoRecords(lr.GridNoRecordFoundMessage)
+                                                              }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_StatusAddTemplate").DisplayDeleteConfirmation(false))
+                                                                            .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate() </text>))
+                                                                                                                  .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+                                                                                                                  .Pageable(pager => pager.Refresh(true))
+                                                                                                                  .Scrollable().Filterable().Events(e => e.Edit("Grid_onEdit").Save("General_onSave"))
+                                                                                                                  .HtmlAttributes(new { style = "height:350px;" }).DataSource(dataSource => dataSource.Ajax().Model(model => { model.Id(m => m.ID); }).PageSize(8)
+                                                                                                                  .Read(read => read.Action("InvoiceStatusChanges_Read", "Invoiceing", new { PersonID = Model }))
+                                                                                                                  .Create(read => read.Action("InvoiceStatusChanges_Create", "Invoiceing", new { PersonID = Model }))
+                                                                                                                                                                  .Events(e => e.Error("GeneralErrorHandler(\"InvoiceStatusChange\")").RequestEnd("GridRequestEndUpdate"))
+                                                                                                                  ).NoRecords(lr.GridNoRecordFoundMessage)
         )
     </div>
 
     @helper RenderAddTemplate()
     {
-
-    }
-
-
-
+        if (User.IsInRole("CanAddStatusInvoice"))
+        {
+            <a class="k-button tms-grid-add" title="" data-placement="left" data-toggle="tooltip" data-original-title="Tooltip on left"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+        }
+     }
 }
 

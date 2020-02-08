@@ -8,64 +8,66 @@
     var phonenubner = lr.PersonPhoneNumber;
     var personEmail = lr.PersonContactEmail;
 }
-<h2>Customer</h2>
-
-@(Html.Kendo().Grid<TMS.Library.Entities.Invoice.Customer>()
-                    .Name("PersonGrid")
-                    .Columns(columns =>
-                    {
-                        columns.Bound(e => e.Customer_PName).Filterable(true).ClientTemplate(@"<div  class='person-box'>
+<h2>@lr.Customer</h2>
+@if (User.IsInRole("CanViewCustomer"))
+{
+    @(Html.Kendo().Grid<TMS.Library.Entities.Invoice.Customer>()
+                                .Name("PersonGrid")
+                                .Columns(columns =>
+                                {
+                                    columns.Bound(e => e.Customer_PName).Filterable(true).ClientTemplate(@"<div  class='person-box'>
 <div class='person'>
 " +
-                                    @"<h3>#:Customer_PName#</h3>" +
-                                     @"# if (Email!=null) { #" +
-                                    @"<p>" + personEmail + @" : #:Email#</p> #} if(PersonContact!=null){#<p>" + phonenubner + @" : #:PersonContact#</p> #}#
+                                                @"<h3>#:Customer_PName#</h3>" +
+                                                 @"# if (Email!=null) { #" +
+                                                @"<p>" + personEmail + @" : #:Email#</p> #} if(PersonContact!=null){#<p>" + phonenubner + @" : #:PersonContact#</p> #}#
 </div>"
-                               );
-                        columns.Bound(e => e.Customer_Type).Filterable(true);
-                        columns.Bound(e => e.Creator).Filterable(true);
-                        columns.Bound(e => e.OrganizationName).Filterable(true);
-                    })
-                    .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_CustomerTemplete").DisplayDeleteConfirmation(false))
-                    .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>)).Groupable()
-                                                    .Sortable().Selectable(selectable => selectable
-                                                    .Mode(GridSelectionMode.Single))
-                                                    .Groupable()
-                                                    .Pageable(pager => pager
-                                                    .Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
-                                                    .Scrollable()
-                                                    //.ClientDetailTemplateId("PersonGridChildtemplate")
-                                                    .Filterable()
-                                                    .HtmlAttributes(new { style = "height:700px !important;" })
-                                                    .DataSource(dataSource => dataSource
-                                                        .Ajax()
-                                                        //.ServerOperation(false)
-                                                        .Model(model =>
-                                                        {
-                                                            model.Id(m => m.ID);
-                                                        })
-                                                       .PageSize(5)
-                                                        .Read(read => read.Action("Customer_Read", "Customer").Data("withSearch"))
-                                                        .Create(read => read.Action("Customer_Create", "Customer"))
-                                                        .Destroy(read => read.Action("Customer_Destroy", "Customer"))
-                                                        .Update(read => read.Action("Customer_Update", "Customer"))
-                                                        .Events(e => e.Error("GeneralErrorHandler(\"PersonGrid\")"))
-                                                        ).NoRecords(lr.GridNoRecordFoundMessage)
-)
+                                           );
+                                    columns.Bound(e => e.Customer_Type).Filterable(true);
+                                    columns.Bound(e => e.Creator).Filterable(true);
+                                    columns.Bound(e => e.OrganizationName).Filterable(true);
+                                })
+                                .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_CustomerTemplete").DisplayDeleteConfirmation(false))
+                                .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>)).Groupable()
+                                                                            .Sortable().Selectable(selectable => selectable
+                                                                            .Mode(GridSelectionMode.Single))
+                                                                            .Groupable()
+                                                                            .Pageable(pager => pager
+                                                                            .Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
+                                                                            .Scrollable()
+                                                                            //.ClientDetailTemplateId("PersonGridChildtemplate")
+                                                                            .Filterable()
+                                                                            .HtmlAttributes(new { style = "height:700px !important;" })
+                                                                            .DataSource(dataSource => dataSource
+                                                                                .Ajax()
+                                                                                //.ServerOperation(false)
+                                                                                .Model(model =>
+                                                                                {
+                                                                                    model.Id(m => m.ID);
+                                                                                })
+                                                                               .PageSize(5)
+                                                                                .Read(read => read.Action("Customer_Read", "Customer").Data("withSearch"))
+                                                                                .Create(read => read.Action("Customer_Create", "Customer"))
+                                                                                .Destroy(read => read.Action("Customer_Destroy", "Customer"))
+                                                                                .Update(read => read.Action("Customer_Update", "Customer"))
+                                                                                .Events(e => e.Error("GeneralErrorHandler(\"PersonGrid\")"))
+                                                                                ).NoRecords(lr.GridNoRecordFoundMessage)
+    )
 
-@helper RenderAddTemplate()
-{
-    <div class="toolbar">
-        @if (User.IsInRole("CanAddEditPerson"))
-        {
-            <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
-            <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
-        }
-        @if (User.IsInRole("CanDeletePerson"))
-        {
-            <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
-        }
-       
-    </div>
+    @helper RenderAddTemplate()
+    {
+        <div class="toolbar">
+            @if (User.IsInRole("CanAddEditCustomer"))
+            {
+                <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+                <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+            }
+            @if (User.IsInRole("CanDeleteCustomer"))
+            {
+                <a class="k-button tms-grid-destroy"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+            }
 
+        </div>
+
+    }
 }

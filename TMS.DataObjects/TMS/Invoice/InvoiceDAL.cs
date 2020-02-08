@@ -364,7 +364,7 @@ namespace TMS.DataObjects.TMS.Invoice
                 if (single.User_ID > 0)
                 {
                     var x = ExecuteSinglewithSP<LoginUsers>(@"INO_Get_User", ParamBuilder.Par("UID", single.User_ID));
-                    single.users = x;
+                    single.usersHistory = x.P_DisplayName;
                 }
             }
                 return _CustomerData.ToList();
@@ -412,7 +412,7 @@ namespace TMS.DataObjects.TMS.Invoice
                 if (single.Created_By > 0)
                 {
                     var x = ExecuteSinglewithSP<LoginUsers>(@"INO_Get_User", ParamBuilder.Par("UID", single.Created_By));
-                    single.users = x;
+                    single.usersAddedBy = x.P_DisplayName;
                 }
             }
             return _CustomerData.ToList();
@@ -474,7 +474,7 @@ namespace TMS.DataObjects.TMS.Invoice
                 if (single.CreatedBy > 0)
                 {
                     var x = ExecuteSinglewithSP<LoginUsers>(@"INO_Get_User", ParamBuilder.Par("UID", single.CreatedBy));
-                    single.users = x;
+                    single.usersName = x.P_DisplayName;
                 }
             }
             return _CustomerData.ToList();

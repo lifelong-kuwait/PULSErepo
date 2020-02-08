@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TMS.Library.ModelMapper;
 using TMS.Library.Users;
-
+using lr = Resources.Resources;
 namespace TMS.Library.Entities.Invoice
 {
     public class ReIssued : IDataMapper
@@ -20,23 +21,21 @@ namespace TMS.Library.Entities.Invoice
         /// Gets or sets the name of the primary.
         /// </summary>
         /// <value>The name of the primary.</value>
-        //[Display(Name = "PrimaryCourseName", ResourceType = typeof(lr))]
-        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "PrimaryCourseNameRequired")]
+        [Display(Name = "InvoiceID", ResourceType = typeof(lr))]
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "InvoiceIDRequired")]
         public long Invoice_ID { get; set; }
         /// <summary>
         /// Gets or sets the notes.
         /// </summary>
         /// <value>The notes.</value>
-        //[Display(Name = "CourseNotes", ResourceType = typeof(lr))]
+        [Display(Name = "CreatedBy", ResourceType = typeof(lr))]
         public long Re_Issued_By { get; set; }
 
         /// <summary>
         /// Gets or sets the minimum attendance requirement.
         /// </summary>
         /// <value>The minimum attendance requirement.</value>
-        //[Display(Name = "CourseMinimumAttendanceRequirement", ResourceType = typeof(lr))]
-        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "CourseMinimumAttendanceRequirementRequired")]
-        //[Range(1, 100, ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "OneToThousandDurationRange")]
+        [Display(Name = "ReIssuedDate", ResourceType = typeof(lr))]
         public DateTime Re_Issued_Date { get; set; }
         /// <summary>
         /// Gets or sets the PreRequisites.

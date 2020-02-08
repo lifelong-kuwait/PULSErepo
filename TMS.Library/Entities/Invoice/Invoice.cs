@@ -40,47 +40,65 @@ namespace TMS.Library.TMS
         /// Gets or sets the name of the primary.
         /// </summary>
         /// <value>The name of the primary.</value>
-        //[Display(Name = "PrimaryCourseName", ResourceType = typeof(lr))]
-        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "PrimaryCourseNameRequired")]
+        [Display(Name = "InvoiceNumber", ResourceType = typeof(lr))]
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "InvoiceNumberRequired")]
         public string Invoice_Number { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the secondary.
         /// </summary>
         /// <value>The name of the secondary.</value>
-       // [Display(Name = "SecondaryCourseName", ResourceType = typeof(lr))]
+       [Display(Name = "ReferanceNumber", ResourceType = typeof(lr))]
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "ReferanceNumberRequired")]
+
         public string Referance_Number { get; set; }
 
         /// <summary>
         /// Gets or sets the course category identifier.
         /// </summary>
         /// <value>The course category identifier.</value>
-        //[Display(Name = "CourseCategory", ResourceType = typeof(lr))]
+        [Display(Name = "OrganizationID", ResourceType = typeof(lr))]
         //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "CourseCategoryRequired")]
         public long Organization_ID { get; set; }
+        /// <summary>
+        /// Gets or sets the course category identifier.
+        /// </summary>
+        /// <value>The course category identifier.</value>
+        [Display(Name = "InvoiceType", ResourceType = typeof(lr))]
+        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "CourseCategoryRequired")]
         public long Invoice_Type { get; set; }
         /// <summary>
         /// Gets or sets the duration of the course.
         /// </summary>
         /// <value>The duration of the course.</value>
-        //[Display(Name = "CourseDuration", ResourceType = typeof(lr))]
+        [Display(Name = "InvoiceAmount", ResourceType = typeof(lr))]
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "InvoiceAmountRequired")]
+
         public double Invoice_Amount { get; set; }
 
         /// <summary>
         /// Gets or sets the type of the course duration.
         /// </summary>
         /// <value>The type of the course duration.</value>
-       //[Display(Name = "CourseDurationType", ResourceType = typeof(lr))]
+       [Display(Name = "taxPercentage", ResourceType = typeof(lr))]
+       [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "taxPercentageRequired")]
+
         public double Tax_Percentage { get; set; }
 
         /// <summary>
         /// Gets or sets the course vendor identifier.
         /// </summary>
         /// <value>The course vendor identifier.</value>
-        //[Display(Name = "CourseVendor", ResourceType = typeof(lr))]
-        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "CourseVendorRequired")]
+        [Display(Name = "Discount", ResourceType = typeof(lr))]
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "DiscountRequired")]
         public double Discount { get; set; }
 
+        /// <summary>
+        /// Gets or sets the course vendor identifier.
+        /// </summary>
+        /// <value>The course vendor identifier.</value>
+        [Display(Name = "InvoiceAmountWithTax", ResourceType = typeof(lr))]
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "InvoiceAmountWithTaxRequired")]
 
         public double Invoice_Amount_With_Tax { get; set; }
 
@@ -88,41 +106,51 @@ namespace TMS.Library.TMS
         /// Gets or sets the rating.
         /// </summary>
         /// <value>The rating.</value>
+        [Display(Name = "InvoiceGrossTotal", ResourceType = typeof(lr))]
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "InvoiceGrossTotalRequired")]
         public double Invoice_Gross_Total { get; set; }
         /// <summary>
         /// Gets or sets the rating.
         /// </summary>
         /// <value>The rating.</value>
+        [Display(Name = "TaxType", ResourceType = typeof(lr))]
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "TaxTypeRequired")]
+
         public TaxType Tax_Type { get; set; }
-        public string tax_Value
+        public string tax_ValueString
         {
             get
             {
                 return Tax_Type != null ? Fd.GetDisplayName(Tax_Type) : "NotSpecified";
             }
         }
-    /// <summary>
-    /// Gets or sets the rating.
-    /// </summary>
-    /// <value>The rating.</value>
-    public double Tax_Value { get; set; }
         /// <summary>
         /// Gets or sets the rating.
         /// </summary>
         /// <value>The rating.</value>
+        [Display(Name = "TaxValue", ResourceType = typeof(lr))]
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "TaxValueRequired")]
+
+        public double Tax_Value { get; set; }
+        /// <summary>
+        /// Gets or sets the rating.
+        /// </summary>
+        /// <value>The rating.</value>
+        [Display(Name = "DiscountValue", ResourceType = typeof(lr))]
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "DiscountValueRequired")]
         public double Discount_Value { get; set; }
         /// <summary>
         /// Gets or sets the notes.
         /// </summary>
         /// <value>The notes.</value>
-        //[Display(Name = "CourseNotes", ResourceType = typeof(lr))]
+        [Display(Name = "CreatedBy", ResourceType = typeof(lr))]
         public long Generated_By { get; set; }
 
         /// <summary>
         /// Gets or sets the minimum attendance requirement.
         /// </summary>
         /// <value>The minimum attendance requirement.</value>
-        //[Display(Name = "CourseMinimumAttendanceRequirement", ResourceType = typeof(lr))]
+        [Display(Name = "CreatedDate", ResourceType = typeof(lr))]
         //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "CourseMinimumAttendanceRequirementRequired")]
         //[Range(1, 100, ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "OneToThousandDurationRange")]
         public DateTime Generated_Date { get; set; }
@@ -131,14 +159,14 @@ namespace TMS.Library.TMS
         /// Gets or sets the minimum trainee.
         /// </summary>
         /// <value>The minimum trainee.</value>
-        //[Display(Name = "ClassMinimumTrainee", ResourceType = typeof(lr))]
+        [Display(Name = "CustomerTo", ResourceType = typeof(lr))]
         public long Generated_To { get; set; }
 
         /// <summary>
         /// Gets or sets the minimum trainee.
         /// </summary>
         /// <value>The minimum trainee.</value>
-        //[Display(Name = "ClassMinimumTrainee", ResourceType = typeof(lr))]
+        [Display(Name = "InvoiceStatus", ResourceType = typeof(lr))]
         public InvoiceStatus Invoice_Status { get; set; }
         public string Invoice_StatusString
         {
@@ -151,31 +179,35 @@ namespace TMS.Library.TMS
         /// Gets or sets the course fee.
         /// </summary>
         /// <value>The course fee.</value>
-       // [Display(Name = "CourseFee", ResourceType = typeof(lr))]
+        [Display(Name = "DueDate", ResourceType = typeof(lr))]
         public DateTime Due_Date { get; set; }
         /// <summary>
         /// Gets or sets the course fee.
         /// </summary>
         /// <value>The course fee.</value>
-       // [Display(Name = "CourseFee", ResourceType = typeof(lr))]
+        [Display(Name = "DueDate2", ResourceType = typeof(lr))]
         public string Due_Date2 { get; set; }
 
         /// <summary>
         /// Gets or sets the fee currency.
         /// </summary>
         /// <value>The fee currency.</value>
+        [Display(Name = "IsDeposit", ResourceType = typeof(lr))]
+       // 
         public bool Is_Deposit { get; set; }
         /// <summary>
         /// Gets or sets the fee currency.
         /// </summary>
         /// <value>The fee currency.</value>
+        [Display(Name = "IsPartialDeposit", ResourceType = typeof(lr))]
+
         public bool Is_Partial_Deposit { get; set; }
         
         /// <summary>
         /// Gets or sets the course code.
         /// </summary>
         /// <value>The course code.</value>
-        //[Display(Name = "CourseCode", ResourceType = typeof(lr))]
+        [Display(Name = "DepositeTypeID", ResourceType = typeof(lr))]
         //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "CourseCodeRequired")]
         public long Deposite_Type_ID { get; set; }
 
@@ -183,23 +215,26 @@ namespace TMS.Library.TMS
         /// Gets or sets the sales commission.
         /// </summary>
         /// <value>The sales commission.</value>
-        //  [Display(Name = "CourseSalesCommission", ResourceType = typeof(lr))]
-        //[Display(Name = "CourseSalesCommission", ResourceType = typeof(lr))]
-        //[Range(1, 100, ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "OneToThousandDurationRange")]
-        public bool Is_Re_Issued { get; set; }
+          [Display(Name = "CourseSalesCommission", ResourceType = typeof(lr))]
+         public bool Is_Re_Issued { get; set; }
 
         /// <summary>
         /// Gets or sets the PreRequisites.
         /// </summary>
         /// <value>The  PreRequisites.</value>
-       // [Display(Name = "CoursePreRequisites", ResourceType = typeof(lr))]
+        [Display(Name = "IsInstallment", ResourceType = typeof(lr))]
         public bool Is_Installment { get; set; }
         /// <summary>
         /// Gets or sets the PreRequisites.
         /// </summary>
         /// <value>The  PreRequisites.</value>
-       // [Display(Name = "CoursePreRequisites", ResourceType = typeof(lr))]
+       // [Display(Name = "invoiceLastActivity", ResourceType = typeof(lr))]
         public HistoryType invoiceLastActivity { get; set; }
+        /// <summary>
+        /// Gets or sets the PreRequisites.
+        /// </summary>
+        /// <value>The  PreRequisites.</value>
+        //[Display(Name = "invoiceLastActivity", ResourceType = typeof(lr))]
         public string invoiceLastActivityValue
         {
             get
@@ -207,14 +242,25 @@ namespace TMS.Library.TMS
                 return invoiceLastActivity != null ? Fd.GetDisplayName(invoiceLastActivity) : "NotSpecified";
             }
         }
+        /// <summary>
+        /// Gets or sets the PreRequisites.
+        /// </summary>
+        /// <value>The  PreRequisites.</value>
+        [Display(Name = "HistoryCreator", ResourceType = typeof(lr))]
         public string INO_GetlatestHistoryCreator { get; set; }
         /// <summary>
         /// Gets or sets the feedback form identifier.
         /// </summary>
         /// <value>The feedback form identifier.</value>
-        public string Notes { get; set; }
+        [Display(Name = "Notes", ResourceType = typeof(lr))]
+         public string Notes { get; set; }
 
         /// <summary>
+        /// Gets or sets the created by.
+        /// </summary>
+        /// <value>The created by.</value>
+          public string IssuedDate { get; set; }
+        // <summary>
         /// Gets or sets the created by.
         /// </summary>
         /// <value>The created by.</value>
@@ -257,6 +303,7 @@ namespace TMS.Library.TMS
             invoiceLastActivity = (HistoryType)dr.GetInt32("invoiceLastActivity");
             INO_GetlatestHistoryCreator = dr.GetString("INO_GetlatestHistoryCreator");
             Notes = dr.GetString("Notes");
+            IssuedDate = dr.GetString("IssuedDate");
             IsActive = dr.GetBoolean("IsActive");
             IsDelete = dr.GetBoolean("IsDelete");
         }
@@ -294,45 +341,49 @@ namespace TMS.Library.TMS
         /// Gets or sets the name of the primary.
         /// </summary>
         /// <value>The name of the primary.</value>
-        //[Display(Name = "PrimaryCourseName", ResourceType = typeof(lr))]
-        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "PrimaryCourseNameRequired")]
+        [Display(Name = "InvoiceID", ResourceType = typeof(lr))]
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "InvoiceIDRequired")]
         public long Invoice_ID { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the secondary.
         /// </summary>
         /// <value>The name of the secondary.</value>
-       // [Display(Name = "SecondaryCourseName", ResourceType = typeof(lr))]
+        [Display(Name = "item", ResourceType = typeof(lr))]
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "ItemRequired")]
         public string Item { get; set; }
 
         /// <summary>
         /// Gets or sets the course category identifier.
         /// </summary>
         /// <value>The course category identifier.</value>
-        //[Display(Name = "CourseCategory", ResourceType = typeof(lr))]
-        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "CourseCategoryRequired")]
+        [Display(Name = "Description", ResourceType = typeof(lr))]
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "DescriptionRequired")]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or sets the duration of the course.
         /// </summary>
         /// <value>The duration of the course.</value>
-        //[Display(Name = "CourseDuration", ResourceType = typeof(lr))]
+        [Display(Name = "quantity", ResourceType = typeof(lr))]
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "quantityRequired")]
         public long Qty { get; set; }
 
         /// <summary>
         /// Gets or sets the type of the course duration.
         /// </summary>
         /// <value>The type of the course duration.</value>
-       //[Display(Name = "CourseDurationType", ResourceType = typeof(lr))]
+       [Display(Name = "Price", ResourceType = typeof(lr))]
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "PriceRequired")]
+
         public double Price { get; set; }
 
         /// <summary>
         /// Gets or sets the course vendor identifier.
         /// </summary>
         /// <value>The course vendor identifier.</value>
-        //[Display(Name = "CourseVendor", ResourceType = typeof(lr))]
-        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "CourseVendorRequired")]
+        [Display(Name = "SubTotal", ResourceType = typeof(lr))]
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "SubTotalRequired")]
         public double Sub_Total { get; set; }
         /// <summary>
         /// Gets or sets the created by.

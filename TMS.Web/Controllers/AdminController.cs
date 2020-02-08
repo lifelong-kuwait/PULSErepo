@@ -405,7 +405,8 @@ namespace TMS.Web.Controllers
             var ChangesFromDb = permissionsList.Where(x => x.IsChecked != x.NewChecked);//all those whose values are changed this needs to be updated for the database
             var NotPresentInDatabase = ChangesFromDb.Where(x => x.GroupPermissionId == int.MinValue);
             var PresentInDatabase = ChangesFromDb.Where(x => x.GroupPermissionId != int.MinValue);
-
+            var NotPresentIn = NotPresentInDatabase.Count();
+            var Present = PresentInDatabase.Count();
             if (NotPresentInDatabase.Count() > 0)
             {
                 foreach (var data in NotPresentInDatabase)
@@ -487,7 +488,81 @@ namespace TMS.Web.Controllers
             ViewData["GroupName"] = GetGroupName(GroupId);
             return View(permissionsList);
         }
+        //////////////////////
+        ///Invoice Permissions
+        ///
+        //////////////////////
+        [HttpGet]
+        //[ClaimsAuthorize("CanViewGroupsDetail")]
+        public ActionResult INOGroupDetail()
+        {
+            long GroupId = Convert.ToInt64(Session["GroupId"]);
+            if (string.IsNullOrEmpty(GroupId.ToString()))
+            {
+                return RedirectPermanent(Url.Content("~/Admin/Groups"));
+            }
+            else
+            {
+                var GroupData = this._Groups.INO_Groups_GetbyGroupIdBAL(CurrentCulture, GroupId);
+                //if (CurrentUser.CompanyID > 0)
+                //{
+                //    GroupData = this._Groups.TMS_Groups_GetbyGroupIdBALbyOrg(CurrentCulture, GroupId, Convert.ToString(CurrentUser.CompanyID));
+                //}
+                if (GroupData == null)
+                {
+                    ViewData["model"] = Url.Content("~/Organization/Index");
+                    return View("Static/NotFound");
+                }
+                else
+                {
+                    var PermissionData = this._Groups.INO_SecurityGroupsPermissions_GetAllByGroupIdBAL(CurrentCulture, GroupId, CurrentUser.NameIdentifierInt64, CurrentUser.CompanyID.ToString());
+                    //if (CurrentUser.CompanyID > 0)
+                    //{
+                    //    PermissionData = this._Groups.SecurityGroupsPermission_GetAllByGroupIdBALbyOrg(CurrentCulture, GroupId, Convert.ToString(CurrentUser.CompanyID));
+                    //}
+                    // ViewData["model"] = PermissionData;
+                    ViewData["GroupId"] = GetGroupName(GroupId);
+                    return PartialView(PermissionData);
+                }
+            }
+        }
+        [HttpPost]
+        [ClaimsAuthorize("CanViewGroupsDetail")]
+        public ActionResult INOGroupDetail(List<SecurityGroupsPermission> permissionsList)
 
+        {
+            long GroupId = Convert.ToInt64(Session["GroupId"]);
+            var ChangesFromDb = permissionsList.Where(x => x.IsChecked != x.NewChecked);//all those whose values are changed this needs to be updated for the database
+            var NotPresentInDatabase = ChangesFromDb.Where(x => x.GroupPermissionId == int.MinValue);
+            var PresentInDatabase = ChangesFromDb.Where(x => x.GroupPermissionId != int.MinValue);
+
+            if (NotPresentInDatabase.Count() > 0)
+            {
+                foreach (var data in NotPresentInDatabase)
+                {
+                    data.GroupId = GroupId;
+                    data.IsChecked = data.NewChecked;
+                    data.CreatedBy = CurrentUser.NameIdentifierInt64;
+                    data.CreatedDate = DateTime.UtcNow;
+                    data.GroupPermissionId = this._Groups.TMS_GroupPermissions_CreateDAL(data);
+                }
+            }
+            if (PresentInDatabase.Count() > 0)
+            {
+                foreach (var data in PresentInDatabase)
+                {
+                    data.IsChecked = data.NewChecked;
+                    data.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                    data.UpdatedDate = DateTime.UtcNow;
+                    var Result = this._Groups.TMS_GroupPermissions_UpdateBAL(data);
+                }
+            }
+
+            // ViewData["model"] = permissionsList;
+            TempData["Success"] = "Success";
+            ViewData["GroupName"] = GetGroupName(GroupId);
+            return View(permissionsList);
+        }
         #endregion "GroupDetail"
 
         #region "Roles"

@@ -23,11 +23,15 @@ namespace TMS.Web.Controllers
              _UserBAL = objUserBAL; _CustomerBAL = customerBAL;
         }
         // GET: Customer
+        [ClaimsAuthorize("CanViewCustomer")]
+
         public ActionResult Index()
         {
             return View();
         }
         [DontWrapResult]
+        [ClaimsAuthorize("CanViewCustomer")]
+
         public ActionResult Customer_Read([DataSourceRequest]DataSourceRequest request)
         {
             var kendoRequest = new Kendo.Mvc.UI.DataSourceRequest
@@ -75,6 +79,8 @@ namespace TMS.Web.Controllers
 
        // [DisableValidation]
         [DontWrapResult]
+        [ClaimsAuthorize("CanAddEditCustomer")]
+
         public ActionResult Customer_Create([DataSourceRequest] DataSourceRequest request,Customer customer )
         {
             if (ModelState.IsValid)
@@ -94,6 +100,8 @@ namespace TMS.Web.Controllers
             return Json(resultData.ToDataSourceResult(request, ModelState));
         }
         [DontWrapResult]
+        [ClaimsAuthorize("CanAddEditCustomer")]
+
         public ActionResult Customer_Update([DataSourceRequest] DataSourceRequest request, Customer customer)
         {
             if (ModelState.IsValid)
@@ -109,7 +117,9 @@ namespace TMS.Web.Controllers
             var resultData = new[] { customer };
             return Json(resultData.ToDataSourceResult(request, ModelState));
         }
-        [DontWrapResult]
+        [DontWrapResult] 
+        [ClaimsAuthorize("CanDeleteCustomer")]
+
         public ActionResult Customer_Destroy([DataSourceRequest] DataSourceRequest request, Customer customer)
         {
             if (ModelState.IsValid)

@@ -32,8 +32,15 @@ namespace TMS.Business.Interfaces.Common.Groups
         /// <param name="GroupId">The group identifier.</param>
         /// <returns>SecurityGroups.</returns>
         SecurityGroups TMS_Groups_GetbyGroupIdBAL(string Culture, long GroupId);
+        /// <summary>
+        /// TMSs the groups getby group identifier bal.
+        /// </summary>
+        /// <param name="Culture">The culture.</param>
+        /// <param name="GroupId">The group identifier.</param>
+        /// <returns>SecurityGroups.</returns>
+        SecurityGroups INO_Groups_GetbyGroupIdBAL(string Culture, long GroupId);
 
-       
+
         /// <summary>
         /// TMSs the groups getby group identifier bal.
         /// </summary>
@@ -106,7 +113,13 @@ namespace TMS.Business.Interfaces.Common.Groups
         /// <param name="GroupId">The group identifier.</param>
         /// <returns>IList&lt;SecurityGroupsPermission&gt;.</returns>
         IList<SecurityGroupsPermission> SecurityGroupsPermissions_GetAllByGroupIdBAL(string Culture, long GroupId, long userid, string companyID);
-
+        /// <summary>
+        /// Securities the groups permission get all by group identifier bal.
+        /// </summary>
+        /// <param name="Culture">The culture.</param>
+        /// <param name="GroupId">The group identifier.</param>
+        /// <returns>IList&lt;SecurityGroupsPermission&gt;.</returns>
+        IList<SecurityGroupsPermission> INO_SecurityGroupsPermissions_GetAllByGroupIdBAL(string Culture, long GroupId, long userid, string companyID);
         /// <summary>
         /// Securities the groups permission get all by group identifier bal.
         /// </summary>

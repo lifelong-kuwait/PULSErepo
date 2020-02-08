@@ -628,20 +628,20 @@ namespace TMS.Library
     }
     public enum TaxType
     {
+      
+        [Display(Name = "TaxExclusive", ResourceType = typeof(lr))]
+        Tax_Exclusive = 1,
+        [Display(Name = "TaxInclusive", ResourceType = typeof(lr))]
+        Tax_Inclusive = 2,
+        [Display(Name = "NoTax", ResourceType = typeof(lr))]
+        NoTax = 3,
+    }
+    public enum CustomerType
+    {
         [Display(Name = "corporate", ResourceType = typeof(lr))]
         corporate = 1,
         [Display(Name = "Individual", ResourceType = typeof(lr))]
         Individual = 2,
-       
-    }
-    public enum CustomerType
-    {
-        [Display(Name = "LoyalCustomer", ResourceType = typeof(lr))]
-        Loyal_customer = 1,
-         [Display(Name = "DiscountCustomer", ResourceType = typeof(lr))]
-        Discount_customer = 2,
-         [Display(Name = "NewCustomer", ResourceType = typeof(lr))]
-        New_customer = 3,
     }
     public enum InvoiceStatus
     {
@@ -663,6 +663,8 @@ namespace TMS.Library
         InvoiceCashPartialyRecived = 8,
         [Display(Name = "InvoiceCancled", ResourceType = typeof(lr))]
         InvoiceCancled = 9,
+        [Display(Name = "FollowUp", ResourceType = typeof(lr))]
+        FollowUp = 10,
     }
     public enum DepositType
     {

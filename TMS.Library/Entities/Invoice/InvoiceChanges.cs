@@ -21,7 +21,7 @@ namespace TMS.Library.Entities.Invoice
         /// Gets or sets the name of the primary.
         /// </summary>
         /// <value>The name of the primary.</value>
-        //[Display(Name = "PersonP_FirstName", ResourceType = typeof(lr))]
+        [Display(Name = "InvoiceID", ResourceType = typeof(lr))]
         //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "CustomerPrimaryNameRequired")]
         public long Invoice_ID { get; set; }
 
@@ -29,36 +29,39 @@ namespace TMS.Library.Entities.Invoice
         /// Gets or sets the name of the secondary.
         /// </summary>
         /// <value>The name of the secondary.</value>
-        //[Display(Name = "CustomerSecondaryName", ResourceType = typeof(lr))]
+        [Display(Name = "OldSubTotal", ResourceType = typeof(lr))]
         public double Old_Sub_total { get; set; }
         /// <summary>
         /// Gets or sets the name of the secondary.
         /// </summary>
         /// <value>The name of the secondary.</value>
-        //[Display(Name = "PersonP_MiddleName", ResourceType = typeof(lr))]
+        [Display(Name = "OldNetValue", ResourceType = typeof(lr))]
         public double Old_Net_Value { get; set; }
         /// <summary>
         /// Gets or sets the name of the secondary.
         /// </summary>
         /// <value>The name of the secondary.</value>
-        //[Display(Name = "PersonP_LastName", ResourceType = typeof(lr))]
+        [Display(Name = "OldTaxValue", ResourceType = typeof(lr))]
         public double Old_Tax_Value { get; set; }
         /// <summary>
         /// Gets or sets the course category identifier.
         /// </summary>Customer_Type
         /// <value>The course category identifier.</value>
-        //[Display(Name = "CustomerType", ResourceType = typeof(lr))]
+        [Display(Name = "OldTaxType", ResourceType = typeof(lr))]
         //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "CustomerTypeRequired")]
         public TaxType Old_Tax_Type { get; set; }
-        //[Display(Name = "UserEmail", ResourceType = typeof(lr))]
-        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "UserEmailRequired")]
-        //[RegularExpression("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "EmailInValid")]
+        [Display(Name = "OldTaxPercentage", ResourceType = typeof(lr))]
         public double Old_Tax_Percentage { get; set; }
-        //[Display(Name = "PersonPhoneNumber", ResourceType = typeof(lr))]
+        [Display(Name = "OldDiscount", ResourceType = typeof(lr))]
         //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "PersonPhoneNumberRequired")]
         public double Old_Discount { get; set; }
+        [Display(Name = "OldDiscountVlaue", ResourceType = typeof(lr))]
         public double Old_Discount_Vlaue { get; set; }
+        [Display(Name = "CreatedBy", ResourceType = typeof(lr))]
+
         public long Created_By { get; set; }
+        [Display(Name = "CreatedDate", ResourceType = typeof(lr))]
+
 
         public DateTime Created_Date { get; set; }
 

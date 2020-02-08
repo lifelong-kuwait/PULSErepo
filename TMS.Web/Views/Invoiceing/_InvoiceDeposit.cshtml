@@ -1,7 +1,7 @@
 ﻿
 @model string
 @using lr = Resources.Resources;
-@if (User.IsInRole("CanViewPersonEmail"))
+@if (User.IsInRole("CanViewDepositInvoice"))
 {
     <div class="ChildGrid">
         @(Html.Kendo().Grid<TMS.Library.Entities.Invoice.DepositDetail>()
@@ -14,7 +14,7 @@
                                                                   columns.Bound(e => e.Total_Payment).Title(lr.TotalPayment);
                                                                   columns.Bound(e => e.Balance).Title(lr.Balance);
                                                                   columns.Bound(e => e.Created_By).ClientTemplate(@"<div class='gridaddedby'>
-            <span class='Addedby' >#:users.P_DisplayName#</span>
+            <span class='Addedby' >#:usersAddedBy#</span>
             <span class='date' >#=kendo.toString(Created_Date,'" + DateFormatScript + @"')#</span>
             <span class='time' >#=kendo.toString(Created_Date,'" + TimeFormatScript + @"')#</span>
         </div>").Title(lr.InvoiceCreate);
@@ -36,11 +36,17 @@
 
     @helper RenderAddTemplate()
     {
-                        /**/
-        <div class="toolbar">
+/**/
+    <div class="toolbar">
+        @if (User.IsInRole("CanAddDepositInvoice"))
+        {
             <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
-            <a class="k-button tms-grid-edit download"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
-           
+
+        }
+        @if (User.IsInRole("CanPrintDepositInvoice"))
+        {
+            <a class="k-button tms-grid download"><span class="tms-grid-icon mdi mdi-printer "></span></a>
+        }
         </div>
                         /**/
 
