@@ -2078,3 +2078,104 @@ INFO  2020-02-08 17:13:23,315 1538502ms DESKTOP-LSN82VI        Login            
 INFO  2020-02-08 17:13:23,727 1538914ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/8/2020 2:13:23 PM
 INFO  2020-02-08 17:13:41,944 1557131ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/8/2020 2:13:41 PM
 INFO  2020-02-08 17:13:42,321 1557508ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/8/2020 2:13:42 PM
+INFO  2020-02-09 09:40:56,111 53060ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/9/2020 6:40:56 AM
+INFO  2020-02-09 09:40:56,506 53455ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/9/2020 6:40:56 AM
+INFO  2020-02-09 09:41:07,743 64692ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/9/2020 6:41:07 AM
+INFO  2020-02-09 09:41:08,404 65353ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/9/2020 6:41:08 AM
+INFO  2020-02-09 11:18:41,521 79505ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/9/2020 8:18:41 AM
+INFO  2020-02-09 11:18:41,896 79880ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/9/2020 8:18:41 AM
+INFO  2020-02-09 11:18:46,183 84167ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/9/2020 8:18:46 AM
+INFO  2020-02-09 11:18:46,858 84842ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/9/2020 8:18:46 AM
+INFO  2020-02-09 11:37:55,915 24770ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/9/2020 8:37:55 AM
+INFO  2020-02-09 11:37:56,297 25151ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/9/2020 8:37:56 AM
+INFO  2020-02-09 11:38:06,453 35307ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/9/2020 8:38:06 AM
+INFO  2020-02-09 11:38:07,065 35919ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/9/2020 8:38:07 AM
+ERROR 2020-02-09 11:39:52,964 141818ms DESKTOP-LSN82VI        OnException        - An error occurred during local report processing.
+ERROR 2020-02-09 11:45:00,388 449242ms DESKTOP-LSN82VI        OnException        - An error occurred during local report processing.
+ERROR 2020-02-09 11:46:30,471 539326ms DESKTOP-LSN82VI        OnException        - An error occurred during local report processing.
+ERROR 2020-02-09 11:48:35,057 663911ms DESKTOP-LSN82VI        OnException        - An error occurred during local report processing.
+INFO  2020-02-09 12:38:50,169 3679023ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/9/2020 9:38:50 AM
+INFO  2020-02-09 12:38:50,576 3679430ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/9/2020 9:38:50 AM
+INFO  2020-02-09 12:38:51,124 3679978ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/9/2020 9:38:51 AM
+INFO  2020-02-09 12:38:51,544 3680399ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/9/2020 9:38:51 AM
+INFO  2020-02-09 12:48:19,814 4248669ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/9/2020 9:48:19 AM
+INFO  2020-02-09 12:48:20,180 4249035ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/9/2020 9:48:20 AM
+INFO  2020-02-09 12:48:21,284 4250138ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/9/2020 9:48:21 AM
+INFO  2020-02-09 12:48:21,693 4250548ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/9/2020 9:48:21 AM
+INFO  2020-02-09 12:49:13,468 4302322ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/9/2020 9:49:13 AM
+INFO  2020-02-09 12:49:13,854 4302708ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/9/2020 9:49:13 AM
+INFO  2020-02-09 12:49:14,430 4303284ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/9/2020 9:49:14 AM
+INFO  2020-02-09 12:49:14,843 4303697ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/9/2020 9:49:14 AM
+INFO  2020-02-11 08:55:34,522 44211ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/11/2020 5:55:34 AM
+INFO  2020-02-11 08:55:35,376 45065ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/11/2020 5:55:35 AM
+INFO  2020-02-11 08:55:50,576 60265ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/11/2020 5:55:50 AM
+INFO  2020-02-11 08:55:51,116 60806ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/11/2020 5:55:51 AM
+ERROR 2020-02-11 09:18:31,199 1420889ms DESKTOP-LSN82VI        OnException        - c:\Users\SynergicProfessional\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\Views\Invoiceing\Index.cshtml(63): error CS1502: The best overloaded method match for 'Kendo.Mvc.UI.Fluent.TextBoxBuilder<string>.Value(string)' has some invalid arguments
+ERROR 2020-02-11 09:53:00,841  7741ms DESKTOP-LSN82VI        OnException        - Exception has been thrown by the target of an invocation.
+INFO  2020-02-11 09:53:22,640 29541ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/11/2020 6:53:22 AM
+INFO  2020-02-11 09:53:22,994 29894ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/11/2020 6:53:22 AM
+INFO  2020-02-11 09:53:26,556 33457ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/11/2020 6:53:26 AM
+INFO  2020-02-11 09:53:26,951 33852ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/11/2020 6:53:26 AM
+INFO  2020-02-11 10:10:55,847 59481ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/11/2020 7:10:55 AM
+INFO  2020-02-11 10:10:56,220 59854ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/11/2020 7:10:56 AM
+INFO  2020-02-11 10:11:10,968 74603ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/11/2020 7:11:10 AM
+INFO  2020-02-11 10:11:11,467 75101ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/11/2020 7:11:11 AM
+ERROR 2020-02-11 10:21:58,204 721839ms DESKTOP-LSN82VI        OnException        - c:\Users\SynergicProfessional\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\Views\Invoiceing\InvoiceEdit.cshtml(786): error CS1061: 'string' does not contain a definition for 'ID' and no extension method 'ID' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
+ERROR 2020-02-11 10:22:07,761 731396ms DESKTOP-LSN82VI        OnException        - c:\Users\SynergicProfessional\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\Views\Invoiceing\InvoiceEdit.cshtml(786): error CS1061: 'string' does not contain a definition for 'ID' and no extension method 'ID' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
+INFO  2020-02-11 10:25:52,705 25492ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/11/2020 7:25:52 AM
+INFO  2020-02-11 10:25:53,076 25863ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/11/2020 7:25:53 AM
+INFO  2020-02-11 10:26:04,322 37109ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/11/2020 7:26:04 AM
+INFO  2020-02-11 10:26:04,986 37772ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/11/2020 7:26:04 AM
+ERROR 2020-02-11 10:26:30,099 62885ms DESKTOP-LSN82VI        OnException        - c:\Users\SynergicProfessional\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\Views\Invoiceing\InvoiceEdit.cshtml(786): error CS1061: 'TMS.Library.TMS.Invoice' does not contain a definition for 'customerID' and no extension method 'customerID' accepting a first argument of type 'TMS.Library.TMS.Invoice' could be found (are you missing a using directive or an assembly reference?)
+ERROR 2020-02-11 10:26:52,456 85243ms DESKTOP-LSN82VI        OnException        - c:\Users\SynergicProfessional\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\Views\Invoiceing\InvoiceDetail.cshtml(45): error CS1660: Cannot convert lambda expression to type 'string' because it is not a delegate type
+INFO  2020-02-12 11:13:00,319 26869ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/12/2020 8:13:00 AM
+INFO  2020-02-12 11:13:00,726 27275ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/12/2020 8:13:00 AM
+INFO  2020-02-12 11:13:12,907 39457ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/12/2020 8:13:12 AM
+INFO  2020-02-12 11:13:13,420 39969ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/12/2020 8:13:13 AM
+INFO  2020-02-12 11:53:57,767 27687ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/12/2020 8:53:57 AM
+INFO  2020-02-12 11:53:58,142 28062ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/12/2020 8:53:58 AM
+INFO  2020-02-12 11:54:07,989 37909ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/12/2020 8:54:07 AM
+INFO  2020-02-12 11:54:08,583 38504ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/12/2020 8:54:08 AM
+INFO  2020-02-12 12:58:51,555 3921476ms DESKTOP-LSN82VI        Login              - User tried to login with email TrainerTestLogin@llk.com at 2/12/2020 9:58:51 AM
+INFO  2020-02-12 12:58:51,908 3921828ms DESKTOP-LSN82VI        Login              - User login with email TrainerTestLogin@llk.com at 2/12/2020 9:58:51 AM
+INFO  2020-02-12 12:58:52,552 3922473ms DESKTOP-LSN82VI        Login              - User tried to login with email TrainerTestLogin@llk.com at 2/12/2020 9:58:52 AM
+INFO  2020-02-12 12:58:52,939 3922860ms DESKTOP-LSN82VI        Login              - User login with email TrainerTestLogin@llk.com at 2/12/2020 9:58:52 AM
+INFO  2020-02-12 12:59:15,398 3945318ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/12/2020 9:59:15 AM
+INFO  2020-02-12 12:59:15,757 3945678ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/12/2020 9:59:15 AM
+INFO  2020-02-12 12:59:16,408 3946329ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/12/2020 9:59:16 AM
+INFO  2020-02-12 12:59:16,799 3946720ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/12/2020 9:59:16 AM
+INFO  2020-02-12 14:27:22,120 25370ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/12/2020 11:27:22 AM
+INFO  2020-02-12 14:27:22,498 25748ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/12/2020 11:27:22 AM
+INFO  2020-02-12 14:27:38,108 41358ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/12/2020 11:27:38 AM
+INFO  2020-02-12 14:27:38,691 41941ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/12/2020 11:27:38 AM
+ERROR 2020-02-12 15:07:57,734 2460984ms DESKTOP-LSN82VI        OnException        - c:\Users\SynergicProfessional\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\Views\Invoiceing\InvoiceDetail.cshtml(45): error CS1660: Cannot convert lambda expression to type 'string' because it is not a delegate type
+ERROR 2020-02-12 15:08:24,322 2487572ms DESKTOP-LSN82VI        OnException        - c:\Users\SynergicProfessional\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\Views\Invoiceing\InvoiceDetail.cshtml(45): error CS1660: Cannot convert lambda expression to type 'string' because it is not a delegate type
+INFO  2020-02-12 15:34:55,386 29835ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/12/2020 12:34:55 PM
+INFO  2020-02-12 15:34:55,824 30273ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/12/2020 12:34:55 PM
+INFO  2020-02-12 15:35:06,074 40523ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/12/2020 12:35:06 PM
+INFO  2020-02-12 15:35:06,964 41412ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/12/2020 12:35:06 PM
+ERROR 2020-02-12 15:35:26,731 61179ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'PageSize' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.FileResult PrintGridReport_Read(Int32, Int32)' in 'TMS.Web.Controllers.InvoiceingController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-02-12 15:37:14,433 168881ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'PageSize' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.FileResult PrintGridReport_Read(Int32, Int32)' in 'TMS.Web.Controllers.InvoiceingController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-02-12 15:38:49,181 263630ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'PageSize' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.FileResult PrintGridReport_Read(Int32, Int32)' in 'TMS.Web.Controllers.InvoiceingController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-02-12 15:39:14,890 289339ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'Page' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.FileResult PrintGridReport_Read(Int32, Int32)' in 'TMS.Web.Controllers.InvoiceingController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-02-12 15:44:56,082 630530ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'Page' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.FileResult PrintGridReport_Read(Int32, Int32)' in 'TMS.Web.Controllers.InvoiceingController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-02-12 15:45:24,979 659427ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'Page' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.FileResult PrintGridReport_Read(Int32, Int32)' in 'TMS.Web.Controllers.InvoiceingController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-02-12 15:45:28,991 663439ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'Page' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.FileResult PrintGridReport_Read(Int32, Int32)' in 'TMS.Web.Controllers.InvoiceingController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-02-12 15:45:35,126 669575ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'Page' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.FileResult PrintGridReport_Read(Int32, Int32)' in 'TMS.Web.Controllers.InvoiceingController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-02-12 15:45:38,190 672638ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'Page' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.FileResult PrintGridReport_Read(Int32, Int32)' in 'TMS.Web.Controllers.InvoiceingController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-02-12 15:45:59,762 694211ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'Page' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.FileResult PrintGridReport_Read(Int32, Int32)' in 'TMS.Web.Controllers.InvoiceingController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+INFO  2020-02-12 15:49:24,115 28781ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/12/2020 12:49:24 PM
+INFO  2020-02-12 15:49:24,485 29151ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/12/2020 12:49:24 PM
+INFO  2020-02-12 15:49:35,261 39927ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/12/2020 12:49:35 PM
+INFO  2020-02-12 15:49:35,853 40519ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/12/2020 12:49:35 PM
+ERROR 2020-02-12 15:50:20,946 85612ms DESKTOP-LSN82VI        OnException        - Input string was not in a correct format.

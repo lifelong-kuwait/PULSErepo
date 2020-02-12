@@ -215,11 +215,13 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Invoice ID</Value>
+                    <Value>Invoice NO:</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>Underline</TextDecoration>
+                      <Color>White</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -230,12 +232,15 @@
             <Top>0.95574in</Top>
             <Left>0.46937in</Left>
             <Height>0.21875in</Height>
-            <Width>1.62153in</Width>
+            <Width>1.6979in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Color>Silver</Color>
+                <Style>Solid</Style>
+                <Width>2pt</Width>
               </Border>
+              <BackgroundColor>#244800</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -249,11 +254,13 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Invoice Ref#</Value>
+                    <Value>Invoice Ref#:</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>Underline</TextDecoration>
+                      <Color>White</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -264,46 +271,15 @@
             <Top>1.24393in</Top>
             <Left>0.46937in</Left>
             <Height>0.21007in</Height>
-            <Width>1.62153in</Width>
+            <Width>1.6979in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Color>Silver</Color>
+                <Style>Solid</Style>
+                <Width>2pt</Width>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox72">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Invoice No</Value>
-                    <Style>
-                      <FontStyle>Normal</FontStyle>
-                      <FontWeight>Bold</FontWeight>
-                      <TextDecoration>Underline</TextDecoration>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox69</rd:DefaultName>
-            <Top>1.53734in</Top>
-            <Left>0.46937in</Left>
-            <Height>0.19791in</Height>
-            <Width>1.62153in</Width>
-            <ZIndex>3</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
+              <BackgroundColor>#244800</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -322,7 +298,6 @@
                       <FontStyle>Normal</FontStyle>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
-                      <Color>Gray</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -336,11 +311,12 @@
             <Left>2.25062in</Left>
             <Height>0.21875in</Height>
             <Width>1.89584in</Width>
-            <ZIndex>4</ZIndex>
+            <ZIndex>3</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
+              <BackgroundColor>#d3e499</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -359,7 +335,6 @@
                       <FontStyle>Normal</FontStyle>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
-                      <Color>Gray</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -373,48 +348,12 @@
             <Left>2.25062in</Left>
             <Height>0.21007in</Height>
             <Width>1.89584in</Width>
-            <ZIndex>5</ZIndex>
+            <ZIndex>4</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox78">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=Fields!Invoice_Number.Value</Value>
-                    <Style>
-                      <FontStyle>Normal</FontStyle>
-                      <FontWeight>Bold</FontWeight>
-                      <TextDecoration>None</TextDecoration>
-                      <Color>Gray</Color>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox69</rd:DefaultName>
-            <Top>1.5651in</Top>
-            <Left>2.25062in</Left>
-            <Height>0.19791in</Height>
-            <Width>1.89584in</Width>
-            <ZIndex>6</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
+              <BackgroundColor>#d3e499</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -428,11 +367,13 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Generated By</Value>
+                    <Value>Issued By:</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>Underline</TextDecoration>
+                      <Color>White</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -443,12 +384,15 @@
             <Top>0.95574in</Top>
             <Left>4.2702in</Left>
             <Height>0.21875in</Height>
-            <Width>1.07639in</Width>
-            <ZIndex>7</ZIndex>
+            <Width>1.07638in</Width>
+            <ZIndex>5</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Color>Silver</Color>
+                <Style>Solid</Style>
+                <Width>2pt</Width>
               </Border>
+              <BackgroundColor>#244800</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -462,11 +406,13 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Generated To</Value>
+                    <Value>To:</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>Underline</TextDecoration>
+                      <Color>White</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -477,12 +423,15 @@
             <Top>1.24393in</Top>
             <Left>4.2702in</Left>
             <Height>0.21007in</Height>
-            <Width>0.95834in</Width>
-            <ZIndex>8</ZIndex>
+            <Width>1.07638in</Width>
+            <ZIndex>6</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Color>Silver</Color>
+                <Style>Solid</Style>
+                <Width>2pt</Width>
               </Border>
+              <BackgroundColor>#244800</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -499,8 +448,10 @@
                     <Value>Due Date</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>Underline</TextDecoration>
+                      <Color>White</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -508,15 +459,18 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox69</rd:DefaultName>
-            <Top>1.52345in</Top>
+            <Top>1.53732in</Top>
             <Left>4.2702in</Left>
-            <Height>0.19791in</Height>
-            <Width>0.95834in</Width>
-            <ZIndex>9</ZIndex>
+            <Height>0.22048in</Height>
+            <Width>1.07638in</Width>
+            <ZIndex>7</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Color>Silver</Color>
+                <Style>Solid</Style>
+                <Width>2pt</Width>
               </Border>
+              <BackgroundColor>#244800</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -535,7 +489,6 @@
                       <FontStyle>Normal</FontStyle>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
-                      <Color>Gray</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -549,11 +502,12 @@
             <Left>5.41603in</Left>
             <Height>0.21875in</Height>
             <Width>2.22918in</Width>
-            <ZIndex>10</ZIndex>
+            <ZIndex>8</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
+              <BackgroundColor>#d3e499</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -572,7 +526,6 @@
                       <FontStyle>Normal</FontStyle>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
-                      <Color>Gray</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -583,14 +536,15 @@
             </Paragraphs>
             <rd:DefaultName>Textbox69</rd:DefaultName>
             <Top>1.24393in</Top>
-            <Left>5.41603in</Left>
+            <Left>5.41602in</Left>
             <Height>0.21007in</Height>
-            <Width>2.27085in</Width>
-            <ZIndex>11</ZIndex>
+            <Width>2.22919in</Width>
+            <ZIndex>9</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
+              <BackgroundColor>#d3e499</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -623,11 +577,12 @@
             <Left>5.41603in</Left>
             <Height>0.19791in</Height>
             <Width>2.22918in</Width>
-            <ZIndex>12</ZIndex>
+            <ZIndex>10</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
+              <BackgroundColor>#d3e499</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -646,7 +601,6 @@
                       <FontStyle>Normal</FontStyle>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
-                      <Color>Gray</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -656,15 +610,16 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox69</rd:DefaultName>
-            <Top>1.80468in</Top>
+            <Top>1.53732in</Top>
             <Left>2.25062in</Left>
             <Height>0.21007in</Height>
             <Width>1.89584in</Width>
-            <ZIndex>13</ZIndex>
+            <ZIndex>11</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
+              <BackgroundColor>#d3e499</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -681,24 +636,30 @@
                     <Value>Discount (</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>Underline</TextDecoration>
+                      <Color>White</Color>
                     </Style>
                   </TextRun>
                   <TextRun>
                     <Value>=Fields!Discount.Value</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>Underline</TextDecoration>
+                      <Color>White</Color>
                     </Style>
                   </TextRun>
                   <TextRun>
                     <Value>%)</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>Underline</TextDecoration>
+                      <Color>White</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -706,15 +667,18 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox69</rd:DefaultName>
-            <Top>2.09287in</Top>
+            <Top>1.82551in</Top>
             <Left>0.4416in</Left>
             <Height>0.21875in</Height>
-            <Width>1.64931in</Width>
-            <ZIndex>14</ZIndex>
+            <Width>1.72568in</Width>
+            <ZIndex>12</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Color>Silver</Color>
+                <Style>Solid</Style>
+                <Width>2pt</Width>
               </Border>
+              <BackgroundColor>#244800</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -731,8 +695,10 @@
                     <Value>Gross Total</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>Underline</TextDecoration>
+                      <Color>White</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -743,12 +709,15 @@
             <Top>1.81336in</Top>
             <Left>4.27019in</Left>
             <Height>0.21007in</Height>
-            <Width>0.95834in</Width>
-            <ZIndex>15</ZIndex>
+            <Width>1.07638in</Width>
+            <ZIndex>13</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Color>Silver</Color>
+                <Style>Solid</Style>
+                <Width>2pt</Width>
               </Border>
+              <BackgroundColor>#244800</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -767,7 +736,6 @@
                       <FontStyle>Normal</FontStyle>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
-                      <Color>Gray</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -777,15 +745,16 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox69</rd:DefaultName>
-            <Top>2.09287in</Top>
+            <Top>1.82551in</Top>
             <Left>2.25062in</Left>
             <Height>0.21875in</Height>
             <Width>1.89584in</Width>
-            <ZIndex>16</ZIndex>
+            <ZIndex>14</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
+              <BackgroundColor>#d3e499</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -817,12 +786,13 @@
             <Top>1.81336in</Top>
             <Left>5.41602in</Left>
             <Height>0.21007in</Height>
-            <Width>1.89584in</Width>
-            <ZIndex>17</ZIndex>
+            <Width>2.22919in</Width>
+            <ZIndex>15</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
+              <BackgroundColor>#d3e499</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -844,16 +814,16 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox26</rd:DefaultName>
-            <Top>2.51958in</Top>
-            <Left>0.09312in</Left>
+            <Top>2.2175in</Top>
+            <Left>0.03062in</Left>
             <Height>0.03125in</Height>
             <Width>7.55208in</Width>
-            <ZIndex>18</ZIndex>
+            <ZIndex>16</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <BackgroundColor>Black</BackgroundColor>
+              <BackgroundColor>#244800</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -878,11 +848,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>2.84375in</Top>
-            <Left>2.89459in</Left>
+            <Top>2.37757in</Top>
+            <Left>2.7923in</Left>
             <Height>0.30208in</Height>
             <Width>2.03534in</Width>
-            <ZIndex>19</ZIndex>
+            <ZIndex>17</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -903,8 +873,10 @@
                     <Value>Deposit #</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>Underline</TextDecoration>
+                      <Color>White</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -912,15 +884,18 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox69</rd:DefaultName>
-            <Top>3.29604in</Top>
-            <Left>1.39519in</Left>
-            <Height>0.21007in</Height>
+            <Top>2.82986in</Top>
+            <Left>1.2929in</Left>
+            <Height>0.2934in</Height>
             <Width>1.86646in</Width>
-            <ZIndex>20</ZIndex>
+            <ZIndex>18</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Color>Silver</Color>
+                <Style>Solid</Style>
+                <Width>2pt</Width>
               </Border>
+              <BackgroundColor>#244800</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -937,8 +912,10 @@
                     <Value>Payment</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>Underline</TextDecoration>
+                      <Color>White</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -946,15 +923,18 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox69</rd:DefaultName>
-            <Top>3.84118in</Top>
-            <Left>1.3952in</Left>
-            <Height>0.19791in</Height>
+            <Top>3.52777in</Top>
+            <Left>1.29295in</Left>
+            <Height>0.2118in</Height>
             <Width>1.86646in</Width>
-            <ZIndex>21</ZIndex>
+            <ZIndex>19</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Color>Silver</Color>
+                <Style>Solid</Style>
+                <Width>2pt</Width>
               </Border>
+              <BackgroundColor>#244800</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -971,9 +951,9 @@
                     <Value>=Fields!ID2.Value</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
-                      <Color>Gray</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -983,15 +963,16 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox69</rd:DefaultName>
-            <Top>3.30993in</Top>
-            <Left>3.86394in</Left>
-            <Height>0.21007in</Height>
+            <Top>2.84375in</Top>
+            <Left>3.76165in</Left>
+            <Height>0.27951in</Height>
             <Width>2.53126in</Width>
-            <ZIndex>22</ZIndex>
+            <ZIndex>20</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
+              <BackgroundColor>#d3e499</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -1008,9 +989,9 @@
                     <Value>=Fields!Payment.Value</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
-                      <Color>Gray</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1020,15 +1001,16 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox69</rd:DefaultName>
-            <Top>3.86895in</Top>
-            <Left>3.86395in</Left>
-            <Height>0.19791in</Height>
+            <Top>3.52777in</Top>
+            <Left>3.76171in</Left>
+            <Height>0.25694in</Height>
             <Width>2.53126in</Width>
-            <ZIndex>23</ZIndex>
+            <ZIndex>21</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
+              <BackgroundColor>#d3e499</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -1045,8 +1027,10 @@
                     <Value>Total Payment</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>Underline</TextDecoration>
+                      <Color>White</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1054,15 +1038,18 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox69</rd:DefaultName>
-            <Top>4.12242in</Top>
-            <Left>1.39523in</Left>
+            <Top>3.82637in</Top>
+            <Left>1.29296in</Left>
             <Height>0.21007in</Height>
             <Width>1.86646in</Width>
-            <ZIndex>24</ZIndex>
+            <ZIndex>22</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Color>Silver</Color>
+                <Style>Solid</Style>
+                <Width>2pt</Width>
               </Border>
+              <BackgroundColor>#244800</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -1079,9 +1066,9 @@
                     <Value>=Fields!Total_Payment.Value</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
-                      <Color>Gray</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1091,15 +1078,16 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox69</rd:DefaultName>
-            <Top>4.13631in</Top>
-            <Left>3.86398in</Left>
+            <Top>3.84026in</Top>
+            <Left>3.76171in</Left>
             <Height>0.21007in</Height>
             <Width>2.53126in</Width>
-            <ZIndex>25</ZIndex>
+            <ZIndex>23</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
+              <BackgroundColor>#d3e499</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -1116,8 +1104,10 @@
                     <Value>Invoice Gross Total</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>Underline</TextDecoration>
+                      <Color>White</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1125,15 +1115,18 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox69</rd:DefaultName>
-            <Top>3.58944in</Top>
-            <Left>1.3952in</Left>
-            <Height>0.21007in</Height>
+            <Top>3.19271in</Top>
+            <Left>1.29294in</Left>
+            <Height>0.26562in</Height>
             <Width>1.86646in</Width>
-            <ZIndex>26</ZIndex>
+            <ZIndex>24</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Color>Silver</Color>
+                <Style>Solid</Style>
+                <Width>2pt</Width>
               </Border>
+              <BackgroundColor>#244800</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -1150,9 +1143,9 @@
                     <Value>=First(Fields!Invoice_Gross_Total.Value, "DataSet1")</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
-                      <Color>Gray</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1162,15 +1155,16 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox69</rd:DefaultName>
-            <Top>3.58944in</Top>
-            <Left>3.86397in</Left>
-            <Height>0.21007in</Height>
+            <Top>3.19271in</Top>
+            <Left>3.76171in</Left>
+            <Height>0.26562in</Height>
             <Width>2.53126in</Width>
-            <ZIndex>27</ZIndex>
+            <ZIndex>25</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
+              <BackgroundColor>#d3e499</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -1187,8 +1181,10 @@
                     <Value>Remaining Balance</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>Underline</TextDecoration>
+                      <Color>White</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1196,15 +1192,18 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox69</rd:DefaultName>
-            <Top>4.40193in</Top>
-            <Left>1.39522in</Left>
-            <Height>0.21007in</Height>
+            <Top>4.10589in</Top>
+            <Left>1.2929in</Left>
+            <Height>0.26215in</Height>
             <Width>1.86646in</Width>
-            <ZIndex>28</ZIndex>
+            <ZIndex>26</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Color>Silver</Color>
+                <Style>Solid</Style>
+                <Width>2pt</Width>
               </Border>
+              <BackgroundColor>#244800</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -1221,6 +1220,7 @@
                     <Value>=Fields!Balance.Value</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>Red</Color>
@@ -1233,15 +1233,16 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox69</rd:DefaultName>
-            <Top>4.41582in</Top>
-            <Left>3.86397in</Left>
-            <Height>0.21007in</Height>
+            <Top>4.11978in</Top>
+            <Left>3.76165in</Left>
+            <Height>0.26215in</Height>
             <Width>2.53126in</Width>
-            <ZIndex>29</ZIndex>
+            <ZIndex>27</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
+              <BackgroundColor>#d3e499</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -1258,8 +1259,10 @@
                     <Value>Recived By</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>Underline</TextDecoration>
+                      <Color>White</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1267,15 +1270,18 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox69</rd:DefaultName>
-            <Top>4.91792in</Top>
-            <Left>0.30082in</Left>
+            <Top>4.45174in</Top>
+            <Left>0.19853in</Left>
             <Height>0.21007in</Height>
             <Width>1.86646in</Width>
-            <ZIndex>30</ZIndex>
+            <ZIndex>28</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Color>Silver</Color>
+                <Style>Solid</Style>
+                <Width>2pt</Width>
               </Border>
+              <BackgroundColor>#244800</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -1301,15 +1307,16 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox69</rd:DefaultName>
-            <Top>4.91792in</Top>
-            <Left>2.3529in</Left>
+            <Top>4.45174in</Top>
+            <Left>2.25061in</Left>
             <Height>0.21007in</Height>
             <Width>1.61459in</Width>
-            <ZIndex>31</ZIndex>
+            <ZIndex>29</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Double</Style>
               </Border>
+              <BackgroundColor>#d3e499</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -1326,8 +1333,10 @@
                     <Value>Recived Date</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>Underline</TextDecoration>
+                      <Color>White</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1335,15 +1344,18 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox69</rd:DefaultName>
-            <Top>5.30333in</Top>
-            <Left>0.30082in</Left>
+            <Top>4.83715in</Top>
+            <Left>0.19853in</Left>
             <Height>0.21007in</Height>
             <Width>1.86646in</Width>
-            <ZIndex>32</ZIndex>
+            <ZIndex>30</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Color>Silver</Color>
+                <Style>Solid</Style>
+                <Width>2pt</Width>
               </Border>
+              <BackgroundColor>#244800</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -1371,15 +1383,16 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox69</rd:DefaultName>
-            <Top>5.30333in</Top>
-            <Left>2.35291in</Left>
+            <Top>4.83715in</Top>
+            <Left>2.25062in</Left>
             <Height>0.21007in</Height>
             <Width>1.61459in</Width>
-            <ZIndex>33</ZIndex>
+            <ZIndex>31</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Double</Style>
               </Border>
+              <BackgroundColor>#d3e499</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -1406,15 +1419,16 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox69</rd:DefaultName>
-            <Top>5.30333in</Top>
-            <Left>4.11048in</Left>
+            <Top>4.83715in</Top>
+            <Left>4.00819in</Left>
             <Height>0.21007in</Height>
             <Width>1.07639in</Width>
-            <ZIndex>34</ZIndex>
+            <ZIndex>32</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Double</Style>
               </Border>
+              <BackgroundColor>#d3e499</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -1441,16 +1455,16 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox69</rd:DefaultName>
-            <Top>5.50299in</Top>
-            <Left>5.25978in</Left>
+            <Top>5.03681in</Top>
+            <Left>5.15749in</Left>
             <Height>0.01042in</Height>
             <Width>2.38543in</Width>
-            <ZIndex>35</ZIndex>
+            <ZIndex>33</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <BackgroundColor>Black</BackgroundColor>
+              <BackgroundColor>#244800</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -1474,11 +1488,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>ExecutionTime</rd:DefaultName>
-            <Top>5.72483in</Top>
-            <Left>3.66603in</Left>
+            <Top>5.25865in</Top>
+            <Left>3.56374in</Left>
             <Height>0.25in</Height>
             <Width>2.93688in</Width>
-            <ZIndex>36</ZIndex>
+            <ZIndex>34</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1496,11 +1510,13 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Tax</Value>
+                    <Value>Tax:</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>Underline</TextDecoration>
+                      <Color>White</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1508,15 +1524,18 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox69</rd:DefaultName>
-            <Top>1.81684in</Top>
+            <Top>1.54948in</Top>
             <Left>0.46937in</Left>
-            <Height>0.19791in</Height>
-            <Width>1.62153in</Width>
-            <ZIndex>37</ZIndex>
+            <Height>0.22047in</Height>
+            <Width>1.6979in</Width>
+            <ZIndex>35</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Color>Silver</Color>
+                <Style>Solid</Style>
+                <Width>2pt</Width>
               </Border>
+              <BackgroundColor>#244800</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -1531,7 +1550,7 @@
             <Left>1.14298in</Left>
             <Height>0.67014in</Height>
             <Width>1.0243in</Width>
-            <ZIndex>38</ZIndex>
+            <ZIndex>36</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1544,6 +1563,26 @@
       </Body>
       <Width>7.68688in</Width>
       <Page>
+        <PageHeader>
+          <Height>1in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageHeader>
+        <PageFooter>
+          <Height>1in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageFooter>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>
         <LeftMargin>0.25in</LeftMargin>

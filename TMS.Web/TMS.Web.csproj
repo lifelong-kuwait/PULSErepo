@@ -327,6 +327,11 @@
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="DS_CompanyInfo.Designer.cs" />
+    <Compile Include="INO_Invoice_Grid_ReportDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>INO_Invoice_Grid_ReportDataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="InvoiceReciptDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2596,6 +2601,17 @@
     </Content>
     <Content Include="InvoiceReciptDataSet.xsc">
       <DependentUpon>InvoiceReciptDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="INO_Invoice_Grid_ReportDataSet1.xsc">
+      <DependentUpon>INO_Invoice_Grid_ReportDataSet1.xsd</DependentUpon>
+    </Content>
+    <None Include="INO_Invoice_Grid_ReportDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>INO_Invoice_Grid_ReportDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="INO_Invoice_Grid_ReportDataSet1.xss">
+      <DependentUpon>INO_Invoice_Grid_ReportDataSet1.xsd</DependentUpon>
     </Content>
     <None Include="InvoiceReciptDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
@@ -5592,6 +5608,9 @@
     </Content>
     <Content Include="Report\INO_Deposit_Slips_For_Invoices.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\INO_Invoice_Grid_Report.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="Report\Report1.rdlc" />
     <Content Include="Report\Venue_Matrix_ReportCustomized.rdlc" />

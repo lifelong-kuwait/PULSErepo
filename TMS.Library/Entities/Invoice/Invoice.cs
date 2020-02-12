@@ -271,9 +271,10 @@ namespace TMS.Library.TMS
         /// </summary>
         /// <value>The created date.</value>
         public bool IsDelete { get; set; }
-        public Entities.Invoice.Customer customer { get; set; }
-        public OrganizationModel Organization { get; set; }
-        public LoginUsers users { get; set; }
+        public string customer { get; set; }
+        public string Organization { get; set; }
+        public string users { get; set; }
+        public long CustomerID { get; set; }
         public List<InvoiceDetail> invoiceDetailslist { get; set; }
         public void MapProperties(DbDataReader dr)
         {
@@ -306,6 +307,10 @@ namespace TMS.Library.TMS
             IssuedDate = dr.GetString("IssuedDate");
             IsActive = dr.GetBoolean("IsActive");
             IsDelete = dr.GetBoolean("IsDelete");
+            customer= dr.GetString("customer");
+            Organization = dr.GetString("Organization");
+            users = dr.GetString("users");
+            CustomerID = dr.GetLong("CustomerID");
         }
     }
     public static class Fd

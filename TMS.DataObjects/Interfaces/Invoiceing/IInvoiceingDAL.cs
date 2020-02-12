@@ -23,7 +23,7 @@ namespace TMS.DataObjects.Interfaces.Invoiceing
         
         long create_InvoiceDetailDAL(InvoiceDetail invoiceDetail);
         long Update_InvoiceDetailDAL(InvoiceDetail invoiceDetail);
-        DataTable GetInvoiceReportsDAL(long InoID, long companyID);
+        DataTable GetInvoiceReportsDAL(long InoID, long companyID ,bool bit);
         DataTable GetInvoiceDepositReportsDAL(long InoID, long DepositId, long companyID);
         List<InvoiceHistory> Read_InvoiceHistoryDAL(string invoiceId); 
         List<ReIssued> Read_InvoiceReIssuedByDAL(string invoiceId);
@@ -37,5 +37,7 @@ namespace TMS.DataObjects.Interfaces.Invoiceing
         List<InvoiceStatusModel> Read_InvoiceStatusChangesDAL(string invoiceId);
         
         long InvoiceStatusChangeCreateDAL(InvoiceStatusModel invoiceStatus);
+        DataTable GetInvoiceGridReportsDAL(string startRowindex, string Page, string PageSize, long CompanyID);
+
     }
 }

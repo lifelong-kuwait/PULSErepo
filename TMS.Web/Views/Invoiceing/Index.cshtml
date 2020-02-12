@@ -54,14 +54,14 @@
                                                                                                            .DateInput()
                     )
                 </div>
-                <div class="col col-md-3">
+                <div class="col col-md-3" style="display:none;">
                     <label>
                         @lr.InvoiceNumber
                     </label>
                     @(Html.Kendo().TextBox()
                                                                                                                  .Name("Invoice_Number")
-                                                                                                                 .Value("")
-                                                                                                                 .HtmlAttributes(new { style = "width: 100%;border:1px solid;", title = "datetimepicker" })
+                                                                                                                 .Value("123456")
+                                                                                                                 .HtmlAttributes(new { style = "width: 100%;border:1px solid;display:none;", title = "datetimepicker" })
 
                     )
                 </div>
