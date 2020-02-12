@@ -70,7 +70,7 @@
 
                         )
                     </div>
-                    <div class="col col-md-3">
+                    <div class="col col-md-3"style="display:none;">
                         <label>
                             @lr.InvoiceNumber
                         </label>
@@ -783,7 +783,7 @@
         jQuery(document).ready(function () {
             var todayDate = kendo.toString(kendo.parseDate(new Date('@modellist.Due_Date.ToString()')), 'MM/dd/yyyy');
             jQuery("#Due_Date").data("kendoDatePicker").value(todayDate);
-            jQuery("#PersonsForInvoice").data('kendoDropDownList').value(@modellist.customer.ID);
+            jQuery("#PersonsForInvoice").data('kendoDropDownList').value(@modellist.CustomerID);
             jQuery("#Currency").data('kendoDropDownList').value(3);
             jQuery("#TaxType").data('kendoDropDownList').value(@((int)modellist.Tax_Type));
             if (@((int)modellist.Tax_Type)== '1' ||@((int)modellist.Tax_Type)== '2') {

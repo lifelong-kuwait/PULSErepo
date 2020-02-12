@@ -27,13 +27,13 @@
         jQuery('#checkbox_id2').change(function () {
 
 
-            jQuery('.checkBoxClass').prop("checked", this.checked);
+            jQuery('.checkBoxClassINO').prop("checked", this.checked);
 
         });
 
-        jQuery('.checkBoxClass').change(function () {
+        jQuery('.checkBoxClassINO').change(function () {
 
-            if (jQuery('input:checkbox:checked.checkBoxClass').length === jQuery("input:checkbox.checkBoxClass").length) {
+            if (jQuery('input:checkbox:checked.checkBoxClassINO').length === jQuery("input:checkbox.checkBoxClassINO").length) {
                 jQuery('#checkbox_id2').prop("checked", true);
             }
             else {
@@ -68,6 +68,7 @@
                     <div class="control-group">
                         @foreach (var country in codeGroup)
                         {
+                            country.PermissionGroupType = "ino";
                             { Html.RenderPartial("_GroupsPermissionRow", country); }
                         }
                     </div>

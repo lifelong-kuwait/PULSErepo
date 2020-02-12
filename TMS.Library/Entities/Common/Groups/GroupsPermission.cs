@@ -90,7 +90,11 @@ namespace TMS.Library.Common.Groups
         /// </summary>
         /// <value>The permission name identifier.</value>
         public long PermissionNameId { get; set; }
-
+        /// <summary>
+        /// Gets or sets the group permission code.
+        /// </summary>
+        /// <value>The group permission code.</value>
+        public string PermissionGroupType { get; set; }
         /// <summary>
         /// Maps the properties.
         /// </summary>

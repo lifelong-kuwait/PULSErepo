@@ -22,7 +22,7 @@ namespace TMS.Business.Interfaces.Invoiceing
         Invoice Read_InvoiceByIDBAL(string  invoiceId);
         long create_InvoiceDetailBAL(InvoiceDetail invoiceDetail); 
         long Update_InvoiceDetailBAL(InvoiceDetail invoiceDetail);
-        DataTable GetInvoiceReportsBAL(long InoID, long companyID);
+        DataTable GetInvoiceReportsBAL(long InoID, long companyID, bool bit);
         DataTable GetInvoiceDepositReportsBAL(long InoID, long DepositId,long companyID);
         List<InvoiceHistory> Read_InvoiceHistoryBAL(string invoiceId);
         List<ReIssued> Read_InvoiceReIssuedByBAL(string invoiceId);
@@ -35,6 +35,7 @@ namespace TMS.Business.Interfaces.Invoiceing
         long create_InvoiceReIssueBAL(ReIssued invoiceReIssue);
         long create_InvoiceHistoryBAL(InvoiceHistory invoiceHistory);
         long InvoiceStatusChangeCreateBAL(InvoiceStatusModel invoiceStatus);
+        DataTable GetInvoiceGridReportsBAL(string startRowindex, string Page, string PageSize,long CompanyID);
 
     }
 }

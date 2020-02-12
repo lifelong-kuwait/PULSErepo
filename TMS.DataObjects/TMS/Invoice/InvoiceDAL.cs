@@ -223,13 +223,14 @@ namespace TMS.DataObjects.TMS.Invoice
                 );
         }
         
-        public DataTable GetInvoiceReportsDAL(long InoID, long companyID)
+        public DataTable GetInvoiceReportsDAL(long InoID, long companyID,bool bit)
         {
             DataTable dt = new DataTable();
             var conString = DBHelper.ConnectionString;
             SqlCommand cmd = new SqlCommand("INO_InvoiceDetail_Report");
             cmd.Parameters.AddWithValue("@Invoice_ID", InoID);
             cmd.Parameters.AddWithValue("@OrganizationID", companyID);
+            cmd.Parameters.AddWithValue("@printDublicate", bit);
             using (SqlConnection con = new SqlConnection(conString))
             {
                 using (SqlDataAdapter sda = new SqlDataAdapter())
@@ -288,26 +289,7 @@ namespace TMS.DataObjects.TMS.Invoice
         }
         public Library.TMS.Invoice Read_InvoiceByIDDAL(string invoiceId)
         {
-            var _PersonData = ExecuteSinglewithSP<Library.TMS.Invoice>("INO_Get_Invoice_By_ID_Read", ParamBuilder.Par("InvoiceId", invoiceId));
-           
-                if (_PersonData.Generated_To > 0)
-                {
-                    var x = ExecuteSinglewithSP<Customer>(@"INO_Get_Customer", ParamBuilder.Par("CID", _PersonData.Generated_To));
-                _PersonData.customer = x;
-                }
-                if (_PersonData.Organization_ID > 0)
-                {
-                    var x = ExecuteSinglewithSP<OrganizationModel>(@"INO_Get_Organization", ParamBuilder.Par("OID", _PersonData.Organization_ID));
-                _PersonData.Organization = x;
-                }
-                if (_PersonData.Generated_By > 0)
-                {
-                    var x = ExecuteSinglewithSP<LoginUsers>(@"INO_Get_User", ParamBuilder.Par("UID", _PersonData.Generated_By));
-                _PersonData.users = x;
-                }
-                //  Person = _PersonData.Read<Trainer>().AsList<Trainer>();
-            
-            return _PersonData;
+            return  ExecuteSinglewithSP<Library.TMS.Invoice>("INO_Get_Invoice_By_ID_Read", ParamBuilder.Par("InvoiceId", invoiceId));
         }
         public List<Library.TMS.Invoice> Read_InvoiceDAL(ref int Total, string culture, string SearchText, string SortExpression, int StartRowIndex, int page, int PageSize, long CompanyID)
         {
@@ -324,25 +306,25 @@ namespace TMS.DataObjects.TMS.Invoice
                 }
                 conn.Close();
             }
-            foreach (var single in _CustomerData)
-            {
-                if (single.Generated_To > 0)
-                {
-                    var x = ExecuteSinglewithSP<Customer>(@"INO_Get_Customer", ParamBuilder.Par("CID", single.Generated_To));
-                    single.customer = x;
-                }
-                if (single.Organization_ID > 0)
-                {
-                    var x = ExecuteSinglewithSP<OrganizationModel>(@"INO_Get_Organization", ParamBuilder.Par("OID", single.Organization_ID));
-                    single.Organization = x;
-                }
-                if (single.Generated_By > 0)
-                {
-                    var x = ExecuteSinglewithSP<LoginUsers>(@"INO_Get_User", ParamBuilder.Par("UID", single.Generated_By));
-                    single.users = x;
-                }
-                //  Person = _PersonData.Read<Trainer>().AsList<Trainer>();
-            }
+            //foreach (var single in _CustomerData)
+            //{
+            //    if (single.Generated_To > 0)
+            //    {
+            //        var x = ExecuteSinglewithSP<Customer>(@"INO_Get_Customer", ParamBuilder.Par("CID", single.Generated_To));
+            //        single.customer = x;
+            //    }
+            //    if (single.Organization_ID > 0)
+            //    {
+            //        var x = ExecuteSinglewithSP<OrganizationModel>(@"INO_Get_Organization", ParamBuilder.Par("OID", single.Organization_ID));
+            //        single.Organization = x;
+            //    }
+            //    if (single.Generated_By > 0)
+            //    {
+            //        var x = ExecuteSinglewithSP<LoginUsers>(@"INO_Get_User", ParamBuilder.Par("UID", single.Generated_By));
+            //        single.users = x;
+            //    }
+            //    //  Person = _PersonData.Read<Trainer>().AsList<Trainer>();
+            //}
             return _CustomerData.ToList();
         }
         public List<InvoiceHistory> Read_InvoiceHistoryDAL(string invoiceId)
@@ -478,6 +460,30 @@ namespace TMS.DataObjects.TMS.Invoice
                 }
             }
             return _CustomerData.ToList();
+        }
+        public DataTable GetInvoiceGridReportsDAL(string startRowindex, string Page, string PageSize, long CompanyID)
+        {
+            DataTable dt = new DataTable();
+            var conString = DBHelper.ConnectionString;
+            SqlCommand cmd = new SqlCommand("INO_Invoice_Grid_Report");
+            cmd.Parameters.AddWithValue("@StartRowIndex", startRowindex);
+            cmd.Parameters.AddWithValue("@Page", Page);
+            cmd.Parameters.AddWithValue("@PageSize", PageSize); 
+            cmd.Parameters.AddWithValue("@CompanyID", CompanyID);
+            using (SqlConnection con = new SqlConnection(conString))
+            {
+                using (SqlDataAdapter sda = new SqlDataAdapter())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    sda.SelectCommand = cmd;
+                    using (DataSet dsCustomers = new DataSet())
+                    {
+                        sda.Fill(dsCustomers, "Customers");
+                        return dsCustomers.Tables[0];
+                    }
+                }
+            }
         }
     }
 }

@@ -29,71 +29,76 @@
             return '';
         }
     </script>
+
+    <div  align="right">
+        <button type="button" id="invoiceReportGrid" value="GenerateReport" class="invoiceReportGrid">Generate Report</button>
+    </div>
     @(Html.Kendo().Grid<TMS.Library.TMS.Invoice>()
-                                .Name("PersonGrid")
-                                .Columns(columns =>
-                                {
-                                    columns.Bound(e => e.Invoice_Number).Filterable(true).ClientTemplate(@"<div  class='person-box'>
+                                                .Name("PersonGrid")
+                                                .Columns(columns =>
+                                                {
+                                                    columns.Bound(e => e.Invoice_Number).Filterable(true).ClientTemplate(@"<div  class='person-box'>
 <div class='person'>
 " +
-                                    @"<h3> <b>" + InvoiceNumber + @"</b>:#:Invoice_Number#</h3>" +
-                                     @"# if (Referance_Number!=null) { #" +
-                                    @"<p> <b>" + ReferanceNumber + @"</b>: #:Referance_Number#</p> #}
-if(customer.Customer_PName!=null){#<p><b>" + customer + @"</b> :#:customer.Customer_PName#</p> #}
-if(users.P_DisplayName!=null){#<p><b>" + createdBy + @"</b> :#:users.P_DisplayName#</p> #}
-if(Organization.P_Name!=null){#<p><b>" + oraganization + @"</b> :#:Organization.P_Name#</p> #}#
+                                                    @"<h3> <b>" + InvoiceNumber + @"</b>:#:ID#</h3>" +
+                                                     @"# if (Referance_Number!=null) { #" +
+                                                    @"<p> <b>" + ReferanceNumber + @"</b>: #:Referance_Number#</p> #}
+if(customer!=null){#<p><b>" + customer + @"</b> :#:customer#</p> #}
+if(users!=null){#<p><b>" + createdBy + @"</b> :#:users#</p> #}
+if(Organization!=null){#<p><b>" + oraganization + @"</b> :#:Organization#</p> #}#
 </div>"
-                               ).Title(lr.InvoiceNumber).Width(300);
-                                    columns.Bound(e => e.customer.Customer_PName).Filterable(true).ClientTemplate(@"<div  class='person-box'>
+                                               ).Title(lr.InvoiceNumber).Width(300);
+                                                    columns.Bound(e => e.customer).Filterable(true).ClientTemplate(@"<div  class='person-box'>
 <div class='person'>
 " +
-                                     @"<h3> <b>" + invoiceSubTotal + @"</b>:#:Invoice_Amount#</h3>" +
-                                      @"# if (Tax_Value!=null) { #" +
-                                     @"<p> <b>" + tax + @"</b>: #:Tax_Value#</p> #}
+                                                     @"<h3> <b>" + invoiceSubTotal + @"</b>:#:Invoice_Amount#</h3>" +
+                                                      @"# if (Tax_Value!=null) { #" +
+                                                     @"<p> <b>" + tax + @"</b>: #:Tax_Value#</p> #}
 if(Discount_Value!=null){#<p><b>" + discount + @"</b>:#:Discount_Value#</p> #}
 if(Invoice_Gross_Total!=null){#<h2><p><b>" + grossTotal + @"</b> :#:Invoice_Gross_Total#</p></h2> #}#
 
 </div>"
-                                ).Title(lr.InvoiceDetail);
-                                    columns.Bound(e => e.invoiceLastActivity).Filterable(true).ClientTemplate(@"<div  class='person-box'>
-                    <div class='person'>
-                        " +
-                    @"<h5> <b>" + LastActivityType + @"</b>:#:invoiceLastActivityValue#</h5>" +
-                       @"<h5> <b>Done By:</b>:#:INO_GetlatestHistoryCreator#</h5>" +
+                                                ).Title(lr.InvoiceDetail);
+                                                    columns.Bound(e => e.invoiceLastActivity).Filterable(true).ClientTemplate(@"<div  class='person-box'>
+    <div class='person'>
+        " +
+                                    @"<h5> <b>" + LastActivityType + @"</b>:#:invoiceLastActivityValue#</h5>" +
+                                       @"<h5> <b>Done By:</b>:#:INO_GetlatestHistoryCreator#</h5>" +
 
-                @"</div>"
-               );
-                                    columns.Bound(e => e.Invoice_Status).Filterable(true).ClientTemplate("#=SessionTemplate(data)#").Title(lr.InvoiceStatus);
+                                @"</div>"
+                               );
+                                                    columns.Bound(e => e.Invoice_Status).Filterable(true).ClientTemplate("#=SessionTemplate(data)#").Title(lr.InvoiceStatus);
 
 
-                                })
-                                .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_PersonTemplate").DisplayDeleteConfirmation(false))
-                                .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>)).Groupable()
-                                                                                    .Sortable().Selectable(selectable => selectable
-                                                                                    .Mode(GridSelectionMode.Single))
-                                                                                    .Groupable()
-                                                                                    .Pageable(pager => pager
-                                                                                    .Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
-                                                                                    .Scrollable()
-                                                                                    //.ClientDetailTemplateId("PersonGridChildtemplate")
-                                                                                    .Filterable().Events(e => e.Edit("PersonGrid_onEdit").Save("Person_onSave"))
-                                                                                    .HtmlAttributes(new { style = "height:700px !important;" })
-                                                                                    .ClientDetailTemplateId("LookupDetailGriTemplate")
-                                                                                    .DataSource(dataSource => dataSource
-                                                                                        .Ajax()
-                                                                                        //.ServerOperation(false)
-                                                                                        .Model(model =>
-                                                                                        {
-                                                                                            model.Id(m => m.ID);
-                                                                                        })
-                                                                                       .PageSize(5)
-                                                                                        .Read(read => read.Action("Invoice_Read", "Invoiceing", new { RoleID = Model }).Data("withSearch"))
-                                                                                        .Events(e => e.Error("GeneralErrorHandler(\"PersonGrid\")"))
-                                                                                        ).NoRecords(lr.GridNoRecordFoundMessage)
+                                                })
+                                                .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_PersonTemplate").DisplayDeleteConfirmation(false))
+                                                .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>)).Groupable()
+                                                                                                                            .Sortable().Selectable(selectable => selectable
+                                                                                                                            .Mode(GridSelectionMode.Single))
+                                                                                                                            .Groupable()
+                                                                                                                            .Pageable(pager => pager
+                                                                                                                            .Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
+                                                                                                                            .Scrollable()
+                                                                                                                            //.ClientDetailTemplateId("PersonGridChildtemplate")
+                                                                                                                            .Filterable().Events(e => e.Edit("PersonGrid_onEdit").Save("Person_onSave"))
+                                                                                                                            .HtmlAttributes(new { style = "height:700px !important;" })
+                                                                                                                            .ClientDetailTemplateId("LookupDetailGriTemplate")
+                                                                                                                            .DataSource(dataSource => dataSource
+                                                                                                                                .Ajax()
+                                                                                                                                //.ServerOperation(false)
+                                                                                                                                .Model(model =>
+                                                                                                                                {
+                                                                                                                                    model.Id(m => m.ID);
+                                                                                                                                })
+                                                                                                                               .PageSize(5)
+                                                                                                                                .Read(read => read.Action("Invoice_Read", "Invoiceing", new { RoleID = Model }).Data("withSearch"))
+                                                                                                                                .Events(e => e.Error("GeneralErrorHandler(\"PersonGrid\")"))
+                                                                                                                                ).NoRecords(lr.GridNoRecordFoundMessage)
     )
-  {Html.Kendo().Window()
-          .Name("InProcessModel")
-          .Content(@<text>@{Html.RenderPartial("~/Views/Invoiceing/EditorTemplates/UnderProcessProcess.cshtml");}</text>)
+    {
+        Html.Kendo().Window()
+               .Name("InProcessModel")
+               .Content(@<text>@{Html.RenderPartial("~/Views/Invoiceing/EditorTemplates/UnderProcessProcess.cshtml");}</text>)
 .Draggable(true).Title(lr.InvoiceInProcess)
 .Resizable()
 .Scrollable(false)
@@ -104,17 +109,17 @@ if(Invoice_Gross_Total!=null){#<h2><p><b>" + grossTotal + @"</b> :#:Invoice_Gros
 .Actions(actions => actions.Maximize().Minimize().Close())
 .Iframe(true)
 .Render();
-    }
+}
 
 
-    @helper RenderAddTemplate()
-    {
+@helper RenderAddTemplate()
+{
     <div class="toolbar">
 
         @if (User.IsInRole("CanAddInvoicing"))
         {
             <a class="k-button tms-grid-added" title="" data-placement="left" data-toggle="tooltip" data-original-title="Tooltip on left"><span class="tms-grid-icon mdi mdi-plus "></span></a>
-        }  
+        }
         @if (User.IsInRole("CanEditInvoicing"))
         {
             <a class="k-button tms-grid-editGrid"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
@@ -129,35 +134,46 @@ if(Invoice_Gross_Total!=null){#<h2><p><b>" + grossTotal + @"</b> :#:Invoice_Gros
         }
 
     </div>
-    }
-    <script src="~/Views/People/Person.js"></script>
-    <script id="LookupDetailGriTemplate" type="text/kendo-tmpl">
-        @(Html.Kendo().Grid<TMS.Library.TMS.InvoiceDetail>()
-                                                                                          .Name("ResourceLookupDetailGridMian#=ID#") // template expression, to be evaluated in the master context
-                                                                          .Columns(columns =>
-                                                                          {
-                                                                              columns.Bound(o => o.Item).Width(110);
-                                                                              columns.Bound(o => o.Description).Width(110).Title(lr.Description);
-                                                                              columns.Bound(p => p.Qty).Title(lr.quantity).Width(50); ;
-                                                                              columns.Bound(p => p.Price).Title(lr.Price).Width(50); ;
-                                                                              columns.Bound(p => p.Sub_Total).Width(100).Format(KendoDateFormat).Title(lr.SubTotal); ;
+}
+<script src="~/Views/People/Person.js"></script>
+<script id="LookupDetailGriTemplate" type="text/kendo-tmpl">
+    @(Html.Kendo().Grid<TMS.Library.TMS.InvoiceDetail>()
+                                                                                                      .Name("ResourceLookupDetailGridMian#=ID#") // template expression, to be evaluated in the master context
+                                                                                      .Columns(columns =>
+                                                                                      {
+                                                                                          columns.Bound(o => o.Item).Width(110);
+                                                                                          columns.Bound(o => o.Description).Width(110).Title(lr.Description);
+                                                                                          columns.Bound(p => p.Qty).Title(lr.quantity).Width(50); ;
+                                                                                          columns.Bound(p => p.Price).Title(lr.Price).Width(50); ;
+                                                                                          columns.Bound(p => p.Sub_Total).Width(100).Format(KendoDateFormat).Title(lr.SubTotal); ;
 
 
-                                                                          })
-                                                                            .Events(e => e.Edit("PersonGrid_onEdit").Save("Person_onSave"))
-                                                                          .DataSource(dataSource => dataSource
-                                                                             .Ajax()
-                                                                             .Model(model => model.Id(p => p.ID))
-                                                                             .Read(read => read.Action("InvoiceDetail_Read", "Invoiceing", new { InvoiceID = "#=ID#" }))
+                                                                                      })
+                                                                                        .Events(e => e.Edit("PersonGrid_onEdit").Save("Person_onSave"))
+                                                                                      .DataSource(dataSource => dataSource
+                                                                                         .Ajax()
+                                                                                         .Model(model => model.Id(p => p.ID))
+                                                                                         .Read(read => read.Action("InvoiceDetail_Read", "Invoiceing", new { InvoiceID = "#=ID#" }))
 
-                                                                                  )
+                                                                                              )
 
 
-                                                                          .Sortable().NoRecords(lr.GridNoRecordFoundMessage)
-                                                                          .ToClientTemplate()
-        )
-    </script>
-    <script type="text/javascript">
+                                                                                      .Sortable().NoRecords(lr.GridNoRecordFoundMessage)
+                                                                                      .ToClientTemplate()
+    )
+</script>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+         jQuery(".invoiceReportGrid").click(function () {
+           // var checkedLength = jQuery("#PersonGrid tr.k-state-selected").length;
+            var pagesize=jQuery("#PersonGrid").data("kendoGrid").dataSource.pageSize();
+             var page = jQuery("#PersonGrid").data("kendoGrid").dataSource.page();
+             var urls = "/Invoiceing/PrintGridReport_Read?Page=" + page + "&PageSize=" + pagesize + ""
+             
+                window.open(urls, "_blank");
+            
+        });
+    });
     jQuery(function () {
         var template = kendo.template(jQuery("#toolTipTemplate").html());
         //initialize tooltip to grid tbody with filter cells with given CSS class
@@ -191,6 +207,8 @@ if(Invoice_Gross_Total!=null){#<h2><p><b>" + grossTotal + @"</b> :#:Invoice_Gros
 
             }
         });
+       
+        
         jQuery(".tms-grid-editGrid").live("mousedown", function (event) {
             var checkedLength = jQuery("#PersonGrid tr.k-state-selected").length;
             if (checkedLength == 1) {
@@ -226,13 +244,13 @@ if(Invoice_Gross_Total!=null){#<h2><p><b>" + grossTotal + @"</b> :#:Invoice_Gros
                 var data = grid.dataItem(jQuery("#PersonGrid tr.k-state-selected"));
                 if (data.Is_Re_Issued == true) {
                     swal({
-                        title: 'Print Invoice Again',
-                        text: 'Do you want to print invoice again!',
+                        title: 'Print Invoice As Dublicate',
+                        text: 'Do you want to Print as Dublicate!',
                         type: "warning",
                         showCancelButton: true,
                         confirmButtonColor: "#DD6B55",
                         confirmButtonText: "@lr.confirmYes",
-                        cancelButtonText: "@lr.confirmNo",
+                        cancelButtonText: "No",
                         closeOnConfirm: true,
                         closeOnCancel: true,
                         html: true,
@@ -245,11 +263,23 @@ if(Invoice_Gross_Total!=null){#<h2><p><b>" + grossTotal + @"</b> :#:Invoice_Gros
                                     url: "/Invoiceing/SetSessionValues",
                                     dataType: "JSON",
                                     contentType: "application/json; charset=utf-8",
-                                    data: JSON.stringify({ _InoID: data.ID }),
+                                    data: JSON.stringify({ _InoID: data.ID, _PrintDublicate:true }),
                                     success: function (data) {
                                         window.open("/Invoiceing/PrintInvoice_Read", "_blank");
                                     }
                                 });
+                            } else {
+                                jQuery.ajax({
+                                    method: "post",
+                                    url: "/Invoiceing/SetSessionValues",
+                                    dataType: "JSON",
+                                    contentType: "application/json; charset=utf-8",
+                                    data: JSON.stringify({ _InoID: data.ID, _PrintDublicate: false }),
+                                    success: function (data) {
+                                        window.open("/Invoiceing/PrintInvoice_Read", "_blank");
+                                    }
+                                });
+
                             }
                         }
                     );
@@ -259,7 +289,7 @@ if(Invoice_Gross_Total!=null){#<h2><p><b>" + grossTotal + @"</b> :#:Invoice_Gros
                         url: "/Invoiceing/SetSessionValues",
                         dataType: "JSON",
                         contentType: "application/json; charset=utf-8",
-                        data: JSON.stringify({ _InoID: data.ID }),
+                        data: JSON.stringify({ _InoID: data.ID, _PrintDublicate: false }),
                         success: function (data) {
                             window.open("/Invoiceing/PrintInvoice_Read", "_blank");
                         }
@@ -367,72 +397,77 @@ if(Invoice_Gross_Total!=null){#<h2><p><b>" + grossTotal + @"</b> :#:Invoice_Gros
         });
 
     })
-    </script>
-    <script id="SessionTemplate" type="text/kendo">
-        <div class='person-box'>
-            <div class='person'>
+</script>
+<script id="SessionTemplate" type="text/kendo">
+    <div class='person-box'>
+        <div class='person'>
 
-                <h5>
-                    #if (data.Is_Re_Issued){ #
-                    <label>
-                        Issued Date :
-                    </label>
-                    <span class='date'>#=kendo.toString(data.IssuedDate,'" + DateFormatScript + "')#</span>
-                    #}#
-                </h5>
-                <h5 style="color:red;">
-                    <p>
-                        <label>
-                            @lr.DueDate :
-                        </label>
-                        <span>
-                            #:data.Due_Date2#
-                        </span>
-                    </p>
-                </h5>
+            <h5>
+                #if (data.Is_Re_Issued){ #
+                <label>
+                    Issued Date :
+                </label>
+                <span class='date'>#=kendo.toString(data.IssuedDate,'" + DateFormatScript + "')#</span>
+                #}#
+            </h5>
+            <h5 style="color:red;">
                 <p>
                     <label>
-                        @lr.Status:
-
+                        @lr.DueDate :
                     </label>
-                    #:data.Invoice_StatusString#
+                    <span>
+                        #:data.Due_Date2#
+                    </span>
                 </p>
-                <p>
-                    <label>@lr.IsDeposit: </label>
-                    <label>
-                        #if (data.Is_Deposit){ # <span class="mdi mdi-checkbox-blank-circle text-success"></span>    #}else{#  <span class="mdi mdi-checkbox-blank-circle text-danger"></span>  #}#
+            </h5>
+            <p>
+                <label>
+                    @lr.Status:
 
-                    </label>
-                </p>
+                </label>
+                #:data.Invoice_StatusString#
+            </p>
+            <p>
+                <label>@lr.IsDeposit: </label>
+                <label>
+                    #if (data.Is_Deposit){ # <span class="mdi mdi-checkbox-blank-circle text-success"></span>    #}else{#  <span class="mdi mdi-checkbox-blank-circle text-danger"></span>  #}#
+
+                </label>
+            </p>
 
 
-            </div>
         </div>
-    </script>
-    <script id="toolTipTemplate" type="text/x-kendo-template">
-        @if (User.IsInRole("CanEditInvoicing"))
-        {
-            <span class="grid-tooltip-icon tms-grid-editGrid" dat-pid="#=ID#" title="Edit Invoice"><i class=" mdi mdi-pencil"></i></span>
-        }
-        @if (User.IsInRole("CanViewDetailInvoicing"))
-        {
-            <span class="grid-tooltip-icon detail" dat-pid="#=ID#" title="See the detail of Invoice #=Invoice_Number#"><i class=" mdi mdi-open-in-new"></i></span>
-        }
-        @if (User.IsInRole("CanPrintInvoice"))
-        {
-            <span class="grid-tooltip-icon download" dat-pid="#=ID#" title="Download this Invoice #=Invoice_Number#"><i class="mdi mdi-printer"></i></span>
-        }
-        @if (User.IsInRole("CanChangeStatusInProcessInvoice"))
-        {
-            <span class="grid-tooltip-icon Process" dat-pid="#=ID#" title="Invoice in Process #=Invoice_Number#"><i class="mdi mdi-replay"></i></span>
-        }
-        @if (User.IsInRole("CanChangeStatusReadyForCollectionInvoice"))
-        {
-            <span class="grid-tooltip-icon ReadyForCollection" dat-pid="#=ID#" title="is Invoice Ready for Collection #=Invoice_Number#"><i class="mdi mdi-cash-multiple"></i></span>
-        }
-        @if (User.IsInRole("CanChangeStatusCancelInvoice"))
-        {
-            <span class="grid-tooltip-icon CancelInvoice" dat-pid="#=ID#" title="Cancel this Invoice #=Invoice_Number#"><i class="mdi mdi-delete-circle"></i></span>
-        }
-    </script>
-            }
+    </div>
+</script>
+<script id="toolTipTemplate" type="text/x-kendo-template">
+    @if (User.IsInRole("CanEditInvoicing"))
+    {
+        <span class="grid-tooltip-icon tms-grid-editGrid" dat-pid="#=ID#" title="Edit Invoice"><i class=" mdi mdi-pencil"></i></span>
+    }
+    @if (User.IsInRole("CanViewDetailInvoicing"))
+    {
+        <span class="grid-tooltip-icon detail" dat-pid="#=ID#" title="See the detail of Invoice #=Invoice_Number#"><i class=" mdi mdi-open-in-new"></i></span>
+    }
+    @if (User.IsInRole("CanPrintInvoice"))
+    {
+        <span class="grid-tooltip-icon download" dat-pid="#=ID#" title="Download this Invoice #=Invoice_Number#"><i class="mdi mdi-printer"></i></span>
+    }
+    @if (User.IsInRole("CanChangeStatusInProcessInvoice"))
+    {
+        <span class="grid-tooltip-icon Process" dat-pid="#=ID#" title="Invoice in Process #=Invoice_Number#"><i class="mdi mdi-replay"></i></span>
+    }
+    @if (User.IsInRole("CanChangeStatusReadyForCollectionInvoice"))
+    {
+        <span class="grid-tooltip-icon ReadyForCollection" dat-pid="#=ID#" title="is Invoice Ready for Collection #=Invoice_Number#"><i class="mdi mdi-cash-multiple"></i></span>
+    }
+    @if (User.IsInRole("CanChangeStatusCancelInvoice"))
+    {
+        <span class="grid-tooltip-icon CancelInvoice" dat-pid="#=ID#" title="Cancel this Invoice #=Invoice_Number#"><i class="mdi mdi-delete-circle"></i></span>
+    }
+</script>
+}
+<script>
+    function onClick(e) {
+        kendoConsole.log("event :: click (" + jQuery(e.event.target).closest(".k-button").attr("id") + ")");
+    }
+</script>

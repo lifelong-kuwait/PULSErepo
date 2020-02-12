@@ -42,6 +42,7 @@ namespace TMS.Web.Controllers
             Session["InvoiceID"] = -1;
             Session["InoID"] = -1;
             Session["DepoID"] = -1;
+            Session["PrintDublicate"] = false;
             return View();
         }
         [DontWrapResult]
@@ -153,9 +154,10 @@ namespace TMS.Web.Controllers
         }
         [DontWrapResult]
         [HttpPost]
-        public void SetSessionValues(string _InoID)
+        public void SetSessionValues(string _InoID,bool _PrintDublicate)
         {
             Session["InvoiceID"] = _InoID;
+            Session["PrintDublicate"] = _PrintDublicate.ToString();
         }
         // [ClaimsAuthorize("CanPrintCertificates")]
         [DontWrapResult]
@@ -164,8 +166,15 @@ namespace TMS.Web.Controllers
 
         public FileResult PrintInvoice_Read()
         {
-
+            
+            
             string _classID = System.Web.HttpContext.Current.Session["InvoiceID"].ToString();
+            string _PrintDublicate = System.Web.HttpContext.Current.Session["PrintDublicate"].ToString();
+            bool bit = false;
+            if(_PrintDublicate=="True")
+            {
+                bit = true;
+            }
             if (_classID.Equals("-1"))
             {
                 Session["InvoiceID"] = -1;
@@ -195,13 +204,21 @@ namespace TMS.Web.Controllers
                 var rptPath = Server.MapPath(@"../Report/INO_InvoiceRecipt.rdlc");
                 ReportViewerRSFReports.LocalReport.ReportPath = rptPath;
                 long cID = Convert.ToInt64(CurrentUser.CompanyID);
-                DataTable dt = _CustomerBAL.GetInvoiceReportsBAL(Convert.ToInt64(_classID), Convert.ToInt64(CurrentUser.CompanyID));
+                DataTable dt = _CustomerBAL.GetInvoiceReportsBAL(Convert.ToInt64(_classID), Convert.ToInt64(CurrentUser.CompanyID),bit);
                 ReportViewerRSFReports.ProcessingMode = ProcessingMode.Local;
                 ReportViewerRSFReports.LocalReport.DataSources.Clear();
+                ReportViewerRSFReports.LocalReport.EnableExternalImages = true;
+                List<OrganizationModel> logoPath = _PersonBAL.GetOrganizationLogo(CurrentUser.CompanyID);
+                ReportParameter paramLogo = new ReportParameter();
+                paramLogo.Name = "Picture";
+                string imagePath = new Uri(Server.MapPath(@"~/" + logoPath.FirstOrDefault().Logo)).AbsoluteUri;
+                paramLogo.Values.Add(imagePath);
+                ReportViewerRSFReports.LocalReport.SetParameters(paramLogo);
                 ReportViewerRSFReports.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt));
                 ReportViewerRSFReports.LocalReport.Refresh();
                 byte[] mybytes = ReportViewerRSFReports.LocalReport.Render(format: "PDF", deviceInfo: "");
                 Session["InvoiceID"] = -1;
+                Session["PrintDublicate"] = false;
                 return File(mybytes, System.Net.Mime.MediaTypeNames.Application.Octet, "Invoice.pdf");
 
 
@@ -212,6 +229,10 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         public ActionResult InvoiceGrid()
         {
+            Session["InvoiceID"] = -1;
+            Session["InoID"] = -1;
+            Session["DepoID"] = -1;
+            Session["PrintDublicate"] = false;
             return View();
         }
         [DontWrapResult]
@@ -604,6 +625,37 @@ namespace TMS.Web.Controllers
             }
             var resultData = new[] { _objTask };
             return RedirectToAction("InvoiceGrid");
+        }
+        [DontWrapResult]
+        //[HttpPost]
+        [ClaimsAuthorize("CanPrintInvoice", "CanViewInvoicing")]
+        public FileResult PrintGridReport_Read(string Page,string PageSize)
+        {
+            int p = Convert.ToInt32(Page);
+            int pz = Convert.ToInt32(PageSize);
+                var startRowIndex = (p - 1) * pz;
+                ReportViewer ReportViewerRSFReports = new ReportViewer();
+                ReportViewerRSFReports.Height = Unit.Parse("100%");
+                ReportViewerRSFReports.Width = Unit.Parse("100%");
+                ReportViewerRSFReports.CssClass = "table";
+                var rptPath = Server.MapPath(@"../Report/INO_Invoice_Grid_Report.rdlc");
+                ReportViewerRSFReports.LocalReport.ReportPath = rptPath;
+                long cID = Convert.ToInt64(CurrentUser.CompanyID);
+                DataTable dt = _CustomerBAL.GetInvoiceGridReportsBAL(startRowIndex.ToString(), Page.ToString(), PageSize.ToString(), Convert.ToInt64(CurrentUser.CompanyID));
+                ReportViewerRSFReports.ProcessingMode = ProcessingMode.Local;
+                ReportViewerRSFReports.LocalReport.DataSources.Clear();
+                ReportViewerRSFReports.LocalReport.EnableExternalImages = true;
+                List<OrganizationModel> logoPath = _PersonBAL.GetOrganizationLogo(CurrentUser.CompanyID);
+                ReportParameter paramLogo = new ReportParameter();
+                paramLogo.Name = "Picture";
+                string imagePath = new Uri(Server.MapPath(@"~/" + logoPath.FirstOrDefault().Logo)).AbsoluteUri;
+                paramLogo.Values.Add(imagePath);
+                ReportViewerRSFReports.LocalReport.SetParameters(paramLogo);
+                ReportViewerRSFReports.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt));
+                ReportViewerRSFReports.LocalReport.Refresh();
+                byte[] mybytes = ReportViewerRSFReports.LocalReport.Render(format: "PDF", deviceInfo: "");
+               
+                return File(mybytes, System.Net.Mime.MediaTypeNames.Application.Octet, "Invoice.pdf");
         }
 
     }

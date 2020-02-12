@@ -68,10 +68,16 @@ namespace TMS.Business.TMS.Invoice
             return DAL.Update_InvoiceDetailDAL(_invoiceDetail);
         }
         
-       public DataTable GetInvoiceReportsBAL(long InoID, long companyID)
+       public DataTable GetInvoiceReportsBAL(long InoID, long companyID, bool bit)
         {
-            return DAL.GetInvoiceReportsDAL( InoID,  companyID);
+            return DAL.GetInvoiceReportsDAL( InoID,  companyID,bit);
         }
+       public DataTable GetInvoiceGridReportsBAL(string startRowindex, string Page, string PageSize, long CompanyID)
+        {
+            return DAL.GetInvoiceGridReportsDAL( startRowindex,  Page,  PageSize,  CompanyID);
+
+        }
+
         public DataTable GetInvoiceDepositReportsBAL(long InoID, long DepositId, long companyID)
         {
             return DAL.GetInvoiceDepositReportsDAL(InoID, DepositId, companyID);
