@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TMS.Library.ModelMapper;
+using lr = Resources.Resources;
 
 namespace TMS.Library.Entities.CRM
 {
@@ -16,6 +18,8 @@ namespace TMS.Library.Entities.CRM
         public string UpdatedByAlias { get; set; }
         
         public long PersonID { get; set; }
+        [Display(Name = "HowHeard", ResourceType = typeof(lr))]
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "HowHeardRequired")]
         public long HowHeardID { get; set; }
         public long CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }

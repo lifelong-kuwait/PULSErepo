@@ -16,9 +16,10 @@ namespace TMS.Library.Entities.CRM
     public long ID { get; set; }
 
     [Display(Name = "CRM_OptionName", ResourceType = typeof(lr))]
-    public string Name { get; set; }
-
+    [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "OptionNameRequired")]
+     public string Name { get; set; }
     [Display(Name = "CRM_Description", ResourceType = typeof(lr))]
+    [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "DescriptionRequired")]
     public string Description { get; set; }
     public long OrganizationID { get; set; }
     public long? CreatedBy { get; set; }

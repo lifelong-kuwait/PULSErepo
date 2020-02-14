@@ -58,7 +58,7 @@ namespace TMS.Web.Controllers
             var result = this._TaskBAL.ChangeStatus_DoneBAL(_objTask);
             if (result == -1)
             {
-                ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                ModelState.AddModelError(lr.ErrorServerError, lr.ErrorServerError);
             }
             var resultData = new[] { _objTask };
             return Json(resultData, JsonRequestBehavior.AllowGet);
@@ -76,7 +76,7 @@ namespace TMS.Web.Controllers
             var result = this._TaskBAL.ChangeStatus_UnderwayBAL(_objTask);
             if (result == -1)
             {
-                ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                ModelState.AddModelError(lr.ErrorServerError, lr.ErrorServerError);
             }
             var resultData = new[] { _objTask };
             return Json(resultData, JsonRequestBehavior.AllowGet);
@@ -105,7 +105,7 @@ namespace TMS.Web.Controllers
             var result = this._TaskBAL.ChangeStatus_RescheduleBAL(_objTask);
             if (result == -1)
             {
-                ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                ModelState.AddModelError(lr.ErrorServerError, lr.ErrorServerError);
             }
             var resultData = new[] { _objTask };
             return RedirectToAction("Index");
@@ -142,7 +142,7 @@ namespace TMS.Web.Controllers
                 _objTasks.ID = _TaskBAL.Tasks_UpdateBAL(_objTasks);
                 if (_objTasks.ID == -1)
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    ModelState.AddModelError(lr.ErrorServerError, lr.ErrorServerError);
                 }
 
             }
@@ -163,7 +163,7 @@ namespace TMS.Web.Controllers
                 _objTasks.ID = _TaskBAL.Tasks_DeleteBAL(_objTasks);
                 if (_objTasks.ID == -1)
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    ModelState.AddModelError(lr.ErrorServerError, lr.ErrorServerError);
                 }
 
             }
@@ -199,7 +199,7 @@ namespace TMS.Web.Controllers
                 _objTasks.ID = _TaskBAL.Task_CreateBAL(objTask);
                 if (_objTasks.ID == -1)
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    ModelState.AddModelError(lr.ErrorServerError, lr.ErrorServerError);
                 }
 
             }
@@ -239,7 +239,7 @@ namespace TMS.Web.Controllers
                         var result = this._UserBAL.LoginUsers_UpdateBAL(_objUsers);
                         if (result == -1)
                         {
-                            ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                            ModelState.AddModelError(lr.ErrorServerError, lr.ErrorServerError);
                         }
                     }
                     else
@@ -254,7 +254,7 @@ namespace TMS.Web.Controllers
                         var result = this._UserBAL.LoginUsers_UpdateBAL(_objUsers);
                         if (result == -1)
                         {
-                            ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                            ModelState.AddModelError(lr.ErrorServerError, lr.ErrorServerError);
                         }
                         else
                         {
@@ -286,7 +286,7 @@ namespace TMS.Web.Controllers
                 var result = this._UserBAL.LoginUsers_DeleteBAL(_objUsers);
                 if (result == -1)
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    ModelState.AddModelError(lr.ErrorServerError, lr.ErrorServerError);
                 }
             }
             var resultData = new[] { _objUsers };
@@ -527,7 +527,7 @@ namespace TMS.Web.Controllers
                 }
                 if (flage)
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.OrganizationNameDublicaton);
+                    ModelState.AddModelError(lr.DubliocationHappen, lr.ProposedCourseAllreadyExists);
                 }
                 else
                 {
@@ -564,7 +564,7 @@ namespace TMS.Web.Controllers
                 }
                 if (flage)
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.OrganizationNameDublicaton);
+                    ModelState.AddModelError(lr.DubliocationHappen, lr.ProposedCourseAllreadyExists);
                 }
                 else
                 {
@@ -573,7 +573,7 @@ namespace TMS.Web.Controllers
                     var result = _objSaleBAL.CourseUpdateBAL(_course);
                     if (result == -1)
                     {
-                        ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                        ModelState.AddModelError(lr.ErrorServerError, lr.ErrorServerError);
                     }
                 }
             }
@@ -594,7 +594,7 @@ namespace TMS.Web.Controllers
                 var result = _objSaleBAL.Course_DeleteBAL(_courses);
                 if (result == -1)
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    ModelState.AddModelError(lr.ErrorServerError, lr.ErrorServerError);
                 }
             }
             var resultData = new[] { _courses };
@@ -646,7 +646,7 @@ namespace TMS.Web.Controllers
                 }
                 if (flage)
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.OrganizationNameDublicaton);
+                    ModelState.AddModelError(lr.ErrorServerError, lr.ProposedCourseAllreadyExists);
                 }
                 else
                 {
@@ -654,8 +654,6 @@ namespace TMS.Web.Controllers
                     _objlogmap.CreatedBy = CurrentUser.NameIdentifierInt64;
                     _objlogmap.CreatedDate = DateTime.Now;
                     _objlogmap.OrganizationID = CurrentUser.CompanyID;
-
-
                     _objlogmap.ID = _objSaleBAL.ManageCourse_CreateBAL(_objlogmap);
                 }
             }
@@ -681,7 +679,7 @@ namespace TMS.Web.Controllers
                 }
                 if (flage)
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.OrganizationNameDublicaton);
+                    ModelState.AddModelError(lr.ErrorServerError, lr.ProposedCourseAllreadyExists);
                 }
                 else
                 {
@@ -690,7 +688,7 @@ namespace TMS.Web.Controllers
                     var result = _objSaleBAL.CourseUpdateBAL(_course);
                     if (result == -1)
                     {
-                        ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                        ModelState.AddModelError(lr.ErrorServerError, lr.ErrorServerError);
                     }
                 }
             }
@@ -711,7 +709,7 @@ namespace TMS.Web.Controllers
                 var result = _objSaleBAL.Course_DeleteBAL(_courses);
                 if (result == -1)
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    ModelState.AddModelError(lr.ErrorServerError, lr.ErrorServerError);
                 }
             }
             var resultData = new[] { _courses };
@@ -856,7 +854,7 @@ namespace TMS.Web.Controllers
                     }
                 }if(flage)
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    ModelState.AddModelError(lr.DubliocationHappen, lr.CRMConfigrationAllreadyExists);
                 }
                 else
                 {
@@ -894,7 +892,7 @@ namespace TMS.Web.Controllers
                 }
                 if (flage)
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    ModelState.AddModelError(lr.DubliocationHappen, lr.CRMConfigrationAllreadyExists);
                 }
                 else
                 {
@@ -904,7 +902,7 @@ namespace TMS.Web.Controllers
                     var result = _objSaleBAL.ManageConfiguration_UpdateBAL(_course);
                     if (result == -1)
                     {
-                        ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                        ModelState.AddModelError(lr.ErrorServerError, lr.ErrorServerError);
                     }
                 }
             }
@@ -925,7 +923,7 @@ namespace TMS.Web.Controllers
                 var result = _objSaleBAL.ManageConfiguration_DeleteBAL(_courses);
                 if (result == -1)
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.ResourceUpdateValidationError);
+                    ModelState.AddModelError(lr.ErrorServerError, lr.ErrorServerError);
                 }
             }
             var resultData = new[] { _courses };

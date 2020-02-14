@@ -368,7 +368,7 @@ namespace TMS.DataObjects
             return LoginUserList;
 
         }
-        public IList<LoginUsers> LoginUsersOrganization_GetAllDAL(string Culture, string ID,string SearchText)
+        public IList<LoginUsers> LoginUsersOrganization_GetAllDAL(string Culture, string ID,string SearchText,long companyID)
         {
             List<LoginUsers> LoginUserList = new List<LoginUsers>();
             var conString = DBHelper.ConnectionString;
@@ -379,8 +379,9 @@ namespace TMS.DataObjects
                 DynamicParameters param = new DynamicParameters();
                 param.Add("@Culture", Culture);
                 param.Add("@ID", ID);
-                param.Add("@SearchText", SearchText);
-                var LoginUsersDictionary = new Dictionary<long, LoginUsers>();
+                param.Add("@SearchText", SearchText); 
+                param.Add("@OrganizationID", companyID);
+                 var LoginUsersDictionary = new Dictionary<long, LoginUsers>();
                 LoginUserList = conn.Query<LoginUsers, LoginUserGroups, LoginUsers>(
                        qry, (loginUsers, Groups) =>
                        {

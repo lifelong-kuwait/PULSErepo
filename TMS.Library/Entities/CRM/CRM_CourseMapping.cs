@@ -13,6 +13,7 @@ namespace TMS.Library.Entities.CRM
     {
         [Display(Name = "PrimaryCourseName", ResourceType = typeof(lr))]
         public long ID { get; set; }
+        [Display(Name = "PrimaryCourseName", ResourceType = typeof(lr))]
         public string CourseName { get; set; }
         public string AddedByAlias { get; set; }
         public string UpdatedByAlias { get; set; }

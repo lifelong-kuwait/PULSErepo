@@ -13,13 +13,16 @@ namespace TMS.Library.Entities.CRM
    public class CRMCourses: IDataMapper
     {
       //  public System.Web.SessionState.HttpSessionState Session { get; }
-    public long ID { get; set; }
-       [Display(Name = "CRM_PCourseName", ResourceType = typeof(lr))]
+        public long ID { get; set; }
+        [Display(Name = "CRM_PCourseName", ResourceType = typeof(lr))]
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "PrimaryCourseNameRequired")]
         public string PrimaryCourseName { get; set; }
-
         [Display(Name = "CRM_SCourseName", ResourceType = typeof(lr))]
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "SecondaryCourseNameRequired")]
         public string SecondaryCourseName { get; set; }
-       [Display(Name = "CRM_Description", ResourceType = typeof(lr))]
+        [Display(Name = "CRM_Description", ResourceType = typeof(lr))]
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "DescriptionRequired")]
+
         public string Description { get; set; }
         public long OrganizationID { get; set; }
         public long? CreatedBy { get; set; }

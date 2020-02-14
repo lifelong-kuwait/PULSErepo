@@ -83,7 +83,7 @@ namespace Resources.Concrete
 
             string sql = "";
             if (MaxNo > 0)
-                sql = "select Culture, Name, Value from dbo.Resources where OrganizationID=" + CompnayID + "and Culture='" + culture + "'; ";
+                sql = "select Culture, Name, Value from dbo.Resources where OrganizationID=" + CompnayID + " and Culture='" + culture + "'; ";
             else
                 sql = "select Culture, Name, Value from dbo.Resources where OrganizationID=-2 and Culture='" + culture + "'; ";
             

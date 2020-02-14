@@ -309,6 +309,7 @@ namespace TMS.Web.Controllers
             Resources.UpdatedBy = Convert.ToInt64(CurrentUser.NameIdentifier);
             Resources.Name = Resources.Name.RemoveWhitespace();//Removeany uunwanted Space
             Resources.Name = Resources.Name.RemoveUnWantedCharacter();//to make this Proper Variblename
+            Resources.OrganizationID = CurrentUser.CompanyID;
             var Resp = _objeResources.UpdateDualTMSResourceBAL(Resources);
             if (Resp != 2)
             {

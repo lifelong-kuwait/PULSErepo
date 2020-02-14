@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TMS.Library.ModelMapper;
-
+using lr = Resources.Resources;
 namespace TMS.Library.Entities.CRM
 {
   public  class CRM_VisitHistory : IDataMapper
@@ -16,10 +17,14 @@ namespace TMS.Library.Entities.CRM
         public string UpdatedByAlias { get; set; }
         
         public string PerformedBy { get; set; }
+        [Display(Name = "VisitDateTime", ResourceType = typeof(lr))]
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "NotesReqired")]
         public string Notes { get; set; }
         public long AssignedTo { get; set; }
         public long? AssignedBy { get; set; }
+        [Display(Name = "VisitType", ResourceType = typeof(lr))]
         public Visittype VisitType { get; set; }
+        [Display(Name = "VisitDateTime", ResourceType = typeof(lr))]
         public DateTime VisitDateTime { get; set; }
         public string VisitDateTimes { get; set; }
         public long? CreatedBy { get; set; }
