@@ -2351,6 +2351,27 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("PersonSkill", CultureInfo.CurrentUICulture.Name);
                }
             }
+        public static string BalanceZero
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("BalanceZero", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InvoiceCancledOut
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InvoiceCancledOut", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string BalanceMustBeEqual
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("BalanceMustBeEqual", CultureInfo.CurrentUICulture.Name);
+            }
+        }
         public static string VenueOcupaidByOther
         {
             get
@@ -2735,6 +2756,68 @@ namespace Resources {
                 return (string)resourceProvider.GetResource("OrganizationNameDublicaton", CultureInfo.CurrentUICulture.Name);
             }
         }
+        /// <summary>FullName</summary>
+        public static string ProposedClassAllreadyExists
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("ProposedClassAllreadyExists", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>FullName</summary>
+        public static string ProposedCourseAllreadyExists
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("ProposedCourseAllreadyExists", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>FullName</summary>
+        public static string CRMConfigrationAllreadyExists
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CRMConfigrationAllreadyExists", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>FullName</summary>
+        public static string Prospect
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Prospect", CultureInfo.CurrentUICulture.Name);
+            }
+        }/// <summary>FullName</summary>
+        public static string ProspectRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("ProspectRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
+        public static string AssignedBy
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("AssignedBy", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string AssignedTo
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("AssignedTo", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string AssignedToReqired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("AssignedToReqired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        
         /// <summary>FullName</summary>
         public static string LogisticDublication
         {
@@ -6176,6 +6259,13 @@ namespace Resources {
                 return (string)resourceProvider.GetResource("OptionName", CultureInfo.CurrentUICulture.Name);
             }
         }
+        public static string OptionNameRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("OptionNameRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
 
         public static string Incoming
         {
@@ -6931,7 +7021,69 @@ namespace Resources {
                 return (string)resourceProvider.GetResource("FollowUp", CultureInfo.CurrentUICulture.Name);
             }
         }
-
+        public static string HowHeard
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("HowHeard", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string HowHeardRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("HowHeardRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string PerformedBy
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("PerformedBy", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string CallType
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CallType", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string CallTime
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CallTime", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string NotesReqired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("NotesReqired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string VisitType
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("VisitType", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string VisitDateTime
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("VisitDateTime", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string SecondaryCourseNameRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("SecondaryCourseNameRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
 
 
 

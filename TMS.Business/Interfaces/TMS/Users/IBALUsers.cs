@@ -85,7 +85,7 @@ namespace TMS.Business.Interfaces.TMS
 
         IList<LoginUsers> LoginUsers_GetAllBAL(string culture,string SearchText);
         IList<LoginUsers> LoginLockedUsers_GetAllBAL(string culture, string SearchText); 
-         IList<LoginUsers> LoginUsersOrganization_GetAllBAL(string culture, string ID, string SearchText);
+         IList<LoginUsers> LoginUsersOrganization_GetAllBAL(string culture, string ID, string SearchText,long CompanyID);
         IList<LoginUsers> LoginLockedUsersOrganization_GetAllBAL(string culture, string ID, string SearchText);
         IList<CRM_UserLog> LogOrganization_GetAllBAL(ref int Total,   string OrgID, string SearchText, string SortExpression, int StartRowIndex, int page, int PageSize);
         IList<CRM_UserLog> ErrorLogOrganization_GetAllBAL(ref int Total, string OrgID, string SearchText, string SortExpression, int StartRowIndex, int page, int PageSize);

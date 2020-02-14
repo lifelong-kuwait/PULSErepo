@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TMS.Library.ModelMapper;
-
+using lr = Resources.Resources;
 namespace TMS.Library.Entities.CRM
 {
    public class CRM_CourseCategoryMapping : IDataMapper
     {
         public long ID { get; set; }
+        [Display(Name = "CourseCategory", ResourceType = typeof(lr))]
         public string CategoryName { get; set; }
         public string AddedByAlias { get; set; }
         public string UpdatedByAlias { get; set; }

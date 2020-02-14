@@ -35,6 +35,8 @@ namespace TMS.Web.Controllers
         {
             _UserBAL = objUserBAL; _CustomerBAL = customerBAL;
         }
+        #region Invoice CRUD
+       
         // GET: Invoiceing
         [ClaimsAuthorize("CanAddInvoicing", "CanViewInvoicing")]
         public ActionResult Index()
@@ -152,6 +154,8 @@ namespace TMS.Web.Controllers
 
             //return Json(resultData.ToDataSourceResult(request, ModelState));
         }
+        #endregion Invoice CRUD
+        #region Invoice Report
         [DontWrapResult]
         [HttpPost]
         public void SetSessionValues(string _InoID,bool _PrintDublicate)
@@ -225,6 +229,8 @@ namespace TMS.Web.Controllers
             }
 
         }
+        #endregion Invoice Report
+        #region Invoice Grid
         [ClaimsAuthorize("CanViewInvoicing")]
         [DontWrapResult]
         public ActionResult InvoiceGrid()
@@ -355,8 +361,9 @@ namespace TMS.Web.Controllers
                 }
             }
         }
-        
-       [ContentAuthorize]
+        #endregion Invoice Grid
+        #region Invoice History
+        [ContentAuthorize]
         [DontWrapResult]
         [ClaimsAuthorize("CanViewActivityInvoice")]
         public ActionResult InvoiceHistory(string PersonID)
@@ -391,6 +398,8 @@ namespace TMS.Web.Controllers
             var resultData = new[] { _objTask };
             return Json(resultData.ToDataSourceResult(request, ModelState));
         }
+        #endregion Invoice History
+        #region Invoice ReIssued
         [ContentAuthorize]
         [DontWrapResult]
         [ClaimsAuthorize("CanReissueHistoryInvoice")]
@@ -406,6 +415,8 @@ namespace TMS.Web.Controllers
             var _Phone = _CustomerBAL.Read_InvoiceReIssuedByBAL(PersonID);
             return Json(_Phone.ToDataSourceResult(request, ModelState));
         }
+        #endregion Invoice ReIssued
+        #region Invoice Deposit
         [ContentAuthorize]
         [DontWrapResult]
         [ClaimsAuthorize("CanViewDepositInvoice")]
@@ -429,6 +440,15 @@ namespace TMS.Web.Controllers
             {
                 var json = new JavaScriptSerializer().Serialize(_DepositDetail);
                 _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to create Courses at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+                var data = _CustomerBAL.Read_InvoiceByIDBAL(PersonID);
+                if(data.Invoice_Status== InvoiceStatus.InvoiceCancled)
+                {
+                    ModelState.AddModelError(lr.InvoiceCancledOut, lr.InvoiceCancledOut);
+                }
+                else
+                {
+
+                
                 InvoiceHistory invoiceHistory = new InvoiceHistory();
                 invoiceHistory.History_Name = "Invoice Deposit";
                 invoiceHistory.Type = InvoiceStatus.InvoiceDeposit;
@@ -437,7 +457,7 @@ namespace TMS.Web.Controllers
                 invoiceHistory.User_ID = CurrentUser.NameIdentifierInt64;
                 invoiceHistory.Organization_ID = CurrentUser.CompanyID;
                 invoiceHistory.Date_TIME = DateTime.Now;
-                 _CustomerBAL.create_InvoiceHistoryBAL(invoiceHistory);
+                _CustomerBAL.create_InvoiceHistoryBAL(invoiceHistory);
                 _DepositDetail.Invoice_ID = PersonID;
                 var x = this._CustomerBAL.InvoiceBalanceCheckBAL(_DepositDetail);
                 var xx = this._CustomerBAL.InvoiceGrossTotalCheckBAL(_DepositDetail);
@@ -447,7 +467,7 @@ namespace TMS.Web.Controllers
                 balance = Math.Round(balance, 3);
                 if (balance == 0)
                 {
-                    ModelState.AddModelError(lr.PersonSkill, lr.FlagDuplicationCheck);
+                    ModelState.AddModelError(lr.BalanceZero, lr.BalanceZero);
                 }
                 else if (balance >= _DepositDetail.Payment)
                 {
@@ -458,14 +478,15 @@ namespace TMS.Web.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(lr.ErrorServerError, lr.FlagDuplicationCheck);
+                    ModelState.AddModelError(lr.BalanceMustBeEqual, lr.BalanceMustBeEqual);
                 }
-              
+                }
             }
 
             var resultData = new[] { _DepositDetail };
             return Json(resultData.ToDataSourceResult(request, ModelState));
         }
+        
         [DontWrapResult]
         [HttpPost]
         public void SetSessionDepositValues(string _InoID,string _DepositID)
@@ -530,6 +551,8 @@ namespace TMS.Web.Controllers
 
 
         }
+        #endregion Invoice Deposit
+        #region Invoice Changes
         [ContentAuthorize]
         [DontWrapResult]
         [ClaimsAuthorize("CanViewChangeHistoryInvoice")]
@@ -545,6 +568,8 @@ namespace TMS.Web.Controllers
             var _Phone = _CustomerBAL.Read_InvoiceChangesBAL(PersonID);
             return Json(_Phone.ToDataSourceResult(request, ModelState));
         }
+        #endregion Invoice Changes
+        #region Invoice Status Changes
         [ContentAuthorize]
         [DontWrapResult]
         [ClaimsAuthorize("CanViewStatusInvoice")]
@@ -589,6 +614,7 @@ namespace TMS.Web.Controllers
             var resultData = new[] { _objTask };
             return RedirectToAction("InvoiceGrid");
         }
+        
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
         [ActivityAuthorize]
@@ -626,11 +652,14 @@ namespace TMS.Web.Controllers
             var resultData = new[] { _objTask };
             return RedirectToAction("InvoiceGrid");
         }
+        #endregion Invoice Status Changes
+        #region Invoice Grid Report
         [DontWrapResult]
         //[HttpPost]
-        [ClaimsAuthorize("CanPrintInvoice", "CanViewInvoicing")]
+        [ClaimsAuthorize("CanViewGridInvoiceReport")]
         public FileResult PrintGridReport_Read(string Page,string PageSize)
         {
+            try { 
             int p = Convert.ToInt32(Page);
             int pz = Convert.ToInt32(PageSize);
                 var startRowIndex = (p - 1) * pz;
@@ -655,8 +684,14 @@ namespace TMS.Web.Controllers
                 ReportViewerRSFReports.LocalReport.Refresh();
                 byte[] mybytes = ReportViewerRSFReports.LocalReport.Render(format: "PDF", deviceInfo: "");
                
-                return File(mybytes, System.Net.Mime.MediaTypeNames.Application.Octet, "Invoice.pdf");
+                return File(mybytes, System.Net.Mime.MediaTypeNames.Application.Octet, "InvoiceGridReport.pdf");
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
+        #endregion Invoice Grid Report
 
     }
 }

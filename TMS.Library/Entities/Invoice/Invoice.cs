@@ -50,7 +50,6 @@ namespace TMS.Library.TMS
         /// <value>The name of the secondary.</value>
        [Display(Name = "ReferanceNumber", ResourceType = typeof(lr))]
         [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "ReferanceNumberRequired")]
-
         public string Referance_Number { get; set; }
 
         /// <summary>

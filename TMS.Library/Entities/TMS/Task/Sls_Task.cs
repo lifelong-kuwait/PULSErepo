@@ -14,6 +14,7 @@ namespace TMS.Library.Task
     {
         public class Users
         {
+           
             public long UserID { get; set; }
             public string P_FirstName { get; set; }
             public string P_LastName { get; set; }
@@ -33,15 +34,24 @@ namespace TMS.Library.Task
         public List<Users> User1 { get; set; }
 
         public long ID { get; set; }
+        [Display(Name = "Prospect", ResourceType = typeof(lr))]
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "ProspectRequired")]
         public string LeadID { get; set; }
         //public long LeadIDs { get; set; }
       //  public long ProspectID { get; set; }
         public DateTime DueDate { get; set; }
+        [Display(Name = "AssignedBy", ResourceType = typeof(lr))]
+        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "ProspectRequired")]
         public long AssignedBy { get; set; }
+        [Display(Name = "AssignedTo", ResourceType = typeof(lr))]
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "AssignedToReqired")]
         public long AssignedTo { get; set; }
         public long ActionID { get; set; }
         public long OrganizationID { get; set; }
         public Int32 Status { get; set; }
+        [Display(Name = "Description", ResourceType = typeof(lr))]
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "DescriptionRequired")]
+
         public string Description { get; set; }
         public string UserName { get; set; }
         public int TaskType { get; set; }

@@ -269,7 +269,7 @@
                   <TextRun>
                     <Value>Grid Report</Value>
                     <Style>
-                      <FontSize>14pt</FontSize>
+                      <FontSize>16pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                     </Style>
@@ -282,7 +282,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
             <Top>0.18625in</Top>
-            <Left>1.77305in</Left>
+            <Left>1.89459in</Left>
             <Height>0.375in</Height>
             <Width>3.77083in</Width>
             <Style>
@@ -298,11 +298,11 @@
           <Image Name="Image1">
             <Source>External</Source>
             <Value>=Parameters!Picture.Value</Value>
-            <Sizing>FitProportional</Sizing>
-            <Top>0.18625in</Top>
-            <Left>0.48139in</Left>
-            <Height>0.5in</Height>
-            <Width>0.5in</Width>
+            <Sizing>Fit</Sizing>
+            <Top>0.06944in</Top>
+            <Left>0.66542in</Left>
+            <Height>0.61681in</Height>
+            <Width>0.92708in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -314,16 +314,19 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.03819in</Width>
+                  <Width>0.92708in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.23611in</Width>
+                  <Width>0.98611in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1.24653in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.61458in</Width>
+                  <Width>1.28472in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1in</Width>
@@ -345,10 +348,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Invoice Number</Value>
+                                  <Value>Invoice #</Value>
                                   <Style>
-                                    <FontSize>12pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>SemiBold</FontWeight>
                                     <Color>White</Color>
                                   </Style>
                                 </TextRun>
@@ -385,8 +388,8 @@
                                 <TextRun>
                                   <Value>Issue Date</Value>
                                   <Style>
-                                    <FontSize>12pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>SemiBold</FontWeight>
                                     <Color>White</Color>
                                   </Style>
                                 </TextRun>
@@ -414,6 +417,44 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="Textbox10">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Status</Value>
+                                  <Style>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>SemiBold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox10</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>Silver</Color>
+                              <Style>Solid</Style>
+                              <Width>2pt</Width>
+                            </Border>
+                            <BackgroundColor>#244800</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>4pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="Textbox9">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -423,8 +464,8 @@
                                 <TextRun>
                                   <Value>Net Amount</Value>
                                   <Style>
-                                    <FontSize>12pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>SemiBold</FontWeight>
                                     <Color>White</Color>
                                   </Style>
                                 </TextRun>
@@ -461,8 +502,8 @@
                                 <TextRun>
                                   <Value>Due Date</Value>
                                   <Style>
-                                    <FontSize>12pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>SemiBold</FontWeight>
                                     <Color>White</Color>
                                   </Style>
                                 </TextRun>
@@ -499,8 +540,8 @@
                                 <TextRun>
                                   <Value>Payment</Value>
                                   <Style>
-                                    <FontSize>12pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>SemiBold</FontWeight>
                                     <Color>White</Color>
                                   </Style>
                                 </TextRun>
@@ -537,8 +578,8 @@
                                 <TextRun>
                                   <Value>Balance</Value>
                                   <Style>
-                                    <FontSize>12pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>SemiBold</FontWeight>
                                     <Color>White</Color>
                                   </Style>
                                 </TextRun>
@@ -579,7 +620,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!ID2.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontWeight>SemiBold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -613,7 +656,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!IssuedDate.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontWeight>SemiBold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -639,6 +684,42 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="Invoice_Status">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Invoice_Status.Value</Value>
+                                  <Style>
+                                    <FontWeight>SemiBold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Invoice_Status</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>Silver</Color>
+                              <Style>Solid</Style>
+                              <Width>2pt</Width>
+                            </Border>
+                            <BackgroundColor>#d3e499</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>4pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="Invoice_Gross_Total">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -647,7 +728,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!Invoice_Gross_Total.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontWeight>SemiBold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -682,6 +765,7 @@
                                 <TextRun>
                                   <Value>=Fields!Due_Date2.Value</Value>
                                   <Style>
+                                    <FontWeight>SemiBold</FontWeight>
                                     <Color>Red</Color>
                                   </Style>
                                 </TextRun>
@@ -717,7 +801,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=iif(IsNothing(Sum(Fields!Total_Payment.Value)),0.00,Fields!Total_Payment.Value).ToString()</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontWeight>SemiBold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -752,6 +838,7 @@
                                 <TextRun>
                                   <Value>=iif(IsNothing(Fields!Total_Payment.Value),Fields!Invoice_Gross_Total.Value,Fields!Balance.Value).ToString()</Value>
                                   <Style>
+                                    <FontWeight>SemiBold</FontWeight>
                                     <Color>Red</Color>
                                   </Style>
                                 </TextRun>
@@ -789,6 +876,7 @@
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -805,22 +893,226 @@
             <Top>0.75917in</Top>
             <Left>0.05431in</Left>
             <Height>0.6875in</Height>
-            <Width>7.13542in</Width>
+            <Width>7.44444in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Color>Silver</Color>
-                <Style>None</Style>
+                <Style>Solid</Style>
                 <Width>2pt</Width>
               </Border>
             </Style>
           </Tablix>
+          <Textbox Name="Textbox1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Sum(Fields!Invoice_Gross_Total.Value)</Value>
+                    <Style>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>1.60292in</Top>
+            <Left>2.9675in</Left>
+            <Height>0.375in</Height>
+            <Width>1.24653in</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Color>Silver</Color>
+                <Style>Solid</Style>
+                <Width>2pt</Width>
+              </Border>
+              <BackgroundColor>#d3e499</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>4pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Sum(Fields!Total_Payment.Value)</Value>
+                    <Style>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>1.60292in</Top>
+            <Left>5.49875in</Left>
+            <Height>0.375in</Height>
+            <Width>1in</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Color>Silver</Color>
+                <Style>Solid</Style>
+                <Width>2pt</Width>
+              </Border>
+              <BackgroundColor>#d3e499</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>4pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox4">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Sum(iif(IsNothing(Fields!Total_Payment.Value),Fields!Invoice_Gross_Total.Value,Fields!Balance.Value))</Value>
+                    <Style>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>1.60292in</Top>
+            <Left>6.52653in</Left>
+            <Height>0.375in</Height>
+            <Width>0.97222in</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Color>Silver</Color>
+                <Style>Solid</Style>
+                <Width>2pt</Width>
+              </Border>
+              <BackgroundColor>#d3e499</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>4pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox6">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Total</Value>
+                    <Style>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox6</rd:DefaultName>
+            <Top>1.60292in</Top>
+            <Left>0.66542in</Left>
+            <Height>0.375in</Height>
+            <Width>1.5in</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Color>Silver</Color>
+                <Style>Solid</Style>
+                <Width>2pt</Width>
+              </Border>
+              <BackgroundColor>#d3e499</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>4pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="ExecutionTime">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Globals!ExecutionTime</Value>
+                    <Style>
+                      <Format>MMMM d, yyyy</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>ExecutionTime</rd:DefaultName>
+            <Top>0.44667in</Top>
+            <Left>5.66542in</Left>
+            <Height>0.25in</Height>
+            <Width>1.83333in</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>2in</Height>
+        <Height>2.08333in</Height>
         <Style />
       </Body>
-      <Width>7.2175in</Width>
+      <Width>7.53694in</Width>
       <Page>
+        <PageHeader>
+          <Height>1in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageHeader>
+        <PageFooter>
+          <Height>1in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageFooter>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>
         <LeftMargin>0.25in</LeftMargin>

@@ -24,7 +24,7 @@
         }
     }
     <script>
-        jQuery('#checkbox_id2').change(function () {
+        jQuery('#checkbox_id3').change(function () {
 
 
             jQuery('.checkBoxClassINO').prop("checked", this.checked);
@@ -34,10 +34,10 @@
         jQuery('.checkBoxClassINO').change(function () {
 
             if (jQuery('input:checkbox:checked.checkBoxClassINO').length === jQuery("input:checkbox.checkBoxClassINO").length) {
-                jQuery('#checkbox_id2').prop("checked", true);
+                jQuery('#checkbox_id3').prop("checked", true);
             }
             else {
-                jQuery('#checkbox_id2').prop("checked", false);
+                jQuery('#checkbox_id3').prop("checked", false);
             }
 
         })
@@ -54,7 +54,7 @@
                 <legend class="scheduler-border">Click to Check All</legend>
                 <div class="control-group">
                     <div class="custom-checkbox">
-                        <input type="checkbox" class="checkbox-inline" id="checkbox_id2" value="true" style="display:inline-table;" />
+                        <input type="checkbox" class="checkbox-inline" id="checkbox_id3" value="true" style="display:inline-table;" />
                         <label class="checkbox-inline" for="checkbox_id2">Click To check All</label>
                     </div>
                 </div>

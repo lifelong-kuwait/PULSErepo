@@ -129,7 +129,8 @@ namespace TMS.DataObjects.CustomGenerics.Admin
                cmd.Parameters.AddWithValue("@P_Value", _objTMSResource.P_Value);
                cmd.Parameters.AddWithValue("@S_Value", _objTMSResource.S_Value);
                cmd.Parameters.AddWithValue("@UpdatedBy", _objTMSResource.UpdatedBy);
-               cmd.Parameters.AddWithValue("@result", SqlDbType.Int);
+               cmd.Parameters.AddWithValue("@organizationID", _objTMSResource.OrganizationID);
+                cmd.Parameters.AddWithValue("@result", SqlDbType.Int);
                cmd.Parameters["@result"].Direction = ParameterDirection.Output;
          
                con.Open();

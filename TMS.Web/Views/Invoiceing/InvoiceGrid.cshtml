@@ -30,9 +30,7 @@
         }
     </script>
 
-    <div  align="right">
-        <button type="button" id="invoiceReportGrid" value="GenerateReport" class="invoiceReportGrid">Generate Report</button>
-    </div>
+    
     @(Html.Kendo().Grid<TMS.Library.TMS.Invoice>()
                                                 .Name("PersonGrid")
                                                 .Columns(columns =>
@@ -132,7 +130,10 @@ if(Invoice_Gross_Total!=null){#<h2><p><b>" + grossTotal + @"</b> :#:Invoice_Gros
         {
             <a class="k-button tms-grid-Download download"><span class="tms-grid-icon mdi mdi-printer "></span></a>
         }
-
+        @if (User.IsInRole("CanViewGridInvoiceReport"))
+        {
+            <a class="k-button tms-grid-Download invoiceReportGrid"><span class="tms-grid-icon mdi mdi-clipboard-outline "></span></a>
+        }
     </div>
 }
 <script src="~/Views/People/Person.js"></script>

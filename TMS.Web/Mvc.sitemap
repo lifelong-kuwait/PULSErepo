@@ -85,6 +85,15 @@
     <mvcSiteMapNode title="Locked Users" controller="User" action="UnlockUser">
       <mvcSiteMapNode title="Locked Users" controller="User" action="UnlockUser"/>
     </mvcSiteMapNode>
+    <mvcSiteMapNode title="Customer" controller="Customer" action="Index">
+      <mvcSiteMapNode title="Customer" controller="Customer" action="Index"/>
+    </mvcSiteMapNode>
+     <mvcSiteMapNode title="Invoicing" controller="Invoiceing" action="InvoiceGrid">
+      <mvcSiteMapNode title="Invoicing" controller="Invoiceing" action="InvoiceGrid"/>
+      <mvcSiteMapNode title="Invoice Create" controller="Invoiceing" action="Index"/>
+      <mvcSiteMapNode title="Invoice Edit" controller="Invoiceing" action="InvoiceEdit"/>
+      <mvcSiteMapNode title="Invoice Detail" controller="Invoiceing" action="InvoiceDetail"/>
+    </mvcSiteMapNode>
     <!--<mvcSiteMapNode title="Tasks" controller="Task" action="Index"/>
     <mvcSiteMapNode title="Task History" controller="Task" action="Detail"/>-->
     <!--<mvcSiteMapNode title="Prospects" controller="Prospect" action="Index"/>VenueMatrixReport-->

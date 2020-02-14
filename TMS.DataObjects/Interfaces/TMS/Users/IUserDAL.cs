@@ -82,7 +82,7 @@ namespace TMS.DataObjects.Interfaces
         // With Search
         IList<LoginUsers> LoginUsers_GetAllDAL(string culture,string SearchText);
         IList<LoginUsers> LoginLockedUsers_GetAllDAL(string culture, string SearchText); 
-         IList<LoginUsers> LoginUsersOrganization_GetAllDAL(string culture, string ID, string SearchText); 
+         IList<LoginUsers> LoginUsersOrganization_GetAllDAL(string culture, string ID, string SearchText,long CompanyID); 
        IList<LoginUsers> LoginLockedUsersOrganization_GetAllDAL(string culture, string ID, string SearchText);
         IList<CRM_UserLog> LogOrganization_GetAllDAL(ref int Total, string OrgID, string SearchText, string SortExpression, int StartRowIndex, int page, int PageSize);
         IList<CRM_UserLog> ErrorLogOrganization_GetAllDAL(ref int Total, string OrgID, string SearchText, string SortExpression, int StartRowIndex, int page, int PageSize);

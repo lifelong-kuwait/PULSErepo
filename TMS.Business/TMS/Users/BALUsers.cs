@@ -148,9 +148,9 @@ namespace TMS.Business.TMS
         {
             return _DAL.LoginLockedUsers_GetAllDAL(culture, SearchText);
         }
-        public IList<LoginUsers> LoginUsersOrganization_GetAllBAL(string culture, string ID, string SearchText)
+        public IList<LoginUsers> LoginUsersOrganization_GetAllBAL(string culture, string ID, string SearchText, long CompanyID)
         {
-            return _DAL.LoginUsersOrganization_GetAllDAL(culture, ID, SearchText);
+            return _DAL.LoginUsersOrganization_GetAllDAL(culture, ID, SearchText, CompanyID);
         }
         public IList<LoginUsers> LoginLockedUsersOrganization_GetAllBAL(string culture, string ID, string SearchText)
         {
