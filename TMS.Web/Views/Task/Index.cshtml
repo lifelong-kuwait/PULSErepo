@@ -360,7 +360,10 @@
                 grid = jQuery("#Users").data("kendoGrid");
                 var data = grid.dataItem(jQuery("#Users tr.k-state-selected"));
                 var ID = data.ID;
-                jQuery("#DueDate").val(data.DueDate);
+                var da = jQuery.datepicker.formatDate('m/dd/yy', data.DueDate)
+               
+                jQuery("#DueDate").val(da);
+                
                 jQuery("#ID").val(data.ID);
                 var window = jQuery("#RescheduledModel").data("kendoWindow");
                 window.open();

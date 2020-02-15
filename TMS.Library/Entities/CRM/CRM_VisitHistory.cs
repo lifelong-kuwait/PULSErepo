@@ -17,7 +17,7 @@ namespace TMS.Library.Entities.CRM
         public string UpdatedByAlias { get; set; }
         
         public string PerformedBy { get; set; }
-        [Display(Name = "VisitDateTime", ResourceType = typeof(lr))]
+        [Display(Name = "Notes", ResourceType = typeof(lr))]
         [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "NotesReqired")]
         public string Notes { get; set; }
         public long AssignedTo { get; set; }

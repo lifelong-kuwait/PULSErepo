@@ -2530,3 +2530,118 @@ INFO  2020-02-14 16:48:37,165 24765ms DESKTOP-LSN82VI        Login              
 INFO  2020-02-14 16:48:37,546 25147ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/14/2020 1:48:37 PM
 INFO  2020-02-14 16:48:46,827 34428ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/14/2020 1:48:46 PM
 INFO  2020-02-14 16:48:47,408 35008ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/14/2020 1:48:47 PM
+INFO  2020-02-15 08:24:28,247 104601ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/15/2020 5:24:28 AM
+INFO  2020-02-15 08:24:28,758 105111ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/15/2020 5:24:28 AM
+INFO  2020-02-15 08:24:29,382 105735ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/15/2020 5:24:29 AM
+INFO  2020-02-15 08:24:29,741 106095ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/15/2020 5:24:29 AM
+INFO  2020-02-15 08:32:40,301 596654ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 5:32:40 AM
+INFO  2020-02-15 08:32:40,659 597012ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 5:32:40 AM
+INFO  2020-02-15 08:40:14,267 1050620ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/15/2020 5:40:14 AM
+INFO  2020-02-15 08:40:14,619 1050972ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/15/2020 5:40:14 AM
+INFO  2020-02-15 08:40:15,240 1051593ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/15/2020 5:40:15 AM
+INFO  2020-02-15 08:40:15,625 1051978ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/15/2020 5:40:15 AM
+INFO  2020-02-15 08:41:11,711 1108065ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 5:41:11 AM
+INFO  2020-02-15 08:41:12,084 1108437ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 5:41:12 AM
+INFO  2020-02-15 08:43:15,934 1232287ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/15/2020 5:43:15 AM
+INFO  2020-02-15 08:43:16,298 1232651ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/15/2020 5:43:16 AM
+INFO  2020-02-15 08:43:16,875 1233228ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/15/2020 5:43:16 AM
+INFO  2020-02-15 08:43:17,277 1233630ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/15/2020 5:43:17 AM
+INFO  2020-02-15 08:44:07,045 1283399ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 5:44:07 AM
+INFO  2020-02-15 08:44:07,421 1283775ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 5:44:07 AM
+INFO  2020-02-15 08:44:08,016 1284369ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 5:44:08 AM
+INFO  2020-02-15 08:44:08,403 1284756ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 5:44:08 AM
+INFO  2020-02-15 11:05:34,899 9771253ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/15/2020 8:05:34 AM
+INFO  2020-02-15 11:05:35,272 9771625ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/15/2020 8:05:35 AM
+INFO  2020-02-15 11:05:36,393 9772747ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/15/2020 8:05:36 AM
+INFO  2020-02-15 11:05:36,832 9773186ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/15/2020 8:05:36 AM
+INFO  2020-02-15 11:56:27,010 12823363ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 8:56:27 AM
+INFO  2020-02-15 11:56:27,381 12823734ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 8:56:27 AM
+INFO  2020-02-15 11:56:28,221 12824574ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 8:56:28 AM
+INFO  2020-02-15 11:56:28,954 12825307ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 8:56:28 AM
+INFO  2020-02-15 12:39:23,354 1862031ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 9:39:23 AM
+INFO  2020-02-15 12:39:23,730 1862407ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 9:39:23 AM
+INFO  2020-02-15 12:39:33,933 1872611ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 9:39:33 AM
+INFO  2020-02-15 12:39:34,643 1873320ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 9:39:34 AM
+INFO  2020-02-15 13:04:34,767 36249ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 10:04:34 AM
+INFO  2020-02-15 13:04:35,143 36624ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 10:04:35 AM
+INFO  2020-02-15 13:04:44,869 46350ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 10:04:44 AM
+INFO  2020-02-15 13:04:45,436 46917ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 10:04:45 AM
+ERROR 2020-02-15 13:16:01,642 723123ms DESKTOP-LSN82VI        OnException        - Method arguments are not valid! See ValidationErrors for details.
+ERROR 2020-02-15 13:27:17,996 1399477ms DESKTOP-LSN82VI        OnException        - c:\Users\SynergicProfessional\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\Views\Task\EditorTemplates\Reschedule.cshtml(36): error CS1003: Syntax error, ',' expected
+ERROR 2020-02-15 14:18:12,193 3049336ms DESKTOP-LSN82VI        OnException        - Method arguments are not valid! See ValidationErrors for details.
+INFO  2020-02-15 14:18:57,731 3094874ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 11:18:57 AM
+INFO  2020-02-15 14:18:58,096 3095239ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 11:18:58 AM
+INFO  2020-02-15 14:18:58,673 3095816ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 11:18:58 AM
+INFO  2020-02-15 14:18:59,056 3096199ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 11:18:59 AM
+ERROR 2020-02-15 14:19:09,233 3106376ms DESKTOP-LSN82VI        OnException        - Method arguments are not valid! See ValidationErrors for details.
+ERROR 2020-02-15 14:20:03,013 3160155ms DESKTOP-LSN82VI        OnException        - Method arguments are not valid! See ValidationErrors for details.
+ERROR 2020-02-15 14:20:31,423 3188565ms DESKTOP-LSN82VI        OnException        - Method arguments are not valid! See ValidationErrors for details.
+ERROR 2020-02-15 14:21:17,728 3234871ms DESKTOP-LSN82VI        OnException        - Method arguments are not valid! See ValidationErrors for details.
+ERROR 2020-02-15 14:21:30,539 3247682ms DESKTOP-LSN82VI        OnException        - Method arguments are not valid! See ValidationErrors for details.
+INFO  2020-02-15 14:32:48,060 181999ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 11:32:48 AM
+INFO  2020-02-15 14:32:48,434 182373ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 11:32:48 AM
+INFO  2020-02-15 14:33:00,221 194161ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 11:33:00 AM
+INFO  2020-02-15 14:33:00,694 194633ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 11:33:00 AM
+ERROR 2020-02-15 14:35:01,705 315644ms DESKTOP-LSN82VI        OnException        - Method arguments are not valid! See ValidationErrors for details.
+INFO  2020-02-15 14:36:48,573 39209ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 11:36:48 AM
+INFO  2020-02-15 14:36:48,949 39585ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 11:36:48 AM
+INFO  2020-02-15 14:36:58,738 49373ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 11:36:58 AM
+INFO  2020-02-15 14:36:59,342 49977ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 11:36:59 AM
+ERROR 2020-02-15 14:39:35,676 206311ms DESKTOP-LSN82VI        OnException        - Method arguments are not valid! See ValidationErrors for details.
+INFO  2020-02-15 14:43:55,320 34966ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 11:43:55 AM
+INFO  2020-02-15 14:43:55,698 35345ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 11:43:55 AM
+INFO  2020-02-15 14:44:05,368 45015ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 11:44:05 AM
+INFO  2020-02-15 14:44:06,067 45714ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 11:44:06 AM
+ERROR 2020-02-15 14:44:24,237 63884ms DESKTOP-LSN82VI        OnException        - Method arguments are not valid! See ValidationErrors for details.
+ERROR 2020-02-15 14:47:08,826 228472ms DESKTOP-LSN82VI        OnException        - String was not recognized as a valid DateTime.
+ERROR 2020-02-15 14:48:16,244 295891ms DESKTOP-LSN82VI        OnException        - Method arguments are not valid! See ValidationErrors for details.
+INFO  2020-02-15 14:49:28,578 25208ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 11:49:28 AM
+INFO  2020-02-15 14:49:28,952 25581ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 11:49:28 AM
+INFO  2020-02-15 14:49:38,729 35358ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 11:49:38 AM
+INFO  2020-02-15 14:49:39,312 35942ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 11:49:39 AM
+INFO  2020-02-15 14:55:26,942 122870ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 11:55:26 AM
+INFO  2020-02-15 14:55:27,315 123243ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 11:55:27 AM
+INFO  2020-02-15 14:55:36,922 132850ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 11:55:36 AM
+INFO  2020-02-15 14:55:37,483 133410ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 11:55:37 AM
+ERROR 2020-02-15 14:56:14,435 170363ms DESKTOP-LSN82VI        OnException        - Method arguments are not valid! See ValidationErrors for details.
+INFO  2020-02-15 14:58:15,397 65029ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 11:58:15 AM
+INFO  2020-02-15 14:58:15,775 65407ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 11:58:15 AM
+INFO  2020-02-15 14:58:25,880 75512ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 11:58:25 AM
+INFO  2020-02-15 14:58:26,438 76070ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 11:58:26 AM
+ERROR 2020-02-15 15:02:11,178 300810ms DESKTOP-LSN82VI        OnException        - Procedure or function 'TMS_Task_Create' expects parameter '@LeadID', which was not supplied.
+ERROR 2020-02-15 15:03:51,188 400820ms DESKTOP-LSN82VI        OnException        - Procedure or function 'TMS_Task_Create' expects parameter '@Description', which was not supplied.
+INFO  2020-02-15 15:08:34,147 153038ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 12:08:34 PM
+INFO  2020-02-15 15:08:34,524 153415ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 12:08:34 PM
+INFO  2020-02-15 15:08:44,222 163113ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 12:08:44 PM
+INFO  2020-02-15 15:08:44,840 163732ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 12:08:44 PM
+ERROR 2020-02-15 15:11:33,074 331966ms DESKTOP-LSN82VI        OnException        - The view 'EditStatusRescheduled' or its master was not found or no view engine supports the searched locations. The following locations were searched:
+~/Views/Task/EditStatusRescheduled.aspx
+~/Views/Task/EditStatusRescheduled.ascx
+~/Views/Shared/EditStatusRescheduled.aspx
+~/Views/Shared/EditStatusRescheduled.ascx
+~/Views/Task/EditStatusRescheduled.cshtml
+~/Views/Task/EditStatusRescheduled.vbhtml
+~/Views/Shared/EditStatusRescheduled.cshtml
+~/Views/Shared/EditStatusRescheduled.vbhtml
+~/__MVCSITEMAPPROVIDER/EditStatusRescheduled.ascx
+ERROR 2020-02-15 15:13:17,823 436714ms DESKTOP-LSN82VI        OnException        - String was not recognized as a valid DateTime.
+ERROR 2020-02-15 15:13:34,264 453156ms DESKTOP-LSN82VI        OnException        - Method arguments are not valid! See ValidationErrors for details.
+INFO  2020-02-15 15:20:58,467 64552ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 12:20:58 PM
+INFO  2020-02-15 15:20:58,852 64937ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 12:20:58 PM
+INFO  2020-02-15 15:21:09,104 75189ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 12:21:09 PM
+INFO  2020-02-15 15:21:09,690 75775ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 12:21:09 PM
+ERROR 2020-02-15 15:21:38,101 104186ms DESKTOP-LSN82VI        OnException        - Method arguments are not valid! See ValidationErrors for details.
+ERROR 2020-02-15 15:21:45,108 111193ms DESKTOP-LSN82VI        OnException        - Method arguments are not valid! See ValidationErrors for details.
+INFO  2020-02-15 15:25:54,798 133083ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 12:25:54 PM
+INFO  2020-02-15 15:25:55,182 133467ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 12:25:55 PM
+INFO  2020-02-15 15:26:07,451 145736ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 12:26:07 PM
+INFO  2020-02-15 15:26:08,206 146491ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 12:26:08 PM
+INFO  2020-02-15 15:30:24,366 23916ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 12:30:24 PM
+INFO  2020-02-15 15:30:24,742 24293ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 12:30:24 PM
+INFO  2020-02-15 15:30:34,447 33997ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 12:30:34 PM
+INFO  2020-02-15 15:30:34,969 34519ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 12:30:34 PM
+INFO  2020-02-15 15:56:36,999 72609ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 12:56:36 PM
+INFO  2020-02-15 15:56:37,390 73000ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 12:56:37 PM
+INFO  2020-02-15 15:56:47,743 83353ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 12:56:47 PM
+INFO  2020-02-15 15:56:48,604 84214ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 12:56:48 PM
+ERROR 2020-02-15 16:03:20,999 476610ms DESKTOP-LSN82VI        OnException        - Procedure or function 'CRM_Task_Update' expects parameter '@Description', which was not supplied.

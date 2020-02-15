@@ -133,7 +133,7 @@
                     i.Add().Text("CRM").LoadContentFrom("CRMGroupDetail", "Admin", new { GroupId = ViewData["GroupId"] });
                     // i.Add().Text("CRM").LoadContentFrom("CRMGroupDetail", "Admin");
                 }
-                if (User.IsInRole("CanViewCRMGroups"))
+                if (User.IsInRole("CanViewINOGroups"))
                 {
                     i.Add().Text("INO").LoadContentFrom("INOGroupDetail", "Admin", new { GroupId = ViewData["GroupId"] });
                     // i.Add().Text("CRM").LoadContentFrom("CRMGroupDetail", "Admin");
