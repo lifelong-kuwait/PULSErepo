@@ -84,11 +84,12 @@ namespace TMS.Web.Controllers
 
         [AcceptVerbs(HttpVerbs.Get)]
         [ClaimsAuthorize("CanAddEditRescheduled")]
+        //[DisableValidation]
         public ActionResult EditStatusRescheduled(string ID, string DueDate)
         {
             Sls_Task objtask = new Sls_Task();
             objtask.ID = int.Parse(ID);
-            DateTime date = DateTime.ParseExact(DueDate, "{0:MM-dd-yyyy}", null);
+            DateTime date = DateTime.ParseExact(DueDate, "{0:dd-MM-yyyy}", null);
             objtask.DueDate = date;
             return View(objtask);
         }
@@ -97,6 +98,7 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         [ActivityAuthorize]
         [ClaimsAuthorize("CanAddEditRescheduled")]
+        //[DisableValidation]
         public ActionResult EditStatusRescheduled(Sls_Task _objTask)
         {
 
@@ -137,6 +139,14 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (_objTasks.LeadID == null)
+                {
+                    _objTasks.LeadID = "";
+                }
+                if (_objTasks.Description == null)
+                {
+                    _objTasks.Description = "";
+                }
                 _objTasks.ModifiedBy = CurrentUser.NameIdentifierInt64;
                 _objTasks.ModifiedOn = DateTime.Now;
                 _objTasks.ID = _TaskBAL.Tasks_UpdateBAL(_objTasks);
@@ -178,6 +188,14 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(_objTasks.LeadID==null)
+                {
+                    _objTasks.LeadID = "";
+                }
+                if (_objTasks.Description == null)
+                {
+                    _objTasks.Description = "";
+                }
                 Sls_Task objTask = new Sls_Task
                 {
                     LeadID = _objTasks.LeadID,

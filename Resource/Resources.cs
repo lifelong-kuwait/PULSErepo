@@ -5380,7 +5380,14 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("SessionIsValidScheduleDate", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        public static string Date
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Date", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>Scheduled date/time conflicts with trainers other sessions date/time</summary>
         public static string SessionIsValidTrainerTime {
                get {
