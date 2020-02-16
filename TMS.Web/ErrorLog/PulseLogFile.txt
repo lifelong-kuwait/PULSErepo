@@ -2645,3 +2645,43 @@ INFO  2020-02-15 15:56:37,390 73000ms DESKTOP-LSN82VI        Login              
 INFO  2020-02-15 15:56:47,743 83353ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/15/2020 12:56:47 PM
 INFO  2020-02-15 15:56:48,604 84214ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/15/2020 12:56:48 PM
 ERROR 2020-02-15 16:03:20,999 476610ms DESKTOP-LSN82VI        OnException        - Procedure or function 'CRM_Task_Update' expects parameter '@Description', which was not supplied.
+INFO  2020-02-16 10:47:37,786 28772ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/16/2020 7:47:37 AM
+INFO  2020-02-16 10:47:38,182 29169ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/16/2020 7:47:38 AM
+INFO  2020-02-16 10:47:49,791 40778ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/16/2020 7:47:49 AM
+INFO  2020-02-16 10:47:50,207 41193ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/16/2020 7:47:50 AM
+ERROR 2020-02-16 10:54:26,659 437645ms DESKTOP-LSN82VI        OnException        - Invalid object name 'TMS_SPL_PULSE.dbo.Resources'.
+INFO  2020-02-16 11:00:06,479 17690ms DESKTOP-LSN82VI        Login              - User tried to login with email Organization1@hotmail.com at 2/16/2020 8:00:06 AM
+INFO  2020-02-16 11:00:06,849 18060ms DESKTOP-LSN82VI        Login              - User login with email Organization1@hotmail.com at 2/16/2020 8:00:06 AM
+INFO  2020-02-16 11:00:11,021 22232ms DESKTOP-LSN82VI        Login              - User tried to login with email Organization1@hotmail.com at 2/16/2020 8:00:11 AM
+INFO  2020-02-16 11:00:11,628 22840ms DESKTOP-LSN82VI        Login              - User login with email Organization1@hotmail.com at 2/16/2020 8:00:11 AM
+INFO  2020-02-16 11:37:14,429 16053ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/16/2020 8:37:14 AM
+INFO  2020-02-16 11:37:14,818 16442ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/16/2020 8:37:14 AM
+INFO  2020-02-16 11:37:19,063 20687ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/16/2020 8:37:19 AM
+INFO  2020-02-16 11:37:19,758 21382ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/16/2020 8:37:19 AM
+INFO  2020-02-16 12:32:58,061 3359685ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/16/2020 9:32:58 AM
+INFO  2020-02-16 12:32:58,416 3360040ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/16/2020 9:32:58 AM
+ERROR 2020-02-16 12:36:04,064 3545688ms DESKTOP-LSN82VI        OnException        - Could not find a part of the path 'C:\Users\SynergicProfessional\Source\Repos\lifelong-kuwait\PULSErepo\TMS.Web\UploadTempFolder\637174532247538048'.
+INFO  2020-02-16 15:00:27,151 22589ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/16/2020 12:00:27 PM
+INFO  2020-02-16 15:00:27,517 22954ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/16/2020 12:00:27 PM
+INFO  2020-02-16 15:00:37,726 33163ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/16/2020 12:00:37 PM
+INFO  2020-02-16 15:00:38,278 33715ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/16/2020 12:00:38 PM
+ERROR 2020-02-16 15:01:18,117 73554ms DESKTOP-LSN82VI        OnException        - Exception has been thrown by the target of an invocation.
+INFO  2020-02-16 15:01:41,376 96813ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/16/2020 12:01:41 PM
+INFO  2020-02-16 15:01:41,737 97174ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/16/2020 12:01:41 PM
+ERROR 2020-02-16 15:01:59,184 114621ms DESKTOP-LSN82VI        OnException        - Exception has been thrown by the target of an invocation.
+INFO  2020-02-16 15:02:39,237 12474ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/16/2020 12:02:39 PM
+INFO  2020-02-16 15:02:39,619 12857ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/16/2020 12:02:39 PM
+INFO  2020-02-16 15:02:43,883 17121ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/16/2020 12:02:43 PM
+INFO  2020-02-16 15:02:44,518 17756ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/16/2020 12:02:44 PM
+INFO  2020-02-16 15:06:49,520 262758ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/16/2020 12:06:49 PM
+INFO  2020-02-16 15:06:49,905 263143ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/16/2020 12:06:49 PM
+INFO  2020-02-16 15:06:50,653 263891ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/16/2020 12:06:50 PM
+INFO  2020-02-16 15:06:51,428 264666ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/16/2020 12:06:51 PM
+INFO  2020-02-16 15:07:06,721 279958ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/16/2020 12:07:06 PM
+INFO  2020-02-16 15:07:07,069 280307ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/16/2020 12:07:07 PM
+INFO  2020-02-16 15:07:07,827 281065ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 2/16/2020 12:07:07 PM
+INFO  2020-02-16 15:07:08,460 281698ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 2/16/2020 12:07:08 PM
+INFO  2020-02-16 15:08:16,763 350001ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/16/2020 12:08:16 PM
+INFO  2020-02-16 15:08:17,133 350371ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/16/2020 12:08:17 PM
+INFO  2020-02-16 15:08:17,819 351057ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/16/2020 12:08:17 PM
+INFO  2020-02-16 15:08:18,373 351611ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/16/2020 12:08:18 PM

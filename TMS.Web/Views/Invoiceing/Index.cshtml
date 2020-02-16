@@ -435,9 +435,13 @@
                                         success: function (msgg) {
                                         }
                                     });
-
+                                    var variable = jQuery('#InvoiceTable tr:last').attr('id');
+                                    if (jQuery(this).attr("id") === variable) {
+                                        loadView();
+                                    }
+                                    console.log(variable);
                                 });
-                                window.open("/Invoiceing/InvoiceGrid", "_self")
+                               
 
                             } else {
 
@@ -765,6 +769,9 @@
 
     </script>
     <script>
+        function loadView() {
+            window.open("/Invoiceing/InvoiceGrid", "_self")
+        }
         function getFlooredFixed(v, d) {
             return (Math.floor(v * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d);
         }
