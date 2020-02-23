@@ -319,7 +319,7 @@
                         var gVal = g.value();
                         var gh = jQuery('#TaxType').data("kendoDropDownList");
                         var ghVal = gh.value();
-                        var model = {
+                        var invoice = {
                             ID: ID,
                             Invoice_Number: aVal,
                             Referance_Number: bVal,
@@ -337,6 +337,25 @@
                             Due_Date: jsDate,
                             Invoice_Amount: gfVal,
                         };
+                        var listData = [];
+                        jQuery('#InvoiceTable > tbody  > tr').each(function (index, tr) {
+                            var itemId = jQuery(this).children('td:first').text();
+                            var itemIdValue = -1;
+                            if (itemId > 0) { itemIdValue = itemId };
+                            var obj = new Object();
+                            obj.ID = itemIdValue;
+                            obj.Invoice_ID = ID;
+                            obj.Item = jQuery('#item' + jQuery(this).attr("id") + '').val();
+                            obj.Description = jQuery('#Description' + jQuery(this).attr("id") + '').val();
+                            obj.Qty = jQuery('#Qty' + jQuery(this).attr("id") + '').val();
+                            obj.Price = jQuery('#currency' + jQuery(this).attr("id") + '').val();
+                            obj.Sub_Total = jQuery('#Total' + jQuery(this).attr("id") + '').val();
+                            listData.push(obj);
+                        });
+                        var model = {
+                            "invoice": invoice,
+                            "invoiceDetails": listData
+                        }
                         var response = jQuery.ajax({
                             method: "post",
                             url: "/Invoiceing/Invoice_Update",
@@ -345,32 +364,7 @@
                             data: JSON.stringify(model),
                             success: function (msg) {
                                 if (msg.success === true && msg.responseText > 0) {
-                                    jQuery('#InvoiceTable > tbody  > tr').each(function (index, tr) {
-                                        var itemId = jQuery(this).children('td:first').text();
-                                        var itemIdValue = -1;
-                                        if (itemId > 0) { itemIdValue = itemId };
-
-                                        jQuery('#item' + jQuery(this).attr("id") + '').val()
-                                        var model2 = {
-                                            ID: itemIdValue,
-                                            Invoice_ID: msg.responseText,
-                                            Item: jQuery('#item' + jQuery(this).attr("id") + '').val(),
-                                            Description: jQuery('#Description' + jQuery(this).attr("id") + '').val(),
-                                            Qty: jQuery('#Qty' + jQuery(this).attr("id") + '').val(),
-                                            Price: jQuery('#currency' + jQuery(this).attr("id") + '').val(),
-                                            Sub_Total: jQuery('#Total' + jQuery(this).attr("id") + '').val(),
-                                        };
-                                        jQuery.ajax({
-                                            method: "post",
-                                            url: "/Invoiceing/InvoiceDetail_Update",
-                                            dataType: "JSON",
-                                            contentType: "application/json; charset=utf-8",
-                                            data: JSON.stringify(model2),
-                                            success: function (msgg) {
-                                            }
-                                        });
-
-                                    });
+                                   
                                     window.open("/Invoiceing/InvoiceGrid", "_self")
 
                                 } else {

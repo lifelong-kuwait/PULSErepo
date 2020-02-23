@@ -246,6 +246,21 @@ function SessionGrid_onEdit(e) {
     }
     //
 }
+function SessionGrid_onEdit(e) {
+    if (e.model.isNew()) {
+        jQuery('.scheduleDateHide').hide();
+        jQuery('.calendarSession').show();
+        //console.log("new")
+        
+    }
+    else {
+        jQuery('.scheduleDateHide').show();
+        jQuery('.calendarSession').hide();
+       // console.log("Old")
+
+
+    }
+}
 /*
 
 */

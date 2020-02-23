@@ -2697,6 +2697,8 @@
     <None Include="Properties\PublishProfiles\FolderProfile71.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile72.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile73.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile74.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile75.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile8.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile9.pubxml" />
     <None Include="Properties\PublishProfiles\New TMS.pubxml" />

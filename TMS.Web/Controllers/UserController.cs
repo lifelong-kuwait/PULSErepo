@@ -385,6 +385,7 @@ namespace TMS.Web.Controllers
         [DontWrapResult]
         [ActivityAuthorize]
         [ClaimsAuthorize("CanAddEditUsers")]
+        //[DisableValidation]
         public ActionResult LoginUser_Update([DataSourceRequest] DataSourceRequest request, LoginUsers _objUsers, string filename, long aid)
         {
             if (ModelState.IsValid)

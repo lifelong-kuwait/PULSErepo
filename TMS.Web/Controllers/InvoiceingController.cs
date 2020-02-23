@@ -51,63 +51,77 @@ namespace TMS.Web.Controllers
         //[DisableValidation]
         [HttpPost]
         [ClaimsAuthorize("CanAddInvoicing", "CanViewInvoicing")]
-        public ActionResult Invoice_Create([DataSourceRequest] DataSourceRequest request, Invoice _invoice)
+        public ActionResult Invoice_Create([DataSourceRequest] DataSourceRequest request, InvocieAndDetail _invoice)
         {
             if (ModelState.IsValid)
             {
                 var json = new JavaScriptSerializer().Serialize(_invoice);
                 _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to insert Invoice " + DateTime.UtcNow, "", 0, "Invoice", "Invoice_Create", json.ToString(), CurrentUser.CompanyID);
-                _invoice.Generated_By = CurrentUser.NameIdentifierInt64;
-                _invoice.Generated_Date = DateTime.UtcNow;
-                _invoice.Invoice_Status = InvoiceStatus.InvoiceInvented;
-                _invoice.Organization_ID = CurrentUser.CompanyID;
-                _invoice.ID = _CustomerBAL.create_InvoiceBAL(_invoice);
+                _invoice.invoice.Generated_By = CurrentUser.NameIdentifierInt64;
+                _invoice.invoice.Generated_Date = DateTime.UtcNow;
+                _invoice.invoice.Invoice_Status = InvoiceStatus.InvoiceInvented;
+                _invoice.invoice.Organization_ID = CurrentUser.CompanyID;
+                _invoice.invoice.ID = _CustomerBAL.create_InvoiceBAL(_invoice.invoice);
                 InvoiceHistory invoiceHistory = new InvoiceHistory();
                 invoiceHistory.History_Name = "Invoice Create";
                 invoiceHistory.Type = InvoiceStatus.InvoiceInvented;
                 invoiceHistory.Description = "";
-                invoiceHistory.Invoice_Number = _invoice.ID;
+                invoiceHistory.Invoice_Number = _invoice.invoice.ID;
                 invoiceHistory.User_ID = CurrentUser.NameIdentifierInt64;
                 invoiceHistory.Organization_ID = CurrentUser.CompanyID;
                 invoiceHistory.Date_TIME = DateTime.Now;
-                var x=_CustomerBAL.create_InvoiceHistoryBAL(invoiceHistory);
-                var InvoiceIDd = _invoice.ID;
+                var x = _CustomerBAL.create_InvoiceHistoryBAL(invoiceHistory);
+                foreach (var item in _invoice.invoiceDetails)
+                {
+                    var jsons = new JavaScriptSerializer().Serialize(_invoice);
+                    _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to insert Invoice Detail at" + DateTime.UtcNow, "", 0, "Invoice", "InvoiceDetail_Create", jsons.ToString(), CurrentUser.CompanyID);
+                    item.Invoice_ID = _invoice.invoice.ID;
+                     _CustomerBAL.create_InvoiceDetailBAL(item);
+                }
+                var InvoiceIDd = _invoice.invoice.ID;
                 var resultData2 = new[] { InvoiceIDd };
                 return Json(new { success = true, responseText = InvoiceIDd }, JsonRequestBehavior.AllowGet);
             }
-            var InvoiceID = _invoice.ID;
-            var resultData = new[] { InvoiceID };
-            return Json(new { success = false, responseText = InvoiceID }, JsonRequestBehavior.AllowGet);
+            var InvoiceID = _invoice.invoice.ID;
+            var resultData = new[] { _invoice };
+            return Json(new { success = false, responseText = _invoice }, JsonRequestBehavior.AllowGet);
 
             //return Json(resultData.ToDataSourceResult(request, ModelState));
         }
         [DontWrapResult]
         [ClaimsAuthorize("CanEditInvoicing", "CanViewInvoicing")]
-        public ActionResult Invoice_Update([DataSourceRequest] DataSourceRequest request, Invoice _invoice)
+        public ActionResult Invoice_Update([DataSourceRequest] DataSourceRequest request, InvocieAndDetail _invoice)
         {
             if (ModelState.IsValid)
             {
                 var json = new JavaScriptSerializer().Serialize(_invoice);
                 _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to insert Invoice " + DateTime.UtcNow, "", 0, "Invoice", "Invoice_Create", json.ToString(), CurrentUser.CompanyID);
-                _invoice.Generated_By = CurrentUser.NameIdentifierInt64;
-                _invoice.Generated_Date = DateTime.UtcNow;
-                _invoice.Invoice_Status = InvoiceStatus.InvoiceInvented;
-                _invoice.Organization_ID = CurrentUser.CompanyID;
-                var xx = _CustomerBAL.Update_InvoiceBAL(_invoice);
+                _invoice.invoice.Generated_By = CurrentUser.NameIdentifierInt64;
+                _invoice.invoice.Generated_Date = DateTime.UtcNow;
+                _invoice.invoice.Invoice_Status = InvoiceStatus.InvoiceInvented;
+                _invoice.invoice.Organization_ID = CurrentUser.CompanyID;
+                var xx = _CustomerBAL.Update_InvoiceBAL(_invoice.invoice);
                 InvoiceHistory invoiceHistory = new InvoiceHistory();
                 invoiceHistory.History_Name = "Invoice Update";
                 invoiceHistory.Type = InvoiceStatus.InvoiceInvented;
                 invoiceHistory.Description = "";
-                invoiceHistory.Invoice_Number = _invoice.ID;
+                invoiceHistory.Invoice_Number = _invoice.invoice.ID;
                 invoiceHistory.User_ID = CurrentUser.NameIdentifierInt64;
                 invoiceHistory.Organization_ID = CurrentUser.CompanyID;
                 invoiceHistory.Date_TIME = DateTime.Now;
                 var x = _CustomerBAL.create_InvoiceHistoryBAL(invoiceHistory);
-                var InvoiceIDd = _invoice.ID;
+                foreach (var item in _invoice.invoiceDetails)
+                {
+                    var jsons = new JavaScriptSerializer().Serialize(_invoice);
+                    _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to insert Invoice Detail at" + DateTime.UtcNow, "", 0, "Invoice", "InvoiceDetail_Create", jsons.ToString(), CurrentUser.CompanyID);
+                     _CustomerBAL.Update_InvoiceDetailBAL(item);
+
+                }
+                var InvoiceIDd = _invoice.invoice.ID;
                 var resultData2 = new[] { InvoiceIDd };
                 return Json(new { success = true, responseText = InvoiceIDd }, JsonRequestBehavior.AllowGet);
             }
-            var InvoiceID = _invoice.ID;
+            var InvoiceID = _invoice.invoice.ID;
             var resultData = new[] { InvoiceID };
             return Json(new { success = false, responseText = InvoiceID }, JsonRequestBehavior.AllowGet);
 

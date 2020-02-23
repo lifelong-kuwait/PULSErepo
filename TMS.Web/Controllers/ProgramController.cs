@@ -19,6 +19,8 @@ using Abp.Runtime.Validation;
 using TMS.Web.Core;
 using TMS.Library.Entities.Common.Roles;
 using System.Web.Script.Serialization;
+using System.Globalization;
+using System.Linq;
 
 namespace TMS.Web.Controllers
 {
@@ -1406,10 +1408,18 @@ namespace TMS.Web.Controllers
         [ClaimsAuthorize("CanViewSession")]
         public ActionResult Sessions()
         {
+            Session["CalanderValues"] = "";
             var json = new JavaScriptSerializer().Serialize(0);
             _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to read sessions at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
 
             return View();
+        }
+        [DontWrapResult]
+        [HttpPost]
+        public void SetSessionValues(string CalanderValues)
+        {
+            Session["CalanderValues"] = CalanderValues;
+            
         }
         [ClaimsAuthorize("CanViewReports")]
         public ActionResult TrainerDetailReport()
@@ -1674,56 +1684,97 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (VerifyBussinessRules(_Sessions))
+                string _SessionsDates = "";
+                try { 
+                     _SessionsDates = System.Web.HttpContext.Current.Session["CalanderValues"].ToString();
+                }
+                catch(Exception e)
                 {
-                    var json = new JavaScriptSerializer().Serialize(_Sessions);
-                    _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to create sessions detail at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
-
-                    DateTime t1 = Convert.ToDateTime(_Sessions.StartTimeString);
-                    DateTime t2 = Convert.ToDateTime(_Sessions.EndTimeString);
-                    int value = DateTime.Compare(t1, t2);
-                    // checking 
-                    if (value < 0)
+                    ModelState.AddModelError(lr.SessionTimeConflict + "  " + _Sessions.ScheduleDate, lr.StartandEndDateConflict + "  " + _Sessions.ScheduleDate);
+                }
+                    if (_SessionsDates != "")
+                    {
+                    string[] authorsList = _SessionsDates.Split(',');
+                    DateTime[] dateObjects= new DateTime[1000];
+                    for (int x=0;x<authorsList.Length;++x)
+                    {
+                        string str = authorsList[x].ToString();
+                        string date = str.Substring(4, 11);
+                        DateTime s = DateTime.ParseExact(date, "MMM dd yyyy", CultureInfo.InvariantCulture);
+                        dateObjects[x] = s;
+                    }
+                    List<DateTime> lst = dateObjects.OfType<DateTime>().ToList();
+                    lst.RemoveAll(x=>x.Year== DateTime.MinValue.Year);
+                    foreach (var item in lst)
                     {
 
-
-                        _Sessions.CreatedBy = CurrentUser.NameIdentifierInt64;
-                        _Sessions.CreatedDate = DateTime.Now;
-                        _Sessions.OrganizationID = CurrentUser.CompanyID;
-                        _Sessions.ClassID = ClassID;
+                        _Sessions.ScheduleDate = item.Date;
                         if (VerifyBussinessRules(_Sessions))
                         {
-                            if (_SessionBAL.GetSessionVenueOccupancyDetailBAL(_Sessions) > 0)
+
+                            var json = new JavaScriptSerializer().Serialize(_Sessions);
+                            _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to create sessions detail at" + DateTime.UtcNow + " with user id =" + CurrentUser.NameIdentifierInt64, "", 0, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), json.ToString(), CurrentUser.CompanyID);
+                            DateTime t1 = Convert.ToDateTime(_Sessions.StartTimeString);
+                            DateTime t2 = Convert.ToDateTime(_Sessions.EndTimeString);
+                            int value = DateTime.Compare(t1, t2);
+                            // checking 
+                            if (value < 0)
                             {
-                                ModelState.AddModelError(lr.VenueOcupaidByOther, lr.VenueOcupaidByOther);
+                                _Sessions.CreatedBy = CurrentUser.NameIdentifierInt64;
+                                _Sessions.CreatedDate = DateTime.Now;
+                                _Sessions.OrganizationID = CurrentUser.CompanyID;
+                                _Sessions.ClassID = ClassID;
+                                if (VerifyBussinessRules(_Sessions))
+                                {
+                                    if (_SessionBAL.GetSessionVenueOccupancyDetailBAL(_Sessions) > 0)
+                                    {
+                                        ModelState.AddModelError(lr.VenueOcupaidByOther + "  " + _Sessions.ScheduleDate, lr.VenueOcupaidByOther + "  " + _Sessions.ScheduleDate);
+                                    }
+                                    else
+                                    {
+                                        _Sessions.ID = this._SessionBAL.TMS_Sessions_CreateBAL(_Sessions);
+                                        string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                                        if (string.IsNullOrEmpty(ip))
+                                            ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                                        // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
+                                        // string browserName = req.Browser.Browser;
+                                        _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+
+                                    }
+
+
+                                }
                             }
                             else
                             {
-                                _Sessions.ID = this._SessionBAL.TMS_Sessions_CreateBAL(_Sessions);
-                                string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                                if (string.IsNullOrEmpty(ip))
-                                    ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                                // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
-                                // string browserName = req.Browser.Browser;
-                                _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
-
+                                ModelState.AddModelError(lr.SessionTimeConflict+"  "+ _Sessions.ScheduleDate, lr.StartandEndDateConflict + "  " + _Sessions.ScheduleDate);
+                                break;
                             }
 
-
                         }
-                    }
-                    else
-                    {
-                        ModelState.AddModelError(lr.SessionTimeConflict, lr.StartandEndDateConflict);
+                        else
+                        {
+                            
+                            ModelState.AddModelError(lr.SessionTimeConflict + "  " + _Sessions.ScheduleDate, lr.StartandEndDateConflict + "  " + _Sessions.ScheduleDate);
+                            break;
+                        }
 
                     }
-
+                }
+                else
+                {
+                    ModelState.AddModelError(lr.ErrorServerError, lr.SessionScheduleDate);
 
                 }
 
 
             }
+            else
+            {
+                ModelState.AddModelError(lr.ErrorServerError , lr.SessionScheduleDate);
 
+            }
+            Session["CalanderValues"] = "";
             var resultData = new[] { _Sessions };
             return Json(resultData.ToDataSourceResult(request, ModelState));
         }
@@ -1858,37 +1909,37 @@ namespace TMS.Web.Controllers
 
             if (result.MaximumSessionLimitReached)
             {
-                ModelState.AddModelError(lr.ClassMaximumSessionPerDay, lr.SessionMaximumSessionLimitReached);
+                ModelState.AddModelError(lr.ClassMaximumSessionPerDay +"  " +sesions.ScheduleDate, lr.SessionMaximumSessionLimitReached + "  " + sesions.ScheduleDate);
                 return false;
             }
             else if (!result.IsValidSessionDateTime)
             {
-                ModelState.AddModelError(lr.SessionTimeConflict, lr.SessionIsValidSessionTime);
+                ModelState.AddModelError(lr.SessionTimeConflict + "  " + sesions.ScheduleDate, lr.SessionIsValidSessionTime + "  " + sesions.ScheduleDate);
                 return false;
             }
             else if (!result.IsValidScheduleDate)
             {
-                ModelState.AddModelError(lr.SessionScheduleDate, lr.SessionIsValidScheduleDate);
+                ModelState.AddModelError(lr.SessionScheduleDate + "  " + sesions.ScheduleDate, lr.SessionIsValidScheduleDate + "  " + sesions.ScheduleDate);
                 return false;
             }
             else if (!result.IsValidTrainerTime)
             {
-                ModelState.AddModelError(lr.Trainer, lr.SessionIsValidTrainerTime);
+                ModelState.AddModelError(lr.Trainer+sesions.ScheduleDate + "  " + sesions.ScheduleDate, lr.SessionIsValidTrainerTime + "  " + sesions.ScheduleDate);
                 return false;
             }
-            else if (!result.IsValidVenueTime)
+            else if (!result.IsValidVenueTime )
             {
-                ModelState.AddModelError(lr.VenueName, lr.SessionIsValidVenueTime);
+                ModelState.AddModelError(lr.VenueName + "  " + sesions.ScheduleDate, lr.SessionIsValidVenueTime + "  " + sesions.ScheduleDate);
                 return false;
             }
             else if (!result.IsValidVenueAvailabilityTime)
             {
-                ModelState.AddModelError(lr.VenueAvailabelTimeRange, lr.VenueAvailabelTimeRangeIssue);
+                ModelState.AddModelError(lr.VenueAvailabelTimeRange + "  " + sesions.ScheduleDate, lr.VenueAvailabelTimeRangeIssue + "  " + sesions.ScheduleDate);
                 return false;
             }
             else if (!string.IsNullOrEmpty(result.ConflictNames.Trim()))
             {
-                ModelState.AddModelError(lr.ClassMaximumSessionPerDay, string.Format(lr.SessionConflictNames, result.ConflictNames.Trim()));
+                ModelState.AddModelError(lr.ClassMaximumSessionPerDay + "  " + sesions.ScheduleDate, string.Format(lr.SessionConflictNames, result.ConflictNames.Trim()));
                 return false;
             }
 

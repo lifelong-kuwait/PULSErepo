@@ -3,7 +3,7 @@
 <script type="text/javascript">
     function filteSessionrrelateditems() {
         return {
-            OpenId: jQuery("#ClassID").val(), OpenType: 2, 
+            OpenId: jQuery("#ClassID").val(), OpenType: 2,
         };
     }
     function filteSessionrrelateditems2() {
@@ -20,13 +20,13 @@
     <div class="form-group" id="classdll">
         @Html.LabelFor(model => model.ClassID, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-7 col-lg-7 col-sm-11">
-           
+
             @(Html.Kendo().DropDownListFor(m => m.ClassID)
-            .HtmlAttributes(new { style = "width:100%" })
-            .DataTextField("Text")
-            .DataValueField("Value")
-            .OptionLabel(lr.SessionClassOptionalLabel).Events(x => x.Change("onChangeClassId")).Filter(Kendo.Mvc.UI.FilterType.Contains)
-            .DataSource(dataSource => { dataSource.Read(read => read.Action("ClasesbyCourseId", "DDL")); }))
+                                            .HtmlAttributes(new { style = "width:100%" })
+                                            .DataTextField("Text")
+                                            .DataValueField("Value")
+                                            .OptionLabel(lr.SessionClassOptionalLabel).Events(x => x.Change("onChangeClassId")).Filter(Kendo.Mvc.UI.FilterType.Contains)
+                                            .DataSource(dataSource => { dataSource.Read(read => read.Action("ClasesbyCourseId", "DDL")); }))
             @Html.ValidationMessageFor(model => model.ClassID)
         </div>
     </div>
@@ -42,38 +42,53 @@
         @Html.LabelFor(model => model.LanguageID, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-7 col-lg-7 col-sm-11">
             @(Html.Kendo().DropDownListFor(m => m.LanguageID)
-                    .HtmlAttributes(new { style = "width:100%" })
-                    .DataTextField("Text")
-                    .DataValueField("Value")
-                    .OptionLabel(lr.ClassLanguageOptionalLabel)
-                     // .OptionLabel(new { Text = lr.CourseCategoryOptionalLabel, Value = 0 })
-                     .DataSource(dataSource =>
-                     {
-                         dataSource.Read(read => read.Action("LanguageClassDDL", "DDL").Data("filteSessionrrelateditems2"))
-                        .ServerFiltering(true);
-                     }).CascadeFrom("ClassID"))
+                                                    .HtmlAttributes(new { style = "width:100%" })
+                                                    .DataTextField("Text")
+                                                    .DataValueField("Value")
+                                                    .OptionLabel(lr.ClassLanguageOptionalLabel)
+                                                     // .OptionLabel(new { Text = lr.CourseCategoryOptionalLabel, Value = 0 })
+                                                     .DataSource(dataSource =>
+                                                     {
+                                                         dataSource.Read(read => read.Action("LanguageClassDDL", "DDL").Data("filteSessionrrelateditems2"))
+                                                        .ServerFiltering(true);
+                                                     }).CascadeFrom("ClassID"))
             @Html.ValidationMessageFor(model => model.LanguageID)
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group scheduleDateHide">
         @Html.LabelFor(model => model.ScheduleDate, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-7 col-lg-7 col-sm-11">
-            @(Html.Kendo().DatePickerFor(x => x.ScheduleDate).Start(CalendarView.Month).Depth(CalendarView.Month).Format(KendoDateFormat)
-                .HtmlAttributes(new { style = "width: 100%", value = "" })
+            @(Html.Kendo().DatePickerFor(x => x.ScheduleDate).Start(CalendarView.Month).Depth(CalendarView.Month).Format(KendoDateFormat).HtmlAttributes(new { style = "width: 100%", value = "" })
             )
             @Html.ValidationMessageFor(model => model.ScheduleDate)
+        </div>
+    </div>
+    <div class="form-group calendarSession">
+        @Html.LabelFor(model => model.ScheduleDate, new { @class = "col-md-3 col-lg-3 control-label" })
+        <div class="col-md-7 col-lg-7 col-sm-11">
+            @(Html.Kendo().Calendar()
+                                                                    .Name("calendar")
+                                                                    .WeekNumber(true)
+                                                                    .Format("dd/mm/yyy")
+                                                                    .Selectable("multiple")
+                                    .HtmlAttributes(new { style = "width: 100%", value = "" })
+                                    .Events(e =>
+                                                                {
+                                                                    e.Change("onCalanderChange");
+                                                                })
+            )
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(model => model.StartTimeString, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-7 col-lg-7 col-sm-11">
             @(Html.Kendo().DropDownListFor(m => m.StartTimeString)
-            .HtmlAttributes(new { style = "width:100%" })
-            .DataTextField("Text")
-            .DataValueField("Value")
-            .OptionLabel(lr.SessionStartTimeOptionalLabel)
-            // .OptionLabel(new { Text = lr.CourseCategoryOptionalLabel, Value = 0 })
-            .BindTo(TMS.DropDownUtil.FillSessionTimeDropDown()))
+                                                    .HtmlAttributes(new { style = "width:100%" })
+                                                    .DataTextField("Text")
+                                                    .DataValueField("Value")
+                                                    .OptionLabel(lr.SessionStartTimeOptionalLabel)
+                                                    // .OptionLabel(new { Text = lr.CourseCategoryOptionalLabel, Value = 0 })
+                                                    .BindTo(TMS.DropDownUtil.FillSessionTimeDropDown()))
             @Html.ValidationMessageFor(model => model.StartTimeString)
         </div>
     </div>
@@ -82,12 +97,12 @@
         @Html.LabelFor(model => model.EndTimeString, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-7 col-lg-7 col-sm-11">
             @(Html.Kendo().DropDownListFor(m => m.EndTimeString)
-            .HtmlAttributes(new { style = "width:100%" })
-            .DataTextField("Text")
-            .DataValueField("Value")
-            .OptionLabel(lr.SessionEndTimeOptionalLabel)
-            // .OptionLabel(new { Text = lr.CourseCategoryOptionalLabel, Value = 0 })
-            .BindTo(TMS.DropDownUtil.FillSessionTimeDropDown()))
+                                                    .HtmlAttributes(new { style = "width:100%" })
+                                                    .DataTextField("Text")
+                                                    .DataValueField("Value")
+                                                    .OptionLabel(lr.SessionEndTimeOptionalLabel)
+                                                    // .OptionLabel(new { Text = lr.CourseCategoryOptionalLabel, Value = 0 })
+                                                    .BindTo(TMS.DropDownUtil.FillSessionTimeDropDown()))
             @Html.ValidationMessageFor(model => model.EndTimeString)
         </div>
     </div>
@@ -96,20 +111,20 @@
         @Html.LabelFor(model => model.TrainerID, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-7 col-lg-7 col-sm-11">
             @(Html.Kendo().DropDownListFor(m => m.TrainerID)
-                    .HtmlAttributes(new { style = "width:100%" })
-                    .DataTextField("Text")
-                    .DataValueField("Value")
-                    .OptionLabel(lr.TrainerOptionalLabel)
-                    //  .OptionLabel(new { Text = lr.VenueOpenTypeOptionalLabel, Value = 0 })
-                    .DataSource(dataSource =>
-                    {
-                        dataSource.Read(read => read.Action("Trainer", "DDL").Data("filteSessionrrelateditems"))
-                        .ServerFiltering(true);
-                    }).CascadeFrom("ClassID")
-            .Events(e =>
-            {
-                e.Change("onChange");
-            }))
+                                                            .HtmlAttributes(new { style = "width:100%" })
+                                                            .DataTextField("Text")
+                                                            .DataValueField("Value")
+                                                            .OptionLabel(lr.TrainerOptionalLabel)
+                                                            //  .OptionLabel(new { Text = lr.VenueOpenTypeOptionalLabel, Value = 0 })
+                                                            .DataSource(dataSource =>
+                                                            {
+                                                                dataSource.Read(read => read.Action("Trainer", "DDL").Data("filteSessionrrelateditems"))
+                                                                .ServerFiltering(true);
+                                                            }).CascadeFrom("ClassID")
+                                                    .Events(e =>
+                                                    {
+                                                        e.Change("onChange");
+                                                    }))
             @Html.ValidationMessageFor(model => model.TrainerID)
         </div>
     </div>
@@ -135,20 +150,21 @@
         @Html.LabelFor(model => model.VenueID, new { @class = "col-md-3 col-lg-3 control-label" })
         <div class="col-md-7 col-lg-7 col-sm-11">
             @(Html.Kendo().DropDownListFor(m => m.VenueID)
-            .HtmlAttributes(new { style = "width:100%" })
-            .DataTextField("Text")
-            .DataValueField("Value")
-            .OptionLabel(lr.VenueOpenTypeOptionalLabel)
-          //  .OptionLabel(new { Text = lr.VenueOpenTypeOptionalLabel, Value = 0 })
-            .DataSource(dataSource =>
-            {
-                dataSource.Read(read => read.Action("VenueByClassId", "DDL").Data("filteSessionrrelateditems"))
-                .ServerFiltering(true);
-            }).CascadeFrom("ClassID"))
-           
+                                                    .HtmlAttributes(new { style = "width:100%" })
+                                                    .DataTextField("Text")
+                                                    .DataValueField("Value")
+                                                    .OptionLabel(lr.VenueOpenTypeOptionalLabel)
+                                                    //  .OptionLabel(new { Text = lr.VenueOpenTypeOptionalLabel, Value = 0 })
+                                                    .DataSource(dataSource =>
+                                                    {
+                                                        dataSource.Read(read => read.Action("VenueByClassId", "DDL").Data("filteSessionrrelateditems"))
+                                                        .ServerFiltering(true);
+                                                    }).CascadeFrom("ClassID"))
+
             @Html.ValidationMessageFor(model => model.VenueID)
         </div>
     </div>
+   
 </div>
 
 <style>
@@ -156,3 +172,4 @@
         line-height: 1.25em;
     }
 </style>
+

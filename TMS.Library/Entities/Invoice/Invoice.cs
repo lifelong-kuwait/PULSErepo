@@ -312,6 +312,11 @@ namespace TMS.Library.TMS
             CustomerID = dr.GetLong("CustomerID");
         }
     }
+    public class InvocieAndDetail
+    {
+        public Invoice invoice { get; set; }
+        public List<InvoiceDetail> invoiceDetails { get; set; }
+    }
     public static class Fd
     {
         /// <summary>
