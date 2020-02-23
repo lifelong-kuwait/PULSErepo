@@ -12,6 +12,20 @@
         }
 </script>
 <script type="text/javascript">
+   
+        function onCalanderChange() {
+        var seldataes = this.selectDates();
+        jQuery.ajax({
+            method: "post",
+        url: "/Program/SetSessionValues",
+        dataType: "JSON",
+        contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({CalanderValues: seldataes.toString() }),
+            success: function (msg) {}
+        });
+
+    }
+
         function SessionGridNested_onEdit(e) {
             //if current model is not new then remove the Name editor
             var title = jQuery(e.container).parent().find(".k-window-title");
@@ -28,8 +42,9 @@
                 dropdownlist.enable(false);
                 jQuery(title).text(lr.AddRecordGeneralTitle);
                 jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.SaveRecordGeneralButton);
-                jQuery("#ScheduleDate").data("kendoDatePicker").value(null);
-               
+                //jQuery("#ScheduleDate").data("kendoDatePicker").value(null);
+                jQuery('.scheduleDateHide').hide();
+                jQuery('.calendarSession').show();
             }
             else {
                 //jQuery("#classdll").remove();
@@ -37,7 +52,10 @@
                 dropdownlist.enable(false);
                 jQuery(title).text(lr.EditRecordGeneralTitle);
                 jQuery(update).html('<span class="k-icon k-i-check"></span>' + lr.UpdateRecordGeneralButton);
+                jQuery('.scheduleDateHide').show();
+                jQuery('.calendarSession').hide();
             }
+            
             //
         }
         function onChangeofSessionTRainer(e) {

@@ -97,6 +97,8 @@ namespace TMS.Web
 
             //Configure navigation/menu
             Configuration.Navigation.Providers.Add<TMSNavigationProvider>();
+            //Configuration.Modules.AbpMvc().IsValidationEnabledForControllers = false;
+
             //Configuration. .AbpWeb().AntiForgery.IsEnabled = false;
         }
 

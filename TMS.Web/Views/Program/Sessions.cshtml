@@ -37,7 +37,7 @@
                                    .Pageable(pager => 
                                    pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
                                    .Scrollable()
-                                   .Filterable().Events(e => e.Edit("PersonGrid_onEdit").Save("Person_onSave"))
+                                   .Filterable()
                                    .Events(e => e.Edit("SessionGrid_onEdit").Save("General_onSave"))
                                    .HtmlAttributes(new { style = "height:700px !important;" })
                                    .DataSource(dataSource => dataSource.Ajax().Model(model => { model.Id(m => m.ID); })
@@ -315,11 +315,26 @@
              }
 
          });
+        
+         
 
 
     });
 </script>
-
+<script>
+    function onCalanderChange() {
+        var seldataes = this.selectDates();
+        jQuery.ajax({
+            method: "post",
+            url: "/Program/SetSessionValues",
+            dataType: "JSON",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ CalanderValues: seldataes.toString() }),
+            success: function (msg) { }
+        });
+        
+    }
+    </script>
 
 
 
@@ -393,6 +408,9 @@
         </div>
     </div>
 </script>
+<script>
+    
+</script>
 @section Scripts
 {
     <script>
@@ -416,6 +434,7 @@
                 jQuery("#ManageTrainer").data("kendoGrid").addRow();
             }
         }
+        
     </script>
     <script src="@Url.Content("~/Scripts/ts/tms/Program/Program.js")"></script>
 }

@@ -60,6 +60,12 @@ namespace TMS.Library.Entities.TMS.Program
         /// <value>The schedule date.</value>
         [Display(Name = "SessionScheduleDate", ResourceType = typeof(lr))]
         public DateTime ScheduleDate { get; set; }
+        /// <summary>
+        /// Gets or sets the schedule date.
+        /// </summary>
+        /// <value>The schedule date.</value>
+        //[Display(Name = "SessionScheduleDate", ResourceType = typeof(lr))]
+        public string ScheduleDates { get; set; }
 
         /// <summary>
         /// Gets or sets the start time.

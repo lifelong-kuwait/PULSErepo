@@ -52,7 +52,7 @@ ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"
    .Pageable(pager => pager.Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
    .HtmlAttributes(new { style = "height:700px !important;" })
    .Events(e => e.Edit("UsersLoginGrid_onEdit").Save("UsersLoginGrid_onSave"))
-   .DataSource(dataSource => dataSource.Ajax().PageSize(15)
+   .DataSource(dataSource => dataSource.Ajax().PageSize(5)
    .Model(model =>
    {
        model.Id(p => p.UserID);
@@ -354,6 +354,9 @@ return allValues
     }
 
     function UsersLoginGrid_onSave(e) {
+        e.sender.one("dataBound", function () {
+            e.sender.dataSource.read();
+        });
         jQuery(event.srcElement)
             .addClass("k-state-disabled")
             .bind("click", disable = function (e) { e.preventDefault(); return false; })
