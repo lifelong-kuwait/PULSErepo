@@ -1705,10 +1705,15 @@ namespace TMS.Web.Controllers
                     }
                     List<DateTime> lst = dateObjects.OfType<DateTime>().ToList();
                     lst.RemoveAll(x=>x.Year== DateTime.MinValue.Year);
+                    var result = _SessionBAL.GetClassDetailByClassIdForNewSessionBAL(_Sessions.ClassID.ToString(), "0");
+                    int Count = result.Count;
                     foreach (var item in lst)
                     {
 
                         _Sessions.ScheduleDate = item.Date;
+                        Count = ++Count;
+                        _Sessions.SessionName = result.ClassName + "-" + (Count);
+                        
                         if (VerifyBussinessRules(_Sessions))
                         {
 
@@ -1720,6 +1725,15 @@ namespace TMS.Web.Controllers
                             // checking 
                             if (value < 0)
                             {
+                                var lastItem = lst.Last();
+                                if(lastItem.Date==item.Date && _Sessions.IsLastSession==true)
+                                {
+                                    _Sessions.IsLastSession = true;
+                                }
+                                else
+                                {
+                                    _Sessions.IsLastSession = false;
+                                }
                                 _Sessions.CreatedBy = CurrentUser.NameIdentifierInt64;
                                 _Sessions.CreatedDate = DateTime.Now;
                                 _Sessions.OrganizationID = CurrentUser.CompanyID;
@@ -1729,6 +1743,7 @@ namespace TMS.Web.Controllers
                                     if (_SessionBAL.GetSessionVenueOccupancyDetailBAL(_Sessions) > 0)
                                     {
                                         ModelState.AddModelError(lr.VenueOcupaidByOther + "  " + _Sessions.ScheduleDate, lr.VenueOcupaidByOther + "  " + _Sessions.ScheduleDate);
+                                        break;
                                     }
                                     else
                                     {
@@ -1764,7 +1779,7 @@ namespace TMS.Web.Controllers
                 else
                 {
                     ModelState.AddModelError(lr.ErrorServerError, lr.SessionScheduleDate);
-
+                    
                 }
 
 
