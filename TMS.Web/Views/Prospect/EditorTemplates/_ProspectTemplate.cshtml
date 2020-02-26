@@ -153,6 +153,8 @@
                            .HtmlAttributes(new { style = "width:100%" })
             .DataTextField("Text")
                     .DataValueField("Value")
+                    .AutoBind(true)
+                    .SelectedIndex(111)
             .OptionLabel(new { Text = lr.PersonPhoneCountryCodeOptionalLabel, Value = 0 })
                   .DataSource(dataSource =>
                   {

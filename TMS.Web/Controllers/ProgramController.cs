@@ -1778,6 +1778,7 @@ namespace TMS.Web.Controllers
                 }
                 else
                 {
+                    
                     ModelState.AddModelError(lr.ErrorServerError, lr.SessionScheduleDate);
                     
                 }
@@ -1789,7 +1790,6 @@ namespace TMS.Web.Controllers
                 ModelState.AddModelError(lr.ErrorServerError , lr.SessionScheduleDate);
 
             }
-            Session["CalanderValues"] = "";
             var resultData = new[] { _Sessions };
             return Json(resultData.ToDataSourceResult(request, ModelState));
         }
