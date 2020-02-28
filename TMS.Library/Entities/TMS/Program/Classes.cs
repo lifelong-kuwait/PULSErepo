@@ -892,11 +892,17 @@ namespace TMS.Library.Entities.TMS.Program
         /// <value>The conflict names.</value>
         public bool IsValidVenueAvailabilityTime { get; set; }
     }
-
     /// <summary>
-    /// Class ClassTraineeMapping.
+    /// Class ClassTraineeRulesVerify.
     /// </summary>
-    public class ClassTraineeMapping
+    public class ClassTraineeRulesVerify
+    {
+        public long ClassId { get; set; }
+        public string PrimaryClassTitle { get; set; }
+        public string ClassName { get; set; }
+        public string P_DisplayName { get; set; }
+    }
+        public class ClassTraineeMapping
     {
         /// <summary>
         /// Gets or sets the identifier.

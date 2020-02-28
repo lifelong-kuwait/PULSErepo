@@ -403,6 +403,14 @@ namespace Resources {
                }
             }
         /// <summary>Server Error</summary>
+        public static string TraineeTimeConflictWithOtherClass
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("TraineeTimeConflictWithOtherClass", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        /// <summary>Server Error</summary>
         public static string MaximumSessionConflict
         {
             get

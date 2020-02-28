@@ -585,7 +585,22 @@ namespace TMS.DataObjects.TMS.Program
             }
             return Person.ToList();
         }
-
+        public IList<ClassTraineeRulesVerify> TMS_ClassTraineeMapping_BussinesRuleVerifyDAL(string _Classes, string PersonId, long organizationId)
+        {
+            List<ClassTraineeRulesVerify> Person = new List<ClassTraineeRulesVerify>();
+            using (var conn = new SqlConnection(DBHelper.ConnectionString))
+            {
+                conn.Open();
+                DynamicParameters dbParam = new DynamicParameters();
+                dbParam.AddDynamicParams(new { ClassID = _Classes, PersonID = PersonId, OrganizationID = organizationId });
+                using (var multi = conn.QueryMultiple("TMS_Session_TraineeAvailabilityVerifyByPersonAndClass", dbParam, commandType: System.Data.CommandType.StoredProcedure))
+                {
+                    Person = multi.Read<ClassTraineeRulesVerify>().AsList<ClassTraineeRulesVerify>(); 
+                }
+                conn.Close();
+            }
+            return Person.ToList();
+        }
 
 
         public long TMS_ClassTraineeMapping_CreateDAL(ClassTraineeMapping _Classes, string PersonIds)

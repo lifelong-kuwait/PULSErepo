@@ -102,6 +102,7 @@
             .HtmlAttributes(new { style = "width:100%" })
             .DataTextField("Text")
             .DataValueField("Value")
+            .SelectedIndex(3)
                      .OptionLabel(lr.CourseFeeCurrencyOptionalLabel)
                     // .OptionLabel(new { Text = lr.CourseFeeCurrencyOptionalLabel, Value = 0 })
                     .DataSource(dataSource => { dataSource.Read(read => read.Action("Currencies", "DDL")); }))
