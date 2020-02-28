@@ -691,17 +691,39 @@ namespace TMS.Web.Controllers
                 if (ModelState.IsValid)
                 {
                     //  string PersonIds = "2233";
-                    _Classes.CreatedBy = CurrentUser.NameIdentifierInt64;
-                    _Classes.CreatedDate = DateTime.Now;
-                    _Classes.ClassID = cid;
-                    _Classes.ID = _ClassBAL.TMS_ClassTraineeMapping_CreateBAL(_Classes, PersonIds);
-                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-                    if (string.IsNullOrEmpty(ip))
-                        ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                    // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
-                    // string browserName = req.Browser.Browser;
-                    _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+                    bool flg = true;
+                    string[] arr = PersonIds.Split(',');
+                    string msg = "";
+                    foreach(var item in arr)
+                    {
+                        var valaue = _ClassBAL.TMS_ClassTraineeMapping_BussinesRuleVerifyBAL(cid.ToString(), item,CurrentUser.CompanyID);
+                        if(valaue.Count>0)
+                        {
+                            flg = false;
+                            foreach(var x in valaue)
+                            {
+                                string t = "(" + x.P_DisplayName + " is added in Class " + x.PrimaryClassTitle + " ),";
+                                msg=msg+t;
+                            }
+                        }
+                    }
+                    if (flg)
+                    {
+                        _Classes.CreatedBy = CurrentUser.NameIdentifierInt64;
+                        _Classes.CreatedDate = DateTime.Now;
+                        _Classes.ClassID = cid;
+                        _Classes.ID = _ClassBAL.TMS_ClassTraineeMapping_CreateBAL(_Classes, PersonIds);
+                        string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                        if (string.IsNullOrEmpty(ip))
+                            ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+                        // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
+                        // string browserName = req.Browser.Browser;
+                        _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
+                    }else
+                    {
+                        ModelState.AddModelError(lr.TraineeTimeConflictWithOtherClass, msg);
 
+                    }
                 }
             }
             var resultData = new[] { _Classes };

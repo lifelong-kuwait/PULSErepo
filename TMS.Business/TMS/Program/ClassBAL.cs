@@ -236,6 +236,11 @@ namespace TMS.Business.TMS.Program
 
         public IList<Person> ClassTrainee_GetAllByClassIDForCreatingBALOrganization(string Culture,long CompnayID, long ClassID, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText) =>
            _ClassDAL.ClassTrainee_GetAllByClassIDForCreatingDALOrganization(Culture, CompnayID, ClassID, StartRowIndex, PageSize, ref Total, SortExpression, SearchText);
+        public IList<ClassTraineeRulesVerify> TMS_ClassTraineeMapping_BussinesRuleVerifyBAL(string _Classes, string PersonIds,long organizationId)
+        {
+           return _ClassDAL.TMS_ClassTraineeMapping_BussinesRuleVerifyDAL(_Classes, PersonIds, organizationId);
+        }
+
         /// <summary>
         /// TMSs the class trainee mapping create bal.
         /// </summary>

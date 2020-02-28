@@ -148,7 +148,14 @@ namespace TMS.Business.Interfaces.TMS.Program
 
 
         IList<Person> ClassTrainee_GetAllByClassIDForCreatingBALOrganization(string Culture,long CompnayID, long ClassID, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText);
-
+        /// <summary>
+        /// TMSs the class trainee mapping create bal.
+        /// </summary>
+        /// <param name="_Classes">The classes.</param>
+        /// <param name="PersonIds">The person ids.</param>
+        /// <returns>System.Int64.</returns>
+        IList<ClassTraineeRulesVerify> TMS_ClassTraineeMapping_BussinesRuleVerifyBAL(string _Classes, string PersonIds,long organizationId);
+        
         /// <summary>
         /// TMSs the class trainee mapping create bal.
         /// </summary>

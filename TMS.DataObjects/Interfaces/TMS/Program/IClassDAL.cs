@@ -140,7 +140,7 @@ namespace TMS.DataObjects.Interfaces.TMS
         /// 
         IList<Person> ClassTrainee_GetAllByClassIDForCreatingDALOrganization(string Culture, long CompnayID, long ClassID, int StartRowIndex, int PageSize, ref int Total, string SortExpression, string SearchText);
 
-
+        IList<ClassTraineeRulesVerify> TMS_ClassTraineeMapping_BussinesRuleVerifyDAL(string _Classes, string PersonIds, long organizationId);
         long TMS_ClassTraineeMapping_CreateDAL(ClassTraineeMapping _Classes, string PersonIds);
         /// <summary>
         /// TMSs the class trainee mapping delete dal.
