@@ -145,6 +145,9 @@ namespace TMS.DataObjects.Interfaces
 
         int LoginUsers_DuplicationCheckUpdateDAL(LoginUsers _objUsers);
         int LoginPerson_DuplicationCheckDAL(Library.TMS.Persons.Person objperson);
+        int LoginPerson_DuplicationPhoneNumberCheckDAL(Library.TMS.Persons.Person objperson);
+        int LoginPerson_DuplicationPhoneNumberUpdateCheckDAL(Library.TMS.Persons.Person objperson);
+        
         int LoginPerson_DuplicationCheckUpdateDAL(Library.TMS.Persons.Person objperson);
         
         /// <summary>

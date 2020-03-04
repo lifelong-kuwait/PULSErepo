@@ -402,14 +402,14 @@ namespace TMS.Web.Controllers
 
         {
             long GroupId = Convert.ToInt64(Session["GroupId"]);
-            var ChangesFromDb = permissionsList.Where(x => x.IsChecked != x.NewChecked);//all those whose values are changed this needs to be updated for the database
-            var NotPresentInDatabase = ChangesFromDb.Where(x => x.GroupPermissionId == int.MinValue);
-            var PresentInDatabase = ChangesFromDb.Where(x => x.GroupPermissionId != int.MinValue);
-            var NotPresentIn = NotPresentInDatabase.Count();
-            var Present = PresentInDatabase.Count();
-            if (NotPresentInDatabase.Count() > 0)
-            {
-                foreach (var data in NotPresentInDatabase)
+            //var ChangesFromDb = permissionsList.Where(x => x.IsChecked != x.NewChecked);//all those whose values are changed this needs to be updated for the database
+            //var NotPresentInDatabase = ChangesFromDb.Where(x => x.GroupPermissionId == int.MinValue);
+            //var PresentInDatabase = ChangesFromDb.Where(x => x.GroupPermissionId != int.MinValue);
+            //var NotPresentIn = NotPresentInDatabase.Count();
+            //var Present = PresentInDatabase.Count();
+            //if (NotPresentInDatabase.Count() > 0)
+            //{
+                foreach (var data in permissionsList)
                 {
                     data.GroupId = GroupId;
                     data.IsChecked = data.NewChecked;
@@ -417,19 +417,19 @@ namespace TMS.Web.Controllers
                     data.CreatedDate = DateTime.UtcNow;
                     data.GroupPermissionId = this._Groups.TMS_GroupPermissions_CreateDAL(data);
                 }
-            }
-            if (PresentInDatabase.Count() > 0)
-            {
-                foreach (var data in PresentInDatabase)
-                {
-                    data.IsChecked = data.NewChecked;
-                    data.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                    data.UpdatedDate = DateTime.UtcNow;
-                    var Result = this._Groups.TMS_GroupPermissions_UpdateBAL(data);
-                }
-            }
+            //}
+            //if (PresentInDatabase.Count() > 0)
+            //{
+            //    foreach (var data in PresentInDatabase)
+            //    {
+            //        data.IsChecked = data.NewChecked;
+            //        data.UpdatedBy = CurrentUser.NameIdentifierInt64;
+            //        data.UpdatedDate = DateTime.UtcNow;
+            //        var Result = this._Groups.TMS_GroupPermissions_UpdateBAL(data);
+            //    }
+            //}
 
-            // ViewData["model"] = permissionsList;
+             ViewData["model"] = permissionsList;
             TempData["Success"] = "Success";
             ViewData["GroupName"] = GetGroupName(GroupId);
             return View(permissionsList);
@@ -456,7 +456,7 @@ namespace TMS.Web.Controllers
                     data.IsChecked = data.NewChecked;
                     data.CreatedBy = CurrentUser.NameIdentifierInt64;
                     data.CreatedDate = DateTime.UtcNow;
-                    data.GroupPermissionId = this._Groups.TMS_GroupPermissions_CreateDAL(data);
+                data.GroupPermissionId = this._Groups.TMS_GroupPermissions_CreateDAL(data);
                 }
             //}
             //else

@@ -329,9 +329,9 @@ namespace TMS.DataObjects.Common.Configuration
             switch (OpenType)
             {
                 case -1:
-                    return ExecuteListSp<DDlList>("TrainerOpenMapping_ForCourseGetAllByCulture", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OrganizationID", CompnayID));
+                    return ExecuteListSp<DDlList>("TrainerOpenMapping_ForCourseGetAllByCulture", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OrganizationID", CompnayID), ParamBuilder.Par("opentype", OpenType), ParamBuilder.Par("openID", OpenId));
                 case 3:
-                    return ExecuteListSp<DDlList>("TrainerOpenMapping_ForCourseGetAllByCulture", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OrganizationID", CompnayID));
+                    return ExecuteListSp<DDlList>("TrainerOpenMapping_ForCourseGetAllByCulture", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OrganizationID", CompnayID), ParamBuilder.Par("opentype", OpenType), ParamBuilder.Par("openID", OpenId));
 
                 default:
                     return ExecuteListSp<DDlList>("TrainerOpenMapping_ByOpenIdAndTypeAndCulture", ParamBuilder.Par("culture", culture), ParamBuilder.Par("OpenId", OpenId), ParamBuilder.Par("OpenType", OpenType), ParamBuilder.Par("OrganizationID", CompnayID));

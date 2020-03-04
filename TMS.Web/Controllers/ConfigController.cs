@@ -249,7 +249,7 @@ namespace TMS.Web.Controllers
                 if (_objVenues.IsCommon == null)
                     _objVenues.IsCommon = false;
                 if (_objVenues.CountryID == null)
-                    _objVenues.CountryID = 145;
+                    _objVenues.CountryID = 134;
                 if (_objVenues.StateID == null)
                     _objVenues.StateID = 0;
                 _objVenues.CreatedBy = CurrentUser.NameIdentifierInt64;

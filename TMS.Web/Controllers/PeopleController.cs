@@ -230,7 +230,29 @@ namespace TMS.Web.Controllers
                 return Json(true, JsonRequestBehavior.AllowGet);
             }
         }
-
+        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
+        [DontWrapResult]
+        public JsonResult IsUserWithThisPhoneNumber_Available(string ContactNumber, string initialContactNumber)
+        {
+            if (string.IsNullOrEmpty(ContactNumber))
+            {
+                return Json("Enter Contact Number please!", JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                if (ContactNumber == initialContactNumber)
+                {
+                    return Json(true, JsonRequestBehavior.AllowGet);
+                }
+                if (this._UserBAL.LoginUsers_DuplicationCheckBAL(new LoginUsers { Email = ContactNumber, CompanyID = CurrentUser.CompanyID }) > 0)
+                {
+                    return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
+                }
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+        }
+        
 
 
         [ClaimsAuthorizeAttribute("CanAddEditPerson")]
@@ -243,39 +265,60 @@ namespace TMS.Web.Controllers
                 bool _valid = false;
                 var json = new JavaScriptSerializer().Serialize(_person);
                 _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.Insert_Success.ToString(), System.Environment.MachineName, "User tried to insert Person " + DateTime.UtcNow, "", 0, "People", "Person_Create", json.ToString(), CurrentUser.CompanyID);
-
-                if (_UserBAL.LoginPerson_DuplicationCheckBAL(new Person { Email = _person.Email, CreatedBy = CurrentUser.CompanyID }) > 0)
+                if (_UserBAL.LoginPerson_DuplicationPhoneNumberCheckBAL(new Person { ContactNumber = _person.ContactNumber, CreatedBy = CurrentUser.CompanyID }) > 0)
+                {
+                    ModelState.AddModelError(lr.DubliocationHappen, lr.PersonContactPhoneDuplicationCheck);
+                     //return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
+                }
+                else if (_UserBAL.LoginPerson_DuplicationCheckBAL(new Person { Email = _person.Email, CreatedBy = CurrentUser.CompanyID }) > 0)
                 {
                     ModelState.AddModelError(lr.DubliocationHappen, lr.PersonContactEmailDuplicationCheck);
                     // return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-
-                    if (_person.Email != null)//when Email is Provided
+                    if(_person.Email!=null)
                     {
-                        _valid = true;
+                            if (this._UserBAL.LoginUsers_DuplicationCheckBAL(new LoginUsers { Email = _person.Email, CompanyID = CurrentUser.CompanyID }) > 0)
+                            {
+                                ModelState.AddModelError(lr.DubliocationHappen, lr.UserEmailAlreadyExist);
+                            //return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
+                            _valid = false;
+                        }
+                            else
+                        {
+                            _valid = true;
+                        }
+                            //return Json(true, JsonRequestBehavior.AllowGet);
+                        
+                    }
+
+                    if (_person.Email == null&& _person.IsLogin == true && _person.Password != null && RoleID==2)//when Email is Provided
+                    {
+                        ModelState.AddModelError(lr.PersonEmailorPhoneRequired, lr.PersonEmailorPhoneRequired);
+
+                        _valid = false;
                     }
                     else if (_person.ContactNumber != null)//when Contact number is provided
                     {
                         if (_person.CountryCode == 0)//when country code is  provided
                         {
-                            ModelState.AddModelError(lr.PersonPhoneCountryCode, lr.PersonPhoneNumberProvideCountryocde);
+                            _person.CountryCode = 134;
+                            _valid = true;
+                            //ModelState.AddModelError(lr.PersonPhoneCountryCode, lr.PersonPhoneNumberProvideCountryocde);
                         }
                         else
                         {
                             _valid = true;
                         }
                     }
-
-
-
                     else
                     {
-                        ModelState.AddModelError(lr.PersonContactEmail, lr.PersonEmailorPhoneRequired);
+                        _valid = true;
+                        //ModelState.AddModelError(lr.PersonContactEmail, lr.PersonEmailorPhoneRequired);
                     }
 
-                    if (_person.IsLogin == true && _person.Password != null)
+                    if (_person.Email != null&&_person.IsLogin == true && _person.Password != null)
                     {
                        
                         if (_UserBAL.LoginUsersAsTrainer_DuplicationCheckBAL(new LoginUsers { Email = _person.Email, CompanyID = CurrentUser.CompanyID }) > 0)
@@ -378,7 +421,7 @@ namespace TMS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         [DontWrapResult]
         //[DisableValidation]
-        public ActionResult Person_Update([DataSourceRequest] DataSourceRequest request, Person _person, string filename, long aid)
+        public ActionResult Person_Update([DataSourceRequest] DataSourceRequest request, Person _person, string filename, long aid, long RoleID)
         {
             _person.UpdatedBy = CurrentUser.NameIdentifierInt64;
             _person.UpdatedDate = DateTime.Now;
@@ -392,27 +435,41 @@ namespace TMS.Web.Controllers
                 ModelState.AddModelError(lr.PersonContactEmailDuplicationCheck, lr.PersonContactEmailDuplicationCheck);
                 // return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
             }
+            else if (_UserBAL.LoginPerson_DuplicationPhoneNumberUpdateCheckBAL(new Person { ContactNumber = _person.ContactNumber, CreatedBy = CurrentUser.CompanyID ,ID=_person.ID}) > 0)
+            {
+                ModelState.AddModelError(lr.DubliocationHappen, lr.PersonContactPhoneDuplicationCheck);
+                //return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
+            }
             else
             {
-                if (_person.Email != null)//when Email is Provided
+                if (_person.Email != null &&_person.EmailID<0)
                 {
-                    _valid = true;
-                }
-                else if (_person.ContactNumber != null)//when Contact number is provided
-                {
-                    if (_person.CountryCode == 0)//when country code is  provided
+                    if (this._UserBAL.LoginUsers_DuplicationCheckBAL(new LoginUsers { Email = _person.Email, CompanyID = CurrentUser.CompanyID }) > 0)
                     {
-                        ModelState.AddModelError(lr.PersonPhoneCountryCode, lr.PersonPhoneNumberProvideCountryocde);
+                        ModelState.AddModelError(lr.DubliocationHappen, lr.UserEmailAlreadyExist);
+                        //return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
+                        _valid = false;
                     }
                     else
                     {
                         _valid = true;
                     }
+                    //return Json(true, JsonRequestBehavior.AllowGet);
+
                 }
+
+                if (_person.Email == null && _person.IsLogin == true && _person.Password != null && RoleID == 2)//when Email is Provided
+                {
+                    ModelState.AddModelError(lr.PersonEmailorPhoneRequired, lr.PersonEmailorPhoneRequired);
+
+                    _valid = false;
+                }
+                
                 else
                 {
-                    ModelState.AddModelError(lr.PersonContactEmail, lr.PersonEmailorPhoneRequired);
-                }
+                    _valid = true;
+                    //ModelState.AddModelError(lr.PersonContactEmail, lr.PersonEmailorPhoneRequired);
+                }                
                 if (_valid)
                 {
                     if (_person.DateOfBirth == null)
@@ -508,7 +565,7 @@ namespace TMS.Web.Controllers
                                 _person.EmailID = _objPersonContactBAL.PersonEmailAddress_CreateBAL(_objEmailAddresses, _person.ID);
                             }
                         }
-                        if(_person.RoleName=="Trainer")
+                        if(_person.RoleName=="Trainer" && _person.Email !=null)
                         { 
                         if(_person.UserID>0)
                         {
@@ -921,8 +978,12 @@ namespace TMS.Web.Controllers
                 {
 
                     var person = _PersonBAL.Person_GetAllByIdBAL(Convert.ToString(_objPersonRoles.PersonID));
+                    if(person.Email==null)
+                    {
+                        ModelState.AddModelError(lr.EmailInValid, lr.UserEmailRequired);
 
-                    if (_UserBAL.LoginUsersAsTrainer_DuplicationCheckBAL(new LoginUsers { Email = person.Email,CompanyID=CurrentUser.CompanyID }) > 0)
+                    }
+                    else if (_UserBAL.LoginUsersAsTrainer_DuplicationCheckBAL(new LoginUsers { Email = person.Email,CompanyID=CurrentUser.CompanyID }) > 0)
                     {
                         ModelState.AddModelError(lr.UsersTitle, lr.UserEmailAlreadyExist);
                         if (_PersonBAL.TMS_PersonRolesMapping_DuplicationCheckBAL(_objPersonRoles) > 0)

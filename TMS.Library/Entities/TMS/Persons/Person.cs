@@ -487,11 +487,11 @@ namespace TMS.Library.TMS.Persons
         }
         public string ClientStatusValue
         {
-            get;set;
-            //get
-            //{
-            //    return clientstatus != null ? Fd.GetDisplayName(clientstatus) : "NotSpecified";
-            //}
+           // get;set;
+            get
+            {
+                return clientstatus != null ? Fd.GetDisplayName(clientstatus) : "NotSpecified";
+            }
         }
         //public string personTypeValue
         //{
@@ -522,9 +522,10 @@ namespace TMS.Library.TMS.Persons
         /// <value>The contact number.</value>
         [Display(Name = "PersonPhoneNumber", ResourceType = typeof(lr))]
         [DataType(DataType.PhoneNumber)]
+        //[System.Web.Mvc.Remote("IsUserWithThisPhoneNumber_Available", "People", HttpMethod="Post", ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "UserEmailAlreadyExist", AdditionalFields = "initialContactNumber")]
         //[RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "PersonPhoneNumberNotValid")]
         [RegularExpression(@"^[0-9]*$", ErrorMessageResourceType = typeof(Resources.Resources), ErrorMessageResourceName = "PersonPhoneNumberNotValid")]
-
+        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "UserContactNumberRequired")]
         public string ContactNumber { get; set; }
 
         /// <summary>
@@ -552,8 +553,8 @@ namespace TMS.Library.TMS.Persons
         //                              ErrorMessageResourceName = "EmailInValid")]
 
         [Display(Name = "UserEmail", ResourceType = typeof(lr))]
-        [Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "UserEmailRequired")]
-        [Remote("IsUserWithEmail_Available", "People", ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "UserEmailAlreadyExist", AdditionalFields = "InitialEmail")]
+        //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "UserEmailRequired")]
+        //[Remote("IsUserWithEmail_Available", "People", ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "UserEmailAlreadyExist", AdditionalFields = "InitialEmail")]
         [RegularExpression("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", ErrorMessageResourceType = typeof(Resources.Resources),
                                 ErrorMessageResourceName = "EmailInValid")]
         //[Required(ErrorMessageResourceType = typeof(lr), ErrorMessageResourceName = "UserEmailRequired")]
@@ -618,6 +619,17 @@ namespace TMS.Library.TMS.Persons
 
         [Display(Name = "PersonClientType", ResourceType = typeof(lr))]
         public CRMClientType CrmClientType { get; set; }
+        /// <summary>
+        /// Gets the gender value.
+        /// </summary>
+        /// <value>The gender value.</value>
+        public string CrmClientTypeValue
+        {
+            get
+            {
+                return CrmClientType != null ? Fd.GetDisplayName(CrmClientType) : "NotSpecified";
+            }
+        }
         public string UserName { get; set; }
 
         public string ScheduleClasses { get; set; }

@@ -2261,7 +2261,15 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("PersonContactEmailDuplicationCheck", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Your entered Email Address already Exist</summary>
+        public static string PersonContactPhoneDuplicationCheck
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("PersonContactPhoneDuplicationCheck", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+
         /// <summary>Cannot add more the {0} Email Address</summary>
         public static string PersonContactEmailLimit {
                get {
@@ -6727,6 +6735,14 @@ namespace Resources {
                 return (string)resourceProvider.GetResource("OldDiscountValue", CultureInfo.CurrentUICulture.Name);
             }
         }
+        public static string UserContactNumberRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("UserContactNumberRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        
         public static string OldNetValue
         {
             get

@@ -319,7 +319,7 @@ ClientTemplate(@"<div class='gridupdated'> # if (UpdatedByAlias!=null) { #" + @"
                     @lr.GeneralAddress :
                 </label>
                 <span>
-                    #:data.Country# , #:data.State# #if (data.City!=null){ #, #:data.City#  #}# 
+                    #if (data.Country!=null){ # #:data.Country# #}#,#if (data.State!=null){ #  #:data.State# #}# #if (data.City!=null){ #, #:data.City#  #}#
                 </span>
             </p>
             <p>

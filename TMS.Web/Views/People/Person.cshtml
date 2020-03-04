@@ -73,7 +73,7 @@
         .Read(read => read.Action("Person_Read", "People", new { RoleID = Model }).Data("withSearch"))
         .Create(read => read.Action("Person_Create", "People", new { RoleID = Model }).Data("PersonProfilePictureData"))
         .Destroy(read => read.Action("Person_Destroy", "People"))
-        .Update(read => read.Action("Person_Update", "People").Data("PersonProfilePictureData"))
+        .Update(read => read.Action("Person_Update", "People", new { RoleID = Model }).Data("PersonProfilePictureData"))
         .Events(e => e.Error("GeneralErrorHandler(\"PersonGrid\")"))
         ).NoRecords(lr.GridNoRecordFoundMessage)
 )
