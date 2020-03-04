@@ -393,6 +393,14 @@ namespace TMS.Business.TMS
         {
             return _DAL.LoginPerson_DuplicationCheckDAL(objperson);
         }
+        public int LoginPerson_DuplicationPhoneNumberCheckBAL(Person objperson)
+        {
+            return _DAL.LoginPerson_DuplicationPhoneNumberCheckDAL(objperson);
+        }
+        public int LoginPerson_DuplicationPhoneNumberUpdateCheckBAL(Person objperson)
+        {
+            return _DAL.LoginPerson_DuplicationPhoneNumberUpdateCheckDAL(objperson);
+        }
         
         public int LoginPerson_DuplicationCheckUpdateBAL(Person objperson)
         {

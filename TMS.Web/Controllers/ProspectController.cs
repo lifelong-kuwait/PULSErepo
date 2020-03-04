@@ -115,27 +115,34 @@ namespace TMS.Web.Controllers
                     // return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
                     _valid = false;
                 }
+                else if (_UserBAL.LoginPerson_DuplicationPhoneNumberCheckBAL(new Person { ContactNumber = _person.ContactNumber, CreatedBy = CurrentUser.CompanyID }) > 0)
+                {
+                    ModelState.AddModelError(lr.DubliocationHappen, lr.PersonContactPhoneDuplicationCheck);
+                    //return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
+                }
                 else
                 {
-                    if (_person.Email != null)//when Email is Provided
-                    {
-                        _valid = true;
-                    }
-                    else if (_person.ContactNumber != null)//when Contact number is provided
-                    {
-                        if (_person.CountryCode == 0)//when country code is  provided
-                        {
-                            ModelState.AddModelError(lr.PersonPhoneCountryCode, lr.PersonPhoneNumberProvideCountryocde);
-                        }
-                        else
-                        {
-                            _valid = true;
-                        }
-                    }
-                    else
-                    {
-                        ModelState.AddModelError(lr.PersonContactEmail, lr.PersonEmailorPhoneRequired);
-                    }
+                    //if (_person.Email != null)//when Email is Provided
+                    //{
+                    //    _valid = true;
+                    //}
+                    //else
+                    //if (_person.ContactNumber != null)//when Contact number is provided
+                    //{
+                    //    if (_person.CountryCode == 0)//when country code is  provided
+                    //    {
+                    //        ModelState.AddModelError(lr.PersonPhoneCountryCode, lr.PersonPhoneNumberProvideCountryocde);
+                    //    }
+                    //    else
+                    //    {
+                    //        _valid = true;
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    ModelState.AddModelError(lr.PersonContactEmail, lr.PersonEmailorPhoneRequired);
+                    //}
+                    _valid = true;
                     if (_valid)
                     {
                         _person.CreatedBy = CurrentUser.NameIdentifierInt64;
@@ -208,6 +215,11 @@ namespace TMS.Web.Controllers
                 // return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
                 _valid = false;
             }
+            else if (_UserBAL.LoginPerson_DuplicationPhoneNumberUpdateCheckBAL(new Person { ContactNumber = _person.ContactNumber, CreatedBy = CurrentUser.CompanyID, ID = _person.ID }) > 0)
+            {
+                ModelState.AddModelError(lr.DubliocationHappen, lr.PersonContactPhoneDuplicationCheck);
+                //return Json(lr.UserEmailAlreadyExist, JsonRequestBehavior.AllowGet);
+            }
             else
             {
 
@@ -219,7 +231,8 @@ namespace TMS.Web.Controllers
                 {
                     if (_person.CountryCode == 0)//when country code is  provided
                     {
-                        ModelState.AddModelError(lr.PersonPhoneCountryCode, lr.PersonPhoneNumberProvideCountryocde);
+                        _person.CountryCode = 134;
+                        //ModelState.AddModelError(lr.PersonPhoneCountryCode, lr.PersonPhoneNumberProvideCountryocde);
                     }
                     else
                     {
@@ -233,6 +246,10 @@ namespace TMS.Web.Controllers
                 if (_valid)
                 {
                     _person.UpdatedBy = CurrentUser.NameIdentifierInt64;
+                    if(_person.ClientType==null)
+                    {
+                        _person.ClientType = ClientType.Not_Specified;
+                    }
                     var result = _PersonBAL.Person_UpdateBAL(_person);
                     _person.ProfilePicture = HandlePersonProfilePicture(filename, _person.ID, aid);
                     if (result != -1)
@@ -241,6 +258,10 @@ namespace TMS.Web.Controllers
                         {
                             if (_person.ContactNumber != null)
                             {
+                                if(_person.CountryCode==0)
+                                {
+                                    _person.CountryCode = 134;
+                                }
                                 if (_person.CountryCode != 0)//when country code is  provided
                                 {
                                     PhoneNumbers _objPhoneNumbers = new PhoneNumbers

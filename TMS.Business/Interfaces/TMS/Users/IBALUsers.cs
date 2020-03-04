@@ -150,6 +150,9 @@ namespace TMS.Business.Interfaces.TMS
 
         int LoginUsers_DuplicationCheckUpdateBAL(LoginUsers _objUsers);
         int LoginPerson_DuplicationCheckBAL(Person person);
+        int LoginPerson_DuplicationPhoneNumberCheckBAL(Person person);
+        int LoginPerson_DuplicationPhoneNumberUpdateCheckBAL(Person person);
+        
         int LoginPerson_DuplicationCheckUpdateBAL(Person person);
         /// <summary>
         /// Logins the users update profile image bal.

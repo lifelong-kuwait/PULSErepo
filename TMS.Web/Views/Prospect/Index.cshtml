@@ -12,11 +12,12 @@
 @(Html.Kendo().Grid<TMS.Library.TMS.Persons.Person>()
     .Name("PersonGrid")
     .Columns(columns =>
+
     {
         columns.Bound(e => e.P_DisplayName).ClientTemplate(@"<div  class='person-box'>
                 <div class='person'>
                    " +
-                    @" <h2>#:P_DisplayName#</h2>" + @" <h5>"+clientStatus+": #:CrmClientType#</h5>"
+                    @" <h2>#:P_DisplayName#</h2>" + @" <h5>"+clientStatus+ ": #:CrmClientTypeValue#</h5>"
                     + @" <h5>Assigned To: #:UserName#</h5>" +
                     @"# if (Email!=null) { #" +
                     @"<p>" + personEmail + @"::#:Email#</p> #} if(ContactNumber!=null){#<h5>" + phonenubner + @"::#:ContactNumber#</h5> #}#

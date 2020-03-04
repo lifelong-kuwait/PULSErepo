@@ -2911,3 +2911,211 @@ INFO  2020-02-28 08:24:26,260 42178ms DESKTOP-LSN82VI        Login              
 INFO  2020-02-28 08:24:26,752 42670ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/28/2020 5:24:26 AM
 INFO  2020-02-28 08:24:37,855 53773ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/28/2020 5:24:37 AM
 INFO  2020-02-28 08:24:38,582 54501ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/28/2020 5:24:38 AM
+INFO  2020-02-29 10:09:23,949 28054ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/29/2020 7:09:23 AM
+INFO  2020-02-29 10:09:24,379 28484ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/29/2020 7:09:24 AM
+INFO  2020-02-29 10:09:34,971 39076ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/29/2020 7:09:34 AM
+INFO  2020-02-29 10:09:35,523 39628ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/29/2020 7:09:35 AM
+ERROR 2020-02-29 12:01:55,106 6779211ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'pT' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult Index(Int64)' in 'TMS.Web.Controllers.TrainerController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-02-29 12:02:04,106 6788211ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'pT' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult Index(Int64)' in 'TMS.Web.Controllers.TrainerController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-02-29 12:15:27,044 7591149ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'pT' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult Index(Int64)' in 'TMS.Web.Controllers.TrainerController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+INFO  2020-02-29 12:29:52,223 439234ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/29/2020 9:29:52 AM
+INFO  2020-02-29 12:29:52,742 439753ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/29/2020 9:29:52 AM
+INFO  2020-02-29 12:30:06,886 453897ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/29/2020 9:30:06 AM
+INFO  2020-02-29 12:30:07,551 454562ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/29/2020 9:30:07 AM
+ERROR 2020-02-29 12:34:04,819 691830ms DESKTOP-LSN82VI        OnException        - Cannot insert the value NULL into column 'Email', table 'PULSE_With_Invoicein.dbo.Users'; column does not allow nulls. INSERT fails.
+Cannot insert the value NULL into column 'UserID', table 'PULSE_With_Invoicein.dbo.Users_TMS_GroupsMapping'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+The statement has been terminated.
+ERROR 2020-02-29 12:37:01,938 868949ms DESKTOP-LSN82VI        OnException        - Cannot insert the value NULL into column 'Email', table 'PULSE_With_Invoicein.dbo.Users'; column does not allow nulls. INSERT fails.
+Cannot insert the value NULL into column 'UserID', table 'PULSE_With_Invoicein.dbo.Users_TMS_GroupsMapping'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+The statement has been terminated.
+INFO  2020-02-29 12:54:52,034 91297ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/29/2020 9:54:52 AM
+INFO  2020-02-29 12:54:52,438 91701ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/29/2020 9:54:52 AM
+INFO  2020-02-29 12:55:02,191 101454ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/29/2020 9:55:02 AM
+INFO  2020-02-29 12:55:02,806 102069ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/29/2020 9:55:02 AM
+INFO  2020-02-29 15:17:15,482 71614ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/29/2020 12:17:15 PM
+INFO  2020-02-29 15:17:15,891 72023ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/29/2020 12:17:15 PM
+INFO  2020-02-29 15:17:19,630 75762ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 2/29/2020 12:17:19 PM
+INFO  2020-02-29 15:17:20,296 76427ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 2/29/2020 12:17:20 PM
+INFO  2020-03-01 09:53:49,118 66991ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/1/2020 6:53:49 AM
+INFO  2020-03-01 09:53:49,540 67413ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/1/2020 6:53:49 AM
+INFO  2020-03-01 09:53:49,995 67867ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/1/2020 6:53:49 AM
+INFO  2020-03-01 09:53:50,382 68254ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/1/2020 6:53:50 AM
+INFO  2020-03-01 10:21:06,416 28962ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/1/2020 7:21:06 AM
+INFO  2020-03-01 10:21:06,829 29375ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/1/2020 7:21:06 AM
+INFO  2020-03-01 10:21:16,377 38923ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/1/2020 7:21:16 AM
+INFO  2020-03-01 10:21:17,138 39684ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/1/2020 7:21:17 AM
+INFO  2020-03-01 10:39:28,401 23540ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/1/2020 7:39:28 AM
+INFO  2020-03-01 10:39:28,802 23941ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/1/2020 7:39:28 AM
+INFO  2020-03-01 10:39:38,569 33708ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/1/2020 7:39:38 AM
+INFO  2020-03-01 10:39:39,224 34363ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/1/2020 7:39:39 AM
+INFO  2020-03-01 10:50:04,916 22274ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/1/2020 7:50:04 AM
+INFO  2020-03-01 10:50:05,329 22687ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/1/2020 7:50:05 AM
+INFO  2020-03-01 10:50:16,595 33952ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/1/2020 7:50:16 AM
+INFO  2020-03-01 10:50:17,015 34372ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/1/2020 7:50:17 AM
+INFO  2020-03-01 11:21:29,620 26833ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/1/2020 8:21:29 AM
+INFO  2020-03-01 11:21:30,040 27253ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/1/2020 8:21:30 AM
+INFO  2020-03-01 11:21:39,652 36865ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/1/2020 8:21:39 AM
+INFO  2020-03-01 11:21:40,346 37559ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/1/2020 8:21:40 AM
+INFO  2020-03-01 11:37:03,591 36253ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/1/2020 8:37:03 AM
+INFO  2020-03-01 11:37:04,698 37360ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/1/2020 8:37:04 AM
+INFO  2020-03-01 11:37:14,637 47298ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/1/2020 8:37:14 AM
+INFO  2020-03-01 11:37:51,352 84013ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/1/2020 8:37:51 AM
+INFO  2020-03-01 11:37:51,784 84446ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/1/2020 8:37:51 AM
+INFO  2020-03-01 11:53:41,492 30636ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/1/2020 8:53:41 AM
+INFO  2020-03-01 11:53:41,897 31042ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/1/2020 8:53:41 AM
+INFO  2020-03-01 11:53:52,561 41706ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/1/2020 8:53:52 AM
+INFO  2020-03-01 11:53:53,016 42161ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/1/2020 8:53:53 AM
+INFO  2020-03-01 12:32:22,090 28429ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/1/2020 9:32:22 AM
+INFO  2020-03-01 12:32:22,497 28836ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/1/2020 9:32:22 AM
+INFO  2020-03-01 12:32:32,589 38928ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/1/2020 9:32:32 AM
+INFO  2020-03-01 12:32:33,216 39555ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/1/2020 9:32:33 AM
+INFO  2020-03-01 12:46:52,337 31442ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/1/2020 9:46:52 AM
+INFO  2020-03-01 12:46:52,738 31843ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/1/2020 9:46:52 AM
+INFO  2020-03-01 12:51:33,599 23061ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/1/2020 9:51:33 AM
+INFO  2020-03-01 12:51:34,005 23467ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/1/2020 9:51:34 AM
+INFO  2020-03-01 14:20:39,785 27019ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/1/2020 11:20:39 AM
+INFO  2020-03-01 14:20:40,212 27445ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/1/2020 11:20:40 AM
+INFO  2020-03-01 14:20:50,370 37603ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/1/2020 11:20:50 AM
+INFO  2020-03-01 14:20:50,965 38198ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/1/2020 11:20:50 AM
+INFO  2020-03-04 08:42:51,003 51183ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 3/4/2020 5:42:51 AM
+INFO  2020-03-04 08:42:51,462 51641ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 3/4/2020 5:42:51 AM
+INFO  2020-03-04 08:43:04,909 65089ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 3/4/2020 5:43:04 AM
+INFO  2020-03-04 08:43:05,572 65752ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 3/4/2020 5:43:05 AM
+INFO  2020-03-04 08:44:15,249 135429ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/4/2020 5:44:15 AM
+INFO  2020-03-04 08:44:15,626 135806ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/4/2020 5:44:15 AM
+INFO  2020-03-04 08:46:01,158 241338ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 3/4/2020 5:46:01 AM
+INFO  2020-03-04 08:46:01,541 241721ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 3/4/2020 5:46:01 AM
+INFO  2020-03-04 08:46:02,102 242282ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 3/4/2020 5:46:02 AM
+INFO  2020-03-04 08:46:02,534 242714ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 3/4/2020 5:46:02 AM
+INFO  2020-03-04 08:47:01,536 301716ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/4/2020 5:47:01 AM
+INFO  2020-03-04 08:47:01,906 302085ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/4/2020 5:47:01 AM
+INFO  2020-03-04 08:47:02,487 302667ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/4/2020 5:47:02 AM
+INFO  2020-03-04 08:47:02,902 303082ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/4/2020 5:47:02 AM
+INFO  2020-03-04 08:47:31,742 331922ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 3/4/2020 5:47:31 AM
+INFO  2020-03-04 08:47:32,112 332291ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 3/4/2020 5:47:32 AM
+INFO  2020-03-04 08:47:32,692 332872ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 3/4/2020 5:47:32 AM
+INFO  2020-03-04 08:47:33,100 333280ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 3/4/2020 5:47:33 AM
+INFO  2020-03-04 08:48:37,917 398097ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/4/2020 5:48:37 AM
+INFO  2020-03-04 08:48:38,281 398461ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/4/2020 5:48:38 AM
+INFO  2020-03-04 08:49:13,480 433660ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 3/4/2020 5:49:13 AM
+INFO  2020-03-04 08:49:14,430 434610ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 3/4/2020 5:49:14 AM
+INFO  2020-03-04 08:51:08,161 548341ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 3/4/2020 5:51:08 AM
+INFO  2020-03-04 08:51:08,525 548705ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 3/4/2020 5:51:08 AM
+INFO  2020-03-04 08:52:03,364 603544ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/4/2020 5:52:03 AM
+INFO  2020-03-04 08:52:03,736 603916ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/4/2020 5:52:03 AM
+INFO  2020-03-04 08:52:04,325 604504ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/4/2020 5:52:04 AM
+INFO  2020-03-04 08:52:04,769 604949ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/4/2020 5:52:04 AM
+ERROR 2020-03-04 09:17:18,100 2118279ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:18:58,866 2219046ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:18:59,840 2220020ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:19:02,647 2222827ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:19:03,271 2223451ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:19:03,488 2223668ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:19:03,872 2224052ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:19:28,824 2249004ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:19:30,098 2250278ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:19:30,281 2250461ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:19:30,448 2250628ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:19:30,616 2250796ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:19:30,784 2250964ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:19:30,950 2251129ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:19:32,544 2252724ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:19:32,766 2252945ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:19:52,040 2272220ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:19:52,255 2272435ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:20:06,138 2286318ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:20:07,080 2287260ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:20:07,290 2287470ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:20:08,954 2289133ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:20:09,497 2289676ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:20:09,685 2289864ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:20:09,855 2290035ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:20:10,040 2290220ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:20:12,785 2292965ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:20:12,991 2293171ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:20:13,178 2293357ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-04 09:20:13,360 2293540ms DESKTOP-LSN82VI        OnException        - The parameters dictionary contains a null entry for parameter 'courseId' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult LanguageDDL(Int64)' in 'TMS.Web.Controllers.DDLController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+INFO  2020-03-04 09:57:47,598 4547778ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 3/4/2020 6:57:47 AM
+INFO  2020-03-04 09:57:47,962 4548142ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 3/4/2020 6:57:47 AM
+INFO  2020-03-04 09:57:49,059 4549239ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 3/4/2020 6:57:49 AM
+INFO  2020-03-04 09:57:49,477 4549657ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 3/4/2020 6:57:49 AM
+INFO  2020-03-04 10:03:32,538 4892718ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/4/2020 7:03:32 AM
+INFO  2020-03-04 10:03:32,911 4893091ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/4/2020 7:03:32 AM
+INFO  2020-03-04 10:03:33,524 4893704ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/4/2020 7:03:33 AM
+INFO  2020-03-04 10:03:33,925 4894105ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/4/2020 7:03:33 AM
+INFO  2020-03-04 10:39:44,472 105424ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/4/2020 7:39:44 AM
+INFO  2020-03-04 10:39:44,874 105826ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/4/2020 7:39:44 AM
+INFO  2020-03-04 10:39:55,938 116890ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/4/2020 7:39:55 AM
+INFO  2020-03-04 10:39:56,604 117556ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/4/2020 7:39:56 AM
+INFO  2020-03-04 10:49:07,253 288652ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/4/2020 7:49:07 AM
+INFO  2020-03-04 10:49:07,640 289040ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/4/2020 7:49:07 AM
+INFO  2020-03-04 10:49:17,490 298889ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/4/2020 7:49:17 AM
+INFO  2020-03-04 10:49:18,228 299627ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/4/2020 7:49:18 AM
+ERROR 2020-03-04 11:20:20,837 107115ms DESKTOP-LSN82VI        OnException        - Login failed for user 'localuser'.  Reason: The password of the account has expired.
+INFO  2020-03-04 11:22:36,799 101926ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/4/2020 8:22:36 AM
+INFO  2020-03-04 11:22:37,192 102319ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/4/2020 8:22:37 AM
+INFO  2020-03-04 11:22:49,417 114544ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/4/2020 8:22:49 AM
+INFO  2020-03-04 11:22:49,969 115096ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/4/2020 8:22:49 AM
+INFO  2020-03-04 11:29:43,965 529092ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 3/4/2020 8:29:43 AM
+INFO  2020-03-04 11:29:44,337 529464ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 3/4/2020 8:29:44 AM
+INFO  2020-03-04 11:29:45,940 531067ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 3/4/2020 8:29:45 AM
+INFO  2020-03-04 11:29:46,339 531466ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 3/4/2020 8:29:46 AM
+INFO  2020-03-04 11:30:36,452 581579ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/4/2020 8:30:36 AM
+INFO  2020-03-04 11:30:36,828 581955ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/4/2020 8:30:36 AM
+INFO  2020-03-04 11:30:37,427 582554ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/4/2020 8:30:37 AM
+INFO  2020-03-04 11:30:37,842 582969ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/4/2020 8:30:37 AM
+INFO  2020-03-04 11:31:00,120 605247ms DESKTOP-LSN82VI        Login              - User tried to login with email as@s.com at 3/4/2020 8:31:00 AM
+INFO  2020-03-04 11:31:00,487 605614ms DESKTOP-LSN82VI        Login              - User login with email as@s.com at 3/4/2020 8:31:00 AM
+INFO  2020-03-04 11:32:12,521 677648ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@Llk.com at 3/4/2020 8:32:12 AM
+INFO  2020-03-04 11:32:12,884 678011ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@Llk.com at 3/4/2020 8:32:12 AM
+INFO  2020-03-04 11:32:13,470 678597ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@Llk.com at 3/4/2020 8:32:13 AM
+INFO  2020-03-04 11:32:13,882 679009ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@Llk.com at 3/4/2020 8:32:13 AM
+INFO  2020-03-04 12:04:53,891 36034ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@Llk.com at 3/4/2020 9:04:53 AM
+INFO  2020-03-04 12:04:54,319 36462ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@Llk.com at 3/4/2020 9:04:54 AM
+INFO  2020-03-04 12:05:04,848 46991ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@Llk.com at 3/4/2020 9:05:04 AM
+INFO  2020-03-04 12:05:05,711 47854ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@Llk.com at 3/4/2020 9:05:05 AM
+INFO  2020-03-04 12:46:13,154 28862ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/4/2020 9:46:13 AM
+INFO  2020-03-04 12:46:13,545 29253ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/4/2020 9:46:13 AM
+INFO  2020-03-04 12:46:23,794 39501ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/4/2020 9:46:23 AM
+INFO  2020-03-04 12:46:24,434 40142ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/4/2020 9:46:24 AM
+ERROR 2020-03-04 14:18:39,192 5574900ms DESKTOP-LSN82VI        OnException        - Cannot insert the value NULL into column 'ClientType', table 'PULSE_With_Invoicein.dbo.Person'; column does not allow nulls. UPDATE fails.
+The statement has been terminated.
+INFO  2020-03-04 14:48:37,759 35660ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/4/2020 11:48:37 AM
+INFO  2020-03-04 14:48:38,157 36058ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/4/2020 11:48:38 AM
+INFO  2020-03-04 14:48:48,402 46303ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/4/2020 11:48:48 AM
+INFO  2020-03-04 14:48:49,045 46947ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/4/2020 11:48:49 AM

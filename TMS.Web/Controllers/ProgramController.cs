@@ -188,6 +188,10 @@ namespace TMS.Web.Controllers
                 }
                 else
                 {
+                    if(_Course.FeeCurrency==null)
+                    {
+                        _Course.FeeCurrency = 3;
+                    }
                     _Course.ID = this._CourseBAL.TMS_Courses_CreateBAL(_Course);
                     string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
                     if (string.IsNullOrEmpty(ip))

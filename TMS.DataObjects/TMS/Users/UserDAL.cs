@@ -838,6 +838,21 @@ namespace TMS.DataObjects
              ParamBuilder.Par("createdBy", objperson.CreatedBy)
                   );
         }
+        public int LoginPerson_DuplicationPhoneNumberCheckDAL(Person objperson)
+        {
+            return ExecuteScalarSPInt32("TMS_Person_PhopneNumberDuplicationCheck",
+             ParamBuilder.Par("Number", objperson.ContactNumber),
+             ParamBuilder.Par("createdBy", objperson.CreatedBy)
+                  );
+        }
+        public int LoginPerson_DuplicationPhoneNumberUpdateCheckDAL(Person objperson)
+        {
+            return ExecuteScalarSPInt32("TMS_Person_PhopneNumberUpdateDuplicationCheck",
+              ParamBuilder.Par("Number", objperson.ContactNumber),
+              ParamBuilder.Par("createdBy", objperson.CreatedBy),
+              ParamBuilder.Par("PersonID", objperson.ID)
+                   );
+        }        
         public int LoginPerson_DuplicationCheckUpdateDAL(Person objperson)
         {
             return ExecuteScalarSPInt32("TMS_Person_DuplicationCheckForUpdate",
