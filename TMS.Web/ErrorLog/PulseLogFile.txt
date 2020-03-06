@@ -3119,3 +3119,15 @@ INFO  2020-03-04 14:48:37,759 35660ms DESKTOP-LSN82VI        Login              
 INFO  2020-03-04 14:48:38,157 36058ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/4/2020 11:48:38 AM
 INFO  2020-03-04 14:48:48,402 46303ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/4/2020 11:48:48 AM
 INFO  2020-03-04 14:48:49,045 46947ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/4/2020 11:48:49 AM
+INFO  2020-03-05 10:09:44,018 5359731ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/5/2020 7:09:44 AM
+INFO  2020-03-05 10:09:44,545 5360258ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/5/2020 7:09:44 AM
+INFO  2020-03-05 10:09:59,164 5374877ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/5/2020 7:09:59 AM
+INFO  2020-03-05 10:09:59,822 5375535ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/5/2020 7:09:59 AM
+ERROR 2020-03-05 12:27:18,980 13614693ms DESKTOP-LSN82VI        OnException        - Cannot insert the value NULL into column 'ID', table 'PULSE_With_Invoicein.dbo.PersonEducationTrainings'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+ERROR 2020-03-05 12:27:27,225 13622938ms DESKTOP-LSN82VI        OnException        - Cannot insert the value NULL into column 'ID', table 'PULSE_With_Invoicein.dbo.PersonEducationTrainings'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+INFO  2020-03-05 14:35:06,109 29613ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/5/2020 11:35:06 AM
+INFO  2020-03-05 14:35:06,504 30009ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/5/2020 11:35:06 AM
+INFO  2020-03-05 14:35:18,188 41693ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/5/2020 11:35:18 AM
+INFO  2020-03-05 14:35:18,858 42362ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/5/2020 11:35:18 AM
