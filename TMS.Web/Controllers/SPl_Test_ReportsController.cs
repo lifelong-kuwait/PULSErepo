@@ -31,7 +31,7 @@ namespace TMS.Web.Controllers
              this._UserBAL = objUserBAL;
         }
         // GET: SPl_Test_Reports
-        [ClaimsAuthorize("CanViewAttendance")]
+        [ClaimsAuthorize("CanViewReports")]
         [DontWrapResult]
         public ActionResult ReportViewer()
         {

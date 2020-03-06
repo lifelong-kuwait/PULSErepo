@@ -3131,3 +3131,7 @@ INFO  2020-03-05 14:35:06,109 29613ms DESKTOP-LSN82VI        Login              
 INFO  2020-03-05 14:35:06,504 30009ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/5/2020 11:35:06 AM
 INFO  2020-03-05 14:35:18,188 41693ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/5/2020 11:35:18 AM
 INFO  2020-03-05 14:35:18,858 42362ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/5/2020 11:35:18 AM
+INFO  2020-03-06 13:24:51,118 103332ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/6/2020 10:24:51 AM
+INFO  2020-03-06 13:24:51,524 103738ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/6/2020 10:24:51 AM
+INFO  2020-03-06 13:25:04,570 116783ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/6/2020 10:25:04 AM
+INFO  2020-03-06 13:25:05,045 117259ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/6/2020 10:25:05 AM
