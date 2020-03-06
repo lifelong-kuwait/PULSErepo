@@ -338,7 +338,7 @@ namespace TMS.DataObjects.TMS
                             ParamBuilder.Par("Type", _objPerson.Type),
                             ParamBuilder.Par("IsCoordinator", _objPerson.IsCoordinator),
                             ParamBuilder.Par("Rating", _objPerson.Rating),
-                            ParamBuilder.Par("ClientType", _objPerson.ClientType),
+                            ParamBuilder.Par("ClientType", _objPerson.CrmClientType),
                             ParamBuilder.Par("UpdatedBy", _objPerson.UpdatedBy),
                             ParamBuilder.Par("UpdatedDate", _objPerson.UpdatedDate),
                             ParamBuilder.Par("IsActive", true),

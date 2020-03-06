@@ -232,6 +232,7 @@ namespace TMS.Web.Controllers
                     if (_person.CountryCode == 0)//when country code is  provided
                     {
                         _person.CountryCode = 134;
+                        _valid = true;
                         //ModelState.AddModelError(lr.PersonPhoneCountryCode, lr.PersonPhoneNumberProvideCountryocde);
                     }
                     else
@@ -246,9 +247,9 @@ namespace TMS.Web.Controllers
                 if (_valid)
                 {
                     _person.UpdatedBy = CurrentUser.NameIdentifierInt64;
-                    if(_person.ClientType==null)
+                    if(_person.CrmClientType==null)
                     {
-                        _person.ClientType = ClientType.Not_Specified;
+                        _person.CrmClientType = CRMClientType.Not_Specified;
                     }
                     var result = _PersonBAL.Person_UpdateBAL(_person);
                     _person.ProfilePicture = HandlePersonProfilePicture(filename, _person.ID, aid);
