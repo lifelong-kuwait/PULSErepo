@@ -1,11 +1,13 @@
 ﻿using Abp.Web.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
+using Microsoft.AspNet.SignalR;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
+using TMS.Business.Interfaces;
 using TMS.Business.Interfaces.Common;
 using TMS.Business.Interfaces.Common.Configuration;
 using TMS.Business.Interfaces.TMS.Program;
@@ -29,9 +31,10 @@ namespace TMS.Web.Controllers
         private readonly IConfigurationBAL _objConfigurationBAL;
         private readonly IClassBAL _ClassBAL;
         private readonly IAttachmentBAL _AttachmentBAL;
-        public ConfigController(IConfigurationBAL _objIConfigurationBAL, IClassBAL _ClassIBAL, IAttachmentBAL _AttachmentBAL)
+        private readonly INotificationBAL BALNotification;
+        public ConfigController(INotificationBAL objINotificationBAL, IConfigurationBAL _objIConfigurationBAL, IClassBAL _ClassIBAL, IAttachmentBAL _AttachmentBAL)
         {
-            _objConfigurationBAL = _objIConfigurationBAL; _ClassBAL = _ClassIBAL; this._AttachmentBAL = _AttachmentBAL;
+            this.BALNotification = objINotificationBAL; _objConfigurationBAL = _objIConfigurationBAL; _ClassBAL = _ClassIBAL; this._AttachmentBAL = _AttachmentBAL;
         }
 
         #region Flags
@@ -528,7 +531,21 @@ namespace TMS.Web.Controllers
                     else
                     {
                         _objtrainer.ID = _objConfigurationBAL.ManageTrainer_CreateBAL(_objtrainer);
-                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                        Library.TMS.Notifications nof = new Library.TMS.Notifications();
+                        nof.NotificationText = "Your are added in Class as trainer";
+                        nof.Organization_ID = CurrentUser.CompanyID;
+                        nof.ToUser = Convert.ToInt64(_objtrainer.PersonID);
+                        nof.FromUser = CurrentUser.NameIdentifierInt64;
+                        nof.ActionUrl = "Program/ClassDetail?id="+_objtrainer.OpenId;
+                        nof.Event_ID = 1;
+                        nof.CreatedDate = DateTime.Now;
+                        BALNotification.create_NotificationsBAL(nof);
+                        TempData["message"] = "Added";
+                        var notificationHub = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
+                        notificationHub.Clients.All.notify("added");
+                        //re-register notification
+                        //RegisterNotification(DateTime.Now);
+                        string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
                     if (string.IsNullOrEmpty(ip))
                         ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
                     _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
@@ -565,7 +582,19 @@ namespace TMS.Web.Controllers
                     else
                     {
                         var result = _objConfigurationBAL.ManageTrainer_UpdateBAL(_objtrainer);
-                        string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                    Library.TMS.Notifications nof = new Library.TMS.Notifications();
+                    nof.NotificationText = "Your are added in Class as trainer";
+                    nof.Organization_ID = CurrentUser.CompanyID;
+                    nof.ToUser = Convert.ToInt64(_objtrainer.PersonID);
+                    nof.FromUser = CurrentUser.NameIdentifierInt64;
+                    Session["LatestNotificationTime"] = DateTime.Now;
+                    nof.ActionUrl = "Program/ClassDetail?id=" + _objtrainer.OpenId;
+                    nof.Event_ID = 1;
+                    nof.CreatedDate = DateTime.Now;
+                    BALNotification.create_NotificationsBAL(nof);
+                    var notificationHub = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
+                    notificationHub.Clients.All.notify("added");
+                    string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
                         if (string.IsNullOrEmpty(ip))
                             ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
                         _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Update, System.Web.HttpContext.Current.Request.Browser.Browser);

@@ -73,7 +73,8 @@ namespace TMS.Business.CastleWindsor
                   Component.For<IDDLDAL>().ImplementedBy<DDLDAL>().LifestyleTransient(),              
                   Component.For<IAttendanceDAL>().ImplementedBy<AttendanceDAL>().LifestyleTransient(),
                   Component.For<ILanguageDAL>().ImplementedBy<LanguageDAL>().LifestyleTransient(),
-                   Component.For<ISalesAdministrationDAL>().ImplementedBy<SalesAdministrationDAL>().LifestyleTransient()
+                   Component.For<ISalesAdministrationDAL>().ImplementedBy<SalesAdministrationDAL>().LifestyleTransient(),
+                   Component.For<INotificationsDAL>().ImplementedBy<INotificationsDAL>().LifestyleTransient()
 
                 //
                 );

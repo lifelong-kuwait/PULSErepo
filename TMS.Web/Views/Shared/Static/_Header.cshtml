@@ -31,19 +31,15 @@
 
             </li>
             <li class="">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <span class="count">4</span>
+                <a class="noti dropdown-toggle" data-toggle="dropdown" href="#">
+                    <span class="count">0</span>
                     <span class="fa fa-bell-o menu-icon"></span>
                     <span class="headmenu-label">Alerts</span>
                 </a>
-                <ul class="dropdown-menu transparent">
+                <ul class=" dropdown-menu transparent" id="notiContent">
                     <li class="nav-header">Alerts</li>
-                    <li><a href=""><span class="glyphicon glyphicon-envelope"></span> New message from <strong>Jack</strong> <small class="muted"> - 19 hours ago</small></a></li>
-                    <li><a href=""><span class="glyphicon glyphicon-envelope"></span> New message from <strong>Daniel</strong> <small class="muted"> - 2 days ago</small></a></li>
-                    <li><a href=""><span class="glyphicon glyphicon-envelope"></span> New message from <strong>Jane</strong> <small class="muted"> - 3 days ago</small></a></li>
-                    <li><a href=""><span class="glyphicon glyphicon-envelope"></span> New message from <strong>Tanya</strong> <small class="muted"> - 1 week ago</small></a></li>
-                    <li><a href=""><span class="glyphicon glyphicon-envelope"></span> New message from <strong>Lee</strong> <small class="muted"> - 1 week ago</small></a></li>
-                    <li class="viewmore"><a href="messages.html">View More Messages</a></li>
+                   
+                    <li class="viewmore"><a target="_blank" href="../Notification/Index">View More Messages</a></li>
                 </ul>
             </li>
 
@@ -97,9 +93,9 @@
                             <li><a href="@Url.Content("~/SPl_Test_Reports/Class_Current_Report")"><span class="fa fa-bar-chart"></span> <strong>Class Schedule List Current</strong> </a></li>
                         }
                         @*if (User.IsInRole("CanViewVenueDetailyUtilizationReport"))
-                        {
-                            <li><a href="@Url.Content("~/SPl_Test_Reports/VenueDetailUtilizationReport")"><span class="fa fa-bar-chart"></span> <strong>Venue Detail Utilization Report</strong> </a></li>
-                        }*@
+                            {
+                                <li><a href="@Url.Content("~/SPl_Test_Reports/VenueDetailUtilizationReport")"><span class="fa fa-bar-chart"></span> <strong>Venue Detail Utilization Report</strong> </a></li>
+                            }*@
                         if (User.IsInRole("CanViewVenueWeeklyUtilizationReport"))
                         {
                             <li><a href="@Url.Content("~/SPl_Test_Reports/WeeklyUtilizationReportModified")"><span class="fa fa-bar-chart"></span> <strong>Venue Utilization By Dates Report</strong> </a></li>
@@ -120,43 +116,43 @@
                         {
                             <li><a href="@Url.Content("~/SPl_Test_Reports/Schedules")"><span class="fa fa-bar-chart"></span> <strong>Schedule</strong> </a></li>
                         }
-                            @*< li >< a href = "@Url.Content("~/ Program / VenueMatrixReport")" >< span class="fa fa-bar-chart"></span> <strong>Venue Matrix Report</strong> </a></li>
+                        @*< li >< a href = "@Url.Content("~/ Program / VenueMatrixReport")" >< span class="fa fa-bar-chart"></span> <strong>Venue Matrix Report</strong> </a></li>
 
-                 <li><a href = "@Url.Content("~/Program/TrainerDetailReport")"><span class="fa fa-bar-chart"></span> <strong>Trainer Detail Report</strong> </a></li>
-                <li><a href = "@Url.Content("~/Program/TraineeDetailReport")"><span class="fa fa-bar-chart"></span> <strong>Trainee Detail Report</strong></a></li>
-                 <li><a href = "@Url.Content("~/Program/ClassDetailReport")"><span class="fa fa-bar-chart"></span> <strong>Class Detail Report</strong></a></li>
-                 <li><a href = "@Url.Content("~/Program/CourseAttendanceReport")"><span class="fa fa-bar-chart"></span> <strong>Course Attendance Report</strong> </a></li>
-                 <li><a href = "@Url.Content("~/Program/VenueDetailReport")"><span class="fa fa-bar-chart"></span> <strong>Venue Detail Report</strong> </a></li>
-                 <li><a href = "@Url.Content("~/Program/OccupancyVenueReport")"><span class="fa fa-bar-chart"></span> <strong>Occupancy Venue Report</strong> </a></li>
-                 <li><a href = "@Url.Content("~/Program/Attendance")"><span class="fa fa-bar-chart"></span> <strong>Weekly Attendance Report</strong> </a></li>
-                 <li><a href = "@Url.Content("~/Program/ClassReportFuture")"><span class="fa fa-bar-chart"></span> <strong>Class Schedule List Future</strong> </a></li>
-                 <li><a href = "@Url.Content("~/Program/ClassSchedule")"><span class="fa fa-bar-chart"></span> <strong>Class Schedule List Current</strong> </a></li>
-                 <li><a href = "@Url.Content("~/Program/VenueDetailUtilizationReport")"><span class="fa fa-bar-chart"></span> <strong>Venue Detail Utilization Report</strong> </a></li>
-                 <li><a href = "@Url.Content("~/Program/WeeklySummeryReport")"><span class="fa fa-bar-chart"></span> <strong>Weekly Utilization Report</strong> </a></li>
-                 <li><a href = "@Url.Content("~/Program/VenueDailyUtilizationReport")"><span class="fa fa-bar-chart"></span> <strong>Venue Daily Utilization Report</strong> </a></li>
-                 <li><a href = "@Url.Content("~/Program/TraineePeriodicReport")"><span class="fa fa-bar-chart"></span> <strong>Trainee Periodic Report</strong> </a></li>
-                 <li><a href = "@Url.Content("~/Program/CoursePeriodicReport")"><span class="fa fa-bar-chart"></span> <strong>Course Periodic Report</strong> </a></li>
-                 <li><a href = "@Url.Content("~/Program/Schedules")"><span class="fa fa-bar-chart"></span> <strong>Schedule</strong> </a></li>*@
-                        }
-
-
-                        @*<li><a href="@Url.Content("~/Task/Index")"><span class="fa fa-calendar"></span>  <strong>Task</strong> <label class="muted"> - TMS Page</label></a></li>
-            <li><a href="@Url.Content("~/Prospect/Index")"><span class="fa fa-th-list"></span> <strong>Prospect</strong> <label class="muted"> - TMS Page(Working...)</label></a></li>
-            <li><a href="@Url.Content("~/Task/ThirdReporting")"><span class="fa fa-bar-chart"></span> <strong>Sample Report 001</strong> <label class="muted"> - Sample Report</label></a></li>
-            <li><a href="@Url.Content("~/Task/TraineeDetailReport")"><span class="fa fa-bar-chart"></span> <strong>Trainee Detail Report</strong> <label class="muted"> - TMS Report</label></a></li>
-            <li><a href="@Url.Content("~/Task/ClassDetailReport")"><span class="fa fa-bar-chart"></span> <strong>Class Detail Report</strong> <label class="muted"> - TMS Report</label></a></li>
-            <li><a href="@Url.Content("~/Task/TrainerDetailReport")"><span class="fa fa-bar-chart"></span> <strong>Trainer Detail Report</strong> <label class="muted"> - TMS Report</label></a></li>
-            <li><a href="@Url.Content("~/Views/Shared/Static/TrainerDetailReport.aspx")"><span class="fa fa-bar-chart"></span> <strong>Trainer Detail Report</strong> <label class="muted"> - TMS Report</label></a></li>
+                             <li><a href = "@Url.Content("~/Program/TrainerDetailReport")"><span class="fa fa-bar-chart"></span> <strong>Trainer Detail Report</strong> </a></li>
+                            <li><a href = "@Url.Content("~/Program/TraineeDetailReport")"><span class="fa fa-bar-chart"></span> <strong>Trainee Detail Report</strong></a></li>
+                             <li><a href = "@Url.Content("~/Program/ClassDetailReport")"><span class="fa fa-bar-chart"></span> <strong>Class Detail Report</strong></a></li>
+                             <li><a href = "@Url.Content("~/Program/CourseAttendanceReport")"><span class="fa fa-bar-chart"></span> <strong>Course Attendance Report</strong> </a></li>
+                             <li><a href = "@Url.Content("~/Program/VenueDetailReport")"><span class="fa fa-bar-chart"></span> <strong>Venue Detail Report</strong> </a></li>
+                             <li><a href = "@Url.Content("~/Program/OccupancyVenueReport")"><span class="fa fa-bar-chart"></span> <strong>Occupancy Venue Report</strong> </a></li>
+                             <li><a href = "@Url.Content("~/Program/Attendance")"><span class="fa fa-bar-chart"></span> <strong>Weekly Attendance Report</strong> </a></li>
+                             <li><a href = "@Url.Content("~/Program/ClassReportFuture")"><span class="fa fa-bar-chart"></span> <strong>Class Schedule List Future</strong> </a></li>
+                             <li><a href = "@Url.Content("~/Program/ClassSchedule")"><span class="fa fa-bar-chart"></span> <strong>Class Schedule List Current</strong> </a></li>
+                             <li><a href = "@Url.Content("~/Program/VenueDetailUtilizationReport")"><span class="fa fa-bar-chart"></span> <strong>Venue Detail Utilization Report</strong> </a></li>
+                             <li><a href = "@Url.Content("~/Program/WeeklySummeryReport")"><span class="fa fa-bar-chart"></span> <strong>Weekly Utilization Report</strong> </a></li>
+                             <li><a href = "@Url.Content("~/Program/VenueDailyUtilizationReport")"><span class="fa fa-bar-chart"></span> <strong>Venue Daily Utilization Report</strong> </a></li>
+                             <li><a href = "@Url.Content("~/Program/TraineePeriodicReport")"><span class="fa fa-bar-chart"></span> <strong>Trainee Periodic Report</strong> </a></li>
+                             <li><a href = "@Url.Content("~/Program/CoursePeriodicReport")"><span class="fa fa-bar-chart"></span> <strong>Course Periodic Report</strong> </a></li>
+                             <li><a href = "@Url.Content("~/Program/Schedules")"><span class="fa fa-bar-chart"></span> <strong>Schedule</strong> </a></li>*@
+                    }
 
 
-             <li><a href="@Url.Content("~/Task/SampleTrainarDetailReport")"><span class="fa fa-bar-chart"></span> <strong>Sample Trainer Detail Report</strong> <label class="muted"> - TMS Report(Working...)</label></a></li>
-            <li><a href="@Url.Content("~/Task/InvoiceReport")"><span class="fa fa-bar-chart"></span> <strong>Invoice Report</strong> <label class="muted"> - Sample Report</label></a></li>
-            <li><a href="@Url.Content("~/Task/SalesOrderDetailReport")"><span class="fa fa-bar-chart"></span> <strong>Sales Order Report</strong> <label class="muted"> - Sample Report</label></a></li>
-            <li><a href="@Url.Content("~/Task/ReportCatalog")"><span class="fa fa-bar-chart"></span> <strong>Report Catalog</strong> <label class="muted"> - Sample Report</label></a></li>
-            <li><a href="@Url.Content("~/Task/EmployeeSalesSummaryReport")"><span class="fa fa-bar-chart"></span> <strong>Employee Sales Summary Report</strong> <label class="muted"> - Sample Report</label></a></li>
-            <li><a href="@Url.Content("~/Task/ListBoundReport")"><span class="fa fa-bar-chart"></span> <strong>List Bound Report</strong> <label class="muted"> - Sample Report</label></a></li>
-            <li><a href="~/Views/Report/Pages/TrainerDetailReport.aspx">Trainer Report</a></li>*@
-                    </ul>
+                    @*<li><a href="@Url.Content("~/Task/Index")"><span class="fa fa-calendar"></span>  <strong>Task</strong> <label class="muted"> - TMS Page</label></a></li>
+                        <li><a href="@Url.Content("~/Prospect/Index")"><span class="fa fa-th-list"></span> <strong>Prospect</strong> <label class="muted"> - TMS Page(Working...)</label></a></li>
+                        <li><a href="@Url.Content("~/Task/ThirdReporting")"><span class="fa fa-bar-chart"></span> <strong>Sample Report 001</strong> <label class="muted"> - Sample Report</label></a></li>
+                        <li><a href="@Url.Content("~/Task/TraineeDetailReport")"><span class="fa fa-bar-chart"></span> <strong>Trainee Detail Report</strong> <label class="muted"> - TMS Report</label></a></li>
+                        <li><a href="@Url.Content("~/Task/ClassDetailReport")"><span class="fa fa-bar-chart"></span> <strong>Class Detail Report</strong> <label class="muted"> - TMS Report</label></a></li>
+                        <li><a href="@Url.Content("~/Task/TrainerDetailReport")"><span class="fa fa-bar-chart"></span> <strong>Trainer Detail Report</strong> <label class="muted"> - TMS Report</label></a></li>
+                        <li><a href="@Url.Content("~/Views/Shared/Static/TrainerDetailReport.aspx")"><span class="fa fa-bar-chart"></span> <strong>Trainer Detail Report</strong> <label class="muted"> - TMS Report</label></a></li>
+
+
+                         <li><a href="@Url.Content("~/Task/SampleTrainarDetailReport")"><span class="fa fa-bar-chart"></span> <strong>Sample Trainer Detail Report</strong> <label class="muted"> - TMS Report(Working...)</label></a></li>
+                        <li><a href="@Url.Content("~/Task/InvoiceReport")"><span class="fa fa-bar-chart"></span> <strong>Invoice Report</strong> <label class="muted"> - Sample Report</label></a></li>
+                        <li><a href="@Url.Content("~/Task/SalesOrderDetailReport")"><span class="fa fa-bar-chart"></span> <strong>Sales Order Report</strong> <label class="muted"> - Sample Report</label></a></li>
+                        <li><a href="@Url.Content("~/Task/ReportCatalog")"><span class="fa fa-bar-chart"></span> <strong>Report Catalog</strong> <label class="muted"> - Sample Report</label></a></li>
+                        <li><a href="@Url.Content("~/Task/EmployeeSalesSummaryReport")"><span class="fa fa-bar-chart"></span> <strong>Employee Sales Summary Report</strong> <label class="muted"> - Sample Report</label></a></li>
+                        <li><a href="@Url.Content("~/Task/ListBoundReport")"><span class="fa fa-bar-chart"></span> <strong>List Bound Report</strong> <label class="muted"> - Sample Report</label></a></li>
+                        <li><a href="~/Views/Report/Pages/TrainerDetailReport.aspx">Trainer Report</a></li>*@
+                </ul>
 
             </li>
 
@@ -182,4 +178,128 @@
         </ul>
     </div>
 </div>
+<script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+<script src="/signalr/hubs"></script>
 @Html.Partial("Static/_HeaderOutlookMenu")
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery(document).ready(function () {
+            updateNotificationCount();
+        });
+        // Click on notification icon for show notification
+        jQuery('.noti').click(function (e) {
+            //debugger;
+            //e.stopPropagation();
+            
+            jQuery('.count').hide();
+            jQuery('.noti-content').show();
+            var count = 0;
+            count = parseInt(jQuery('span.count').html()) || 0;
+            // only load notification if not already loaded
+            
+            //if (count > 0) {
+                updateNotification();
+            //}
+            jQuery('span.count', this).html('&nbsp;');
+        })
+        // hide notifications
+       
+        jQuery('html').click(function () {
+            jQuery('.noti-content').hide();
+        })
+        // update notification
+        function updateNotification() {
+            jQuery('#notiContent').empty();
+            jQuery('#notiContent').append(jQuery('<li>Loading...</li>'));
+            jQuery.ajax({
+                type: 'GET',
+                url: '/Notification/GetNotifications',
+                success: function (response) {
+                    ///debugger;
+                    jQuery('#notiContent').empty();
+                    if (response.length == 0) {
+                        jQuery('#notiContent').append(jQuery('<li>Currently You Have No New Notifications.</li>'));
+                    } else {
+                        var json_data = response.result.notifications;
+                        //var result = [];
+                        for (var i in json_data) {
+                            if (json_data[i].isRead) {
+                                jQuery('#notiContent').append(jQuery('<li ><a target="_blank" onclick="markAsRead(' + json_data[i].id +');" href="../' + json_data[i].actionUrl + '"><span class="glyphicon glyphicon-envelope"></span> ' + json_data[i].notificationText + ' <p hidden>' + json_data[i].id +'<p></a ></li>'));
+                            } else {
+                                jQuery('#notiContent').append(jQuery('<li ><a target="_blank" onclick="markAsRead(' + json_data[i].id +');" href="../' + json_data[i].actionUrl + '"><span class="glyphicon glyphicon-envelope"></span> <b>' + json_data[i].notificationText + '  </b><p hidden>' + json_data[i].id +'<p></a ></li>'));
+
+                            }
+                        }
+                        jQuery('#notiContent').append(jQuery(' <li class="viewmore"><a target="_blank" href="../Notification/Index">View More Messages</a></li>'));
+                       
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            })
+        }
+        // update notification count
+        
+        function updateNotificationCount() {
+            //if('@TempData["message"]' == "Added"){
+          
+            var Bcount = parseInt(jQuery('span.count').html());
+            if (Bcount === 'NaN') {
+                Bcount = 0;
+            }
+            jQuery('.count').show();
+            var count = 0;
+            jQuery.ajax({
+                type: 'GET',
+                url: '/Notification/GetNotificationsCount',
+                success: function (response) {
+                    count = parseInt(response.result.notifications);
+                    jQuery('.noti').css("color", "white");
+                    //jQuery('.count').css({ "background-color": "red", "color": "white" });
+                    jQuery('.count').html(count);
+                    if (Bcount < count) {
+                        toastr.info('New Notification');
+                    }
+                }
+            });
+           
+            
+        }
+        function ToasterMessage() {
+            jQuery.ajax({
+                type: 'GET',
+                url: '/Notification/GetLatestNotificationsResultForUser',
+                success: function (response) {
+                    if (response.result.notifications != "-1") {
+                        toastr.info(response.result.notifications);
+                    }
+                }
+            });
+        }
+        // signalr js code for start hub and send receive notification
+        var notificationHub = jQuery.connection.notificationHub;
+        jQuery.connection.hub.start().done(function () {
+        });
+        //signalr method for push server message to client
+        notificationHub.client.notify = function (message) {
+            if (message && message.toLowerCase() == "added") {
+                updateNotificationCount();
+                ToasterMessage();
+            }
+        }
+    })
+</script>
+<script>
+    function markAsRead(value) {
+        var val = value;
+            jQuery.ajax({
+                type: 'POST',
+                url: '/Notification/MarkAsRead',
+                dataType: "JSON",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ ID: value }),
+                success: function (response) { }
+            });
+    }
+</script>

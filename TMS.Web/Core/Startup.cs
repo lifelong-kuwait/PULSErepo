@@ -23,7 +23,7 @@ namespace TMS.Web.Core
             //    AuthenticationType = "mainTms",
             //    LoginPath = new Microsoft.Owin.PathString("/Home/Login")
             //});
-
+            app.MapSignalR();
             ConfigureAuth(app);
         }
        

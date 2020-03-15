@@ -87,6 +87,7 @@
     <Compile Include="Interfaces\Common\Roles\IRolesDAL.cs" />
     <Compile Include="Interfaces\CRM\ISalesAdministrationDAL.cs" />
     <Compile Include="Interfaces\Invoiceing\IInvoiceingDAL.cs" />
+    <Compile Include="Interfaces\Notifications\INotificationsDAL.cs" />
     <Compile Include="Interfaces\TMS\Admin\ILookupDAL.cs" />
     <Compile Include="Interfaces\TMS\Admin\ITMSResourceDAL.cs" />
     <Compile Include="Interfaces\TMS\Exams\IExamsDAL.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Interfaces\TMS\Trainer\ITrainerDAL.cs" />
     <Compile Include="Interfaces\TMS\Users\IOffice365UsersDAL.cs" />
     <Compile Include="Interfaces\TMS\Users\IUserDAL.cs" />
+    <Compile Include="Notification\NotificationDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TMS\Admin\LookupDAL.cs" />
     <Compile Include="TMS\Admin\TMSResourceDAL.cs" />

@@ -21,6 +21,7 @@ using TMS.Library.Entities.Common.Roles;
 using System.Web.Script.Serialization;
 using System.Globalization;
 using System.Linq;
+using TMS.Business.Interfaces;
 
 namespace TMS.Web.Controllers
 {
@@ -33,6 +34,8 @@ namespace TMS.Web.Controllers
         private readonly IAttendanceBAL _AttendanceBAL;
         private readonly IConfigurationBAL _objConfigurationBAL;
         private readonly IBALUsers _UserBAL;
+        
+       
 
         public ProgramController(ICourseBAL ICourseBAL, IConfigurationBAL _objIConfigurationBAL, IClassBAL IClassBAL, ISessionBAL _ISessionBAL, IAttendanceBAL _IAttendanceBAL,IBALUsers objUserBAL)
         {
@@ -42,7 +45,8 @@ namespace TMS.Web.Controllers
             _SessionBAL = _ISessionBAL;
             _UserBAL = objUserBAL;
             _AttendanceBAL = _IAttendanceBAL;
-        }
+              
+            }
 
         #region Course
 
@@ -723,7 +727,9 @@ namespace TMS.Web.Controllers
                         // var req = System.Web.HttpContext.Current.Request.Browser.Browser;
                         // string browserName = req.Browser.Browser;
                         _objConfigurationBAL.Audit_CreateBAL(ip, DateTime.Now, CurrentUser.CompanyID, CurrentUser.NameIdentifierInt64, EventType.Create, System.Web.HttpContext.Current.Request.Browser.Browser);
-                    }else
+                        
+
+                    } else
                     {
                         ModelState.AddModelError(lr.TraineeTimeConflictWithOtherClass, msg);
 
@@ -818,6 +824,15 @@ namespace TMS.Web.Controllers
                 _Classes.CreatedDate = DateTime.Now;
                 _Classes.ClassID = cid;
                 _Classes.ID = _ClassBAL.TrainerOpenMapping_CreateByPersonIdsBAL(_Classes, PersonIds);
+                //Notifications nof = new Notifications();
+                //nof.NotificationText = "Your are added in Class as trainer";
+                //nof.Organization_ID = CurrentUser.CompanyID;
+                //nof.ToUser = Convert.ToInt64(PersonIds);
+                //nof.FromUser = CurrentUser.NameIdentifierInt64;
+                //nof.ActionUrl = "Program/Classes/";
+                //nof.Event_ID = 1;
+                //nof.CreatedDate = DateTime.Now;
+                //this.BALNotification.create_NotificationsBAL(nof);
                 string ip = System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
                 if (string.IsNullOrEmpty(ip))
                     ip = System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];

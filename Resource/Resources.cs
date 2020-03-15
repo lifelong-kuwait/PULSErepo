@@ -4321,7 +4321,36 @@ namespace Resources {
                 return (string)resourceProvider.GetResource("CourseTitle", CultureInfo.CurrentUICulture.Name);
             }
         }
+        public static string Notification
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Notification", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string IsRead
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("IsRead", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string ActionUrl
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("ActionUrl", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string EventName
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("EventName", CultureInfo.CurrentUICulture.Name);
+            }
+        }
 
+        
         /// <summary>Class Title</summary>
         public static string ClassPrimaryTitle {
                get {

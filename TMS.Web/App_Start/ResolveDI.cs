@@ -93,7 +93,8 @@ namespace TMS.Web.App_Start
                    Component.For<ILanguageBAL>().ImplementedBy<LanguageBAL>().LifestyleTransient(),
                    Component.For<IAttendanceBAL>().ImplementedBy<AttendanceBAL>().LifestyleTransient(),
                       Component.For<ISalesAdministrationBAL>().ImplementedBy<SalesAdministrationBAL>().LifestyleTransient(),
-                      Component.For<IInvoiceingBAL>().ImplementedBy<InvoiceBAL>().LifestyleTransient()
+                      Component.For<IInvoiceingBAL>().ImplementedBy<InvoiceBAL>().LifestyleTransient(),
+                      Component.For<INotificationBAL>().ImplementedBy<NotificationBAL>().LifestyleTransient()
 
                 );//
             container.Install(new DependencyInjectionExtension());
