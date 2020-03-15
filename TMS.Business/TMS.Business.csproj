@@ -71,6 +71,7 @@
     <Compile Include="Interfaces\Common\Roles\IRolesBAL.cs" />
     <Compile Include="Interfaces\CRM\ISalesAdministrationBAL.cs" />
     <Compile Include="Interfaces\Invoiceing\IInvoiceingBAL.cs" />
+    <Compile Include="Interfaces\Notifications\notificationBAL.cs" />
     <Compile Include="Interfaces\TMS\Exams\IExamsBAL.cs" />
     <Compile Include="Interfaces\TMS\Language\ILanguageBAL.cs" />
     <Compile Include="Interfaces\TMS\Program\IAttendanceBAL.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Interfaces\TMS\Task\IBALTask.cs" />
     <Compile Include="Interfaces\TMS\Trainer\ITrainerBAL.cs" />
     <Compile Include="Interfaces\TMS\Users\IOffice365UsersBAL.cs" />
+    <Compile Include="Notifications\NotificationBAL.cs" />
     <Compile Include="TMS\Admin\LookupBAL.cs" />
     <Compile Include="TMS\Admin\TMSResourcesBAL.cs" />
     <Compile Include="Interfaces\TMS\Admin\ILookupBAL.cs" />

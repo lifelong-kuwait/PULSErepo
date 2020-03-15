@@ -1,6 +1,7 @@
 ﻿using Abp.Web.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
+using Microsoft.AspNet.SignalR;
 using System;
 using System.Linq;
 using System.Web.Mvc;
@@ -25,10 +26,10 @@ namespace TMS.Web.Controllers
         private readonly IPersonBAL _PersonBAL;
         private readonly IPersonContactBAL _objPersonContactBAL;
         private readonly IBALUsers _UserBAL;
-
-        public ProspectController(IAttachmentBAL objIAttachmentBAL, IPersonBAL objIPersonBAL, IPersonContactBAL _objePersonContact, IBALUsers _User)
+        private readonly INotificationBAL BALNotification;
+        public ProspectController(INotificationBAL objINotificationBAL,IAttachmentBAL objIAttachmentBAL, IPersonBAL objIPersonBAL, IPersonContactBAL _objePersonContact, IBALUsers _User)
         {
-            _AttachmentBAL = objIAttachmentBAL; _PersonBAL = objIPersonBAL; _objPersonContactBAL = _objePersonContact; _UserBAL = _User;
+            this.BALNotification = objINotificationBAL; _AttachmentBAL = objIAttachmentBAL; _PersonBAL = objIPersonBAL; _objPersonContactBAL = _objePersonContact; _UserBAL = _User;
         }
         // GET: Prospect
         public ActionResult Index()
@@ -166,7 +167,17 @@ namespace TMS.Web.Controllers
                         if (_person.ID != long.MinValue)
                         {
                             _PersonBAL.ManageAssigned_CreateBAL(_person);
-
+                            Library.TMS.Notifications nof = new Library.TMS.Notifications();
+                            nof.NotificationText = "Your have assigned a prospect";
+                            nof.Organization_ID = CurrentUser.CompanyID;
+                            nof.ToUser = Convert.ToInt64(_person.AssignedTo);
+                            nof.FromUser = CurrentUser.NameIdentifierInt64;
+                            nof.ActionUrl = "Prospect/Detail?pid=" + _person.ID;
+                            nof.Event_ID = 2;
+                            nof.CreatedDate = DateTime.Now;
+                            BALNotification.create_NotificationsBAL(nof);
+                            var notificationHub = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
+                            notificationHub.Clients.All.notify("added");
                             if (_person.ContactNumber != null)//when ContactNumber is Provided
                             {
                                 PhoneNumbers _objPhoneNumbers = new PhoneNumbers
@@ -255,6 +266,22 @@ namespace TMS.Web.Controllers
                     _person.ProfilePicture = HandlePersonProfilePicture(filename, _person.ID, aid);
                     if (result != -1)
                     {
+                        if(_person.clientstatus==null)
+                        {
+                            _person.clientstatus = CRMClientType.Not_Specified;
+                        }
+                        _PersonBAL.ManageAssigned_UpdateBAL(_person);
+                        Library.TMS.Notifications nof = new Library.TMS.Notifications();
+                        nof.NotificationText = "Your have assigned a prospect";
+                        nof.Organization_ID = CurrentUser.CompanyID;
+                        nof.ToUser = Convert.ToInt64(_person.AssignedTo);
+                        nof.FromUser = CurrentUser.NameIdentifierInt64;
+                        nof.ActionUrl = "Prospect/Detail?pid=" + _person.ID;
+                        nof.Event_ID = 2;
+                        nof.CreatedDate = DateTime.Now;
+                        BALNotification.create_NotificationsBAL(nof);
+                        var notificationHub = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
+                        notificationHub.Clients.All.notify("added");
                         if (_person.PhoneID > 0)
                         {
                             if (_person.ContactNumber != null)

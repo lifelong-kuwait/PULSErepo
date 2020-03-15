@@ -3143,3 +3143,177 @@ INFO  2020-03-07 15:57:24,440 18386ms DESKTOP-LSN82VI        Login              
 INFO  2020-03-07 15:57:24,852 18798ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/7/2020 12:57:24 PM
 INFO  2020-03-07 15:57:31,514 25460ms DESKTOP-LSN82VI        Login              - User tried to login with email paceadmin@llk.com at 3/7/2020 12:57:31 PM
 INFO  2020-03-07 15:57:32,095 26041ms DESKTOP-LSN82VI        Login              - User login with email paceadmin@llk.com at 3/7/2020 12:57:32 PM
+INFO  2020-03-08 17:10:10,247 153741ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/8/2020 12:10:10 PM
+INFO  2020-03-08 17:10:10,740 154234ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/8/2020 12:10:10 PM
+INFO  2020-03-08 17:10:23,916 167410ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/8/2020 12:10:23 PM
+INFO  2020-03-08 17:10:24,505 167999ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/8/2020 12:10:24 PM
+INFO  2020-03-12 11:11:16,566 165702ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/12/2020 6:11:16 AM
+INFO  2020-03-12 11:11:17,037 166173ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/12/2020 6:11:17 AM
+INFO  2020-03-12 11:11:31,253 180389ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/12/2020 6:11:31 AM
+INFO  2020-03-12 11:11:31,982 181118ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/12/2020 6:11:31 AM
+INFO  2020-03-12 12:58:45,112 52617ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/12/2020 7:58:45 AM
+INFO  2020-03-12 12:58:45,559 53064ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/12/2020 7:58:45 AM
+INFO  2020-03-12 12:58:58,108 65613ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/12/2020 7:58:58 AM
+INFO  2020-03-12 12:58:58,941 66446ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/12/2020 7:58:58 AM
+INFO  2020-03-12 18:20:45,667 41676ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/12/2020 1:20:45 PM
+INFO  2020-03-12 18:20:46,099 42108ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/12/2020 1:20:46 PM
+INFO  2020-03-12 18:21:00,095 56104ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/12/2020 1:21:00 PM
+INFO  2020-03-12 18:21:00,891 56900ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/12/2020 1:21:00 PM
+INFO  2020-03-12 18:32:20,466 102660ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/12/2020 1:32:20 PM
+INFO  2020-03-12 18:32:20,925 103119ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/12/2020 1:32:20 PM
+INFO  2020-03-12 18:32:34,594 116788ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/12/2020 1:32:34 PM
+INFO  2020-03-12 18:32:35,448 117642ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/12/2020 1:32:35 PM
+INFO  2020-03-12 18:40:44,487 45827ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/12/2020 1:40:44 PM
+INFO  2020-03-12 18:40:44,940 46280ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/12/2020 1:40:44 PM
+INFO  2020-03-12 18:40:57,383 58724ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/12/2020 1:40:57 PM
+INFO  2020-03-12 18:40:58,173 59513ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/12/2020 1:40:58 PM
+INFO  2020-03-13 10:20:33,942 32534ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 5:20:33 AM
+INFO  2020-03-13 10:20:34,434 33026ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 5:20:34 AM
+INFO  2020-03-13 10:20:34,724 33316ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 5:20:34 AM
+INFO  2020-03-13 10:20:35,306 33898ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 5:20:35 AM
+INFO  2020-03-13 10:30:43,701 23990ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 5:30:43 AM
+INFO  2020-03-13 10:30:44,158 24447ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 5:30:44 AM
+INFO  2020-03-13 10:30:57,223 37512ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 5:30:57 AM
+INFO  2020-03-13 10:30:57,943 38232ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 5:30:57 AM
+ERROR 2020-03-13 10:35:45,563 325852ms DESKTOP-LHV4G3D        OnException        - Object reference not set to an instance of an object.
+ERROR 2020-03-13 10:36:59,601 399891ms DESKTOP-LHV4G3D        OnException        - Object reference not set to an instance of an object.
+INFO  2020-03-13 10:44:56,592 26247ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 5:44:56 AM
+INFO  2020-03-13 10:44:57,089 26744ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 5:44:57 AM
+INFO  2020-03-13 10:45:09,513 39168ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 5:45:09 AM
+INFO  2020-03-13 10:45:10,232 39887ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 5:45:10 AM
+INFO  2020-03-13 10:47:57,697 29145ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 5:47:57 AM
+INFO  2020-03-13 10:47:58,245 29694ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 5:47:58 AM
+INFO  2020-03-13 10:48:10,657 42106ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 5:48:10 AM
+INFO  2020-03-13 10:48:11,624 43072ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 5:48:11 AM
+INFO  2020-03-13 10:50:46,897 27031ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 5:50:46 AM
+INFO  2020-03-13 10:50:47,349 27482ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 5:50:47 AM
+INFO  2020-03-13 10:50:59,489 39622ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 5:50:59 AM
+INFO  2020-03-13 10:51:00,382 40515ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 5:51:00 AM
+INFO  2020-03-13 11:34:09,517 28359ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 6:34:09 AM
+INFO  2020-03-13 11:34:10,088 28930ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 6:34:10 AM
+INFO  2020-03-13 12:26:52,444 196474ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 7:26:52 AM
+INFO  2020-03-13 12:26:53,056 197086ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 7:26:53 AM
+INFO  2020-03-13 12:26:53,222 197252ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 7:26:53 AM
+INFO  2020-03-13 12:26:53,795 197825ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 7:26:53 AM
+INFO  2020-03-13 12:39:20,971 24388ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 7:39:20 AM
+INFO  2020-03-13 12:39:21,525 24942ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 7:39:21 AM
+INFO  2020-03-13 12:39:29,437 32854ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 7:39:29 AM
+INFO  2020-03-13 12:39:30,321 33738ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 7:39:30 AM
+INFO  2020-03-13 14:39:51,181 25856ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 9:39:51 AM
+INFO  2020-03-13 14:39:51,707 26383ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 9:39:51 AM
+INFO  2020-03-13 14:39:51,924 26600ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 9:39:51 AM
+INFO  2020-03-13 14:39:52,520 27195ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 9:39:52 AM
+ERROR 2020-03-13 14:40:18,718 53393ms DESKTOP-LHV4G3D        OnException        - This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.
+ERROR 2020-03-13 14:40:21,039 55714ms DESKTOP-LHV4G3D        OnException        - This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.
+ERROR 2020-03-13 14:41:05,428 100103ms DESKTOP-LHV4G3D        OnException        - This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.
+ERROR 2020-03-13 14:44:50,410 325085ms DESKTOP-LHV4G3D        OnException        - This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.
+ERROR 2020-03-13 14:44:53,801 328476ms DESKTOP-LHV4G3D        OnException        - This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.
+ERROR 2020-03-13 14:45:14,572 349248ms DESKTOP-LHV4G3D        OnException        - This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.
+ERROR 2020-03-13 14:47:13,145 467821ms DESKTOP-LHV4G3D        OnException        - This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.
+ERROR 2020-03-13 14:47:15,966 470641ms DESKTOP-LHV4G3D        OnException        - This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.
+ERROR 2020-03-13 14:48:08,357 523032ms DESKTOP-LHV4G3D        OnException        - This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.
+ERROR 2020-03-13 15:20:24,008  9107ms DESKTOP-LHV4G3D        OnException        - This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.
+ERROR 2020-03-13 15:20:24,065  9164ms DESKTOP-LHV4G3D        OnException        - This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.
+INFO  2020-03-13 15:20:35,013 20111ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 10:20:35 AM
+INFO  2020-03-13 15:20:35,548 20647ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 10:20:35 AM
+INFO  2020-03-13 15:20:40,422 25520ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 10:20:40 AM
+INFO  2020-03-13 15:20:41,468 26567ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 10:20:41 AM
+ERROR 2020-03-13 15:21:07,360 52458ms DESKTOP-LHV4G3D        OnException        - This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.
+ERROR 2020-03-13 15:21:07,432 52530ms DESKTOP-LHV4G3D        OnException        - This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.
+ERROR 2020-03-13 15:21:39,927 85026ms DESKTOP-LHV4G3D        OnException        - This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.
+ERROR 2020-03-13 15:21:39,965 85064ms DESKTOP-LHV4G3D        OnException        - This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.
+INFO  2020-03-13 15:27:33,688 28066ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 10:27:33 AM
+INFO  2020-03-13 15:27:34,202 28580ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 10:27:34 AM
+INFO  2020-03-13 15:27:34,638 29015ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 10:27:34 AM
+INFO  2020-03-13 15:27:35,210 29587ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 10:27:35 AM
+INFO  2020-03-13 15:51:55,027 111874ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 10:51:55 AM
+INFO  2020-03-13 15:51:55,564 112410ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 10:51:55 AM
+INFO  2020-03-13 15:52:00,594 117441ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 10:52:00 AM
+INFO  2020-03-13 15:52:01,595 118441ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 10:52:01 AM
+INFO  2020-03-13 15:54:51,467 15146ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 10:54:51 AM
+INFO  2020-03-13 15:54:51,978 15657ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 10:54:51 AM
+INFO  2020-03-13 15:54:56,360 20039ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 10:54:56 AM
+INFO  2020-03-13 15:54:57,348 21027ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 10:54:57 AM
+INFO  2020-03-13 16:23:56,612 43983ms DESKTOP-LHV4G3D        Login              - User tried to login with email PACEADMIN@LLK.COM at 3/13/2020 11:23:56 AM
+INFO  2020-03-13 16:23:57,115 44486ms DESKTOP-LHV4G3D        Login              - User login with email PACEADMIN@LLK.COM at 3/13/2020 11:23:57 AM
+INFO  2020-03-13 16:24:11,679 59050ms DESKTOP-LHV4G3D        Login              - User tried to login with email PACEADMIN@LLK.COM at 3/13/2020 11:24:11 AM
+INFO  2020-03-13 16:24:12,573 59944ms DESKTOP-LHV4G3D        Login              - User login with email PACEADMIN@LLK.COM at 3/13/2020 11:24:12 AM
+INFO  2020-03-13 16:43:42,122 32266ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@Llk.com at 3/13/2020 11:43:42 AM
+INFO  2020-03-13 16:43:42,593 32738ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@Llk.com at 3/13/2020 11:43:42 AM
+INFO  2020-03-13 16:43:55,061 45205ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@Llk.com at 3/13/2020 11:43:55 AM
+INFO  2020-03-13 16:43:55,837 45982ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@Llk.com at 3/13/2020 11:43:55 AM
+INFO  2020-03-13 17:15:13,639 56712ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@Llk.com at 3/13/2020 12:15:13 PM
+INFO  2020-03-13 17:15:14,256 57330ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@Llk.com at 3/13/2020 12:15:14 PM
+INFO  2020-03-13 17:15:18,644 61717ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@Llk.com at 3/13/2020 12:15:18 PM
+INFO  2020-03-13 17:15:19,553 62627ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@Llk.com at 3/13/2020 12:15:19 PM
+INFO  2020-03-13 18:14:07,586 128793ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 1:14:07 PM
+INFO  2020-03-13 18:14:08,147 129354ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 1:14:08 PM
+INFO  2020-03-13 18:14:20,509 141716ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 1:14:20 PM
+INFO  2020-03-13 18:14:21,351 142559ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 1:14:21 PM
+ERROR 2020-03-13 18:14:27,248 148456ms DESKTOP-LHV4G3D        OnException        - The parameters dictionary contains a null entry for parameter 'ID' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult MarkAsRead(Int64)' in 'TMS.Web.Controllers.NotificationController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+ERROR 2020-03-13 18:14:46,267 167475ms DESKTOP-LHV4G3D        OnException        - The parameters dictionary contains a null entry for parameter 'ID' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult MarkAsRead(Int64)' in 'TMS.Web.Controllers.NotificationController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+INFO  2020-03-13 18:16:03,313 23888ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 1:16:03 PM
+INFO  2020-03-13 18:16:03,767 24342ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 1:16:03 PM
+ERROR 2020-03-13 18:16:26,320 46895ms DESKTOP-LHV4G3D        OnException        - The parameters dictionary contains a null entry for parameter 'ID' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult MarkAsRead(Int64)' in 'TMS.Web.Controllers.NotificationController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+INFO  2020-03-13 18:18:50,339 23832ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 1:18:50 PM
+INFO  2020-03-13 18:18:50,786 24279ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 1:18:50 PM
+INFO  2020-03-13 18:19:02,833 36326ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 1:19:02 PM
+INFO  2020-03-13 18:19:03,960 37453ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 1:19:03 PM
+ERROR 2020-03-13 18:19:44,104 77597ms DESKTOP-LHV4G3D        OnException        - Implicit conversion from data type datetime to bigint is not allowed. Use the CONVERT function to run this query.
+ERROR 2020-03-13 18:20:36,787 130280ms DESKTOP-LHV4G3D        OnException        - Implicit conversion from data type datetime to bigint is not allowed. Use the CONVERT function to run this query.
+ERROR 2020-03-13 18:20:56,924 150417ms DESKTOP-LHV4G3D        OnException        - Implicit conversion from data type datetime to bigint is not allowed. Use the CONVERT function to run this query.
+ERROR 2020-03-13 18:22:10,745 224238ms DESKTOP-LHV4G3D        OnException        - Implicit conversion from data type datetime to bigint is not allowed. Use the CONVERT function to run this query.
+ERROR 2020-03-13 18:23:09,252 282745ms DESKTOP-LHV4G3D        OnException        - Implicit conversion from data type datetime to bigint is not allowed. Use the CONVERT function to run this query.
+INFO  2020-03-13 18:34:11,639 24301ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 1:34:11 PM
+INFO  2020-03-13 18:34:12,163 24826ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 1:34:12 PM
+INFO  2020-03-13 18:34:24,086 36748ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 1:34:24 PM
+INFO  2020-03-13 18:34:24,936 37599ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 1:34:24 PM
+INFO  2020-03-13 18:47:48,027 48192ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 1:47:48 PM
+INFO  2020-03-13 18:47:48,481 48646ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 1:47:48 PM
+INFO  2020-03-13 18:48:00,481 60646ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/13/2020 1:48:00 PM
+INFO  2020-03-13 18:48:01,409 61574ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/13/2020 1:48:01 PM
+INFO  2020-03-14 10:49:31,907 534852ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/14/2020 5:49:31 AM
+INFO  2020-03-14 10:49:32,605 535550ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/14/2020 5:49:32 AM
+INFO  2020-03-14 10:49:32,745 535690ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/14/2020 5:49:32 AM
+INFO  2020-03-14 10:49:33,259 536204ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/14/2020 5:49:33 AM
+INFO  2020-03-14 12:14:56,906 28452ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/14/2020 7:14:56 AM
+INFO  2020-03-14 12:14:57,400 28945ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/14/2020 7:14:57 AM
+INFO  2020-03-14 12:15:09,335 40880ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/14/2020 7:15:09 AM
+INFO  2020-03-14 12:15:10,167 41712ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/14/2020 7:15:10 AM
+INFO  2020-03-14 12:42:25,417 22258ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/14/2020 7:42:25 AM
+INFO  2020-03-14 12:42:26,061 22902ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/14/2020 7:42:26 AM
+INFO  2020-03-14 12:42:26,874 23715ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/14/2020 7:42:26 AM
+INFO  2020-03-14 12:42:27,857 24698ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/14/2020 7:42:27 AM
+INFO  2020-03-14 13:16:49,986 49211ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/14/2020 8:16:49 AM
+INFO  2020-03-14 13:16:50,566 49790ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/14/2020 8:16:50 AM
+INFO  2020-03-14 13:16:55,526 54751ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/14/2020 8:16:55 AM
+INFO  2020-03-14 13:16:56,600 55825ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/14/2020 8:16:56 AM
+INFO  2020-03-14 13:56:18,470 38954ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/14/2020 8:56:18 AM
+INFO  2020-03-14 13:56:19,101 39586ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/14/2020 8:56:19 AM
+INFO  2020-03-14 13:56:35,745 56229ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/14/2020 8:56:35 AM
+INFO  2020-03-14 13:56:36,973 57458ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/14/2020 8:56:36 AM
+INFO  2020-03-14 14:28:36,483 33199ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/14/2020 9:28:36 AM
+INFO  2020-03-14 14:28:37,081 33796ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/14/2020 9:28:37 AM
+INFO  2020-03-14 14:28:37,285 34000ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/14/2020 9:28:37 AM
+INFO  2020-03-14 14:28:38,057 34773ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/14/2020 9:28:38 AM
+INFO  2020-03-14 17:27:43,524 39263ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/14/2020 12:27:43 PM
+INFO  2020-03-14 17:27:44,223 39962ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/14/2020 12:27:44 PM
+INFO  2020-03-14 17:27:44,411 40150ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/14/2020 12:27:44 PM
+INFO  2020-03-14 17:27:45,315 41054ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/14/2020 12:27:45 PM
+ERROR 2020-03-14 17:31:24,153 259892ms DESKTOP-LHV4G3D        OnException        - Object reference not set to an instance of an object.
+INFO  2020-03-14 17:31:37,569 273308ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/14/2020 12:31:37 PM
+INFO  2020-03-14 17:31:38,267 274006ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/14/2020 12:31:38 PM
+INFO  2020-03-14 17:31:39,023 274762ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/14/2020 12:31:39 PM
+INFO  2020-03-14 17:31:40,199 275938ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/14/2020 12:31:40 PM
+INFO  2020-03-14 18:02:18,994 255680ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/14/2020 1:02:18 PM
+INFO  2020-03-14 18:02:19,828 256514ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/14/2020 1:02:19 PM
+INFO  2020-03-14 18:02:20,411 257098ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/14/2020 1:02:20 PM
+INFO  2020-03-14 18:02:20,980 257666ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/14/2020 1:02:20 PM
+ERROR 2020-03-14 18:14:55,487 1012174ms DESKTOP-LHV4G3D        OnException        - Procedure or function 'CRM_UserPersonMapping_Update' expects parameter '@ClientStatus', which was not supplied.
+INFO  2020-03-15 10:56:09,174 55355ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/15/2020 5:56:09 AM
+INFO  2020-03-15 10:56:09,844 56025ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/15/2020 5:56:09 AM
+INFO  2020-03-15 10:56:10,059 56240ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/15/2020 5:56:10 AM
+INFO  2020-03-15 10:56:10,667 56849ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/15/2020 5:56:10 AM

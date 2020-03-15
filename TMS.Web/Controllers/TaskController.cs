@@ -2,12 +2,14 @@
 using Abp.Web.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
+using Microsoft.AspNet.SignalR;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using TelerikReportLibrary;
+using TMS.Business.Interfaces;
 using TMS.Business.Interfaces.Common;
 using TMS.Business.Interfaces.Common.Groups;
 using TMS.Business.Interfaces.CRM;
@@ -30,9 +32,10 @@ namespace TMS.Web.Controllers
         private IBALUsers _UserBAL { get; set; }
         private readonly IAttachmentBAL _AttachmentBAL;
         private readonly IGroupsBAL _Groups;
-        public TaskController(IBALUsers balUser, IAttachmentBAL _AttachmentBAL, IGroupsBAL _Groups, IBALTask balTask, ISalesAdministrationBAL _objSalesBAL)
+        private readonly INotificationBAL BALNotification;
+        public TaskController(INotificationBAL objINotificationBAL, IBALUsers balUser, IAttachmentBAL _AttachmentBAL, IGroupsBAL _Groups, IBALTask balTask, ISalesAdministrationBAL _objSalesBAL)
         {
-            _UserBAL = balUser; this._AttachmentBAL = _AttachmentBAL; this._Groups = _Groups; _TaskBAL = balTask;
+            this.BALNotification = objINotificationBAL; _UserBAL = balUser; this._AttachmentBAL = _AttachmentBAL; this._Groups = _Groups; _TaskBAL = balTask;
             _objSaleBAL = _objSalesBAL;
         }
 
@@ -108,6 +111,19 @@ namespace TMS.Web.Controllers
             if (result == -1)
             {
                 ModelState.AddModelError(lr.ErrorServerError, lr.ErrorServerError);
+            }else
+            {
+                Library.TMS.Notifications nof = new Library.TMS.Notifications();
+                nof.NotificationText = "Your Task has rescheduled to "+ _objTask.DueDate.Date;
+                nof.Organization_ID = CurrentUser.CompanyID;
+                nof.ToUser = Convert.ToInt64(10001);
+                nof.FromUser = CurrentUser.NameIdentifierInt64;
+                nof.ActionUrl = "../Task/Detail?pid=" + _objTask.ID;
+                nof.Event_ID = 3;
+                nof.CreatedDate = DateTime.Now;
+                BALNotification.create_NotificationsBAL(nof);
+                var notificationHub = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
+                notificationHub.Clients.All.notify("added");
             }
             var resultData = new[] { _objTask };
             return RedirectToAction("Index");
@@ -215,6 +231,17 @@ namespace TMS.Web.Controllers
                     AssignedTo = _objTasks.AssignedTo
                 };
                 _objTasks.ID = _TaskBAL.Task_CreateBAL(objTask);
+                Library.TMS.Notifications nof = new Library.TMS.Notifications();
+                nof.NotificationText = "Your have assigned a New Task";
+                nof.Organization_ID = CurrentUser.CompanyID;
+                nof.ToUser = Convert.ToInt64(_objTasks.AssignedTo);
+                nof.FromUser = CurrentUser.NameIdentifierInt64;
+                nof.ActionUrl = "../Task/Detail?pid="+ _objTasks.ID;
+                nof.Event_ID =3;
+                nof.CreatedDate = DateTime.Now;
+                BALNotification.create_NotificationsBAL(nof);
+                var notificationHub = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
+                notificationHub.Clients.All.notify("added");
                 if (_objTasks.ID == -1)
                 {
                     ModelState.AddModelError(lr.ErrorServerError, lr.ErrorServerError);
@@ -805,9 +832,18 @@ namespace TMS.Web.Controllers
                         obj.UpdatedOn = DateTime.Now;
                         // AssignedBy= CurrentUser.NameIdentifierInt64.ToString(),
                         obj.UserID = Convert.ToInt64(userId);
-
                         _objSaleBAL.ReassignProspectBAL(obj);
-
+                        Library.TMS.Notifications nof = new Library.TMS.Notifications();
+                        nof.NotificationText = "Your have assigned a prospect";
+                        nof.Organization_ID = CurrentUser.CompanyID;
+                        nof.ToUser = Convert.ToInt64(obj.UserID);
+                        nof.FromUser = CurrentUser.NameIdentifierInt64;
+                        nof.ActionUrl = "Prospect/Detail?pid="+ obj.PersonID;
+                        nof.Event_ID = 2;
+                        nof.CreatedDate = DateTime.Now;
+                        BALNotification.create_NotificationsBAL(nof);
+                        var notificationHub = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
+                        notificationHub.Clients.All.notify("added");
                     }
                 }
             }

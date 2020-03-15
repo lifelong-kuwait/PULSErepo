@@ -1,0 +1,178 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+}
+@using lr = Resources.Resources;
+
+<script>
+
+    function CourseTemplate(data) {
+        if (data !== null) {
+            var CourseTemplate = kendo.template(jQuery("#CourseTemplate").html(), { useWithBlock: false });
+            return CourseTemplate(data);
+        }
+        return '';
+    }
+</script>
+<h2>@lr.Notification</h2>
+@Html.AntiForgeryToken()
+@(Html.Kendo().Grid<TMS.Library.TMS.Notifications>()
+                .Name("NotificationGrid")
+                .Columns(columns =>
+                {
+
+                    columns.Bound(e => e.NotificationText).Title(lr.MessagesHead);
+                    columns.Bound(e => e.CreatedDate).Width(220).ClientTemplate("<span class='date' >#=kendo.toString(CreatedDate,'" + DateFormatScript + @"')#</span>").Title(lr.CreatedDate);
+                    columns.Bound(e => e.IsRead).ClientTemplate("#=CourseTemplate(data)#").Width(210).MinScreenWidth(560).Title(lr.IsRead);
+                    columns.Bound(e => e.ActionUrl).Width(190).Title(lr.ActionUrl);
+                    columns.Bound(e => e.Primary_Name).Width(190).Title(lr.EventName);
+                }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_CourseTemplate").DisplayDeleteConfirmation(false))
+                                   .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>))
+                                   .Sortable().Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+                                   .Pageable(pager => pager.Refresh(true).Numeric(false).PreviousNext(false).PageSizes(false))
+                                   .Scrollable()
+                                   .Events(e => e.Edit("CourseGrid_onEdit").Save("General_onSave"))
+                                   .HtmlAttributes(new { style = "height:700px !important;" })
+                                   .DataSource(dataSource => dataSource.Ajax().ServerOperation(true).Model(model => { model.Id(m => m.ID); })
+                                   .Read(read => read.Action("Notification_Read", "Notification"))
+                                   .Events(e => e.Error("GeneralErrorHandler(\"NotificationGrid\")").RequestEnd("GridRequestEndUpdate")))
+                                   .NoRecords(lr.GridNoRecordFoundMessage)
+)
+@helper RenderAddTemplate()
+{
+    <div class="toolbar">
+       
+            <a class="k-button tms-grid-detail-Course"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>
+        
+       
+
+    </div>
+
+}
+
+
+
+<script id="toolTipTemplate" type="text/x-kendo-template">
+
+    
+        <span class="grid-tooltip-icon persondetail" dat-uid="#=ID#" title="See the detail of #=NotificationText#"><i class="mdi mdi-open-in-new"></i></span>
+
+   
+   
+</script>
+
+<script>
+     jQuery(function () {
+
+        var template = kendo.template(jQuery("#toolTipTemplate").html());
+        //initialize tooltip to grid tbody with filter cells with given CSS class
+         var tooltip = jQuery("#NotificationGrid tbody").kendoTooltip({
+            position: "center",
+            autoHide: false,
+            filter: "td:nth-child(1)",
+            showOn: "click",
+            show: function (e) {
+
+                //get current target row
+                this.popup.element.addClass("tmstooltip");
+                var currentRow = this.target().closest("tr");
+                var grid = jQuery("#NotificationGrid").data("kendoGrid");
+                //get current row dataItem
+                var dataItem = grid.dataItem(currentRow);
+
+                //pass the dataItem to the template
+                var generatedTemplate = template(dataItem);
+                //set the generated template to the content of the tooltip
+                this.content.html(generatedTemplate);
+            },
+        }).data("kendoTooltip");
+         jQuery(".tms-grid-detail-Course").live("mousedown", function (event) {
+             //debugger;
+             var checkedLength = jQuery("#NotificationGrid tr.k-state-selected").length;
+             if (checkedLength == 1) {
+                 grid = jQuery("#NotificationGrid").data("kendoGrid");
+                 var data = grid.dataItem(jQuery("#NotificationGrid tr.k-state-selected"));
+                 var url = '../' + data.ActionUrl;
+                 window.open(url, '_blank');
+                 jQuery.ajax({
+                     type: 'POST',
+                     url: '/Notification/MarkAsRead',
+                     dataType: "JSON",
+                     contentType: "application/json; charset=utf-8",
+                     data: JSON.stringify({ ID: data.ID }),
+                     success: function (response) { }
+                 });
+             } else {
+
+             }
+
+         });
+         jQuery(".persondetail").live("mousedown", function (event) {
+             //debugger;
+             var checkedLength = jQuery("#NotificationGrid tr.k-state-selected").length;
+             if (checkedLength == 1) {
+                 grid = jQuery("#NotificationGrid").data("kendoGrid");
+                 var data = grid.dataItem(jQuery("#NotificationGrid tr.k-state-selected"));
+                 var url = '../' + data.ActionUrl;
+                 window.open(url, '_blank');
+                 jQuery.ajax({
+                     type: 'POST',
+                     url: '/Notification/MarkAsRead',
+                     dataType: "JSON",
+                     contentType: "application/json; charset=utf-8",
+                     data: JSON.stringify({ ID: data.ID }),
+                     success: function (response) { }
+                 });
+             } else {
+
+             }
+
+         });
+
+
+    });
+</script>
+
+
+
+<script id="CourseTemplate" type="text/kendo">
+    <div class=''>
+        <div class=''>
+            <p>
+                <span class="heading">
+                    <b>
+                        #:data.IsRead#   #if (data.IsRead){ # <span class="mdi mdi-checkbox-blank-circle text-success"></span>    #}else{#  <span class="mdi mdi-checkbox-blank-circle text-danger"></span>  #}#
+                    </b>
+                </span>
+            </p>
+            </div>
+        </div>
+    </script>
+
+
+
+
+
+
+            @section Scripts
+{
+
+
+                <script>
+
+        jQuery(".tms-grid-detail-Course").live("mousedown", function (event) {
+            var checkedLength = jQuery("#CourseGrid tr.k-state-selected").length;
+            if (checkedLength == 1) {
+                grid = jQuery("#CourseGrid").data("kendoGrid");
+                var data = grid.dataItem(jQuery("#CourseGrid tr.k-state-selected"));
+                var url = '@Url.Content("~/Program/CourseDetail?id=")' + data.ID;
+                window.open(url, '_blank');
+            } else {
+
+            }
+        });
+                </script>
+                <script src="@Url.Content("~/Scripts/ts/tms/Program/Program.js")"></script>
+            }
+
