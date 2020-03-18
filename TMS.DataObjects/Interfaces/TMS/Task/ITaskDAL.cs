@@ -23,7 +23,8 @@ namespace TMS.DataObjects.Interfaces
         /// <param name="culture">The culture.</param>
         /// <returns>IList&lt;LoginUsers&gt;.</returns>
         IList<Sls_Task> Task_GetAllDALbyOrganization(string culture,string Oid, long? userid);
-
+        IList<Sls_Task> Task_GetDALbyOrganization(string culture,string Oid, long? userid,long ID);
+        
         int ChangeStatus_DoneBAL(Sls_Task _objTask);
 
         int ChangeStatus_UnderwayBAL(Sls_Task _objTask);
@@ -38,5 +39,6 @@ namespace TMS.DataObjects.Interfaces
         int Tasks_UpdateDAL(Sls_Task _objTasks);
 
         IList<CRM_TaskHistory> Task_GetAllByIdDAL(long ID);
+       
     }
 }

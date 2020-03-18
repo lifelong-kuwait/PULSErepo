@@ -105,7 +105,7 @@ namespace TMS.Web.Controllers
         public ActionResult EditStatusRescheduled(Sls_Task _objTask)
         {
 
-            _objTask.ModifiedBy = 216;
+            _objTask.ModifiedBy = CurrentUser.NameIdentifierInt64;
             _objTask.ModifiedOn = DateTime.Now;
             var result = this._TaskBAL.ChangeStatus_RescheduleBAL(_objTask);
             if (result == -1)
@@ -113,10 +113,12 @@ namespace TMS.Web.Controllers
                 ModelState.AddModelError(lr.ErrorServerError, lr.ErrorServerError);
             }else
             {
+                var results = this._TaskBAL.Task_GetBALbyOrganization(CurrentCulture.ToString(),CurrentUser.CompanyID.ToString(),CurrentUser.NameIdentifierInt64, _objTask.ID);
+                var r = results.First();
                 Library.TMS.Notifications nof = new Library.TMS.Notifications();
                 nof.NotificationText = "Your Task has rescheduled to "+ _objTask.DueDate.Date;
                 nof.Organization_ID = CurrentUser.CompanyID;
-                nof.ToUser = Convert.ToInt64(10001);
+                nof.ToUser = Convert.ToInt64(r.AssignedTo);
                 nof.FromUser = CurrentUser.NameIdentifierInt64;
                 nof.ActionUrl = "../Task/Detail?pid=" + _objTask.ID;
                 nof.Event_ID = 3;

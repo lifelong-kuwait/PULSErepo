@@ -260,11 +260,16 @@
                     jQuery('.count').html(count);
                     if (Bcount < count) {
                         toastr.info('New Notification');
+                        playSound();
                     }
                 }
             });
            
             
+        }
+        function playSound() {
+            var audio = new Audio('/Attachment/TMS/Music/been_tree.mp3');
+            audio.play();
         }
         function ToasterMessage() {
             jQuery.ajax({

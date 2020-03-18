@@ -23,8 +23,10 @@ namespace TMS.Business.Interfaces.TMS
         /// <param name="culture">The culture.</param>
         /// <returns>IList&lt;Tasks&gt;.</returns>
         IList<Sls_Task> Task_GetAllBALbyOrganization(string culture,string Oid, long? userid);
+        IList<Sls_Task> Task_GetBALbyOrganization(string culture,string Oid, long? userid,long ID);
 
         IList<CRM_TaskHistory> Task_GetAllByIdBAL(long ID);
+        
         int ChangeStatus_DoneBAL(Sls_Task _objTask);
 
         int ChangeStatus_UnderwayBAL(Sls_Task _objTask);
