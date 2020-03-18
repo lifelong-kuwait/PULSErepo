@@ -3317,3 +3317,24 @@ INFO  2020-03-15 10:56:09,174 55355ms DESKTOP-LHV4G3D        Login              
 INFO  2020-03-15 10:56:09,844 56025ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/15/2020 5:56:09 AM
 INFO  2020-03-15 10:56:10,059 56240ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/15/2020 5:56:10 AM
 INFO  2020-03-15 10:56:10,667 56849ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/15/2020 5:56:10 AM
+INFO  2020-03-18 10:14:26,308 83246ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/18/2020 5:14:26 AM
+INFO  2020-03-18 10:14:27,003 83941ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/18/2020 5:14:27 AM
+ERROR 2020-03-18 10:21:42,594 519532ms DESKTOP-LHV4G3D        OnException        - The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Sls_TaskHistories_Sls_Tasks". The conflict occurred in database "PULSE_With_Invoicein", table "dbo.Sls_Task", column 'ID'.
+The statement has been terminated.
+INFO  2020-03-18 10:33:15,765 24860ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/18/2020 5:33:15 AM
+INFO  2020-03-18 10:33:16,211 25306ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/18/2020 5:33:16 AM
+INFO  2020-03-18 10:33:27,139 36234ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/18/2020 5:33:27 AM
+INFO  2020-03-18 10:33:27,918 37013ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/18/2020 5:33:27 AM
+INFO  2020-03-18 11:23:36,380 3045475ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 3/18/2020 6:23:36 AM
+INFO  2020-03-18 11:23:36,778 3045872ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 3/18/2020 6:23:36 AM
+INFO  2020-03-18 11:27:21,442 3270537ms DESKTOP-LHV4G3D        Login              - User tried to login with email T2@hotmail.com at 3/18/2020 6:27:21 AM
+INFO  2020-03-18 11:27:21,850 3270945ms DESKTOP-LHV4G3D        Login              - User login with email T2@hotmail.com at 3/18/2020 6:27:21 AM
+INFO  2020-03-18 11:27:22,437 3271532ms DESKTOP-LHV4G3D        Login              - User tried to login with email T2@hotmail.com at 3/18/2020 6:27:22 AM
+INFO  2020-03-18 11:27:23,114 3272208ms DESKTOP-LHV4G3D        Login              - User login with email T2@hotmail.com at 3/18/2020 6:27:23 AM
+ERROR 2020-03-18 11:45:20,612 4349706ms DESKTOP-LHV4G3D        OnException        - Procedure or function 'Venues_Create' expects parameter '@ContactPersonPhone', which was not supplied.
+ERROR 2020-03-18 12:16:49,402 6238497ms DESKTOP-LHV4G3D        OnException        - Error parsing column 10 (SessionAttended= - String)
+ERROR 2020-03-18 12:17:28,541 6277635ms DESKTOP-LHV4G3D        OnException        - Error parsing column 10 (SessionAttended= - String)
+ERROR 2020-03-18 12:18:37,182 6346277ms DESKTOP-LHV4G3D        OnException        - Object reference not set to an instance of an object.
+ERROR 2020-03-18 12:18:45,448 6354543ms DESKTOP-LHV4G3D        OnException        - Object reference not set to an instance of an object.
+INFO  2020-03-18 16:32:24,184 45219ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/18/2020 11:32:24 AM
+INFO  2020-03-18 16:32:24,595 45630ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/18/2020 11:32:24 AM

@@ -49,6 +49,24 @@ namespace TMS.DataObjects.TMS.Task
             }
             return TaskList;
         }
+        public IList<Sls_Task> Task_GetDALbyOrganization(string Culture, string Oid, long? UserID,long id)
+        {
+            List<Sls_Task> TaskList = new List<Sls_Task>();
+            var conString = DBHelper.ConnectionString;
+            using (var conn = new SqlConnection(conString))
+            {
+                conn.Open();
+                string qry = @"TMS_Task_GetSingleByIDAndOrganization";
+                DynamicParameters param = new DynamicParameters();
+                param.Add("@Culture", Culture);
+                param.Add("@Oid", Oid);
+                param.Add("@UserID", UserID); 
+                param.Add("@TaskdID", id); 
+                 TaskList = conn.Query<Sls_Task>(qry.ToString(), param, commandType: System.Data.CommandType.StoredProcedure).AsList<Sls_Task>();
+                conn.Close();
+            }
+            return TaskList;
+        }
 
         /// <summary>
         /// Logins the users delete dal.

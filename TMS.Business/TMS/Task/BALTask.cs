@@ -39,7 +39,16 @@ namespace TMS.Business.TMS
         {
             return _DAL.Task_GetAllDALbyOrganization(culture, Oid, userid);
         }
-
+        /// <summary>
+        /// Logins the users get all bal.
+        /// </summary>
+        /// <param name="culture">The culture.</param>
+        /// <returns>IList&lt;LoginUsers&gt;.</returns>
+        public IList<Sls_Task> Task_GetBALbyOrganization(string culture, string Oid, long? userid,long ID)
+        {
+            return _DAL.Task_GetDALbyOrganization(culture, Oid, userid,ID);
+        }
+        
         public int ChangeStatus_DoneBAL(Sls_Task _objTask)
         {
             return _DAL.ChangeStatus_DoneBAL(_objTask);
@@ -74,5 +83,6 @@ namespace TMS.Business.TMS
         {
             return _DAL.Task_GetAllByIdDAL(ID);
         }
+       
     }
 }
