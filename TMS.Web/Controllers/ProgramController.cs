@@ -1783,7 +1783,9 @@ namespace TMS.Web.Controllers
                                 {
                                     if (_SessionBAL.GetSessionVenueOccupancyDetailBAL(_Sessions) > 0)
                                     {
-                                        ModelState.AddModelError(lr.VenueOcupaidByOther + "  " + _Sessions.ScheduleDate, lr.VenueOcupaidByOther + "  " + _Sessions.ScheduleDate);
+                                        var results=_SessionBAL.GetSessionVenueOccupancyDetailStringBAL(_Sessions);
+                                        
+                                        ModelState.AddModelError(lr.VenueOcupaidByOther + "  " + _Sessions.ScheduleDate.ToString("dd/MM/yyyy"), lr.VenueOcupaidByOther + "  " + results+" on date "+ _Sessions.ScheduleDate.ToString("dd/MM/yyyy"));
                                         break;
                                     }
                                     else
@@ -1803,7 +1805,7 @@ namespace TMS.Web.Controllers
                             }
                             else
                             {
-                                ModelState.AddModelError(lr.SessionTimeConflict+"  "+ _Sessions.ScheduleDate, lr.StartandEndDateConflict + "  " + _Sessions.ScheduleDate);
+                                ModelState.AddModelError(lr.SessionTimeConflict+"  "+ _Sessions.ScheduleDate.ToString("dd/MM/yyyy"), lr.StartandEndDateConflict + "  " + _Sessions.ScheduleDate.ToString("dd/MM/yyyy"));
                                 break;
                             }
 
@@ -1811,7 +1813,7 @@ namespace TMS.Web.Controllers
                         else
                         {
                             
-                            ModelState.AddModelError(lr.SessionTimeConflict + "  " + _Sessions.ScheduleDate, lr.StartandEndDateConflict + "  " + _Sessions.ScheduleDate);
+                           // ModelState.AddModelError(lr.SessionTimeConflict + "  " + _Sessions.ScheduleDate.ToString("dd/MM/yyyy"), lr.StartandEndDateConflict + "  " + _Sessions.ScheduleDate.ToString("dd/MM/yyyy"));
                             break;
                         }
 
@@ -1859,7 +1861,10 @@ namespace TMS.Web.Controllers
                     {
                         if (_SessionBAL.GetSessionVenueOccupancyDetailUPBAL(_Sessions) > 0)
                         {
-                            ModelState.AddModelError(lr.VenueOcupaidByOther, lr.VenueOcupaidByOther);
+                            var results = _SessionBAL.GetSessionVenueOccupancyDetailStringBAL(_Sessions);
+
+                            ModelState.AddModelError(lr.VenueOcupaidByOther + "  " + _Sessions.ScheduleDate.ToString("dd/MM/yyyy"), lr.VenueOcupaidByOther + "  " + results + " on date " + _Sessions.ScheduleDate.ToString("dd/MM/yyyy"));
+                            
                         }
                         else
                         {
@@ -1960,42 +1965,41 @@ namespace TMS.Web.Controllers
                 dtEndTime = dtEndTime.AddDays(1);
 
             sesions.EndTime = dtEndTime;
-
             var result = _SessionBAL.GetClassDetailByClassIdForNewSessionBAL(sesions);
 
             if (result.MaximumSessionLimitReached)
             {
-                ModelState.AddModelError(lr.ClassMaximumSessionPerDay +"  " +sesions.ScheduleDate, lr.SessionMaximumSessionLimitReached + "  " + sesions.ScheduleDate);
+                ModelState.AddModelError(lr.ClassMaximumSessionPerDay +"  " +sesions.ScheduleDate.ToString("dd/MM/yyyy"), lr.SessionMaximumSessionLimitReached + "  " + sesions.ScheduleDate.ToString("dd/MM/yyyy"));
                 return false;
             }
             else if (!result.IsValidSessionDateTime)
             {
-                ModelState.AddModelError(lr.SessionTimeConflict + "  " + sesions.ScheduleDate, lr.SessionIsValidSessionTime + "  " + sesions.ScheduleDate);
+                ModelState.AddModelError(lr.SessionTimeConflict + "  " + sesions.ScheduleDate.ToString("dd/MM/yyyy"), lr.SessionIsValidSessionTime + "  " + sesions.ScheduleDate.ToString("dd/MM/yyyy"));
                 return false;
             }
             else if (!result.IsValidScheduleDate)
             {
-                ModelState.AddModelError(lr.SessionScheduleDate + "  " + sesions.ScheduleDate, lr.SessionIsValidScheduleDate + "  " + sesions.ScheduleDate);
+                ModelState.AddModelError(lr.SessionScheduleDate + "  " + sesions.ScheduleDate.ToString("dd/MM/yyyy"), lr.SessionIsValidScheduleDate + "  " + sesions.ScheduleDate.ToString("dd/MM/yyyy"));
                 return false;
             }
             else if (!result.IsValidTrainerTime)
             {
-                ModelState.AddModelError(lr.Trainer+sesions.ScheduleDate + "  " + sesions.ScheduleDate, lr.SessionIsValidTrainerTime + "  " + sesions.ScheduleDate);
+                ModelState.AddModelError(lr.Trainer+ "  " + sesions.ScheduleDate.ToString("dd/MM/yyyy"), lr.SessionIsValidTrainerTime + " " + result.TrainerTimeConflictClassNames+" on date  "+sesions.ScheduleDate.ToString("dd/MM/yyyy")+" " );
                 return false;
             }
             else if (!result.IsValidVenueTime )
             {
-                ModelState.AddModelError(lr.VenueName + "  " + sesions.ScheduleDate, lr.SessionIsValidVenueTime + "  " + sesions.ScheduleDate);
+                ModelState.AddModelError(lr.VenueName + "  " + sesions.ScheduleDate.ToString("dd/MM/yyyy"), lr.SessionIsValidVenueTime + "  " + sesions.ScheduleDate.ToString("dd/MM/yyyy"));
                 return false;
             }
             else if (!result.IsValidVenueAvailabilityTime)
             {
-                ModelState.AddModelError(lr.VenueAvailabelTimeRange + "  " + sesions.ScheduleDate, lr.VenueAvailabelTimeRangeIssue + "  " + sesions.ScheduleDate);
+                ModelState.AddModelError(lr.VenueAvailabelTimeRange + "  " + sesions.ScheduleDate.ToString("dd/MM/yyyy"), lr.VenueAvailabelTimeRangeIssue + "  "+ result.IsVenueTime + " on date "+sesions.ScheduleDate.ToString("dd/MM/yyyy"));
                 return false;
             }
             else if (!string.IsNullOrEmpty(result.ConflictNames.Trim()))
             {
-                ModelState.AddModelError(lr.ClassMaximumSessionPerDay + "  " + sesions.ScheduleDate, string.Format(lr.SessionConflictNames, result.ConflictNames.Trim()));
+                ModelState.AddModelError(lr.TraineeTimeConflictWithOtherClass + "  " + sesions.ScheduleDate.ToString("dd/MM/yyyy"), string.Format(lr.SessionConflictNames, result.ConflictNames.Trim()));
                 return false;
             }
 

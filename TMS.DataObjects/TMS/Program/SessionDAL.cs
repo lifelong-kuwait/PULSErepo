@@ -272,7 +272,7 @@ namespace TMS.DataObjects.TMS.Program
         }
         public int GetSessionVenueOccupancyDetailDAL(Sessions Sessions)
         {
-            
+
             return ExecuteScalarSPInt32("TMS_ScheduleVenueOccupancyConflict",
                            ParamBuilder.Par("ScheduleDate", Sessions.ScheduleDate),
                            ParamBuilder.Par("StartTime", Sessions.StartTime),
@@ -280,6 +280,17 @@ namespace TMS.DataObjects.TMS.Program
                            ParamBuilder.Par("VenueID", Sessions.VenueID)
            );
         }
+        public string GetSessionVenueOccupancyDetailStringDAL(Sessions Sessions)
+        {
+
+            return ExecuteScalarNvarchar("TMS_ScheduleVenueOccupancyConflictClass",
+                           ParamBuilder.Par("ScheduleDate", Sessions.ScheduleDate),
+                           ParamBuilder.Par("StartTime", Sessions.StartTime),
+                           ParamBuilder.Par("EndTime", Sessions.EndTime),
+                           ParamBuilder.Par("VenueID", Sessions.VenueID)
+           );
+        }
+        
         public int GetSessionVenueOccupancyDetailUPDAL(Sessions Sessions)
         {
 

@@ -15,7 +15,7 @@
 </style>
 @if (User.IsInRole("CanAddInvoicing"))
 {
-    <h2>@lr.InvoiceCreate</h2>
+    <h2>Fee Invoice</h2>
     <form name="registration" id="registration" onsubmit="event.preventDefault();" method="post">
         <div class="row" style="border:outset 2px;border-radius:5px; border-color:lightgrey">
 
@@ -28,7 +28,7 @@
                                                                                                                             .Name("PersonsForInvoice")
                                                                                                                             .DataTextField("Text")
                                                                                                                             .DataValueField("Value")
-                                                                                                                            .OptionLabel(lr.CustomerSelect)
+                                                                                                                            .OptionLabel("Please Select Student")
                                                                                                                             .Filter("contains")
                                                                                                                             .DataSource(source =>
                                                                                                                             {

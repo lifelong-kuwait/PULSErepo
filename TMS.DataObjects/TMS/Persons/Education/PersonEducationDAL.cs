@@ -31,7 +31,8 @@ namespace TMS.DataObjects.TMS.Persons.Education
         public int Degree_DuplicationCheckDAL(PersonDegrees _Degrees)
         {
             return ExecuteScalarSPInt32("TMS_Degree_DuplicationCheck",
-              ParamBuilder.Par("P_Title", _Degrees.P_Title)
+              ParamBuilder.Par("P_Title", _Degrees.P_Title),
+              ParamBuilder.Par("PersonID", _Degrees.PersonID)
                    );
         }
         /// <summary>

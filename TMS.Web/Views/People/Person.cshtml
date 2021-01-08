@@ -28,7 +28,7 @@
     {
         columns.Bound(e => e.P_DisplayName).Filterable(true).ClientTemplate(@"<div  class='person-box'>
                 <div class='person'>
-                    <img src='../#:ProfilePicture#' class='paddig'  alt=''>" +
+                    <img src='../#:replaceString(data.ProfilePicture)#' class='paddig'  alt=''>" +
                     @"<h3>#:P_DisplayName#</h3>" +
                      @"# if (Email!=null) { #" +
                     @"<p>" + personEmail + @" : #:Email#</p> #} if(ContactNumber!=null){#<p>" + phonenubner + @" : #:ContactNumber#</p> #}#
@@ -131,7 +131,13 @@
         #}#
     </div>
 </script>
-
+<script type="text/javascript">
+    function replaceString(value) {
+        if (value == null || value == "") { return "@TMS.TMSHelper.DefaultPicture()"; } else {
+            return value.replace("~/", "");
+        }
+    }
+</script>
 <script type="text/javascript">
     function FlagsTemplate(data) {
        // debugger;

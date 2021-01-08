@@ -38,7 +38,7 @@
                 </a>
                 <ul class=" dropdown-menu transparent" id="notiContent">
                     <li class="nav-header">Alerts</li>
-                   
+
                     <li class="viewmore"><a target="_blank" href="../Notification/Index">View More Messages</a></li>
                 </ul>
             </li>
@@ -185,25 +185,50 @@
     jQuery(function () {
         jQuery(document).ready(function () {
             updateNotificationCount();
+            Notification.requestPermission().then(function (permission) {
+                console.log(permission);
+                });
+            //Notification.requestPermission().then(function (result) {
+            //    console.log(result);
+            //});
+            //const constraints = {
+            //   autoplayback: true
+            //};
+            //navigator.mediaDevices.autoplayback(constraints).
+            //    then((stream) => {
+            //       //console.log(stream);
+            //     // handleSuccess(stream); // This is basic handler with stream input.
+            //    });
+      //      const constraints = {
+      //          audio: true,
+      //          video: true
+      //      };
+      //      navigator.mediaDevices.getUserMedia({ constraints: true })
+      //.then(function(stream) {
+      //  console.log('You let me use your mic!')
+      //})
+      //.catch(function(err) {
+      //  console.log('No mic for you!')
+      //});
         });
         // Click on notification icon for show notification
         jQuery('.noti').click(function (e) {
             //debugger;
             //e.stopPropagation();
-            
+
             jQuery('.count').hide();
             jQuery('.noti-content').show();
             var count = 0;
             count = parseInt(jQuery('span.count').html()) || 0;
             // only load notification if not already loaded
-            
+
             //if (count > 0) {
                 updateNotification();
             //}
             jQuery('span.count', this).html('&nbsp;');
         })
         // hide notifications
-       
+
         jQuery('html').click(function () {
             jQuery('.noti-content').hide();
         })
@@ -231,7 +256,7 @@
                             }
                         }
                         jQuery('#notiContent').append(jQuery(' <li class="viewmore"><a target="_blank" href="../Notification/Index">View More Messages</a></li>'));
-                       
+
                     }
                 },
                 error: function (error) {
@@ -240,10 +265,10 @@
             })
         }
         // update notification count
-        
+
         function updateNotificationCount() {
             //if('@TempData["message"]' == "Added"){
-          
+
             var Bcount = parseInt(jQuery('span.count').html());
             if (Bcount === 'NaN') {
                 Bcount = 0;
@@ -260,16 +285,19 @@
                     jQuery('.count').html(count);
                     if (Bcount < count) {
                         toastr.info('New Notification');
-                        playSound();
+                        var audio = new Audio('/Attachment/beyond-doubt.mp3');
+                        audio.autoplayback = true;
+                        
+                        audio.play();
                     }
                 }
             });
-           
-            
+
+
         }
         function playSound() {
-            var audio = new Audio('/Attachment/TMS/Music/been_tree.mp3');
-            audio.play();
+
+
         }
         function ToasterMessage() {
             jQuery.ajax({
@@ -296,15 +324,20 @@
     })
 </script>
 <script>
+    window.onload = function () {
+        var context = new AudioContext();
+    }
+</script>
+<script>
     function markAsRead(value) {
         var val = value;
-            jQuery.ajax({
-                type: 'POST',
-                url: '/Notification/MarkAsRead',
-                dataType: "JSON",
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify({ ID: value }),
-                success: function (response) { }
-            });
+        jQuery.ajax({
+            type: 'POST',
+            url: '/Notification/MarkAsRead',
+            dataType: "JSON",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ ID: value }),
+            success: function (response) { }
+        });
     }
 </script>

@@ -883,7 +883,18 @@ namespace TMS.Web.Controllers
                 _mapping.CreatedOn = DateTime.Now;
 
                 _mapping.ID = _PersonBAL.ManageRecordCall_CreateBAL(_mapping);
-
+                var data = _PersonBAL.Prospect_GetAllByIdBAL(oid.ToString());
+                Library.TMS.Notifications nof = new Library.TMS.Notifications();
+                nof.NotificationText = "System Generated Call has forwarded to you.";
+                nof.Organization_ID = CurrentUser.CompanyID;
+                nof.ToUser = Convert.ToInt64(_mapping.AssignedTo);
+                nof.FromUser = CurrentUser.NameIdentifierInt64;
+                nof.ActionUrl = "../Prospect/Detail?pid=" + oid.ToString();
+                nof.Event_ID = 4;
+                nof.CreatedDate = DateTime.Now;
+                BALNotification.create_NotificationsBAL(nof);
+                var notificationHub = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
+                notificationHub.Clients.All.notify("added");
             }
             var resultData = new[] { _mapping };
             return Json(resultData.ToDataSourceResult(request, ModelState));
@@ -911,6 +922,19 @@ namespace TMS.Web.Controllers
 
 
                 _mapping.ID = _PersonBAL.ManageRecordCall_CreateBAL(_mapping);
+                //var results = this._TaskBAL.Task_GetBALbyOrganization(CurrentCulture.ToString(), CurrentUser.CompanyID.ToString(), CurrentUser.NameIdentifierInt64, _objTask.ID);
+                var data = _PersonBAL.Prospect_GetAllByIdBAL(pid.ToString());
+                Library.TMS.Notifications nof = new Library.TMS.Notifications();
+                nof.NotificationText = "System Generated Call has forwarded to you.";
+                nof.Organization_ID = CurrentUser.CompanyID;
+                nof.ToUser = Convert.ToInt64(data.AssignedTo);
+                nof.FromUser = CurrentUser.NameIdentifierInt64;
+                nof.ActionUrl = "../Prospect/Detail?pid=" + pid.ToString();
+                nof.Event_ID = 4;
+                nof.CreatedDate = DateTime.Now;
+                BALNotification.create_NotificationsBAL(nof);
+                var notificationHub = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
+                notificationHub.Clients.All.notify("added");
 
             }
             var resultData = new[] { _mapping };

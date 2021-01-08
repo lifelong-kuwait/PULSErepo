@@ -44,6 +44,7 @@ namespace TMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                _personDegree.PersonID = Convert.ToInt64(pid);
                 if (this._PersonEducationBAL.Degree_DuplicationCheckBAL(_personDegree) > 0)
                 {
                     ModelState.AddModelError(lr.EducationEducationDublication, lr.EducationEducationDublication);

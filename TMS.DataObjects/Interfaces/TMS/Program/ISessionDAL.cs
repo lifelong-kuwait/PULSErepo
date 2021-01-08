@@ -114,6 +114,8 @@ namespace TMS.DataObjects.Interfaces.TMS.Program
         /// <returns>SessionCreationRules.</returns>
         SessionCreationRules TMS_Session_CheckValidSessionDAL(Sessions Sessions);
         int GetSessionVenueOccupancyDetailDAL(Sessions Sessions);
+        string GetSessionVenueOccupancyDetailStringDAL(Sessions Sessions);
+        
         int GetSessionVenueOccupancyDetailUPDAL(Sessions Sessions);
         int User_EmailCheckDAL(long CompanyID, string Email);
 
