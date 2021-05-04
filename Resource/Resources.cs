@@ -42,7 +42,15 @@ namespace Resources {
                    return (string) resourceProvider.GetResource("ResourceNameRequired", CultureInfo.CurrentUICulture.Name);
                }
             }
-            
+        /// <summary>Resource Name Required </summary>
+        public static string JobModulePermisions
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("JobModulePermisions", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        
         /// <summary>Primary Resource Value Required</summary>
         public static string PrimaryResourceRequired {
                get {
@@ -7144,12 +7152,170 @@ namespace Resources {
                 return (string)resourceProvider.GetResource("SecondaryCourseNameRequired", CultureInfo.CurrentUICulture.Name);
             }
         }
+        public static string JobTitle
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("JobTitle", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string SkillSet
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("SkillSet", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Location
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Location", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string CareerLevel
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("CareerLevel", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Entrylevel
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Entrylevel", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Intermediate
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Intermediate", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Midlevel
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Midlevel", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string executivelevel
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("executivelevel", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string SalaryRangeFrom
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("SalaryRangeFrom", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string SalaryRangeTo
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("SalaryRangeTo", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string FunctionalArea
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("FunctionalArea", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Type
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Type", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string NoOfPositions
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("NoOfPositions", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Timing
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Timing", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string LastDateToApply
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("LastDateToApply", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string EducationRequired
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("EducationRequired", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string MinExperiance
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("MinExperiance", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string MaxExperiance
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("MaxExperiance", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Allowance
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Allowance", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string InternShip
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("InternShip", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string PartTime
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("PartTime", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Permanent
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Permanent", CultureInfo.CurrentUICulture.Name);
+            }
+        }
+        public static string Applications
+        {
+            get
+            {
+                return (string)resourceProvider.GetResource("Applications", CultureInfo.CurrentUICulture.Name);
+            }
+        }
 
 
-
-
-
-
+        
 
 
 

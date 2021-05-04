@@ -1,0 +1,235 @@
+﻿@model long
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+}
+@using lr = Resources.Resources;
+@if (User.IsInRole("CanViewJobApplicationDetailJobModule"))
+{
+
+
+<script>
+
+    function PersonTemplate(data) {
+        if (data !== null) {
+            var CourseTemplate = kendo.template(jQuery("#PersonTemplate").html(), { useWithBlock: false });
+            return CourseTemplate(data);
+        }
+        return '';
+    }
+    function JobDetailTemplate(data) {
+        if (data !== null) {
+            var ExperianceTemplate = kendo.template(jQuery("#ExperianceTemplate").html(), { useWithBlock: false });
+            return ExperianceTemplate(data);
+        }
+        return '';
+    }
+    function ContactDetailTemplate(data) {
+        if (data !== null) {
+            var ExperianceTemplate = kendo.template(jQuery("#ContactDeatailTemplate").html(), { useWithBlock: false });
+            return ExperianceTemplate(data);
+        }
+        return '';
+    }
+
+    
+</script>
+<h2>@lr.Applications</h2>
+@Html.AntiForgeryToken()
+@(Html.Kendo().Grid<TMS.Library.Entities.Jobs.JobApplicationPerson>()
+                                        .Name("JobsRequirmentGrid")
+                                        .Columns(columns =>
+                                        {
+                                            columns.Bound(e => e.P_FirstName).ClientTemplate("#=PersonTemplate(data)#").Width(180).Title("First Name");//lr.MessagesHead);
+                                            columns.Bound(e => e.IsActive).ClientTemplate("#=ContactDetailTemplate(data)#").Width(250).MinScreenWidth(560).Title("Active");
+                                            // columns.Bound(e => e.JoiningDate).Width(180).Encoded(false).Title("Joining Date");//lr.MessagesHead);
+                                            columns.Bound(e => e.CreatedOn).Width(250).ClientTemplate("<span class='date' >#=kendo.toString(JoiningDate,'" + DateFormatScript + @"')#</span>").Title("Applied On Date");
+                                            columns.Bound(e => e.ExpectedSalary).ClientTemplate("#=JobDetailTemplate(data)#").Width(180).Title("First Name");//lr.MessagesHead);
+
+                                            //columns.Bound(e => e.MinExperiance).ClientTemplate("#=ExperianceTemplate(data)#").Width(260).Title("Experiance");
+                                            //columns.Bound(e => e.MinExperiance).ClientTemplate("#=ExperianceTemplate(data)#").Width(260).Title("Experiance");
+                                            // columns.Bound(e => e.ExpectedSalary).Width(260).Title("Expected Salary");
+
+                                        })
+                          .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>)).Groupable()
+                                      .Sortable().Selectable(selectable => selectable
+                                      .Mode(GridSelectionMode.Single))
+                                      .Groupable()
+                                      .Pageable(pager => pager
+                                      .Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
+                                      .Scrollable()
+                                      //.ClientDetailTemplateId("PersonGridChildtemplate")
+                                      .Filterable()
+                                      .HtmlAttributes(new { style = "height:700px !important;" })
+                                      .DataSource(dataSource => dataSource
+                                          .Ajax()
+                                          //.ServerOperation(false)
+                                          .Model(model =>
+                                          {
+                                              model.Id(m => m.ID);
+                                          })
+                                         .PageSize(5)
+                                       .Read(read => read.Action("JobsApplications_Read", "JobApplications", new { JobID = Model }))
+                                       .Events(e => e.Error("GeneralErrorHandler(\"JobsRequirmentGrid\")").RequestEnd("GridRequestEndUpdate")))
+                                       .NoRecords(lr.GridNoRecordFoundMessage)
+)
+@helper RenderAddTemplate()
+{
+<div class="toolbar">
+    @if (User.IsInRole("CanViewPersonDetail"))
+    {
+    <a class="k-button tms-grid-Persondetail"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>
+    }
+</div>
+}
+<script id="toolTipTemplate" type="text/x-kendo-template">
+    @if (User.IsInRole("CanViewPersonDetail"))
+    {
+        <span class="grid-tooltip-icon persondetail" dat-pid="#=ID#" title="See the detail of #=P_DisplayName#"><i class="mdi mdi-open-in-new"></i></span>
+    }
+</script>
+
+<script>
+    jQuery(function () {
+       // debugger;
+        var template = kendo.template(jQuery("#toolTipTemplate").html());
+        //initialize tooltip to grid tbody with filter cells with given CSS class
+        var tooltip = jQuery("#JobsRequirmentGrid tbody").kendoTooltip({
+            position: "center",
+            autoHide: false,
+            filter: "td:nth-child(1)",
+            showOn: "click",
+            show: function (e) {
+                //get current target row
+                this.popup.element.addClass("tmstooltip");
+                var currentRow = this.target().closest("tr");
+                var grid = jQuery("#JobsRequirmentGrid").data("kendoGrid");
+                //get current row dataItem
+                var dataItem = grid.dataItem(currentRow);
+                //pass the dataItem to the template
+                var generatedTemplate = template(dataItem);
+                //set the generated template to the content of the tooltip
+                this.content.html(generatedTemplate);
+
+            },
+        }).data("kendoTooltip");
+        
+
+     
+
+        
+         jQuery(".tms-grid-Persondetail").live("mousedown", function (event) {
+         //   debugger;
+             var checkedLength = jQuery("#JobsRequirmentGrid tr.k-state-selected").length;
+            if (checkedLength == 1) {
+                grid = jQuery("#JobsRequirmentGrid").data("kendoGrid");
+                var data = grid.dataItem(jQuery("#JobsRequirmentGrid tr.k-state-selected"));
+                var url = '@Url.Content("~/People/Detail?pid=")' + data.ID;
+                window.open(url, '_blank');
+            } else {
+
+            }
+        });
+        jQuery(".persondetail").live("mousedown", function (event) {
+           // debugger;
+            var url = '@Url.Content("~/People/Detail?pid=")' + jQuery(this).attr("dat-pid");
+            window.open(url, '_blank');
+        });
+    });
+</script>
+<script id="PersonTemplate" type="text/kendo">
+    <div class=''>
+        <div class=''>
+
+            <p>
+                <span class="heading">
+                    <b>
+                        First Name:
+                    </b>
+                </span> #:data.P_FirstName#
+            </p>
+            <p>
+                <span class="heading">
+                    <b>
+                        Middle Name:
+                    </b>
+                </span>#:data.P_MiddleName#
+            </p>
+            <p>
+                <span class="heading">
+                    <b>
+                        Last Name:
+                    </b>
+                </span> #:data.P_LastName#
+            </p>
+            
+        </div>
+    </div>
+</script>
+
+<script id="ExperianceTemplate" type="text/kendo">
+    <div class=''>
+        <div class=''>
+            <p>
+                <span class="heading">
+                    <b>
+                        Expected Salary:
+                    </b>
+                </span> #:data.ExpectedSalary#
+            </p>
+            <p>
+                <span class="heading">
+                    <b>
+                        Joining Date:
+                    </b>
+                </span> <span class='date'>#:data.JoiningDate#</span>
+            </p>            
+        </div>
+    </div>
+</script>
+<script id="ContactDeatailTemplate" type="text/kendo">
+    <div class=''>
+        <div class=''>
+            <p>
+                <span class="heading">
+                    <b>
+                        Email:
+                    </b>
+                </span> #:data.Email#
+            </p>
+            <p>
+                <span class="heading">
+                    <b>
+                        Country Code:
+                    </b>
+                </span> #:data.CountryCode#
+            </p>
+            <p>
+                <span class="heading">
+                    <b>
+                        Extension:
+                    </b>
+                </span> #:data.Extension#
+            </p>
+            <p>
+                <span class="heading">
+                    <b>
+                        Contact Number:
+                    </b>
+                </span> #:data.ContactNumber#
+            </p>
+            <p>
+                <span class="heading">
+                    <b>
+                        Active Status: #:data.IsActive#   #if (data.IsActive){ # <span class="mdi mdi-checkbox-blank-circle text-success"></span>    #}else{#  <span class="mdi mdi-checkbox-blank-circle text-danger"></span>  #}#
+                    </b>
+                </span>
+            </p>
+        </div>
+    </div>
+</script>
+}
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/ts/tms/Program/Program.js")"></script>
+}

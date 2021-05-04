@@ -121,6 +121,7 @@ namespace TMS.Business.Interfaces.TMS.Program
         /// <returns>SessionCreationRules.</returns>
         SessionCreationRules GetClassDetailByClassIdForNewSessionBAL(Sessions Sessions);
         int GetSessionVenueOccupancyDetailBAL(Sessions Sessions);
+        string GetSessionVenueOccupancyDetailStringBAL(Sessions Sessions);
         int GetSessionVenueOccupancyDetailUPBAL(Sessions Sessions);
         int User_EmailCheckBAL(long CompanyID, string Email);
 

@@ -4,7 +4,7 @@
     ViewBag.Title = "Invoice";
     Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
     var InvoiceNumber = lr.InvoiceNumber;
-    var ReferanceNumber = lr.InvoiceRefNumber;
+    var ReferanceNumber = "ReferanceNumber";//lr.InvoiceRefNumber;
     var customer = lr.Customer;
     var createdBy = lr.GridCreatedBy;
     var oraganization = lr.OrganizationFullName;
@@ -18,7 +18,7 @@
 }
 @if (User.IsInRole("CanViewInvoicing"))
 {
-    <h2>@lr.invoiceing</h2>
+    <h2>Fee Module</h2>
     <script>
         //Class
         function SessionTemplate(data) {
@@ -56,7 +56,7 @@ if(Discount_Value!=null){#<p><b>" + discount + @"</b>:#:Discount_Value#</p> #}
 if(Invoice_Gross_Total!=null){#<h2><p><b>" + grossTotal + @"</b> :#:Invoice_Gross_Total#</p></h2> #}#
 
 </div>"
-                                                ).Title(lr.InvoiceDetail);
+                                                ).Title("Detail");
                                                     columns.Bound(e => e.invoiceLastActivity).Filterable(true).ClientTemplate(@"<div  class='person-box'>
     <div class='person'>
         " +
@@ -64,8 +64,8 @@ if(Invoice_Gross_Total!=null){#<h2><p><b>" + grossTotal + @"</b> :#:Invoice_Gros
                                        @"<h5> <b>Done By:</b>:#:INO_GetlatestHistoryCreator#</h5>" +
 
                                 @"</div>"
-                               );
-                                                    columns.Bound(e => e.Invoice_Status).Filterable(true).ClientTemplate("#=SessionTemplate(data)#").Title(lr.InvoiceStatus);
+                               ).Title("Last Activity");
+                                                    columns.Bound(e => e.Invoice_Status).Filterable(true).ClientTemplate("#=SessionTemplate(data)#").Title("Status");
 
 
                                                 })

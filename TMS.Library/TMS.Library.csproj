@@ -96,6 +96,10 @@
     <Compile Include="Entities\Invoice\InvoiceHistory.cs" />
     <Compile Include="Entities\Invoice\InvoiceStatusModel.cs" />
     <Compile Include="Entities\Invoice\ReIssued.cs" />
+    <Compile Include="Entities\Jobs\JobApplication.cs" />
+    <Compile Include="Entities\Jobs\JobApplicationPerson.cs" />
+    <Compile Include="Entities\Jobs\JobReferance.cs" />
+    <Compile Include="Entities\Jobs\JobsRequirement.cs" />
     <Compile Include="Entities\Notifications\Notifications.cs" />
     <Compile Include="Entities\TMS\Course\CourseDataBar.cs" />
     <Compile Include="Entities\TMS\Course\CourseRelatedExamModel.cs" />

@@ -154,6 +154,11 @@ namespace TMS.Business.TMS.Program
         {
              return _SessionBAL.GetSessionVenueOccupancyDetailDAL(Sessions); 
         }
+        public string GetSessionVenueOccupancyDetailStringBAL(Sessions Sessions)
+        {
+            return _SessionBAL.GetSessionVenueOccupancyDetailStringDAL(Sessions);
+        }
+        
         public int GetSessionVenueOccupancyDetailUPBAL(Sessions Sessions)
         {
             return _SessionBAL.GetSessionVenueOccupancyDetailUPDAL(Sessions);

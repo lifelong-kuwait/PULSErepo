@@ -48,6 +48,8 @@ namespace TMS.Web.Controllers
         {
             _UserBAL.LogInsert(DateTime.Now.ToString(), "10", Logs.View_Success.ToString(), System.Environment.MachineName, "User tried to View Persons " + DateTime.UtcNow, "", 0, "People", "Person", pT.ToString(), CurrentUser.CompanyID);
             ViewData["RoleID"] = pT;
+            ViewData["JobGridValue"] = 0;
+            Session["JobLoadID"] = 0;
             return View(pT);
         }
 
@@ -148,7 +150,9 @@ namespace TMS.Web.Controllers
             var startRowIndex = (request.Page - 1) * request.PageSize;
                int Total = 0;
             var SearchText = Request.Form["SearchText"];
+            var JobGridValue = Session["JobLoadID"];
             var DeletedPerson = Request.Form["DeletedPerson"];
+            JobGridValue = JobGridValue.ToString();
             if (request.PageSize == 0)
             {
                 request.PageSize = 10;
@@ -163,15 +167,31 @@ namespace TMS.Web.Controllers
                 if (CurrentUser.CompanyID > 0)
                 {
                     IList<TMS.Library.TMS.Trainer.Trainer> _person;
-                    if (kendoRequest.Filters.Count>0)
+                    if (JobGridValue.Equals("0"))
                     {
-                         _person = this._TrainerBAL.TrainerOrganization_GetAllBAL(ref Total, CurrentCulture, RoleID, Convert.ToString(CurrentUser.CompanyID), SearchText, GridHelper.GetSortExpression(request, "ID").ToString(), startRowIndex, request.Page, 10000, PersonId);
+                        if (kendoRequest.Filters.Count > 0)
+                        {
+                            _person = this._TrainerBAL.TrainerOrganization_GetAllBAL(ref Total, CurrentCulture, RoleID, Convert.ToString(CurrentUser.CompanyID), SearchText, GridHelper.GetSortExpression(request, "ID").ToString(), startRowIndex, request.Page, 10000, PersonId,false);
 
+                        }
+                        else
+                        {
+                            _person = this._TrainerBAL.TrainerOrganization_GetAllBAL(ref Total, CurrentCulture, RoleID, Convert.ToString(CurrentUser.CompanyID), SearchText, GridHelper.GetSortExpression(request, "ID").ToString(), startRowIndex, request.Page, request.PageSize, PersonId,false);
+
+                        }
                     }
                     else
                     {
-                        _person = this._TrainerBAL.TrainerOrganization_GetAllBAL(ref Total, CurrentCulture, RoleID, Convert.ToString(CurrentUser.CompanyID), SearchText, GridHelper.GetSortExpression(request, "ID").ToString(), startRowIndex, request.Page, request.PageSize, PersonId);
+                        if (kendoRequest.Filters.Count > 0)
+                        {
+                            _person = this._TrainerBAL.TrainerOrganization_GetAllBAL(ref Total, CurrentCulture, RoleID, Convert.ToString(CurrentUser.CompanyID), SearchText, GridHelper.GetSortExpression(request, "ID").ToString(), startRowIndex, request.Page, 10000, PersonId,true);
 
+                        }
+                        else
+                        {
+                            _person = this._TrainerBAL.TrainerOrganization_GetAllBAL(ref Total, CurrentCulture, RoleID, Convert.ToString(CurrentUser.CompanyID), SearchText, GridHelper.GetSortExpression(request, "ID").ToString(), startRowIndex, request.Page, request.PageSize, PersonId,true);
+
+                        }
                     }
                     //var _person = _PersonBAL.PersonOrganization_GetALLBAL(Convert.ToString(CurrentUser.CompanyID));,string SortExpression,int StartRowIndex,int page,int PageSize
                     _person = _person.Distinct().ToList();
@@ -681,6 +701,15 @@ namespace TMS.Web.Controllers
                 result = "";
             }
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [DontWrapResult]
+        [ClaimsAuthorize("CanDeletePerson")]
+
+        public JsonResult setJobGridValue(string value)
+        {
+            Session["JobLoadID"] = value;
+            return Json(value, JsonRequestBehavior.AllowGet);
         }
 
         [NonAction]

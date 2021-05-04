@@ -62,7 +62,8 @@
             if(currentEditingRowFileType==12){
 
             }else{
-                var FileType = jQuery("#FileType").data('kendoDropDownList'); FileType.value(dropvalue); FileType.trigger("change");
+                var FileType = jQuery("#FileType").data('kendoDropDownList');
+                FileType.value(dropvalue); FileType.trigger("change");
                 jQuery(".attachmentimage").html(fileiconaccordinglyfiletype(dropvalue));
             }
         }
@@ -285,7 +286,7 @@
             @if (Opentype == 1 && User.IsInRole("CanAddEditPersonAttachments"))
             {
                 <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
-                <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+                @*<a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>*@
             }
             @if (Opentype == 1 && User.IsInRole("CanDeletePersonAttachments"))
             {
@@ -294,7 +295,7 @@
             @if (Opentype == 2 && User.IsInRole("CanAddEditOrganizationAttachments"))
             {
                 <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
-                <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+                @*<a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>*@
             }
             @if (Opentype == 2 && User.IsInRole("CanDeleteOrganizationAttachments"))
             {

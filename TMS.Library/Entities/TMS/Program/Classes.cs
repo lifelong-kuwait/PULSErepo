@@ -891,6 +891,12 @@ namespace TMS.Library.Entities.TMS.Program
         /// </summary>
         /// <value>The conflict names.</value>
         public bool IsValidVenueAvailabilityTime { get; set; }
+        /// <summary>
+        /// Gets or sets the conflict names.
+        /// </summary>
+        /// <value>Trainer Time Conflict Class Names.</value>
+        public string TrainerTimeConflictClassNames { get; set; }
+        public string IsVenueTime { get; set; }
     }
     /// <summary>
     /// Class ClassTraineeRulesVerify.

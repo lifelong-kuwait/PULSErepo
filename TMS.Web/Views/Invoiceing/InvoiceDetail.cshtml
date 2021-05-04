@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
 }
 
-<h2>@lr.InvoiceDetail</h2>
+<h2>Fee Detail</h2>
 
 @using lr = Resources.Resources;
 @{
@@ -52,7 +52,7 @@
             if(Invoice_Gross_Total!=null){#<h2><p><b>Net Total</b> :#:Invoice_Gross_Total#</p></h2> #}#
 
         </div>"
-                                    ).Title(lr.InvoiceDetail);
+                                    ).Title("Detail");
                                         columns.Bound(e => e.invoiceLastActivity).Filterable(true).ClientTemplate(@"<div  class='person-box'>
         <div class='person'>
             " +
@@ -60,9 +60,9 @@
                                 @"<h5> <b>Done By:</b>:#:INO_GetlatestHistoryCreator#</h5>" +
 
                          @"</div>"
-                        ).Title(lr.InvoiceLastActivity);
+                        ).Title("Last Activity");
 
-                                        columns.Bound(e => e.Is_Re_Issued).Filterable(true).ClientTemplate("#=SessionTemplate(data)#").Title(lr.InvoiceStatus);
+                                        columns.Bound(e => e.Is_Re_Issued).Filterable(true).ClientTemplate("#=SessionTemplate(data)#").Title("Status");
                                     }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_PersonDetailTemplate").DisplayDeleteConfirmation(false))
                                       .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate() </text>))
                                                                                                                 .DataSource(dataSource => dataSource

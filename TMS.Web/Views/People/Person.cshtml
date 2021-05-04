@@ -28,7 +28,7 @@
     {
         columns.Bound(e => e.P_DisplayName).Filterable(true).ClientTemplate(@"<div  class='person-box'>
                 <div class='person'>
-                    <img src='../#:ProfilePicture#' class='paddig'  alt=''>" +
+                    <img src='../#:replaceString(data.ProfilePicture)#' class='paddig'  alt=''>" +
                     @"<h3>#:P_DisplayName#</h3>" +
                      @"# if (Email!=null) { #" +
                     @"<p>" + personEmail + @" : #:Email#</p> #} if(ContactNumber!=null){#<p>" + phonenubner + @" : #:ContactNumber#</p> #}#
@@ -80,48 +80,49 @@
 
 @helper RenderAddTemplate()
 {
-    <div class="toolbar">
-        @if (User.IsInRole("CanAddEditPerson"))
-        {
-            <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
-            <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
-        }
-        @if (User.IsInRole("CanDeletePerson"))
-        {
-            <a class="k-button tms-grid-destroyperson"><span class="tms-grid-icon mdi mdi-delete "></span></a>
-        }
-        @if ((User.IsInRole("CanViewPersonDetail")))
-        {
-            if (Model == (int)personType.Trainer)
-            {
-                <a class="k-button tms-grid-Persondetail"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>
-                <a class="k-button tms-grid-detail"><span class="tms-grid-icon mdi mdi-account-card-details "></span></a>
-                <a class="k-button tms-grid-detail_Registration"><span class="tms-grid-icon mdi mdi-receipt "></span></a>
-                <a class="k-button tms-grid-detail_Class"><span class="tms-grid-icon mdi mdi-account-box"></span></a>
+                                        <div class="toolbar">
+                                            @if (User.IsInRole("CanAddEditPerson"))
+                                            {
+                                                <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+                                                <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+                                            }
+                                            @if (User.IsInRole("CanDeletePerson"))
+                                            {
+                                                <a class="k-button tms-grid-destroyperson"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+                                            }
+                                            @if ((User.IsInRole("CanViewPersonDetail")))
+                                            {
+                                                if (Model == (int)personType.Trainer)
+                                                {
+                                                    <a class="k-button tms-grid-Persondetail"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>
+                                                    <a class="k-button tms-grid-detail"><span class="tms-grid-icon mdi mdi-account-card-details "></span></a>
+                                                    <a class="k-button tms-grid-detail_Registration"><span class="tms-grid-icon mdi mdi-receipt "></span></a>
+                                                    <a class="k-button tms-grid-detail_Class"><span class="tms-grid-icon mdi mdi-account-box"></span></a>
 
 
-            }
-            else if (Model == (int)personType.Trainee)
-            {
-                <a class="k-button tms-grid-Persondetail"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>
-                <a class="k-button tms-grid-detailtrainee"><span class="tms-grid-icon mdi mdi-account-card-details "></span></a>
-                <a class="k-button tms-grid-detail_Registrationtrainee"><span class="tms-grid-icon mdi mdi-receipt "></span></a>
-                <a class="k-button tms-grid-detail_Classtrainee"><span class="tms-grid-icon mdi mdi-account-box "></span></a>
-            }
-            else if (Model == (int)personType.Person)
-            {
-                <a class="k-button tms-grid-Persondetail"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>
-                @*<a href="@Url.Content("~/People/PersonActive")" class="k-button tms-grid-close"><span class="tms-grid-icon mdi mdi-close-box"></span></a>*@
-                <a href="@Url.Content("~/People/PersonActive?pT=0")" class="k-button tms-grid-close"><span class="tms-grid-icon mdi mdi-close-box"></span></a>
+                                                }
+                                                else if (Model == (int)personType.Trainee)
+                                                {
+                                                    <a class="k-button tms-grid-Persondetail"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>
+                                                    <a class="k-button tms-grid-detailtrainee"><span class="tms-grid-icon mdi mdi-account-card-details "></span></a>
+                                                    <a class="k-button tms-grid-detail_Registrationtrainee"><span class="tms-grid-icon mdi mdi-receipt "></span></a>
+                                                    <a class="k-button tms-grid-detail_Classtrainee"><span class="tms-grid-icon mdi mdi-account-box "></span></a>
+                                                }
+                                                else if (Model == (int)personType.Person)
+                                                {
+                                                    <a class="k-button tms-grid-Persondetail"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>
+                                                    @*<a href="@Url.Content("~/People/PersonActive")" class="k-button tms-grid-close"><span class="tms-grid-icon mdi mdi-close-box"></span></a>*@
+                                                    <a href="@Url.Content("~/People/PersonActive?pT=0")" class="k-button tms-grid-close"><span class="tms-grid-icon mdi mdi-close-box"></span></a>
 
-                //   <a class="k-button tms-grid-close"><span class="tms-grid-icon mdi mdi-close-box"></span></a>
+                                                    //   <a class="k-button tms-grid-close"><span class="tms-grid-icon mdi mdi-close-box"></span></a>
 
-                @*<a class="k-button tms-grid-exitapp"><span class="tms-grid-icon mdi mdi-exit-to-app "></span></a>*@
-                @*<a class="k-button tms-grid-phone"><span class="tms-grid-icon mdi mdi-phone-settings "></span></a>*@
-            }
+                                                    @*<a class="k-button tms-grid-exitapp"><span class="tms-grid-icon mdi mdi-exit-to-app "></span></a>*@
+                                                    @*<a class="k-button tms-grid-phone"><span class="tms-grid-icon mdi mdi-phone-settings "></span></a>*@
+                                                }
 
-        }
-    </div>
+                                            }
+                                                    <a class="k-button tms-grid-JobPerson"><label class="switch" ><input class="Switcher" type="checkbox"><span class="slider round"></span></label></a>
+                                        </div>
     @*@Html.Partial("Static/_gridSearchWidget", lr.MenuPerson)*@
 }
 <script type="text/kendo" id="FlagsTemplateformat">
@@ -131,7 +132,13 @@
         #}#
     </div>
 </script>
-
+<script type="text/javascript">
+    function replaceString(value) {
+        if (value == null || value == "") { return "@TMS.TMSHelper.DefaultPicture()"; } else {
+            return value.replace("~/", "");
+        }
+    }
+</script>
 <script type="text/javascript">
     function FlagsTemplate(data) {
        // debugger;
@@ -142,7 +149,7 @@
         return '';
     }
     jQuery(function () {
-       debugger;
+      //debugger;
         var template = kendo.template(jQuery("#toolTipTemplate").html());
         //initialize tooltip to grid tbody with filter cells with given CSS class
         var tooltip = jQuery("#PersonGrid tbody").kendoTooltip({
@@ -169,8 +176,40 @@
             //alert('edit click');
             jQuery("#PersonGrid").data("kendoGrid").editRow(jQuery("[data-uid='" + jQuery(this).attr("dat-uid") + "']"));
         });
-
-
+       
+        
+        jQuery(".Switcher").change("mousedown", function (e) {
+            console.log(e.target.value)
+            if (e.target.value == 'on') {
+                this.value = 'off';
+                jQuery.ajax({
+                    method: "post",
+                    url: "/People/setJobGridValue",
+                    dataType: "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ value: -5 }),
+                    success: function (msg) { }
+                });
+            
+                jQuery('#PersonGrid').data('kendoGrid').dataSource.read();
+                jQuery('#PersonGrid').data('kendoGrid').refresh();
+            }
+            else {
+                jQuery.ajax({
+                    method: "post",
+                    url: "/People/setJobGridValue",
+                    dataType: "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ value: 0 }),
+                    success: function (msg) { }
+                });
+                this.value = 'on';
+                jQuery('#PersonGrid').data('kendoGrid').dataSource.read();
+                jQuery('#PersonGrid').data('kendoGrid').refresh();
+            }
+           
+           });
+        
         //destroy from header
         @*jQuery(".tms-grid-destroy-main").live("mousedown", function (event) {
             grid = jQuery("#PersonDetailGrid").data("kendoGrid");
@@ -889,3 +928,65 @@
     //    toolbar.Create().Text("");
     //    toolbar.Custom().Text("Delete").HtmlAttributes(new { @class = "k-grid-destroy delete-all" });
     //})*@
+<style>
+   
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: red;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+    input:checked + .slider {
+        background-color: green;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+</style>

@@ -88,11 +88,15 @@
     <mvcSiteMapNode title="Customer" controller="Customer" action="Index">
       <mvcSiteMapNode title="Customer" controller="Customer" action="Index"/>
     </mvcSiteMapNode>
-     <mvcSiteMapNode title="Invoicing" controller="Invoiceing" action="InvoiceGrid">
-      <mvcSiteMapNode title="Invoicing" controller="Invoiceing" action="InvoiceGrid"/>
-      <mvcSiteMapNode title="Invoice Create" controller="Invoiceing" action="Index"/>
-      <mvcSiteMapNode title="Invoice Edit" controller="Invoiceing" action="InvoiceEdit"/>
-      <mvcSiteMapNode title="Invoice Detail" controller="Invoiceing" action="InvoiceDetail"/>
+     <mvcSiteMapNode title="FeeInvoicing" controller="Invoiceing" action="InvoiceGrid">
+      <mvcSiteMapNode title="Fee Invoicing" controller="Invoiceing" action="InvoiceGrid"/>
+      <mvcSiteMapNode title="Fee Invoice" controller="Invoiceing" action="Index"/>
+      <mvcSiteMapNode title="Fee Edit" controller="Invoiceing" action="InvoiceEdit"/>
+      <mvcSiteMapNode title="Fee Invoice Detail" controller="Invoiceing" action="InvoiceDetail"/>
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="Jobs" controller="JobAplicationRequirement" action="Index">
+      <mvcSiteMapNode title="Jobs / Careers" controller="JobAplicationRequirement" action="Index"/>
+      <mvcSiteMapNode title="Job Applications" controller="JobApplications" action="Index"/>      
     </mvcSiteMapNode>
     <!--<mvcSiteMapNode title="Tasks" controller="Task" action="Index"/>
     <mvcSiteMapNode title="Task History" controller="Task" action="Detail"/>-->

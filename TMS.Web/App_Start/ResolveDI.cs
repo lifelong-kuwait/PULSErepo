@@ -31,6 +31,7 @@ using TMS.Business.Interfaces.Common.DDL;
 using TMS.Business.Interfaces.Common.Groups;
 using TMS.Business.Interfaces.CRM;
 using TMS.Business.Interfaces.Invoiceing;
+using TMS.Business.Interfaces.Jobs;
 using TMS.Business.Interfaces.TMS;
 using TMS.Business.Interfaces.TMS.Exams;
 using TMS.Business.Interfaces.TMS.Language;
@@ -38,6 +39,7 @@ using TMS.Business.Interfaces.TMS.Organization;
 using TMS.Business.Interfaces.TMS.Persons.Education;
 using TMS.Business.Interfaces.TMS.Program;
 using TMS.Business.Interfaces.TMS.SkillsInterestLevel;
+using TMS.Business.Jobs;
 using TMS.Business.TMS;
 using TMS.Business.TMS.Exams;
 using TMS.Business.TMS.Invoice;
@@ -90,12 +92,13 @@ namespace TMS.Web.App_Start
                 Component.For<IProspectBAL>().ImplementedBy<ProspectBAL>().LifestyleTransient(),
                 Component.For<IReportBAL>().ImplementedBy<ReportBAL>().LifestyleTransient(),
                 Component.For<ITrainerBAL>().ImplementedBy<TrainerBAL>().LifestyleTransient(),
-                   Component.For<ILanguageBAL>().ImplementedBy<LanguageBAL>().LifestyleTransient(),
-                   Component.For<IAttendanceBAL>().ImplementedBy<AttendanceBAL>().LifestyleTransient(),
-                      Component.For<ISalesAdministrationBAL>().ImplementedBy<SalesAdministrationBAL>().LifestyleTransient(),
-                      Component.For<IInvoiceingBAL>().ImplementedBy<InvoiceBAL>().LifestyleTransient(),
-                      Component.For<INotificationBAL>().ImplementedBy<NotificationBAL>().LifestyleTransient()
-
+                Component.For<ILanguageBAL>().ImplementedBy<LanguageBAL>().LifestyleTransient(),
+                Component.For<IAttendanceBAL>().ImplementedBy<AttendanceBAL>().LifestyleTransient(),
+                Component.For<ISalesAdministrationBAL>().ImplementedBy<SalesAdministrationBAL>().LifestyleTransient(),
+                Component.For<IInvoiceingBAL>().ImplementedBy<InvoiceBAL>().LifestyleTransient(),
+                Component.For<INotificationBAL>().ImplementedBy<NotificationBAL>().LifestyleTransient(),
+                Component.For<IJobsBAL>().ImplementedBy<JobsRequirementBAL>().LifestyleTransient(),
+                Component.For<IJobApplicationBAL>().ImplementedBy<Job_Application_BAL>().LifestyleTransient()
                 );//
             container.Install(new DependencyInjectionExtension());
         }

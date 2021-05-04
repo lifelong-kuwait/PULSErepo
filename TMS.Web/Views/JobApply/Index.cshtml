@@ -1,0 +1,1509 @@
+﻿@using System.Threading
+@using System.Web.Optimization
+@using Abp.Timing
+@using lr = Resources.Resources;
+@using TMS.DataObjects
+@model List<TMS.Library.Entities.Jobs.JobsRequirement>
+
+@*@{
+        SetAntiForgeryCookie();
+    }*@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Apply Here</title>
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/Shamcey/css/style.default.css")" type="text/css" />
+    <link href="@Url.Content("~/css/custom.css")" rel="stylesheet" />
+    @Styles.Render("~/Content/vendor")
+    @Styles.Render("~/Bundles/css")
+    <link href="@Url.Content("~/Content/flags/css/flag-icon.min.css")" rel="stylesheet" />
+    <script type="text/javascript">
+        //This is used to get the application's root path from javascript. It's useful if you're running application in a virtual directory under IIS.
+        var abp = abp || {}; abp.appPath = '@ApplicationPath';
+    </script>
+    <link href="~/css/JobAplicationCSS.css" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="@Url.Content("~/Scripts/others/html5shiv.js")"></script>
+        <script src="@Url.Content("~/Scripts/others/respond.min.js")"></script>
+    <![endif]-->
+    @Scripts.Render("~/Bundles/vendor/js/top")
+
+    <script type="text/javascript">
+        function filterCountry() {
+            return {
+                CountryId: jQuery("#dropdownlistCountries").data("kendoDropDownList").value()
+            };
+
+        }
+        function SalutationChange(e) {
+            // ;
+            var dataItem = this.dataItem(e.item);
+            var salutation = parseInt(dataItem.Value);
+            var dropdownlist = jQuery("#Gender").data("kendoDropDownList");
+            switch (salutation) {
+                case 1:
+                    dropdownlist.value("1"); dropdownlist.trigger("change");
+                    break;
+                case 2:
+                    dropdownlist.value("2"); dropdownlist.trigger("change");
+                    break;
+                case 3:
+                    dropdownlist.value("2"); dropdownlist.trigger("change");
+                    break;
+                case 4:
+                    dropdownlist.value("0"); dropdownlist.trigger("change");
+                    break;
+                default:
+                    return true;
+            }
+        };
+        function onDOBChange(e) {
+            var dt = e.sender;
+            var value = dt.value();
+
+            if (value === null) {
+                value = kendo.parseDate(dt.element.val(), dt.options.parseFormats);
+            }
+
+            if (value < dt.min()) {
+                dt.value(dt.min());
+            } else if (value > dt.max()) {
+                dt.value(dt.max());
+            }
+        }
+        function OnChangeSessionDuration(value) {
+            console.log(value);
+            var durationYear = parseInt(jQuery("#Duration_" + value).data("kendoDropDownList").value());
+            var sessionYear = parseInt(jQuery("#Session_" + value).data("kendoDropDownList").value());
+            var DegreeCompletionYear = durationYear + sessionYear;
+            var dt = new Date(); var currentYear = parseInt(dt.getFullYear());
+            if (durationYear != NaN || sessionYear != NaN) {
+                if (DegreeCompletionYear > currentYear) {
+                    jQuery("#DegreenIncomplete_" + value).prop("checked", true).change();
+                    jQuery(":radio[name='DegreeStatus_" + value + "']").attr("disabled", true);
+                } else {
+
+                    jQuery("#Degreencomplete_" + value).prop("checked", true).change();
+                    jQuery(":radio[name='DegreeStatus_" + value + "']").attr("disabled", false);
+                }
+            }
+        }
+        //function JobsTemplate(data) {
+        //    if (data !== null) {
+        //        console.log(jQuery("#JobsTemplate").get(0));
+        //        //var CourseTemplate = kendo.template(jQuery("#JobsTemplate").html(), { useWithBlock: false });
+        //        //return CourseTemplate(data);
+        //    }
+        //    return '';
+        //}
+    </script>
+    <link href="@Url.Content("~/Content/kendo/2018.1.117/kendo.common-fiori.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2018.1.117/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2018.1.117/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2018.1.117/kendo.fiori.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2018.1.117/kendo.dataviz.fiori.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2018.1.117/kendo.rtl.min.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/kendo/2018.1.117/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2018.1.117/jszip.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2018.1.117/kendo.all.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2018.1.117/kendo.aspnetmvc.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+
+    @if (CurrentCulture == "ar-KW")
+    {
+        <link href="@Url.Content("~/Content/Shamcey/css/lang-AR.css")" rel="stylesheet" type="text/css" id="rtl_ltr_b1" />
+        <link href="@Url.Content("~/css/langRTL.css")" rel="stylesheet" />
+    }
+    else
+    {
+
+        <link href="@Url.Content("~/css/langLTR.css")" rel="stylesheet" />
+    }
+</head>
+<body class="loginpage">
+
+
+    @*<div class="logo animate0 bounceIn"><img src="@Url.Content("~/Content/Shamcey/images/logo.png")" alt="" /></div>
+        <form id="UpdatePassword" method="post" autocomplete="off">
+            @Html.HiddenFor(x => x.uid)
+            @Html.HiddenFor(x => x.ts)
+            @Html.AntiForgeryToken()
+            <div class="inputwrapper login-alert">
+
+                @if (ViewContext.ViewData.ModelState.Where(x => x.Key == "").Any())
+                {
+                    @Html.ValidationSummary(true, null, new { @class = "alert alert-error" })
+                }
+            </div>
+            <div class="inputwrapper animate1 bounceIn">
+                @Html.PasswordFor(x => x.Password, new { @placeholder = lr.UserPassword })
+            </div>
+            <div class="inputwrapper animate2 bounceIn">
+                @Html.PasswordFor(x => x.ConfirmPassword, new { @placeholder = lr.UserConfirmPassword })
+            </div>
+            <div class="inputwrapper animate3 bounceIn">
+                <button id="submit" type="submit">@lr.UserChangePassword</button>
+            </div>
+        </form>*@
+    <section class="form-box" id="JobBlock">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-sm-offset-1 col-md-12 col-md-offset-2 col-lg-12 col-lg-offset-3 form-wizard" style="margin-left: 1% !important;">
+
+                    <!-- Form Wizard -->
+                    @*     <form role="form" action="item\addform" method="post">*@
+                    @*@using (Html.BeginForm("BlogComment", "Blog"))
+                        {*@
+                    <h3>Position to Apply</h3>
+
+                    <!-- Form progress -->
+                    <div class="form-wizard-steps form-wizard-tolal-steps-4">
+                        <div class="form-wizard-progress">
+                            @{
+                                int i = 1;
+                            }
+                        </div>
+                        @foreach (var item in Model)
+                        {
+                            <div class="row ">
+                                <div class="col-lg-1 text-left">
+
+                                    @i  .
+
+                                </div>
+                                <div class="col-lg-8 text-left">
+                                    <div class="" style="color:#0866c6;"><b>Job Title :</b><b> @item.JobTitle</b></div>
+                                    <div class=""><b>Description :</b>@Html.Raw(item.Description)</div>
+                                    <div class=""><b>Salary Range :</b>@item.SalaryRangeFrom -To- @item.SalaryRangeTo</div>
+                                    <div class=""><b>No of Positions :</b>@item.NoOfPositions</div>
+
+                                    <div class="" style="color:red;"><b>Last Date To Apply :</b>@item.LastDateToApply.ToString("dddd, dd MMMM yyyy")</div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <a class="btn btn-primary ApplyStuff" id="@item.ID" value="@item.ID">Apply</a>
+                                </div>
+                            </div>
+                            {
+                                i = ++i;
+                            }
+                        }                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="form-box" id="JobDetailBlock" style="display:none;">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-sm-offset-1 col-md-12 col-md-offset-2 col-lg-12 col-lg-offset-3 form-wizard" style="margin-left: 1% !important;">
+
+                    <!-- Form Wizard -->
+                    @*     <form role="form" action="item\addform" method="post">*@
+                    @*@using (Html.BeginForm("BlogComment", "Blog"))
+                        {*@
+                    <h3>Job Detail</h3>
+
+                    <!-- Form progress -->
+                    <div class="form-wizard-steps form-wizard-tolal-steps-4">
+                        <div class="form-wizard-progress">
+
+                        </div>
+                        <div class="col-lg-12">
+                            <h2 id="JobDetailheader"></h2>
+                        </div>
+                        <div class="row ">
+
+                            <div class="col-lg-12">
+                                <h5 id="JobDetailBody"></h5>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-12 text-right" id="JobDetailLink">
+
+                            @*<a class="btn btn-primary" onclick="showStuff('Leture for English');">Apply</a>*@
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="form-box" id="ApplyBlock" style="display:none;">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-sm-offset-1 col-md-12 col-md-offset-2 col-lg-12 col-lg-offset-3 form-wizard" style="margin-left: 1% !important;">
+
+                    <!-- Form Wizard -->
+                    @*     <form role="form" action="item\addform" method="post">*@
+                    @*@using (Html.BeginForm("BlogComment", "Blog"))
+                        {*@
+                    <h3>Employment Form</h3>
+                    <p>Fill all form field to go next step</p>
+
+                    <!-- Form progress -->
+                    <div class="form-wizard-steps form-wizard-tolal-steps-4">
+                        <div class="form-wizard-progress">
+                            <div class="form-wizard-progress-line" data-now-value="12.25" data-number-of-steps="4" style="width: 8.25%;"></div>
+                        </div>
+                        <!-- Step 1 -->
+                        <div class="form-wizard-step active">
+                            <div class="form-wizard-step-icon"><i class="fa fa-user" aria-hidden="true"></i></div>
+                            <p>Personal</p>
+                        </div>
+                        <!-- Step 1 -->
+                        <!-- Step 3 -->
+                        <div class="form-wizard-step">
+                            <div class="form-wizard-step-icon"><i class="fa fa-book" aria-hidden="true"></i></div>
+                            <p>Education</p>
+                        </div>
+                        <!-- Step 3 -->
+                        <!-- Step 4 -->
+                        <div class="form-wizard-step">
+                            <div class="form-wizard-step-icon"><i class="fa fa-hands-helping" aria-hidden="true"></i></div>
+                            <p>Referance</p>
+                        </div>
+                        <!-- Step 4 -->
+                        <!-- Step 5 -->
+                        <div class="form-wizard-step">
+                            <div class="form-wizard-step-icon"><i class="fa fa-history" aria-hidden="true"></i></div>
+                            <p>History</p>
+                        </div>
+                        <!-- Step 5 -->
+                        <!-- Step 6 -->
+                        <div class="form-wizard-step">
+                            <div class="form-wizard-step-icon"><i class="fa fa-history" aria-hidden="true"></i></div>
+                            <p>Attachments</p>
+                        </div>
+                        <!-- Step 6 -->
+
+                    </div>
+                    <!-- Form progress -->
+                    <!-- Form Step 1 -->
+                    <fieldset>
+
+                        <h4>Personal Information: <span>Step 1 - 5</span></h4>
+                        <div id="personeditdiv" style="display:none;">
+                            <div class="form-group">
+                                @Html.Label("Job ID", new { @class = "col-md-3 col-lg-3 control-label" })
+                                <div class="col-md-7 col-lg-7 col-sm-11">
+                                    @Html.Kendo().TextBox().Name("JobID").HtmlAttributes(new { @class = "form-control required", @disabled = "disabled", @style = " width: 100%;" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label(lr.PersonSalutation, new { @class = "col -md-3 col-lg-3 control-label" })
+                            <div class="col-md-7 col-lg-7 col-sm-11">
+                                @(Html.Kendo().DropDownList().Name("SalutationID").DataTextField("Text").DataValueField("Value")
+                                                                                                                        .OptionLabel(lr.SalutationOptionalLabel)
+                                                                                                                        //  .OptionLabel(new { Text = lr.SalutationOptionalLabel, Value = 0 })
+                                                                                                                        .HtmlAttributes(new { @class = "form-control txtrequired required", style = "width:100%", })
+                                                                                                                                            .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.Salutation>(typeof(TMS.Library.Salutation))).Events(e => e.Change("SalutationChange")))
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label(lr.Gender, new { @class = "col-md-3 col-lg-3 control-label" })
+                            <div class="col-md-7 col-lg-7 col-sm-11">
+                                @(Html.Kendo().DropDownList().Name("Gender").DataTextField("Text").DataValueField("Value")
+                                                                                                                        .OptionLabel(lr.GenderOptionallabel)
+                                                                                                                        // .OptionLabel(new { Text = lr.GenderOptionallabel, Value = 0 })
+                                                                                                                        .HtmlAttributes(new { @class = "form-control txtrequired required", style = "width:100%" })
+                                                                                                                                               .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.Gender>(typeof(TMS.Library.Gender))))
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label(lr.PersonP_FirstName, new { @class = "col-md-3 col-lg-3 control-label" })
+                            <div class="col-md-7 col-lg-7 col-sm-11">
+                                @Html.Kendo().TextBox().Name("P_FirstName").HtmlAttributes(new { @class = "form-control pfirstname txtrequired required", @placeholder = lr.PersonP_FirstName, @dir = @PLDIR, @style = " width: 100%;" })
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label(lr.PersonP_MiddleName, new { @class = "col -md-3 col-lg-3 control-label" })
+                            <div class="col-md-7 col-lg-7 col-sm-11">
+                                @Html.Kendo().TextBox().Name("P_MiddleName").HtmlAttributes(new { @class = "form-control pmidddlename required", @placeholder = lr.PersonP_MiddleName, @dir = @PLDIR, @style = " width: 100%;" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label(lr.PersonP_LastName, new { @class = "col-md-3 col-lg-3 control-label" })
+                            <div class="col-md-7 col-lg-7 col-sm-11">
+                                @Html.Kendo().TextBox().Name("P_LastName").HtmlAttributes(new { @class = "form-control  plast_name txtrequired required", @placeholder = lr.PersonP_LastName, @dir = @PLDIR, @style = " width: 100%;" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label(lr.PersonNickName, new { @class = "col-md-3 col-lg-3 control-label" })
+                            <div class="col-md-7 col-lg-7 col-sm-11">
+                                @Html.Kendo().TextBox().Name("NickName").HtmlAttributes(new { @class = "form-control nickname txtrequired required", @placeholder = lr.PersonNickName, @dir = @PLDIR, @style = " width: 100%;" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label(lr.UserEmail, new { @class = "col-md-3 col-lg-3 control-label" })
+                            <div class="col-md-7 col-lg-7 col-sm-11">
+                                @Html.Kendo().TextBox().Name("Email").HtmlAttributes(new { @class = "form-control txtrequired required", @placeholder = lr.PersonContactEmail, @style = " width: 100%;" })
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label(lr.MaritalStatus, new { @class = "col-md-3 col-lg-3 control-label" })
+                            <div class="col-md-7 col-lg-7 col-sm-11">
+                                @(Html.Kendo().DropDownList().Name("MaritalStatus").DataTextField("Text").DataValueField("Value")
+                                                                                                .OptionLabel(lr.MaritalStatusOptionalLabel)
+                                                                                                .OptionLabel(new { Text = lr.MaritalStatusOptionalLabel, Value = 0 })
+                                                                                                .HtmlAttributes(new { @class = "form-control required", style = "width:100%" })
+                                                                                                .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.MaritalStatus>(typeof(TMS.Library.MaritalStatus))))
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label(lr.DateOfBirth, new { @class = "col-md-3 col-lg-3 control-label" })
+                            <div class="col-md-7 col-lg-7 col-sm-11">
+                                @(Html.Kendo().DatePicker().Name("DateOfBirth")
+                                                                                    .Start(CalendarView.Month)
+                                                                                    .Depth(CalendarView.Month)
+                                                                                    .Format(KendoDateFormat)
+                                                                                    .Value(DateTime.Now.AddYears(-10))
+                                                                                    //.OptionLabel(new { Text = lr.OfficialIDTypeOptionalLabel, Value = 0 })
+                                                                                    .HtmlAttributes(new { @class = "required", style = "width: 100%;" })
+                                                                                    .Max(DateTime.Now.AddYears(-10)).Events(e => e.Change("onDOBChange")))
+
+
+                                @*@(Html.Kendo().DatePickerFor(model => model.DateOfBirth).Start(CalendarView.Month).Depth(CalendarView.Month).Format(KendoDateFormat).Value("").HtmlAttributes(new { style = "width: 100%;padding-bottom: 10px;", @class = "txtrequired" }).Max(DateTime.Now).Events(e => e.Change("onDOBChange")))*@
+                                @*@Html.ValidationMessageFor(model => model.DateOfBirth)*@
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("NationalIdentity", new { @class = "col-md-3 col-lg-3 control-label" })
+                            <div class="col-md-7 col-lg-7 col-sm-11">
+                                @(Html.Kendo().DropDownList().Name("NationalIdentity")
+                                                                                                                                                                                /// .ValuePrimitive(true)
+                                                                                                                                                                                .HtmlAttributes(new { style = "width:100%" })
+                                                                                        .DataTextField("Text")
+                                                                                        .DataValueField("Value")
+                                                                                        .SelectedIndex(110)
+                                                                                        .Filter("contains")
+                                                                                        .HtmlAttributes(new { @class = "required", style = "width: 100%;" })
+                                                                                        .OptionLabel(new { Text = lr.NationalityOptionalLabel, Value = 0 })
+                                                                                        .DataSource(dataSource =>
+                                                                                        {
+                                                                                            dataSource.Read(read =>
+                                                                                            {
+                                                                                                read.Action("NationalityCode", "DDL");
+                                                                                            }).ServerFiltering(false);
+
+                                                                                        })
+                                )
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label(lr.PersonPhoneCountryCode, new { @class = "col-md-3 col-lg-3 control-label" })
+                            <div class="col-md-7 col-lg-7 col-sm-11">
+                                @(Html.Kendo().DropDownList()
+                                                                                                                                            .ValuePrimitive(true)
+                                                                                                                                                            .Name("dropdownlistCountries")
+                                                                                                                                                            .OptionLabel("Countries")
+                                                                                                                                                            .DataTextField("Text")
+                                                                                                                                                            .DataValueField("Value")
+                                                                                                                                                            .Filter("contains")
+                                                                                                                                                            .HtmlAttributes(new { @class = "form-control required", style = "width:100%" })
+                                                                                                                                                            .DataSource(dataSource =>
+                                                                                                                                                            {
+                                                                                                                                                                dataSource.Read(read => read.Action("CoreCountries", "DDL")).ServerFiltering(false);
+                                                                                                                                                            })
+                                )
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label(lr.AddressStateRegion, new { @class = "col-md-3 col-lg-3 control-label" })
+                            <div class="col-md-7 col-lg-7 col-sm-11">
+                                @(Html.Kendo().DropDownList()
+                                                                                                                                                     .Name("dropdownlistCountriesRegions")
+                                                                                                                                                     .ValuePrimitive(true)
+                                                                                                                                                     .AutoBind(true)
+                                                                                                                                                     .OptionLabel("Regions")
+                                                                                                                                                     .DataTextField("Text")
+                                                                                                                                                     .DataValueField("Value").HtmlAttributes(new { @class = "form-control required", style = "width:100%" })
+                                                                                                                                                     .DataSource(dataSource =>
+                                                                                                                                                     {
+                                                                                                                                                         dataSource.Read(read => read.Action("CoreRegion", "DDL").Data("filterCountry"))
+                                                                                                                                                                                                .ServerFiltering(true);
+                                                                                                                                                     })
+                                                                                                                                                        .CascadeFrom("dropdownlistCountries")
+                                )
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label(lr.PersonPhoneNumber, new { @class = "col-md-3 col-lg-3 control-label" })
+                            <div class="col-md-7 col-lg-7 col-sm-11">
+                                @(Html.Kendo().TextBox().Name("ContactNumber").HtmlAttributes(new { @class = "form-control required", style = "width:100%" }))
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label(lr.PersonPhoneExtension, new { @class = "col-md-3 col-lg-3 control-label" })
+                            <div class="col-md-7 col-lg-7 col-sm-11">
+                                @(Html.Kendo().TextBox().Name("Extension").HtmlAttributes(new { @class = "form-control required", style = "width:100%" }))
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Expected Salary", new { @class = "col-md-3 col-lg-3 control-label" })
+                            <div class="col-md-7 col-lg-7 col-sm-11">
+                                @Html.Kendo().TextBox().Name("ExpectedSalary").HtmlAttributes(new { @class = "form-control txtrequired required", @placeholder = "Expected Salary", @style = " width: 100%;" })
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Joining Date", new { @class = "col-md-3 col-lg-3 control-label" })
+                            <div class="col-md-7 col-lg-7 col-sm-11">
+                                @(Html.Kendo().DatePicker().Name("JoiningDate")
+                                                                                    .Start(CalendarView.Month)
+                                                                                    .Depth(CalendarView.Month)
+                                                                                    .Format(KendoDateFormat)
+                                                                                    .Value(DateTime.Now)
+                                                                                    //.OptionLabel(new { Text = lr.OfficialIDTypeOptionalLabel, Value = 0 })
+                                                                                    .HtmlAttributes(new { @class = "required", style = "width: 100%;" })
+                                                                                    .Min(DateTime.Now.AddMonths(3)).Events(e => e.Change("onDOBChange")))
+
+
+                                @*@(Html.Kendo().DatePickerFor(model => model.DateOfBirth).Start(CalendarView.Month).Depth(CalendarView.Month).Format(KendoDateFormat).Value("").HtmlAttributes(new { style = "width: 100%;padding-bottom: 10px;", @class = "txtrequired" }).Max(DateTime.Now).Events(e => e.Change("onDOBChange")))*@
+                                @*@Html.ValidationMessageFor(model => model.DateOfBirth)*@
+                            </div>
+                        </div>
+                        <div class="" style="margin-top:2%;margin-left:4%;">
+                            <label>if selected then go through Psychometric test?: <span>*</span></label>
+                            <label class="radio-inline" style="margin-left:3%;">
+                                <input type="radio" name="itemPsychoMeterTest" value="true" checked="checked"><span></span> Yes
+                            </label>
+                            <label class="radio-inline" style="margin-left:6%;">
+                                <input type="radio" name="itemPsychoMeterTest" value="false"><span>  </span> NO
+                            </label>
+                        </div>
+                        <div class="form-wizard-buttons" style="margin-top:2%;">
+                            <button type="button" class="btn btn-next">Next</button>
+                        </div>
+                    </fieldset>
+                    <!-- Form Step 1 -->
+                    <!-- Form Step 2 -->
+                    <fieldset>
+                        <h4>Education: <span>Step 2 - 5</span></h4>
+                        <div class="form-group">
+                            <table class="table table-striped" id="EducationTable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">
+
+                                        </th>
+                                        <th scope="col">
+
+                                        </th>
+                                        <th scope="col">
+
+                                        </th>
+                                        <th scope="col">
+
+                                        </th>
+                                        <th scope="col">
+
+                                        </th>
+                                        <th scope="col">
+
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="4" class="EduR_1">
+                                            <div class="form-group" style="margin:0; padding:0px;">
+                                                <label class="col-md-3 col-lg-3 control-label"> Title</label>
+                                                <div class="col-md-7 col-lg-8 col-sm-11"> <input type="text" name="ITitle_1" id="ITitle_1" class="form-control required"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr style="margin-top:2%;" class="EduR_1">
+                                        <td colspan="4">
+                                            <div class="form-group" style="margin:0; padding:0px;">
+                                                <label class="col-md-3 col-lg-3 control-label">University/Institute</label>
+                                                <div class="col-md-7 col-lg-8 col-sm-11"> <input type="text" name="IName_1" id="IName_1" class="form-control required"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="EduR_1">
+                                        <td colspan="4">
+                                            <div class="form-group" style="margin:0; padding:0px;">
+                                                <div class="col-md-3 col-lg-3 control-label">Result Type</div>
+                                                <div class="col-md-4 col-lg-4 col-sm-11">
+                                                    @(Html.Kendo().DropDownList().Name("Result_Type_1").DataTextField("Text").DataValueField("Value").OptionLabel(lr.PersonEducationDegreeResultTypeOptionalLabel).HtmlAttributes(new { @class = "form-control required", style = "width:100%" })
+                                                                                                       .BindTo(TMS.Extensions.EnumToSelectList<TMS.Library.ResultType>(typeof(TMS.Library.ResultType))))
+
+                                                </div>
+
+                                                <div class="col-md-3 col-lg-3 col-sm-11">
+                                                    <input type="text" id="Result_1" class="form-control" placeholder="@lr.PersonEducationDegreeResultPlaceHolder" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr style="margin-top:2%;" class="EduR_1">
+                                        <td colspan="4">
+                                            <div class="form-group">
+                                                <div class="col-md-2 col-lg-2 control-label">Session</div>
+                                                <div class="col-md-4 col-lg-4 col-sm-6">
+                                                    <span title="" class="k-widget k-dropdown k-header session" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" style="width: 100%;" tabindex="0" aria-owns="Session_1_listbox" aria-disabled="false" aria-busy="false" aria-activedescendant="76c9e802-8b59-4a3a-bb51-8f6fa6a0d002"><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">Select Session</span><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-60-down"></span></span></span><input class="session required" id="Session_1" name="Session_1" style="width: 100%; display: none;" type="text" data-role="dropdownlist"></span>
+                                                    <script>
+                                                        kendo.syncReady(function () { jQuery("#Session_1").kendoDropDownList({ "change": function (e) { OnChangeSessionDuration(1); }, "dataSource": { "transport": { "read": { "url": "/DDL/PersonEducationDegreeSessions" }, "prefix": "" }, "schema": { "errors": "Errors" } }, "dataTextField": "Text", "dataValueField": "Value", "optionLabel": "Select Session" }); });
+                                                    </script>
+                                                </div>
+                                                <div class="col-md-2 col-lg-2 control-label">Duration</div>
+                                                <div class="col-md-4 col-lg-4 col-sm-6">
+                                                    <span title="" class="k-widget k-dropdown k-header duration" unselectable="on" role="listbox" aria-haspopup="true" aria-expanded="false" style="width: 100%;" tabindex="0" aria-owns="Duration_1_listbox" aria-disabled="false" aria-busy="false" aria-activedescendant="4181b58c-0faf-4a57-b443-3215a6afca72"><span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">Select Degree Duration</span><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-60-down"></span></span></span><input class="duration required" id="Duration_1" name="Duration_1" style="width: 100%; display: none;" type="text" data-role="dropdownlist"></span>
+                                                    <script>
+                                                        kendo.syncReady(function () { jQuery("#Duration_1").kendoDropDownList({ "change": function (e) { OnChangeSessionDuration(1); }, "dataSource": { "transport": { "read": { "url": "/DDL/PersonEducationDegreeDuration" }, "prefix": "" }, "schema": { "errors": "Errors" } }, "dataTextField": "Text", "dataValueField": "Value", "optionLabel": "Select Degree Duration" }); });
+                                                    </script>
+
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="EduR_1">
+                                        <td colspan="4">
+                                            <div class="form-group">
+                                                <div class="col-md-8 col-lg-12 col-sm-11" style="margin-top:2%;margin-left:4%;">
+                                                    <label>Degree Completed?: <span>*</span></label>
+                                                    <label class="radio-inline" style="margin-left:3%;">
+                                                        <input type="radio" name="DegreeStatus_1" id="DegreenIncomplete_1" value="2" checked="checked"> @lr.PersonEducationDegreeIncomplete
+                                                    </label>
+                                                    <label class="radio-inline" style="margin-left:6%;">
+                                                        <input type="radio" name="DegreeStatus_1" id="Degreencomplete_1" value="1"> @lr.PersonEducationDegreeComplete
+                                                    </label>
+                                                </div>
+                                            </div>
+
+
+                                        </td>
+                                    </tr>
+                                    <tr class="EduR_1">
+                                        <td colspan="2">
+                                            <input type="text" name="EMajor_1" id="EMajor_1" placeholder="Major (1)" class="form-control required">
+                                        </td>
+                                    </tr>
+                                    <tr style="margin-top: 1%; border-bottom: 2px solid black;" class="EduR_1">
+                                        <td colspan="4">
+                                            <input type="text" name="Description_1" id="Description_1" placeholder="Description (1)" class="form-control required">
+                                        </td>
+                                    </tr>
+                                    <tr id="1" style="visibility:hidden" class="EduR_1">
+                                        1
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a class="btn btn-primary" id="AddEducationRow"><i class="fa fa-plus-square-o" aria-hidden="true"> Add more</i></a>
+
+                        </div>
+
+
+                        <br />
+                        <div class="form-wizard-buttons">
+                            <button type="button" class="btn btn-previous">Previous</button>
+                            <button type="button" class="btn btn-next">Next</button>
+                        </div>
+                    </fieldset>
+                    <!-- Form Step 3 -->
+                    <!-- Form Step 4 -->
+                    <fieldset>
+
+                        <h4>References: <span>Step 3 - 5</span></h4>
+                        <div style="clear:both;"></div>
+                        <div class="form-group">
+                            <table class="table table-striped" id="ReferanceTable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">
+                                            Name
+                                        </th>
+                                        <th scope="col">
+                                            Title
+                                        </th>
+                                        <th scope="col">
+                                            Company
+                                        </th>
+                                        <th scope="col">
+                                            Phone
+                                        </th>
+                                        <th>
+
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr style="margin-top:2%;" class="RefR_1">
+                                        <td>
+                                            <input type="text" name="RName_1" id="RName_1" placeholder="Name" class="form-control required">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="RTitle_1" id="RTitle_1" placeholder="Title" class="form-control required">
+
+                                        </td>
+                                        <td>
+                                            <input type="text" name="RCompany_1" id="RCompany_1" placeholder="Company" class="form-control required">
+
+                                        </td>
+                                        <td>
+                                            <input type="text" name="RPhone_1" id="RPhone_1" placeholder="Phone" class="form-control required">
+
+                                        </td>
+                                        <td class="RefR_1"></td>
+
+                                    </tr>
+                                    <tr id="1" style="visibility:hidden;margin-top: 1%; border-bottom: 2px solid black;" class="RefR_1">1</tr>
+
+                                </tbody>
+                            </table>
+                            <a class="btn btn-primary" id="AddReferanceRow"><i class="fa fa-plus-square-o" aria-hidden="true"> Add More </i></a>
+
+                        </div>
+                        <br />
+                        <div class="form-wizard-buttons">
+                            <button type="button" class="btn btn-previous">Previous</button>
+                            <button type="button" class="btn btn-next">Next</button>
+                        </div>
+                    </fieldset>
+                    <!-- Form Step 4 -->
+                    <!--Form Step 5-->
+                    <fieldset>
+
+                        <h4>Employment History: <span>Step 4 - 5</span></h4>
+
+                        <div style="clear:both;"></div>
+                        <h6>Please list all previous employers inside and oustside Kuwait:</h6>
+
+                        <div class="form-group">
+                            <table class="table table-striped" id="employersHistoryTable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">
+
+                                        </th>
+                                        <th scope="col">
+
+                                        </th>
+                                        <th scope="col">
+
+                                        </th>
+                                        <th scope="col">
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="margin-top:2%;" class="EHis_1">
+                                        <td colspan="2">
+                                            <input type="text" name="HEmployer_1" id="HEmployer_1" placeholder="Employer (1)" class="form-control required">
+                                        </td>
+                                        <td colspan="1">
+                                            <input type="text" name="HTitle_1" id="HTitle_1" placeholder="Job Title" class="form-control required">
+
+                                        </td>
+                                        <td colspan="1"></td>
+                                    </tr>
+                                    <tr style="margin-top:1%;" class="EHis_1">
+                                        <td>
+                                            <input type="text" name="HWPh_1" id="HWPh_1" placeholder="Work Phone" class="form-control required">
+                                        </td>
+                                        <td>
+                                            <label class="label" style="color:#8b0000">From</label>
+                                            <input type="date" name="HFrom_1" id="HFrom_1" placeholder="From" class="form-control required">
+                                        </td>
+                                        <td>
+                                            <label class="label" style="color:#8b0000">To</label>
+
+                                            <input type="date" name="HTo_1" id="HTo_1" placeholder="To" class="form-control required">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="HSalary_1" id="HSalary_1" placeholder="Salary" class="form-control required">
+
+                                        </td>
+                                    </tr>
+                                    <tr style="margin-top:1%;border-bottom:2px solid black;" class="EHis_1">
+                                        <td>
+                                            <input type="text" name="HAddress_1" id="HAddress_1" placeholder="Address" class="form-control required">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="HCity_1" id="HCity_1" placeholder="city" class="form-control required">
+
+                                        </td>
+                                        <td>
+                                            <input type="text" name="HState_1" id="HState_1" placeholder="State" class="form-control required">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="HZip_1" id="HZip_1" placeholder="Zip" class="form-control required">
+
+                                        </td>
+                                    </tr>
+                                    <tr id="1" style="visibility:hidden" class="EHis_1">1</tr>
+                                </tbody>
+                            </table>
+                            <a class="btn btn-primary" id="employersHistoryRow"><i class="fa fa-plus-square-o" aria-hidden="true"> Add More </i></a>
+                        </div>
+                        <br />
+                        <div class="form-wizard-buttons">
+                            <button type="button" class="btn btn-previous">Previous</button>
+                            <button type="button" class="btn btn-next">Next</button>
+                        </div>
+                    </fieldset>
+                    <!--Form Step 5-->
+                    <!--Form Step 5-->
+                    <fieldset>
+
+                        <h4>Attachment: <span>Step 5 - 5</span></h4>
+
+                        <div style="clear:both;"></div>
+                        <h6>Please attach required attachments in pdf or Word:</h6>
+
+                        <div class="form-group">
+                            <div class="form-group">
+                                <input id="fileupload" name="fileupload" type="file" accept="application/pdf,application/docx" class="form-control required">
+                            </div>
+
+                        </div>
+                        <input type="text" id="FileID" value="" style="display:none" />
+                        <br />
+                        <div class="form-wizard-buttons">
+                            <button type="button" class="btn btn-previous">Previous</button>
+                            <button type="button" class="btn btn-submit" id="btnSubmit">Submit</button>
+                        </div>
+                    </fieldset>
+                    <!--Form Step 5-->
+                    <!--</form>-->
+                    <!-- Form Wizard -->
+                    @*  }*@
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <script type="text/javascript">
+        "use strict";
+    function scroll_to_class(element_class, removed_height) {
+        var scroll_to = jQuery(element_class).offset().top - removed_height;
+        if (jQuery(window).scrollTop() != scroll_to) {
+            jQuery('.form-wizard').stop().animate({ scrollTop: scroll_to }, 0);
+        }
+    }
+
+    function bar_progress(progress_line_object, direction) {
+        var number_of_steps = progress_line_object.data('number-of-steps');
+        var now_value = progress_line_object.data('now-value');
+        var new_value = 0;
+        if (direction == 'right') {
+            new_value = now_value + (100 / number_of_steps);
+        }
+        else if (direction == 'left') {
+            new_value = now_value - (100 / number_of_steps);
+        }
+        progress_line_object.attr('style', 'width: ' + new_value + '%;').data('now-value', new_value);
+        } function onChange(e) {
+            var orders = jQuery("#shipTo").data("kendoDropDownList");
+            orders.value("");
+
+            if (e.sender.value() == "") {
+                orders.enable(false);
+            }
+            else {
+                orders.enable(true);
+            }
+        }
+
+    jQuery(document).ready(function () {
+
+        jQuery('#AddEducationRow').click(function () {
+            var indexID = jQuery('#EducationTable tr:last').attr('id');
+            if (indexID == 1) {
+            } else {
+                jQuery("#EduDelete_" + indexID).hide();
+            }
+                indexID = parseInt(indexID) + 1;
+                var Ero = '<td><span class="btn btn-delete EduDelete"  id="EduDelete_' + indexID + '"value="' + indexID + '"> Delete</span></td>'
+                var Er1 = '<tr class="EduR_' + indexID + '"><td colspan="3"><div class="form-group" style="margin:0; padding:0px;"><label class="col-md-3 col-lg-3 control-label"> Title</label><div class="col-md-7 col-lg-8 col-sm-11"> <input type="text" name="ITitle_' + indexID + '" id="ITitle_' + indexID + '" class="form-control required"></div></div></td>' + Ero+'</tr>';
+            var Er2 = '<tr style="margin-top:2%;" class="EduR_' + indexID + '"><td colspan="4"><div class="form-group" style="margin:0; padding:0px;"><label class="col-md-3 col-lg-3 control-label">University/Institute</label><div class="col-md-7 col-lg-8 col-sm-11"> <input type="text" name="IName_' + indexID + '" id="IName_' + indexID + '" class="form-control required"></div></div></td></tr>';
+                var Enumerators = JSON.parse('@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(TMS.Extensions.EnumToSelectList<TMS.Library.ResultType>(typeof(TMS.Library.ResultType)),
+                                 new Newtonsoft.Json.Converters.StringEnumConverter()))');
+                var Er3 = '<tr class="EduR_' + indexID + '"><td colspan="4"><div class="form-group" style="margin:0; padding:0px;"><div class="col-md-3 col-lg-3 control-label">Result Type</div><div class="col-md-4 col-lg-4 col-sm-11">';
+            //Er3 = Er3 + '<select class="form-control required" id="Result_Type_' + indexID + '">';
+            //    for (var x = 0; x < Enumerators.length; x++) {
+            //        var option = Enumerators[x];
+            //        Er3 = Er3 + '<option value="' + option.Value + '">' + option.Text + '</option>';
+            //    }
+            Er3 = Er3 + '<input class="Result_Type_ required" id="Result_Type_' + indexID + '" name="Result_Type_' + indexID + '" style="width: 100%; display: none;" type="text" data-role="dropdownlist"/></div><div class="col-md-3 col-lg-3 col-sm-11"><input type="text" id="Result_1"  class="form-control required" placeholder="@lr.PersonEducationDegreeResultPlaceHolder"/></div></div></td></tr>';
+                //var x = '<tr style="margin-top:2%;" class="EduR_' + indexID + '"><td colspan="2"><input type="text" name="IName_' + indexID + '" id="IName_' + indexID + '" placeholder="Institute (' + indexID + ')" class="form-control "></td><td colspan="1"><select data-val="true" id="ECountry_' + indexID + '" class="form-control" data-val-required="The DayOfWeek field is required." id="DayOfWeek" name="DayOfWeek" style="width:80%;"><option value="">Countries</option></select></td><td><span class="btn btn-delete EduDelete"  id="EduDelete_' + indexID + '"value="' + indexID + '" >Delete</span></td></tr><tr style="margin-top:2%;"  class="EduR_' + indexID + '"><td colspan="2"><label class="label" style="color:#8b0000">From</label><input type="date" name="EFrom_' + indexID + '" id="EFrom_' + indexID + '" placeholder="From" class="form-control "></td><td colspan="2"><label class="label" style="color:#8b0000">To</label><input type="date" name="ETo_' + indexID + '" id="ETo_' + indexID + '" placeholder="To" class="form-control "></td></tr><tr  class="EduR_' + indexID + '" style="margin-top: ' + indexID + '%; border-bottom: 2px solid black;"><td colspan="2"><input type="text" name="EDegree_' + indexID + '" id="EDegree_' + indexID + '" placeholder="Degree (' + indexID + ')" class="form-control "></td><td colspan="2"><input type="text" name="EMajor_' + indexID + '" id="EMajor_' + indexID + '" placeholder="Major (' + indexID + ')" class="form-control "></td></tr><tr  class="EduR_' + indexID + '" id="' + indexID + '" style="visibility:collapse">' + indexID + '</tr>';
+            var Er4 = '<tr style="margin-top:2%;" class="EduR_' + indexID + '"><td colspan="4"><div class="form-group"><div class="col-md-2 col-lg-2 control-label">Session</div><div class="col-md-4 col-lg-4 col-sm-6"><input class="session required" id="Session_' + indexID + '" name="Session_' + indexID + '" style="width: 100%; disabled="disabled" style="width: 100%;"/></div > <div class="col-md-2 col-lg-2 control-label">Duration</div> <div class="col-md-4 col-lg-4 col-sm-6"><input class="duration required" id="Duration_' + indexID + '" name="Duration_' + indexID + '" style="width: 100%; display: none;" type="text" data-role="dropdownlist"/></div></div></td ></tr > ';
+            var Er5 = '<tr class="EduR_' + indexID + '"><td colspan="4"><div class="form-group"><div class="col-md-8 col-lg-12 col-sm-11" style="margin-top:2%;margin-left:4%;"><label>Degree Completed?: <span>*</span></label><label class="radio-inline" style="margin-left:3%;"><input type="radio" name="DegreeStatus_' + indexID + '" id="DegreenIncomplete' + indexID + '" value="2" checked="checked"> @lr.PersonEducationDegreeIncomplete</label><label class="radio-inline" style="margin-left:6%;"><input type="radio" name="DegreeStatus_' + indexID + '" id="Degreencomplete' + indexID + '" value="1"> @lr.PersonEducationDegreeComplete</label></div></div></td></tr>';
+                var Er6 = '<tr class="EduR_' + indexID + '"><td colspan = "2" ><input type="text" name="EMajor_' + indexID + '" id="EMajor_' + indexID + '" placeholder="Major (' + indexID + ')" class="form-control "></td></tr>';
+            var Er7 = '<tr style="margin-top: 1%; border-bottom: 2px solid black;" class="EduR_' + indexID + '"><td colspan = "4" > <input type="text" name="Description_' + indexID + '" id="Description_' + indexID + '" placeholder="Description (' + indexID + ')" class="form-control required"></td></tr> <tr id="' + indexID + '" style="visibility:hidden" class="EduR_' + indexID + '">' + indexID + '</tr>'
+                var x = Er1 + Er2 + Er3 + Er4 + Er5 + Er6 + Er7;
+                jQuery('#EducationTable').append(x);
+                jQuery("#Session_" + indexID + "").kendoDropDownList({
+                    autoBind: false, cascadeFrom: "Session", optionLabel: "Select Session", dataTextField: "Text", dataValueField: "Value", change: function (e) { OnChangeSessionDuration(indexID); }, dataSource: { serverFiltering: true, transport: { read: "/DDL/PersonEducationDegreeSessions", } }
+                }).data("kendoDropDownList");
+                jQuery("#Duration_" + indexID + "").kendoDropDownList({
+                    autoBind: false,
+                    cascadeFrom: "Duration",
+                    optionLabel: "Select Duration",
+                    dataTextField: "Text",
+                    dataValueField: "Value",
+                    change: function (e) { OnChangeSessionDuration(indexID); },
+                    dataSource: {
+                        serverFiltering: true,
+                        transport: {
+                            read: "/DDL/PersonEducationDegreeDuration",
+                        }
+                    }
+                }).data("kendoDropDownList");
+            var c = jQuery("#Result_Type_" + indexID + "").kendoDropDownList({
+                autoBind: false,
+                cascadeFrom: "Duration",
+                optionLabel: "Select Duration",
+                dataTextField: "Text",
+                dataValueField: "Value",
+                dataSource: Enumerators
+            }).data("kendoDropDownList");
+
+        });
+        jQuery(document).on('click', '.showStuff', function () {
+
+            document.getElementById("JobBlock").style.display = 'none';
+            // hide the lorem ipsum text
+            document.getElementById("JobDetailBlock").style.display = 'block';
+
+            document.getElementById("JobDetailheader").innerHTML = jQuery(this).attr("value");
+            document.getElementById("JobDetailBody").innerHTML = jQuery(this).text();
+            document.getElementById("JobDetailLink").innerHTML = '<a class="btn btn-primary ApplyStuff" value="' + jQuery(this).attr("value") + '">Apply</a>';
+
+
+        });
+        jQuery(document).on('click', '.ApplyStuff', function () {
+            document.getElementById("JobBlock").style.display = 'none';
+            document.getElementById("JobDetailBlock").style.display = 'none';
+            document.getElementById("ApplyBlock").style.display = 'block';          
+            jQuery("#JobID").val(jQuery(this).attr('id'));        
+        });
+        jQuery(document).on('click', '.EduDelete', function () {
+            var val = jQuery(".EduDelete").attr("value");
+            console.log(val);
+            jQuery(".EduR_" + val).remove();
+            var indexID = parseInt(val) - 1;
+            jQuery("#EduDelete_" + indexID).show();
+        });
+        jQuery('#AddReferanceRow').click(function () {
+            var indexID = jQuery('#ReferanceTable tr:last').attr('id');
+            if (indexID == 1) {
+                indexID = parseInt(indexID) + 1;
+                var x = '  <tr style="margin-top:2%;" class="RefR_' + indexID + '"><td><input type="text" name="RName_' + indexID + '" id="RName_' + indexID + '" placeholder="Name" class="form-control required"></td><td><input type="text" name="RTitle_' + indexID + '" id="RTitle_' + indexID + '" placeholder="Title" class="form-control required"></td><td><input type="text" name="RCompany_' + indexID + '" id="RCompany_' + indexID + '" placeholder="Company" class="form-control required"></td><td><input type="text" name="RPhone_' + indexID + '" id="RPhone_' + indexID + '" placeholder="Phone" class="form-control required"></td> <td><span class="btn btn-delete RefDelete"  id="RefDelete_' + indexID + '"value="' + indexID + '"> Delete</span></td></tr><tr id="' + indexID + '" style="visibility:collapse" class="RefR_' + indexID +'">' + indexID + '</tr>';
+            }
+            else {
+                jQuery("#RefDelete_" + indexID).hide();
+                indexID = parseInt(indexID) + 1;
+                var x = '  <tr style="margin-top:2%;" class="RefR_' + indexID + '" > <td><input type="text" name="RName_' + indexID + '" id="RName_' + indexID + '" placeholder="Name" class="form-control required"></td><td><input type="text" name="RTitle_' + indexID + '" id="RTitle_' + indexID + '" placeholder="Title" class="form-control required"></td><td><input type="text" name="RCompany_' + indexID + '" id="RCompany_' + indexID + '" placeholder="Company" class="form-control required"></td><td><input type="text" name="RPhone_' + indexID + '" id="RPhone_' + indexID + '" placeholder="Phone" class="form-control required"></td> <td><span class="btn btn-delete RefDelete"  id="RefDelete_' + indexID + '"value="' + indexID + '"> Delete</span></td> </tr><tr id="' + indexID + '" style="visibility:collapse" class="RefR_' + indexID +'">' + indexID + '</tr>';
+            }
+        jQuery('#ReferanceTable').append(x);
+        });
+        jQuery(document).on('click', '.RefDelete', function () {
+            var val = jQuery(".RefDelete").attr("value");
+            console.log(val);
+            jQuery(".RefR_" + val).remove();
+           var  indexID = parseInt(val) - 1;
+            jQuery("#RefDelete_" + indexID).show();
+        });
+    jQuery('#employersHistoryRow').click(function () {
+        var indexID = jQuery('#employersHistoryTable tr:last').attr('id');
+        if (indexID == 1) {
+            indexID = parseInt(indexID) + 1;
+            var x = '<tr style="margin-top:2%;" class="EHis_' + indexID + '" > <td colspan="2" ><input type="text" name="HEmployer_' + indexID + '" id="HEmployer_' + indexID + '" placeholder="Employer (' + indexID + ')" class="form-control required"></td><td colspan="1"><input type="text" name="HTitle_' + indexID + '" id="HTitle_' + indexID + '" placeholder="Job Title" class="form-control required"></td><td><span class="btn btn-delete EHisDelete"  id="EHisDelete_' + indexID + '"value="' + indexID + '"> Remove</span></td></tr><tr class="EHis_' + indexID + '" style="margin-top:' + indexID + '%;"><td><input type="text" name="HWPh_' + indexID + '" id="HWPh_' + indexID + '" placeholder="Work Phone" class="form-control required"></td><td><label class="label" style="color:#8b0000">From</label><input type="date" name="HFrom_' + indexID + '" id="HFrom_' + indexID + '" placeholder="From" class="form-control required"></td><td><label class="label" style="color:#8b0000">To</label><input type="date" name="HTo_' + indexID + '" id="HTo_' + indexID + '" placeholder="To" class="form-control required"></td><td><input type="text" name="HSalary_' + indexID + '" id="HSalary_' + indexID + '" placeholder="Salary" class="form-control required"></td></tr><tr class="EHis_' + indexID + '" style="margin-top:' + indexID + '%;border-bottom:2px solid black;"><td><input type="text" name="HAddress_' + indexID + '" id="HAddress_' + indexID + '" placeholder="Address" class="form-control required"></td><td><input type="text" name="HCity_' + indexID + '" id="HCity_' + indexID + '" placeholder="city" class="form-control required"></td><td><input type="text" name="HState_' + indexID + '" id="HState_' + indexID + '" placeholder="State" class="form-control required"></td><td><input type="text" name="HZip_' + indexID + '" id="HZip_' + indexID + '" placeholder="Zip" class="form-control required"></td></tr><tr class="EHis_' + indexID + '" id="' + indexID + '" style="visibility:hidden">' + indexID + '</tr>';
+
+        } else {
+            jQuery("#EHisDelete_" + indexID).hide();
+            indexID = parseInt(indexID) + 1;
+            var x = '<tr style="margin-top:2%;" class="EHis_' + indexID + '"><td colspan = "2" ><input type="text" name="HEmployer_' + indexID + '" id="HEmployer_' + indexID + '" placeholder="Employer (' + indexID + ')" class="form-control required"></td><td colspan="1"><input type="text" name="HTitle_' + indexID + '" id="HTitle_' + indexID + '" placeholder="Job Title" class="form-control required"></td><td><span class="btn btn-delete EHisDelete"  id="EHisDelete_' + indexID + '"value="' + indexID + '"> Remove</span></td></tr><tr class="EHis_' + indexID + '" style="margin-top:' + indexID + '%;"><td><input type="text" name="HWPh_' + indexID + '" id="HWPh_' + indexID + '" placeholder="Work Phone" class="form-control required"></td><td><label class="label" style="color:#8b0000">From</label><input type="date" name="HFrom_' + indexID + '" id="HFrom_' + indexID + '" placeholder="From" class="form-control required"></td><td><label class="label" style="color:#8b0000">To</label><input type="date" name="HTo_' + indexID + '" id="HTo_' + indexID + '" placeholder="To" class="form-control required"></td><td><input type="text" name="HSalary_' + indexID + '" id="HSalary_' + indexID + '" placeholder="Salary" class="form-control required"></td></tr><tr class="EHis_' + indexID + '" style="margin-top:' + indexID + '%;border-bottom:2px solid black;"><td><input type="text" name="HAddress_' + indexID + '" id="HAddress_' + indexID + '" placeholder="Address" class="form-control required"></td><td><input type="text" name="HCity_' + indexID + '" id="HCity_' + indexID + '" placeholder="city" class="form-control required"></td><td><input type="text" name="HState_' + indexID + '" id="HState_' + indexID + '" placeholder="State" class="form-control required"></td><td><input type="text" name="HZip_' + indexID + '" id="HZip_' + indexID + '" placeholder="Zip" class="form-control required"></td></tr><tr class="EHis_' + indexID + '" id="' + indexID + '" style="visibility:hidden">' + indexID + '</tr>';
+        }
+        jQuery('#employersHistoryTable').append(x);
+
+    });
+        jQuery(document).on('click', '.EHisDelete', function () {
+            var val = jQuery(".EHisDelete").attr("value");
+        jQuery(".EHis_" + val).remove();
+        var indexID = parseInt(val) - 1;
+        jQuery("#EHisDelete_" + indexID).show();
+    });
+        jQuery('#btnSubmit').click(function () {
+            jQuery('#btnSubmit').prop('disabled', true);
+            //alert("hello + " + dnn.getVar("sf_siteRoot", "/") + "DesktopModules/MVC/DNNModule1/item/addform")
+            //var things = [
+            //    { id: 1, color: 'yellow' },
+            //    { id: 2, color: 'blue' },
+            //    { id: 3, color: 'red' }
+            //];
+            ///////////// Single model    ///////////////////
+            var Item = new Object();
+                Item.JobID          = jQuery("#JobID").val();
+                Item.SalutationID = jQuery("#SalutationID").val();
+                Item.Gender              = jQuery("#Gender").val();
+                Item.P_FirstName         = jQuery("#P_FirstName").val();
+                Item.P_MiddleName        = jQuery("#P_MiddleName").val();
+                Item.P_LastName          = jQuery("#P_LastName").val();
+                Item.NickName            = jQuery("#NickName").val();
+                Item.MaritalStatus       = jQuery("#MaritalStatus").data("kendoDropDownList").value();
+                Item.Email               = jQuery("#Email").val();
+                Item.DateOfBirth         = jQuery("#DateOfBirth").val();
+                Item.NationalIdentity    = jQuery("#NationalIdentity").data("kendoDropDownList").value();
+                Item.CountriesID         = jQuery("#dropdownlistCountries").data("kendoDropDownList").value();
+                Item.CountriesRegionsID  = jQuery("#dropdownlistCountriesRegions").data("kendoDropDownList").value();
+                Item.ContactNumber       = jQuery("#ContactNumber").val();
+                Item.Extension           = jQuery("#Extension").val();
+                Item.PsychoMeterTest     = jQuery('input[name=itemPsychoMeterTest]:checked').val();
+            Item.FileID = jQuery("#FileID").val();
+            Item.ExpectedSalary = jQuery("#ExpectedSalary").val();
+            Item.JoiningDate = jQuery("#JoiningDate").val();
+
+            var indexID = jQuery('#EducationTable tr:last').attr('id');
+            indexID = parseInt(indexID);
+            var education = new Array();
+            for (var i = 1; i <= indexID; i++) {
+                var EObject = {
+                    'P_Title': jQuery("#ITitle_" + i).val(),
+                    'University': jQuery("#IName_" + i).val(),
+                    'Result': jQuery("#Result_" + i).val(),
+                    'ResultTypeID': jQuery("#Result_Type_" + i).data("kendoDropDownList").value(),
+                    'Session': jQuery("#Session_" + i).val(),
+                    'Duration': jQuery("#Duration_" + i).val(),
+                    'Major': jQuery("#EMajor_" + i).val(),
+                    'DegreeStatus': jQuery('input[name=DegreeStatus_' + i + ']:checked').val(),
+                    'Description': jQuery("#Description_" + i).val()
+                };
+                education.push(EObject)
+            }
+
+            console.log(education);
+
+            var indexRID = jQuery('#ReferanceTable tr:last').attr('id');
+            indexRID = parseInt(indexRID);
+            var referances = new Array();
+            for (i = 1; i <= indexRID; i++) {
+                var RObject = {
+                    'Name': jQuery("#RName_"+i).val(),
+                    'Title': jQuery("#RTitle_" + i).val(),
+                    'Comapany': jQuery("#RCompany_" + i).val(),
+                    'Phone': jQuery("#RPhone_" + i).val()
+                };
+                referances.push(RObject)
+            }
+
+            console.log(referances);
+
+            var indexERID = jQuery('#ReferanceTable tr:last').attr('id');
+            indexERID = parseInt(indexERID);
+            var employementHistories = new Array();
+            for (i = 1; i <= indexERID; i++) {
+                var ERObject = {
+                    'Employer': jQuery("#HEmployer_"+i).val(),
+                    'JobTitle': jQuery("#HTitle_"+i).val(),
+                    'WorkPhone': jQuery("#HWPh_"+i).val(),
+                    'WorkFrom': jQuery("#HFrom_"+i).val(),
+                    'WorkTo': jQuery("#HTo_"+i).val(),
+                    'Salary': jQuery("#HSalary_"+i).val(),
+                    'Address': jQuery("#HAddress_"+i).val(),
+                    'City': jQuery("#HCity_"+i).val(),
+                    'State': jQuery("#HState_"+i).val(),
+                    'Zip': jQuery("#HZip_"+i).val()
+                };
+                employementHistories.push(ERObject)
+            }
+
+            console.log(employementHistories);
+
+
+            if (Item == null) {
+                console.log("Null Entry");
+                console.log(Item);
+            }
+
+
+
+            var modelData = {
+                'JobID': Item.JobID, 'SalutationID': Item.SalutationID, 'Gender': Item.Gender,
+                'P_FirstName': Item.P_FirstName, 'P_MiddleName': Item.P_MiddleName,
+                'P_LastName': Item.P_LastName, 'NickName': Item.NickName, 'Email': Item.Email,
+                'DateOfBirth': Item.DateOfBirth, 'MaritalStatus': Item.MaritalStatus, 'NationalIdentity': Item.NationalIdentity,
+                'CountriesID': Item.CountriesID, 'CountriesRegionsID': Item.CountriesRegionsID,
+                'ContactNumber': Item.ContactNumber, 'Extension': Item.Extension, 'PsychoMeterTest': Item.PsychoMeterTest, 'FileID': Item.FileID, 'JoiningDate': Item.JoiningDate, 'ExpectedSalary': Item.ExpectedSalary
+            };
+
+            //var fileUpload = jQuery("#firstFile").get(0);
+            //var files = fileUpload.files;
+
+            //// modify
+            //var fileUpload = jQuery("#firstFile").get(0);
+            //var files = fileUpload.files;
+
+            //// Create FormData object
+            //var fileData = new FormData();
+
+            //// Looping over all files and add it to FormData object
+            //for (var i = 0; i < files.length; i++) {
+            //    fileData.append(files[i].name, files[i]);
+            //}
+            @*jQuery.ajax({
+                type: 'post',
+                url:'@Url.Action("FileUpload", "Item")',
+                dataType: "JSON",
+                contentType: false,
+                processData: false,
+                data: fileData,
+                success: function (response) {
+                    console.log(response);
+                    if (response.success) {
+                        console.log(response.Message);
+                        alert("Your Application form has submitted our team will contact you soon.thanks")
+                        window.location.reload();
+                    } else {
+                        // DoSomethingElse()
+                        console.log(response)
+                    }
+                },
+                error: function (response) {*@
+                    //var jsonPart = response.responseText.substring(0, response.responseText.indexOf("<!DOCTYPE html>"));
+                    //var data = JSON.parse(jsonPart);
+                    var gmodel = {
+                        'item': modelData,
+                        'education': education,
+                        'referances': referances,
+                        'employementHistories': employementHistories
+                    };
+                    console.log(gmodel);
+                     jQuery.ajax({
+                type: 'post',
+                url:'@Url.Action("JobApplySave", "JobApply")',
+                dataType: "JSON",
+                         contentType: "application/json",
+                         processData: false,
+                         data: JSON.stringify({ "gModel": gmodel }),
+                success: function (response) {
+
+                    if (response =="Succes") {
+                       
+                        alert("Your Application form has submitted our team will contact you soon.thanks")
+                        window.location.reload();
+                    } else {
+
+                        console.log(response)
+                    }
+
+                },
+                error: function (response) {
+                    alert("Your Application form has submitted our team will contact you soon.thanks")
+                    console.log(response);
+                    window.location.reload();
+                }
+
+            });
+
+
+        //        }
+
+        //    });
+
+        });
+
+        /*
+            Form
+        */
+        jQuery('.form-wizard fieldset:first').fadeIn('slow');
+
+        jQuery('.form-wizard .required').on('focus', function () {
+            jQuery(this).removeClass('input-error');
+        });
+
+        // next step
+        jQuery('.form-wizard .btn-next').on('click', function () {
+            var parent_fieldset = jQuery(this).parents('fieldset');
+            var next_step = true;
+            // navigation steps / progress steps
+            var current_active_step = jQuery(this).parents('.form-wizard').find('.form-wizard-step.active');
+            var progress_line = jQuery(this).parents('.form-wizard').find('.form-wizard-progress-line');
+
+            // fields validation
+            parent_fieldset.find('input.required').each(function () {
+                if (jQuery(this).val() == "" || jQuery(this).attr("ID") == undefined) {
+                    console.log(jQuery(this).attr("ID"))
+                    jQuery(this).addClass('input-error');
+                    next_step = false;
+                }
+                else {
+                    jQuery(this).removeClass('input-error');
+                }
+            });
+            // fields validation
+
+            if (next_step) {
+                parent_fieldset.fadeOut(400, function () {
+                    // change icons
+                    current_active_step.removeClass('active').addClass('activated').next().addClass('active');
+                    // progress bar
+                    bar_progress(progress_line, 'right');
+                    // show next step
+                    jQuery(this).next().fadeIn();
+                    // scroll window to beginning of the form
+                    scroll_to_class(jQuery('.form-wizard'), 20);
+                });
+            }
+
+        });
+
+        // previous step
+        jQuery('.form-wizard .btn-previous').on('click', function () {
+            // navigation steps / progress steps
+            var current_active_step = jQuery(this).parents('.form-wizard').find('.form-wizard-step.active');
+            var progress_line = jQuery(this).parents('.form-wizard').find('.form-wizard-progress-line');
+
+            jQuery(this).parents('fieldset').fadeOut(400, function () {
+                // change icons
+                current_active_step.removeClass('active').prev().removeClass('activated').addClass('active');
+                // progress bar
+                bar_progress(progress_line, 'left');
+                // show previous step
+                jQuery(this).prev().fadeIn();
+                // scroll window to beginning of the form
+                scroll_to_class(jQuery('.form-wizard'), 20);
+            });
+        });
+
+        // submit
+        jQuery('.form-wizard').on('submit', function (e) {
+
+            // fields validation
+            jQuery(this).find('.required').each(function () {
+                if (jQuery(this).val() == "" || jQuery(this).attr("ID") == undefined) {
+                    e.preventDefault();
+                    jQuery(this).addClass('input-error');
+                }
+                else {
+                    jQuery(this).removeClass('input-error');
+                }
+            });
+            // fields validation
+
+        });
+
+
+    });
+
+
+
+
+
+    // image uploader scripts
+
+    var jQuerydropzone = jQuery('.image_picker'),
+        jQuerydroptarget = jQuery('.drop_target'),
+        jQuerydropinput = jQuery('#inputFile'),
+        jQuerydropimg = jQuery('.image_preview'),
+        jQueryremover = jQuery('[data-action="remove_current_image"]');
+
+    jQuerydropzone.on('dragover', function () {
+        jQuerydroptarget.addClass('dropping');
+        return false;
+    });
+
+    jQuerydropzone.on('dragend dragleave', function () {
+        jQuerydroptarget.removeClass('dropping');
+        return false;
+    });
+
+    jQuerydropzone.on('drop', function (e) {
+        jQuerydroptarget.removeClass('dropping');
+        jQuerydroptarget.addClass('dropped');
+        jQueryremover.removeClass('disabled');
+        e.preventDefault();
+
+        var file = e.originalEvent.dataTransfer.files[0],
+            reader = new FileReader();
+
+        reader.onload = function (event) {
+            jQuerydropimg.css('background-image', 'url(' + event.target.result + ')');
+        };
+
+        console.log(file);
+        reader.readAsDataURL(file);
+
+        return false;
+    });
+
+    jQuerydropinput.change(function (e) {
+        jQuerydroptarget.addClass('dropped');
+        jQueryremover.removeClass('disabled');
+        jQuery('.image_title input').val('');
+
+        var file = jQuerydropinput.get(0).files[0],
+            reader = new FileReader();
+
+        reader.onload = function (event) {
+            jQuerydropimg.css('background-image', 'url(' + event.target.result + ')');
+        }
+
+        reader.readAsDataURL(file);
+    });
+
+    jQueryremover.on('click', function () {
+        jQuerydropimg.css('background-image', '');
+        jQuerydroptarget.removeClass('dropped');
+        jQueryremover.addClass('disabled');
+        jQuery('.image_title input').val('');
+    });
+
+    jQuery('.image_title input').blur(function () {
+        if (jQuery(this).val() != '') {
+            jQuerydroptarget.removeClass('dropped');
+        }
+        });
+
+        jQuery('input[type="file"]').change(function () {
+
+            AttachmentGrid_onEdit();
+        });
+// image uploader scripts
+    </script>
+    <!--loginpanelinner-->
+    <!--loginpanel-->
+    <div class="loginfooter">
+        <p>&copy; @L("FooterCompanyName") &copy;. @L("AllRightsReserved") .</p>
+    </div>
+
+    @*<script src="@Url.Content("~/Content/Shamcey/js/jquery-1.10.2.min.js")"></script>*@
+    <script src="@Url.Content("~/Content/Shamcey/js/jquery-migrate-1.2.1.min.js")"></script>
+    <script src="@Url.Content("~/Content/Shamcey/js/jquery-ui-1.10.3.min.js")"></script>
+    <script src="@Url.Content("~/Content/Shamcey/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Content/Shamcey/js/modernizr.min.js")"></script>
+    @Scripts.Render("~/Bundles/vendor/js/bottom")
+    @Scripts.Render("~/Bundles/js")
+    <script src="@Url.Content("~/Content/Shamcey/js/custom.js")"></script>
+    <script src="@Url.Content("~/Content/Shamcey/js/jquery.cookies.js")"></script>
+
+    <script>
+        abp.localization.defaultSourceName = '@LocalizationSourceName';
+        //moment.locale('@Thread.CurrentThread.CurrentUICulture.Name'); //Localizing momentjs
+    </script>
+    <script src="~/AbpScripts/GetScripts?v=@(Clock.Now.Ticks)" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        var source = abp.localization.getSource('TMS');
+        var s1 = source('Welcomenote');
+    </script>
+    <script type="text/javascript" src="@Url.Content("~/Content/Shamcey/js/jquery.validate.min.js")"></script>
+
+    @if (ViewContext.ViewData.ModelState.Where(x => x.Key == "").Any())
+    {
+        <script>
+            jQuery(document).ready(function () { jQuery('.login-alert').fadeIn(); });
+        </script>
+    }
+    <script type="text/javascript">
+        String.format = function () {
+            var s = arguments[0];
+            for (var i = 0; i < arguments.length - 1; i++) {
+                var reg = new RegExp("\\{" + i + "\\}", "gm");
+                s = s.replace(reg, arguments[i + 1]);
+            }
+
+            return s;
+        }
+
+    </script>
+
+
+    <style>
+        #UpdatePassword label.error {
+            color: #effeff;
+        }
+    </style>
+   
+    <script>
+    var attachmentname = null;var parentFoldername=null; var aid=null; var currentEditingRowFileType=null;
+    function CreateAttachmentAdditionalData(){
+        return {
+            parentFoldername: parentFoldername,aid:aid
+        }
+    }
+
+    function UpdateAttachmentAdditionalData(){
+        return {
+            parentFoldername: parentFoldername,aid:aid
+        }
+    }
+
+
+        function UploadAttachmentData(e) {
+
+        e.data = { oid:5000,otype:3 ,fileType:4};
+    }
+    function Attachmentsuccess(e) {
+        parentFoldername = e.response.parentFoldername;
+        aid = e.response.aid;
+        jQuery("#FileID").val(aid);
+        jQuery("#file").val(parentFoldername).trigger("change");
+    }
+    function AttachmentRemove(e) {
+        if (attachmentname == e.files[0].name) {
+        }
+        e.data= {
+            parentFoldername: parentFoldername,
+            oid:5000 ,
+            Opentype: 3,
+            filename: e.files[0].name,
+            aid:aid
+        }
+    }
+    function AttachmentSelect(e) {
+        var filename = e.files[0].name;
+
+        var dropvalue;
+        if(currentEditingRowFileType==12){
+            dropvalue= checkfiletypfortheprofileandLogo(e.files[0].extension.toLowerCase());
+        }else{
+            dropvalue = changeFileTypeAccordingly(e.files[0].extension.toLowerCase());
+        }
+        var upload = jQuery("#file").data("kendoUpload");
+        if (dropvalue == "-1") {
+            e.preventDefault();
+        } else {
+            attachmentname = filename;
+            jQuery("#FileName").val(filename).trigger("change");
+            if(currentEditingRowFileType==12){
+
+            } else {
+
+                var FileType = 4;
+                //FileType.value(dropvalue); FileType.trigger("change");
+                jQuery(".attachmentimage").html(fileiconaccordinglyfiletype(dropvalue));
+            }
+        }
+    }
+
+    function checkfiletypfortheprofileandLogo(filetype) {
+        switch (filetype) {
+            case ".jpg": case ".jpeg": case ".bmp": case ".png":
+                return "1";
+            default:
+                return "-1";
+                break;
+        }
+    }
+    function changeFileTypeAccordingly(filetype) {
+        switch (filetype) {
+            case ".doc": case ".rtf": case ".docx": case ".docm": case ".dotx": case ".dotm": case ".docb":
+                return "1";
+            case ".xls": case ".xlsx": case ".xlsm": case ".xlsb": case ".xltm": case ".xltx": case ".xlt": case ".csv":
+                return "2";
+            case ".ppt": case ".pot": case ".pps": case ".pptx": case ".pptm": case ".potx": case ".ppam": case ".sldx": case ".sldm":
+                return "3";
+            case ".pdf":
+                return "4";
+            case ".txt":
+                return "5";
+            case ".jpg": case ".jpeg": case ".jfif": case ".tiff": case ".bmp": case ".gif": case ".png":
+                return "6";
+            case ".psd": case ".ai": case ".swf":
+                return "7";
+            case ".mp3":
+                return "8";
+            case ".mp4": case ".mov": case ".wmv":
+                return "9";
+            case ".rar": case ".7z": case ".zip":
+                return "10";
+            case ".exe": case ".msi":
+                return "-1";
+            default:
+                return "11";
+                break;
+        }
+    }
+    function AttachmentGrid_onEdit() {
+            jQuery("#fileupload").kendoUpload({
+                multiple: false,
+                async: {
+                    saveUrl: '@Url.Content("~/JobApply/TMSSaveAttachment")',
+                    removeUrl: '@Url.Content("~/JobApply/RemoveTMSAttachment")',
+                    autoUpload: true
+                },
+                remove: AttachmentRemove,
+                success: Attachmentsuccess,
+                select: AttachmentSelect,
+                upload: UploadAttachmentData
+            });
+            jQuery(".attachmentforEditingonly").hide();jQuery(".attachmentfornewonly").show();
+        }
+
+
+
+    function AttachmentRequestEnd(e) {
+        if (e.sender.error.length > 0) {
+            console.log(e.sender.error)
+
+        }else{
+            if (e.response == "403") {
+                window.location = LoginUrl;
+            }
+            else
+            if (e.response.Errors == null) {
+                if (e.type == "update") { this.read(); } if (e.type == "create") { this.read(); }
+            }
+        }
+    }
+
+    function fileiconaccordinglyfiletype(filetype) {
+        switch (filetype) {
+            case "1":
+                return '<i class="mdi mdi-36px mdi-file-word"></i>';
+            case "2":
+                return '<i class="mdi mdi-36px mdi-file-excel"></i>';
+            case "3":
+                return '<i class="mdi mdi-36px mdi-file-powerpoint"></i>';
+            case "4":
+                return '<i class="mdi mdi-36px mdi-file-pdf"></i>';
+            case "5":
+                return '<i class="mdi mdi-36px mdi-file"></i>';
+            case "6":
+                return '<i class="mdi mdi-36px mdi-file-image"></i>';
+            case ".psd":
+                return '<i class="mdi mdi-36px mdi-file-multiple"></i>';
+            case "8":
+                return '<i class="mdi mdi-36px mdi-file-music"></i>';
+            case "9":
+                return '<i class="mdi mdi-36px mdi-file-video"></i>';
+            case "10":
+                return '<i class="mdi mdi-36px mdi-zip-box"></i>';
+                return "10";
+            case "12":
+                return '<i class="mdi mdi-36px mdi-account-box"></i>';
+                return "10";
+            default:
+                return '<i class="mdi mdi-36px mdi-file-outline"></i>';
+                break;
+        }
+    }
+    </script>
+</body>
+</html>
