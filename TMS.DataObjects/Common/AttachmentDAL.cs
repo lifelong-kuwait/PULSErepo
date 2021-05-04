@@ -122,6 +122,18 @@ namespace TMS.DataObjects.Common
                     ParamBuilder.Par("UpdatedBy", _objTMS_Attachments.UpdatedBy),
                     ParamBuilder.Par("UpdatedDate", _objTMS_Attachments.UpdatedDate));
         }
+        /// <summary>
+        /// TMSs the attachment update dal.
+        /// </summary>
+        /// <param name="_objTMS_Attachments">The object TMS attachments.</param>
+        /// <returns>System.Int32.</returns>
+        public int TMS_Attachment_UpdateForJobDAL(long PersonID,long AttachmentID)
+        {
+            return ExecuteScalarInt32Sp("TMS_Attachment_Update_Jobs",
+                    ParamBuilder.Par("ID", AttachmentID),
+                    ParamBuilder.Par("PersonID",PersonID));
+        }
+        
 
         /// <summary>
         /// TMSs the attachment delete dal.

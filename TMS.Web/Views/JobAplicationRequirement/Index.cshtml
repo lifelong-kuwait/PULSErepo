@@ -1,0 +1,541 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutDashboardNew.cshtml";
+}
+@using lr = Resources.Resources;
+
+<script>
+
+    function JobsTemplate(data) {
+        if (data !== null) {
+            var CourseTemplate = kendo.template(jQuery("#JobsTemplate").html(), { useWithBlock: false });
+            return CourseTemplate(data);
+        }
+        return '';
+    }
+    function ExperianceTemplate(data) {
+        if (data !== null) {
+            var ExperianceTemplate = kendo.template(jQuery("#ExperianceTemplate").html(), { useWithBlock: false });
+            return ExperianceTemplate(data);
+        }
+        return '';
+    }
+    
+
+</script>
+@if (User.IsInRole("CanViewJobModule"))
+{
+    <h2>Jobs/Careers</h2>
+@Html.AntiForgeryToken()
+@(Html.Kendo().Grid<TMS.Library.Entities.Jobs.JobsRequirement>()
+                                    .Name("JobsRequirmentGrid")
+                                    .Columns(columns =>
+                                    {
+                                        columns.Bound(e => e.JobTitle).Width(180).Title("Job Title");//lr.MessagesHead);
+                                        columns.Bound(e => e.Description).Width(180).Encoded(false).Title("Description");//lr.MessagesHead);
+                                        columns.Bound(e => e.LastDateToApply).Width(250).ClientTemplate("<span class='date' >#=kendo.toString(LastDateToApply,'" + DateFormatScript + @"')#</span>").Title("Last Modified");
+                                        columns.Bound(e => e.IsActive).ClientTemplate("#=JobsTemplate(data)#").Width(250).MinScreenWidth(560).Title("Active");
+                                        columns.Bound(e => e.MinExperiance).ClientTemplate("#=ExperianceTemplate(data)#").Width(260).Title("Experiance");
+                                    }).Editable(editable => editable.Mode(GridEditMode.PopUp)
+                                    .TemplateName("_JobRequirementTemplate").
+                                    DisplayDeleteConfirmation(false))
+                      .ToolBar(toolbar => toolbar.Template(@<text>@RenderAddTemplate()</text>)).Groupable()
+                            .Sortable().Selectable(selectable => selectable
+                            .Mode(GridSelectionMode.Single))
+                            .Groupable()
+                            .Pageable(pager => pager
+                            .Refresh(true).Numeric(true).PreviousNext(true).PageSizes(true))
+                            .Scrollable()
+                            //.ClientDetailTemplateId("PersonGridChildtemplate")
+                            .Filterable()
+                            .HtmlAttributes(new { style = "height:700px !important;" })
+                            .DataSource(dataSource => dataSource
+                                .Ajax()
+                                //.ServerOperation(false)
+                                .Model(model =>
+                                {
+                                    model.Id(m => m.ID);
+                                })
+                               .PageSize(5)
+                             .Read(read => read.Action("JobsRequirement_Read", "JobAplicationRequirement"))
+                             .Create(read => read.Action("JobRequirement_Create", "JobAplicationRequirement"))
+                             .Destroy(read => read.Action("JobRequirement_Destroy", "JobAplicationRequirement"))
+                             .Update(read => read.Action("JobRequirement_Update", "JobAplicationRequirement", new { ID = Model }))
+                             .Events(e => e.Error("GeneralErrorHandler(\"JobsRequirmentGrid\")").RequestEnd("GridRequestEndUpdate")))
+                             .NoRecords(lr.GridNoRecordFoundMessage)
+)
+@helper RenderAddTemplate()
+{
+    <div class="toolbar">
+        @if (User.IsInRole("CanAddEditJobModule"))
+        {
+            <a class="k-button tms-grid-add"><span class="tms-grid-icon mdi mdi-plus "></span></a>
+        }
+        @if (User.IsInRole("CanAddEditJobModule"))
+        {
+            <a class="k-button tms-grid-edit"><span class="tms-grid-icon mdi mdi-pencil "></span></a>
+        }
+        @if (User.IsInAnyRoles("CanViewJobApplicationsJobModule"))
+        {
+            <a class="k-button tms-grid-Persondetail"><span class="tms-grid-icon mdi mdi-open-in-new "></span></a>
+        }
+        @if (User.IsInRole("CanActiveInActiveJobModule") )
+        {
+            <a class="k-button tms-grid-active"><span class="tms-grid-icon mdi mdi-flash"></span></a>
+        
+            <a class="k-button tms-grid-inactive"><span class="tms-grid-icon mdi mdi-flash-off"></span></a>
+        }
+        @if (User.IsInRole("CanDeleteJobModule"))
+        {
+            <a class="k-button tms-grid-destroyperson"><span class="tms-grid-icon mdi mdi-delete "></span></a>
+        } 
+    </div>
+}
+    <script id="toolTipTemplate" type="text/x-kendo-template">
+        @if (User.IsInRole("CanAddEditJobModule"))
+        {
+            <span class="grid-tooltip-icon edit" dat-uid="#=uid#" title="Edit"><i class="mdi mdi-pencil"></i></span>
+        }
+        @if (User.IsInAnyRoles("CanViewJobApplicationsJobModule"))
+        {
+            <span class="grid-tooltip-icon persondetail" dat-pid="#=ID#" title="See the Applications of"><i class="mdi mdi-open-in-new"></i></span>
+        }
+        <span class="grid-tooltip-icon active" dat-uid="#=uid#" title="Active"><i class="mdi mdi-flash"></i></span>
+        @if (User.IsInRole("CanActiveInActiveJobModule"))
+        {
+            <span class="grid-tooltip-icon inactive" dat-uid="#=uid#" title="Active"><i class="mdi mdi-flash-off"></i></span>
+        }
+        @if (User.IsInRole("CanDeleteJobModule"))
+        {
+            <span class="grid-tooltip-icon delete" dat-uid="#=uid#" title="Delete"><i class="mdi mdi-delete"></i></span>
+        }
+    </script>
+
+<script>
+    jQuery(function () {
+        debugger;
+        var template = kendo.template(jQuery("#toolTipTemplate").html());
+        //initialize tooltip to grid tbody with filter cells with given CSS class
+        var tooltip = jQuery("#JobsRequirmentGrid tbody").kendoTooltip({
+            position: "center",
+            autoHide: false,
+            filter: "td:nth-child(1)",
+            showOn: "click",
+            show: function (e) {
+                //get current target row
+                this.popup.element.addClass("tmstooltip");
+                var currentRow = this.target().closest("tr");
+                var grid = jQuery("#JobsRequirmentGrid").data("kendoGrid");
+                //get current row dataItem
+                var dataItem = grid.dataItem(currentRow);
+                //pass the dataItem to the template
+                var generatedTemplate = template(dataItem);
+                //set the generated template to the content of the tooltip
+                this.content.html(generatedTemplate);
+
+            },
+        }).data("kendoTooltip");
+        jQuery(".edit").live("mousedown", function (event) {
+            // debugger;
+            //alert('edit click');
+            jQuery("#JobsRequirmentGrid").data("kendoGrid").editRow(jQuery("[data-uid='" + jQuery(this).attr("dat-uid") + "']"));
+        });
+       
+        jQuery(".tms-grid-destroyperson").live("mousedown", function (event) {
+            var selectedRows = jQuery("#JobsRequirmentGrid tr.k-state-selected");
+            var checkedLength = selectedRows.length;
+            var checkedLength = selectedRows.length;
+            if (checkedLength == 1) {
+                var grid = jQuery("#JobsRequirmentGrid").data("kendoGrid");
+                swal({
+                    title: '@lr.Areyousureyouwanttodeletethisrecord',
+                    text: '@lr.Youwillnotbeabletorecover',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "@lr.confirmDelete",
+                    cancelButtonText: "@lr.confirmNo",
+                    closeOnConfirm: false,
+                    closeOnCancel: true,
+                    customClass: "tmsconfirm"
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        jQuery(".delete").live("mousedown", function (event) {
+                            var checkedLength = jQuery("#JobsRequirmentGrid tr.k-state-selected").length;
+                            if (checkedLength == 1) {
+                                //jQuery("#Users").data("kendoGrid").editRow(jQuery("#Users tr.k-state-selected"));
+                            //    debugger
+                                grid = jQuery("#JobsRequirmentGrid").data("kendoGrid");
+                                var data = grid.dataItem(jQuery("#JobsRequirmentGrid tr.k-state-selected"));
+                                var ID = data.ID;
+                                var response = jQuery.ajax({
+                                    method: "post",
+                                    url: "/JobAplicationRequirement/JobRequirement_Destroy?ID=" + ID,
+                                    dataType: "JSON",
+                                    contentType: "application/json; charset=utf-8",
+                                    data: JSON.stringify({ ID: ID }),
+                                    success: function (msg) {
+                                        var grid = jQuery("#JobsRequirmentGrid").data("kendoGrid");
+                                        grid.dataSource.read();
+                                    }
+                                });
+                            } else {
+
+                            }
+
+                        });
+
+                        grid.removeRow(selectedRows);
+
+                        swal({
+                           title: '@lr.confirmDeleted',
+                           text:  '@lr.confirmDeletedMessage',
+                           type: "success"
+                       },
+                    function(){
+                        window.location="@Url.Content("~/JobAplicationRequirement/index")";
+                        });
+                   }
+                });
+            } else if (checkedLength > 1) {
+                var grid = jQuery("#JobsRequirmentGrid").data("kendoGrid");
+                swal({
+                    title: '@lr.Areyousureyouwanttodeletetheserecord',
+                    text: '@lr.Youwillnotbeabletorecover' + ' <strong style="font-weight:bold">' + checkedLength + ' ' + '@lr.confirmRecords' + '</strong> ?',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "@lr.confirmDelete",
+                    cancelButtonText: "@lr.confirmNo",
+                    closeOnConfirm: false,
+                    closeOnCancel: true,
+                    html: true,
+                    customClass: "tmsconfirm"
+                },
+           function (isConfirm) {
+               if (isConfirm) {
+                   jQuery(".delete").live("mousedown", function (event) {
+                       var checkedLength = jQuery("#JobsRequirmentGrid tr.k-state-selected").length;
+                       if (checkedLength == 1) {
+                           //jQuery("#Users").data("kendoGrid").editRow(jQuery("#Users tr.k-state-selected"));
+                         //  debugger
+                           grid = jQuery("#JobsRequirmentGrid").data("kendoGrid");
+                           var data = grid.dataItem(jQuery("#JobsRequirmentGrid tr.k-state-selected"));
+                           var ID = data.ID;
+                           var response = jQuery.ajax({
+                               method: "post",
+                               url: "/JobAplicationRequirement/JobRequirement_Destroy?ID=" + ID,
+                               dataType: "JSON",
+                               contentType: "application/json; charset=utf-8",
+                               data: JSON.stringify({ ID: ID }),
+                               success: function (msg) {
+                                   var grid = jQuery("#JobsRequirmentGrid").data("kendoGrid");
+                                   grid.dataSource.read();
+                               }
+                           });
+                       } else {
+                       }
+                   });
+                   selectedRows.each(function () { grid.removeRow(jQuery(this)); });
+                   swal({
+                           title: '@lr.confirmDeleted',
+                           text:  '@lr.confirmDeletedMessage',
+                           type: "success"
+                       },
+                    function(){
+                        window.location="@Url.Content("~/JobAplicationRequirement/index")";
+                        });
+                   }
+           });
+            } else {
+            }
+        });
+        jQuery(".delete").live("mousedown", function (event) {  var selectedRows = jQuery("#JobsRequirmentGrid tr.k-state-selected");
+            var checkedLength = selectedRows.length;
+            var checkedLength = selectedRows.length;
+            if (checkedLength == 1) {
+                var grid = jQuery("#JobsRequirmentGrid").data("kendoGrid");
+                swal({
+                    title: '@lr.Areyousureyouwanttodeletethisrecord',
+                    text: '@lr.Youwillnotbeabletorecover',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "@lr.confirmDelete",
+                    cancelButtonText: "@lr.confirmNo",
+                    closeOnConfirm: false,
+                    closeOnCancel: true,
+                    customClass: "tmsconfirm"
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        jQuery(".delete").live("mousedown", function (event) {
+                            var checkedLength = jQuery("#JobsRequirmentGrid tr.k-state-selected").length;
+                            if (checkedLength == 1) {
+                                //jQuery("#Users").data("kendoGrid").editRow(jQuery("#Users tr.k-state-selected"));
+                            //    debugger
+                                grid = jQuery("#JobsRequirmentGrid").data("kendoGrid");
+                                var data = grid.dataItem(jQuery("#JobsRequirmentGrid tr.k-state-selected"));
+                                var ID = data.ID;
+                                var response = jQuery.ajax({
+                                    method: "post",
+                                    url: "/JobAplicationRequirement/JobRequirement_Destroy?ID=" + ID,
+                                    dataType: "JSON",
+                                    contentType: "application/json; charset=utf-8",
+                                    data: JSON.stringify({ ID: ID }),
+                                    success: function (msg) {
+                                        var grid = jQuery("#JobsRequirmentGrid").data("kendoGrid");
+                                        grid.dataSource.read();
+                                    }
+                                });
+                            } else {
+
+                            }
+
+                        });
+
+                        grid.removeRow(selectedRows);
+
+                        swal({
+                           title: '@lr.confirmDeleted',
+                           text:  '@lr.confirmDeletedMessage',
+                           type: "success"
+                       },
+                    function(){
+                        window.location="@Url.Content("~/JobAplicationRequirement/index")";
+                        });
+                   }
+                });
+            } else if (checkedLength > 1) {
+                var grid = jQuery("#JobsRequirmentGrid").data("kendoGrid");
+                swal({
+                    title: '@lr.Areyousureyouwanttodeletetheserecord',
+                    text: '@lr.Youwillnotbeabletorecover' + ' <strong style="font-weight:bold">' + checkedLength + ' ' + '@lr.confirmRecords' + '</strong> ?',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "@lr.confirmDelete",
+                    cancelButtonText: "@lr.confirmNo",
+                    closeOnConfirm: false,
+                    closeOnCancel: true,
+                    html: true,
+                    customClass: "tmsconfirm"
+                },
+           function (isConfirm) {
+               if (isConfirm) {
+                   jQuery(".delete").live("mousedown", function (event) {
+                       var checkedLength = jQuery("#JobsRequirmentGrid tr.k-state-selected").length;
+                       if (checkedLength == 1) {
+                           //jQuery("#Users").data("kendoGrid").editRow(jQuery("#Users tr.k-state-selected"));
+                         //  debugger
+                           grid = jQuery("#JobsRequirmentGrid").data("kendoGrid");
+                           var data = grid.dataItem(jQuery("#JobsRequirmentGrid tr.k-state-selected"));
+                           var ID = data.ID;
+                           var response = jQuery.ajax({
+                               method: "post",
+                               url: "/JobAplicationRequirement/JobRequirement_Destroy?ID=" + ID,
+                               dataType: "JSON",
+                               contentType: "application/json; charset=utf-8",
+                               data: JSON.stringify({ ID: ID }),
+                               success: function (msg) {
+                                   var grid = jQuery("#JobsRequirmentGrid").data("kendoGrid");
+                                   grid.dataSource.read();
+                               }
+                           });
+                       } else {
+                       }
+                   });
+                   selectedRows.each(function () { grid.removeRow(jQuery(this)); });
+                   swal({
+                           title: '@lr.confirmDeleted',
+                           text:  '@lr.confirmDeletedMessage',
+                           type: "success"
+                       },
+                    function(){
+                        window.location="@Url.Content("~/JobAplicationRequirement/index")";
+                        });
+                   }
+           });
+            } else {
+            } });
+
+       
+        jQuery(".tms-grid-active").live("mousedown", function (event) {
+            //debugger;
+            var checkedLength = jQuery("#JobsRequirmentGrid tr.k-state-selected").length;
+            if (checkedLength == 1) {
+                grid = jQuery("#JobsRequirmentGrid").data("kendoGrid");
+                var data = grid.dataItem(jQuery("#JobsRequirmentGrid tr.k-state-selected"));
+                var url = '../' + data.ActionUrl;
+               // window.open(url, '_blank');
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '/JobAplicationRequirement/ActiveJob',
+                    dataType: "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ ID: data.ID }),
+                    success: function (response) { }
+                });
+            } else {
+            }
+            jQuery('#JobsRequirmentGrid').data('kendoGrid').dataSource.read();
+            jQuery('#JobsRequirmentGrid').data('kendoGrid').refresh();
+        });
+        jQuery(".tms-grid-inactive").live("mousedown", function (event) {
+            //debugger;
+            var checkedLength = jQuery("#JobsRequirmentGrid tr.k-state-selected").length;
+            if (checkedLength == 1) {
+                grid = jQuery("#JobsRequirmentGrid").data("kendoGrid");
+                var data = grid.dataItem(jQuery("#JobsRequirmentGrid tr.k-state-selected"));
+                var url = '../' + data.ActionUrl;
+              //  window.open(url, '_blank');
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '/JobAplicationRequirement/InActiveJob',
+                    dataType: "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ ID: data.ID }),
+                    success: function (response) { }
+                });
+            } else {
+            }
+            jQuery('#JobsRequirmentGrid').data('kendoGrid').dataSource.read();
+            jQuery('#JobsRequirmentGrid').data('kendoGrid').refresh();
+        });
+        jQuery(".active").live("mousedown", function (event) {
+            //debugger;
+            var checkedLength = jQuery("#JobsRequirmentGrid tr.k-state-selected").length;
+            if (checkedLength == 1) {
+                grid = jQuery("#JobsRequirmentGrid").data("kendoGrid");
+                var data = grid.dataItem(jQuery("#JobsRequirmentGrid tr.k-state-selected"));
+                var url = '../' + data.ActionUrl;
+                // window.open(url, '_blank');
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '/JobAplicationRequirement/ActiveJob',
+                    dataType: "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ ID: data.ID }),
+                    success: function (response) { }
+                });
+            } else {
+            }
+            jQuery('#JobsRequirmentGrid').data('kendoGrid').dataSource.read();
+            jQuery('#JobsRequirmentGrid').data('kendoGrid').refresh();
+        });
+        jQuery(".inactive").live("mousedown", function (event) {
+            //debugger;
+            var checkedLength = jQuery("#JobsRequirmentGrid tr.k-state-selected").length;
+            if (checkedLength == 1) {
+                grid = jQuery("#JobsRequirmentGrid").data("kendoGrid");
+                var data = grid.dataItem(jQuery("#JobsRequirmentGrid tr.k-state-selected"));
+                var url = '../' + data.ActionUrl;
+                //  window.open(url, '_blank');
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '/JobAplicationRequirement/InActiveJob',
+                    dataType: "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ ID: data.ID }),
+                    success: function (response) { }
+                });
+            } else {
+            }
+            jQuery('#JobsRequirmentGrid').data('kendoGrid').dataSource.read();
+            jQuery('#JobsRequirmentGrid').data('kendoGrid').refresh();
+        });
+         jQuery(".tms-grid-Persondetail").live("mousedown", function (event) {
+         //   debugger;
+             var checkedLength = jQuery("#JobsRequirmentGrid tr.k-state-selected").length;
+            if (checkedLength == 1) {
+                grid = jQuery("#JobsRequirmentGrid").data("kendoGrid");
+                var data = grid.dataItem(jQuery("#JobsRequirmentGrid tr.k-state-selected"));
+                var url = '@Url.Content("~/JobApplications/index?JobRID=")' + data.ID;
+                window.open(url, '_blank');
+            } else {
+
+            }
+        });
+        jQuery(".persondetail").live("mousedown", function (event) {
+           // debugger;
+            var url = '@Url.Content("~/JobApplications/index?JobRID=")' + jQuery(this).attr("dat-pid");
+            window.open(url, '_blank');
+        });
+    });
+</script>
+<script id="JobsTemplate" type="text/kendo">
+    <div class=''>
+        <div class=''>
+
+            <p>
+                <span class="heading">
+                    <b>
+                        Skill set:
+                    </b>
+                </span> #:data.SkillSet#
+            </p>
+            <p>
+                <span class="heading">
+                    <b>
+                        Location:
+                    </b>
+                </span>#:data.Location#
+            </p>
+            <p>
+                <span class="heading">
+                    <b>
+                        Career Level:
+                    </b>
+                </span> #:data.CareerLevel#
+            </p>
+            <p>
+                <span class="heading">
+                    <b>
+                        Active Status: #:data.IsActive#   #if (data.IsActive){ # <span class="mdi mdi-checkbox-blank-circle text-success"></span>    #}else{#  <span class="mdi mdi-checkbox-blank-circle text-danger"></span>  #}#
+                    </b>
+                </span>
+            </p>
+        </div>
+    </div>
+</script>
+
+<script id="ExperianceTemplate" type="text/kendo">
+    <div class=''>
+        <div class=''>
+            <p>
+                <span class="heading">
+                    <b>
+                        Minimum Experiance:
+                    </b>
+                </span> #:data.MinExperiance#
+            </p>
+            <p>
+                <span class="heading">
+                    <b>
+                        Maximum Experiance:
+                    </b>
+                </span> #:data.MaxExperiance#
+            </p>
+            <p>
+                <span class="heading">
+                    <b>
+                        Minimum Salary:
+                    </b>
+                </span> #:data.SalaryRangeFrom#
+            </p>
+            <p>
+                <span class="heading">
+                    <b>
+                        Maximum Salary:
+                    </b>
+                </span> #:data.SalaryRangeTo#
+            </p>
+        </div>
+    </div>
+</script>
+}
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/ts/tms/Program/Program.js")"></script>
+}

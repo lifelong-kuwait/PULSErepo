@@ -62,7 +62,8 @@
             if(currentEditingRowFileType==12){
 
             }else{
-                var FileType = jQuery("#FileType").data('kendoDropDownList'); FileType.value(dropvalue); FileType.trigger("change");
+                var FileType = jQuery("#FileType").data('kendoDropDownList');
+                FileType.value(dropvalue); FileType.trigger("change");
                 jQuery(".attachmentimage").html(fileiconaccordinglyfiletype(dropvalue));
             }
         }

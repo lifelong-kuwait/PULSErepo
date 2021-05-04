@@ -60,6 +60,12 @@ namespace TMS.Business.Common
         {
             return DAL.TMS_Attachment_GetByIdAndTypeDAL(OpenId, OpenType);
         }
+        public int TMS_Attachment_UpdateForJobBAL(long PersonID, long AttachmentId)
+        {
+        
+            return DAL.TMS_Attachment_UpdateForJobDAL(PersonID, AttachmentId);
+        }
+
 
         /// <summary>
         /// TMSs the attachment create bal.

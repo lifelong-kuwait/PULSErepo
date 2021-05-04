@@ -38,6 +38,7 @@ namespace TMS.Business.Interfaces.Common
         /// <returns>IList&lt;TMS_Attachments&gt;.</returns>
         IList<TMS_Attachments> TMS_Attachment_GetByIdAndTypeBAL(long OpenId, int OpenType);
 
+        
         /// <summary>
         /// TMSs the attachment create bal.
         /// </summary>
@@ -65,7 +66,12 @@ namespace TMS.Business.Interfaces.Common
         /// <param name="_objTMS_Attachments">The object TMS attachments.</param>
         /// <returns>System.Int32.</returns>
         int TMS_Attachment_CompletedBAL(TMS_Attachments _objTMS_Attachments);
-
+        /// <summary>
+        /// TMSs the attachment completed bal.
+        /// </summary>
+        /// <param name="_objTMS_Attachments">The object TMS attachments.</param>
+        /// <returns>System.Int32.</returns>
+        int TMS_Attachment_UpdateForJobBAL(long PersonID, long AttachmentId);        
         /// <summary>
         /// TMSs the attachment completed profile logo bal.
         /// </summary>

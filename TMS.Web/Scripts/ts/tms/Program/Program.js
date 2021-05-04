@@ -261,6 +261,16 @@ function SessionGrid_onEdit(e) {
 
     }
 }
+function JobsRequiredGrid_onEdit(e) {
+    if (e.model.isNew()) {
+        jQuery('#personeditdiv').hide();        
+        console.log("new")
+    }
+    else {
+        jQuery('#personeditdiv').show();        
+        console.log("Old")
+    }
+}
 /*
 
 */

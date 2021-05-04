@@ -94,6 +94,10 @@
       <mvcSiteMapNode title="Fee Edit" controller="Invoiceing" action="InvoiceEdit"/>
       <mvcSiteMapNode title="Fee Invoice Detail" controller="Invoiceing" action="InvoiceDetail"/>
     </mvcSiteMapNode>
+    <mvcSiteMapNode title="Jobs" controller="JobAplicationRequirement" action="Index">
+      <mvcSiteMapNode title="Jobs / Careers" controller="JobAplicationRequirement" action="Index"/>
+      <mvcSiteMapNode title="Job Applications" controller="JobApplications" action="Index"/>      
+    </mvcSiteMapNode>
     <!--<mvcSiteMapNode title="Tasks" controller="Task" action="Index"/>
     <mvcSiteMapNode title="Task History" controller="Task" action="Detail"/>-->
     <!--<mvcSiteMapNode title="Prospects" controller="Prospect" action="Index"/>VenueMatrixReport-->

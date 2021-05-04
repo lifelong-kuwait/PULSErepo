@@ -3565,3 +3565,335 @@ ERROR 2020-09-23 18:02:58,631 1440016ms DESKTOP-LHV4G3D        OnException      
 ERROR 2020-09-23 18:21:43,351 2564736ms DESKTOP-LHV4G3D        OnException        - Object reference not set to an instance of an object.
 INFO  2020-10-16 11:53:17,654 35202ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 10/16/2020 6:53:17 AM
 INFO  2020-10-16 11:53:18,372 35920ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 10/16/2020 6:53:18 AM
+INFO  2021-01-08 18:01:07,419 126363ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/8/2021 1:01:07 PM
+INFO  2021-01-08 18:01:08,291 127235ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/8/2021 1:01:08 PM
+INFO  2021-01-20 11:22:37,404 18545ms DESKTOP-LHV4G3D        Login              - User tried to login with email waqas@llk.com at 1/20/2021 6:22:37 AM
+INFO  2021-01-20 11:22:37,809 18951ms DESKTOP-LHV4G3D        Login              - User login with email waqas@llk.com at 1/20/2021 6:22:37 AM
+INFO  2021-01-20 11:22:40,274 21415ms DESKTOP-LHV4G3D        Login              - User tried to login with email waqas@llk.com at 1/20/2021 6:22:40 AM
+INFO  2021-01-20 11:22:40,939 22081ms DESKTOP-LHV4G3D        Login              - User login with email waqas@llk.com at 1/20/2021 6:22:40 AM
+INFO  2021-01-21 15:05:48,182 5517405ms DESKTOP-LHV4G3D        Login              - User tried to login with email waqas@llk.com at 1/21/2021 10:05:48 AM
+INFO  2021-01-21 15:05:48,522 5517745ms DESKTOP-LHV4G3D        Login              - User login with email waqas@llk.com at 1/21/2021 10:05:48 AM
+INFO  2021-01-21 15:37:41,193 386893ms DESKTOP-LHV4G3D        Login              - User tried to login with email waqas@llk.com at 1/21/2021 10:37:41 AM
+INFO  2021-01-21 15:37:41,559 387259ms DESKTOP-LHV4G3D        Login              - User tried to login with email waqas@llk.com at 1/21/2021 10:37:41 AM
+INFO  2021-01-21 17:04:51,631  2929ms DESKTOP-LHV4G3D        Login              - User tried to login with email waqas@llk.com at 1/21/2021 12:04:51 PM
+INFO  2021-01-21 17:05:00,151 11449ms DESKTOP-LHV4G3D        Login              - User tried to login with email waqas@llk.com at 1/21/2021 12:05:00 PM
+INFO  2021-01-21 17:05:12,885 24183ms DESKTOP-LHV4G3D        Login              - User tried to login with email waqas@llk.com at 1/21/2021 12:05:12 PM
+INFO  2021-01-21 17:06:20,658 91956ms DESKTOP-LHV4G3D        Login              - User tried to login with email waqas@llk.com at 1/21/2021 12:06:20 PM
+INFO  2021-01-21 17:06:20,951 92249ms DESKTOP-LHV4G3D        Login              - User login with email waqas@llk.com at 1/21/2021 12:06:20 PM
+INFO  2021-01-21 19:14:10,778 32135ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/21/2021 2:14:10 PM
+INFO  2021-01-21 19:14:11,234 32591ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/21/2021 2:14:11 PM
+INFO  2021-01-21 19:14:24,347 45704ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/21/2021 2:14:24 PM
+INFO  2021-01-21 19:14:25,157 46513ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/21/2021 2:14:25 PM
+INFO  2021-01-22 12:44:34,093 23059ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/22/2021 7:44:34 AM
+INFO  2021-01-22 12:44:34,955 23921ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/22/2021 7:44:34 AM
+INFO  2021-01-22 12:44:47,696 36662ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/22/2021 7:44:47 AM
+INFO  2021-01-22 12:44:48,436 37402ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/22/2021 7:44:48 AM
+ERROR 2021-01-22 12:54:04,578 593544ms DESKTOP-LHV4G3D        OnException        - SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM.
+ERROR 2021-01-22 15:43:29,648 710731ms DESKTOP-LHV4G3D        OnException        - Procedure or function 'Job_InsertJobRequirement ' expects parameter '@JobTitle', which was not supplied.
+INFO  2021-01-22 16:02:23,114 1844197ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/22/2021 11:02:23 AM
+INFO  2021-01-22 16:02:23,388 1844471ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/22/2021 11:02:23 AM
+INFO  2021-01-22 16:02:24,528 1845611ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/22/2021 11:02:24 AM
+INFO  2021-01-22 16:02:25,067 1846150ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/22/2021 11:02:25 AM
+INFO  2021-01-25 11:08:46,039 33571ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/25/2021 6:08:46 AM
+INFO  2021-01-25 11:08:46,941 34473ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/25/2021 6:08:46 AM
+INFO  2021-01-25 11:09:49,465 96997ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/25/2021 6:09:49 AM
+INFO  2021-01-25 11:09:49,709 97241ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/25/2021 6:09:49 AM
+ERROR 2021-01-25 13:16:35,655 37735ms DESKTOP-LHV4G3D        OnException        - c:\Users\AsAd\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\Views\JobAplicationRequirement\Index.cshtml(436): error CS1061: 'System.Web.Mvc.HtmlHelper<dynamic>' does not contain a definition for 'fromHtml' and no extension method 'fromHtml' accepting a first argument of type 'System.Web.Mvc.HtmlHelper<dynamic>' could be found (are you missing a using directive or an assembly reference?)
+ERROR 2021-01-25 13:17:09,843 12318ms DESKTOP-LHV4G3D        OnException        - c:\Users\AsAd\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\Views\JobAplicationRequirement\Index.cshtml(436): error CS1061: 'System.Web.Mvc.HtmlHelper<dynamic>' does not contain a definition for 'fromHtml' and no extension method 'fromHtml' accepting a first argument of type 'System.Web.Mvc.HtmlHelper<dynamic>' could be found (are you missing a using directive or an assembly reference?)
+INFO  2021-01-25 13:19:01,156  5203ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/25/2021 8:19:01 AM
+INFO  2021-01-25 13:19:01,675  5721ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/25/2021 8:19:01 AM
+INFO  2021-01-25 13:19:10,241 14287ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/25/2021 8:19:10 AM
+INFO  2021-01-25 13:19:10,870 14917ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/25/2021 8:19:10 AM
+INFO  2021-01-25 17:11:50,521 40198ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/25/2021 12:11:50 PM
+INFO  2021-01-25 17:11:50,870 40547ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/25/2021 12:11:50 PM
+INFO  2021-01-25 17:12:00,586 50263ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/25/2021 12:12:00 PM
+INFO  2021-01-25 17:12:01,028 50704ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/25/2021 12:12:01 PM
+INFO  2021-01-26 12:45:15,638 2107278ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 7:45:15 AM
+INFO  2021-01-26 12:45:15,967 2107606ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 7:45:15 AM
+INFO  2021-01-26 12:45:16,058 2107697ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 7:45:16 AM
+INFO  2021-01-26 12:45:16,318 2107957ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 7:45:16 AM
+ERROR 2021-01-26 12:59:47,231 2978870ms DESKTOP-LHV4G3D        OnException        - c:\Users\AsAd\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\Views\People\Person.cshtml(125): error CS1061: 'Kendo.Mvc.UI.Fluent.WidgetFactory<long?>' does not contain a definition for 'Switch' and no extension method 'Switch' accepting a first argument of type 'Kendo.Mvc.UI.Fluent.WidgetFactory<long?>' could be found (are you missing a using directive or an assembly reference?)
+INFO  2021-01-26 14:30:41,885 22653ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 9:30:41 AM
+INFO  2021-01-26 14:30:42,151 22919ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 9:30:42 AM
+INFO  2021-01-26 14:30:43,341 24109ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 9:30:43 AM
+INFO  2021-01-26 14:30:43,889 24657ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 9:30:43 AM
+INFO  2021-01-26 14:55:21,319 26566ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 9:55:21 AM
+INFO  2021-01-26 14:55:21,657 26904ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 9:55:21 AM
+INFO  2021-01-26 14:55:21,702 26949ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 9:55:21 AM
+INFO  2021-01-26 14:55:21,952 27199ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 9:55:21 AM
+INFO  2021-01-26 15:12:24,700 41468ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 10:12:24 AM
+INFO  2021-01-26 15:12:25,012 41780ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 10:12:25 AM
+INFO  2021-01-26 15:12:26,803 43570ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 10:12:26 AM
+INFO  2021-01-26 15:12:27,326 44094ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 10:12:27 AM
+INFO  2021-01-26 15:18:03,232 35827ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 10:18:03 AM
+INFO  2021-01-26 15:18:03,622 36217ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 10:18:03 AM
+INFO  2021-01-26 15:18:05,202 37797ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 10:18:05 AM
+INFO  2021-01-26 15:18:05,774 38369ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 10:18:05 AM
+ERROR 2021-01-26 15:20:10,630 163225ms DESKTOP-LHV4G3D        OnException        - c:\Users\AsAd\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\Views\People\Person.cshtml(186): error CS0200: Property or indexer 'System.Web.Mvc.WebViewPage<long?>.Model' cannot be assigned to -- it is read only
+INFO  2021-01-26 15:36:03,320 69671ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 10:36:03 AM
+INFO  2021-01-26 15:36:03,824 70176ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 10:36:03 AM
+INFO  2021-01-26 15:36:07,062 73413ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 10:36:07 AM
+INFO  2021-01-26 15:36:08,464 74816ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 10:36:08 AM
+INFO  2021-01-26 15:36:48,190 32136ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 10:36:48 AM
+INFO  2021-01-26 15:36:48,451 32397ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 10:36:48 AM
+INFO  2021-01-26 15:36:50,317 34262ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 10:36:50 AM
+INFO  2021-01-26 15:36:50,783 34729ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 10:36:50 AM
+INFO  2021-01-26 15:40:18,352 63549ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 10:40:18 AM
+INFO  2021-01-26 15:40:18,684 63881ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 10:40:18 AM
+INFO  2021-01-26 15:40:20,815 66013ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 10:40:20 AM
+INFO  2021-01-26 15:40:21,307 66504ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 10:40:21 AM
+INFO  2021-01-26 15:47:45,203  2408ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 10:47:45 AM
+INFO  2021-01-26 15:47:45,688  2893ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 10:47:45 AM
+INFO  2021-01-26 15:47:45,968  3173ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 10:47:45 AM
+INFO  2021-01-26 15:47:46,341  3546ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 10:47:46 AM
+INFO  2021-01-26 15:48:01,505 18710ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 10:48:01 AM
+INFO  2021-01-26 15:48:01,794 18999ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 10:48:01 AM
+INFO  2021-01-26 15:48:01,982 19187ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 10:48:01 AM
+INFO  2021-01-26 15:48:02,680 19885ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 10:48:02 AM
+INFO  2021-01-26 15:49:51,077 26399ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 10:49:51 AM
+INFO  2021-01-26 15:49:51,549 26870ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 10:49:51 AM
+INFO  2021-01-26 15:49:53,120 28442ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 10:49:53 AM
+INFO  2021-01-26 15:49:53,686 29008ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 10:49:53 AM
+INFO  2021-01-26 15:51:35,614 14760ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 10:51:35 AM
+INFO  2021-01-26 15:51:35,979 15125ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 10:51:35 AM
+INFO  2021-01-26 15:51:37,155 16302ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 10:51:37 AM
+INFO  2021-01-26 15:51:37,886 17032ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 10:51:37 AM
+INFO  2021-01-26 15:53:11,901 21116ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 10:53:11 AM
+INFO  2021-01-26 15:53:12,206 21421ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 10:53:12 AM
+INFO  2021-01-26 15:53:14,000 23215ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 10:53:13 AM
+INFO  2021-01-26 15:53:14,911 24126ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 10:53:14 AM
+INFO  2021-01-26 15:57:47,493 37085ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 10:57:47 AM
+INFO  2021-01-26 15:57:47,814 37407ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 10:57:47 AM
+INFO  2021-01-26 15:57:49,374 38966ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 10:57:49 AM
+INFO  2021-01-26 15:57:49,873 39466ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 10:57:49 AM
+INFO  2021-01-26 16:09:00,224 37798ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 11:09:00 AM
+INFO  2021-01-26 16:09:00,626 38200ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 11:09:00 AM
+INFO  2021-01-26 16:09:15,553 53127ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 11:09:15 AM
+INFO  2021-01-26 16:09:16,175 53749ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 11:09:16 AM
+INFO  2021-01-26 16:16:20,672 12172ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 11:16:20 AM
+INFO  2021-01-26 16:16:21,021 12521ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 11:16:21 AM
+INFO  2021-01-26 16:16:23,081 14581ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 11:16:23 AM
+INFO  2021-01-26 16:16:23,624 15124ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 11:16:23 AM
+INFO  2021-01-26 17:02:18,460 786299ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 12:02:18 PM
+INFO  2021-01-26 17:02:18,808 786646ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 12:02:18 PM
+INFO  2021-01-26 17:02:18,847 786685ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 12:02:18 PM
+INFO  2021-01-26 17:02:19,115 786953ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 12:02:19 PM
+INFO  2021-01-26 17:05:18,816 25916ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/26/2021 12:05:18 PM
+INFO  2021-01-26 17:05:19,485 26586ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/26/2021 12:05:19 PM
+INFO  2021-01-26 17:26:13,300 28125ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/26/2021 12:26:13 PM
+INFO  2021-01-26 17:26:13,805 28630ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/26/2021 12:26:13 PM
+INFO  2021-01-26 18:11:36,838 348360ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/26/2021 1:11:36 PM
+INFO  2021-01-26 18:11:37,296 348818ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/26/2021 1:11:37 PM
+INFO  2021-01-26 21:23:53,735 103799ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/26/2021 4:23:53 PM
+INFO  2021-01-26 21:23:54,398 104461ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/26/2021 4:23:54 PM
+INFO  2021-01-26 21:30:42,096 512159ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 4:30:42 PM
+INFO  2021-01-26 21:30:42,569 512632ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 4:30:42 PM
+INFO  2021-01-26 21:30:44,098 514161ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/26/2021 4:30:44 PM
+INFO  2021-01-26 21:30:44,925 514988ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/26/2021 4:30:44 PM
+INFO  2021-01-27 11:31:07,516 17139ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/27/2021 6:31:07 AM
+INFO  2021-01-27 11:31:08,061 17684ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/27/2021 6:31:08 AM
+INFO  2021-01-27 11:32:33,744 103367ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/27/2021 6:32:33 AM
+INFO  2021-01-27 11:32:34,291 103914ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/27/2021 6:32:34 AM
+INFO  2021-01-27 11:32:35,166 104789ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/27/2021 6:32:35 AM
+INFO  2021-01-27 11:32:36,278 105901ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/27/2021 6:32:36 AM
+INFO  2021-01-27 12:26:58,863 3368486ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/27/2021 7:26:58 AM
+INFO  2021-01-27 12:26:59,358 3368981ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/27/2021 7:26:59 AM
+INFO  2021-01-27 12:26:59,852 3369475ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 1/27/2021 7:26:59 AM
+INFO  2021-01-27 12:27:00,576 3370199ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 1/27/2021 7:27:00 AM
+INFO  2021-01-27 12:30:25,951 3575574ms DESKTOP-LHV4G3D        Login              - User tried to login with email abcd@llk.com at 1/27/2021 7:30:25 AM
+INFO  2021-01-27 12:30:38,918 3588540ms DESKTOP-LHV4G3D        Login              - User login with email abcd@llk.com at 1/27/2021 7:30:38 AM
+INFO  2021-01-27 12:30:41,162 3590785ms DESKTOP-LHV4G3D        Login              - User tried to login with email abcd@llk.com at 1/27/2021 7:30:41 AM
+INFO  2021-01-27 12:30:53,983 3603605ms DESKTOP-LHV4G3D        Login              - User login with email abcd@llk.com at 1/27/2021 7:30:53 AM
+INFO  2021-01-27 12:31:31,693 3641316ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/27/2021 7:31:31 AM
+INFO  2021-01-27 12:31:32,094 3641717ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/27/2021 7:31:32 AM
+INFO  2021-01-27 12:31:32,695 3642318ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/27/2021 7:31:32 AM
+INFO  2021-01-27 12:31:33,311 3642934ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/27/2021 7:31:33 AM
+INFO  2021-01-27 14:43:01,366 478094ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/27/2021 9:43:01 AM
+INFO  2021-01-27 14:43:01,989 478718ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/27/2021 9:43:01 AM
+INFO  2021-01-27 16:49:55,699 10906ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/27/2021 11:49:55 AM
+INFO  2021-01-27 16:49:56,381 11589ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/27/2021 11:49:56 AM
+INFO  2021-01-27 17:44:42,555 159335ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/27/2021 12:44:42 PM
+INFO  2021-01-27 17:44:43,064 159845ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/27/2021 12:44:43 PM
+INFO  2021-01-27 18:12:49,092 397001ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/27/2021 1:12:49 PM
+INFO  2021-01-27 18:12:49,556 397465ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/27/2021 1:12:49 PM
+INFO  2021-01-27 18:20:35,003 77696ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/27/2021 1:20:35 PM
+INFO  2021-01-27 18:20:35,452 78145ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/27/2021 1:20:35 PM
+INFO  2021-01-28 10:53:36,595 190101ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/28/2021 5:53:36 AM
+INFO  2021-01-28 10:53:37,084 190590ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/28/2021 5:53:37 AM
+INFO  2021-01-28 10:53:51,381 204887ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/28/2021 5:53:51 AM
+INFO  2021-01-28 10:53:53,259 206765ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/28/2021 5:53:53 AM
+ERROR 2021-01-28 10:54:50,933 264438ms DESKTOP-LHV4G3D        OnException        - The reader has been disposed; this can happen after all data has been consumed
+Object name: 'Dapper.SqlMapper+GridReader'.
+INFO  2021-01-28 11:01:28,231 24993ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/28/2021 6:01:28 AM
+INFO  2021-01-28 11:01:29,218 25980ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/28/2021 6:01:29 AM
+ERROR 2021-01-28 11:02:37,104 93866ms DESKTOP-LHV4G3D        OnException        - c:\Users\AsAd\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\Views\JobApplications\Index.cshtml(33): error CS1660: Cannot convert lambda expression to type 'string' because it is not a delegate type
+ERROR 2021-01-28 11:03:47,041 163803ms DESKTOP-LHV4G3D        OnException        - c:\Users\AsAd\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\Views\JobApplications\Index.cshtml(33): error CS1660: Cannot convert lambda expression to type 'string' because it is not a delegate type
+INFO  2021-01-28 11:41:42,100 18430ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/28/2021 6:41:42 AM
+INFO  2021-01-28 11:41:42,724 19054ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/28/2021 6:41:42 AM
+INFO  2021-01-28 12:55:58,034 375045ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/28/2021 7:55:58 AM
+INFO  2021-01-28 12:55:58,552 375562ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/28/2021 7:55:58 AM
+INFO  2021-01-28 12:55:59,478 376489ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/28/2021 7:55:59 AM
+INFO  2021-01-28 12:56:00,390 377400ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/28/2021 7:56:00 AM
+ERROR 2021-01-28 13:21:24,523 21311ms DESKTOP-LHV4G3D        OnException        - Object reference not set to an instance of an object.
+INFO  2021-01-28 13:21:52,129 48918ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/28/2021 8:21:52 AM
+INFO  2021-01-28 13:21:52,754 49542ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/28/2021 8:21:52 AM
+INFO  2021-01-28 13:22:01,283 58072ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/28/2021 8:22:01 AM
+INFO  2021-01-28 13:22:02,203 58992ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/28/2021 8:22:02 AM
+ERROR 2021-01-28 13:50:35,910  5214ms DESKTOP-LHV4G3D        OnException        - The parameters dictionary contains a null entry for parameter 'JobRID' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult Index(Int64)' in 'TMS.Web.Controllers.JobApplicationsController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+INFO  2021-01-28 13:51:00,710 30013ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/28/2021 8:51:00 AM
+INFO  2021-01-28 13:51:01,111 30415ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/28/2021 8:51:01 AM
+INFO  2021-01-28 14:19:00,808 327039ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/28/2021 9:19:00 AM
+INFO  2021-01-28 14:19:01,264 327494ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/28/2021 9:19:01 AM
+INFO  2021-01-29 12:33:31,556 963354ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/29/2021 7:33:31 AM
+INFO  2021-01-29 12:33:32,039 963836ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/29/2021 7:33:32 AM
+INFO  2021-01-29 12:33:47,705 979502ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/29/2021 7:33:47 AM
+INFO  2021-01-29 12:33:48,721 980519ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/29/2021 7:33:48 AM
+ERROR 2021-01-29 12:37:53,978 1225775ms DESKTOP-LHV4G3D        OnException        - Object reference not set to an instance of an object.
+INFO  2021-01-29 12:38:12,022 1243820ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/29/2021 7:38:12 AM
+INFO  2021-01-29 12:38:12,581 1244378ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/29/2021 7:38:12 AM
+INFO  2021-01-29 12:38:13,291 1245088ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/29/2021 7:38:13 AM
+INFO  2021-01-29 12:38:14,460 1246258ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/29/2021 7:38:14 AM
+ERROR 2021-01-29 12:39:12,224 1304021ms DESKTOP-LHV4G3D        OnException        - The parameters dictionary contains a null entry for parameter 'JobRID' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.ActionResult Index(Int64)' in 'TMS.Web.Controllers.JobApplicationsController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+INFO  2021-01-29 12:39:43,522 1335320ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/29/2021 7:39:43 AM
+INFO  2021-01-29 12:39:43,945 1335743ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/29/2021 7:39:43 AM
+INFO  2021-01-29 12:49:48,496 1940294ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/29/2021 7:49:48 AM
+INFO  2021-01-29 12:49:49,003 1940801ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/29/2021 7:49:49 AM
+INFO  2021-01-29 12:49:50,328 1942126ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/29/2021 7:49:50 AM
+INFO  2021-01-29 12:49:51,271 1943069ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/29/2021 7:49:51 AM
+INFO  2021-01-29 14:53:21,405 2379926ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/29/2021 9:53:21 AM
+INFO  2021-01-29 14:53:21,978 2380499ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/29/2021 9:53:21 AM
+INFO  2021-01-29 14:53:23,883 2382404ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 1/29/2021 9:53:23 AM
+INFO  2021-01-29 14:53:24,777 2383298ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 1/29/2021 9:53:24 AM
+INFO  2021-02-01 12:01:13,248 39170ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 2/1/2021 7:01:13 AM
+INFO  2021-02-01 12:01:13,925 39847ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 2/1/2021 7:01:13 AM
+INFO  2021-02-01 12:01:14,026 39948ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 2/1/2021 7:01:14 AM
+INFO  2021-02-01 12:01:14,292 40214ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 2/1/2021 7:01:14 AM
+INFO  2021-02-01 12:04:30,575 236497ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 2/1/2021 7:04:30 AM
+INFO  2021-02-01 12:04:30,880 236802ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 2/1/2021 7:04:30 AM
+INFO  2021-02-01 12:04:31,169 237090ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 2/1/2021 7:04:31 AM
+INFO  2021-02-01 12:04:31,655 237577ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 2/1/2021 7:04:31 AM
+INFO  2021-02-01 12:10:40,294 33622ms DESKTOP-LHV4G3D        Login              - User tried to login with email AS@S.COM at 2/1/2021 7:10:40 AM
+INFO  2021-02-01 12:10:40,673 34001ms DESKTOP-LHV4G3D        Login              - User login with email AS@S.COM at 2/1/2021 7:10:40 AM
+INFO  2021-02-01 12:10:53,978 47305ms DESKTOP-LHV4G3D        Login              - User tried to login with email AS@S.COM at 2/1/2021 7:10:53 AM
+INFO  2021-02-01 12:10:54,535 47863ms DESKTOP-LHV4G3D        Login              - User login with email AS@S.COM at 2/1/2021 7:10:54 AM
+INFO  2021-02-01 12:40:09,234 24025ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 2/1/2021 7:40:09 AM
+INFO  2021-02-01 12:40:09,682 24474ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 2/1/2021 7:40:09 AM
+INFO  2021-02-01 12:40:22,298 37090ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 2/1/2021 7:40:22 AM
+INFO  2021-02-01 12:40:23,942 38734ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 2/1/2021 7:40:23 AM
+INFO  2021-02-01 13:03:02,523 24434ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 2/1/2021 8:03:02 AM
+INFO  2021-02-01 13:03:02,843 24754ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 2/1/2021 8:03:02 AM
+INFO  2021-02-01 13:03:02,904 24816ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 2/1/2021 8:03:02 AM
+INFO  2021-02-01 13:03:03,186 25098ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 2/1/2021 8:03:03 AM
+ERROR 2021-02-01 13:03:11,992 33903ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+ERROR 2021-02-01 13:03:12,873 34784ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+INFO  2021-02-01 13:03:40,372 62284ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 2/1/2021 8:03:40 AM
+INFO  2021-02-01 13:03:40,669 62580ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 2/1/2021 8:03:40 AM
+INFO  2021-02-01 13:03:40,818 62729ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 2/1/2021 8:03:40 AM
+INFO  2021-02-01 13:03:41,480 63392ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 2/1/2021 8:03:41 AM
+ERROR 2021-02-01 13:03:42,608 64520ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+ERROR 2021-02-01 13:03:54,083 75995ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+ERROR 2021-02-01 13:05:36,999 178911ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+ERROR 2021-02-01 13:06:59,211 261123ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+ERROR 2021-02-01 13:07:00,846 262758ms DESKTOP-LHV4G3D        OnException        - The given key was not present in the dictionary.
+ERROR 2021-02-01 13:07:03,814 265726ms DESKTOP-LHV4G3D        OnException        - The given key was not present in the dictionary.
+ERROR 2021-02-01 13:07:09,053 270965ms DESKTOP-LHV4G3D        OnException        - The given key was not present in the dictionary.
+ERROR 2021-02-01 13:07:09,703 271615ms DESKTOP-LHV4G3D        OnException        - The given key was not present in the dictionary.
+ERROR 2021-02-01 13:08:27,290 349201ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+ERROR 2021-02-01 13:08:27,831 349742ms DESKTOP-LHV4G3D        OnException        - The given key was not present in the dictionary.
+ERROR 2021-02-01 13:09:17,466 399377ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+ERROR 2021-02-01 13:09:18,494 400405ms DESKTOP-LHV4G3D        OnException        - The given key was not present in the dictionary.
+ERROR 2021-02-01 13:09:19,643 401555ms DESKTOP-LHV4G3D        OnException        - The given key was not present in the dictionary.
+ERROR 2021-02-01 13:48:11,258 2733170ms DESKTOP-LHV4G3D        OnException        - The given key was not present in the dictionary.
+ERROR 2021-02-01 13:48:32,326 2754238ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+ERROR 2021-02-01 13:48:36,652 2758564ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+INFO  2021-02-01 13:49:06,907 2788819ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 2/1/2021 8:49:06 AM
+INFO  2021-02-01 13:49:07,325 2789237ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 2/1/2021 8:49:07 AM
+INFO  2021-02-01 13:49:08,389 2790301ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 2/1/2021 8:49:08 AM
+INFO  2021-02-01 13:49:08,947 2790859ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 2/1/2021 8:49:08 AM
+ERROR 2021-02-01 14:11:21,882 4123793ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+ERROR 2021-02-01 14:11:28,608 4130519ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+INFO  2021-02-01 14:11:49,951 4151863ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 2/1/2021 9:11:49 AM
+INFO  2021-02-01 14:11:50,536 4152448ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 2/1/2021 9:11:50 AM
+INFO  2021-02-01 14:11:56,856 4158768ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 2/1/2021 9:11:56 AM
+INFO  2021-02-01 14:11:57,238 4159150ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 2/1/2021 9:11:57 AM
+ERROR 2021-02-01 14:12:52,668 4214579ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+INFO  2021-02-01 14:13:40,211 26878ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 2/1/2021 9:13:40 AM
+INFO  2021-02-01 14:13:40,512 27179ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 2/1/2021 9:13:40 AM
+INFO  2021-02-01 14:13:40,582 27249ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 2/1/2021 9:13:40 AM
+INFO  2021-02-01 14:13:40,915 27582ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 2/1/2021 9:13:40 AM
+INFO  2021-02-01 14:13:41,109 27777ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 2/1/2021 9:13:41 AM
+INFO  2021-02-01 14:13:41,383 28050ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 2/1/2021 9:13:41 AM
+INFO  2021-02-01 14:13:41,639 28306ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 2/1/2021 9:13:41 AM
+INFO  2021-02-01 14:13:41,937 28604ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 2/1/2021 9:13:41 AM
+INFO  2021-02-01 14:13:42,255 28923ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 2/1/2021 9:13:42 AM
+INFO  2021-02-01 14:13:42,538 29205ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 2/1/2021 9:13:42 AM
+INFO  2021-02-01 17:06:37,002 71374ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 2/1/2021 12:06:37 PM
+INFO  2021-02-01 17:06:37,319 71691ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 2/1/2021 12:06:37 PM
+INFO  2021-02-01 17:06:37,379 71751ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 2/1/2021 12:06:37 PM
+INFO  2021-02-01 17:06:37,648 72020ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 2/1/2021 12:06:37 PM
+ERROR 2021-02-01 17:06:52,262 86634ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+ERROR 2021-02-01 17:15:28,653 603025ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+ERROR 2021-02-01 17:15:36,064 610436ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+ERROR 2021-02-01 17:15:51,106 625478ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+ERROR 2021-02-01 17:16:04,605 638978ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+ERROR 2021-02-02 11:19:56,092 682154ms DESKTOP-LHV4G3D        OnException        - c:\Users\AsAd\source\repos\lifelong-kuwait\PULSErepo\TMS.Web\Views\JobAplicationRequirement\EditorTemplates\_JobRequirementTemplate.cshtml(129): error CS0234: The type or namespace name 'JobType' does not exist in the namespace 'TMS.Library.Entities.Jobs' (are you missing an assembly reference?)
+INFO  2021-02-02 11:21:12,453  3456ms DESKTOP-LHV4G3D        Login              - User tried to login with email as@s.com at 2/2/2021 6:21:12 AM
+INFO  2021-02-02 11:21:13,128  4131ms DESKTOP-LHV4G3D        Login              - User login with email as@s.com at 2/2/2021 6:21:13 AM
+INFO  2021-02-04 13:08:21,801 38491ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 2/4/2021 8:08:21 AM
+INFO  2021-02-04 13:08:22,304 38993ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 2/4/2021 8:08:22 AM
+INFO  2021-02-04 13:08:36,412 53101ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 2/4/2021 8:08:36 AM
+INFO  2021-02-04 13:08:36,968 53658ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 2/4/2021 8:08:36 AM
+ERROR 2021-02-04 13:08:38,478 55168ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+ERROR 2021-02-04 13:08:46,698 63388ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+INFO  2021-02-04 13:18:34,369 651059ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 2/4/2021 8:18:34 AM
+INFO  2021-02-04 13:18:34,642 651332ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 2/4/2021 8:18:34 AM
+INFO  2021-02-04 13:18:35,284 651974ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 2/4/2021 8:18:35 AM
+INFO  2021-02-04 13:18:35,671 652360ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 2/4/2021 8:18:35 AM
+ERROR 2021-02-04 13:18:36,660 653350ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+ERROR 2021-02-04 13:18:40,856 657546ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+INFO  2021-02-04 13:19:31,088 707778ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 2/4/2021 8:19:31 AM
+INFO  2021-02-04 13:19:31,495 708185ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 2/4/2021 8:19:31 AM
+INFO  2021-02-04 13:19:32,288 708978ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 2/4/2021 8:19:32 AM
+INFO  2021-02-04 13:19:32,814 709504ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 2/4/2021 8:19:32 AM
+ERROR 2021-02-04 13:49:43,697 2520386ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+ERROR 2021-02-04 13:53:20,612 2737302ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+INFO  2021-02-04 13:53:45,689 2762379ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 2/4/2021 8:53:45 AM
+INFO  2021-02-04 13:53:46,015 2762705ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 2/4/2021 8:53:46 AM
+INFO  2021-02-04 13:53:47,334 2764024ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 2/4/2021 8:53:47 AM
+INFO  2021-02-04 13:53:47,954 2764644ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 2/4/2021 8:53:47 AM
+ERROR 2021-02-04 13:55:24,910 2861600ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+ERROR 2021-02-04 13:55:30,762 2867452ms DESKTOP-LHV4G3D        OnException        - Exception has been thrown by the target of an invocation.
+INFO  2021-02-04 13:57:34,488 55106ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 2/4/2021 8:57:34 AM
+INFO  2021-02-04 13:57:35,199 55817ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 2/4/2021 8:57:35 AM
+INFO  2021-02-04 14:03:38,896 19876ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 2/4/2021 9:03:38 AM
+INFO  2021-02-04 14:03:39,570 20550ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 2/4/2021 9:03:39 AM
+INFO  2021-02-04 14:05:58,096 17791ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 2/4/2021 9:05:58 AM
+INFO  2021-02-04 14:05:58,763 18459ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 2/4/2021 9:05:58 AM
+INFO  2021-02-04 14:09:13,934 17297ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 2/4/2021 9:09:13 AM
+INFO  2021-02-04 14:09:14,658 18020ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 2/4/2021 9:09:14 AM
+ERROR 2021-02-04 14:10:18,272 81634ms DESKTOP-LHV4G3D        OnException        - An item with the same key has already been added.
+INFO  2021-02-04 14:12:57,125 44661ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 2/4/2021 9:12:57 AM
+INFO  2021-02-04 14:12:57,767 45304ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 2/4/2021 9:12:57 AM
+ERROR 2021-02-04 14:18:54,913 402450ms DESKTOP-LHV4G3D        OnException        - An item with the same key has already been added.
+INFO  2021-02-04 14:20:37,939  9815ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 2/4/2021 9:20:37 AM
+INFO  2021-02-04 14:20:38,559 10435ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 2/4/2021 9:20:38 AM
+ERROR 2021-02-04 14:24:35,108 246984ms DESKTOP-LHV4G3D        OnException        - An item with the same key has already been added.
+INFO  2021-02-04 14:29:54,499 16877ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 2/4/2021 9:29:54 AM
+INFO  2021-02-04 14:29:55,018 17396ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 2/4/2021 9:29:55 AM
+INFO  2021-02-04 14:30:14,647 37025ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 2/4/2021 9:30:14 AM
+INFO  2021-02-04 14:30:15,556 37934ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 2/4/2021 9:30:15 AM
+INFO  2021-03-10 15:24:03,645 28431ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/10/2021 10:24:03 AM
+INFO  2021-03-10 15:24:04,355 29140ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/10/2021 10:24:04 AM
+INFO  2021-03-10 16:19:26,733 11613ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/10/2021 11:19:26 AM
+INFO  2021-03-10 16:19:27,244 12124ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/10/2021 11:19:27 AM
+INFO  2021-03-11 11:51:49,883 67564ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/11/2021 6:51:49 AM
+INFO  2021-03-11 11:51:50,438 68119ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/11/2021 6:51:50 AM
+INFO  2021-03-15 16:48:38,194 26879ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/15/2021 11:48:38 AM
+INFO  2021-03-15 16:48:38,905 27591ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/15/2021 11:48:38 AM
+INFO  2021-03-15 16:48:39,790 28476ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 3/15/2021 11:48:39 AM
+INFO  2021-03-15 16:48:40,343 29028ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 3/15/2021 11:48:40 AM
+ERROR 2021-05-04 13:28:20,602 137102ms DESKTOP-LHV4G3D        OnException        - Login failed for user 'localuser'.  Reason: The password of the account has expired.
+INFO  2021-05-04 13:28:42,966 159466ms DESKTOP-LHV4G3D        Login              - User tried to login with email paceadmin@llk.com at 5/4/2021 8:28:42 AM
+INFO  2021-05-04 13:28:43,454 159953ms DESKTOP-LHV4G3D        Login              - User login with email paceadmin@llk.com at 5/4/2021 8:28:43 AM

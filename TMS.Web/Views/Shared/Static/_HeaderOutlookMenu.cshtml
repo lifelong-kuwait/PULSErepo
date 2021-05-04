@@ -534,6 +534,20 @@
                                 </div>
                             </div>
                         }
+                        @if (User.IsInRole("CanViewJobModule"))
+                        {
+                            <div class="o365cs-nav-appItem">
+                                <div>
+                                    <a autoid="_o365sg2c_d" class="o365cs-nav-appTile o365cs-nav-appTileMedium o365button" role="link" href="@Url.Content("~/JobAplicationRequirement/Index")"
+                                       aria-disabled="false" id="O365_AppTile_ShellTasks" aria-label="Tasks" title="">
+                                        <div class="o365cs-nav-appTileBackground ms-bgc-tp" style="">
+                                            <span class="o365cs-nav-appTileIcon owaimg ms-Icon--tasks ms-icon-font-size-55 ms-fcl-w fa fa-briefcase"> </span>
+                                            <span class="o365cs-nav-appTileTitle ms-fcl-w"><span>Jobs/Careers</span> </span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                         } 
 
                         @*@if (User.IsInRole("CanViewProspects"))
         {

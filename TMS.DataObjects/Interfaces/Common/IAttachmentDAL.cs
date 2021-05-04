@@ -52,7 +52,13 @@ namespace TMS.DataObjects.Interfaces.Common
         /// </summary>
         /// <param name="_objTMS_Attachments">The object TMS attachments.</param>
         /// <returns>System.Int32.</returns>
-        int TMS_Attachment_UpdateDAL(TMS_Attachments _objTMS_Attachments);
+        int TMS_Attachment_UpdateDAL(TMS_Attachments _objTMS_Attachments);/// <summary>
+        /// TMSs the attachment update dal.
+        /// </summary>
+        /// <param name="_objTMS_Attachments">The object TMS attachments.</param>
+        /// <returns>System.Int32.</returns>
+        int TMS_Attachment_UpdateForJobDAL(long PersonID,long AttachmnetId);
+        
 
         /// <summary>
         /// TMSs the attachment delete dal.

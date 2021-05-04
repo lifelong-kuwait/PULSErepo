@@ -301,6 +301,9 @@
     <Compile Include="Controllers\CertificateController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\InvoiceingController.cs" />
+    <Compile Include="Controllers\JobAplicationRequirementController.cs" />
+    <Compile Include="Controllers\JobApplicationsController.cs" />
+    <Compile Include="Controllers\JobApplyController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\SalesAdministrationController.cs" />
     <Compile Include="Controllers\SPl_Test_ReportsController.cs" />
@@ -345,6 +348,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>InvoiceReciptDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Models\GModel.cs" />
     <Compile Include="NotificationHub.cs" />
     <Compile Include="PULSE_With_InvoiceinDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2206,6 +2210,7 @@
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="css\custom.css" />
+    <Content Include="css\JobAplicationCSS.css" />
     <Content Include="css\langLTR.css" />
     <Content Include="css\langRTL.css" />
     <Content Include="css\main.css">
@@ -4933,6 +4938,10 @@
     <Content Include="Views\Admin\INOGroupDetail.cshtml" />
     <Content Include="Views\Invoiceing\EditorTemplates\_InvoiceHistoryTemplate.cshtml" />
     <Content Include="Views\Notification\Index.cshtml" />
+    <Content Include="Views\JobAplicationRequirement\Index.cshtml" />
+    <Content Include="Views\JobAplicationRequirement\EditorTemplates\_JobRequirementTemplate.cshtml" />
+    <Content Include="Views\JobApply\Index.cshtml" />
+    <Content Include="Views\JobApplications\Index.cshtml" />
     <None Include="WeeklyAttendanceReportData.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
